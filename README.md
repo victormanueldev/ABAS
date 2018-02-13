@@ -1,6 +1,6 @@
 # ABAS Sanicontrol S.A.S.
 
-#Por:
--*Andrés Medina
--*Yurani Calvo
--*Victor Manuel Arenas
+# Por:
+-**Andrés Medina
+-**Yurani Calvo
+-**Victor Manuel Arenas
