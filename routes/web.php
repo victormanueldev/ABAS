@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('index');
+});
+
+Route::get('clientes/crear-cliente', function(){
+    return view('crear-cliente');
+});
+
+Route::get('clientes/ver-clientes', function () {
+    return view('ver-clientes');
 });

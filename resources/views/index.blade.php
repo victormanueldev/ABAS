@@ -9,9 +9,6 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-2">
-
-    </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row m-b-lg m-t-lg">
@@ -35,37 +32,7 @@
                 </div>
             </div>
         </div>
-        {{--  <div class="col-md-3">
-            <table class="table small m-b-xs">
-                <tbody>
-                <tr>
-                    <td>
-                        <strong>Identificación</strong><br> 1061507565
-                    </td>
-                    <td>
-                        <strong> Empleado</strong><br> 001
-                    </td>
 
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Género</strong><br> Masculino
-                    </td>
-                    <td>
-                        <strong>Teléfono</strong><br> 343804545
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Fecha Nac.</strong> 1998-02-02
-                    </td>
-                    <td>
-                        <strong>Email</strong> andres@gmail.com
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>  --}}
         <div class="col-md-5">
             <small>Área de desempeño</small>
             <h2 class="no-margins">Área Comercial</h2>
@@ -83,10 +50,10 @@
                     <h3>Registro de Clientes</h3>
 
                     <p class="small">
-                        Registra un nuevo cliente
+                        Registra un nuevo cliente.
                     </p>
                     
-                    <button class="btn btn-success btn-block">Iniciar</button>
+                    <a href="/clientes/crear-cliente" class="btn btn-success btn-block">Iniciar</a>
 
                 </div>
             </div>
@@ -95,45 +62,26 @@
                     <h3>Tareas Rápidas</h3>
 
                     <p class="small">
-                        Registra una tarea rápidamente
+                        Registra una tarea rápidamente.
                     </p>
-
-                    <div class="form-group">
-                        <label>Prioridad</label>
-                        <select class="form-control m-b" name="account">
-                            <option>Normal</option>
-                            <option>Urgente</option>
-                            <option>Importante</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" id="data_1">
-                        <label>Fecha</label>
-                        <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Hora</label>
-                        <div class="input-group clockpicker" data-autoclose="true">
-                            <input type="text" class="form-control" value="09:30" >
-                            <span class="input-group-addon">
-                                <span class="fa fa-clock-o"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Asunto</label>
-                        <input type="email" class="form-control" placeholder="Escriba el Asunto">
-                    </div>
-                    <div class="form-group">
-                        <label>Descripción</label>
-                        <textarea class="form-control" placeholder="Descripción del asunto" rows="3"></textarea>
-                    </div>
-                    <button class="btn btn-primary btn-block">Guardar</button>
-
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalTareas">
+                        Crear
+                    </button>
                 </div>
             </div>
+
+            <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>Novedades</h3>
+    
+                        <p class="small">
+                            Crea una Novedad y publícala.
+                        </p>
+                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalNovedades">
+                            Publicar
+                        </button>
+                    </div>
+                </div>
 
         </div>
 
@@ -292,4 +240,86 @@
 
 </div>
 
-    @endsection
+<div class="modal inmodal" id="modalTareas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-tasks modal-icon"></i>
+                <h4 class="modal-title">Crear Tarea</h4>
+                {{--  <small class="font-bold">.</small>  --}}
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-group">
+                    <label>Prioridad</label>
+                    <select class="form-control m-b" name="account">
+                        <option>Normal</option>
+                        <option>Urgente</option>
+                        <option>Importante</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="data_1">
+                    <label>Fecha</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Hora</label>
+                    <div class="input-group" >
+                        <span class="input-group-addon">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        <input type="time" class="form-control" placeholder="09:20" >
+                        
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea class="form-control" placeholder="Descripción de la tarea" rows="3"></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal" id="modalNovedades" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-bullhorn modal-icon"></i>
+                    <h4 class="modal-title">Crear Novedad</h4>
+                    {{--  <small class="font-bold">.</small>  --}}
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="form-group">
+                        <label>Visibilidad</label>
+                        <select class="form-control m-b" name="account">
+                            <option>Pública</option>
+                            <option>Privada</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea class="form-control" placeholder="Escriba aquí la descripción de la novedad" rows="3"></textarea>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar </button>
+                    <button type="button" class="btn btn-primary">Publicar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

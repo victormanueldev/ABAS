@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>ABAS | Sanicontrol</title>
+    <title>ABAS | Sanicontrol S.A.S</title>
 
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -38,7 +38,7 @@
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle img-responsive" src="img/a4.jpg" style="width: 50px;"/>
+                            <img alt="image" class="img-circle img-responsive" src="{{asset('img/a4.jpg')}}" style="width: 50px;"/>
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Andrés Medina</strong>
@@ -54,7 +54,7 @@
                         </div>
                     </li>
                     <li class="active">
-                        <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Inicio</span></a>
+                        <a href="/home"><i class="fa fa-th-large"></i> <span class="nav-label">Inicio</span></a>
                     </li>
                 </ul>
 
@@ -136,16 +136,16 @@
     <script src="{{asset('js/plugins/chartJs/Chart.min.js')}}"></script>
 
     <!-- Date range use moment.js same as full calendar plugin -->
-    <script src="js/plugins/fullcalendar/moment.min.js"></script>
+    <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
 
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
 
     <!-- Clock picker -->
-    <script src="js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="{{asset('js/plugins/clockpicker/clockpicker.js')}}"></script>
 
     <!-- Data picker -->
-   <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+   <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
 
     <script>
@@ -157,7 +157,7 @@
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                toastr.success('Administrador BD Sanicontrol S.A.', 'Bienvenido a ABAS');
+                toastr.success('Administrador BD Sanicontrol S.A.S.', 'Bienvenido a ABAS');
 
             }, 1300);
 
