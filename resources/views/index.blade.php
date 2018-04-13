@@ -1,11 +1,15 @@
 @extends('layouts.app')
 @section('content')
+<script>
+    document.getElementById('m-inicio').setAttribute("class", "active");
+    document.getElementById('a-inicio').removeAttribute("style");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Página Principal</h2>
         <ol class="breadcrumb">
             <li class="active">
-                <a href="index.html">Inicio</a>
+                <a href="/home">Inicio</a>
             </li>
         </ol>
     </div>
@@ -15,15 +19,15 @@
         <div class="col-md-7">
 
             <div class="profile-image">
-                <img src="img/a4.jpg" class="img-circle circle-border m-b-md" alt="profile">
+                <img src="{{ Storage::url($user->foto)}}" class="img-circle circle-border m-b-md" alt="profile">
             </div>
             <div class="profile-info">
                 <div class="">
                     <div>
                         <h2 class="no-margins">
-                            Andrés Medina
+                            {{ $user->nombres}} {{ $user->apellidos}}
                         </h2>
-                        <h4>Asesor Comercial</h4>
+                        <h4>{{ $user->cargo->descripcion}}</h4>
                         <small>
                             Esta es la página principal, en donde podrás acceder a todas las funcionalidades de ABAS, ver tu actividad reciente
                             y la de tus compañeros de trabajo.
@@ -35,14 +39,46 @@
 
         <div class="col-md-5">
             <small>Área de desempeño</small>
-            <h2 class="no-margins">Área Comercial</h2>
+            <h2 class="no-margins">{{$user->area->descripcion}}</h2>
             <div id="sparkline1"></div> 
         </div>
 
 
     </div>
     <div class="row">
-
+            <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <h2>Tareas rápidas</h2>
+                            <small>Esta es la lista de tareas para hoy</small>
+                            <ul class="todo-list m-t small-list">
+                                <li>
+                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-check-square"></i> </a>
+                                    <span class="m-l-xs todo-completed">Buy a milk</span>
+    
+                                </li>
+                                <li>
+                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-check-square"></i> </a>
+                                    <span class="m-l-xs  todo-completed">Go to shop and find some products.</span>
+    
+                                </li>
+                                <li>
+                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-square-o"></i> </a>
+                                    <span class="m-l-xs">Send documents to Mike</span>
+                                </li>
+                                <li>
+                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-square-o"></i> </a>
+                                    <span class="m-l-xs">Go to the doctor dr Smith</span>
+                                </li>
+                                <li>
+                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-square-o"></i> </a>
+                                    <span class="m-l-xs">Plan vacation</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+{{-- 
         <div class="col-lg-3">
 
             <div class="ibox">
@@ -83,9 +119,50 @@
                     </div>
                 </div>
 
-        </div>
+        </div> --}}
 
         <div class="col-lg-5">
+
+                <div class="social-feed-box">
+                        <div class="pull-right social-action dropdown">
+                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                <i class="fa fa-gear"></i>
+                            </button>
+                            <ul class="dropdown-menu m-t-xs">
+                                <li>
+                                    <a href="">Publica</a>
+                                </li>
+                                <li>
+                                    <a href="">Área Comercial</a>
+                                </li>
+                                <li>
+                                    <a href="">Área Programación</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="social-avatar">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="{{ Storage::url($user->foto)}}">
+                            </a>
+                            <div class="media-body">
+                                <a href="#" style="color: #676a6c;">
+                                   {{ $user->nombres}} {{$user->apellidos}}
+                                </a>
+                                <small class="text-muted"><i class="fa fa-globe"></i> Visibilidad: {{$user->area->descripcion}}</small>
+                            </div>
+                        </div>
+                        <div class="social-body">
+                            <form action="">
+                                <div class="form-group">
+                                        <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3"></textarea>
+                                </div>
+            
+                                <div class="btn-group text-muted">
+                                    <button type="submit" class="btn btn-outline btn-primary btn-xs "><i class="fa fa-share"></i> Publicar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
             <div class="social-feed-box">
 
@@ -102,8 +179,8 @@
                         <img alt="image" src="img/a1.jpg">
                     </a>
                     <div class="media-body">
-                        <a href="#">
-                           Victor Manuel Arenas
+                        <a href="#" style="color: #676a6c;">
+                           Andrés Stiven Medina
                         </a>
                         <small class="text-muted">Hoy 4:21 pm - 2018-02-21</small>
                     </div>
@@ -117,7 +194,7 @@
                     </p>
 
                     <div class="btn-group text-muted">
-                        <button class="btn btn-white btn-xs "><i class="fa fa-check-square-o"></i> Resuelto</button>
+                        <button class="btn btn-outline btn-default btn-xs "><i class="fa fa-check"></i> Resuelto</button>
                     </div>
                 </div>
                 <div class="social-footer">
@@ -126,12 +203,12 @@
                             <img alt="image" src="img/a3.jpg">
                         </a>
                         <div class="media-body">
-                            <a href="#">
+                            <a href="#" style="color: #676a6c;">
                                 Yurani Calvo Ruiz
                             </a>
                             Ha resuelto la novedad.
                             <br/>
-                            <a href="#" class="small"><i class="fa fa-check"></i> Resuelto!</a> -
+                            <a href="#" class="small" style="color: #676a6c;"><i class="fa fa-check"></i> Resuelto!</a> -
                             <small class="text-muted">2018-02-22</small>
                         </div>
                     </div>
@@ -155,7 +232,7 @@
                         <img alt="image" src="img/a3.jpg">
                     </a>
                     <div class="media-body">
-                        <a href="#">
+                        <a href="#" style="color: #676a6c;">
                             Yurani Calvo Ruiz
                         </a>
                         <small class="text-muted">Hoy 4:21 pm - 2018-02-22</small>
@@ -176,10 +253,8 @@
                     </p>
                     <img src="img/gallery/3.jpg" class="img-responsive">
                     <div class="btn-group">
-                        <button class="btn btn-white btn-xs "><i class="fa fa-check-square-o"></i> Resolver</button>
+                        <button class="btn btn-outline btn-success btn-xs "><i class="fa fa-check-square-o"></i> Resolver</button>
                     </div>
-                <div class="social-footer">
-            </div>
 
         </div>
     </div>
@@ -322,4 +397,21 @@
             </div>
         </div>
     </div>
+@endsection
+@section('ini-scripts')
+{{-- <script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('Administrador BD Sanicontrol S.A.S.', 'Bienvenido a ABAS');
+
+        }, 1300);
+
+    });
+</script> --}}
 @endsection

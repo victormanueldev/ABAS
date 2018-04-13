@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+<script>
+    document.getElementById('m-ver-clientes').setAttribute("class", "active");
+    document.getElementById('a-ver-clientes').removeAttribute("style");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Listado de Clientes</h2>
@@ -35,9 +39,9 @@
                     </div>
                     <div class="clients-list">
                     <ul class="nav nav-tabs">
-                        <span class="pull-right small text-muted">1406 Elements</span>
-                        <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> Contacts</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i> Companies</a></li>
+                        <span class="pull-right small text-muted">1406 Clientes</span>
+                        <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> Personas</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i> Empresas</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">

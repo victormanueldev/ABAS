@@ -11,14 +11,21 @@
 |
 */
 
-Route::get('/home', function () {
-    return view('index');
+Route::get('/', function () {
+    return view('auth.login');
 });
+Route::get('clientes/crear-empresa', function(){
+    return view('crear-empresa');
+})->name('crear-empresa');
 
-Route::get('clientes/crear-cliente', function(){
-    return view('crear-cliente');
-});
+Route::get('clientes/crear-persona', function(){
+    return view('crear-persona');
+})->name('crear-persona');
 
 Route::get('clientes/ver-clientes', function () {
     return view('ver-clientes');
-});
+})->name('ver-clientes');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

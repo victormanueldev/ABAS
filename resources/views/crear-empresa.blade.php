@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+<script>
+    document.getElementById('m-clientes').setAttribute("class", "active");
+    document.getElementById('a-clientes').removeAttribute("style");
+    document.getElementById('ml2-clientes').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-crearEmpresa').setAttribute("class", "active");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Creación de Clientes</h2>
@@ -22,7 +28,7 @@
         <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Información Básica</h5>
+                        <h3>Información Básica</h3>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -36,7 +42,7 @@
                                     <p>Guarda la información de un prospecto.</p>
         
                                     <div class="form-group col-lg-12"><label class="control-label">Nombre/Empresa *</label>
-                                        <input type="text" placeholder="Nombre del cliente o Empresa" class="form-control">
+                                        <input type="text" placeholder="Nombre de la Empresa" class="form-control">
                                         
                                     </div>
                                     
@@ -66,7 +72,6 @@
         
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
                                         <input type="text" placeholder="Celular del contacto o cliente" class="form-control">
-                                        
                                     </div>
         
                                     {{--  <div class="form-group col-lg-12">
@@ -78,10 +83,66 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>Sede</h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <p>Registre la información de la sede de la empresa</p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                
+                                <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
+                                    <input type="text" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
+                                    <input type="text" placeholder="Escriba la dirección" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
+                                    <input type="text" placeholder="Escriba la ciudad" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
+                                    <input type="text" placeholder="Escriba el Barrio" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
+                                    <input type="text" placeholder="Zona Ruta" class="form-control">
+                                </div>
+            
+                                <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
+                                    <input type="text" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                    
+                                </div>
+    
+                                <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                    <input type="text" placeholder="Celular del contacto" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Email *</label>
+                                    <input type="email" placeholder="Email de contacto" class="form-control">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <strong>Nota: </strong>Diligencia el formulario de Sede si la empresa tiene mas sedes además de la principal, en caso contrario deja en blanco todos los espacios
+                    </div>
+                </div>
+            </div>
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Observaciones</h5>
+                    <h3>Observaciones</h3>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -130,9 +191,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="ibox-footer">
+                    <button type="submit" class="btn btn-w-m btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-w-m btn-default">Cancelar</button>
+                </div>
             </div>
         </div>
-        <div class="col-lg-12">
+        {{-- <div class="col-lg-12">
                 <div class="ibox">
                     <div class="ibox-content">
                         ¿Está seguro que quiere guardar esta información?
@@ -140,7 +205,7 @@
                         <button type="submit" class="btn btn-primary">Si</button>
                     </div>
                 </div>
-        </div>
+        </div> --}}
     </div>
     </form>
 </div>

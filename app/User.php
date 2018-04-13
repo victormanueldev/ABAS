@@ -1,21 +1,29 @@
 <?php
 
-namespace App;
+namespace ABAS;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'cedula',
+        'nombres',
+        'apellidos',
+        'telefono',
+        'id_area',
+        'id_cargo', 
+        'email', 
+        'password',
     ];
 
     /**
@@ -26,4 +34,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Relacion Users-Area
+     */
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    /**
+     * Relacion Users-Cargo
+     */
+    public function cargo()
+    {
+        return $this->belongsTo(Cargo::class);
+    }
+
+    /**
+     * Relacion Empleado-Cliente
+     */
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class);
+    }
 }

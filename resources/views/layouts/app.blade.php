@@ -31,18 +31,18 @@
 
 </head>
 
-<body class="md-skin"
+<body class="md-skin">
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle img-responsive" src="{{asset('img/a4.jpg')}}" style="width: 50px;"/>
+                            <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}" style="width: 50px;"/>
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Andrés Medina</strong>
-                             </span> <span class="text-muted text-xs block">Asesor Comercial <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->nombres}}</strong>
+                             </span> <span class="text-muted text-xs block">{{ Auth::user()->cargo->descripcion}} <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Perfil</a></li>
                                 <li class="divider"></li>
@@ -53,8 +53,18 @@
                             ABAS
                         </div>
                     </li>
-                    <li class="active">
-                        <a href="/home"><i class="fa fa-th-large"></i> <span class="nav-label">Inicio</span></a>
+                    <li id="m-inicio" >
+                        <a href="/home" style="background-color: #5cae27;color: white;" id="a-inicio"><i class="fa fa-th-large"></i> <span class="nav-label">Inicio</span></a>
+                    </li>
+                    <li id="m-clientes">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear clientes </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-clientes">
+                            <li id="ml2-crearEmpresa"><a href="{{route('crear-empresa')}}" style="color: white;">Persona Jurídica</a></li>
+                            <li id="ml2-crearPersona"><a href="{{route('crear-persona')}}" style="color: white;">Persona Natural</a></li>
+                        </ul>
+                    </li>
+                    <li id="m-ver-clientes">
+                        <a href="{{route('ver-clientes')}}" style="background-color: #5cae27;color: white;" id="a-ver-clientes"><i class="fa fa-users"></i> <span class="nav-label">Ver clientes</span></a>
                     </li>
                 </ul>
 
@@ -65,7 +75,7 @@
                 <div class="row border-bottom">
                     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                         <div class="navbar-header">
-                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" style="background-color: #5CAE27;border-color: #5CAE27;"><i class="fa fa-bars"></i> </a>
                             {{--  <form role="search" class="navbar-form-custom" action="search_results.html">
                                 <div class="form-group">
                                     <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
@@ -78,14 +88,18 @@
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                                    <i class="fa fa-bell"></i>  <span class="label label-warning">8</span>
                                 </a>
                             </li>
                 
                             <li>
-                                <a href="login.html">
+                                <a href="{{ route('logout') }}" 
+                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     <i class="fa fa-sign-out"></i> Cerrar Sesión
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         </ul>
                     </nav>
@@ -147,22 +161,7 @@
     <!-- Data picker -->
    <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
-
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.success('Administrador BD Sanicontrol S.A.S.', 'Bienvenido a ABAS');
-
-            }, 1300);
-
-        });
-    </script>
+   @yield('ini-scripts');
     <script>
             $(document).ready(function(){
     
@@ -200,7 +199,7 @@
                     todayHighlight: true
                 });
 
-                    $('.clockpicker').clockpicker();
+                $('.clockpicker').clockpicker();
             }); 
     
     </script>
@@ -212,7 +211,7 @@
                 type: 'line',
                 width: '100%',
                 height: '50',
-                lineColor: '#1ab394',
+                lineColor: '#5CAE27',
                 fillColor: "transparent"
             });
 
