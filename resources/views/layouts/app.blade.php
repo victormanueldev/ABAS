@@ -68,6 +68,9 @@
                     <li id="m-ver-clientes">
                         <a href="{{route('ver-clientes')}}" style="background-color: #5cae27;color: white;" id="a-ver-clientes"><i class="fa fa-users"></i> <span class="nav-label">Ver clientes</span></a>
                     </li>
+                    <li id="m-ver-clientes">
+                            <a href="{{route('actividades')}}" style="background-color: #5cae27;color: white;" id="a-ver-clientes"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
+                        </li>
                 </ul>
 
             </div>
