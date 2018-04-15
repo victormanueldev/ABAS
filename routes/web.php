@@ -26,6 +26,13 @@ Route::get('clientes/ver-clientes', function () {
     return view('ver-clientes');
 })->name('ver-clientes');
 
+Route::get('cronograma/actividades', function () {
+    return view('cronograma-actividades');
+})->name('actividades');
 Auth::routes();
 
+Route::post('tareas/guardar-tarea', 'TareasController@create')->name('guardaEventos');
+Route::get('tareas/index', 'TareasController@index')->name('tareas-index');
+Route::post('tareas/editar-tarea', 'TareasController@edit')->name('tareas-edit');
+Route::post('tareas/elminar-tarea', 'TareasController@destroy')->name('tareas-eliminar');
 Route::get('/home', 'HomeController@index')->name('home');

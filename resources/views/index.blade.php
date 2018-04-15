@@ -154,7 +154,7 @@
                         <div class="social-body">
                             <form action="">
                                 <div class="form-group">
-                                        <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3"></textarea>
+                                    <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3"></textarea>
                                 </div>
             
                                 <div class="btn-group text-muted">

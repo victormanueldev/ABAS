@@ -25,7 +25,9 @@
     <link href="{{asset('css/plugins/clockpicker/clockpicker.css')}}" rel="stylesheet">
     <!-- Gritter -->
     <link href="{{asset('js/plugins/gritter/jquery.gritter.css')}}" rel="stylesheet">
-
+    <!-- Custom page css -->
+    @yield('custom-css')
+    <!-- Basic CSS -->
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
@@ -113,6 +115,8 @@
         </div>
     </div>
 
+    <!-- Date range use moment.js same as full calendar plugin -->
+    <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
     <!-- Mainly scripts -->
     <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -149,8 +153,7 @@
     <!-- ChartJS-->
     <script src="{{asset('js/plugins/chartJs/Chart.min.js')}}"></script>
 
-    <!-- Date range use moment.js same as full calendar plugin -->
-    <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+
 
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
