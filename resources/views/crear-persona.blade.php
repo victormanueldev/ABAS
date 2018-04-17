@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
-    <form class="" method="POST">
+    <form class="" method="POST" >
     <div class="row">
         <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -42,8 +42,7 @@
                                     <p>Guarda la información de un prospecto.</p>
         
                                     <div class="form-group col-lg-12"><label class="control-label">Nombre Completo *</label>
-                                        <input type="text" placeholder="Nombre del cliente o Empresa" class="form-control">
-                                        
+                                        <input type="text"  placeholder="Nombre del cliente o Empresa" class="form-control">                                       
                                     </div>
                                     
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
@@ -74,10 +73,6 @@
                                         <input type="text" placeholder="Celular del contacto o cliente" class="form-control">
                                         
                                     </div>
-        
-                                    {{--  <div class="form-group col-lg-12">
-                                            <button type="button" class="btn btn-primary btn-md" >Guardar</button>
-                                    </div>  --}}
                                 
                             </div>
                         </div>
@@ -143,16 +138,9 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-lg-12">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        ¿Está seguro que quiere guardar esta información?
-                        <button type="submit" class="btn btn-default">No</button>
-                        <button type="submit" class="btn btn-primary">Si</button>
-                    </div>
-                </div>
-        </div> --}}
+
     </div>
+
     </form>
 </div>
 @endsection

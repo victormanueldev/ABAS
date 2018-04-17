@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('custom-css')
+<link href="{{asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+@endsection
 @section('content')
 <script>
     document.getElementById('m-inicio').setAttribute("class", "active");
@@ -46,80 +49,11 @@
 
     </div>
     <div class="row">
-            <div class="col-lg-3">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <h2>Tareas rápidas</h2>
-                            <small>Esta es la lista de tareas para hoy</small>
-                            <ul class="todo-list m-t small-list">
-                                <li>
-                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-check-square"></i> </a>
-                                    <span class="m-l-xs todo-completed">Buy a milk</span>
-    
-                                </li>
-                                <li>
-                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-check-square"></i> </a>
-                                    <span class="m-l-xs  todo-completed">Go to shop and find some products.</span>
-    
-                                </li>
-                                <li>
-                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-square-o"></i> </a>
-                                    <span class="m-l-xs">Send documents to Mike</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-square-o"></i> </a>
-                                    <span class="m-l-xs">Go to the doctor dr Smith</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="check-link" style="color: #5CAE27;"><i class="fa fa-square-o"></i> </a>
-                                    <span class="m-l-xs">Plan vacation</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-{{-- 
         <div class="col-lg-3">
-
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h3>Registro de Clientes</h3>
-
-                    <p class="small">
-                        Registra un nuevo cliente.
-                    </p>
-                    
-                    <a href="/clientes/crear-cliente" class="btn btn-success btn-block">Iniciar</a>
-
-                </div>
+            <div class="ibox float-e-margins" id="app">
+                <tareas></tareas>
             </div>
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h3>Tareas Rápidas</h3>
-
-                    <p class="small">
-                        Registra una tarea rápidamente.
-                    </p>
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalTareas">
-                        Crear
-                    </button>
-                </div>
-            </div>
-
-            <div class="ibox">
-                    <div class="ibox-content">
-                        <h3>Novedades</h3>
-    
-                        <p class="small">
-                            Crea una Novedad y publícala.
-                        </p>
-                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalNovedades">
-                            Publicar
-                        </button>
-                    </div>
-                </div>
-
-        </div> --}}
+        </div>
 
         <div class="col-lg-5">
 
@@ -255,163 +189,72 @@
                     <div class="btn-group">
                         <button class="btn btn-outline btn-success btn-xs "><i class="fa fa-check-square-o"></i> Resolver</button>
                     </div>
-
+                </div>
+            </div>
         </div>
-    </div>
-</div>
         <div class="col-lg-4 m-b-lg">
             <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                @foreach($data_eventos as $evento)
                 <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon navy-bg">
-                        <i class="fa fa-briefcase"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Reunión</h2>
-                        <p>Reunión con el cliente <strong>La Locura sede Norte</strong> dirección Cra 2D # 24A - 21 a las 12:30:00.
-                        </p>
-                        <a href="#" class="btn btn-sm btn-primary"> Ver más</a>
-                            <span class="vertical-date">
-                                Hoy <br>
-                                <small>2018-08-03</small>
-                            </span>
-                    </div>
-                </div>
-
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon blue-bg">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Revisar documentación</h2>
-                        <p>Revisar la documentación del cliente No. <strong>C0123</strong> y Razón social <strong>Leños & Carbón</strong> sede Chipichape.</p>
-                        <a href="#" class="btn btn-sm btn-success">Ver más </a>
-                            <span class="vertical-date">
-                            Hoy <br>
-                                <small>2018-08-03</small>
-                            </span>
-                    </div>
-                </div>
-
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon yellow-bg">
-                        <i class="fa fa-phone"></i>
-                    </div>
-
-                    <div class="vertical-timeline-content">
-                        <h2>Llamada a cliente</h2>
-                        <p>Llamar a cliente para concretar visita de inpección.</p>
-                        <a href="#" class="btn btn-sm btn-primary">Ver más </a>
-                        <span class="vertical-date">Hoy <br><small>2018-08-03</small></span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="modal inmodal" id="modalTareas" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <i class="fa fa-tasks modal-icon"></i>
-                <h4 class="modal-title">Crear Tarea</h4>
-                {{--  <small class="font-bold">.</small>  --}}
-            </div>
-            <div class="modal-body">
-                
-                <div class="form-group">
-                    <label>Prioridad</label>
-                    <select class="form-control m-b" name="account">
-                        <option>Normal</option>
-                        <option>Urgente</option>
-                        <option>Importante</option>
-                    </select>
-                </div>
-
-                <div class="form-group" id="data_1">
-                    <label>Fecha</label>
-                    <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Hora</label>
-                    <div class="input-group" >
-                        <span class="input-group-addon">
-                                <span class="fa fa-clock-o"></span>
-                            </span>
-                        <input type="time" class="form-control" placeholder="09:20" >
-                        
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                        <label>Descripción</label>
-                        <textarea class="form-control" placeholder="Descripción de la tarea" rows="3"></textarea>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal inmodal" id="modalNovedades" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <i class="fa fa-bullhorn modal-icon"></i>
-                    <h4 class="modal-title">Crear Novedad</h4>
-                    {{--  <small class="font-bold">.</small>  --}}
-                </div>
-                <div class="modal-body">
-                    
-                    <div class="form-group">
-                        <label>Visibilidad</label>
-                        <select class="form-control m-b" name="account">
-                            <option>Pública</option>
-                            <option>Privada</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                            <label>Descripción</label>
-                            <textarea class="form-control" placeholder="Escriba aquí la descripción de la novedad" rows="3"></textarea>
+                    @if($evento->tipo == 'Llamada')
+                        <div class="vertical-timeline-icon yellow-bg">
+                            <i class="fa fa-phone"></i>
                         </div>
+                    @elseif($evento->tipo == 'Visita')
+                        <div class="vertical-timeline-icon navy-bg">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                    @else
+                        <div class="vertical-timeline-icon blue-bg">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                    @endif
+
+                    <div class="vertical-timeline-content">
+                        <h2>{{$evento->tipo}}</h2>
+                        <p>{{$evento->asunto}}</p>
+                        
+                    @if($evento->tipo == 'Llamada')
+                        <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-calendar"></i></a>
+                        <span class="vertical-date">
+                        Hoy <br>
+                        <small>{{$evento->fecha_inicio}}</small>
+                        </span>
+                    @elseif($evento->tipo == 'Visita')
+                        <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-calendar"></i></a>
+                        <span class="vertical-date">
+                            Hoy <br>
+                            <small>{{$evento->fecha_inicio}}</small>
+                        </span>
+                    @else
+                        <a href="#" class="btn btn-sm btn-success"><i class="fa fa-calendar"></i> </a>
+                        <span class="vertical-date">
+                        Hoy <br>
+                            <small>{{$evento->fecha_inicio}}</small>
+                        </span>
+                    @endif
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar </button>
-                    <button type="button" class="btn btn-primary">Publicar</button>
-                </div>
+                @endforeach
+
             </div>
+
         </div>
+
     </div>
+
+</div>
+
 @endsection
 @section('ini-scripts')
-{{-- <script>
+{{-- <script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>
+<script>
     $(document).ready(function() {
-        setTimeout(function() {
-            toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 4000
-            };
-            toastr.success('Administrador BD Sanicontrol S.A.S.', 'Bienvenido a ABAS');
-
-        }, 1300);
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
 
     });
-</script> --}}
+</script>  --}}
 @endsection

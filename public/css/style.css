@@ -632,7 +632,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   color: #5CAE27;
 }
 .btn-success.btn-outline {
-  color: #1c84c6;
+  color: #45821d;
 }
 .btn-info.btn-outline {
   color: #23c6c8;
@@ -692,8 +692,8 @@ fieldset[disabled] .btn-primary.active {
   border-color: #1dc5a3;
 }
 .btn-success {
-  background-color: #1c84c6;
-  border-color: #1c84c6;
+  background-color: #45821d;
+  border-color: #45821d;
   color: #FFFFFF;
 }
 .btn-success:hover,
@@ -1096,7 +1096,7 @@ button.dim:active:before {
 }
 .label-success,
 .badge-success {
-  background-color: #1c84c6;
+  background-color: #45821d;
   color: #FFFFFF;
 }
 .label-warning,
@@ -2531,7 +2531,7 @@ label.error {
   border-left: 6px solid #DBA525;
 }
 .inspinia-notify.alert-success {
-  border-left: 6px solid #1c84c6;
+  border-left: 6px solid #45821d;
 }
 .inspinia-notify.alert-danger {
   border-left: 6px solid #ed5565;
@@ -3273,8 +3273,8 @@ body.tour-open .animated {
 }
 .stream .stream-badge i.bg-success {
   color: #ffffff;
-  background-color: #1c84c6;
-  border-color: #1c84c6;
+  background-color: #45821d;
+  border-color: #45821d;
 }
 .stream .stream-badge i.bg-primary {
   color: #ffffff;
@@ -4036,7 +4036,7 @@ table.table-mail tr td {
 }
 .blue-bg,
 .bg-success {
-  background-color: #1c84c6;
+  background-color: #45821d;
   color: #ffffff;
 }
 .navy-bg,
@@ -4070,11 +4070,11 @@ table.table-mail tr td {
   border-color: #5CAE27;
 }
 .panel-success {
-  border-color: #1c84c6;
+  border-color: #45821d;
 }
 .panel-success > .panel-heading {
-  background-color: #1c84c6;
-  border-color: #1c84c6;
+  background-color: #45821d;
+  border-color: #45821d;
   color: #ffffff;
 }
 .panel-info {
@@ -4121,7 +4121,7 @@ table.table-mail tr td {
   background-color: #3dc7ab;
 }
 .progress-bar-success {
-  background-color: #1c84c6;
+  background-color: #45821d;
 }
 .progress-bar-info {
   background-color: #23c6c8;
@@ -4150,7 +4150,7 @@ table.table-mail tr td {
   color: inherit;
 }
 .text-success {
-  color: #1c84c6;
+  color: #45821d;
 }
 .text-info {
   color: #23c6c8;
@@ -4943,7 +4943,7 @@ ul.notes li div {
   color: #5CAE27;
 }
 .category-list li a .text-primary {
-  color: #1c84c6;
+  color: #45821d;
 }
 .category-list li a .text-info {
   color: #23c6c8;
@@ -5465,7 +5465,7 @@ table.issue-tracker tbody tr td {
   border-left: 3px solid #ed5565;
 }
 .agile-list li.info-element {
-  border-left: 3px solid #1c84c6;
+  border-left: 3px solid #45821d;
 }
 .agile-list li.success-element {
   border-left: 3px solid #5CAE27;

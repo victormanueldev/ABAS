@@ -58,4 +58,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cliente::class);
     }
+
+    /**
+     * Realacion User-Tarea
+     */
+    public function tareas()
+    {
+       return $this->hasMany(Tarea::class);
+    }
+
+    /**
+     * Relacion User-Eventos
+     */
+    public function eventos()
+    {
+       return $this->hasMany(Evento::class);
+    }
 }

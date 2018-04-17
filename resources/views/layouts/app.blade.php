@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>ABAS | Sanicontrol S.A.S</title>
 
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -68,9 +68,9 @@
                     <li id="m-ver-clientes">
                         <a href="{{route('ver-clientes')}}" style="background-color: #5cae27;color: white;" id="a-ver-clientes"><i class="fa fa-users"></i> <span class="nav-label">Ver clientes</span></a>
                     </li>
-                    <li id="m-ver-clientes">
-                            <a href="{{route('actividades')}}" style="background-color: #5cae27;color: white;" id="a-ver-clientes"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
-                        </li>
+                    <li id="m-cronograma">
+                        <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
+                    </li>
                 </ul>
 
             </div>
@@ -120,22 +120,12 @@
 
     <!-- Date range use moment.js same as full calendar plugin -->
     <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
     <!-- Mainly scripts -->
     <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-
-    <!-- Flot -->
-    <script src="{{asset('js/plugins/flot/jquery.flot.js')}}"></script>
-    <script src="{{asset('js/plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
-    <script src="{{asset('js/plugins/flot/jquery.flot.spline.js')}}"></script>
-    <script src="{{asset('js/plugins/flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{asset('js/plugins/flot/jquery.flot.pie.js')}}"></script>
-
-    <!-- Peity -->
-    <script src="{{asset('js/plugins/peity/jquery.peity.min.j')}}s"></script>
-    <script src="{{asset('js/demo/peity-demo.js')}}"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="{{asset('js/inspinia.js')}}"></script>
@@ -144,19 +134,11 @@
     <!-- jQuery UI -->
     <script src="{{asset('js/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
-    <!-- GITTER -->
-    <script src="{{asset('js/plugins/gritter/jquery.gritter.min.js')}}"></script>
-
     <!-- Sparkline -->
     <script src="{{asset('js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 
     <!-- Sparkline demo data  -->
     <script src="{{asset('js/demo/sparkline-demo.js')}}"></script>
-
-    <!-- ChartJS-->
-    <script src="{{asset('js/plugins/chartJs/Chart.min.js')}}"></script>
-
-
 
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>

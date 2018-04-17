@@ -12,16 +12,30 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')-> insert([
-            'cedula' => '1061807769',
-            'nombres' => 'Victor Manuel',
-            'apellidos' => 'Arenas Lopez',
-            'telefono' => '3103195394',
-            'foto' => 'default-user.jpg',
-            'email' => 'victormalsx@gmail.com',
-            'password' => bcrypt('1234567'),
-            'area_id' => '1',
-            'cargo_id' => '1' 
-        ]);
+        $users = [
+            '0' => [
+                'cedula' => '1061807769',
+                'nombres' => 'Victor Manuel',
+                'apellidos' => 'Arenas Lopez',
+                'telefono' => '3103195394',
+                'foto' => 'default-user.jpg',
+                'email' => 'victormalsx@gmail.com',
+                'password' => bcrypt('1234567'),
+                'area_id' => '1',
+                'cargo_id' => '1' 
+            ], 
+            '1' => [
+                'cedula' => '987654321',
+                'nombres' => 'Yurani',
+                'apellidos' => 'Calvo Ruiz',
+                'telefono' => '3103195394',
+                'foto' => 'a6.jpg',
+                'email' => 'yurani@gmail.com',
+                'password' => bcrypt('1234567'),
+                'area_id' => '1',
+                'cargo_id' => '1' 
+            ]
+        ];
+        DB::table('users')-> insert($users);
     }
 }
