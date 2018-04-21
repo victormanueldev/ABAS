@@ -12,9 +12,16 @@ class CargoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cargos')->insert([
-            'nombre' => 'asesorcom',
-            'descripcion' => 'Asesor Comercial'
-        ]);
+        $cargos = [
+            '0' => [
+                'nombre' => 'asesorcom',
+                'descripcion' => 'Asesor Comercial'
+            ],
+            '1' => [
+                'nombre' => 'auxcontable',
+                'descripcion' => 'Auxiliar Contable'
+            ]
+        ];
+        DB::table('cargos')->insert($cargos);
     }
 }

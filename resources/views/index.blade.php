@@ -55,9 +55,11 @@
             </div>
         </div>
 
-        <div class="col-lg-5">
-
+        <div class="col-lg-5" id="novedad">
+            
                 <div class="social-feed-box">
+                    {!! Form::open(['route' => ['novedades.store'], 'method' => 'POST']) !!}
+                    {!! Form::token() !!}
                         <div class="pull-right social-action dropdown">
                             <button data-toggle="dropdown" class="dropdown-toggle btn-white">
                                 <i class="fa fa-gear"></i>
@@ -82,116 +84,35 @@
                                 <a href="#" style="color: #676a6c;">
                                    {{ $user->nombres}} {{$user->apellidos}}
                                 </a>
-                                <small class="text-muted"><i class="fa fa-globe"></i> Visibilidad: {{$user->area->descripcion}}</small>
+                            
+                                <small class="text-muted">
+                                    <i class="fa fa-globe"></i> Visibilidad: 
+                                    <select name="area" required>
+                                            <option value="1" selected>{{$user->area->descripcion}}</option>
+                                            <option value="2"> Area Contabilidad</option>
+                                            <option value="3"> Pública</option>
+                                    </select>
+                                </small>
+                            
                             </div>
+                        
                         </div>
+                   
                         <div class="social-body">
-                            <form action="">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3"></textarea>
+                                    <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3" name="descripcion"></textarea>
                                 </div>
-            
+                    
                                 <div class="btn-group text-muted">
                                     <button type="submit" class="btn btn-outline btn-primary btn-xs "><i class="fa fa-share"></i> Publicar</button>
-                                </div>
-                            </form>
+                                </div>  
+                                    
                         </div>
-                    </div>
-
-            <div class="social-feed-box">
-
-                <div class="pull-right social-action dropdown">
-                    <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                        <i class="fa fa-angle-down"></i>
-                    </button>
-                    <ul class="dropdown-menu m-t-xs">
-                        <li><a href="#">Ocultar</a></li>
-                    </ul>
+                    {!! Form::close() !!}
                 </div>
-                <div class="social-avatar">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="img/a1.jpg">
-                    </a>
-                    <div class="media-body">
-                        <a href="#" style="color: #676a6c;">
-                           Andrés Stiven Medina
-                        </a>
-                        <small class="text-muted">Hoy 4:21 pm - 2018-02-21</small>
-                    </div>
+                <novedades></novedades>
                 </div>
-                <div class="social-body">
-                    <p>
-                        Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                        default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                        in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                        default model text.
-                    </p>
-
-                    <div class="btn-group text-muted">
-                        <button class="btn btn-outline btn-default btn-xs "><i class="fa fa-check"></i> Resuelto</button>
-                    </div>
-                </div>
-                <div class="social-footer">
-                    <div class="social-comment">
-                        <a href="" class="pull-left">
-                            <img alt="image" src="img/a3.jpg">
-                        </a>
-                        <div class="media-body">
-                            <a href="#" style="color: #676a6c;">
-                                Yurani Calvo Ruiz
-                            </a>
-                            Ha resuelto la novedad.
-                            <br/>
-                            <a href="#" class="small" style="color: #676a6c;"><i class="fa fa-check"></i> Resuelto!</a> -
-                            <small class="text-muted">2018-02-22</small>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="social-feed-box">
-
-                <div class="pull-right social-action dropdown">
-                    <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                        <i class="fa fa-angle-down"></i>
-                    </button>
-                    <ul class="dropdown-menu m-t-xs">
-                        <li><a href="#">Config</a></li>
-                    </ul>
-                </div>
-                <div class="social-avatar">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="img/a3.jpg">
-                    </a>
-                    <div class="media-body">
-                        <a href="#" style="color: #676a6c;">
-                            Yurani Calvo Ruiz
-                        </a>
-                        <small class="text-muted">Hoy 4:21 pm - 2018-02-22</small>
-                    </div>
-                </div>
-                <div class="social-body">
-                    <p>
-                        Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                        default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                        in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                        default model text.
-                    </p>
-                    <p>
-                        Lorem Ipsum as their
-                        default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                        in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                        default model text.
-                    </p>
-                    <img src="img/gallery/3.jpg" class="img-responsive">
-                    <div class="btn-group">
-                        <button class="btn btn-outline btn-success btn-xs "><i class="fa fa-check-square-o"></i> Resolver</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                   
         <div class="col-lg-4 m-b-lg">
             <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
                 @foreach($data_eventos as $evento)
@@ -215,25 +136,26 @@
                         <p>{{$evento->asunto}}</p>
                         
                     @if($evento->tipo == 'Llamada')
-                        <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-calendar"></i></a>
+                        <a href="#" class="btn btn-sm btn-warning">Ver más</a>
                         <span class="vertical-date">
                         Hoy <br>
                         <small>{{$evento->fecha_inicio}}</small>
                         </span>
                     @elseif($evento->tipo == 'Visita')
-                        <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-calendar"></i></a>
+                        <a href="#" class="btn btn-sm btn-primary">Ver más</a>
                         <span class="vertical-date">
                             Hoy <br>
                             <small>{{$evento->fecha_inicio}}</small>
                         </span>
                     @else
-                        <a href="#" class="btn btn-sm btn-success"><i class="fa fa-calendar"></i> </a>
+                        <a href="#" class="btn btn-sm btn-success">Ver más </a>
                         <span class="vertical-date">
                         Hoy <br>
                             <small>{{$evento->fecha_inicio}}</small>
                         </span>
                     @endif
                     </div>
+                    
                 </div>
                 @endforeach
 
@@ -247,14 +169,4 @@
 
 @endsection
 @section('ini-scripts')
-{{-- <script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>
-<script>
-    $(document).ready(function() {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
-
-    });
-</script>  --}}
 @endsection

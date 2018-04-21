@@ -118,15 +118,16 @@
         </div>
     </div>
 
-    <!-- Date range use moment.js same as full calendar plugin -->
-    <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
-    <script src="{{asset('js/app.js')}}"></script>
     <!-- Mainly scripts -->
     <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
+    <!-- Date range use moment.js same as full calendar plugin -->
+    <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+    
     <!-- Custom and plugin javascript -->
     <script src="{{asset('js/inspinia.js')}}"></script>
     <script src="{{asset('js/plugins/pace/pace.min.js')}}"></script>

@@ -705,8 +705,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success:active:hover,
 .btn-success.active:hover,
 .btn-success.active:focus {
-  background-color: #1a7bb9;
-  border-color: #1a7bb9;
+  background-color: #45821d;
+  border-color: #45821d;
   color: #FFFFFF;
 }
 .btn-success:active,

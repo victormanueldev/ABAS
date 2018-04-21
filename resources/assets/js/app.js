@@ -20,3 +20,9 @@ Vue.component('tareas', require('./components/tareas.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+Vue.component('novedades', require('./components/novedades.vue'));
+
+const novedad = new Vue({
+    el: '#novedad'
+});

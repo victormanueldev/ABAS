@@ -12,9 +12,16 @@ class AreaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('areas')->insert([
-            'nombre' => 'comercial',
-            'descripcion' => 'Área Comercial'
-        ]);
+        $areas = [
+            '0' => [
+                'nombre' => 'comercial',
+                'descripcion' => 'Área Comercial'
+            ],
+            '1' => [
+                'nombre' => 'contabilidad',
+                'descripcion' => 'Área Contabilidad'
+            ]
+        ];
+        DB::table('areas')->insert($areas);
     }
 }

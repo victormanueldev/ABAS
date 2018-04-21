@@ -43,3 +43,6 @@ Route::post('eventos/elminar-evento', 'EventosController@destroy')->name('evento
 Route::resource('tareas', 'TareasController', [
     'except' => ['create', 'show', 'edit']
 ]);
+
+//CRUD Novedades
+Route::resource('novedades', 'NovedadesController');

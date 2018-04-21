@@ -16,6 +16,6 @@ class Area extends Model
      */
     public function novedades()
     {
-        return $this->belongsToMany(Novedad::class);
+        return $this->hasMany(Novedad::class);
     }
 }

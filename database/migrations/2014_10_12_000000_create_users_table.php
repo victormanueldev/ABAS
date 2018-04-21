@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('apellidos', 45);
             $table->string('telefono', 13);
             $table->string('foto');
-            $table->string('email')->unique();
+            $table->string('email', 99)->unique();
             $table->string('password');
             $table->integer('area_id');
             $table->integer('cargo_id');

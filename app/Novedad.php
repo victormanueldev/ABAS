@@ -30,4 +30,12 @@ class Novedad extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Realacion Tarea_Novedad
+     */
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class);
+    }
 }

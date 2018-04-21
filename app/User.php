@@ -74,4 +74,12 @@ class User extends Authenticatable
     {
        return $this->hasMany(Evento::class);
     }
+
+    /**
+     * Relacion User-Novedad
+     */
+    public function novedades()
+    {
+        return $this->hasMany(Novedad::class);
+    }
 }
