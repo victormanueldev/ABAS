@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="social-feed-box" v-for="novedad in novedades" :key="novedad.id">
+    <div class="social-feed-box" v-for="novedad in novedadesOrdenadas" :key="novedad.id">
         <div class="pull-right social-action dropdown">
             <button data-toggle="dropdown" class="dropdown-toggle btn-white">
                 <i class="fa fa-angle-down"></i>
@@ -10,7 +10,7 @@
             </ul>
         </div>
         <div class="social-avatar">
-            <a href="" class="pull-left">
+            <a href="#" class="pull-left">
                 <img alt="image" :src="'/storage/'+novedad.foto_user1">
             </a>
             <div class="media-body">
@@ -52,6 +52,9 @@
 </template>
 
 <script>
+    //Importacion del Loadash
+    import lodash from 'lodash';    
+    Object.defineProperty(Vue.prototype, '$lodash', { value: lodash });
     export default {
         //Se ejecuta cuando se carga el documento
         mounted() {
@@ -68,6 +71,7 @@
                     descripcion: '',
                     area: ''
                 }
+
             }
         },
         methods: {
@@ -101,6 +105,14 @@
                 })
             }
 
+        },
+        computed: {
+            /**
+            * Ordena las novedades de forma descendiente por fecha y por hora de creacion
+            **/
+            novedadesOrdenadas(){
+                return _.orderBy(this.novedades, ['fecha_creacion', 'hora_creacion'], ['desc', 'desc'])
+            }
         }
     }
 </script>

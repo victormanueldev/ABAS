@@ -29,7 +29,7 @@ class CreateClientesTable extends Migration
             $table->string('cargo_contacto_tecnico', 100)->nullable();//Verificar
             $table->string('cargo_contacto', 100);
             $table->string('email');
-            $table->string('telefono', 15);
+            $table->string('telefono', 15)->nullable();
             $table->string('telefono2', 15)->nullable();
             $table->string('extension',15)->nullable();
             $table->string('celular', 20);

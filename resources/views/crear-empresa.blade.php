@@ -23,7 +23,8 @@
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
-    <form class="" method="POST" >
+    {!! Form::open(array('route'=> ['guardarEmpresa'], 'method'=>'POST', 'autocomplete'=>'off')) !!}
+    {{Form::token()}}
     <div class="row">
         <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -41,37 +42,42 @@
                                 
                                     <p>Guarda la información de un prospecto.</p>
         
-                                    <div class="form-group col-lg-12"><label class="control-label">Nombre/Empresa *</label>
-                                        <input type="text" placeholder="Nombre de la Empresa" class="form-control">
+                                    <div class="form-group col-lg-6"><label class="control-label">Nombre/Empresa *</label>
+                                        <input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control">
+                                        
+                                    </div>
+
+                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social *</label>
+                                        <input type="text" name="razon_social" placeholder="Razón Social de la Empresa" class="form-control">
                                         
                                     </div>
                                     
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" placeholder="Nombre del contacto" class="form-control">
+                                        <input type="text" name="nombre_contacto" placeholder="Nombre del contacto" class="form-control">
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                        <input type="text" placeholder="Cargo del contacto" class="form-control">
+                                        <input type="text" name="cargo_contacto" placeholder="Cargo del contacto" class="form-control">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email" placeholder="Email del contacto" class="form-control">
+                                        <input type="email"  name="email" placeholder="Email del contacto" class="form-control">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" placeholder="Direcció del contacto o cliente" class="form-control">
+                                        <input type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                        <input type="text" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                        <input type="text" name="telefono" placeholder="Teléfono del contacto o cliente" class="form-control">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" placeholder="Celular del contacto o cliente" class="form-control">
+                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
                                     </div>
         
                                     {{--  <div class="form-group col-lg-12">
@@ -207,6 +213,6 @@
                 </div>
         </div> --}}
     </div>
-    </form>
+    {!! Form::close() !!}
 </div>
 @endsection

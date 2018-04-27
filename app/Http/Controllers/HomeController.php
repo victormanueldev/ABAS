@@ -39,7 +39,7 @@ class HomeController extends Controller
                 $data_eventos->push($evento);
             }
         }
-        //dd($data_eventos);
+        // dd($data_eventos);
         return view('index', compact('user', 'data_eventos'));
     }
 }

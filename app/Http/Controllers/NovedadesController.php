@@ -8,6 +8,7 @@ use Auth;
 use ABAS\Novedad;
 use ABAS\User;
 use ABAS\Area;
+use Carbon\Carbon;
 
 class NovedadesController extends Controller
 {
@@ -19,43 +20,45 @@ class NovedadesController extends Controller
     public function index()
     {
         $novedades = Novedad::with('user', 'user2')->get();//Consulta todas las novedades con su respectivo usuario
-
+        $now = Carbon::now();
+        $fecha_actual = $now->toDateString();
         $data = collect();//Instancia de Coleccion
-        $cont = 0;
         foreach ($novedades as $novedad) {
-            if (!empty($novedad->user2->nombres)) {
-                //Agrega un elemento a la lista solo si el user2 existe
-                $data->push([
-                    'id' => $novedad->id, 
-                    'descripcion' => $novedad->descripcion, 
-                    'estado' => $novedad->estado, 
-                    'fecha_creacion' => $novedad->created_at->toDateString(),
-                    'hora_creacion' => $novedad->created_at->toTimeString(),
-                    'nombres_user1' => $novedad->user->nombres,
-                    'apellidos_user1' => $novedad->user->apellidos,
-                    'foto_user1' => $novedad->user->foto,
-                    'nombres_user2' => $novedad->user2->nombres,//Datos del usuario que resolvió
-                    'apellidos_user2'=> $novedad->user2->apellidos,//Datos del usuario que resolvió
-                    'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
-                    'fecha_resuelto' => $novedad->updated_at->toDateString(),
-                    'hora_resuelto' => $novedad->updated_at->toTimeString()
-                ]);
-            } else {
-                //Agrega todas las novedades a la coleccion
-                $data->push([
-                    'id' => $novedad->id, 
-                    'descripcion' => $novedad->descripcion, 
-                    'estado' => $novedad->estado, 
-                    'fecha_creacion' => $novedad->created_at->toDateString(),
-                    'hora_creacion' => $novedad->created_at->toTimeString(),
-                    'nombres_user1' => $novedad->user->nombres,
-                    'apellidos_user1' => $novedad->user->apellidos,
-                    'foto_user1' => $novedad->user->foto,
-                    'nombres_user2' => null,
-                    'apellidos_user2'=> null,
-                    'foto_user2' => null
-                ]);
-            }  
+            if ($novedad->created_at->toDateString() == $fecha_actual || $novedad->estado == 'publicada') {//Muestra solo las novedades creadas en la fecha actual
+                if (!empty($novedad->user2->nombres)) {//valida si la novedad está resuleta
+                    //Agrega un elemento a la lista solo si el user2 existe
+                    $data->push([
+                        'id' => $novedad->id, 
+                        'descripcion' => $novedad->descripcion, 
+                        'estado' => $novedad->estado, 
+                        'fecha_creacion' => $novedad->created_at->toDateString(),
+                        'hora_creacion' => $novedad->created_at->toTimeString(),
+                        'nombres_user1' => $novedad->user->nombres,
+                        'apellidos_user1' => $novedad->user->apellidos,
+                        'foto_user1' => $novedad->user->foto,
+                        'nombres_user2' => $novedad->user2->nombres,//Datos del usuario que resolvió
+                        'apellidos_user2'=> $novedad->user2->apellidos,//Datos del usuario que resolvió
+                        'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
+                        'fecha_resuelto' => $novedad->updated_at->toDateString(),
+                        'hora_resuelto' => $novedad->updated_at->toTimeString()
+                    ]);
+                } else {
+                    //Agrega todas las novedades a la coleccion
+                    $data->push([
+                        'id' => $novedad->id, 
+                        'descripcion' => $novedad->descripcion, 
+                        'estado' => $novedad->estado, 
+                        'fecha_creacion' => $novedad->created_at->toDateString(),
+                        'hora_creacion' => $novedad->created_at->toTimeString(),
+                        'nombres_user1' => $novedad->user->nombres,
+                        'apellidos_user1' => $novedad->user->apellidos,
+                        'foto_user1' => $novedad->user->foto,
+                        'nombres_user2' => null,
+                        'apellidos_user2'=> null,
+                        'foto_user2' => null
+                    ]);
+                }
+            }
         }
 
             $data->toJson();//Convierte la coleccion a formato JSON
@@ -117,14 +120,54 @@ class NovedadesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display all resources.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $novedades = Novedad::with('user', 'user2')->get();
+        $data = collect();//Instancia de Coleccion
+        foreach ($novedades as $novedad) {
+            if (!empty($novedad->user2->nombres)) {//valida si la novedad está resuleta
+                //Agrega un elemento a la lista solo si el user2 existe
+                $data->push([
+                    'id' => $novedad->id, 
+                    'descripcion' => $novedad->descripcion, 
+                    'estado' => $novedad->estado, 
+                    'fecha_creacion' => $novedad->created_at->toDateString(),
+                    'hora_creacion' => $novedad->created_at->toTimeString(),
+                    'nombres_user1' => $novedad->user->nombres,
+                    'apellidos_user1' => $novedad->user->apellidos,
+                    'foto_user1' => $novedad->user->foto,
+                    'nombres_user2' => $novedad->user2->nombres,//Datos del usuario que resolvió
+                    'apellidos_user2'=> $novedad->user2->apellidos,//Datos del usuario que resolvió
+                    'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
+                    'fecha_resuelto' => $novedad->updated_at->toDateString(),
+                    'hora_resuelto' => $novedad->updated_at->toTimeString()
+                ]);
+            } else {
+                //Agrega todas las novedades a la coleccion
+                $data->push([
+                    'id' => $novedad->id, 
+                    'descripcion' => $novedad->descripcion, 
+                    'estado' => $novedad->estado, 
+                    'fecha_creacion' => $novedad->created_at->toDateString(),
+                    'hora_creacion' => $novedad->created_at->toTimeString(),
+                    'nombres_user1' => $novedad->user->nombres,
+                    'apellidos_user1' => $novedad->user->apellidos,
+                    'foto_user1' => $novedad->user->foto,
+                    'nombres_user2' => '',
+                    'apellidos_user2'=> '',
+                    'foto_user2' => '',
+                    'fecha_resuelto' => '',
+                    'hora_resuelto' => ''
+                ]);
+            }
+        }
+        return view('novedades', compact('data'));
+
     }
 
     /**

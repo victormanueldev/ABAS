@@ -26,3 +26,9 @@ Vue.component('novedades', require('./components/novedades.vue'));
 const novedad = new Vue({
     el: '#novedad'
 });
+
+Vue.component('ver-clientes', require('./components/ver-clientes.vue'));
+
+const clientes = new Vue({
+    el: '#clientes'
+});

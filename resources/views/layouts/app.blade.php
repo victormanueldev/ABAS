@@ -71,6 +71,9 @@
                     <li id="m-cronograma">
                         <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
                     </li>
+                    <li id="m-novedades">
+                            <a href="{{route('novedades.show')}}" style="background-color: #5cae27;color: white;" id="a-novedades"><i class="fa fa-bullhorn"></i> <span class="nav-label">Novedades</span></a>
+                        </li>
                 </ul>
 
             </div>
@@ -138,9 +141,6 @@
     <!-- Sparkline -->
     <script src="{{asset('js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 
-    <!-- Sparkline demo data  -->
-    <script src="{{asset('js/demo/sparkline-demo.js')}}"></script>
-
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
 
@@ -195,7 +195,6 @@
     <script>
         $(document).ready(function() {
 
-
             $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 48], {
                 type: 'line',
                 width: '100%',
@@ -203,7 +202,6 @@
                 lineColor: '#5CAE27',
                 fillColor: "transparent"
             });
-
 
         });
     </script>

@@ -23,7 +23,7 @@
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
 </head>
-<body class="gray-bg" style="background-color: #5CAE27;">
+<body class="gray-bg" style="background-image: url({{asset('img/bg1.jpg')}}); background-position: center;background-size: 100% 100%;">
 
     <div class="loginColumns animated fadeInDown" style="padding-top: 150px;" >
         <div class="row">

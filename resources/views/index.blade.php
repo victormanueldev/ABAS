@@ -166,7 +166,4 @@
     </div>
 
 </div>
-
-@endsection
-@section('ini-scripts')
 @endsection

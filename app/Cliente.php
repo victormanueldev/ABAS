@@ -8,6 +8,7 @@ class Cliente extends Model
 {
     //Atributos
     protected $fillable = [
+        'id',
         'nombre_cliente',
         'razon_social',
         'nit_cedula',
