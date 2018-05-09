@@ -1,0 +1,11 @@
+Clientes:
+- Vista de Editar cliente (registro de multiples sedes, seguimiento por sedes- visitas e inspecciones)
+- Ver cliente (Vista completa)
+
+Notificaciones:
+- Notificacion de creacion de novedad (Solo a areas correspondientes)
+- Notificaion de evetos proximos (individual)
+
+Novedades:
+- Comentarios en las novedades
+- ver novedades (Comentarios)

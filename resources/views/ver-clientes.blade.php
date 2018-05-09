@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
 <script>
-    document.getElementById('m-ver-clientes').setAttribute("class", "active");
-    document.getElementById('a-ver-clientes').removeAttribute("style");
+    document.getElementById('m-clientes').setAttribute("class", "active");
+    document.getElementById('a-clientes').removeAttribute("style");
+    document.getElementById('ml2-clientes').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-verClientes').setAttribute("class", "active");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">

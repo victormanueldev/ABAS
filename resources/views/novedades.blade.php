@@ -37,10 +37,23 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                placeholder="Buscar en todas las novedades">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                        placeholder="Buscar en todas las novedades">
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="entries" class="form-control input-sm m-b-xs">
+                                    <option selected class="text-muted">Cantidad de entradas</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        
 
-                        <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                        <table id="tabla_novedades" class="table table-stripped dataTables-example" data-filter=#filter>
                             <thead>
                             <tr>
                                 <th>Novedad</th>
@@ -50,6 +63,7 @@
                                 <th data-hide="phone,tablet">Descripción</th>
                                 <th data-hide="phone,tablet">Fecha y hora de publicación</th>
                                 <th data-hide="phone,tablet">Fecha y hora de solución</th>
+                                <th data-hide="phone,tablet">Comentario</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -65,7 +79,8 @@
                                     @endif
                                     <td>{{$novedad['descripcion']}}</td>
                                     <td class="center">{{$novedad['fecha_creacion']}} - {{$novedad['hora_creacion']}}</td>
-                                    <td class="center">{{$novedad['fecha_resuelto']}} - {{$novedad['hora_resuelto']}}</td> 
+                                    <td class="center">{{$novedad['fecha_resuelto']}} - {{$novedad['hora_resuelto']}}</td>
+                                    <td class="center">{{$novedad['comentario']}}</td> 
                                 </tr>
                             @endforeach
                             </tbody>
@@ -85,13 +100,13 @@
 @endsection
 @section('ini-scripts')
 <!-- FooTable -->
+{{-- <script src="{{asset('js/plugins/footable/footable.js')}}"></script> --}}
 <script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
 <!-- Scripts de inicializacion -->
 <script>
     $(document).ready(function() {
 
         $('.footable').footable();
-        $('.footable2').footable();
 
     });
 

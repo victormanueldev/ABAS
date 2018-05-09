@@ -19,6 +19,7 @@ class NovedadSeeder extends Seeder
                 'estado' => 'resuelta',
                 'user2_id' => 2,
                 'user_id' => 1,
+                'comentario' => null,
                 'created_at' => '2018-04-19 15:21:00',
                 'updated_at' => '2018-04-20 20:21:00'
                 
@@ -29,6 +30,7 @@ class NovedadSeeder extends Seeder
                 'estado' => 'publicada',
                 'user2_id' => null,
                 'user_id' => 2,
+                'comentario' => null,
                 'created_at' => '2018-04-17 15:58:00',
                 'updated_at' => null
             ],
@@ -38,6 +40,7 @@ class NovedadSeeder extends Seeder
                 'estado' => 'publicada',
                 'user2_id' => null,
                 'user_id' => 1,
+                'comentario' => 'Novedad resuleta con éxito',
                 'created_at' => '2018-04-18 16:58:00',
                 'updated_at' => null
             ]

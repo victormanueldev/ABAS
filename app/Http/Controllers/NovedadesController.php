@@ -19,6 +19,7 @@ class NovedadesController extends Controller
      */
     public function index()
     {
+        $foto = Auth::user()->foto;
         $novedades = Novedad::with('user', 'user2')->get();//Consulta todas las novedades con su respectivo usuario
         $now = Carbon::now();
         $fecha_actual = $now->toDateString();
@@ -33,6 +34,7 @@ class NovedadesController extends Controller
                         'estado' => $novedad->estado, 
                         'fecha_creacion' => $novedad->created_at->toDateString(),
                         'hora_creacion' => $novedad->created_at->toTimeString(),
+                        'comentario' => $novedad->comentario,
                         'nombres_user1' => $novedad->user->nombres,
                         'apellidos_user1' => $novedad->user->apellidos,
                         'foto_user1' => $novedad->user->foto,
@@ -55,14 +57,15 @@ class NovedadesController extends Controller
                         'foto_user1' => $novedad->user->foto,
                         'nombres_user2' => null,
                         'apellidos_user2'=> null,
-                        'foto_user2' => null
+                        'foto_user2' => null,
+                        'foto_auth' => $foto
                     ]);
                 }
             }
         }
 
-            $data->toJson();//Convierte la coleccion a formato JSON
-            return $data;
+        $data->toJson();//Convierte la coleccion a formato JSON
+        return $data;
     }
         
 
@@ -145,7 +148,8 @@ class NovedadesController extends Controller
                     'apellidos_user2'=> $novedad->user2->apellidos,//Datos del usuario que resolvió
                     'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
                     'fecha_resuelto' => $novedad->updated_at->toDateString(),
-                    'hora_resuelto' => $novedad->updated_at->toTimeString()
+                    'hora_resuelto' => $novedad->updated_at->toTimeString(),
+                    'comentario' => $novedad->comentario
                 ]);
             } else {
                 //Agrega todas las novedades a la coleccion
@@ -162,12 +166,12 @@ class NovedadesController extends Controller
                     'apellidos_user2'=> '',
                     'foto_user2' => '',
                     'fecha_resuelto' => '',
-                    'hora_resuelto' => ''
+                    'hora_resuelto' => '',
+                    'comentario' => '-'
                 ]);
             }
         }
         return view('novedades', compact('data'));
-
     }
 
     /**
@@ -193,6 +197,7 @@ class NovedadesController extends Controller
         $novedad = Novedad::findOrFail($id);
         $novedad->estado = $request->estado;
         $novedad->user2_id = Auth::user()->id;
+        $novedad->comentario = $request->comentario;
         $novedad->update();
     }
 

@@ -26,12 +26,10 @@
                 {{novedad.descripcion}}
             </p>
 
-            <div class="btn-group text-muted">
-                <a v-if="novedad.estado == 'publicada'" class="btn btn-outline btn-success btn-xs " @click.prevent="resolver(novedad)"><i class="fa fa-check-square-o"></i> Resolver</a>
-                <a v-else class="btn btn-default btn-xs "><i class="fa fa-check"></i> Resuelto</a>
-            </div>
+
         </div>
         <div v-if="novedad.estado == 'resuelta'" class="social-footer">
+
             <div class="social-comment">
                 <a href="" class="pull-left">
                     <img alt="image" :src="'/storage/'+novedad.foto_user2">
@@ -45,6 +43,24 @@
                     <a href="#" class="small" style="color: #676a6c;"><i class="fa fa-check"></i> Resuelto!</a> -
                     <small class="text-muted">{{ novedad.fecha_resuelto }} - {{ novedad.hora_resuelto }}</small>
                 </div>
+            </div>
+        </div>
+        <div v-else class="social-footer">
+            <div class="social-comment">
+                <a href="" class="pull-left">
+                    <img alt="image" :src="'/storage/'+novedad.foto_auth">
+                </a>
+                <div class="media-body">
+                    <div class="form-group">
+                        <textarea v-model="comentario_text[novedad.id]" class="form-control" placeholder="Escribe un comentario..."></textarea>
+                    </div>
+
+                    <div class="btn-group text-muted pull-right">
+                        <a v-if="novedad.estado == 'publicada'" class="btn btn-outline btn-success btn-xs" @click.prevent="resolver(novedad, comentario_text)"><i class="fa fa-check-square-o"></i> Resolver</a>
+                        <a v-else class="btn btn-default btn-xs "><i class="fa fa-check"></i> Resuelto</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -70,8 +86,12 @@
                     id: '',
                     descripcion: '',
                     area: ''
-                }
-
+                   
+                    
+                },
+                 comentario_text: []
+                
+                
             }
         },
         methods: {
@@ -92,10 +112,11 @@
             * Método para resolver la novedad
             * envia una variable al servicio para actualizar la novedad
             **/
-            resolver(novedad){
+            resolver(novedad, comentario_text){
                 var url = 'novedades/'+novedad.id
                 axios.put(url, {
-                    estado: 'resuelta'
+                    estado: 'resuelta',
+                    comentario: comentario_text[novedad.id]
                 })
                 .then((res) => {
                     this.fetchData()

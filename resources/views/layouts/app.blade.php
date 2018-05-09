@@ -30,7 +30,11 @@
     <!-- Basic CSS -->
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ])!!};
+    </script>
 </head>
 
 <body class="md-skin">
@@ -59,14 +63,11 @@
                         <a href="/home" style="background-color: #5cae27;color: white;" id="a-inicio"><i class="fa fa-th-large"></i> <span class="nav-label">Inicio</span></a>
                     </li>
                     <li id="m-clientes">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear clientes </span></a>
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i> <span class="nav-label">Clientes </span></a>
                         <ul class="nav nav-second-level collapse" id="ml2-clientes">
-                            <li id="ml2-crearEmpresa"><a href="{{route('crear-empresa')}}" style="color: white;">Persona Jurídica</a></li>
-                            <li id="ml2-crearPersona"><a href="{{route('crear-persona')}}" style="color: white;">Persona Natural</a></li>
+                            <li id="ml2-crearEmpresa"><a href="{{route('crear-empresa')}}" style="color: white;">Crear Cliente</a></li>
+                            <li id="ml2-verClientes"><a href="{{route('ver-clientes')}}" style="color: white;">Ver Clientes</a></li>
                         </ul>
-                    </li>
-                    <li id="m-ver-clientes">
-                        <a href="{{route('ver-clientes')}}" style="background-color: #5cae27;color: white;" id="a-ver-clientes"><i class="fa fa-users"></i> <span class="nav-label">Ver clientes</span></a>
                     </li>
                     <li id="m-cronograma">
                         <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
