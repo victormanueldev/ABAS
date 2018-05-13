@@ -92,6 +92,7 @@ class NovedadesController extends Controller
         $novedad->id = $max_id + 1;//Hace un incremeneto en 1
         $novedad->descripcion = $request->descripcion;
         $novedad->user_id = Auth::user()->id;//Obtiene el ID del usuario autenticado
+        $novedad->area_id = $request->area;
         $novedad->save();//Guarda los datos en la tabla novedades
         
         //Valida la visibilidad de la novedad
@@ -118,7 +119,9 @@ class NovedadesController extends Controller
                     'novedad_id' => $max_id+1//Inserta el ID de la nueva novedad, el mismo en cada iteración
                 ]);
             }
-        } 
+        }
+        
+        
         return redirect('/home');
     }
 
@@ -130,7 +133,7 @@ class NovedadesController extends Controller
      */
     public function show()
     {
-        $novedades = Novedad::with('user', 'user2')->get();
+        $novedades = Novedad::with('user', 'user2')->latest()->get();
         $data = collect();//Instancia de Coleccion
         foreach ($novedades as $novedad) {
             if (!empty($novedad->user2->nombres)) {//valida si la novedad está resuleta
@@ -140,7 +143,7 @@ class NovedadesController extends Controller
                     'descripcion' => $novedad->descripcion, 
                     'estado' => $novedad->estado, 
                     'fecha_creacion' => $novedad->created_at->toDateString(),
-                    'hora_creacion' => $novedad->created_at->toTimeString(),
+                    'hora_creacion' => $novedad->created_at->format('g:i a'),
                     'nombres_user1' => $novedad->user->nombres,
                     'apellidos_user1' => $novedad->user->apellidos,
                     'foto_user1' => $novedad->user->foto,
@@ -148,7 +151,7 @@ class NovedadesController extends Controller
                     'apellidos_user2'=> $novedad->user2->apellidos,//Datos del usuario que resolvió
                     'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
                     'fecha_resuelto' => $novedad->updated_at->toDateString(),
-                    'hora_resuelto' => $novedad->updated_at->toTimeString(),
+                    'hora_resuelto' => $novedad->updated_at->format('g:i a'),
                     'comentario' => $novedad->comentario
                 ]);
             } else {
@@ -158,7 +161,7 @@ class NovedadesController extends Controller
                     'descripcion' => $novedad->descripcion, 
                     'estado' => $novedad->estado, 
                     'fecha_creacion' => $novedad->created_at->toDateString(),
-                    'hora_creacion' => $novedad->created_at->toTimeString(),
+                    'hora_creacion' => $novedad->created_at->format('g:i a'),
                     'nombres_user1' => $novedad->user->nombres,
                     'apellidos_user1' => $novedad->user->apellidos,
                     'foto_user1' => $novedad->user->foto,

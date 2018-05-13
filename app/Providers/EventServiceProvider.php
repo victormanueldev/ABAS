@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'ABAS\Events\Event' => [
-            'ABAS\Listeners\EventListener',
+        'ABAS\Events\NovedadCreada' => [
+            'ABAS\Listeners\NotificaUsuariosNovedadPublicada',
         ],
     ];
 

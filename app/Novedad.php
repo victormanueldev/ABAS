@@ -1,7 +1,7 @@
 <?php
 
 namespace ABAS;
-
+use ABAS\Events\NovedadCreada;
 use Illuminate\Database\Eloquent\Model;
 
 class Novedad extends Model
@@ -12,7 +12,14 @@ class Novedad extends Model
         'descripcion',
         'estado',
         'user2_id',
-        'user_id'
+        'user_id',
+        'area_id'
+    ];
+
+    protected $guarded = [];
+
+    protected $events = [
+        'created' => NovedadCreada::class
     ];
 
     /**

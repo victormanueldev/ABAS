@@ -19,6 +19,7 @@ class CreateNovedadsTable extends Migration
             $table->string('estado', 15)->default('publicada');
             $table->integer('user2_id')->nullable();
             $table->integer('user_id');
+            $table->integer('area_id');
             $table->string('comentario', 60)->nullable();
             $table->timestamps();
         });

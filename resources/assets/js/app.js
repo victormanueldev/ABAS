@@ -32,3 +32,9 @@ Vue.component('ver-clientes', require('./components/ver-clientes.vue'));
 const clientes = new Vue({
     el: '#clientes'
 });
+
+Vue.component('notificaciones', require('./components/notificaciones.vue'));
+
+const notificacion = new Vue({
+    el: '#notificacion'
+});

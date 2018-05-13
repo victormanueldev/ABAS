@@ -12,7 +12,7 @@
                     <div class="input-group">
                         <input type="text" placeholder="Buscar Cliente" class="input form-control" v-model="buscar">
                         <span class="input-group-btn">
-                                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+                                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search" ></i> Buscar</button>
                         </span>
                     </div>
                     <div class="clients-list">
@@ -27,7 +27,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
                                         <tbody>
-                                        <tr v-for="cliente in clientes" v-if="cliente.cedula">
+                                        <tr v-for="cliente in clientesFiltrados" v-if="cliente.cedula" :key="cliente.id">
                                             <td><a data-toggle="tab" :href="'#contact-'+cliente.id" class="client-link" @click="capturarValoresPersonas(cliente)">{{cliente.nombre_cliente}}</a></td>
                                             <td> C.C. {{cliente.cedula}}</td>
                                             <td class="contact-type"><i class="fa fa-envelope"> </i></td>
@@ -45,7 +45,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
                                         <tbody>
-                                        <tr v-for="cliente in clientes" v-if="cliente.razon_social">
+                                        <tr v-for="cliente in clientesFiltrados" v-if="cliente.razon_social" :key="cliente.id">
                                             <td><a data-toggle="tab" :href="'#company-'+cliente.id" class="client-link" @click="capturarValoresEmpresas(cliente)">{{cliente.razon_social}}</a></td>
                                             <td>NIT {{ cliente.nit}}</td>
                                             <td><i class="fa fa-flag"></i> {{cliente.sector_economico}}</td>
@@ -280,6 +280,8 @@
     </div>
 </template>
 <script>
+    import lodash from 'lodash';
+    Object.defineProperty(Vue.prototype, '$lodash', { value: lodash });
         export default {
             //Se ejecuta cuando se carga el documento
             mounted() {
@@ -332,6 +334,9 @@
                         console.log(err)
                     })
                 },
+                /**
+                * Llena el array de personas con la informacion respectiva de la respuesta JSON
+                 */
                 capturarValoresPersonas(cliente){
                     this.personas.id = cliente.id
                     this.personas.nombre = cliente.nombre_cliente
@@ -342,6 +347,9 @@
                     this.personas.celular = cliente.celular
                     this.personas.direccion = cliente.direccion
                 },
+                /** 
+                * Llena el array de Empresa con la informacion respectiva de la respuesta JSON
+                 */
                 capturarValoresEmpresas(cliente){
                     this.empresas.id = cliente.id
                     this.empresas.nombre_cliente = cliente.nombre_cliente
@@ -362,6 +370,17 @@
                     this.empresas.celular = cliente.celular
                     this.empresas.empresa_actual = cliente.empresa_actual
                     this.empresas.razon_cambio = cliente.razon_cambio
+                }
+            },
+            computed:{
+                /**
+                * Filtra los clientes por nombre_cliente
+                 */
+                clientesFiltrados(){
+                    var self = this
+                    return this.clientes.filter(function (cliente) {//Llama a la funcion filter del array
+                        return _.includes(cliente.nombre_cliente ,self.buscar)//Retorna los clientes quietes poseen en el atributo nombre de cliente, el texto del input buscar
+                    })
                 }
             }
             

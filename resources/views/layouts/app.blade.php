@@ -91,16 +91,13 @@
                                 </div>
                             </form>  --}}
                         </div>
-                        <ul class="nav navbar-top-links navbar-right">
+                        <ul class="nav navbar-top-links navbar-right" id="notificacion">
                             <li>
                                 <span class="m-r-sm text-muted welcome-message">Bienvenido a ABAS</span>
                             </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-bell"></i>  <span class="label label-warning">8</span>
-                                </a>
-                            </li>
-                
+
+                            <notificaciones></notificaciones>
+                            
                             <li>
                                 <a href="{{ route('logout') }}" 
                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">

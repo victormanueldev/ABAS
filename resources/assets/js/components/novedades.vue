@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="btn-group text-muted pull-right">
-                        <a v-if="novedad.estado == 'publicada'" class="btn btn-outline btn-success btn-xs" @click.prevent="resolver(novedad, comentario_text)"><i class="fa fa-check-square-o"></i> Resolver</a>
+                        <a v-if="novedad.estado == 'publicada'" class="btn btn-outline btn-success btn-xs" @click.prevent="resolver(novedad)"><i class="fa fa-check-square-o"></i> Resolver</a>
                         <a v-else class="btn btn-default btn-xs "><i class="fa fa-check"></i> Resuelto</a>
                     </div>
                 </div>
@@ -112,11 +112,11 @@
             * Método para resolver la novedad
             * envia una variable al servicio para actualizar la novedad
             **/
-            resolver(novedad, comentario_text){
+            resolver(novedad){
                 var url = 'novedades/'+novedad.id
                 axios.put(url, {
                     estado: 'resuelta',
-                    comentario: comentario_text[novedad.id]
+                    comentario: this.comentario_text[novedad.id]
                 })
                 .then((res) => {
                     this.fetchData()

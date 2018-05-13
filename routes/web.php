@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -59,3 +59,5 @@ Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardar
 Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
 
 Route::get('novedades/listado', 'NovedadesController@show')->name('novedades.show');
+
+Route::resource('notificaciones', 'NotificacionesController');
