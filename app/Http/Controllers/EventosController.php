@@ -18,7 +18,14 @@ class EventosController extends Controller
         $eventos = Auth::user()->eventos;//Consulta todas las eventos de la BD
         $data = collect();//Crea una coleccion
         foreach ($eventos as $evento) {
-            $data->push(['id' => $evento->id, 'title' => $evento->asunto, 'start' => $evento->fecha_inicio, 'backgroundColor' => $evento->color, 'borderColor' => $evento->color]);//Agrega todos los elementos a la coleccion
+            //Agrega todos los elementos a la coleccion
+            $data->push([
+                'id' => $evento->id, 
+                'title' => $evento->asunto, 
+                'start' => $evento->fecha_inicio, 
+                'backgroundColor' => $evento->color, 
+                'borderColor' => $evento->color
+                ]);
         }
         $data->toJson();//Convierte la colecciona a formato JSON
         return $data;

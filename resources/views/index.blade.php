@@ -60,7 +60,7 @@
                 <div class="social-feed-box">
                     {!! Form::open(['route' => ['novedades.store'], 'method' => 'POST']) !!}
                     {!! Form::token() !!}
-                        <div class="pull-right social-action dropdown">
+                        {{-- <div class="pull-right social-action dropdown">
                             <button data-toggle="dropdown" class="dropdown-toggle btn-white">
                                 <i class="fa fa-gear"></i>
                             </button>
@@ -75,7 +75,7 @@
                                     <a href="">Área Programación</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <div class="social-avatar">
                             <a href="" class="pull-left">
                                 <img alt="image" src="{{ Storage::url($user->foto)}}">

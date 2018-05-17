@@ -20,7 +20,7 @@ class NotificacionesController extends Controller
         // 
         if(request()->ajax()){
             return Auth::user()->unreadNotifications;
-        }
+        }   
         $notificaciones  = Auth::user()->notifications;
         return $notificaciones;
     }

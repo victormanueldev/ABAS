@@ -8,9 +8,10 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NovedadPublicada extends Notification
+class NovedadResuelta extends Notification
 {
     use Queueable;
+
     protected $novedad;
 
     /**
@@ -57,15 +58,14 @@ class NovedadPublicada extends Notification
      */
     public function toArray($notifiable)
     {
-        $usuario = Novedad::with('user')->where('user_id', $this->novedad->user_id)->limit(1)->get();
+        $usuario = Novedad::with('user')->where('user2_id', $this->novedad->user_id)->limit(1)->get();
         return [
-          'id' => $this->novedad->id,
-          'descripcion' => $this->novedad->descripcion,
-          'user_id' => $this->novedad->user_id,
-          'nombres' => $usuario[0]['user']['nombres'],
-          'apellidos' => $usuario[0]['user']['apellidos'],
-          'foto' => $usuario[0]['user']['foto']
+            'id' => $this->novedad->id,
+            'descripcion' => $this->novedad->descripcion,
+            'user2_id' => $this->novedad->user2_id,
+            'nombres' => $usuario[0]['user']['nombres'],
+            'apellidos' => $usuario[0]['user']['apellidos'],
+            'foto' => $usuario[0]['user']['foto']
         ];
-        //var_dump($usuario);
     }
 }

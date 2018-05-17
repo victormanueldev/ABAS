@@ -36,7 +36,7 @@ class NotificaUsuariosNovedadPublicada
             $users = User::where('area_id', $event->novedad->area_id)
                         ->where('id','!=', Auth::user()->id)->get();
         }else{
-            $users = User::all();
+            $users = User::where('id','!=', Auth::user()->id)->get();
         }
         //
         Notification::send($users, new NovedadPublicada($event->novedad));

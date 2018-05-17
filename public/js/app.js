@@ -30786,6 +30786,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 //Importacion del Loadash
 
@@ -30805,10 +30807,8 @@ Object.defineProperty(Vue.prototype, '$lodash', { value: __WEBPACK_IMPORTED_MODU
                 id: '',
                 descripcion: '',
                 area: ''
-
             },
             comentario_text: []
-
         };
     },
 
@@ -30982,76 +30982,85 @@ var render = function() {
                 ])
               ])
             ])
-          : _c("div", { staticClass: "social-footer" }, [
-              _c("div", { staticClass: "social-comment" }, [
-                _c("a", { staticClass: "pull-left", attrs: { href: "" } }, [
-                  _c("img", {
-                    attrs: {
-                      alt: "image",
-                      src: "/storage/" + novedad.foto_auth
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-body" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.comentario_text[novedad.id],
-                          expression: "comentario_text[novedad.id]"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { placeholder: "Escribe un comentario..." },
-                      domProps: { value: _vm.comentario_text[novedad.id] },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.comentario_text,
-                            novedad.id,
-                            $event.target.value
-                          )
-                        }
+          : novedad.id_auth == novedad.id_user1
+            ? _c("div")
+            : _c("div", { staticClass: "social-footer" }, [
+                _c("div", { staticClass: "social-comment" }, [
+                  _c("a", { staticClass: "pull-left", attrs: { href: "" } }, [
+                    _c("img", {
+                      attrs: {
+                        alt: "image",
+                        src: "/storage/" + novedad.foto_auth
                       }
                     })
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "btn-group text-muted pull-right" },
-                    [
-                      novedad.estado == "publicada"
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-outline btn-success btn-xs",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.resolver(novedad)
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.comentario_text[novedad.id],
+                            expression: "comentario_text[novedad.id]"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { placeholder: "Escribe un comentario..." },
+                        domProps: { value: _vm.comentario_text[novedad.id] },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.comentario_text,
+                              novedad.id,
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "btn-group text-muted pull-right" },
+                      [
+                        novedad.estado == "publicada"
+                          ? _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-outline btn-success btn-xs",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.resolver(novedad)
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fa fa-check-square-o" }),
-                              _vm._v(" Resolver")
-                            ]
-                          )
-                        : _c("a", { staticClass: "btn btn-default btn-xs " }, [
-                            _c("i", { staticClass: "fa fa-check" }),
-                            _vm._v(" Resuelto")
-                          ])
-                    ]
-                  )
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-check-square-o"
+                                }),
+                                _vm._v(" Resolver")
+                              ]
+                            )
+                          : _c(
+                              "a",
+                              { staticClass: "btn btn-default btn-xs " },
+                              [
+                                _c("i", { staticClass: "fa fa-check" }),
+                                _vm._v(" Resuelto")
+                              ]
+                            )
+                      ]
+                    )
+                  ])
                 ])
               ])
-            ])
       ])
     })
   )
@@ -32462,6 +32471,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     //Se ejecuta cuando se carga el documento
@@ -32585,15 +32596,33 @@ var render = function() {
                       _vm._v(" "),
                       _c("strong", {
                         domProps: {
-                          textContent: _vm._s(notificacion.data.usuario)
+                          textContent: _vm._s(
+                            notificacion.data.nombres +
+                              " " +
+                              notificacion.data.apellidos
+                          )
                         }
                       }),
-                      _vm._v(" ha publicado una nueva novedad "),
-                      _c("br"),
                       _vm._v(" "),
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("3 days ago at 7:58 pm - 10.06.2014")
-                      ])
+                      notificacion.type ==
+                      "ABAS\\Notifications\\NovedadResuelta"
+                        ? _c(
+                            "p",
+                            { staticStyle: { padding: "0", margin: "0" } },
+                            [_vm._v("ha resuelto tu novedad")]
+                          )
+                        : _c(
+                            "p",
+                            { staticStyle: { padding: "0", margin: "0" } },
+                            [_vm._v("ha publicado una nueva novedad")]
+                          ),
+                      _vm._v(" "),
+                      _c("small", {
+                        staticClass: "text-muted",
+                        domProps: {
+                          textContent: _vm._s(notificacion.created_at)
+                        }
+                      })
                     ])
                   ])
                 ]),
@@ -32614,7 +32643,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-envelope" }),
+                    _c("i", { staticClass: "fa fa-envelope-open" }),
                     _vm._v(" "),
                     _c("strong", [_vm._v("Marcar todo como leído")])
                   ]

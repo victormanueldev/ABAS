@@ -45,6 +45,8 @@
                 </div>
             </div>
         </div>
+        <div v-else-if="novedad.id_auth == novedad.id_user1">
+        </div>
         <div v-else class="social-footer">
             <div class="social-comment">
                 <a href="" class="pull-left">
@@ -86,12 +88,8 @@
                     id: '',
                     descripcion: '',
                     area: ''
-                   
-                    
                 },
                  comentario_text: []
-                
-                
             }
         },
         methods: {

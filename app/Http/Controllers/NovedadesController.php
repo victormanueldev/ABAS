@@ -20,6 +20,7 @@ class NovedadesController extends Controller
     public function index()
     {
         $foto = Auth::user()->foto;
+        $id_auth = Auth::user()->id;
         $novedades = Novedad::with('user', 'user2')->get();//Consulta todas las novedades con su respectivo usuario
         $now = Carbon::now();
         $fecha_actual = $now->toDateString();
@@ -35,6 +36,7 @@ class NovedadesController extends Controller
                         'fecha_creacion' => $novedad->created_at->toDateString(),
                         'hora_creacion' => $novedad->created_at->toTimeString(),
                         'comentario' => $novedad->comentario,
+                        'id_user1' => $novedad->user->id,
                         'nombres_user1' => $novedad->user->nombres,
                         'apellidos_user1' => $novedad->user->apellidos,
                         'foto_user1' => $novedad->user->foto,
@@ -52,13 +54,15 @@ class NovedadesController extends Controller
                         'estado' => $novedad->estado, 
                         'fecha_creacion' => $novedad->created_at->toDateString(),
                         'hora_creacion' => $novedad->created_at->toTimeString(),
+                        'id_user1' => $novedad->user->id,
                         'nombres_user1' => $novedad->user->nombres,
                         'apellidos_user1' => $novedad->user->apellidos,
                         'foto_user1' => $novedad->user->foto,
                         'nombres_user2' => null,
                         'apellidos_user2'=> null,
                         'foto_user2' => null,
-                        'foto_auth' => $foto
+                        'foto_auth' => $foto,
+                        'id_auth' => $id_auth
                     ]);
                 }
             }

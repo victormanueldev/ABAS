@@ -12,8 +12,10 @@
                         </a>
                         <div class="media-body">
                             <small @click="eliminarNotificacion(notificacion)" style="cursor: pointer" class="pull-right badge badge-default"><i class="fa fa-times"></i></small>
-                            <strong v-text="notificacion.data.usuario"></strong> ha publicado una nueva novedad <br>
-                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                            <strong v-text="notificacion.data.nombres +' '+ notificacion.data.apellidos"></strong> 
+                            <p v-if="notificacion.type == 'ABAS\\Notifications\\NovedadResuelta'" style="padding: 0;margin: 0;">ha resuelto tu novedad</p> 
+                            <p v-else style="padding: 0;margin: 0;">ha publicado una nueva novedad</p>
+                            <small class="text-muted" v-text="notificacion.created_at"></small>
                         </div>
                     </div>
                 </li>
@@ -22,7 +24,7 @@
             <li>
                 <div class="text-center link-block">
                     <a @click="eliminarTodasNotificaciones(notificacion)">
-                        <i class="fa fa-envelope"></i> <strong>Marcar todo como leído</strong>
+                        <i class="fa fa-envelope-open"></i> <strong>Marcar todo como leído</strong>
                     </a>
                 </div>
             </li>

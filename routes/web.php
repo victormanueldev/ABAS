@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
+Route::get('/', function () {
+    return redirect()->to('/login');
+});
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -43,13 +43,12 @@ Route::post('eventos/elminar-evento', 'EventosController@destroy')->name('evento
 Route::resource('tareas', 'TareasController', [
     'except' => ['create', 'show', 'edit']
 ]);
-
 Route::get('show', 'TareasController@show');
+
 //CRUD Novedades
 Route::resource('novedades', 'NovedadesController', [
     'except' => 'show'
 ]);
-
 Route::resource('clientes', 'ClientesController', [
     'except' => 'store'
 ]);
@@ -57,7 +56,5 @@ Route::resource('clientes', 'ClientesController', [
 //CRUD Clientes
 Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
 Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
-
 Route::get('novedades/listado', 'NovedadesController@show')->name('novedades.show');
-
 Route::resource('notificaciones', 'NotificacionesController');
