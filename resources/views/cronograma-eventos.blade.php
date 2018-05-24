@@ -4,6 +4,7 @@
 <link href="{{asset('css/plugins/iCheck/custom.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.print.css')}}" rel='stylesheet' media='print'>
+<link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
 {{-- Contenido --}}
 @section('content')
@@ -29,7 +30,7 @@
 </div>
 <div class="wrapper wrapper-content">
     <div class="row animated fadeInDown">
-        <div class="col-lg-3">
+        <!--<div class="col-lg-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Crear Eventos</h5>
@@ -81,13 +82,11 @@
                         </p>
                     </div>
 
-                    {{-- Formulario de guardar Eventos --}}
-                    {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
-                    {!! Form::close() !!}
+
                 </div>
             </div>
-        </div>
-        <div class="col-lg-9">
+        </div>-->
+        <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Calendario </h5>
@@ -100,6 +99,9 @@
                         </a>
                     </div>
                 </div>
+                 {{-- Formulario de guardar Eventos --}}
+                {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
+                {!! Form::close() !!}
                 <div class="ibox-content">
                     <div id="calendar"></div>
                 </div>
@@ -115,6 +117,8 @@
 <!-- Full Calendar -->
 <script src="{{asset('js/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/locale/es.js')}}"></script>
+{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+<script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <script>
 
     $(document).ready(function() {
@@ -124,27 +128,6 @@
                 radioClass: 'iradio_square-green'
             });
 
-        /* Inicializa las eventos
-         -----------------------------------------------------------------*/
-            function ini_events(ele) {
-                ele.each(function() {
-
-                    var eventObject = {
-                        title: $.trim($(this).text()) // usa el texto del elemento como titulo
-                    };
-                    
-                    // Guarda el Objeto de Evento en el elemento DOM para que podamos llegar a él más tarde
-                    $(this).data('eventObject', eventObject);
-
-                    // hacer que el evento sea arrastrable usando la interfaz de usuario de jQuery UI
-                    $(this).draggable({
-                        zIndex: 1111999,
-                        revert: true,      // hará que la evento vuelva a su posición
-                        revertDuration: 0  //  original después del arrastre
-                    });
-                });
-            }
-        ini_events($('#external-events div.external-event'));//Agrega la funcion Dropable a las eventos
 
         /* Inicializa el Calendario
          -----------------------------------------------------------------*/
@@ -174,43 +157,76 @@
 
             editable: true,
             droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
-            drop: function(date, allDay) {
-                //Obtiene todos los datos de la evento que fue arrastrada dentro del calendario
-                var originalEventObject = $(this).data('eventObject');
-                //Hace una copia de la evento para que otras eventos no tengan referencia al mismo objeto
-                var copiedEventObject = $.extend({}, originalEventObject);
-                //Dia Completo = true
-                allDay = 1;
-                //Se obtienen los datos de la evento
-                copiedEventObject.start = date;//Obtiene la fecha de inicio
-                copiedEventObject.allDay = allDay;//Obtiene la propiedad dia_completo
-                copiedEventObject.backgroundColor = $(this).css("background-color");//Obtiene el color de fondo en RGB
-                // Valida si esta chequeado el elemento de desaparecer luego de soltar
-                if ($('#drop-remove').is(':checked')) {
-                    // Quita la evento del panel de eventos luego de ser soltada en el calendario
-                    $(this).remove();
-                    
-                }
-                var title = copiedEventObject.title;//Obtiene el titulo o el asunto de la evento
-                var start = copiedEventObject.start.format("YYYY-MM-DD HH:mm");//Formatea la fecha para poder ser guardada en la BD
-                var backgroundC = copiedEventObject.backgroundColor;//Obtiene  el color de fondo de la evento
-                
-                crsfToken = document.getElementsByName("_token")[0].value;//Obtiene los valores del formulario
-                //Utilizaciond el metodo AJAX para el envio de elementos al servidor
-                $.ajax({
-                    url: '/eventos/guardar-evento',//Redirecciona a la direccion URL
-                    data: 'title='+ title+'&start='+ start+'&allday='+allDay+'&background='+backgroundC,//Datos que enviará
-                    type: "POST",//Método de envío
-                    headers: {
-                        "X-CSRF-TOKEN": crsfToken //Token de segurodad
+
+            //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
+            dayClick: function(start, end, allDay) {
+                //Alert con los botones de las clases de eventos
+                swal({
+                    title: "Crear evento",
+                    buttons: {
+                        cancel: {
+                            text: "Cancelar",
+                            value: null,
+                            visible: true,
+                            className: "",
+                            closeModal: true,
+                        },
+                        call: {
+                            text: "Llamada",
+                            value: "Llamada",
+                        },
+                        visit: {
+                            text: "Visita",
+                            value: "Visita",
+                        },
+                        follow: {
+                            text: "Control",
+                            value: "Seguimiento",
+                        },
                     },
-                    success: function(events) {//En caso de ser exitoso el envio de datos
-                        console.log('Evento creado'); //Escribe en la consola 
-                        $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
-                    },
-                    error: function(json){//En caso de ser erroneo el envio de datos 
-                        console.log("Error al crear evento");//Escribe en consola
-                    }        
+                })
+                //Evento de click en un boton
+                .then((value) => {
+                    //Valida que el boton presionado sea diferente al de cancelar
+                    if (value != null) {
+                        //Alert para indicar el asunto del evento
+                        swal({
+                            title: 'Crear Evento',
+                            content: {
+                                element: "input",
+                                attributes: {
+                                placeholder: "Ingresa el asunto del evento",
+                                type: "text",
+                                },
+
+                            },
+                        buttons: true
+                        })
+                        //Cuando se presiona un boton cualquiera
+                        .then((res) => {
+                            //Valida que sea presionado el boton OK
+                            if(res != null){
+                                //Obtiene el token del formulario a enviar
+                                crsfToken = document.getElementsByName("_token")[0].value;
+                                //Peticion HTTP para guardar el evento
+                                $.ajax({
+                                    url: '/evento/guardar',//Redirecciona a la direccion URL
+                                    data: 'title='+ res+'&start='+ start.format("YYYY-MM-DD HH:mm")+'&allday='+allDay.uid+'&tipo='+value,//Datos que enviará
+                                    type: "POST",//Método de envío
+                                    headers: {
+                                        "X-CSRF-TOKEN": crsfToken //Token de segurodad
+                                    },
+                                    success: function(events) {//En caso de ser exitoso el envio de datos
+                                        console.log('Evento creado'); //Escribe en la consola 
+                                        $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+                                    },
+                                    error: function(json){//En caso de ser erroneo el envio de datos 
+                                        console.log("Error al crear evento");//Escribe en consola
+                                    }        
+                                });
+                            }
+                        })
+                    }
                 });
             },
             
@@ -227,7 +243,7 @@
                 crsfToken = document.getElementsByName("_token")[0].value;
                     $.ajax({
                     url: '/eventos/editar-evento',
-                    data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id+'&background='+backgroundC+'&allday='+allDay,
+                    data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id_evento='+ event.id+'&background='+backgroundC+'&allday='+allDay,
                     type: "POST",
                     headers: {
                             "X-CSRF-TOKEN": crsfToken
@@ -254,7 +270,7 @@
                 crsfToken = document.getElementsByName("_token")[0].value;
                 $.ajax({  
                     url: '/eventos/editar-evento',
-                    data: 'title='+ event.title+'&start='+ start +'&end='+ end+'&id='+ event.id+'&background='+back+'&allday='+allDay ,           
+                    data: 'title='+ event.title+'&start='+ start +'&end='+ end+'&id_evento='+ event.id+'&background='+back+'&allday='+allDay ,           
                     type: "POST",
                     headers: {
                     "X-CSRF-TOKEN": crsfToken
@@ -312,14 +328,6 @@
                 $('.tooltipevent').remove();
             },
             
-            //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
-            dayClick: function(date, jsEvent, view) {
-                if (view.name === "month") {
-                    $('#calendar').fullCalendar('gotoDate', date);
-                    $('#calendar').fullCalendar('changeView', 'agendaDay');
-                }
-            },
-            
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: function (event, jsEvent, view) {
                 crsfToken = document.getElementsByName("_token")[0].value;
@@ -341,52 +349,6 @@
                 console.log("Cancelado");
                 }
             }
-        });
-
-        /* Añadir eventos en el contenedor de eventos
-        ------------------------------------------------------------------*/
-        var currColor = '#5CAE27';
-        // $('#add-new-event').css({"background-color": currColor, "border-color": currColor});//Añade las propiedades CSS a la nueva evento
-        //Evento del click en el boton (+) para agregar evento
-        $("#add-new-event").click(function (e) {
-            e.preventDefault();
-            //Obtiene el valor del Select con el tipo de evento
-            var tipo = $('#tipo-evento').val();
-            if (tipo == 1) {//Si es Llamada
-                var val = $("#new-event").val();
-                if (val.length == 0) {
-                    return;
-                }
-                var otroColor = '#DBA525';
-                var event = $("<div />"); //Agrega un DIV
-                event.css({"background-color": otroColor, "border-color": otroColor, "color": "#fff"}).addClass("external-event");
-                event.html(val); //Agrega la evento al DOM
-                $('#external-events').prepend(event); //Agrega la evento en el contenedor
-            }else if (tipo == 2) {//Si es Seguimiento
-                var val = $("#new-event").val();
-                if (val.length == 0) {
-                    return;
-                }
-                var otroColor = '#45821D';
-                var event = $("<div />"); //Agrega un DIV
-                event.css({"background-color": otroColor, "border-color": otroColor, "color": "#fff"}).addClass("external-event");
-                event.html(val); //Agrega la evento al DOM
-                $('#external-events').prepend(event); //Agrega la evento en el contenedor
-            }else{// SI es visita
-                var val = $("#new-event").val();
-                if (val.length == 0) {
-                    return;
-                }
-                //Crear la evento
-                var event = $("<div />"); //Agrega un DIV
-                event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
-                event.html(val); //Agrega la evento al DOM
-                $('#external-events').prepend(event); //Agrega la evento en el contenedor
-            }
-            //Añade la funcionalidad de Drag and Drop a la evento
-            ini_events(event);
-            //Limpia el input de crear la evento
-            $("#new-event").val("");
         });
     });
 

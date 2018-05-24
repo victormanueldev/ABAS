@@ -38,27 +38,7 @@ class EventosController extends Controller
      */
     public function create()
     {
-        $title = $_POST['title'];
-        $start = $_POST['start'];
-        $allday = $_POST['allday'];
-        $backcolor = $_POST['background'];
 
-
-        $evento = new Evento();
-        $evento->asunto = $title;
-        $evento->fecha_inicio = $start;
-        $evento->dia_completo = $allday;
-        $evento->color = $backcolor;
-        if ($backcolor == 'rgb(219, 165, 37)') {
-            $evento->tipo = 'Llamada';
-        }elseif ($backcolor == 'rgb(69, 130, 29)') {
-            $evento->tipo = 'Seguimiento';
-        }else {
-            $evento->tipo = 'Visita';
-        }
-        $evento->user_id = Auth::user()->id;
-
-        $evento->save();
     }
 
     /**
@@ -70,6 +50,27 @@ class EventosController extends Controller
     public function store(Request $request)
     {
         //
+        try{
+            if($request->ajax()){
+                $evento = new Evento();
+                $evento->asunto = $request->title;
+                $evento->fecha_inicio = $request->start;
+                $evento->dia_completo = $request->allDay;
+                $evento->tipo = $request->tipo;
+                if ($request->tipo == 'Llamada') {
+                    $evento->color = "rgb(219, 165, 37)";
+                }elseif($request->tipo == 'Seguimiento'){
+                    $evento->color = "rgb(69, 130, 29)";
+                }
+                $evento->user_id = Auth::user()->id;
+                $evento->save();
+                return response()->json(['Evento Guardado'], 200);
+            }else{
+                return response()->json(['error' => 'Datos no validos'], 400);
+            }
+        }catch(\Exception $e){
+            return response()->json(['error' => 'Error al intentar guardar evento'], 500);
+        }
     }
 
     /**
@@ -91,27 +92,7 @@ class EventosController extends Controller
      */
     public function edit()
     {
-        //Editar eventos
-        $id_evento = $_POST['id'];
-        $start = $_POST['start'];
-        $end = $_POST['end'];
-        $allday = $_POST['allday'];
-
-        $evento  = Evento::find($id_evento);
-        if ($allday == 'false') {
-            $evento->dia_completo = 0;
-        }else{
-            $evento->dia_completo = 1;
-        }
-        if ($end == 'NULL') {
-            $evento->fecha_fin = NULL;
-        }else{
-            $evento->fecha_fin = $end;
-        }
-
-        $evento->fecha_inicio = $start;
-    
-        $evento->save();
+        //
     }
 
     /**
@@ -121,9 +102,24 @@ class EventosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $evento  = Evento::find($request->id_evento);
+        if ($request->allday == 'false') {
+            $evento->dia_completo = 0;
+        }else{
+            $evento->dia_completo = 1;
+        }
+        if ($request->end == 'NULL') {
+            $evento->fecha_fin = NULL;
+        }else{
+            $evento->fecha_fin = $request->end;
+        }
+
+        $evento->fecha_inicio = $request->start;
+    
+        $evento->save();
     }
 
     /**

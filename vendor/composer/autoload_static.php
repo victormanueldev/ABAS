@@ -8,10 +8,10 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
@@ -61,6 +61,7 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         ),
         'P' => 
         array (
+            'Pusher\\' => 7,
             'Psy\\' => 4,
             'Psr\\Log\\' => 8,
             'PhpParser\\' => 10,
@@ -184,6 +185,10 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
         ),
+        'Pusher\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pusher/pusher-php-server/src',
+        ),
         'Psy\\' => 
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src/Psy',
@@ -288,6 +293,8 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\Cliente' => __DIR__ . '/../..' . '/app/Cliente.php',
         'ABAS\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'ABAS\\Evento' => __DIR__ . '/../..' . '/app/Evento.php',
+        'ABAS\\Events\\NovedadActualizada' => __DIR__ . '/../..' . '/app/Events/NovedadActualizada.php',
+        'ABAS\\Events\\NovedadCreada' => __DIR__ . '/../..' . '/app/Events/NovedadCreada.php',
         'ABAS\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'ABAS\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'ABAS\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -297,13 +304,20 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'ABAS\\Http\\Controllers\\EventosController' => __DIR__ . '/../..' . '/app/Http/Controllers/EventosController.php',
         'ABAS\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'ABAS\\Http\\Controllers\\NotificacionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/NotificacionesController.php',
         'ABAS\\Http\\Controllers\\NovedadesController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovedadesController.php',
+        'ABAS\\Http\\Controllers\\SedesController' => __DIR__ . '/../..' . '/app/Http/Controllers/SedesController.php',
+        'ABAS\\Http\\Controllers\\SolicitudesController' => __DIR__ . '/../..' . '/app/Http/Controllers/SolicitudesController.php',
         'ABAS\\Http\\Controllers\\TareasController' => __DIR__ . '/../..' . '/app/Http/Controllers/TareasController.php',
         'ABAS\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'ABAS\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'ABAS\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'ABAS\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'ABAS\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'ABAS\\Listeners\\NotificaUsuariosNovedadActualizada' => __DIR__ . '/../..' . '/app/Listeners/NotificaUsuariosNovedadActualizada.php',
+        'ABAS\\Listeners\\NotificaUsuariosNovedadPublicada' => __DIR__ . '/../..' . '/app/Listeners/NotificaUsuariosNovedadPublicada.php',
+        'ABAS\\Notifications\\NovedadPublicada' => __DIR__ . '/../..' . '/app/Notifications/NovedadPublicada.php',
+        'ABAS\\Notifications\\NovedadResuelta' => __DIR__ . '/../..' . '/app/Notifications/NovedadResuelta.php',
         'ABAS\\Novedad' => __DIR__ . '/../..' . '/app/Novedad.php',
         'ABAS\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'ABAS\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -2625,6 +2639,9 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'Psy\\VersionUpdater\\GitHubChecker' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VersionUpdater/GitHubChecker.php',
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VersionUpdater/NoopChecker.php',
+        'Pusher\\Pusher' => __DIR__ . '/..' . '/pusher/pusher-php-server/src/Pusher.php',
+        'Pusher\\PusherException' => __DIR__ . '/..' . '/pusher/pusher-php-server/src/PusherException.php',
+        'Pusher\\PusherInstance' => __DIR__ . '/..' . '/pusher/pusher-php-server/src/PusherInstance.php',
         'Ramsey\\Uuid\\BinaryUtils' => __DIR__ . '/..' . '/ramsey/uuid/src/BinaryUtils.php',
         'Ramsey\\Uuid\\Builder\\DefaultUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DefaultUuidBuilder.php',
         'Ramsey\\Uuid\\Builder\\DegradedUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DegradedUuidBuilder.php',
@@ -2750,6 +2767,7 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'SedeSeeder' => __DIR__ . '/../..' . '/database/seeds/SedeSeeder.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',

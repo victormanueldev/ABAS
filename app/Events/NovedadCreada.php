@@ -36,4 +36,5 @@ class NovedadCreada
     {
         return new PrivateChannel('channel-name');
     }
+
 }

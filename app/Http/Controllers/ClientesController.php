@@ -17,18 +17,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        // $data = collect([ 
-        //         '0' => [
-        //             'nombre' => 'asdasd'
-        //         ],
-        //         '1' => [
-        //             'nombre' => 'jklkgja'
-        //         ],
-        //         '2' => [
-        //             'nombre' => 'iuhweiuwer'
-        //         ]
-        // ]);
-        // //
+        // 
         $clientes = Cliente::all();
         $data = collect();
         foreach ($clientes as $cliente) {
@@ -48,7 +37,6 @@ class ClientesController extends Controller
 
             }else{
                 $data->push([
-                    
                         'id' => $cliente->id,
                         'nombre_cliente' => $cliente->nombre_cliente,
                         'razon_social' => $cliente->razon_social,
@@ -83,6 +71,7 @@ class ClientesController extends Controller
     public function create()
     {
         //
+        $clientes = Cliente::all();
     }
 
     /**
@@ -128,6 +117,8 @@ class ClientesController extends Controller
     public function show($id)
     {
         //
+        $cliente = Cliente::with('sedes')->where('id', $id)->get();
+        return $cliente;
     }
 
     /**

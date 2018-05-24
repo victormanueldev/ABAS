@@ -117,11 +117,11 @@
             <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
                 @foreach($data_eventos as $evento)
                 <div class="vertical-timeline-block">
-                    @if($evento->tipo == 'Llamada')
+                    @if($evento['tipo'] == 'Llamada')
                         <div class="vertical-timeline-icon yellow-bg">
                             <i class="fa fa-phone"></i>
                         </div>
-                    @elseif($evento->tipo == 'Visita')
+                    @elseif($evento['tipo'] == 'Visita')
                         <div class="vertical-timeline-icon navy-bg">
                             <i class="fa fa-file-text"></i>
                         </div>
@@ -132,27 +132,48 @@
                     @endif
 
                     <div class="vertical-timeline-content">
-                        <h2>{{$evento->tipo}}</h2>
-                        <p>{{$evento->asunto}}</p>
+                        <h2>{{$evento['tipo']}}</h2>
+                        <p>{{$evento['asunto']}}</p>
                         
-                    @if($evento->tipo == 'Llamada')
+                    @if($evento['tipo'] == 'Llamada')
                         <a href="#" class="btn btn-sm btn-warning">Ver más</a>
-                        <span class="vertical-date">
-                        Hoy <br>
-                        <small>{{$evento->fecha_inicio}}</small>
-                        </span>
-                    @elseif($evento->tipo == 'Visita')
-                        <a href="#" class="btn btn-sm btn-primary">Ver más</a>
-                        <span class="vertical-date">
+                        @if($evento['fecha_inicio'] == $fecha_actual)
+                            <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento->fecha_inicio}}</small>
-                        </span>
+                            <small>{{$evento['fecha_inicio']}}</small>
+                            </span>
+                        @else
+                            <span class="vertical-date">
+                            Mañana <br>
+                            <small>{{$evento['fecha_inicio']}}</small>
+                            </span>
+                        @endif
+                    @elseif($evento['tipo'] == 'Visita')
+                        <a href="#" class="btn btn-sm btn-primary">Ver más</a>
+                        @if($evento['fecha_inicio'] == $fecha_actual)
+                            <span class="vertical-date">
+                            Hoy <br>
+                            <small>{{$evento['fecha_inicio']}}</small>
+                            </span>
+                        @else
+                            <span class="vertical-date">
+                            Mañana <br>
+                            <small>{{$evento['fecha_inicio']}}</small>
+                            </span>
+                        @endif
                     @else
                         <a href="#" class="btn btn-sm btn-success">Ver más </a>
-                        <span class="vertical-date">
-                        Hoy <br>
-                            <small>{{$evento->fecha_inicio}}</small>
-                        </span>
+                        @if($evento['fecha_inicio'] == $fecha_actual)
+                            <span class="vertical-date">
+                            Hoy <br>
+                            <small>{{$evento['fecha_inicio']}}</small>
+                            </span>
+                        @else
+                            <span class="vertical-date">
+                            Mañana <br>
+                            <small>{{$evento['fecha_inicio']}}</small>
+                            </span>
+                        @endif
                     @endif
                     </div>
                     

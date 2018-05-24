@@ -38,7 +38,7 @@
 </head>
 
 <body class="md-skin">
-    <div id="wrapper">
+    <div id="wrapper" style="background-color: #5cae27;">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
@@ -74,7 +74,14 @@
                     </li>
                     <li id="m-novedades">
                             <a href="{{route('novedades.show')}}" style="background-color: #5cae27;color: white;" id="a-novedades"><i class="fa fa-bullhorn"></i> <span class="nav-label">Novedades</span></a>
-                        </li>
+                    </li>
+                    <li id="m-solicitud">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-solicitudes"><i class="fa fa-user-plus"></i> <span class="nav-label">Solicitudes </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-solicitudes">
+                            <li id="ml2-doc-solicitud"><a href="{{route('solicitudes.index')}}" style="color: white;">Docmuentación</a></li>
+                            <li id="ml2-verClientes"><a href="{{route('ver-clientes')}}" style="color: white;">Ver Clientes</a></li>
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -147,6 +154,8 @@
 
     <!-- Data picker -->
    <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+
+
 
    @yield('ini-scripts');
     <script>

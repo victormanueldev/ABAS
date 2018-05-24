@@ -98,6 +98,7 @@ class NovedadesController extends Controller
         $novedad->user_id = Auth::user()->id;//Obtiene el ID del usuario autenticado
         $novedad->area_id = $request->area;
         $novedad->save();//Guarda los datos en la tabla novedades
+
         
         //Valida la visibilidad de la novedad
         if($request->area == '1'){
