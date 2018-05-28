@@ -14,13 +14,14 @@ class ClienteSeeder extends Seeder
         //
         $clientes = [
             '0' => [
+                'tipo_cliente' => 'Persona Juridica',
                 'nombre_cliente' => 'Fruver los Paisas',
-                'razon_social' => 'Fruver los Paisas',
                 'nit_cedula' => '135246849-7',
                 'sector_economico' => 'Comercial',
                 'municipio' => 'Santiago de Cali',
                 'direccion' => 'CRA 2D # 62 - 39',
                 'barrio' => 'Guayacanes',
+                'zona' => 'Suroriente',
                 'nombre_contacto' => 'Jenny Molina',
                 'contacto_tecnico' => 'indefinido',
                 'cargo_contacto_tecnico' => 'indefinido',
@@ -36,13 +37,14 @@ class ClienteSeeder extends Seeder
                 'user_id' => 2
             ],
             '1' => [
-                'nombre_cliente' => 'Luis Felipe Cortéz',
-                'razon_social' => 'indefinido',
+                'tipo_cliente' => 'Persona Natural',
+                'nombre_cliente' => 'Luis Felipe Cortéz',                
                 'nit_cedula' => 32135686,
                 'sector_economico' => 'indefinido',
                 'municipio' => 'indefinido',
                 'direccion' => 'CRA 4 # 12A - 399',
                 'barrio' => 'indefinido',
+                'zona' => 'Noroccidente',
                 'nombre_contacto' => 'Luis Felipe Cortéz',
                 'contacto_tecnico' => 'indefinido',
                 'cargo_contacto_tecnico' => 'indefinido',
@@ -58,13 +60,14 @@ class ClienteSeeder extends Seeder
                 'user_id' => 1
             ],
             '2' => [
-                'nombre_cliente' => 'Lina Maria Chavez',
-                'razon_social' => 'indefinido',
+                'tipo_cliente' => 'Persona Natural',
+                'nombre_cliente' => 'Lina Maria Chavez',                
                 'nit_cedula' => 987656546,
                 'sector_economico' => 'indefinido',
                 'municipio' => 'indefinido',
                 'direccion' => 'CRA 4A # 45A - 34',
                 'barrio' => 'indefinido',
+                'zona' => 'indefinido',
                 'nombre_contacto' => 'Lina Maria Chavex',
                 'contacto_tecnico' => 'indefinido',
                 'cargo_contacto_tecnico' => 'indefinido',
@@ -80,13 +83,14 @@ class ClienteSeeder extends Seeder
                 'user_id' => 1
             ],
             '3' => [
+            'tipo_cliente' => 'Persona Natural',
                 'nombre_cliente' => 'Supermercado Super Inter',
-                'razon_social' => 'Super Inter',
                 'nit_cedula' => '654984651-7',
                 'sector_economico' => 'Comercial',
                 'municipio' => 'Santiago de Cali',
                 'direccion' => 'CRA 2D # 62 - 39',
                 'barrio' => 'Guayacanes',
+                'zona' => 'Suroriente',
                 'nombre_contacto' => 'Jenny Molina',
                 'contacto_tecnico' => 'indefinido',
                 'cargo_contacto_tecnico' => 'indefinido',

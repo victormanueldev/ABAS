@@ -45,4 +45,12 @@ class Cliente extends Model
     {
         return $this->hasMany(Sede::class);
     }
+
+    /**
+     * Relacion Cliente-Solicitud
+     */
+    public function solicitudes()
+    {
+        return $this->hasMany(Solicitud::class);
+    }
 }

@@ -75,13 +75,19 @@
                     <li id="m-novedades">
                             <a href="{{route('novedades.show')}}" style="background-color: #5cae27;color: white;" id="a-novedades"><i class="fa fa-bullhorn"></i> <span class="nav-label">Novedades</span></a>
                     </li>
-                    <li id="m-solicitud">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-solicitudes"><i class="fa fa-user-plus"></i> <span class="nav-label">Solicitudes </span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-solicitudes">
-                            <li id="ml2-doc-solicitud"><a href="{{route('solicitudes.index')}}" style="color: white;">Docmuentación</a></li>
-                            <li id="ml2-verClientes"><a href="{{route('ver-clientes')}}" style="color: white;">Ver Clientes</a></li>
+                    
+                    <li id="m-documentacion">
+                        <a href="{{ url('/documentacion') }}" style="background-color: #5cae27;color: white;" id="a-documentacion"><i class="fa fa-list-alt"></i> <span class="nav-label">Documentación</span></a>
+
+                        <ul class="nav nav-second-level collapse" id="ml2-documentacion">
+
+                            <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Solicitud de Programación</span></a></li>
+
+                            <li id="ml2-cotizacion"><a href="{{route('ver-clientes')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li>
                         </ul>
+
                     </li>
+                        
                 </ul>
 
             </div>

@@ -196,7 +196,8 @@
                                 element: "input",
                                 attributes: {
                                 placeholder: "Ingresa el asunto del evento",
-                                type: "text",
+                                type: "time",
+                                class: "datepicker"
                                 },
 
                             },

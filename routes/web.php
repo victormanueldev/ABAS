@@ -70,4 +70,5 @@ Route::get('sedes/cliente/{id}', 'SedesController@index');
 Route::resource('notificaciones', 'NotificacionesController');
 
 //Solicitudes
-Route::resource('solicitudes', 'SolicitudesController');
+Route::resource('solicitud', 'SolicitudesController');
+Route::get('solicitud-create', 'SolicitudesController@create');

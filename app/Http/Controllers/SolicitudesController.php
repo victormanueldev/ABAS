@@ -3,6 +3,7 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Cliente;
+use ABAS\Solicitud;
 use Illuminate\Http\Request;
 
 class SolicitudesController extends Controller
@@ -27,7 +28,10 @@ class SolicitudesController extends Controller
      */
     public function create()
     {
-        //
+        // $data = "Hola Mundo";
+        // $pdf = \PDF::loadView('pdf_solicitud', ['data' => $data]);
+        $pdf = \PDF::loadView('pdf_solicitud');
+        return $pdf->stream('Solicitud.pdf');
     }
 
     /**

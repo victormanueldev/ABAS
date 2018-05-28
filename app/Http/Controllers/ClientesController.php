@@ -17,50 +17,50 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        // 
-        $clientes = Cliente::all();
-        $data = collect();
-        foreach ($clientes as $cliente) {
-            if($cliente->razon_social == 'indefinido'){
-                $data->push([
+        
+        // $clientes = Cliente::all();
+        // $data = collect();
+        // foreach ($clientes as $cliente) {
+        //     if($cliente->razon_social == 'indefinido'){
+        //         $data->push([
                    
-                        'id'=> $cliente->id,
-                        'nombre_cliente' => $cliente->nombre_cliente,
-                        'cedula' => $cliente->nit_cedula,
-                        'direccion' => $cliente->direccion,
-                        'nombre_contacto' => $cliente->nombre_contacto,
-                        'cargo_contacto' => $cliente->cargo_contacto,
-                        'email' => $cliente->email,
-                        'celular' => $cliente->celular
+        //                 'id'=> $cliente->id,
+        //                 'nombre_cliente' => $cliente->nombre_cliente,
+        //                 'cedula' => $cliente->nit_cedula,
+        //                 'direccion' => $cliente->direccion,
+        //                 'nombre_contacto' => $cliente->nombre_contacto,
+        //                 'cargo_contacto' => $cliente->cargo_contacto,
+        //                 'email' => $cliente->email,
+        //                 'celular' => $cliente->celular
                     
-                ]);
+        //         ]);
 
-            }else{
-                $data->push([
-                        'id' => $cliente->id,
-                        'nombre_cliente' => $cliente->nombre_cliente,
-                        'razon_social' => $cliente->razon_social,
-                        'nit' => $cliente->nit_cedula,
-                        'sector_economico' => $cliente->sector_economico,
-                        'municipio' => $cliente->municipio,
-                        'direccion' => $cliente->direccion,
-                        'barrio' => $cliente->barrio,
-                        'nombre_contacto' => $cliente->nombre_contacto,
-                        'contacto_tecnico' => $cliente->contacto_tecnico,
-                        'cargo_contacto_tecnico' => $cliente->cargo_contacto_tecnico,
-                        'cargo_contacto' => $cliente->cargo_contacto,
-                        'email' => $cliente->email,
-                        'telefono' => $cliente->telefono,
-                        'telefono2' => $cliente->telefono2,
-                        'extension' => $cliente->extension,
-                        'celular' => $cliente->celular,
-                        'empresa_actual' => $cliente->empresa_actual,
-                        'razon_cambio' => $cliente->razon_cambio
+        //     }else{
+        //         $data->push([
+        //                 'id' => $cliente->id,
+        //                 'nombre_cliente' => $cliente->nombre_cliente,
+        //                 'razon_social' => $cliente->razon_social,
+        //                 'nit' => $cliente->nit_cedula,
+        //                 'sector_economico' => $cliente->sector_economico,
+        //                 'municipio' => $cliente->municipio,
+        //                 'direccion' => $cliente->direccion,
+        //                 'barrio' => $cliente->barrio,
+        //                 'nombre_contacto' => $cliente->nombre_contacto,
+        //                 'contacto_tecnico' => $cliente->contacto_tecnico,
+        //                 'cargo_contacto_tecnico' => $cliente->cargo_contacto_tecnico,
+        //                 'cargo_contacto' => $cliente->cargo_contacto,
+        //                 'email' => $cliente->email,
+        //                 'telefono' => $cliente->telefono,
+        //                 'telefono2' => $cliente->telefono2,
+        //                 'extension' => $cliente->extension,
+        //                 'celular' => $cliente->celular,
+        //                 'empresa_actual' => $cliente->empresa_actual,
+        //                 'razon_cambio' => $cliente->razon_cambio
                     
-                ]);
-            }
-        }
-        return $data;
+        //         ]);
+        //     }
+        // }
+        // return $data;
     }
 
     /**
@@ -84,27 +84,51 @@ class ClientesController extends Controller
     {
         //
         $cliente = new Cliente();
-        if(!empty($request->razon_social)){
-            $cliente->razon_social = $request->razon_social;
-        }else{
-            $cliente->razon_social = 'indefinido';
-        }
+        // if(!empty($request->razon_social)){
+        //     $cliente->razon_social = $request->razon_social;
+        // }else{
+        //     $cliente->razon_social = 'indefinido';
+        // }
 
-        if(!empty($request->cedula)){
-            $cliente->nit_cedula = $request->cedula;
-        }else{
-            $cliente->nit_cedula = 'indefinido';
-        }
+        // if(!empty($request->cedula)){
+        //     $cliente->nit_cedula = $request->cedula;
+        // }else{
+        //     $cliente->nit_cedula = 'indefinido';
+        // }
+        // $cliente->nombre_cliente = $request->get('nombre_cliente');
+        // $cliente->nombre_contacto = $request->get('nombre_contacto');
+        // $cliente->cargo_contacto = $request->get('cargo_contacto');
+        // $cliente->email = $request->get('email');
+        // $cliente->direccion = $request->get('direccion');
+        // $cliente->telefono = $request->get('telefono');
+        // $cliente->celular = $request->get('celular');
+        // $cliente->user_id = Auth::user()->id;
+
+        // $cliente->save();
+        // return Redirect::to('home');
+
+        $cliente->tipo_cliente = $request->get('tipo_cliente');
+        $cliente->nit_cedula = $request->get('nit_cedula');
         $cliente->nombre_cliente = $request->get('nombre_cliente');
+        $cliente->sector_economico = $request->get('sector_economico');
+        $cliente->municipio = $request->get('municipio');
+        $cliente->direccion = $request->get('direccion');
+        $cliente->barrio = $request->get('barrio');
+        $cliente->zona = $request->get('zona');
         $cliente->nombre_contacto = $request->get('nombre_contacto');
+        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
+        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
         $cliente->cargo_contacto = $request->get('cargo_contacto');
         $cliente->email = $request->get('email');
-        $cliente->direccion = $request->get('direccion');
         $cliente->telefono = $request->get('telefono');
+        $cliente->telefono2 = $request->get('telefono2');
+        $cliente->extension = $request->get('extension');
         $cliente->celular = $request->get('celular');
+        $cliente->empresa_actual = $request->get('empresa_actual');
+        $cliente->razon_cambio = $request->get('razon_cambio');
         $cliente->user_id = Auth::user()->id;
 
-        $cliente->save();
+        $cliente->save();   
         return Redirect::to('home');
     }
 
