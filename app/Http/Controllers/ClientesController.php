@@ -141,6 +141,8 @@ class ClientesController extends Controller
             $evento->save();
         }
 
+        
+
         //return $request->all();
         $cliente->save();   
         return Redirect::to('home');

@@ -68,7 +68,7 @@
                                                         
                                                     </div>
 
-                                                    <div class="col-lg-6 columna-clonada" id="columna_clon">                                                            
+                                                    <div class="col-lg-6 columna-clonada">                                                            
                                                         <label class="control-label">Teléfono *</label>                                                        
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
@@ -193,7 +193,7 @@
                                                         
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
-                                                                <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                                <button class="btn btn-default btn-add" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
                                                             <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono">
@@ -419,7 +419,7 @@
                                                         
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                                <button class="btn btn-default btn-add" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
                                                             <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
@@ -577,15 +577,15 @@
         $("#columna_principal").append(`<div class="columna-clonada form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
     })
 
-        $("#btn-add2").click(event => {
-        var cont = 0;
-        var rowsClonadas = $(".columna_clonada2").length -2;
-        var nuevoNumero  = new Number(rowsClonadas + 1);
-        //var row = $("#row").clone().show();
-        //var input = $("#input").clone();
-        //var div = row.append(input);
-        $("#columna_principal2").append(`<div class="columna-clonada2 form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    })
+    //     $("#btn-add2").click(event => {
+    //     var cont = 0;
+    //     var rowsClonadas = $(".columna_clonada2").length -2;
+    //     var nuevoNumero  = new Number(rowsClonadas + 1);
+    //     //var row = $("#row").clone().show();
+    //     //var input = $("#input").clone();
+    //     //var div = row.append(input);
+    //     $("#columna_principal2").append(`<div class="columna-clonada2 form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+    // })
 </script>
 @endsection
 @endsection
