@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     //Atributos
-    protected $fillable = [
+    /*protected $fillable = [
         'id',
-        'nombre_cliente',
-        'razon_social',
+        'tipo_cliente',
         'nit_cedula',
+        'nombre_cliente',
         'sector_economico',
         'municipio',
         'direccion',
         'barrio',
+        'zona',
         'nombre_contacto',
         'contacto_tecnico',
         'cargo_contacto_tecnico',
@@ -28,7 +29,7 @@ class Cliente extends Model
         'empresa_actual',
         'razon_cambio',
         'user_id'
-    ];
+    ];*/
 
     /**
      * Relacion Cliente-Empleado(User)

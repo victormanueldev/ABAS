@@ -106,7 +106,7 @@
 <!-- Scripts de inicializacion -->
 <script>
     $(document).ready(function(){
-        $('.dataTables-example').DataTable({
+        $('#tabla_novedades').DataTable({
             pageLength: 25,
             responsive: true,
             dom: '<"html5buttons"B>lTfgitp',

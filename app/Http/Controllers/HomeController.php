@@ -28,22 +28,24 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $dt = Carbon::now();
-        $fecha_actual = $dt->toDateString();
-        $tomorrow = $dt->addDay(1);
-        $manana = $tomorrow->toDateString();
+        $dt = Carbon::now();//DateTime Actual
+        $fecha_actual = $dt->toDateString();//Fecha Actual
+        $tomorrow = $dt->addDay(1);//Mañana
+        $manana = $tomorrow->toDateString();//fecha mañana
         $eventos = Auth::user()->eventos;
         $data_eventos = collect();
         foreach ($eventos as $evento ) {
             $fecha_ini = Carbon::parse($evento->fecha_inicio);
-            $fecha_ini_carbon = $fecha_ini->toDateString();
+            $fecha_ini_carbon = $fecha_ini->toDateString();//Fecha inicio de evento
+            $hora_carbon = $fecha_ini->toTimeString();//Hora inicio del evento
             if ($fecha_ini_carbon == $fecha_actual || $fecha_ini_carbon == $manana) {
+                //Coleccion con la informacion de todos los eventos
                 $data_eventos->push([
                     'tipo' => $evento->tipo,
                     'asunto' => $evento->asunto,
-                    'fecha_inicio' => $fecha_ini_carbon
+                    'fecha_inicio' => $fecha_ini_carbon,
+                    'hora_inicio' => $hora_carbon
                 ]);
-                //$data_eventos->concat(['fecha_parseada' =>  $fecha_ini]);
             }
         }
         //dd($data_eventos);

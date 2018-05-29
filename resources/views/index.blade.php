@@ -140,12 +140,12 @@
                         @if($evento['fecha_inicio'] == $fecha_actual)
                             <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento['fecha_inicio']}}</small>
+                            <small>{{$evento['hora_inicio']}}</small>
                             </span>
                         @else
                             <span class="vertical-date">
                             Mañana <br>
-                            <small>{{$evento['fecha_inicio']}}</small>
+                            <small>{{$evento['hora_inicio']}}</small>
                             </span>
                         @endif
                     @elseif($evento['tipo'] == 'Visita')
@@ -153,12 +153,12 @@
                         @if($evento['fecha_inicio'] == $fecha_actual)
                             <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento['fecha_inicio']}}</small>
+                            <small>{{$evento['hora_inicio']}}</small>
                             </span>
                         @else
                             <span class="vertical-date">
                             Mañana <br>
-                            <small>{{$evento['fecha_inicio']}}</small>
+                            <small>{{$evento['hora_inicio']}}</small>
                             </span>
                         @endif
                     @else
@@ -166,12 +166,12 @@
                         @if($evento['fecha_inicio'] == $fecha_actual)
                             <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento['fecha_inicio']}}</small>
+                            <small>{{$evento['hora_inicio']}}</small>
                             </span>
                         @else
                             <span class="vertical-date">
                             Mañana <br>
-                            <small>{{$evento['fecha_inicio']}}</small>
+                            <small>{{$evento['hora_inicio']}}</small>
                             </span>
                         @endif
                     @endif

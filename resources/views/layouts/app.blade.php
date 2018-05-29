@@ -65,8 +65,8 @@
                     <li id="m-clientes">
                         <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i> <span class="nav-label">Clientes </span></a>
                         <ul class="nav nav-second-level collapse" id="ml2-clientes">
-                            <li id="ml2-crearEmpresa"><a href="{{route('crear-empresa')}}" style="color: white;">Crear Cliente</a></li>
-                            <li id="ml2-verClientes"><a href="{{route('ver-clientes')}}" style="color: white;">Ver Clientes</a></li>
+                            <li id="ml2-crearEmpresa"><a href="{{route('clientes.create')}}" style="color: white;">Crear Cliente</a></li>
+                            <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver Clientes</a></li>
                         </ul>
                     </li>
                     <li id="m-cronograma">
@@ -83,7 +83,7 @@
 
                             <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Solicitud de Programación</span></a></li>
 
-                            <li id="ml2-cotizacion"><a href="{{route('ver-clientes')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li>
+                            <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li>
                         </ul>
 
                     </li>
@@ -172,33 +172,8 @@
                     keyboardNavigation: false,
                     forceParse: false,
                     calendarWeeks: true,
-                    autoclose: true
-                });
-    
-                $('#data_2 .input-group.date').datepicker({
-                    startView: 1,
-                    todayBtn: "linked",
-                    keyboardNavigation: false,
-                    forceParse: false,
                     autoclose: true,
-                    format: "dd/mm/yyyy"
-                });
-    
-                $('#data_3 .input-group.date').datepicker({
-                    startView: 2,
-                    todayBtn: "linked",
-                    keyboardNavigation: false,
-                    forceParse: false,
-                    autoclose: true
-                });
-    
-                $('#data_4 .input-group.date').datepicker({
-                    minViewMode: 1,
-                    keyboardNavigation: false,
-                    forceParse: false,
-                    forceParse: false,
-                    autoclose: true,
-                    todayHighlight: true
+                    format: "yyyy-mm-dd"
                 });
 
                 $('.clockpicker').clockpicker();

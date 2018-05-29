@@ -51,7 +51,7 @@
                                             {{Form::token()}}
 
                                             <div class="row">
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-12" >
 
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
@@ -63,64 +63,51 @@
                                                         <input type="text" placeholder="Escriba la dirección" class="form-control" name="direccion">
                                                     </div>
 
-
-                                                    {{-- <div class="col-lg-6">
-
-                                                        <label class="control-label">Teléfono *</label>
-                                                        
-                                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                                        <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente">
-
-                                                    </div> --}}
-
-                                                    <div class="col-lg-6">
-                                                            
-                                                        <label class="control-label">Teléfono *</label>
-                                                        
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                                            </span>
-                                                                
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono">
-                                                            
-                                                        </div>
-                                                        
-                                                    </div>
-
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
                                                         <input type="text" placeholder="Celular del contacto o cliente" class="form-control" name="celular">
                                                         
                                                     </div>
 
+                                                    <div class="col-lg-6 columna-clonada" id="columna_clon">                                                            
+                                                        <label class="control-label">Teléfono *</label>                                                        
+                                                        <div class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button id="btn-add" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                            </span>                                                               
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">                                                           
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row" >
+                                                        <div class="col-lg-12" id="columna_principal"> 
+
+                                                        </div>
+                                                    </div>
                                                     <div class="ibox-title col-lg-12">
                                                         <br>
                                                         <h3>Observaciones</h3>
                                                         <hr>
                                                         <br>
                                                     </div>
-
+        
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                            
-                                                            <div class="form-group col-lg-6"><label class="control-label">Tema *</label>
-                                                                <input type="text" placeholder="Escriba el asunto o tema" class="form-control">
+                                                            
+                                                            <div class="form-group col-lg-12">
+                                                                <label>Tipo</label>
+                                                                <select class="form-control" name="tipo_evento">
+                                                                    <option value="Llamada">LLamada</option>
+                                                                    <option value="Seguimiento">Cotización</option>
+                                                                    <option value="Visita">Visita</option>
+                                                                </select>
                                                             </div>
                                             
                                                             <div class="form-group col-lg-6" id="data_1">
                                                                 <label>Fecha *</label>
                                                                 <div class="input-group date">
-                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" placeholder="">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" placeholder="" name="fecha_inicio">
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="form-group col-lg-6">
-                                                                <label>Tipo</label>
-                                                                <select class="form-control" name="account">
-                                                                    <option>LLamada</option>
-                                                                    <option>Cotización</option>
-                                                                    <option>Visita</option>
-                                                                </select>
                                                             </div>
                                         
                                                             <div class="form-group col-lg-6">
@@ -129,15 +116,15 @@
                                                                     <span class="input-group-addon">
                                                                         <span class="fa fa-clock-o"></span>
                                                                     </span>
-                                                                    <input type="text" class="form-control" placeholder="09:30" >
+                                                                    <input type="text" class="form-control" placeholder="09:30" name="hora_inicio">
                                                                 </div>
                                                             </div>
-
+        
                                                             <div class="form-group col-lg-12">
                                                                 <label>Observaciones</label>
-                                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3"></textarea>
+                                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
                                                             </div>
-
+        
                                                         </div>                                     
                                                     </div>
                                                 </div>
@@ -178,10 +165,7 @@
                                                         
                                                     </div>
                     
-                                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
-                                                        <input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control">
-                                                        
-                                                    </div>
+                                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label><input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control"></div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
                                                         <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control">
@@ -203,13 +187,13 @@
                                                         
                                                     </div>
 
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6 columna_clonada2">
                                                             
                                                         <label class="control-label">Teléfono *</label>
                                                         
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                                <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
                                                             <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono">
@@ -220,6 +204,12 @@
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
                                                         <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
                                                         
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12" id="columna_principal2">
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,17 +245,18 @@
                                                         <input type="text" placeholder="Zona Ruta" class="form-control">
                                                     </div>
                                 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                                        <input type="text" placeholder="Teléfono del contacto o cliente" class="form-control">
-                                                        
-                                                    </div>
-                        
+                                                    
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
                                                         <input type="text" placeholder="Celular del contacto" class="form-control">
                                                     </div>
-
+                                                    
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
                                                         <input type="email" placeholder="Email de contacto" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
+                                                        <input type="text" placeholder="Teléfono del contacto o cliente" class="form-control">
                                                         
                                                     </div>
 
@@ -287,25 +278,22 @@
 
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                    
-                                                    <div class="form-group col-lg-6"><label class="control-label">Tema *</label>
-                                                        <input type="text" placeholder="Escriba el asunto o tema" class="form-control">
+                                                    
+                                                    <div class="form-group col-lg-12">
+                                                        <label>Tipo</label>
+                                                        <select class="form-control" name="tipo_evento">
+                                                            <option value="Llamada">LLamada</option>
+                                                            <option value="Visita">Cotización</option>
+                                                            <option value="Seguimiento">Visita</option>
+                                                        </select>
                                                     </div>
                                     
                                                     <div class="form-group col-lg-6" id="data_1">
                                                         <label>Fecha *</label>
                                                         <div class="input-group date">
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" placeholder="">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="text" class="form-control" placeholder="" name="fecha_inicio">
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group col-lg-6">
-                                                        <label>Tipo</label>
-                                                        <select class="form-control" name="account">
-                                                            <option>LLamada</option>
-                                                            <option>Cotización</option>
-                                                            <option>Visita</option>
-                                                        </select>
                                                     </div>
                                 
                                                     <div class="form-group col-lg-6">
@@ -314,13 +302,13 @@
                                                             <span class="input-group-addon">
                                                                 <span class="fa fa-clock-o"></span>
                                                             </span>
-                                                            <input type="text" class="form-control" placeholder="09:30" >
+                                                            <input type="text" class="form-control" placeholder="09:30" name="hora_inicio">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-12">
                                                         <label>Observaciones</label>
-                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3"></textarea>
+                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
                                                     </div>
 
                                                 </div>                                     
@@ -420,6 +408,11 @@
                                                         
                                                     </div>
 
+                                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
+                                                        
+                                                    </div>
+
                                                     <div class="col-lg-6">
                                                             
                                                         <label class="control-label">Teléfono *</label>
@@ -429,17 +422,12 @@
                                                                 <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono">
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
                                                             
                                                         </div>                                                        
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
-                                                        
-                                                    </div>
-
-                                                    <div class="form-group col-lg-6"><label class="control-label">Empresa de fumigación actualmente *</label>
+                                                    <div class="form-group col-lg-12"><label class="control-label">Empresa de fumigación actualmente *</label>
                                                         <input type="text" name="empresa_actual" placeholder="Empresa que le presta los servicios de fumigación" class="form-control">
                                                         
                                                     </div>
@@ -515,25 +503,22 @@
 
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                    
-                                                    <div class="form-group col-lg-6"><label class="control-label">Tema *</label>
-                                                        <input type="text" placeholder="Escriba el asunto o tema" class="form-control">
+                                                    
+                                                    <div class="form-group col-lg-12">
+                                                        <label>Tipo</label>
+                                                        <select class="form-control" name="tipo_evento">
+                                                                <option value="Llamada">LLamada</option>
+                                                                <option value="Visita">Cotización</option>
+                                                                <option value="Seguimiento">Visita</option>
+                                                        </select>
                                                     </div>
                                     
                                                     <div class="form-group col-lg-6" id="data_1">
                                                         <label>Fecha *</label>
                                                         <div class="input-group date">
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" placeholder="">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="text" class="form-control" placeholder="" name="fecha_inicio">
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group col-lg-6">
-                                                        <label>Tipo</label>
-                                                        <select class="form-control" name="account">
-                                                            <option>LLamada</option>
-                                                            <option>Cotización</option>
-                                                            <option>Visita</option>
-                                                        </select>
                                                     </div>
                                 
                                                     <div class="form-group col-lg-6">
@@ -542,13 +527,13 @@
                                                             <span class="input-group-addon">
                                                                 <span class="fa fa-clock-o"></span>
                                                             </span>
-                                                            <input type="text" class="form-control" placeholder="09:30" >
+                                                            <input type="text" class="form-control" placeholder="09:30" name="hora_inicio">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-12">
                                                         <label>Observaciones</label>
-                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3"></textarea>
+                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
                                                     </div>
 
                                                 </div>                                     
@@ -580,4 +565,27 @@
         </div> --}}
     </div>
 </div>
+@section('ini-scripts')
+<script>
+    $("#btn-add").click(event => {
+        var cont = 0;
+        var rowsClonadas = $(".columna-clonada").length -2;
+        var nuevoNumero  = new Number(rowsClonadas + 1);
+        //var row = $("#row").clone().show();
+        //var input = $("#input").clone();
+        //var div = row.append(input);
+        $("#columna_principal").append(`<div class="columna-clonada form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+    })
+
+        $("#btn-add2").click(event => {
+        var cont = 0;
+        var rowsClonadas = $(".columna_clonada2").length -2;
+        var nuevoNumero  = new Number(rowsClonadas + 1);
+        //var row = $("#row").clone().show();
+        //var input = $("#input").clone();
+        //var div = row.append(input);
+        $("#columna_principal2").append(`<div class="columna-clonada2 form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+    })
+</script>
+@endsection
 @endsection

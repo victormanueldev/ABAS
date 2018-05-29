@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ClienteFormRequest;
 use Illuminate\Support\Facades\Redirect;
 use ABAS\Cliente;
+use ABAS\Evento;
 use Auth;
 
 class ClientesController extends Controller
@@ -61,6 +62,8 @@ class ClientesController extends Controller
         //     }
         // }
         // return $data;
+        $clientes = Cliente::all();
+        return view('ver-clientes', compact('clientes'));
     }
 
     /**
@@ -71,7 +74,8 @@ class ClientesController extends Controller
     public function create()
     {
         //
-        $clientes = Cliente::all();
+        //$clientes = Cliente::all();
+        return view('crear-cliente');
     }
 
     /**
@@ -128,6 +132,16 @@ class ClientesController extends Controller
         $cliente->razon_cambio = $request->get('razon_cambio');
         $cliente->user_id = Auth::user()->id;
 
+        if($request->tipo_evento != '' || $request->tipo_evento != null){
+            $evento = new Evento();
+            $evento->tipo  = $request->tipo_evento;
+            $evento->fecha_inicio = $request->fecha_inicio." ".$request->hora_inicio.":00";
+            $evento->asunto = $request->asunto;
+            $evento->user_id = Auth::user()->id;
+            $evento->save();
+        }
+
+        //return $request->all();
         $cliente->save();   
         return Redirect::to('home');
     }
@@ -140,9 +154,9 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
-        $cliente = Cliente::with('sedes')->where('id', $id)->get();
+        $cliente = Cliente::with('sedes', 'solicitudes')->where('id', $id)->get();
         return $cliente;
+
     }
 
     /**
