@@ -54,4 +54,12 @@ class Cliente extends Model
     {
         return $this->hasMany(Solicitud::class);
     }
+    
+    /**
+     * Relacion entre Clientes-Telefonos
+     */
+    public function telefonos()
+    {
+        return $this->hasMany(Telefono::class);
+    }
 }

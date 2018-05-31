@@ -29,52 +29,65 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="m-b-md">
-                                {{-- <a href="#" class="btn btn-white btn-xs pull-right">Edit project</a> --}}
-                                <h2>Lina María Chavez Ordoñez</h2>
+                                <a href="#" class="btn btn-warning btn-xs pull-right">Editar cliente</a>
+                                <h2>{{$cliente[0]->nombre_cliente}}</h2>
                             </div>
+                            @if($cliente[0]->tipo_cliente == 'Persona Juridica')
                             <dl class="dl-horizontal">
-                                <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
+                                <dt>Tipo de Cliente:</dt> <dd><span class="label label-primary">{{$cliente[0]->tipo_cliente}}</span></dd>
                             </dl>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <dl class="dl-horizontal">
-
-                                <dt>Created by:</dt> <dd>Alex Smith</dd>
-                                <dt>Messages:</dt> <dd>  162</dd>
-                                <dt>Client:</dt> <dd><a href="#" class="text-navy"> Zender Company</a> </dd>
-                                <dt>Version:</dt> <dd> 	v1.4.2 </dd>
+                                <dt>NIT:</dt> <dd>{{$cliente[0]->nit_cedula}}</dd>
+                                <dt>Sector Económico:</dt> <dd>  {{$cliente[0]->sector_economico}}</dd>
+                                <dt>Nombre de Contacto:</dt> <dd> {{$cliente[0]->nombre_contacto}} </dd>
+                                <dt>Cargo de Contacto:</dt> <dd> 	{{$cliente[0]->cargo_contacto}} </dd>
+                            </dl>
+                            @else
+                            <dl class="dl-horizontal">
+                                <dt>Tipo de Cliente:</dt> <dd><span class="label label-warning">{{$cliente[0]->tipo_cliente}}</span></dd>
                             </dl>
                         </div>
-                        <div class="col-lg-7" id="cluster_info">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <dl class="dl-horizontal">
+                                <dt>Nro. Cédula:</dt> <dd>{{$cliente[0]->nit_cedula}}</dd>
+                            </dl>
+                            @endif
+                        </div>
+                        <div class="col-lg-6" id="cluster_info">
                             <dl class="dl-horizontal" >
-
-                                <dt>Last Updated:</dt> <dd>16.08.2014 12:15:57</dd>
-                                <dt>Created:</dt> <dd> 	10.07.2014 23:36:57 </dd>
-                                <dt>Participants:</dt>
-                                <dd class="project-people">
-                                <a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-                                <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
-                                <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
-                                <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>
-                                <a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>
-                                </dd>
+                                <dt>Fecha Registro:</dt> <dd>{{$cliente[0]->created_at}}</dd>
+                                <dt>Fecha Actualización:</dt> <dd> 	{{$cliente[0]->updated_at}} </dd>
+                                <dt>Nombre Asesor:</dt> <dd> 	{{$cliente[0]['user']['nombres']." ".$cliente[0]['user']['apellidos']}} </dd>
                             </dl>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <dl class="dl-horizontal">
-                                <dt>Completed:</dt>
-                                <dd>
-                                    <div class="progress progress-striped active m-b-sm">
-                                        <div style="width: 60%;" class="progress-bar"></div>
-                                    </div>
-                                    <small>Project completed in <strong>60%</strong>. Remaining close the project, sign a contract and invoice.</small>
-                                </dd>
+                                <dt>Municipio:</dt> <dd>{{$cliente[0]->municipio}}</dd>
+                                <dt>Dirección:</dt> <dd>{{$cliente[0]->direccion}}</dd>
+                                <dt>Barrio:</dt>  <dd>{{$cliente[0]->barrio}}</dd>
+                                <dt>Zona:</dt> <dd>{{$cliente[0]->zona}}</dd>
                             </dl>
                         </div>
+                        <div class="col-lg-6">
+                                <dl class="dl-horizontal">
+                                    <dt>Email:</dt> <dd>{{$cliente[0]->municipio}}</dd>
+                                    <dt>Celular:</dt> <dd>{{$cliente[0]->direccion}}</dd>
+                                    <dt>Telefonos :</dt> 
+                                        <dd>
+                                            @foreach($cliente[0]->telefonos as $telefono)
+                                                {{$telefono->numero}} - 
+                                            @endforeach
+                                        </dd> 
+                                </dl>
+                            </div>
                     </div>
                     <div class="row m-t-sm">
                         <div class="col-lg-12">
@@ -82,8 +95,9 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab-1" data-toggle="tab">Users messages</a></li>
-                                    <li class=""><a href="#tab-2" data-toggle="tab">Last activity</a></li>
+                                    <li class="active"><a href="#tab-1" data-toggle="tab">Sedes</a></li>
+                                    <li class=""><a href="#tab-2" data-toggle="tab">Solicitudes</a></li>
+                                    <li class=""><a href="#tab-3" data-toggle="tab">Cotizaciones</a></li>
                                 </ul>
                             </div>
                         </div>

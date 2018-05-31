@@ -47,7 +47,7 @@
 
                                         <div role="tabpanel" class="tab-pane active" id="frio">
 
-                                            {!! Form::open(array('route'=> ['guardarEmpresa'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
+                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
                                             {{Form::token()}}
 
                                             <div class="row">
@@ -141,7 +141,7 @@
                                         
                                         <div role="tabpanel" class="tab-pane" id="prospecto">
 
-                                            {!! Form::open(array('route'=> ['guardarEmpresa'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
+                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
                                             {{Form::token()}}
 
                                             <div class="row">
@@ -187,6 +187,11 @@
                                                         
                                                     </div>
 
+                                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
+                                                        
+                                                    </div>
+
                                                     <div class="col-lg-6 columna_clonada2">
                                                             
                                                         <label class="control-label">Teléfono *</label>
@@ -196,15 +201,11 @@
                                                                 <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono">
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
                                                             
                                                         </div>                                                        
                                                     </div>
                         
-                                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
-                                                        
-                                                    </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-12" id="columna_principal2">
@@ -324,7 +325,7 @@
 
                                         <div role="tabpanel" class="tab-pane" id="cliente">
 
-                                            {!! Form::open(array('route'=> ['guardarEmpresa'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
+                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
                                             {{Form::token()}}
 
                                             <div class="row">
@@ -414,17 +415,20 @@
                                                     </div>
 
                                                     <div class="col-lg-6">
-                                                            
                                                         <label class="control-label">Teléfono *</label>
-                                                        
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                                <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
-                                                                
                                                             <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
-                                                            
                                                         </div>                                                        
+                                                    </div>
+
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-lg-12" id="columna_principal3">
+
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-12"><label class="control-label">Empresa de fumigación actualmente *</label>
@@ -567,25 +571,26 @@
 </div>
 @section('ini-scripts')
 <script>
+    //Inicializacion de Contadores
+    var cont = 1;
+    var cont2 = 1;
+    var cont3 = 1;
+    //Evento click del btn con ID
     $("#btn-add").click(event => {
-        var cont = 0;
-        var rowsClonadas = $(".columna-clonada").length -2;
-        var nuevoNumero  = new Number(rowsClonadas + 1);
-        //var row = $("#row").clone().show();
-        //var input = $("#input").clone();
-        //var div = row.append(input);
-        $("#columna_principal").append(`<div class="columna-clonada form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    })
-
-        $("#btn-add2").click(event => {
-        var cont = 0;
-        var rowsClonadas = $(".columna_clonada2").length -2;
-        var nuevoNumero  = new Number(rowsClonadas + 1);
-        //var row = $("#row").clone().show();
-        //var input = $("#input").clone();
-        //var div = row.append(input);
-        $("#columna_principal2").append(`<div class="columna-clonada2 form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    })
+        cont++;
+        //Añade una serie de nodos dentro del componente con ID columna_principal
+        $("#columna_principal").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont }*</label><input type="text" name="telefono[${cont -1 }]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+    });
+    //Evento click del btn con ID 2
+    $("#btn-add2").click(event => {
+        cont2 = cont2 + 1;
+        $("#columna_principal2").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont2 }*</label><input type="text" name="telefono[${cont2 -1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+    });
+    //Evento click del btn con ID 3
+    $("#btn-add3").click(event => {
+        cont3 = cont3 + 1;
+        $("#columna_principal3").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont3 }*</label><input type="text" name="telefono[${cont3 -1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+    });
 </script>
 @endsection
 @endsection

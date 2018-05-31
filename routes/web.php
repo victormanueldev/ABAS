@@ -45,11 +45,9 @@ Route::resource('novedades', 'NovedadesController', [
 Route::get('novedades/listado', 'NovedadesController@show')->name('novedades.show');
 
 //Clientees
-Route::resource('clientes', 'ClientesController', [
-    'except' => 'store'
-]);
-Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
-Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
+Route::resource('clientes', 'ClientesController');
+// Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
+// Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [

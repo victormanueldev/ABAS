@@ -7,6 +7,8 @@ use App\Http\Requests\ClienteFormRequest;
 use Illuminate\Support\Facades\Redirect;
 use ABAS\Cliente;
 use ABAS\Evento;
+use ABAS\Novedad;
+use ABAS\Telefono;
 use Auth;
 
 class ClientesController extends Controller
@@ -63,7 +65,7 @@ class ClientesController extends Controller
         // }
         // return $data;
         $clientes = Cliente::all();
-        return view('ver-clientes', compact('clientes'));
+        return view('index-clientes', compact('clientes'));
     }
 
     /**
@@ -88,28 +90,6 @@ class ClientesController extends Controller
     {
         //
         $cliente = new Cliente();
-        // if(!empty($request->razon_social)){
-        //     $cliente->razon_social = $request->razon_social;
-        // }else{
-        //     $cliente->razon_social = 'indefinido';
-        // }
-
-        // if(!empty($request->cedula)){
-        //     $cliente->nit_cedula = $request->cedula;
-        // }else{
-        //     $cliente->nit_cedula = 'indefinido';
-        // }
-        // $cliente->nombre_cliente = $request->get('nombre_cliente');
-        // $cliente->nombre_contacto = $request->get('nombre_contacto');
-        // $cliente->cargo_contacto = $request->get('cargo_contacto');
-        // $cliente->email = $request->get('email');
-        // $cliente->direccion = $request->get('direccion');
-        // $cliente->telefono = $request->get('telefono');
-        // $cliente->celular = $request->get('celular');
-        // $cliente->user_id = Auth::user()->id;
-
-        // $cliente->save();
-        // return Redirect::to('home');
 
         $cliente->tipo_cliente = $request->get('tipo_cliente');
         $cliente->nit_cedula = $request->get('nit_cedula');
@@ -124,15 +104,14 @@ class ClientesController extends Controller
         $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
         $cliente->cargo_contacto = $request->get('cargo_contacto');
         $cliente->email = $request->get('email');
-        $cliente->telefono = $request->get('telefono');
-        $cliente->telefono2 = $request->get('telefono2');
         $cliente->extension = $request->get('extension');
         $cliente->celular = $request->get('celular');
         $cliente->empresa_actual = $request->get('empresa_actual');
         $cliente->razon_cambio = $request->get('razon_cambio');
         $cliente->user_id = Auth::user()->id;
+        $cliente->save();   
 
-        if($request->tipo_evento != '' || $request->tipo_evento != null){
+        if($request->fecha_inicio != '' || $request->fecha_inicio != null){
             $evento = new Evento();
             $evento->tipo  = $request->tipo_evento;
             $evento->fecha_inicio = $request->fecha_inicio." ".$request->hora_inicio.":00";
@@ -141,8 +120,18 @@ class ClientesController extends Controller
             $evento->save();
         }
 
+        if ($request->telefono[0] != '' || $request->telefono[0] != null) {               
+            $id_cliente = Cliente::select('id')->where('nombre_cliente', $request->nombre_cliente)->get();
+            for ($i=0; $i < count($request->telefono) ; $i++) { 
+                Telefono::create([
+                    'numero' => $request->telefono[$i],
+                    'cliente_id' => $id_cliente[0]['id']
+                ]);
+            }
+        }
+
         //return $request->all();
-        $cliente->save();   
+
         return Redirect::to('home');
     }
 
@@ -154,8 +143,9 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $cliente = Cliente::with('sedes', 'solicitudes')->where('id', $id)->get();
-        return $cliente;
+
+        $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user')->where('id', $id)->get();
+        return view('ver-cliente', compact('cliente'));
 
     }
 

@@ -16,13 +16,13 @@ class NovedadSeeder extends Seeder
             '0' => [
                 'id' => 3,
                 'descripcion' => 'Cliente No. 20316 no ha pagado el servicio',
-                'estado' => 'resuelta',
-                'user2_id' => 2,
+                'estado' => 'publicada',
+                'user2_id' => null,
                 'user_id' => 1,
                 'area_id' => 1,
                 'comentario' => null,
                 'created_at' => '2018-04-19 15:21:00',
-                'updated_at' => '2018-04-20 20:21:00'
+                'updated_at' => null
                 
             ],
             '1' => [

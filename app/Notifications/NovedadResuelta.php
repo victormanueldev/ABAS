@@ -58,14 +58,14 @@ class NovedadResuelta extends Notification
      */
     public function toArray($notifiable)
     {
-        $usuario = Novedad::with('user')->where('user2_id', $this->novedad->user_id)->limit(1)->get();
+        $novedad = Novedad::where('id', $this->novedad->id)->with('user2')->get();
         return [
             'id' => $this->novedad->id,
             'descripcion' => $this->novedad->descripcion,
             'user2_id' => $this->novedad->user2_id,
-            'nombres' => $usuario[0]['user']['nombres'],
-            'apellidos' => $usuario[0]['user']['apellidos'],
-            'foto' => $usuario[0]['user']['foto']
+            'nombres' => $novedad[0]['user2']['nombres'],
+            'apellidos' => $novedad[0]['user2']['apellidos'],
+            'foto' => $novedad[0]['user2']['foto']
         ];
     }
 }
