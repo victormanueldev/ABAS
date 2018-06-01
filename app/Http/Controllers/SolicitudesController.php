@@ -5,6 +5,8 @@ namespace ABAS\Http\Controllers;
 use ABAS\Cliente;
 use ABAS\Solicitud;
 use Illuminate\Http\Request;
+use ABAS\Sede;
+use Auth;
 
 class SolicitudesController extends Controller
 {
@@ -42,7 +44,18 @@ class SolicitudesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = collect();
+    
+        $cliente = Cliente::find($request->id_cliente);
+        $sede = Sede::find($request->id_sede);
+        $user = Auth::user()->nombres." ".Auth::user()->apellidos;
+
+        $data->push($cliente);
+        $data->push($sede);
+        $data->push(['user' => $user]);
+        // return $data;
+        $pdf = \PDF::loadView('pdf_solicitud', compact('data'));
+        return $pdf->stream('Solicitud.pdf');
     }
 
     /**

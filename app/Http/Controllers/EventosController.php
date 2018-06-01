@@ -54,7 +54,7 @@ class EventosController extends Controller
             if($request->ajax()){
                 $evento = new Evento();
                 $evento->asunto = $request->title;
-                $evento->fecha_inicio = $request->start;
+                $evento->fecha_inicio = $request->start." ".$request->hora;
                 $evento->dia_completo = $request->allDay;
                 $evento->tipo = $request->tipo;
                 if ($request->tipo == 'Llamada') {

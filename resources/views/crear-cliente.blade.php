@@ -198,7 +198,7 @@
                                                         
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-default btn-add" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                                <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
                                                             <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
@@ -577,7 +577,6 @@
     var cont3 = 1;
     //Evento click del btn con ID
     $("#btn-add").click(event => {
-<<<<<<< HEAD
         cont++;
         //Añade una serie de nodos dentro del componente con ID columna_principal
         $("#columna_principal").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont }*</label><input type="text" name="telefono[${cont -1 }]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
@@ -592,26 +591,6 @@
         cont3 = cont3 + 1;
         $("#columna_principal3").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont3 }*</label><input type="text" name="telefono[${cont3 -1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
     });
-=======
-        var cont = 0;
-        var rowsClonadas = $(".columna-clonada").length -2;
-        var nuevoNumero  = new Number(rowsClonadas + 1);
-        //var row = $("#row").clone().show();
-        //var input = $("#input").clone();
-        //var div = row.append(input);
-        $("#columna_principal").append(`<div class="columna-clonada form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    })
-
-    //     $("#btn-add2").click(event => {
-    //     var cont = 0;
-    //     var rowsClonadas = $(".columna_clonada2").length -2;
-    //     var nuevoNumero  = new Number(rowsClonadas + 1);
-    //     //var row = $("#row").clone().show();
-    //     //var input = $("#input").clone();
-    //     //var div = row.append(input);
-    //     $("#columna_principal2").append(`<div class="columna-clonada2 form-group col-lg-6"><label class="control-label">Teléfono  ${nuevoNumero + 2 }*</label><input type="text" name="telefono[${nuevoNumero + 1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    // })
->>>>>>> 88ad869e11b0f7bc8e69c9080bb8251b71a10f50
 </script>
 @endsection
 @endsection

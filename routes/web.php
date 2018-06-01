@@ -61,4 +61,4 @@ Route::resource('notificaciones', 'NotificacionesController');
 
 //Solicitudes
 Route::resource('solicitud', 'SolicitudesController');
-Route::get('solicitud-create', 'SolicitudesController@create');
+//Route::get('solicitud-create', 'SolicitudesController@create');

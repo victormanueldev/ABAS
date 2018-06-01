@@ -32,7 +32,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '3154874545',
                 'empresa_actual' => 'Plagas S.A.S.',
                 'razon_cambio' => 'Mal servicio',
-                'user_id' => 2
+                'user_id' => 2,
+                'created_at' => '2018-05-07 08:50:00',
+                'updated_at' => '2018-05-08 10:31:00'
             ],
             '1' => [
                 'tipo_cliente' => 'Persona Natural',
@@ -53,7 +55,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '311565468',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
-                'user_id' => 1
+                'user_id' => 1,
+                'created_at' => '2018-05-07 08:50:00',
+                'updated_at' => '2018-05-08 10:31:00'
             ],
             '2' => [
                 'tipo_cliente' => 'Persona Natural',
@@ -74,10 +78,12 @@ class ClienteSeeder extends Seeder
                 'celular' => '318546813',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
-                'user_id' => 1
+                'user_id' => 1,
+                'created_at' => '2018-05-07 08:50:00',
+                'updated_at' => '2018-05-08 10:31:00'
             ],
             '3' => [
-            'tipo_cliente' => 'Persona Natural',
+            'tipo_cliente' => 'Persona Juridica',
                 'nombre_cliente' => 'Supermercado Super Inter',
                 'nit_cedula' => '654984651-7',
                 'sector_economico' => 'Comercial',
@@ -95,7 +101,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '3154874545',
                 'empresa_actual' => 'Plagas S.A.S.',
                 'razon_cambio' => 'Mal servicio',
-                'user_id' => 2
+                'user_id' => 2,
+                'created_at' => '2018-05-07 08:50:00',
+                'updated_at' => '2018-05-08 10:31:00'
             ],
         ];
         DB::table('clientes')->insert($clientes);

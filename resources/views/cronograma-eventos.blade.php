@@ -196,8 +196,7 @@
                                 element: "input",
                                 attributes: {
                                 placeholder: "Ingresa el asunto del evento",
-                                type: "time",
-                                class: "datepicker"
+                                type: "text"
                                 },
 
                             },
@@ -207,24 +206,40 @@
                         .then((res) => {
                             //Valida que sea presionado el boton OK
                             if(res != null){
-                                //Obtiene el token del formulario a enviar
-                                crsfToken = document.getElementsByName("_token")[0].value;
-                                //Peticion HTTP para guardar el evento
-                                $.ajax({
-                                    url: '/evento/guardar',//Redirecciona a la direccion URL
-                                    data: 'title='+ res+'&start='+ start.format("YYYY-MM-DD HH:mm")+'&allday='+allDay.uid+'&tipo='+value,//Datos que enviará
-                                    type: "POST",//Método de envío
-                                    headers: {
-                                        "X-CSRF-TOKEN": crsfToken //Token de segurodad
+                                //Alert para indicar el asunto del evento
+                                swal({
+                                    title: 'Crear Evento',
+                                    content: {
+                                        element: "input",
+                                        attributes: {
+                                        type: "time"
+                                        },
+
                                     },
-                                    success: function(events) {//En caso de ser exitoso el envio de datos
-                                        console.log('Evento creado'); //Escribe en la consola 
-                                        $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
-                                    },
-                                    error: function(json){//En caso de ser erroneo el envio de datos 
-                                        console.log("Error al crear evento");//Escribe en consola
-                                    }        
-                                });
+                                buttons: true
+                                })
+                                .then((resul) => {
+                                    if(resul != null){
+                                        //Obtiene el token del formulario a enviar
+                                        crsfToken = document.getElementsByName("_token")[0].value;
+                                        //Peticion HTTP para guardar el evento
+                                        $.ajax({
+                                            url: '/evento/guardar',//Redirecciona a la direccion URL
+                                            data: 'title='+ res+'&start='+ start.format("YYYY-MM-DD")+'&allday='+allDay.uid+'&tipo='+value+'&hora='+resul,//Datos que enviará
+                                            type: "POST",//Método de envío
+                                            headers: {
+                                                "X-CSRF-TOKEN": crsfToken //Token de segurodad
+                                            },
+                                            success: function(events) {//En caso de ser exitoso el envio de datos
+                                                console.log('Evento creado'); //Escribe en la consola 
+                                                $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+                                            },
+                                            error: function(json){//En caso de ser erroneo el envio de datos 
+                                                console.log("Error al crear evento");//Escribe en consola
+                                            }        
+                                        });
+                                    }
+                                })
                             }
                         })
                     }

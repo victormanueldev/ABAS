@@ -158,6 +158,8 @@ class ClientesController extends Controller
     public function edit($id)
     {
         //
+        $cliente = Cliente::with('sedes')->where('id', $id)->get();
+        return $cliente;
     }
 
     /**

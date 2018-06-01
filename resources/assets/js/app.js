@@ -18,7 +18,7 @@ window.Vue = require('vue');
 Vue.component('tareas', require('./components/tareas.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#tareas'
 });
 
 Vue.component('novedades', require('./components/novedades.vue'));
@@ -37,4 +37,10 @@ Vue.component('notificaciones', require('./components/notificaciones.vue'));
 
 const notificacion = new Vue({
     el: '#notificacion'
+});
+
+Vue.component('documentos', require('./components/documentos-cliente.vue'));
+
+const documentos = new Vue({
+    el: '#documentos'
 });

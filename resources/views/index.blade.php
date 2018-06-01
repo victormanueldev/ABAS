@@ -50,7 +50,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <div class="ibox float-e-margins" id="app">
+            <div class="ibox float-e-margins" id="tareas">
                 <tareas></tareas>
             </div>
         </div>

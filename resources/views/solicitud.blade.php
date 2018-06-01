@@ -2,9 +2,9 @@
 @section('content')
 
 <script>
-    document.getElementById('m-clientes').setAttribute("class", "active");
-    document.getElementById('a-clientes').removeAttribute("style");
-    document.getElementById('ml2-clientes').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('m-solicitud').setAttribute("class", "active");
+    document.getElementById('a-solicitudes').removeAttribute("style");
+    document.getElementById('ml2-doc-solicitud').setAttribute("class", "nav nav-second-level collapse in");
     document.getElementById('ml2-crearEmpresa').setAttribute("class", "active");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -27,7 +27,7 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    {!! Form::open(array('url'=>('solicitud-create'), 'method'=>'GET', 'autocomplete'=>'on')) !!}
+    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' => 'form-solicitud')) !!}
     {{Form::token()}}
 
    	<div class="row">
@@ -39,53 +39,53 @@
 
 					     	<div class="row">
 					            <div class="col-lg-12">
+                                        <div class="ibox-title col-lg-12">
+                                                {{-- <label class="control-label">AM-CM-01</label> --}}
+                                                <h1>AM-CM-01</h1>
+                                                <button type="button" class="btn btn-w-m btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true" style="margin-right: 8px;"></span> Generar Código</button>
+                                                <br>
+                                                <br>                                                   
+                                            </div>
+        
+                                            <div class="form-group col-lg-4" id="data_1">
+                                                <label>Fecha *</label>
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="" name="fecha_creacion">
+                                                </div>
+                                            </div>
+        
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">Frecuencia del Servicio</label>
+                                                
+                                                <select class="form-control" id="frecu-1" name="frecuencia_servicio">
+                                                    <option>Nunca</option>
+                                                    <option>Ocasionalmente</option>
+                                                    <option>Frecuentemente</option>
+                                                    <option>Siempre</option>
+                                                </select>
+        
+                                            </div>
+        
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">Frecuencia del Servicio (Mes)</label>
+                                                
+                                                <select class="form-control" id="frecu_mes" name="frecuencia_mes">
+                                                    <option>Enero</option>
+                                                    <option>Febrero</option>
+                                                    <option>Marzo</option>
+                                                    <option>Abril</option>
+                                                    <option>Mayo</option>
+                                                    <option>Junio</option>
+                                                    <option>Julio</option>
+                                                    <option>Agosto</option>
+                                                    <option>Septiembre</option>
+                                                    <option>Octubre</option>
+                                                    <option>Noviembre</option>
+                                                    <option>Diciembre</option>
+                                                </select>
+        
+                                             </div>
 
-                                    <div class="ibox-title col-lg-12">
-                                        {{-- <label class="control-label">AM-CM-01</label> --}}
-                                        <h1>AM-CM-01</h1>
-                                        <button type="button" class="btn btn-w-m btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true" style="margin-right: 8px;"></span> Generar Código</button>
-                                        <br>
-                                        <br>                                                   
-                                    </div>
-
-								    <div class="form-group col-lg-4" id="data_1">
-                                        <label>Fecha *</label>
-                                        <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-                                        
-                                        <select class="form-control" id="frecu-1">
-                                            <option>Nunca</option>
-                                            <option>Ocasionalmente</option>
-                                            <option>Frecuentemente</option>
-                                            <option>Siempre</option>
-                                        </select>
-
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-                                        
-                                        <select class="form-control" id="frecu_mes">
-                                            <option>Enero</option>
-                                            <option>Febrero</option>
-                                            <option>Marzo</option>
-                                            <option>Abril</option>
-                                            <option>Mayo</option>
-                                            <option>Junio</option>
-                                            <option>Julio</option>
-                                            <option>Agosto</option>
-                                            <option>Septiembre</option>
-                                            <option>Octubre</option>
-                                            <option>Noviembre</option>
-                                            <option>Diciembre</option>
-                                        </select>
-
-                                    </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <h3>Facturar a nombre de:</h3>
@@ -95,10 +95,10 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control " id="select_clientes">
-
-                                            @foreach($clientes as $clien)
-                                                <option value="{{$clien->id}}">{{$clien->nombre_cliente}}</option>
+                                        <select class="form-control " id="select_clientes" name="id_cliente">
+                                            <option value="" selected disabled>Selecciona un cliente</option>
+                                            @foreach($clientes as $cliente)
+                                                <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
                                             @endforeach
 
                                         </select>
@@ -106,48 +106,49 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                        <input type="text" name="nit_cedula_c" id="nit_cedula_c" placeholder="Nit ó Cedula" class="form-control">
+                                        <input type="text"  id="input-nit"  placeholder="Nit ó Cedula" class="form-control">
                                                     
                                     </div>
 
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" name="direccion_c" id="direccion_c" placeholder="Dirección de cliente" class="form-control">
+                                        <input type="text"  id="input-direccion"  placeholder="Dirección de cliente" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" name="municipio_c" id="municipio_c" placeholder="Ciudad del cliente" class="form-control">
+                                        <input type="text"  id="input-ciudad"  placeholder="Ciudad del cliente" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" name="barrio_c"  id="barrio_c" placeholder="Barrio del cliente" class="form-control">
+                                        <input type="text" id="input-barrio"  placeholder="Barrio del cliente" class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                        <input type="text" name="zona_c"  id="zona_c" placeholder="Zona del cliente" class="form-control">
-
-                                    </div>
-
+                                    
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" name="nombre_contacto_c" id="nombre_contacto_c"  placeholder="Nombre de contacto del servicio" class="form-control">
+                                        <input type="text" id="input-contacto"  placeholder="Nombre de contacto del servicio" class="form-control">
                                         
+                                    </div>
+                                    
+                                    <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
+                                        <input type="text" id="input-cargo"  placeholder="Zona del cliente" class="form-control">
+
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" name="telefono_c"  id="telefono_c" placeholder="Teléfono del contacto a facturar" class="form-control">
+                                        <input type="text" id="input-telefono"  placeholder="Teléfono del contacto a facturar" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" name="celular_c"  id="celular_c" placeholder="Celular del contacto a facturar" class="form-control">
+                                        <input type="text" id="input-celular"  placeholder="Celular del contacto a facturar" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email"  name="email_c"  id="email_p" placeholder="Email del contacto a facturar" class="form-control">
+                                        <input type="email"  id="input-email"  placeholder="Email del contacto a facturar" class="form-control">
                                         
                                     </div>
                                     
@@ -161,51 +162,51 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control " id="select_sedes">
-
+                                        <select class="form-control " id="select_sedes" name="id_sede">
+                                            <option value="">Selecciona una sede</option>
                                         </select>
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                        <input type="text" name="nit_cedula_s" id="nit_cedula_s" placeholder="Nit ó Cedula" class="form-control">
+                                        <input type="text" id="input-sede-nit"  placeholder="Nit ó Cedula" class="form-control">
                                                     
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" name="direccion_s" id="direccion_s" placeholder="Dirección de donde se realizará el servicio" class="form-control">
+                                        <input type="text"  id="input-sede-direccion" placeholder="Dirección de donde se realizará el servicio" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" name="municipio_s" id="municipio_s" placeholder="Ciudad donde se realizará el servicio" class="form-control">
+                                        <input type="text" id="input-sede-ciudad"  placeholder="Ciudad donde se realizará el servicio" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" name="barrio_s" id="barrio_s" placeholder="Barrio donde se realizará el servicio" class="form-control">
+                                        <input type="text" id="input-sede-barrio"  placeholder="Barrio donde se realizará el servicio" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                        <input type="text" name="zona_s" id="zona_s" placeholder="Zona donde se realizará el servicio" class="form-control">
+                                        <input type="text" id="input-sede-zona"  placeholder="Zona donde se realizará el servicio" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" name="nombre_contacto_s" id="nombre_contacto_s" placeholder="Nombre de contacto del lugar" class="form-control">
+                                        <input type="text" id="input-sede-contacto"  placeholder="Nombre de contacto del lugar" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" name="telefono_s" id="telefono_s" placeholder="Teléfono del contacto del servicio" class="form-control">
+                                        <input type="text" id="input-sede-telefono"  placeholder="Teléfono del contacto del servicio" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" name="celular_s" id="celular_s" placeholder="Celular del contacto del lugar" class="form-control">
+                                        <input type="text" id="input-sede-celular"  placeholder="Celular del contacto del lugar" class="form-control">
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email"  name="email_s" id="email_s" placeholder="Email del contacto del servicio" class="form-control">
+                                        <input type="email" id="input-sede-email"   placeholder="Email del contacto del servicio" class="form-control">
                                         
                                     </div>
 
@@ -216,22 +217,22 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto Factura *</label>
-                                        <input type="text" name="cargo_contacto_tecnico" id="cargo_contacto_tecnico" placeholder="Nombre del contacto a facturar" class="form-control" style="display: block;">
+                                        <input type="text"  placeholder="Nombre del contacto a facturar" class="form-control" style="display: block;">
                                         
                                     </div>
         
-                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" name="telefono" id="telefono" placeholder="Teléfono del contacto a facturar" class="form-control">
+                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
+                                        <input type="text"  placeholder="Teléfono del contacto a facturar" class="form-control">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" name="celular" id="celular" placeholder="Celular del contacto a facturar" class="form-control">
+                                        <input type="text"  placeholder="Celular del contacto a facturar" class="form-control">
                                     </div>
 
 					                <div class="form-group col-lg-12">
 					                    <label>Instrucciones y Observaciones</label>
-					                    <textarea class="form-control" id="observaciones_tecnico" placeholder="Escriba aquí las observaciones para el técnico." rows="3"></textarea>
+					                    <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="3" name="instrucciones"></textarea>
 					                </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -242,14 +243,14 @@
                                     </div>
 
                                     <div class="form-group col-lg-6 col-xs-12 checkbox">
-                                        <label style="display: block;"><input type="checkbox" id="calidad_servicio_clie" value="">Diagnostico Inicial</label>
-                                        <label style="display: block;"><input type="checkbox" id="calidad_servicio_clie" value="">Cronograma de Servicios</label>
-                                        <label style="display: block;"><input type="checkbox" id="calidad_servicio_clie" value="">Visitas de Calidad</label>
+                                        <label style="display: block;"><input type="checkbox" name="diagnostico_inicial" value="1">Diagnostico Inicial</label>
+                                        <label style="display: block;"><input type="checkbox" name="cronograma_servicios" value="2">Cronograma de Servicios</label>
+                                        <label style="display: block;"><input type="checkbox" name="visita calidad" value="3">Visitas de Calidad</label>
                                     </div> 
 
                                      <div class="form-group col-lg-6">
                                       <label>Frecuencia</label>
-                                      <select class="form-control" id="frecu_2">
+                                      <select class="form-control" id="" name="frecuencia_calidad">
                                         <option>Nunca</option>
                                         <option>Ocasionalmente</option>
                                         <option>Frecuentemente</option>
@@ -266,42 +267,42 @@
 
                                     <div class="form-group col-lg-4"
                                     ><label class="control-label">Frecuencia de Visitas *</label>
-                                        <input type="text" name="" id="frecu_visitas" placeholder="Ej: Cada 10 días" class="form-control">
+                                        <input type="text" name="frecuencia_visitas" placeholder="Ej: Cada 10 días" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 1</label>
-                                        <input type="text" name="" id="vis_1" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="text" name="visita_1" placeholder="Ej: 1,77" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 2</label>
-                                        <input type="text" name="" id="vis_2" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="text" name="visita_2" placeholder="Ej: 1,77" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 3</label>
-                                        <input type="text" name="" id="vis_3" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="text" name="visita_3" placeholder="Ej: 1,77" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 4</label>
-                                        <input type="text" name="" id="vis_4" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="text" name="visita_4" placeholder="Ej: 1,77" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Total Horas</label>
-                                        <input type="text" name="" id="total_h" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="text" name="total_horas_visita" placeholder="Ej: 1,77" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor Hora</label>
-                                        <input type="text" name="" id="valor_h" placeholder="Ej: 60.000" class="form-control">
+                                        <input type="text" name="valor_hora" placeholder="Ej: 60.000" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor Facturar</label>
-                                        <input type="text" name="" id="valor_fact" placeholder="Ej: 127.600" class="form-control">
+                                        <input type="text" name="valor_facturar" placeholder="Ej: 127.600" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -313,12 +314,12 @@
 
                                     <div class="form-group col-lg-12">
                                         <label class="control-label">Servicios Contratados</label>
-                                        <input type="text" name="" id="servi_contra" placeholder="Servicios requeridos por el cliente" class="form-control">
+                                        <input type="text" name="servicios_contratados" placeholder="Servicios requeridos por el cliente" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Frecuencia del Servicio</label>
-                                        <select class="form-control" id="frecu_3">
+                                        <select class="form-control" id="" name="frecuencia_plagas">
                                             <option>Nunca</option>
                                             <option>Ocasionalmente</option>
                                             <option>Frecuentemente</option>
@@ -328,30 +329,29 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Tipo Cliente</label>
-                                        <select class="form-control" id="tipo_clie">
+                                        <select class="form-control" id="" name="tipo_cliente">
                                             <option>Servicio</option>
                                             <option>Visita</option>
-                                            <option>Ejemplo</option>
                                             <option>Ejemplo</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Tapa de Alcantarilla</label>
-                                        <select class="form-control" id="tapa_alca">
-                                            <option>Si</option>
-                                            <option>No</option>
+                                        <select class="form-control" id="" name="tapa_alcantarilla">
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Número de Tapas</label>
-                                        <input type="text" name="" id="num_tapa" placeholder="Cantidad" class="form-control">
+                                        <input type="text" name="numero_tapas" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Número de Residencias</label>
-                                        <input type="text" name="" id="num_resi" placeholder="Cantidad" class="form-control">
+                                        <input type="text" name="numero_residencias" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -363,42 +363,42 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Semanales</label>
-                                        <input type="text" name="" id="horas_semanales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_semanales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Mensuales</label>
-                                        <input type="text" name="" id="horas_mensuales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_mensuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Trimestrales</label>
-                                        <input type="text" name="" id="horas_trimestrales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_trimestrales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Semestrales</label>
-                                        <input type="text" name="" id="horas_semestrales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_semestrales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Quincenales</label>
-                                        <input type="text" name="" id="horas_quincenales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_quincenales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Bimensuales</label>
-                                        <input type="text" name="" id="horas_bimensuales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_bimensuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Cada 4 Meses</label>
-                                        <input type="text" name="" id="horas_cada_4" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_4meses" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Anuales</label>
-                                        <input type="text" name="" id="horas_anuales" placeholder="Número de horas" class="form-control">
+                                        <input type="text" name="horas_anuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -410,45 +410,45 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Total de Horas Cotizadas</label>
-                                        <input type="text" name="" id="total_h_cot" placeholder="Total de horas" class="form-control">
+                                        <input type="text" name="total_horas_cotizadas" placeholder="Total de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor Hora Antes IVA</label>
-                                        <input type="text" name="" id="valor_h_antes" placeholder="Valor" class="form-control">
+                                        <input type="text" name="valor_hora_antes" placeholder="Valor" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor Inicial Antes IVA</label>
-                                        <input type="text" name="" id="valor_ini_antes" placeholder="Valor" class="form-control">
+                                        <input type="text" name="valor_inicia_antes" placeholder="Valor" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Forma de Pago</label>
-                                        <input type="text" name="" id="forma_pago" placeholder="Ej: Contado, 3 Meses, etc." class="form-control">
+                                        <input type="text" name="forma_pago" placeholder="Ej: Contado, 3 Meses, etc." class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Facturación</label>
-                                        <input type="text" name="" id="facturacion" placeholder="Ej: SC" class="form-control">
+                                        <input type="text" name="facturacion" placeholder="Ej: SC" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">¿Tiene Contrato?</label>
-                                        <select class="form-control" id="contrato">
-                                            <option>Si</option>
-                                            <option>No</option>
+                                        <select class="form-control" name="contrato">
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Número de Contrato</label>
-                                        <input type="text" name="" id="num_contra" placeholder="#" class="form-control">
+                                        <input type="text" name="numero_contrato" placeholder="#" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Actividad Económica</label>
-                                        <input type="text" name="" id="actividad_econo" placeholder="Actividad Económica" class="form-control">
+                                        <input type="text" name="actividad_economica" placeholder="Actividad Económica" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -458,63 +458,115 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
-                                        <select class="form-control" id="se_entero_servicio">
-                                            <option>Un amigo</option>
-                                            <option>Internet</option>
-                                            <option>Contacto Asesor Directamente</option>
-                                            <option>Llamada Telefónica</option>
-                                            <option>Directorio Telefónico</option>
+                                        <select class="form-control" name="medio_contacto">
+                                            <option value="amigo">Un amigo</option>
+                                            <option value="internet">Internet</option>
+                                            <option value="contacto_asesor">Contacto Asesor Directamente</option>
+                                            <option value="llamada_telefonica">Llamada Telefónica</option>
+                                            <option value="directorio">Directorio Telefónico</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Otro ¿Cúal?</label>
-                                        <input type="text" name="" id="otro" placeholder="Otros medios" class="form-control">
+                                        <input type="text" name="otro" placeholder="Otros medios" class="form-control">
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Diligenciado por:</label>
-                                        <input type="text" name="" id="diligenciado" placeholder="" class="form-control"> 
+                                        <input type="text" name="" placeholder="" class="form-control">
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Revisado por:</label>
-                                        <input type="text" name="" placeholder="" class="form-control"> {{-- viejo victor, aca se firma manualmente. --}}
+                                        <input type="text" name="" placeholder="" class="form-control">
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
-                                            <button type="submit" class="btn btn-primary">Imprimir</button>
-                                            {{-- <button type="submit" class="btn btn-w-m btn-danger">Exportar a PDF</button> --}}
-                                            <a href="\home"><button type="button" class="btn btn-default" style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
+                                                <button type="submit" class="btn btn-primary">Imprimir</button>
+                                                {{-- <button type="submit" class="btn btn-w-m btn-danger">Exportar a PDF</button> --}}
+                                                <a href="\home"><button type="button" class="btn btn-default" style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				            	</div>
+				        	</div>
+				    	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
     {!! Form::close() !!}
 </div>                    
-@endsection
 @section('ini-scripts')
-<script type="text/javascript">
-/*    $("#select_clientes").change(event => {
-        $.get(`/solicitud/${event.target.value}`, function(res, sede){
-            $("#select_sedes").empty()
-            res.forEach(element => {
-                $("#select_sedes").append(`<option value=${res.id}> ${res.nombre} <option>`)
-            })
-        })
-    })*/
 
-    
-</script>
+    <script>
+        //Evento change del select de clientes
+        $("#select_clientes").change(event => {
+            //Peticion GET al servidor a la ruta /clientes/{id} (Cliente con id = $id)
+            $.get(`/clientes/${event.target.value}/edit`, function (res) {
+                //Asignacion de valores a Inputs Clientes
+                $("#input-nit").val(res[0]['nit_cedula']);
+                $("#input-direccion").val(res[0]['direccion']);
+                $("#input-ciudad").val(res[0]['municipio']);
+                $("#input-barrio").val(res[0]['barrio']);
+                $("#input-contacto").val(res[0]['nombre_contacto']);
+                $("#input-cargo").val(res[0]['cargo_contacto']);
+                $("#input-telefono").val(res[0]['telefono']);
+                $("#input-celular").val(res[0]['celular']);
+                $("#input-email").val(res[0]['email']);
+                $("#input-sede-nit").val(res[0]['nit_cedula']);
+            }).then((res) => {//Peticion exitosa => status: 200
+                console.log('Petición Exitosa');
+            }).catch((err) => {//Peticion fallida => status: > 400
+                console.log(err);
+            });
+            //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
+            $.get(`/sedes/cliente/${event.target.value}`,  function (res) {
+                $("#select_sedes").empty();//Limipia el select
+                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                if(res == ''){//Valida que el cliente tenga sedes
+                    console.log('entra');
+                }else{
+                    //Recorre la respuesta del servidor
+                    res.forEach(element => {
+                        //Añade Options al select de sedes dependiendo de la respues del servidor
+                        $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                    });              
+                }
+            }).then((res) => {
+                console.log('Petición Exitosa');
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+
+        //Evento change del select de Sedes
+        $("#select_sedes").change(event => {
+            $.get(`/sedes/${event.target.value}`, function (res) {
+                //Asignacion de valores de los inputs de Sede
+                $("#input-sede-direccion").val(res['direccion']);
+                $("#input-sede-ciudad").val(res['ciudad']);
+                $("#input-sede-barrio").val(res['barrio']);
+                $("#input-sede-zona").val(res['zona_ruta']);
+                $("#input-sede-contacto").val(res['nombre_contacto']);
+                $("#input-sede-telefono").val(res['telefono_contacto']);
+                $("#input-sede-celular").val(res['celular_contacto']);
+                $("#input-sede-email").val(res['email']);
+            }).then((res) => {
+                console.log('Petición Exitosa');
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+
+
+    </script>
+
+@endsection
 @endsection

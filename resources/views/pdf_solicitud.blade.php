@@ -2312,7 +2312,7 @@ AQAAer8AAAAA
 	</table>
 
 	<td colspan=28 rowspan=2 class=xl1163776 width=532 style='border-right:.5pt solid #A5A5A5; border-bottom:.5pt solid #A5A5A5;width:392pt'>
-		 {{-- {{$data}} --}}
+		SOLICITUD DE PROGRAMACION CLIENTE
 	</td>
 
 	<tr height=15 style='mso-height-source:userset;height:11.25pt'></tr>
@@ -2328,9 +2328,9 @@ AQAAer8AAAAA
 	 </tr>
 
 	<tr height=24 style='mso-height-source:userset;height:18.0pt'>
-		<td colspan=8 height=24 class=xl1143776 width=152 style='border-right:.5pt solid #A5A5A5;height:18.0pt;border-left:none;width:112pt'>2016/01/06</td>
+		<td colspan=8 height=24 class=xl1143776 width=152 style='border-right:.5pt solid #A5A5A5;height:18.0pt;border-left:none;width:112pt'>2018/06/01</td>
 
-		<td colspan=7 class=xl1153776 width=133 style='border-right:.5pt solid #A5A5A5;border-left:none;width:98pt'>FR-CM-02</td>
+		<td colspan=7 class=xl1153776 width=133 style='border-right:.5pt solid #A5A5A5;border-left:none;width:98pt'>AM-CM-01</td>
 
 		<td colspan=6 class=xl1153776 width=114 style='border-right:.5pt solid #A5A5A5;border-left:none;width:84pt'>03</td>
 
@@ -2364,9 +2364,9 @@ AQAAer8AAAAA
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=2 height=17 class=xl903776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>1</td>
 
-	  	<td colspan=4 class=xl903776 style='border-right:.5pt solid #A5A5A5;border-left:none'>JULIO</td>
+	  	<td colspan=4 class=xl903776 style='border-right:.5pt solid #A5A5A5;border-left:none'>JUNIO</td>
 
-	  	<td colspan=3 class=xl903776 style='border-right:.5pt solid #A5A5A5;border-left:none'>2016</td>
+	  	<td colspan=3 class=xl903776 style='border-right:.5pt solid #A5A5A5;border-left:none'>2018</td>
 
 	  	<td class=xl643776></td>
 	 </tr>
@@ -2389,9 +2389,9 @@ AQAAer8AAAAA
 
 	<tr height=15 style='mso-height-source:userset;height:11.25pt'>
 
-		<td colspan=18 rowspan=2 height=30 class=xl1053776 width=342 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5;height:22.5pt;width:252pt'>CLUB RECREATIVO EL CASTILLO</td>
+		<td colspan=18 rowspan=2 height=30 class=xl1053776 width=342 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5;height:22.5pt;width:252pt'>{{$data[0]->nombre_cliente}}</td>
 
-		<td colspan=18 rowspan=2 class=xl1053776 width=342 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5;width:252pt'>CASINO SCALIBUR</td>
+		<td colspan=18 rowspan=2 class=xl1053776 width=342 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5;width:252pt'>{{$data[1]->nombre}}</td>
 
 	</tr>
 
@@ -2401,62 +2401,62 @@ AQAAer8AAAAA
 
 		<td colspan=6 height=17 class=xl953776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Nit/Cedula:</td>
 
-	  	<td colspan=12 class=xl933776 style='border-right:.5pt solid #A5A5A5;border-left:none'>815003244-0</td>
+	  	<td colspan=12 class=xl933776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->nit_cedula}}</td>
 
 	  	<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Nit/Cedula:</td>
 
-	  	<td colspan=12 class=xl933776 style='border-right:.5pt solid #A5A5A5;border-left:none'>815003244-0</td>
+	  	<td colspan=12 class=xl933776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->nit_cedula}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Dirección:</td>
 
-	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>CLL 23 # 29 -41</td>
+	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->direccion}}</td>
 
 	  	<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Dirección:</td>
 
-	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>CLL 23 # 29 -41</td>
+	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->direccion}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Ciudad:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>CALI</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->municipio}}</td>
 
 		<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Ciudad:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>CALI</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->municipio}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Barrio:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Santa Helena</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->barrio}}</td>
 
 		<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Barrio:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Santa Helena</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->barrio}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Zona Ruta:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>SUR ORIENTE</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->zona}}</td>
 
 		<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Zona Ruta:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>SUR ORIENTE</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->zona_ruta}}</td>
 	 </tr>
 
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Contacto Servicio:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>KATERINE GUAPACHA</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->nombre_contacto}}</td>
 
 		<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Contacto Servicio:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>KATERINE GUAPACHA</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->nombre_contacto}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
@@ -2472,27 +2472,27 @@ AQAAer8AAAAA
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Celular:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>3146474800</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->celular}}</td>
 
 		<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Celular:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>3146474800</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->celular_contacto}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 	  	<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Email:</td>
 
-	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>casinoscalibur@outlook</td>
+	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[0]->email}}</td>
 
 	  	<td colspan=6 class=xl923776 style='border-right:.5pt solid #A5A5A5;border-left:none'>Email:</td>
 
-	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>casinoscalibur@outlook</td>
+	  	<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->email}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Contacto Factura:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>KATERINE GUAPACHA</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->nombre_contacto}}</td>
 
 		<td colspan=18 class=xl1003776>Instrucciónes y Observaciones Para el Tecnico:</td>
 	</tr>
@@ -2508,13 +2508,13 @@ AQAAer8AAAAA
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Celular:</td>
 
-		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>3146474800</td>
+		<td colspan=12 class=xl943776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->celular}}</td>
 	</tr>
 
 	<tr height=17 style='height:12.75pt'>
 		<td colspan=6 height=17 class=xl923776 style='border-right:.5pt solid #A5A5A5;height:12.75pt'>Email:</td>
 
-		<td colspan=12 class=xl1103776 style='border-right:.5pt solid #A5A5A5;border-left:none'>casinoscalibur@outlook</td>
+		<td colspan=12 class=xl1103776 style='border-right:.5pt solid #A5A5A5;border-left:none'>{{$data[1]->email}}</td>
 	</tr>
 
 	<tr height=6 style='mso-height-source:userset;height:4.5pt'>
@@ -2863,7 +2863,7 @@ AQAAer8AAAAA
 	</tr>
 
 	<tr height=11 style='mso-height-source:userset;height:8.25pt'>
-		<td colspan=18 rowspan=2 height=23 class=xl893776 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5;height:17.25pt'>CRISTIAN LEON</td>
+		<td colspan=18 rowspan=2 height=23 class=xl893776 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5;height:17.25pt'>{{$data[2]['user']}}</td>
 
 		<td colspan=18 rowspan=2 class=xl893776 style='border-right:.5pt solid #A5A5A5;border-bottom:.5pt solid #A5A5A5'>&nbsp;</td>
 	 </tr>

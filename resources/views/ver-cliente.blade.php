@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@section('custom-css')
+<link href="{{asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+@endsection
 <script>
     document.getElementById('m-clientes').setAttribute("class", "active");
     document.getElementById('a-clientes').removeAttribute("style");
@@ -30,6 +33,8 @@
                         <div class="col-lg-12">
                             <div class="m-b-md">
                                 <a href="#" class="btn btn-warning btn-xs pull-right">Editar cliente</a>
+                                <a href="#" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px">Añadir Sede</a>
+                                <a href="#" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px">Añadir Cotización</a>
                                 <h2>{{$cliente[0]->nombre_cliente}}</h2>
                             </div>
                             @if($cliente[0]->tipo_cliente == 'Persona Juridica')
@@ -106,280 +111,92 @@
 
                         <div class="tab-content">
                         <div class="tab-pane active" id="tab-1">
-                            <div class="feed-activity-list">
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a2.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">2h ago</small>
-                                        <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
-                                        <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
-                                        <div class="well">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                            Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a3.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">2h ago</small>
-                                        <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">2 days ago at 8:30am</small>
-                                    </div>
-                                </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a4.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">5h ago</small>
-                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                        <div class="actions">
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a5.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">2h ago</small>
-                                        <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
-                                        <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
-                                        <div class="well">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                            Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/profile.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">23h ago</small>
-                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                    </div>
-                                </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a7.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">46h ago</small>
-                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                    </div>
-                                </div>
+
+                            <div class="table-responsive">
+                                <table class="table shoping-cart-table">
+
+                                    <tbody>
+                                        @foreach($cliente[0]->sedes as $sede)
+                                    <tr>
+                                        <td class="desc">
+                                            <h3>
+                                                {{$sede->nombre}}
+                                            </h3>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <dl class=" dl-horizontal">
+                                                        <dt style="text-align: left;width: 100px;">Ciudad: </dt>
+                                                        <dd style="margin-left: 50px">{{$sede->ciudad}}</dd>
+        
+                                                        <dt style="text-align: left;width: 100px;">Dirección: </dt>
+                                                        <dd style="margin-left: 50px">{{$sede->direccion}}</dd>
+        
+                                                        <dt style="text-align: left;width: 100px;">Barrio: </dt>
+                                                        <dd style="margin-left: 50px">{{$sede->barrio}}</dd>
+
+                                                        <dt style="text-align: left;width: 100px;">Zona/Ruta: </dt>
+                                                        <dd style="margin-left: 50px">{{$sede->zona_ruta}}</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <dl class=" dl-horizontal">
+                                                        <dt style="text-align: left;width: 100px;">Contacto: </dt>
+                                                        <dd style="margin-left: 100px">{{$sede->nombre_contacto}}</dd>
+        
+                                                        <dt style="text-align: left;width: 100px;">Celular: </dt>
+                                                        <dd style="margin-left: 100px">{{$sede->celular_contacto}}</dd>
+        
+                                                        <dt style="text-align: left;width: 100px;">Email: </dt>
+                                                        <dd style="margin-left: 100px">{{$sede->email}}</dd>
+
+                                                        <dt style="text-align: left;width: 100px;">Teléfono: </dt>
+                                                        <dd style="margin-left: 100px">{{$sede->telefono_contacto}}</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+
+                                            <div class="m-t-sm">
+                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Editar información</a>
+                                                |
+                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Eliminar sede</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
 
                         </div>
                         <div class="tab-pane" id="tab-2">
-
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Status</th>
-                                    <th>Title</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Comments</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
-                                    </td>
-                                    <td>
-                                       Create project in webapp
-                                    </td>
-                                    <td>
-                                       12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                    <p class="small">
-                                        Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
-                                    </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Accepted</span>
-                                    </td>
-                                    <td>
-                                        Various versions
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Sent</span>
-                                    </td>
-                                    <td>
-                                        There are many variations
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Reported</span>
-                                    </td>
-                                    <td>
-                                        Latin words
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            Latin words, combined with a handful of model sentence structures
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Accepted</span>
-                                    </td>
-                                    <td>
-                                        The generated Lorem
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Sent</span>
-                                    </td>
-                                    <td>
-                                        The first line
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Reported</span>
-                                    </td>
-                                    <td>
-                                        The standard chunk
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
-                                    </td>
-                                    <td>
-                                        Lorem Ipsum is that
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
-                                        </p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="label label-primary"><i class="fa fa-check"></i> Sent</span>
-                                    </td>
-                                    <td>
-                                        Contrary to popular
-                                    </td>
-                                    <td>
-                                        12.07.2014 10:10:1
-                                    </td>
-                                    <td>
-                                        14.07.2014 10:16:36
-                                    </td>
-                                    <td>
-                                        <p class="small">
-                                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                        </p>
-                                    </td>
-
-                                </tr>
-
-                                </tbody>
-                            </table>
-
+                            <div class="row">
+                                @foreach($cliente[0]->solicitudes as $solicitud)
+                                <div class="col-lg-6" style="padding: 0 30px">
+                                    <h5>Solicitud</h5>
+                                    <h1 class="no-margins">{{$solicitud->codigo}}</h1>
+                                    <a class="stat-percent font-bold text-navy" >Editar <i class="fa fa-edit"></i></a>
+                                    <strong>Creación: </strong><small>{{$solicitud->created_at}}</small>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
+                        <div class="tab-pane" id="tab-3">
+                                <div class="row">
+                                    
+                                    <div class="col-lg-6" style="padding: 0 30px">
+                                        <h5>Cotización</h5>
+                                        <h1 class="no-margins">CT-MO-AS-12</h1>
+                                        <a class="stat-percent font-bold text-navy" >Editar <i class="fa fa-edit"></i></a>
+                                        <strong>Creación: </strong><small>2018-04-05 18:04:12</small>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                         </div>
 
                         </div>
@@ -390,32 +207,34 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-                <div class="ibox">
-                    <div class="ibox-title">
-                        <h5>Domentacion del Cliente</h5>
-                    </div>
+        <div class="col-lg-3" id="documentos">
+            @if($cliente[0]->tipo_cliente == 'Persona Juridica')
+            <documentos></documentos>
+            @else
+            <div class="ibox">
                     <div class="ibox-content">
-                            <ul class="list-group clear-list">
-                                    <li class="list-group-item fist-item">
-                                        <span class="pull-right"> <a class="btn btn-primary btn-xs" >Detalles</a> </span>
-                                        CC. Unico Outlet
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="pull-right"> <a class="btn btn-primary btn-xs" >Detalles</a></span>
-                                        Barrio La Rivera II
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="pull-right"> <a class="btn btn-primary btn-xs" >Detalles</a> </span>
-                                        Barrio Andrés Sanin
-                                    </li>
-                                </ul>
+                        <h2>Documentos</h2>
+                        <small >Listado de documentos del cliente</small>
+                        <ul class="todo-list m-t small-list">
+                            <li >
+                                <div class="checkbox checkbox-success" style="padding-right: 3px;margin: 2px;">
+                                    <input type="checkbox" id="checkbox" >
+                                    <label  >RUT</label>
+                                    <!-- <span class="badge badge-success pull-right" >E</span> -->
+                                </div>                
+                            </li>
+                            <li >
+                                <div class="checkbox checkbox-success" style="padding-right: 3px;margin: 2px;">
+                                    <input type="checkbox" id="checkbox" >
+                                    <label  >Cédula</label>
+                                    <!-- <span class="badge badge-success pull-right" >E</span> -->
+                                </div>                
+                            </li>
+
+                        </ul>
                     </div>
-                    <div class="ibox-footer">
-                        <button class="btn btn-primary">Añadir Dcoumento</button>
-                    </div>
-                </div> 
-    
+                </div>
+            @endif
             {{-- <div class="wrapper wrapper-content project-manager">
                 <h4>Project description</h4>
                 <img src="img/zender_logo.png" class="img-responsive">
