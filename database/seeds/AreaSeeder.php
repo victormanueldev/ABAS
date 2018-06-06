@@ -20,6 +20,10 @@ class AreaSeeder extends Seeder
             '1' => [
                 'nombre' => 'contabilidad',
                 'descripcion' => 'Área Contabilidad'
+            ],
+            '2' => [
+                'nombre' => 'programacion',
+                'descripcion' => 'Área Programación'
             ]
         ];
         DB::table('areas')->insert($areas);

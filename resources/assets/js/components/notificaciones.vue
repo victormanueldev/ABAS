@@ -43,7 +43,8 @@
         },
         data(){
             return{
-                notificaciones: []
+                notificaciones: [],
+                notificacion: []
             }
         },
         methods: {

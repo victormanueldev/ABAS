@@ -14,13 +14,13 @@
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>Calendario</h2>
+        <h2>Cronograma</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Inicio</a>
             </li>
             <li>
-                Calendario
+                Cronograma
             </li>
             <li class="active">
                 <strong>Eventos</strong>
@@ -99,12 +99,40 @@
                         </a>
                     </div>
                 </div>
+                <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#myModal" id="btn-modal">
+                    Launch demo modal
+                </button>
                  {{-- Formulario de guardar Eventos --}}
-                {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
-                {!! Form::close() !!}
-                <div class="ibox-content">
-                    <div id="calendar"></div>
+                 
+                 <div class="ibox-content">
+                     <div id="calendar"></div>
+                    </div>
+                
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" style="margin: 120px auto">
+                        <div class="modal-content animated bounceInRight">
+                            {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
+                            <div class="modal-header">
+                                <button type="button" class="close" id="btn-close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Modal title</h4>
+                                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                                    remaining essentially unchanged.</p>
+                                        <div class="form-group"><label>Sample Input</label> <input type="email" placeholder="Enter your email" class="form-control" id="email"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" id="btn-submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -136,7 +164,6 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-
         $('#calendar').fullCalendar({
             
             header: {
@@ -160,90 +187,18 @@
 
             //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
             dayClick: function(start, end, allDay) {
-                //Alert con los botones de las clases de eventos
-                swal({
-                    title: "Crear evento",
-                    buttons: {
-                        cancel: {
-                            text: "Cancelar",
-                            value: null,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
-                        },
-                        call: {
-                            text: "Llamada",
-                            value: "Llamada",
-                        },
-                        visit: {
-                            text: "Visita",
-                            value: "Visita",
-                        },
-                        follow: {
-                            text: "Control",
-                            value: "Seguimiento",
-                        },
-                    },
-                })
-                //Evento de click en un boton
-                .then((value) => {
-                    //Valida que el boton presionado sea diferente al de cancelar
-                    if (value != null) {
-                        //Alert para indicar el asunto del evento
-                        swal({
-                            title: 'Crear Evento',
-                            content: {
-                                element: "input",
-                                attributes: {
-                                placeholder: "Ingresa el asunto del evento",
-                                type: "text"
-                                },
-
-                            },
-                        buttons: true
-                        })
-                        //Cuando se presiona un boton cualquiera
-                        .then((res) => {
-                            //Valida que sea presionado el boton OK
-                            if(res != null){
-                                //Alert para indicar el asunto del evento
-                                swal({
-                                    title: 'Crear Evento',
-                                    content: {
-                                        element: "input",
-                                        attributes: {
-                                        type: "time"
-                                        },
-
-                                    },
-                                buttons: true
-                                })
-                                .then((resul) => {
-                                    if(resul != null){
-                                        //Obtiene el token del formulario a enviar
-                                        crsfToken = document.getElementsByName("_token")[0].value;
-                                        //Peticion HTTP para guardar el evento
-                                        $.ajax({
-                                            url: '/evento/guardar',//Redirecciona a la direccion URL
-                                            data: 'title='+ res+'&start='+ start.format("YYYY-MM-DD")+'&allday='+allDay.uid+'&tipo='+value+'&hora='+resul,//Datos que enviará
-                                            type: "POST",//Método de envío
-                                            headers: {
-                                                "X-CSRF-TOKEN": crsfToken //Token de segurodad
-                                            },
-                                            success: function(events) {//En caso de ser exitoso el envio de datos
-                                                console.log('Evento creado'); //Escribe en la consola 
-                                                $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
-                                            },
-                                            error: function(json){//En caso de ser erroneo el envio de datos 
-                                                console.log("Error al crear evento");//Escribe en consola
-                                            }        
-                                        });
-                                    }
-                                })
-                            }
-                        })
+                //Simula click en el boton de mostrar el modal
+                document.getElementById("btn-modal").click();
+                //Evento click del boton submit del Formulario de la ventana modal
+                $('#btn-submit').click(event => {
+                    //Obtener el valor de un elemento del formulario
+                    var email = document.getElementById('email').value;
+                    if(email == '' || email == null){//Validacion de campos vacíos
+                        swal('Error', 'warning');
                     }
-                });
+                    //Prueba de fechas y horas
+                    console.log(start.format("YYYY-MM-DD HH:mm"));
+                })
             },
             
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -301,7 +256,7 @@
             },
             
             //Evento de mostrar el Tooltip teniendo el mouse dentro de la evento
-            eventMouseover: function( event, jsEvent, view ) { 
+            eventMouseover: function( event, jsEvent, view ) {   
                 var start = (event.start.format("HH:mm"));
                 var back=event.backgroundColor;
                 if(event.end){

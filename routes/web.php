@@ -62,3 +62,7 @@ Route::resource('notificaciones', 'NotificacionesController');
 //Solicitudes
 Route::resource('solicitud', 'SolicitudesController');
 //Route::get('solicitud-create', 'SolicitudesController@create');
+
+Route::get('cronograma/prog', function () {
+    return view('cronograma-servicios');
+})->name('cronograma');
