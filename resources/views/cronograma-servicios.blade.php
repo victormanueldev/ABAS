@@ -122,11 +122,11 @@
                                 <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
                                     printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
                                     remaining essentially unchanged.</p>
-                                        <div class="form-group"><label>Sample Input</label> <input type="email" placeholder="Enter your email" class="form-control" id="email"></div>
+                                        <div class="form-group"><label>Sample Input</label> <input required type="email" placeholder="Enter your email" class="form-control" id="email"></div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="button" id="btn-submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" id="btn-submit" class="btn btn-primary">Save changes</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -164,6 +164,7 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+        var start1;
         $('#calendar').fullCalendar({
             
             header: {
@@ -190,15 +191,8 @@
                 //Simula click en el boton de mostrar el modal
                 document.getElementById("btn-modal").click();
                 //Evento click del boton submit del Formulario de la ventana modal
-                $('#btn-submit').click(event => {
-                    //Obtener el valor de un elemento del formulario
-                    var email = document.getElementById('email').value;
-                    if(email == '' || email == null){//Validacion de campos vacíos
-                        swal('Error', 'warning');
-                    }
-                    //Prueba de fechas y horas
-                    console.log(start.format("YYYY-MM-DD HH:mm"));
-                })
+                start1 = start;
+
             },
             
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -321,6 +315,13 @@
                 }
             }
         });
+        $('#form-calendario').submit(event => {
+                    //Obtener el valor de un elemento del formulario
+                    event.preventDefault();
+                    var email = document.getElementById('email').value;
+                    //Prueba de fechas y horas
+                    console.log(email, start1.format('YYYY-MM-DD HH:mm'));
+                })
     });
 
 </script>

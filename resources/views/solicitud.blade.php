@@ -1,6 +1,10 @@
 @extends('layouts.app')
-@section('content')
 
+@section('custom-css')
+    <link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
+@endsection
+
+@section('content')
 <script>
     document.getElementById('m-solicitud').setAttribute("class", "active");
     document.getElementById('a-solicitudes').removeAttribute("style");
@@ -94,14 +98,16 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
-                                        
-                                        <select class="form-control " id="select_clientes" name="id_cliente">
+
+                                        <!-- Select con Autocompletar-->
+                                        <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="select_clientes" name="id_cliente">
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
                                                 <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
                                             @endforeach
-
                                         </select>
+
+
 
                                     </div>
 
@@ -162,7 +168,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control " id="select_sedes" name="id_sede">
+                                        <select class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -504,8 +510,13 @@
     {!! Form::close() !!}
 </div>                    
 @section('ini-scripts')
+    <!--Script de Select Autocompletar -->
+    <script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
 
     <script>
+        //Inicializador del Select AUTOCOMPLETAR
+        $('.chosen-select').chosen({width: "100%"});
+
         //Evento change del select de clientes
         $("#select_clientes").change(event => {
             //Peticion GET al servidor a la ruta /clientes/{id} (Cliente con id = $id)
@@ -564,9 +575,7 @@
                 console.log(err);
             });
         });
-
-
     </script>
-
 @endsection
+
 @endsection
