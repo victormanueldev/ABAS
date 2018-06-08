@@ -127,6 +127,9 @@
                                     printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
                                     remaining essentially unchanged.</p>
                                         <div class="form-group"><label>Sample Input</label> <input required type="email" placeholder="Enter your email" class="form-control" id="email"></div>
+<<<<<<< HEAD
+>>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
+=======
 >>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
                             </div>
                             {{-- <div class="modal-body"></div> --}}
@@ -302,6 +305,9 @@
 =======
                                 <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Close</button>
                                 <button type="submit" id="btn-submit" class="btn btn-primary">Save changes</button>
+<<<<<<< HEAD
+>>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
+=======
 >>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
                             </div>
                             {!! Form::close() !!}

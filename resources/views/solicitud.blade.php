@@ -509,6 +509,7 @@
 
     <script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         //Validación de campo fecha
         function validacion(){
@@ -526,6 +527,10 @@
             
         }
 
+=======
+        //Inicializador del Select AUTOCOMPLETAR
+        $('.chosen-select').chosen({width: "100%"});
+>>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
 =======
         //Inicializador del Select AUTOCOMPLETAR
         $('.chosen-select').chosen({width: "100%"});
