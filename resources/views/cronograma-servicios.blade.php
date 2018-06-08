@@ -102,6 +102,7 @@
                 <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#myModal" id="btn-modal">
                     Launch demo modal
                 </button>
+
                  {{-- Formulario de guardar Eventos --}}
                  
                  <div class="ibox-content">
@@ -112,35 +113,61 @@
                     <div class="modal-dialog" style="margin: 120px auto">
                         <div class="modal-content animated bounceInRight">
                             {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
+
                             <div class="modal-header">
                                 <button type="button" class="close" id="btn-close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <i class="fa fa-laptop modal-icon"></i>
-<<<<<<< HEAD
+                                <i class="fa fa-puzzle-piece modal-icon"></i>
                                 <h4 class="modal-title">Agregar servicio</h4>
                                 <small class="font-bold">Se añadira en el calendario un servicio para realizar</small>
-=======
-                                <h4 class="modal-title">Modal title</h4>
-                                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                             </div>
-                            <div class="modal-body">
-                                <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                    remaining essentially unchanged.</p>
-                                        <div class="form-group"><label>Sample Input</label> <input required type="email" placeholder="Enter your email" class="form-control" id="email"></div>
-<<<<<<< HEAD
->>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
-=======
->>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
-                            </div>
-                            {{-- <div class="modal-body"></div> --}}
-
-                            
-                                <div class="form-group col-lg-4" id="data_1">
-                                    <label>Fecha *</label>
+                            {{-- <div class="modal-body" style="padding: 16px;"> --}}
+                            <div class="row" style="padding: 20px;">
+                                
+                                <div class="form-group col-lg-12" id="data_1">
+                                <label>Fecha *</label>
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="" name="fecha_creacion">
                                     </div>
                                 </div>
+
+                            {{-- </div> --}}
+                            {{-- </div> --}}
+
+                            
+                            {{-- <div class="form"> --}}
+
+                                <div class="form-group col-lg-6">
+                                    <label class="control-label">Cliente *</label>
+                                    
+                                    <select class="form-control " id="select_clientes" name="id_cliente">
+                                        <option value="" selected disabled>Selecciona un cliente</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <label class="control-label">Solicitud *</label>
+                                    
+                                    <select class="form-control " id="select_clientes" name="id_cliente">
+                                        <option value="" selected disabled>Selecciona una solicitud</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group col-lg-4">
+                                        <label>Frecuencia</label>
+                                        <select class="form-control" id="" name="frecuencia_calidad">
+                                            <option>Ocasionalmente</option>
+                                            <option>Semanales</option>
+                                            <option>Quincenales</option>
+                                            <option>Mensuales</option>
+                                            <option>Bimestrales</option>
+                                            <option>Trimestrales</option>
+                                            <option>Cada 4 Meses</option>
+                                            <option>Semestrales</option>
+                                            <option>Anuales</option>
+                                        </select>
+                                    </div>
 
                                 <div class="form-group col-lg-4" id="data_1">
                                     <label>Hora *</label>
@@ -155,133 +182,14 @@
                                        <input type="text"  id="input-nit"  placeholder="Horas" class="form-control">
                                     </div>
                                 </div>
-                                    
-                                <div class="ibox-title col-lg-12">
-                                    <h3>Facturar a nombre de:</h3>
-                                    <br>
-                                </div>
-
+                                
                                 <div class="form-group col-lg-6">
-                                    <label class="control-label">Razón Social/Nombre *</label>
+                                    <label class="control-label">Servicios *</label>
                                     
                                     <select class="form-control " id="select_clientes" name="id_cliente">
-                                        <option value="" selected disabled>Selecciona un cliente</option>
-                                        {{-- @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
-                                        @endforeach --}}
-
+                                        <option value="" selected disabled>Selecciona un Servicio</option>
                                     </select>
 
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                    <input type="text"  id="input-nit"  placeholder="Nit ó Cedula" class="form-control">
-                                                
-                                </div>
-
-
-                                <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                    <input type="text"  id="input-direccion"  placeholder="Dirección de cliente" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                    <input type="text"  id="input-ciudad"  placeholder="Ciudad del cliente" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                    <input type="text" id="input-barrio"  placeholder="Barrio del cliente" class="form-control">
-
-                                </div>
-
-                                
-                                <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                    <input type="text" id="input-contacto"  placeholder="Nombre de contacto del servicio" class="form-control">
-                                    
-                                </div>
-                                
-                                <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                    <input type="text" id="input-cargo"  placeholder="Zona del cliente" class="form-control">
-
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                    <input type="text" id="input-telefono"  placeholder="Teléfono del contacto a facturar" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                    <input type="text" id="input-celular"  placeholder="Celular del contacto a facturar" class="form-control">
-
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                    <input type="email"  id="input-email"  placeholder="Email del contacto a facturar" class="form-control">
-                                    
-                                </div>
-
-
-                                <div class="ibox-title col-lg-12">
-                                    <br>
-                                    <h3>Realizar servicio en:</h3>
-                                    <br>
-                                </div>
-                                            
-
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label">Razón Social/Nombre *</label>
-                                    
-                                    <select class="form-control " id="select_sedes" name="id_sede">
-                                        <option value="">Selecciona una sede</option>
-                                    </select>
-
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                    <input type="text" id="input-sede-nit"  placeholder="Nit ó Cedula" class="form-control">
-                                                
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                    <input type="text"  id="input-sede-direccion" placeholder="Dirección de donde se realizará el servicio" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                    <input type="text" id="input-sede-ciudad"  placeholder="Ciudad donde se realizará el servicio" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                    <input type="text" id="input-sede-barrio"  placeholder="Barrio donde se realizará el servicio" class="form-control">
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                    <input type="text" id="input-sede-zona"  placeholder="Zona donde se realizará el servicio" class="form-control">
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                    <input type="text" id="input-sede-contacto"  placeholder="Nombre de contacto del lugar" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                    <input type="text" id="input-sede-telefono"  placeholder="Teléfono del contacto del servicio" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                    <input type="text" id="input-sede-celular"  placeholder="Celular del contacto del lugar" class="form-control">
-                                </div>
-    
-                                <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                    <input type="email" id="input-sede-email"   placeholder="Email del contacto del servicio" class="form-control">
-                                    
-                                </div>
-
-                                <div class="form-group col-lg-6"><label class="control-label">Servicio a realizar *</label>
-                                    <input type="" id=""   placeholder="" class="form-control">
                                 </div>
 
                                 <div class="form-group col-lg-6">
@@ -289,26 +197,15 @@
                                     
                                     <select class="form-control " id="select_clientes" name="id_cliente">
                                         <option value="" selected disabled>Selecciona un Técnico</option>
-                                        <option value="" selected disabled>Andres</option>
-                                        <option value="" selected disabled>Luis</option>
-                                        <option value="" selected disabled>Valentina</option>
                                     </select>
 
                                 </div>
 
-
+                            </div>
 
                             <div class="modal-footer">
-<<<<<<< HEAD
                                 <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
                                 <button type="button" id="btn-submit" class="btn btn-primary">Guardar</button>
-=======
-                                <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="submit" id="btn-submit" class="btn btn-primary">Save changes</button>
-<<<<<<< HEAD
->>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
-=======
->>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
                             </div>
                             {!! Form::close() !!}
                         </div>
