@@ -1,6 +1,10 @@
 @extends('layouts.app')
-@section('content')
 
+@section('custom-css')
+    <link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
+@endsection
+
+@section('content')
 <script>
     document.getElementById('m-solicitud').setAttribute("class", "active");
     document.getElementById('a-solicitudes').removeAttribute("style");
@@ -27,7 +31,7 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' => 'form-solicitud')) !!}
+    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' => 'form-solicitud', 'onsubmit' => 'return validacion()')) !!}
     {{Form::token()}}
 
    	<div class="row">
@@ -39,52 +43,37 @@
 
 					     	<div class="row">
 					            <div class="col-lg-12">
-                                        <div class="ibox-title col-lg-12">
-                                                {{-- <label class="control-label">AM-CM-01</label> --}}
-                                                <h1>AM-CM-01</h1>
-                                                <button type="button" class="btn btn-w-m btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true" style="margin-right: 8px;"></span> Generar Código</button>
-                                                <br>
-                                                <br>                                                   
+                                    <div class="ibox-title col-lg-12">
+                                            {{-- <label class="control-label">AM-CM-01</label> --}}
+                                        <h1>AM-CM-01</h1>
+                                        <button type="button" class="btn btn-w-m btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true" style="margin-right: 8px;"></span> Generar Código</button>
+                                        <br>
+                                        <br>                                                   
+                                    </div>
+    
+                                        <div class="form-group col-lg-6" id="data_1">
+                                            <label>Fecha *</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="" name="fecha_creacion">
                                             </div>
-        
-                                            <div class="form-group col-lg-4" id="data_1">
-                                                <label>Fecha *</label>
-                                                <div class="input-group date">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="" name="fecha_creacion">
-                                                </div>
-                                            </div>
-        
-                                            <div class="form-group col-lg-4">
-                                                <label class="control-label">Frecuencia del Servicio</label>
-                                                
-                                                <select class="form-control" id="frecu-1" name="frecuencia_servicio">
-                                                    <option>Nunca</option>
-                                                    <option>Ocasionalmente</option>
-                                                    <option>Frecuentemente</option>
-                                                    <option>Siempre</option>
-                                                </select>
-        
-                                            </div>
-        
-                                            <div class="form-group col-lg-4">
-                                                <label class="control-label">Frecuencia del Servicio (Mes)</label>
-                                                
-                                                <select class="form-control" id="frecu_mes" name="frecuencia_mes">
-                                                    <option>Enero</option>
-                                                    <option>Febrero</option>
-                                                    <option>Marzo</option>
-                                                    <option>Abril</option>
-                                                    <option>Mayo</option>
-                                                    <option>Junio</option>
-                                                    <option>Julio</option>
-                                                    <option>Agosto</option>
-                                                    <option>Septiembre</option>
-                                                    <option>Octubre</option>
-                                                    <option>Noviembre</option>
-                                                    <option>Diciembre</option>
-                                                </select>
-        
-                                             </div>
+                                        </div>
+    
+                                        <div class="form-group col-lg-6">
+                                            <label class="control-label">Frecuencia del Servicio</label>
+                                            
+                                            <select class="form-control" id="frecu-1" name="frecuencia_servicio">
+                                                <option>Ocasionalmente</option>
+                                                <option>Semanales</option>
+                                                <option>Quincenales</option>
+                                                <option>Mensuales</option>
+                                                <option>Bimestrales</option>
+                                                <option>Trimestrales</option>
+                                                <option>Cada 4 Meses</option>
+                                                <option>Semestrales</option>
+                                                <option>Anuales</option>
+                                            </select>
+    
+                                        </div>
 
 
                                     <div class="ibox-title col-lg-12">
@@ -94,14 +83,16 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
-                                        
-                                        <select class="form-control " id="select_clientes" name="id_cliente">
+
+                                        <!-- Select con Autocompletar-->
+                                        <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="select_clientes" name="id_cliente">
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
                                                 <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
                                             @endforeach
-
                                         </select>
+
+
 
                                     </div>
 
@@ -162,7 +153,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control " id="select_sedes" name="id_sede">
+                                        <select class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -248,14 +239,19 @@
                                         <label style="display: block;"><input type="checkbox" name="visita calidad" value="3">Visitas de Calidad</label>
                                     </div> 
 
-                                     <div class="form-group col-lg-6">
-                                      <label>Frecuencia</label>
-                                      <select class="form-control" id="" name="frecuencia_calidad">
-                                        <option>Nunca</option>
-                                        <option>Ocasionalmente</option>
-                                        <option>Frecuentemente</option>
-                                        <option>Siempre</option>
-                                      </select>
+                                    <div class="form-group col-lg-6">
+                                        <label>Frecuencia</label>
+                                        <select class="form-control" id="" name="frecuencia_calidad">
+                                            <option>Ocasionalmente</option>
+                                            <option>Semanales</option>
+                                            <option>Quincenales</option>
+                                            <option>Mensuales</option>
+                                            <option>Bimestrales</option>
+                                            <option>Trimestrales</option>
+                                            <option>Cada 4 Meses</option>
+                                            <option>Semestrales</option>
+                                            <option>Anuales</option>
+                                        </select>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -305,11 +301,9 @@
                                         <input type="text" name="valor_facturar" placeholder="Ej: 127.600" class="form-control">
                                     </div>
 
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Control integrado de plagas y roedores</h3>
-                                        <hr>
-                                        <br>
+                                    <div class="form-group col-lg-12">
+                                        <label>Observaciones</label>
+                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="instrucciones"></textarea>
                                     </div>
 
                                     <div class="form-group col-lg-12">
@@ -320,10 +314,15 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Frecuencia del Servicio</label>
                                         <select class="form-control" id="" name="frecuencia_plagas">
-                                            <option>Nunca</option>
                                             <option>Ocasionalmente</option>
-                                            <option>Frecuentemente</option>
-                                            <option>Siempre</option>
+                                            <option>Semanales</option>
+                                            <option>Quincenales</option>
+                                            <option>Mensuales</option>
+                                            <option>Bimestrales</option>
+                                            <option>Trimestrales</option>
+                                            <option>Cada 4 Meses</option>
+                                            <option>Semestrales</option>
+                                            <option>Anuales</option>
                                         </select>
                                     </div>
 
@@ -464,6 +463,7 @@
                                             <option value="contacto_asesor">Contacto Asesor Directamente</option>
                                             <option value="llamada_telefonica">Llamada Telefónica</option>
                                             <option value="directorio">Directorio Telefónico</option>
+                                            <option value="directorio">Otro</option>
                                         </select>
                                     </div>
 
@@ -486,7 +486,7 @@
 
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
-                                                <button type="submit" class="btn btn-primary">Imprimir</button>
+                                                <button type="submit" class="btn btn-primary" id="btn">Imprimir</button>
                                                 {{-- <button type="submit" class="btn btn-w-m btn-danger">Exportar a PDF</button> --}}
                                                 <a href="\home"><button type="button" class="btn btn-default" style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
                                         </div>
@@ -504,8 +504,33 @@
     {!! Form::close() !!}
 </div>                    
 @section('ini-scripts')
+    <!--Script de Select Autocompletar -->
+    <script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
 
     <script>
+<<<<<<< HEAD
+
+        //Validación de campo fecha
+        function validacion(){
+        //         var c_fecha = document.getElementById('fecha'), 
+        //             boton = document.getElementById('btn');
+        // }
+
+            var valor = document.getElementById("fecha").value;
+
+                if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
+                    
+                    alert('¡Campo Fecha Vacio!');
+                    return false;
+            }
+            
+        }
+
+=======
+        //Inicializador del Select AUTOCOMPLETAR
+        $('.chosen-select').chosen({width: "100%"});
+>>>>>>> 10b3a73eaba8814bd90b04eb902304b5d2440400
+
         //Evento change del select de clientes
         $("#select_clientes").change(event => {
             //Peticion GET al servidor a la ruta /clientes/{id} (Cliente con id = $id)
@@ -564,9 +589,7 @@
                 console.log(err);
             });
         });
-
-
     </script>
-
 @endsection
+
 @endsection
