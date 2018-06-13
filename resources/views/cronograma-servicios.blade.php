@@ -110,12 +110,12 @@
                     </div>
                 
                 <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" style="margin: 120px auto">
+                    <div class="modal-dialog">
                         <div class="modal-content animated bounceInRight">
                             {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
 
                             <div class="modal-header">
-                                <button type="button" class="close" id="btn-close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <i class="fa fa-puzzle-piece modal-icon"></i>
                                 <h4 class="modal-title">Agregar servicio</h4>
                                 <small class="font-bold">Se añadira en el calendario un servicio para realizar</small>
@@ -169,14 +169,14 @@
                                         </select>
                                     </div>
 
-                                <div class="form-group col-lg-4" id="data_1">
+                                <div class="form-group col-lg-4" >
                                     <label>Hora *</label>
                                     <div class="input-group">
-                                       <input type="text"  id="input-nit" class="form-control">
+                                        <input type="time"  class="form-control" id="hora1">
                                     </div>
                                 </div>
 
-                                <div class="form-group col-lg-4" id="data_1">
+                                <div class="form-group col-lg-4" >
                                     <label>Tiempo de servicio *</label>
                                     <div class="input-group">
                                        <input type="text"  id="input-nit"  placeholder="Horas" class="form-control">
@@ -205,7 +205,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                <button type="button" id="btn-submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -397,10 +397,27 @@
         $('#form-calendario').submit(event => {
                     //Obtener el valor de un elemento del formulario
                     event.preventDefault();
-                    var email = document.getElementById('email').value;
+                    var email = document.getElementById('hora1').value;
                     //Prueba de fechas y horas
                     console.log(email, start1.format('YYYY-MM-DD HH:mm'));
-                })
+                    crsfToken = document.getElementsByName("_token")[0].value;
+                    //Peticion HTTP para guardar el evento
+                    $.ajax({
+                        url: '/evento/guardar',//Redirecciona a la direccion URL
+                        data: 'title='+ 'Evento prueba'+'&start='+ start1.format("YYYY-MM-DD")+'&allday='+0+'&tipo='+'Llamada'+'&hora='+email,//Datos que enviará
+                        type: "POST",//Método de envío
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken //Token de segurodad
+                        },
+                        success: function(events) {//En caso de ser exitoso el envio de datos
+                            console.log('Evento creado'); //Escribe en la consola 
+                            $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+                        },
+                        error: function(json){//En caso de ser erroneo el envio de datos 
+                            console.log("Error al crear evento");//Escribe en consola
+                        }        
+                    });
+            })
     });
 
 </script>
