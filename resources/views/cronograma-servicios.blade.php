@@ -102,6 +102,9 @@
                 <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#myModal" id="btn-modal">
                     Launch demo modal
                 </button>
+                <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#event-option" id="btn-modal2">
+                    Launch demo modal
+                </button>
 
                  {{-- Formulario de guardar Eventos --}}
                  
@@ -211,7 +214,33 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="modal inmodal fade" id="event-option" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Opciones del servicio</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label">Opciones *</label>
+                                    
+                                    <select class="form-control " id="select_opciones" name="opcion">
+                                        <option value="" selected disabled>Selecciona una opción</option>
+                                        <option value="1">Imprimir documentos por Técnico</option>
+                                        <option value="2"> Imprimir documentos por Servicio</option>
+                                        <option value="3"> Eliminar servicio</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -261,7 +290,7 @@
             events: { 
                 url:"/eventos/index"
             },
-
+            eventLimit: true,
             editable: true,
             droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
 
@@ -375,24 +404,25 @@
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: function (event, jsEvent, view) {
                 crsfToken = document.getElementsByName("_token")[0].value;
-                var con=confirm("Esta seguro que desea eliminar el evento");//Muestra alert con botones de aceptar y cancelar
-                if(con){//En caso de presionar aceptar
-                    $.ajax({
-                    url: '/eventos/elminar-evento',
-                    data: 'id=' + event.id,
-                    headers: {
-                        "X-CSRF-TOKEN": crsfToken
-                        },
-                    type: "POST",
-                    success: function () {
-                            $('#calendar').fullCalendar('removeEvents', event._id);
-                            console.log("Evento eliminado");
-                        }
-                    });
-                }else{
-                console.log("Cancelado");
-                }
-            }
+                // var con=confirm("Esta seguro que desea eliminar el evento");//Muestra alert con botones de aceptar y cancelar
+                // if(con){//En caso de presionar aceptar
+                //     $.ajax({
+                //     url: '/eventos/elminar-evento',
+                //     data: 'id=' + event.id,
+                //     headers: {
+                //         "X-CSRF-TOKEN": crsfToken
+                //         },
+                //     type: "POST",
+                //     success: function () {
+                //             $('#calendar').fullCalendar('removeEvents', event._id);
+                //             console.log("Evento eliminado");
+                //         }
+                //     });
+                // }else{
+                // console.log("Cancelado");
+                // }
+                document.getElementById("btn-modal2").click();
+            } 
         });
         $('#form-calendario').submit(event => {
                     //Obtener el valor de un elemento del formulario
@@ -410,7 +440,8 @@
                             "X-CSRF-TOKEN": crsfToken //Token de segurodad
                         },
                         success: function(events) {//En caso de ser exitoso el envio de datos
-                            console.log('Evento creado'); //Escribe en la consola 
+                            console.log('Evento creado'); //Escribe en la consola
+                            document.getElementById("btn-close2").click();
                             $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
                         },
                         error: function(json){//En caso de ser erroneo el envio de datos 
