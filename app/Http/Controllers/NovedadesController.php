@@ -179,7 +179,7 @@ class NovedadesController extends Controller
                 ]);
             }
         }
-        return view('novedades', compact('data'));
+        return view('general.novedades', compact('data'));
     }
 
     /**

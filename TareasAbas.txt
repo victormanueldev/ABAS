@@ -2,10 +2,37 @@ Clientes:
 - Vista de Editar cliente (registro de multiples sedes, seguimiento por sedes- visitas e inspecciones)
 - Ver cliente (Vista completa)
 
-Notificaciones:
-- Notificacion de creacion de novedad (Solo a areas correspondientes)
-- Notificaion de evetos proximos (individual)
 
-Novedades:
-- Comentarios en las novedades
-- ver novedades (Comentarios)
+Modulo de Programacion
+- Historial de tecnicos (Servicio-Tecnico) Ultimos 3 meses
+- Imprimir documentos, seleccionar cualquier doc - Imprimir todos los docs por dia->seleccionar los docs
+- Horas de militar a formato 12 hrs. -- Español, formato 24Hrs (Revisado)
+- Imprimir servicios por tecnicos-> todas los horarios de todos y cada uno de los tecnicos
+- Candado de confirmacion 
+- Informacion del servicio Pop-up mouseover
+- Editar servicio con un click
+- Eventos de mas de 1 dia
+
+Otros Ajustes
+    AREA COMERCIAL
+        - Crear Cliente 
+            - Organizar HTML de telefono
+            - Validar campos obligatorios
+        - Mostrar novedades segun el area del empleado
+        - Horas de Observaciones en formato 24Hrs (ClockPicker crear cliente)
+        - Verificar JS de seleccion de vista (li="active")
+        - Editar Cliente
+            - Modal de añadir cotizacion (CRUD)
+            - Modal de Añadir sede
+            - Modal de Editar datos de cliente
+            - Guardar Documentos en la BD (Boolean)
+        - Calendario
+            - Verificar horario de trabajo
+            - Editar Evento dando Click
+        - Solicitudes
+            - Generar Codigo aleatorio con JS
+            - Sumar horas de visitas (reactivo)
+            - Revisar HTML
+        - Novedades
+            - Ver listado de novedades solo del area a la que pertenezca el usuario.
+        NOTA: Revisar anotaciones cuaderno

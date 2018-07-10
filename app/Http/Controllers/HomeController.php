@@ -49,6 +49,6 @@ class HomeController extends Controller
             }
         }
         //dd($data_eventos);
-        return view('index', compact('user', 'data_eventos', 'fecha_actual'));
+        return view('general.index', compact('user', 'data_eventos', 'fecha_actual'));
     }
 }

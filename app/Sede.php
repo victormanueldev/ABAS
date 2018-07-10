@@ -28,4 +28,12 @@ class Sede extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    /**
+     * Relacion Sede-Cliente
+     */
+    public function solicitud()
+    {
+        return $this->hasOne(solicitud::class);
+    }
 }

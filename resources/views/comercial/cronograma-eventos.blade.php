@@ -154,9 +154,19 @@
             events: { 
                 url:"/eventos/index"
             },
-
+            
             editable: true,
             droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
+            eventLimit: true,
+            nowIndicator: true,
+            businessHours: true,
+            businessHours: {
+                // days of week. an array of zero-based day of week integers (0=Sunday)
+                dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
+
+                start: '06:00', // a start time (10am in this example)
+                end: '19:00', // an end time (6pm in this example)
+            },
 
             //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
             dayClick: function(start, end, allDay) {

@@ -11,15 +11,26 @@ class Solicitud extends Model
 
     	'id',
     	'codigo',
-    	'cliente_id'
-
+        'cliente_id',
+        'sede_id', 
+        'frecuencia',
+        'fecha',
+        'contacto_factura',
+        'telefono',
+        'celular',
+        'observaciones'
     ];
 
     /**
      * Relacion Solicitud-Cliente
      */
-    public function clientes()
+    public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+    public function sede()
+    {
+        return $this->belongsTo(Sede::class);
     }
 }

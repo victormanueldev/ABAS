@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+/*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");*/
 /*
  *
  *   INSPINIA - Responsive Admin Theme
@@ -12,7 +12,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 100;
+  font-weight: 300;
 }
 h1 {
   font-size: 30px;
@@ -1945,6 +1945,12 @@ div.dt-button-info {
   background: none repeat scroll 0 0 #ed5565;
   box-shadow: none;
 }
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+}
+
 /* UI Sortable */
 .ui-sortable .ibox-title {
   cursor: move;
@@ -3608,7 +3614,7 @@ video {
   background: #f8fafb;
 }
 .inmodal .modal-header {
-  padding: 30px 15px;
+  padding: 20px 15px;
   text-align: center;
 }
 .animated.modal.fade .modal-dialog {

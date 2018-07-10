@@ -65,7 +65,7 @@ class ClientesController extends Controller
         // }
         // return $data;
         $clientes = Cliente::all();
-        return view('index-clientes', compact('clientes'));
+        return view('comercial.index-clientes', compact('clientes'));
     }
 
     /**
@@ -77,7 +77,7 @@ class ClientesController extends Controller
     {
         //
         //$clientes = Cliente::all();
-        return view('crear-cliente');
+        return view('comercial.crear-cliente');
     }
 
     /**
@@ -145,7 +145,7 @@ class ClientesController extends Controller
     {
 
         $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user')->where('id', $id)->get();
-        return view('ver-cliente', compact('cliente'));
+        return view('general.ver-cliente', compact('cliente'));
 
     }
 

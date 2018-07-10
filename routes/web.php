@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Eventos
 Route::get('cronograma/eventos', function () {
-    return view('cronograma-eventos');
+    return view('comercial.cronograma-eventos');
 })->name('eventos');
 Route::post('eventos/guardar-evento', 'EventosController@create')->name('guardaEventos');
 Route::post('evento/guardar', 'EventosController@store')->name('eventos.store');
@@ -60,9 +60,14 @@ Route::get('sedes/cliente/{id}', 'SedesController@index');
 Route::resource('notificaciones', 'NotificacionesController');
 
 //Solicitudes
-Route::resource('solicitud', 'SolicitudesController');
+Route::resource('solicitud', 'SolicitudesController', [
+    'except' => 'show'
+]);
+Route::post('solicitud/show', 'SolicitudesController@show');
 //Route::get('solicitud-create', 'SolicitudesController@create');
 
-Route::get('cronograma/prog', function () {
-    return view('cronograma-servicios');
-})->name('cronograma');
+Route::resource('servicios', 'ServicioController');
+
+Route::resource('tecnicos', 'TecnicoController');
+
+Route::get('tecnicos/getColor/{id}', 'TecnicoController@getColor');

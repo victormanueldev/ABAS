@@ -2,6 +2,7 @@
 
 @section('custom-css')
     <link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
+    <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
 
 @section('content')
@@ -31,7 +32,7 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' => 'form-solicitud', 'onsubmit' => 'return validacion()')) !!}
+    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' => 'form-solicitud')) !!}
     {{Form::token()}}
 
    	<div class="row">
@@ -54,23 +55,23 @@
                                         <div class="form-group col-lg-6" id="data_1">
                                             <label>Fecha *</label>
                                             <div class="input-group date">
-                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="" name="fecha_creacion">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha_creacion" class="form-control" placeholder="" name="fecha_creacion" required>
                                             </div>
                                         </div>
     
                                         <div class="form-group col-lg-6">
                                             <label class="control-label">Frecuencia del Servicio</label>
                                             
-                                            <select class="form-control" id="frecu-1" name="frecuencia_servicio">
-                                                <option>Ocasionalmente</option>
-                                                <option>Semanales</option>
-                                                <option>Quincenales</option>
-                                                <option>Mensuales</option>
-                                                <option>Bimestrales</option>
-                                                <option>Trimestrales</option>
-                                                <option>Cada 4 Meses</option>
-                                                <option>Semestrales</option>
-                                                <option>Anuales</option>
+                                            <select class="form-control" id="frecuencia_servicio" name="frecuencia_servicio" required>
+                                                <option value="" selected>Seleccione una frecuencia</option>
+                                                <option value="7">Semanales</option>
+                                                <option value="15">Quincenales</option>
+                                                <option value="30">Mensuales</option>
+                                                <option value="60">Bimestrales</option>
+                                                <option value="90">Trimestrales</option>
+                                                <option value="120">Cada 4 Meses</option>
+                                                <option value="180">Semestrales</option>
+                                                <option value="360">Anuales</option>
                                             </select>
     
                                         </div>
@@ -85,7 +86,7 @@
                                         <label class="control-label">Razón Social/Nombre *</label>
 
                                         <!-- Select con Autocompletar-->
-                                        <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="select_clientes" name="id_cliente">
+                                        <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="select_clientes" name="id_cliente" required>
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
                                                 <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
@@ -153,7 +154,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control" id="select_sedes" name="id_sede">
+                                        <select class="form-control" id="select_sedes" name="id_sede" required>
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -223,7 +224,7 @@
 
 					                <div class="form-group col-lg-12">
 					                    <label>Instrucciones y Observaciones</label>
-					                    <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="3" name="instrucciones"></textarea>
+					                    <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="3" name="instrucciones" id="observaciones_tecnico" required></textarea>
 					                </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -486,7 +487,7 @@
 
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
-                                                <button type="submit" class="btn btn-primary" id="btn">Imprimir</button>
+                                                <button type="submit" class="btn btn-primary" id="btn-submit">Imprimir</button>
                                                 {{-- <button type="submit" class="btn btn-w-m btn-danger">Exportar a PDF</button> --}}
                                                 <a href="\home"><button type="button" class="btn btn-default" style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
                                         </div>
@@ -504,9 +505,8 @@
     {!! Form::close() !!}
 </div>                    
 @section('ini-scripts')
-    <!--Script de Select Autocompletar -->
     <script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
-
+    <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
     <script>
 
         //Validación de campo fecha
@@ -589,6 +589,91 @@
                 console.log(err);
             });
         });
+        
+        //Generar numero aleatorio
+        function codigoAleatorio() {
+            var randomCode = Math.round(Math.random()*(999 - 0));
+            if(randomCode <= 9){
+                return "FS00"+randomCode.toString();
+            }else if (randomCode >= 9 && randomCode <= 99){
+                return "FS0"+randomCode.toString();
+            }else{
+                return "FS"+randomCode.toString();
+            }
+        }
+        
+        //Realiza la peticion POST al servidor (AJAX)
+        function guardarSolicitud(codigo, fecha, frecuencia, id_cliente, id_sede, observaciones, crsfToken) {
+            $.ajax({
+                url: '/solicitud',
+                data: {
+                    'codigo_solicitud': codigo,
+                    'fecha_creacion': fecha,
+                    'frecuencia_servicio': frecuencia,
+                    'id_cliente': id_cliente,
+                    'id_sede': id_sede,
+                    'observaciones': observaciones 
+                },
+                headers: {
+                    "X-CSRF-TOKEN": crsfToken
+                },
+                type: "POST",
+                success: function () {
+                    console.log("Form enviado");
+                },
+                error: function () {
+                    console.error("Error al enviar el form");
+                }
+            });
+        }
+        
+        //Evento Submit del Formulario de Solicitud
+        $("#form-solicitud").submit(event => {
+            event.preventDefault();
+            crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
+            var codigo_solicitud = codigoAleatorio();   //Obtiene el valor del codigo generado automaticamente (String)
+            //Captura la informacion de los inputs del formulario HTML
+            var fecha = $("#fecha_creacion").val();
+            var frecuencia_servicio = $("#frecuencia_servicio").val();
+            var id_cliente = $("#select_clientes").val();
+            var id_sede = $("#select_sedes").val();
+            var observaciones = $("#observaciones_tecnico").val();
+            //Alert para cambiar el codigo generado por uno personalizado (opcional)
+            swal({
+                title: "Código de Solicitud",
+                text: "Código generado: "+codigo_solicitud+", escribe otro código aquí: ",
+                icon: "warning",
+                content: {
+                    element: "input",
+                    attributes: {
+                    placeholder: "Ingresa el código personalizado para el formulario de solicitud",
+                    type: "text"
+                    },
+                },
+                buttons: true,
+                dangerMode: false,
+            })
+            //Cuando el usuario presione algun botón
+            .then((res) => {
+                if (res == '') {  //Valida que el usuario presione el boton guardar
+                    //Llama a la funcion de guardar form
+                    guardarSolicitud(codigo_solicitud, fecha, frecuencia_servicio, id_cliente, id_sede, observaciones, crsfToken);
+                    //Alert de guardado con éxito
+                    swal("¡Formato de solicitud guardado con éxito!", {
+                        icon: "success",
+                    });
+                    
+                }else if(res == null){ //Valida que el usuario presione el boton cancelar
+                    return
+                }else{
+                    //Cambio de atributos
+                    guardarSolicitud(res, fecha, frecuencia_servicio, id_cliente, id_sede, observaciones, crsfToken);
+                    swal("¡Formato de solicitud guardado con éxito!", {
+                        icon: "success",
+                    }); 
+                }
+            });
+        })
     </script>
 @endsection
 

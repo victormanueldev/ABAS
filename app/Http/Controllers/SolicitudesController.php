@@ -5,6 +5,7 @@ namespace ABAS\Http\Controllers;
 use ABAS\Cliente;
 use ABAS\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use ABAS\Sede;
 use Auth;
 
@@ -20,7 +21,7 @@ class SolicitudesController extends Controller
         //
         $clientes = Cliente::select('nombre_cliente', 'id')->get();
         //return $clientes;
-        return view('solicitud', compact('clientes'));
+        return view('comercial.solicitud', compact('clientes'));
     }
 
     /**
@@ -32,7 +33,7 @@ class SolicitudesController extends Controller
     {
         // $data = "Hola Mundo";
         // $pdf = \PDF::loadView('pdf_solicitud', ['data' => $data]);
-        $pdf = \PDF::loadView('pdf_solicitud');
+        $pdf = \PDF::loadView('comercial.pdf_solicitud');
         return $pdf->stream('Solicitud.pdf');
     }
 
@@ -44,18 +45,36 @@ class SolicitudesController extends Controller
      */
     public function store(Request $request)
     {
-        $data = collect();
-    
-        $cliente = Cliente::find($request->id_cliente);
-        $sede = Sede::find($request->id_sede);
-        $user = Auth::user()->nombres." ".Auth::user()->apellidos;
+        try{
+            if ($request->ajax()) {
+                // $data = collect();
+                $solicitud = new Solicitud();
+                $cliente = Cliente::find($request->id_cliente);
+                $sede = Sede::find($request->id_sede);
+                // $user = Auth::user()->nombres." ".Auth::user()->apellidos;
+        
+                // $data->push($cliente);
+                // $data->push($sede);
+                // $data->push(['user' => $user]);
+                // return $data;
+                //$pdf = \PDF::loadView('comercial.pdf_solicitud', compact('data'));
+                //return $pdf->stream('Solicitud.pdf');
+                $solicitud->codigo = $request->codigo_solicitud;
+                $solicitud->fecha = $request->fecha_creacion;
+                $solicitud->frecuencia = $request->frecuencia_servicio;
+                $solicitud->observaciones = $request->observaciones;
+                $solicitud->cliente_id = $request->id_cliente;
+                $solicitud->sede_id = $request->id_sede;
+                $solicitud->save();
+                return response()->json('Servicio guardado con exito', 200);
+                
+            }else{
+                return response()->json('Datos enviados, no validos', 400);
+            }
+        }catch(\Exception $e){
+            return response()->json(['Error al guardar el servicio',$e], 500);
+        }
 
-        $data->push($cliente);
-        $data->push($sede);
-        $data->push(['user' => $user]);
-        // return $data;
-        $pdf = \PDF::loadView('pdf_solicitud', compact('data'));
-        return $pdf->stream('Solicitud.pdf');
     }
 
     /**
@@ -64,9 +83,15 @@ class SolicitudesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         //
+        $solicitud = Solicitud::select('id', 'frecuencia', 'observaciones')
+                                ->where('cliente_id', $request->id_cliente)
+                                ->where('sede_id', $request->id_sede)
+                                ->limit(1)
+                                ->get();
+        return $solicitud;
     }
 
     /**
