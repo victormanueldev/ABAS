@@ -2,17 +2,6 @@ Clientes:
 - Vista de Editar cliente (registro de multiples sedes, seguimiento por sedes- visitas e inspecciones)
 - Ver cliente (Vista completa)
 
-
-Modulo de Programacion
-- Historial de tecnicos (Servicio-Tecnico) Ultimos 3 meses
-- Imprimir documentos, seleccionar cualquier doc - Imprimir todos los docs por dia->seleccionar los docs
-- Horas de militar a formato 12 hrs. -- Español, formato 24Hrs (Revisado)
-- Imprimir servicios por tecnicos-> todas los horarios de todos y cada uno de los tecnicos
-- Candado de confirmacion 
-- Informacion del servicio Pop-up mouseover
-- Editar servicio con un click
-- Eventos de mas de 1 dia
-
 Otros Ajustes
     AREA COMERCIAL
         - Crear Cliente 
@@ -36,3 +25,14 @@ Otros Ajustes
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
         NOTA: Revisar anotaciones cuaderno
+    AREA PROGRAMACION
+        - Calendario
+            - Crear tabla en BD de servicios
+            - Historial de tecnicos (Servicio-Tecnico) Ultimos 3 meses (Hecho)
+            - Candado de confirmacion (InProgress)
+            - Informacion del servicio Pop-up mouseover (InProgress)
+            - Editar servicio con un click (InProgress)
+            - Eventos de mas de 1 dia (Hecho)
+            - Imprimir documentos, seleccionar cualquier doc - Imprimir todos los docs por dia->seleccionar los docs
+            - Horas de militar a formato 12 hrs. -- Español, formato 24Hrs (Revisado)
+            - Imprimir servicios por tecnicos-> todas los horarios de todos y cada uno de los tecnicos

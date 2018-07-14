@@ -1176,13 +1176,13 @@ button.dim:active:before {
   box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-  content: "ON";
+  content: "SI";
   padding-left: 10px;
   background-color: #5CAE27;
   color: #FFFFFF;
 }
 .onoffswitch-inner:after {
-  content: "OFF";
+  content: "NO";
   padding-right: 10px;
   background-color: #FFFFFF;
   color: #999999;
@@ -1995,7 +1995,7 @@ div.dt-button-info {
   display: block;
   float: left;
   width: 50%;
-  height: 16px;
+  height: 27px;
   padding: 0;
   line-height: 16px;
   font-size: 10px;
@@ -2007,17 +2007,21 @@ div.dt-button-info {
   box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-  content: "ON";
-  padding-left: 7px;
+  content: "SI";
+  padding-left: 12px;
   background-color: #5CAE27;
   color: #FFFFFF;
+  padding-top: 7px;
+  font-size: 13px;
 }
 .onoffswitch-inner:after {
-  content: "OFF";
-  padding-right: 7px;
+  content: "NO";
+  padding-right: 8px;
   background-color: #FFFFFF;
   color: #919191;
   text-align: right;
+  padding-top: 7px;
+  font-size: 13px;
 }
 .onoffswitch-switch {
   display: block;

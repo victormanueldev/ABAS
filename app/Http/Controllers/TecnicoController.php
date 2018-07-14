@@ -3,7 +3,10 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Tecnico;
+use ABAS\Servicio;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class TecnicoController extends Controller
 {
@@ -44,9 +47,18 @@ class TecnicoController extends Controller
      * @param  \ABAS\Tecnico  $tecnico
      * @return \Illuminate\Http\Response
      */
-    public function show(Tecnico $tecnico)
+    public function show($id)
     {
-        //
+        $now = Carbon::now();
+        $three_months_ago = $now->subMonths(3); //Restar 3 MEses a la fecha actual
+        $tecnicos = Servicio::select('tecnicos.nombre', DB::raw('count(servicios.id) as servicios'))
+                                ->join('tecnicos', 'servicios.tecnico_id', '=', 'tecnicos.id')
+                                ->where('servicios.solicitud_id', $id)
+                                ->where('servicios.fecha_inicio', '>=', $three_months_ago->toDateString())
+                                ->groupBy('tecnicos.nombre')
+                                ->limit(3)
+                                ->get();
+        return $tecnicos;
     }
 
     /**

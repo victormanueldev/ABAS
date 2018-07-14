@@ -64,7 +64,6 @@ Route::resource('solicitud', 'SolicitudesController', [
     'except' => 'show'
 ]);
 Route::post('solicitud/show', 'SolicitudesController@show');
-//Route::get('solicitud-create', 'SolicitudesController@create');
 
 Route::resource('servicios', 'ServicioController');
 

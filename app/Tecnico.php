@@ -12,4 +12,9 @@ class Tecnico extends Model
         'nombre',
         'color'
     ];
+
+    public function servicios()
+    {
+        return $this->hasMany(Servicio::class);
+    }
 }

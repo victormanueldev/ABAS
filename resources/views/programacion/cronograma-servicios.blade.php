@@ -6,6 +6,7 @@
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.print.css')}}" rel='stylesheet' media='print'>
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 <link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
+<link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
 @endsection
 {{-- Contenido --}}
 @section('content')
@@ -44,45 +45,31 @@
                         </a>
                     </div>
                 </div>
+
                 <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#modal-servicios" id="btn-modal">
-                    Launch demo modal
+                    Launch modal
                 </button>
                 <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#event-option" id="btn-modal2">
-                    Launch demo modal
+                    Launch modal
                 </button>
 
-                 {{-- Formulario de guardar Eventos --}}
+                 {{-- Calendario --}}
                  <div class="ibox-content">
                      <div id="calendar"></div>
                     </div>
                 
+                <!--===================================================
+                /* Modal de Crear Servicio */
+                ====================================================-->
                 <div class="modal inmodal" id="modal-servicios" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content animated bounceInRight">
                             {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
-
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            
-                                <h4 class="modal-title">Agregar servicio</h4>
-                                <small class="font-bold">Se añadira en el calendario un servicio para realizar</small>
+                                <h3 class="modal-title">Agendar servicio</h3>
                             </div>
-                            {{-- <div class="modal-body" style="padding: 16px;"> --}}
-                            <div class="row" style="padding: 20px;">
-                                
-                                <div class="form-group col-lg-12" id="data_1">
-                                <label>Fecha *</label>
-                                    <div class="input-group date">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha" class="form-control" placeholder="" name="fecha_creacion">
-                                    </div>
-                                </div>
-
-                            {{-- </div> --}}
-                            {{-- </div> --}}
-
-                            
-                            {{-- <div class="form"> --}}
-
+                            <div class="row" style="padding: 20px 20px 0 20px;">
                                 <div class="form-group col-lg-6">
                                     <!-- Select con Autocompletar-->
                                     <label >Cliente *</label>
@@ -155,7 +142,7 @@
                                     <div class="form-group col-lg-5">
                                         <label class="control-label">Técnicos *</label>
                                         
-                                        <select class="form-control " id="select_tecnicos" >
+                                        <select class="form-control tecnicos"  >
                                             <option value="" selected disabled>Selecciona un Técnico</option>
                                             @foreach($tecnicos as $tecnico)
                                                 <option value="{{$tecnico->id}}">{{$tecnico->nombre}} </option>
@@ -165,20 +152,38 @@
                                     </div>
                                     <div class="form-group col-lg-1">
                                         <label class="control-label">Color *</label>
-                                        <div id="color" class="circle" style="background-color: white;"></div>
+                                        <div class="circle color_tecnico" style="background-color: white;"></div>
                                     </div>
                                 </div>
 
 
-                                <div class="form-group col-lg-12">
+                                <div class="form-group col-lg-6">
                                     <label>Instrucciones y Observaciones</label>
-                                    <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="1" name="instrucciones" id="text-instrucciones"></textarea>
+                                    <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="2" name="instrucciones" id="text-instrucciones"></textarea>
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <label>Historial de Técnicos</label>
+                                    
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Nombre del técnico</th>
+                                    <th>No. servicios</th>
+                                </tr>
+                                </thead>
+                                <tbody id="rows-table-history">
+                                    <tr>
+                                        {{--<td><span class="pie">2018-05-18</span></td> --}}
+                                    </tr>
+                                </tbody>
+                            </table>
                                 </div>
 
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button> {{-- No se si este boton de guardar sea necesario. --}}
                                 <button type="button" class="btn btn-primary">Imprimir</button>
 
@@ -187,28 +192,102 @@
                         </div>
                     </div>
                 </div>
+                <!--===================================================
+                /* Modal de Editar Servicio */
+                ====================================================-->
                 <div class="modal inmodal fade" id="event-option" tabindex="-1" role="dialog"  aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title">Opciones del servicio</h4>
+                                <h4 class="modal-title">Editar servicio</h4>
                             </div>
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="control-label">Opciones *</label>
-                                    
-                                    <select class="form-control " id="select_opciones" name="opcion">
-                                        <option value="" selected disabled>Selecciona una opción</option>
-                                        <option value="1">Imprimir documentos por Técnico</option>
-                                        <option value="2"> Imprimir documentos por Servicio</option>
-                                        <option value="3"> Eliminar servicio</option>
-                                    </select>
-
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-lg-3">
+                                        <label class="control-label">Cliente </label>
+                                        <input type="text"  disabled class="form-control" id="nombre_cliente_editar" style="width: 100%">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-3">
+                                        <label class="control-label">Sede </label>
+                                        <input type="text" disabled class="form-control" id="nombre_sede_editar" style="width: 100%">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-3">
+                                        <label class="control-label">Solicitud </label>
+                                        <input type="text" disabled class="form-control" id="codigo_solcitud_editar" style="width: 100%">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-3">
+                                        <label class="control-label">Fecha de Solicitud </label>
+                                        <input type="text" disabled class="form-control" id="fecha_solcitud_editar" style="width: 100%">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                        <div class="form-group col-xs-6 col-lg-4">
+                                            <label class="control-label">Servicio </label>
+                                            <select class="form-control" id="select_tipo" name="tipo_servicio_editar">
+                                                <option value="0" selected disabled>Selecciona un Servicio</option>
+                                                <option value="Fumigacion">Fumigación</option>
+                                                <option value="Desratizacion">Desratización</option>
+                                                <option value="Plagas">Control de plagas</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-lg-2">
+                                            <label for="" style="margin-bottom: 6px;">¿Confirmado?</label>
+                                            <div class="switch">
+                                                    <div class="onoffswitch">
+                                                        <input type="checkbox" checked class="onoffswitch-checkbox" id="confirmado">
+                                                        <label class="onoffswitch-label" for="confirmado">
+                                                            <span class="onoffswitch-inner"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="form-group col-lg-1">
+                                            <label class="control-label">Actual</label>
+                                            <div class="circle" id="color_tecnico_editar" style="background-color: white;"></div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-lg-5">
+                                            <label class="control-label">Nuevo técnico </label>
+                                            <select class="form-control" id="select_tecnicos">
+                                                <option value="" selected disabled>Selecciona un Técnico</option>
+                                                @foreach($tecnicos as $tecnico)
+                                                    <option value="{{$tecnico->id}}">{{$tecnico->nombre}} </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-2">
+                                        <label>Frecuencia Actual</label>
+                                        <input type="text" class="form-control" id="frecuencia_solicitud">
+                                    </div>
+                                    <div class="form-group col-lg-1">
+                                        <label>Otra</label>
+                                        <input type="checkbox" class="form-control" id="check">
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Frecuencia</label>
+                                        <select class="form-control" id="select_frecuencia_editar" name="frecuencia_calidad" disabled>
+                                            <option value="">Seleccione una frec.</option>
+                                            <option value="7">Semanal</option>
+                                            <option value="15">Quincenal</option>
+                                            <option value="30">Mensual</option>
+                                            <option value="60">Bimestral</option>
+                                            <option value="90">Trimestral</option>
+                                            <option value="120">Cada 4 Meses</option>
+                                            <option value="180">Semestral</option>
+                                            <option value="360">Anual</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Instrucciones y Observaciones</label>
+                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="1" name="instrucciones" id="text-instrucciones"></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
                                 <button type="button" class="btn btn-primary">Aceptar</button>
                             </div>
                         </div>
@@ -291,7 +370,10 @@
                 //Simula click en el boton de mostrar el modal
                 document.getElementById("btn-modal").click();
                 //Guarda la fecha y hora del dia seleccionado
-                inicio_servicio = start.format("YYYY-MM-DD ");
+                inicio_servicio = start.format("YYYY-MM-DD");
+                //Limpiar elementos
+                $(".color_tecnico").attr('style', 'background-color: white')
+                $(".tecnicos option:eq(0)").attr('selected', 'selected');
 
             },
             
@@ -385,7 +467,7 @@
                 $('.tooltipevent').css('top', e.pageY + 10);
                 $('.tooltipevent').css('left', e.pageX + 20);
                 });
-                console.log(event);            
+                //console.log(event);            
             },
             
             //Evento de quitar el tooltip cuando el mouse está fuera de la evento
@@ -397,6 +479,7 @@
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: function (event, jsEvent, view) {
                 crsfToken = document.getElementsByName("_token")[0].value;
+                
                 // var con=confirm("Esta seguro que desea eliminar el evento");//Muestra alert con botones de aceptar y cancelar
                 // if(con){//En caso de presionar aceptar
                 //     $.ajax({
@@ -414,6 +497,20 @@
                 // }else{
                 // console.log("Cancelado");
                 // }
+                $.get(`/servicios/${event.id}/edit`, function(res) {
+                    //console.log(res[0]);
+                    $("#nombre_cliente_editar").val(res[0].nombre_cliente);
+                    $("#nombre_sede_editar").val(res[0].nombre)
+                    $("#codigo_solcitud_editar").val(res[0].codigo)
+                    $("#fecha_solcitud_editar").val(res[0].fecha)
+                    $("#color_tecnico_editar").attr('style', `background-color: ${res[0].color}`);
+                })
+                .then((res) => {
+                    console.log('GET EditService Successfull');
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
                 document.getElementById("btn-modal2").click();
             } 
         });
@@ -454,10 +551,10 @@
         })
         
         //Evento change del select de tecnicos
-        $("#select_tecnicos").change(event => {
+        $(".tecnicos").change(event => {
             $.get(`/tecnicos/getColor/${event.target.value}`, function (res) {
                 //Peticion para obtener el color de un técnico
-                $("#color").attr('style', `background-color: ${res[0].color}`); //Cambia el color del elemento
+                $(".color_tecnico").attr('style', `background-color: ${res[0].color}`); //Cambia el color del elemento
                 color = res[0].color;   //Guarda el color en la variable publica
             });
         })
@@ -485,6 +582,13 @@
                         $("#text-instrucciones").val(res[0]['observaciones']);
                         //console.log(res[0]['frecuencia']);
                         id_solicitud = res[0]['id'];
+                        $.get(`/tecnicos/${id_solicitud}`, function (data) {
+                            $("#rows-table-history").empty();
+                            data.forEach(element => {
+                                console.log(element);
+                                $("#rows-table-history").append(`<tr><td>${element.nombre}</td><td>${element.servicios}</td> </tr>`);
+                            });
+                        });
                         frecuencia_solicitud = res[0]['frecuencia']; //Guarda la frecuencia en la variable publica
                         switch (res[0]['frecuencia']) { //Valida la respuesta del servidor (Frecuencia del servicio desde la solicitud)
                             case 7:
@@ -534,13 +638,13 @@
         //Evento change del select de Sedes
         $("#select_sedes").change(event => {
             
-            $.get(`/sedes/${event.target.value}`, function (res) {
-                //
-            }).then((res) => {
-                console.log('Petición Exitosa');
-            }).catch((err) => {
-                console.log(err);
-            });
+            // $.get(`/sedes/${event.target.value}`, function (res) {
+            //     //
+            // }).then((res) => {
+            //     console.log('Petición Exitosa');
+            // }).catch((err) => {
+            //     console.log(err);
+            // });
             crsfToken = document.getElementsByName("_token")[0].value;
             var id_cliente = $("#select_clientes").val();
             var id_sede = $("#select_sedes").val();
@@ -554,7 +658,7 @@
             //Declaracion de Variables locales de Servicio
             var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val()) 
             var frecuencia;
-            var start_event = inicio_servicio+" "+$("#hora_inicio").val();
+            var start_event = inicio_servicio;
             if(checkbox){   //Valida que el checkbox este seleccionado
                 frecuencia = parseInt($("#select_frecuencia").val());
             }else{
@@ -571,6 +675,7 @@
                     'tipo='+$("#select_tipo").val()+
                     '&frecuencia='+frecuencia+
                     '&start='+start_event+
+                    '&hora_inicio='+$("#hora_inicio").val()+
                     '&duracion='+duracion_servicio+
                     '&color='+color+
                     '&id_tecnico='+$("#select_tecnicos").val()+

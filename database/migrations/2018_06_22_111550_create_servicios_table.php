@@ -17,8 +17,10 @@ class CreateServiciosTable extends Migration
             $table->increments('id');
             $table->string('tipo', 30);
             $table->unsignedSmallInteger('frecuencia');
-            $table->datetime('fecha_inicio');
-            $table->datetime('fecha_fin')->nullable();
+            $table->date('fecha_inicio');
+            $table->time('hora_inicio');
+            $table->date('fecha_fin')->nullable();
+            $table->time('hora_fin')->nullable();
             $table->unsignedMediumInteger('duracion');//Minutos
             $table->string('color', 25);
             $table->integer('tecnico_id')->nullable();

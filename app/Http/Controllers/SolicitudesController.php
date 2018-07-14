@@ -86,11 +86,13 @@ class SolicitudesController extends Controller
     public function show(Request $request)
     {
         //
+
         $solicitud = Solicitud::select('id', 'frecuencia', 'observaciones')
                                 ->where('cliente_id', $request->id_cliente)
                                 ->where('sede_id', $request->id_sede)
                                 ->limit(1)
                                 ->get();
+        
         return $solicitud;
     }
 
