@@ -18,7 +18,7 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
         // $clientes = Cliente::all();
@@ -65,6 +65,9 @@ class ClientesController extends Controller
         // }
         // return $data;
         $clientes = Cliente::all();
+        if($request->ajax()){
+            return $clientes;
+        }
         return view('comercial.index-clientes', compact('clientes'));
     }
 
@@ -184,4 +187,5 @@ class ClientesController extends Controller
     {
         //
     }
+
 }

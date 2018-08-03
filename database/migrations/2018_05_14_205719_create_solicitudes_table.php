@@ -24,7 +24,7 @@ class CreateSolicitudesTable extends Migration
             // $table->string('telefono', 10)->nullable();
             // $table->string('celular', 10)->nullable();
             $table->string('observaciones', 100)->nullable();
-
+            
             $table->integer('cliente_id');
             $table->integer('sede_id')->default(0)->nullable();
             $table->timestamps();

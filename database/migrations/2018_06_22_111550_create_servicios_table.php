@@ -15,16 +15,15 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo', 30);
             $table->unsignedSmallInteger('frecuencia');
             $table->date('fecha_inicio');
             $table->time('hora_inicio');
             $table->date('fecha_fin')->nullable();
             $table->time('hora_fin')->nullable();
             $table->unsignedMediumInteger('duracion');//Minutos
+            $table->boolean('confirmado')->default(false);
             $table->string('color', 25);
-            $table->integer('tecnico_id')->nullable();
-            $table->integer('solicitud_id');
+            $table->integer('solicitud_id')->nullable();
             $table->timestamps();
         });
     }

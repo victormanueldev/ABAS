@@ -688,8 +688,8 @@ fieldset[disabled] .btn-primary:hover,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #1dc5a3;
-  border-color: #1dc5a3;
+  background-color: #4F9B1E;
+  border-color: #4F9B1E;
 }
 .btn-success {
   background-color: #45821d;
@@ -3603,7 +3603,7 @@ video {
   background-clip: padding-box;
   background-color: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 4px;
+  border-radius: 0px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   outline: 0 none;
   position: relative;
@@ -3612,13 +3612,13 @@ video {
   z-index: 2200;
 }
 .modal-body {
-  padding: 20px 30px 30px 30px;
+  padding: 20px 30px 10px 30px;
 }
 .inmodal .modal-body {
-  background: #f8fafb;
+  background: #fff;
 }
 .inmodal .modal-header {
-  padding: 20px 15px;
+  padding: 10px 15px;
   text-align: center;
 }
 .animated.modal.fade .modal-dialog {
@@ -4492,7 +4492,7 @@ a.close-canvas-menu:hover {
   margin-bottom: 10px;
 }
 .m-b {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .m-b-md {
   margin-bottom: 20px;

@@ -5,8 +5,8 @@
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.print.css')}}" rel='stylesheet' media='print'>
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
-<link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
+<link href="{{asset('css/plugins/select2/select2.min.css')}}" rel="stylesheet">
 @endsection
 {{-- Contenido --}}
 @section('content')
@@ -46,6 +46,7 @@
                     </div>
                 </div>
 
+                {{-- Botones de mostrar modal  --}}
                 <button style="display: none" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#modal-servicios" id="btn-modal">
                     Launch modal
                 </button>
@@ -53,175 +54,238 @@
                     Launch modal
                 </button>
 
-                 {{-- Calendario --}}
+                                 
+                <!--===================================================
+                /* Calendario */
+                ====================================================-->
                  <div class="ibox-content">
                      <div id="calendar"></div>
-                    </div>
-                
+                </div>
+
+                                
                 <!--===================================================
                 /* Modal de Crear Servicio */
                 ====================================================-->
-                <div class="modal inmodal" id="modal-servicios" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content animated bounceInRight">
-                            {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h3 class="modal-title">Agendar servicio</h3>
-                            </div>
-                            <div class="row" style="padding: 20px 20px 0 20px;">
-                                <div class="form-group col-lg-6">
-                                    <!-- Select con Autocompletar-->
-                                    <label >Cliente *</label>
-                                    <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="select_clientes" name="id_cliente">
-                                        <option value="" selected disabled>Selecciona un cliente</option>
-                                        @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->id}}">{{$cliente->nit_cedula}}</option>
-                                        @endforeach
-                                    </select>
+                    <div id="modal-servicios" class="modal inmodal fade" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" >
+                            <div class="modal-content ">
+                                {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h3 class="modal-title">Agendar servicio</h3>
                                 </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Información del cliente</h3>
+                                            <p>Indique los datos del cliente al que se le agendará el servicio.</p>
+                                            <div class="row">
+                                                <div class="form-group "><label class="col-sm-4 control-label">Buscar cliente por: </label>
+                                                    <div class="col-sm-8">
+                                                        <label class="radio-inline"> <input class="radio-options" type="radio" value="1" id="por_nombre" name="optionsRadios"> Nombre </label> 
+                                                        <label class="radio-inline"><input class="radio-options" type="radio" value="2" id="por_rs" name="optionsRadios"> Razon Social </label> 
+                                                        <label class="radio-inline"><input class="radio-options" type="radio" value="3" id="por_nit" name="optionsRadios"> NIT/CC </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12" style="margin-top: 10px;">
+                                                    <input type="text" placeholder="Cliente..." class="typeahead_1 form-control" id="input_autocomplete" autocomplete="off"/>
+                                                </div>
+                                                <div class="form-group col-lg-12" style="margin-top: 15px;">
+                                                        <label class="control-label">Sede *</label>
+                                                        <select class="form-control " id="select_sedes">
+                                                            <option value="" selected disabled>Selecciona una sede</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            <h3 class="m-t-none m-b">Información de Sede/Residencia</h3>
+                                            <p style="margin-bottom: 14px;">Confirma la información del lugar donde se realizará el servicio.</p>
+                                            <div class="row">
+                                                <div class="form-group col-lg-6">
+                                                    <label>Dirección</label>
+                                                    <input class="form-control" rows="2" id="dir_sede" readonly>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label>Barrio</label>
+                                                    <input class="form-control" rows="2" id="barrio_sede" readonly>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label>Contacto</label>
+                                                    <input class="form-control" rows="2" id="contacto_sede" readonly>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label>Telefono</label>
+                                                    <input class="form-control" rows="2" id="tel_sede" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h3 class="m-t-none m-b">Información del servicio</h3>
+                                            <p>Diligencie todos los campos del referentes al servicio</p>
+                                            <div class="row">
+                                                <div class="form-group col-lg-12">
+                                                        <label>Frecuencia: </label>
+                                                        <select class="form-control" id="select_frecuencia" name="frecuencia_calidad" style="margin-top: 10px;">
+                                                            <option value="">Seleccione una frecencia.</option>
+                                                            <option value="7">Semanal</option>
+                                                            <option value="15">Quincenal</option>
+                                                            <option value="30">Mensual</option>
+                                                            <option value="60">Bimestral</option>
+                                                            <option value="90">Trimestral</option>
+                                                            <option value="120">Cada 4 Meses</option>
+                                                            <option value="180">Semestral</option>
+                                                            <option value="360">Anual</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-4" >
+                                                        <label>Hora de inicio*</label>
+                                                        <div class="input-group" style="width: 100%">
+                                                            <input type="time"  class="form-control" id="hora_inicio" style="width: 100%">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-8" >
+                                                            <label >Duración del servicio</label>
+                                                            <div class="input-group">
+                                                                <input style="width: 45%;margin-right: 10px;" type="number" min="0" class="form-control" id="num_horas" placeholder="Horas">
+                                                                <input style="width: 47%;margin-left: 10px;" type="number" min="0" max="60" class="form-control" id="num_minutos" placeholder="Minutos">
+                                                            </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-12">
+                                                        <label >Tipo de servicio</label>
+                                                        <select class="form-control" id="select_servicios" multiple="multiple">
+                                                            @foreach($tipos as $tipo)
+                                                                <option value="{{$tipo->id}}">{{$tipo->nombre}} </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-12">
+                                                        <label >Tecnicos</label>
+                                                        <select class="form-control" id="select_tecnicos2" multiple="multiple">
+                                                            @foreach($tecnicos as $tecnico)
+                                                                <option value="{{$tecnico->id}}">{{$tecnico->nombre}} </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-12">
+                                                        <label>Instrucciones y Observaciones</label>
+                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="1" name="instrucciones" id="text-instrucciones"></textarea>
+                                                    </div>
+                                            </div>
 
-                                <div class="form-group col-lg-6">
-                                    <label class="control-label">Sede *</label>
-                                    
-                                    <select class="form-control " id="select_sedes">
-                                        <option value="" selected disabled>Selecciona una sede</option>
-                                    </select>
-
-                                </div>
-                                <div class="row" style="padding: 0px 15px">
-                                    <div class="form-group col-lg-2">
-                                        <label>Frecuencia sugerida</label>
-                                        <input type="text" class="form-control" id="frecuencia_solicitud">
-                                    </div>
-                                    <div class="form-group col-lg-1">
-                                        <label>Otra</label>
-                                        <input type="checkbox" class="form-control" id="check">
-                                    </div>
-                                    <div class="form-group col-lg-3">
-                                        <label>Frecuencia</label>
-                                        <select class="form-control" id="select_frecuencia" name="frecuencia_calidad" disabled>
-                                            <option value="">Seleccione una frec.</option>
-                                            <option value="7">Semanal</option>
-                                            <option value="15">Quincenal</option>
-                                            <option value="30">Mensual</option>
-                                            <option value="60">Bimestral</option>
-                                            <option value="90">Trimestral</option>
-                                            <option value="120">Cada 4 Meses</option>
-                                            <option value="180">Semestral</option>
-                                            <option value="360">Anual</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Servicios *</label>
-                                        
-                                        <select class="form-control " id="select_tipo" name="tipo_servicio">
-                                            <option value="" selected disabled>Selecciona un Servicio</option>
-                                            <option value="Fumigacion">Fumigación</option>
-                                            <option value="Desratizacion">Desratización</option>
-                                            <option value=""></option>
-                                        </select>
-    
-                                    </div>
-                                </div>
-
-                                <div class="row" style="padding: 0px 15px;">
-                                    <div class="form-group col-lg-2" >
-                                        <label>Hora *</label>
-                                        <div class="input-group" style="width: 100%">
-                                            <input type="time"  class="form-control" id="hora_inicio" style="width: 100%">
                                         </div>
                                     </div>
-                                    <div class="form-group col-lg-4" >
-                                        <label >Tiempo del servicio</label>
-                                        <div class="input-group">
-                                            <input style="width: 45%;margin-right: 10px;" type="number" min="0" class="form-control" id="num_horas" placeholder="Horas">
-                                            <input style="width: 47%;margin-left: 10px;" type="number" min="0" max="60" class="form-control" id="num_minutos" placeholder="Minutos">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-5">
-                                        <label class="control-label">Técnicos *</label>
-                                        
-                                        <select class="form-control tecnicos"  >
-                                            <option value="" selected disabled>Selecciona un Técnico</option>
-                                            @foreach($tecnicos as $tecnico)
-                                                <option value="{{$tecnico->id}}">{{$tecnico->nombre}} </option>
-                                            @endforeach
-                                        </select>
-    
-                                    </div>
-                                    <div class="form-group col-lg-1">
-                                        <label class="control-label">Color *</label>
-                                        <div class="circle color_tecnico" style="background-color: white;"></div>
-                                    </div>
                                 </div>
-
-
-                                <div class="form-group col-lg-6">
-                                    <label>Instrucciones y Observaciones</label>
-                                    <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="2" name="instrucciones" id="text-instrucciones"></textarea>
+                                <div class="modal-footer">
+                                    <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button> {{-- No se si este boton de guardar sea necesario. --}}
+                                    <button  id="btn-print" type="button" class="btn btn-primary" >Imprimir</button>
                                 </div>
-
-                                <div class="form-group col-lg-6">
-                                    <label>Historial de Técnicos</label>
-                                    
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Nombre del técnico</th>
-                                    <th>No. servicios</th>
-                                </tr>
-                                </thead>
-                                <tbody id="rows-table-history">
-                                    <tr>
-                                        {{--<td><span class="pie">2018-05-18</span></td> --}}
-                                    </tr>
-                                </tbody>
-                            </table>
-                                </div>
-
+                                {!! Form::close() !!}
                             </div>
-
-                            <div class="modal-footer">
-                                <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button> {{-- No se si este boton de guardar sea necesario. --}}
-                                <button type="button" class="btn btn-primary">Imprimir</button>
-
-                            </div>
-                            {!! Form::close() !!}
                         </div>
                     </div>
-                </div>
+
                 <!--===================================================
-                /* Modal de Editar Servicio */
+                /* Modal de Ver Info de Servicio */
                 ====================================================-->
                 <div class="modal inmodal fade" id="event-option" tabindex="-1" role="dialog"  aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title">Editar servicio</h4>
+                                <h6 class="modal-title">Información del servicio</h6>
+                                
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-lg-3">
-                                        <label class="control-label">Cliente </label>
-                                        <input type="text"  disabled class="form-control" id="nombre_cliente_editar" style="width: 100%">
+                                    <div class="col-sm-6 b-r">
+                                        <div class="row">
+                                                    <div class="col-sm-12" style="margin-bottom: 15px;">
+                                                        <h3>Información del cliente </h3>
+                                                    </div>
+                        
+                                                    <div class="form-group col-xs-12 col-lg-6">
+                                                        <label class="control-label">Cliente </label>
+                                                        <input type="text" disabled class="form-control" id="ver_nombre_cliente" style="width: 100%;background-color: #fff;">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-lg-6">
+                                                        <label class="control-label">Sede/Residencia </label>
+                                                        <input type="text" disabled class="form-control" id="ver_nombre_sede" style="width: 100%;background-color: #fff;">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-lg-6">
+                                                        <label class="control-label">Dirección </label>
+                                                        <input type="text" disabled class="form-control" id="ver_direccion_sede" style="width: 100%;background-color: #fff;">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-lg-6">
+                                                        <label class="control-label">Barrio </label>
+                                                        <input type="text" disabled class="form-control" id="ver_barrio_sede" style="width: 100%;background-color: #fff;">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-lg-6">
+                                                        <label class="control-label">Contacto </label>
+                                                        <input type="text" disabled class="form-control" id="ver_contacto_sede" style="width: 100%;background-color: #fff;">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-lg-6">
+                                                            <label class="control-label">Teléfono </label>
+                                                            <input type="text" disabled class="form-control" id="ver_telefono_sede" style="width: 100%;background-color: #fff;">
+                                                        </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-xs-12 col-lg-3">
-                                        <label class="control-label">Sede </label>
-                                        <input type="text" disabled class="form-control" id="nombre_sede_editar" style="width: 100%">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                                <div class="col-sm-6 col-xs-12" style="margin-bottom: 7px;">
+                                                        <a class="btn btn-primary btn-outline" id="btn-lock" style="cursor: not-allowed;"></a>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12" style="margin-bottom: 7px;">
+                                                    <label >Opciones: </label>
+                                                    <a class="btn btn-default btn-outline" title="Editar Servicio">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-default btn-outline" title="Imprimir Documentos">
+                                                        <i class="fa fa-print"></i>
+                                                    </a>
+                                                    <a class="btn btn-default btn-outline">
+                                                        <i class="fa fa-wrench"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-lg-6">
+                                                    <label class="control-label">Hora de inicio </label>
+                                                    <input type="text" disabled class="form-control" id="ver_hora_inicio" style="width: 100%;background-color: #fff;">
+                                                </div>
+                                                <div class="form-group col-xs-12 col-lg-6">
+                                                        <label class="control-label">Fecha/Hora de fin. </label>
+                                                        <input type="text" disabled class="form-control" id="ver_datos_fin" style="width: 100%;background-color: #fff;">
+                                                    </div>
+
+                                                <div class="form-group col-sm-6">
+                                                        <label>Frecuencia: </label>
+                                                        <select class="form-control" id="ver_frecuencia" name="frecuencia_calidad" style="background-color: #fff;" disabled>    
+                                                            <option value="7">Semanal</option>
+                                                            <option value="15">Quincenal</option>
+                                                            <option value="30">Mensual</option>
+                                                            <option value="60">Bimestral</option>
+                                                            <option value="90">Trimestral</option>
+                                                            <option value="120">Cada 4 Meses</option>
+                                                            <option value="180">Semestral</option>
+                                                            <option value="360">Anual</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-6" >
+                                                            <label >Duración del servicio</label>
+                                                            <div class="input-group">
+                                                                <input type="text" disabled class="form-control" id="ver_duracion" style="width: 100%;background-color: #fff;">
+                                                            </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-12">
+                                                            <label>Instrucciones y Observaciones</label>
+                                                            <textarea class="form-control" rows="1" name="instrucciones" id="ver_instrucciones"></textarea>
+                                                        </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-xs-12 col-lg-3">
-                                        <label class="control-label">Solicitud </label>
-                                        <input type="text" disabled class="form-control" id="codigo_solcitud_editar" style="width: 100%">
-                                    </div>
-                                    <div class="form-group col-xs-12 col-lg-3">
-                                        <label class="control-label">Fecha de Solicitud </label>
-                                        <input type="text" disabled class="form-control" id="fecha_solcitud_editar" style="width: 100%">
-                                    </div>
+
                                 </div>
+                                <hr>
                                 <div class="row">
+                                    
+                                </div>
+                                {{-- <div class="row">
                                         <div class="form-group col-xs-6 col-lg-4">
                                             <label class="control-label">Servicio </label>
                                             <select class="form-control" id="select_tipo" name="tipo_servicio_editar">
@@ -256,8 +320,8 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                </div>
-                                <div class="row">
+                                </div> --}}
+                                {{-- <div class="row">
                                     <div class="form-group col-lg-2">
                                         <label>Frecuencia Actual</label>
                                         <input type="text" class="form-control" id="frecuencia_solicitud">
@@ -284,15 +348,44 @@
                                         <label>Instrucciones y Observaciones</label>
                                         <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="1" name="instrucciones" id="text-instrucciones"></textarea>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="modal-footer">
                                 <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Aceptar</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--===================================================
+                  /* Modal opciones de impresion  
+                ====================================================-->
+                <div class="modal inmodal fade" id="event-print" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            {!! Form::open(['id' =>'form-print']) !!}
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Editar servicio</h4>
+                            </div>
+                            <div class="modal-body">
+                                    
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="i-checks"><label> <input id="orden" type="checkbox" value="1" name="check_op"> <i></i> Option one </label></div>
+                                        <div class="i-checks"><label> <input id="ruta-lamparas" type="checkbox" value="2" name="check_op"> <i></i> Option two </label></div>
+                                        <div class="i-checks"><label> <input id="ruta-ratas" type="checkbox" value="3" name="check_op"> <i></i> Option three </label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div> 
+
             </div>
         </div>
     </div>
@@ -302,24 +395,111 @@
 @section('ini-scripts')
 <!-- iCheck -->
 <script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>
+
 <!-- Full Calendar -->
 <script src="{{asset('js/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/locale/es.js')}}"></script>
-{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+<script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+<script src="{{asset('js/date.js')}}"></script>
+
+<!-- Sweet Alert -->
 <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <!-- Chosen -->
 <script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
+
+<!-- Select2 -->
+<script src="{{asset('js/plugins/select2/select2.full.min.js')}}"></script>
+
+<!-- Typehead -->
+<script src="{{asset('js/plugins/typehead/bootstrap3-typeahead.min.js')}}"></script>
 <script>
 
     $(document).ready(function() {
 
+        $("#select_servicios").select2({
+            width: '100%',
+            placeholder: 'Servicios...'
+        });
+
+        $("#select_tecnicos2").select2({
+            width: '100%',
+            placeholder: 'Técnicos...'
+        });
+        
+        /* Estructuracion de la información del cliente para el autocompletado
+        ------------------------------------------------------------------------*/
+        //Inicializacion de variables
+        var nit_clientes = [];
+        var nombres_clientes = [];
+        var razon_social_clientes = [];
+        var $input;
+        var data;
+
+        //Peticion al servidor para obtener los clientes de la DB
+        $.get('/clientes')
+        .then((res) => {
+            //Recorre la respueta
+            res.forEach((value, index) => {
+                nit_clientes[index] = JSON.parse(`{"name": "${value.nit_cedula}", "id": "${value.id}"}`);
+                nombres_clientes[index] = JSON.parse(`{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
+                if(value.razon_social == 'null' || value.razon_social == null){
+                    razon_social_clientes[index] = JSON.parse(`{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
+                }else{
+                    razon_social_clientes[index] = JSON.parse(`{"name": "${value.razon_social}", "id": "${value.id}"}`);
+                }
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+        //Inicia el Autocompletado con los NIT de los clientes
+        $input = $('.typeahead_1').typeahead({
+            source: nit_clientes
+        });
+
+        //Evento click de los radiobuttons
+        $(".radio-options").click(event => {
+            //Valida el valor del radiobutton seleccionado
+            switch (event.target.value) {
+                //Buscar por nombre de clientes
+                case '1':
+                    data = nombres_clientes;
+                    $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                //Buscar por razon social de clientes
+                case '2':
+                    data = razon_social_clientes;
+                    $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                //Buscar por NIT o CC de clientes
+                case '3':                  
+                    data = nit_clientes;
+                    $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                default:
+                    console.log('Default');
+                    data = [];
+                    break;
+            }
+        })
+
+        /* Inicialización de componentes de la pagina
+         -----------------------------------------------------------------*/
+         //Inicia iCheck 
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green'
         });
-
-        $('.chosen-select').chosen({width: "100%"});
-
+    
+        
+        
         /* Inicializa el Calendario
          -----------------------------------------------------------------*/
         //Instancia la Clase Date para obtener la fecah actual
@@ -333,8 +513,9 @@
         var color;
         var frecuencia_solicitud;
         var id_solicitud;
+        var id_cliente;
 
-
+        //Inicia el calendario
         $('#calendar').fullCalendar({
             
             header: {
@@ -372,9 +553,18 @@
                 //Guarda la fecha y hora del dia seleccionado
                 inicio_servicio = start.format("YYYY-MM-DD");
                 //Limpiar elementos
-                $(".color_tecnico").attr('style', 'background-color: white')
-                $(".tecnicos option:eq(0)").attr('selected', 'selected');
-
+                $("#select_sedes").empty();
+                $('#input_autocomplete').val('');
+                $("#dir_sede").val('');
+                $("#barrio_sede").val('');
+                $("#contacto_sede").val('');
+                $("#tel_sede").val('');
+                $("#select_frecuencia").val('0').change();
+                $("#hora_inicio").val('');
+                $("#num_horas").val('');
+                $("#num_minutos").val('');
+                $('#select_servicios').select2("val", "");
+                $('#select_tecnicos2').select2("val", "");
             },
             
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -479,7 +669,7 @@
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: function (event, jsEvent, view) {
                 crsfToken = document.getElementsByName("_token")[0].value;
-                
+                $("#btn-lock").empty();
                 // var con=confirm("Esta seguro que desea eliminar el evento");//Muestra alert con botones de aceptar y cancelar
                 // if(con){//En caso de presionar aceptar
                 //     $.ajax({
@@ -497,15 +687,24 @@
                 // }else{
                 // console.log("Cancelado");
                 // }
-                $.get(`/servicios/${event.id}/edit`, function(res) {
-                    //console.log(res[0]);
-                    $("#nombre_cliente_editar").val(res[0].nombre_cliente);
-                    $("#nombre_sede_editar").val(res[0].nombre)
-                    $("#codigo_solcitud_editar").val(res[0].codigo)
-                    $("#fecha_solcitud_editar").val(res[0].fecha)
-                    $("#color_tecnico_editar").attr('style', `background-color: ${res[0].color}`);
-                })
+                $.get(`/servicios/${event.id}/edit`)
                 .then((res) => {
+                    //console.log(res[0]);
+                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
+                    $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
+                    $("#ver_nombre_sede").val(res[0].solicitud.sede.nombre)
+                    $("#ver_direccion_sede").val(res[0].solicitud.sede.direccion)
+                    $("#ver_barrio_sede").val(res[0].solicitud.sede.barrio)
+                    $("#ver_contacto_sede").val(res[0].solicitud.sede.nombre_contacto)
+                    $("#ver_telefono_sede").val(res[0].solicitud.sede.telefono_contacto)
+                    var date1 = moment(res[0].fecha_inicio+" "+res[0].hora_inicio).format('YYYY-MM-DD hh:mm a');
+                    var date2 = Date.parse(res[0].hora_inicio);
+                    $("#ver_hora_inicio").val(date1);
+                    $("#ver_datos_fin")
+                    $("#frecuencia_calidad")
+                    $("#ver_duracion")
+                    $("#ver_instrucciones")
+                    $("#color_tecnico_editar").attr('style', `background-color: ${res[0].color}`);
                     console.log('GET EditService Successfull');
                 })
                 .catch((err) => {
@@ -515,10 +714,12 @@
             } 
         });
 
-        //Evento change del select de clientes
-        $("#select_clientes").change(event => {
+        //Change del input de autocompletado
+        $input.change(function() {
+            var current = $input.typeahead("getActive");
+            id_cliente = current.id;
                 //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
-                $.get(`/sedes/cliente/${event.target.value}`,  function (res) {
+                $.get(`/sedes/cliente/${current.id}`,  function (res) {
                 $("#select_sedes").empty();//Limipia el select
                 $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
                 if(res == ''){//Valida que el cliente tenga sedes
@@ -537,6 +738,7 @@
             });
         });
         
+
         //Evento click del checbox
         $("#check").on('click', function () {
             if ($("#check:checked").length == 1) {  //valida que el checkbox este seleccionado
@@ -560,7 +762,7 @@
         })
         
         //Peticion al servidor para obtener la solicitud de una sede
-        function obtenerSolicitudSede(id_cliente, id_sede, crsfToken ) {
+        function obtenerSolicitudSede(id_sede, crsfToken ) {
             $.ajax({
                 url: '/solicitud/show',
                 data: {
@@ -580,53 +782,21 @@
                     }else{
                         console.log(res);
                         $("#text-instrucciones").val(res[0]['observaciones']);
+                        $("#dir_sede").val(res[0].direccion);
+                        $("#barrio_sede").val(res[0].barrio);
+                        $("#contacto_sede").val(res[0].nombre_contacto);
+                        $("#tel_sede").val(res[0].telefono_contacto);
                         //console.log(res[0]['frecuencia']);
                         id_solicitud = res[0]['id'];
-                        $.get(`/tecnicos/${id_solicitud}`, function (data) {
-                            $("#rows-table-history").empty();
-                            data.forEach(element => {
-                                console.log(element);
-                                $("#rows-table-history").append(`<tr><td>${element.nombre}</td><td>${element.servicios}</td> </tr>`);
-                            });
-                        });
+                        // $.get(`/tecnicos/${id_solicitud}`, function (data) {
+                        //     $("#rows-table-history").empty();
+                        //     data.forEach(element => {
+                        //         console.log(element);
+                        //         $("#rows-table-history").append(`<tr><td>${element.nombre}</td><td>${element.servicios}</td> </tr>`);
+                        //     });
+                        // });
                         frecuencia_solicitud = res[0]['frecuencia']; //Guarda la frecuencia en la variable publica
-                        switch (res[0]['frecuencia']) { //Valida la respuesta del servidor (Frecuencia del servicio desde la solicitud)
-                            case 7:
-                                $("#frecuencia_solicitud").val('Semanal'); //Cambia el valor del input       
-                                break;
-
-                            case 15:
-                                $("#frecuencia_solicitud").val('Quincenal');        
-                                break;
-
-                            case 30:
-                                $("#frecuencia_solicitud").val('Mensual');        
-                                break;
-
-                            case 60:
-                                $("#frecuencia_solicitud").val('Bimestral');        
-                                break;
-                            
-                            case 90:
-                                $("#frecuencia_solicitud").val('Trimestral');        
-                                break;
-
-                            case 120:
-                                $("#frecuencia_solicitud").val('Cada 4 meses');        
-                                break;
-
-                            case 180:
-                                $("#frecuencia_solicitud").val('Semestral');        
-                                break;
-
-                            case 360:
-                                $("#frecuencia_solicitud").val('Anual');        
-                                break;
-
-                            default:
-                                $("#frecuencia_solicitud").val('selected');  
-                                break;
-                        }
+                        $("#select_frecuencia").val(frecuencia_solicitud).change(); //Cambia el valor del input      
                     }
                 },
                 error: function (err) {
@@ -637,18 +807,10 @@
 
         //Evento change del select de Sedes
         $("#select_sedes").change(event => {
-            
-            // $.get(`/sedes/${event.target.value}`, function (res) {
-            //     //
-            // }).then((res) => {
-            //     console.log('Petición Exitosa');
-            // }).catch((err) => {
-            //     console.log(err);
-            // });
             crsfToken = document.getElementsByName("_token")[0].value;
-            var id_cliente = $("#select_clientes").val();
             var id_sede = $("#select_sedes").val();
-            obtenerSolicitudSede(id_cliente, id_sede, crsfToken);
+            //Referencia al metodo de obtener la solicitud del cliente
+            obtenerSolicitudSede(id_sede, crsfToken);
             
         });
 
@@ -659,11 +821,16 @@
             var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val()) 
             var frecuencia;
             var start_event = inicio_servicio;
-            if(checkbox){   //Valida que el checkbox este seleccionado
-                frecuencia = parseInt($("#select_frecuencia").val());
-            }else{
-                frecuencia = frecuencia_solicitud;  //Guarda la frecuencia en la variable global
-            }
+            frecuencia = parseInt($("#select_frecuencia").val());
+            var tecnicos = [];
+            $("#select_tecnicos2").val().forEach((value, index) => {
+                tecnicos[index] = value;
+            });
+            var tipos_servicio = [];
+            $("#select_servicios").val().forEach((value, index) => {
+                tipos_servicio[index] = value
+            });
+            console.log(tecnicos);
             //Prueba de fechas y horas
             console.log($("#hora_inicio").val());//email, start1.format('YYYY-MM-DD HH:mm'));
             crsfToken = document.getElementsByName("_token")[0].value;
@@ -672,20 +839,21 @@
                 url: '/servicios',//Redirecciona a la direccion URL
                 data:
                     //Datos que enviará
-                    'tipo='+$("#select_tipo").val()+
-                    '&frecuencia='+frecuencia+
-                    '&start='+start_event+
-                    '&hora_inicio='+$("#hora_inicio").val()+
-                    '&duracion='+duracion_servicio+
-                    '&color='+color+
-                    '&id_tecnico='+$("#select_tecnicos").val()+
-                    '&id_solicitud='+id_solicitud,
+                    {
+                        tipos: tipos_servicio,
+                        frecuencia: frecuencia,
+                        start: start_event,
+                        hora_inicio: $("#hora_inicio").val(),
+                        duracion: duracion_servicio,
+                        id_tecnicos: tecnicos,
+                        id_solicitud: id_solicitud
+                    },
                 type: "POST",//Método de envío
                 headers: {
                     "Content-Type": 'application/x-www-form-urlencoded',
-                    "X-CSRF-TOKEN": crsfToken //Token de seguridad
+                    "X-CSRF-TOKEN": crsfToken   //Token de seguridad
                 },
-                success: function(events) {//En caso de ser exitoso el envio de datos
+                success: function(events) {     //En caso de ser exitoso el envio de datos
                     console.log('Evento creado'); //Escribe en la consola
                     document.getElementById("btn-close2").click();
                     $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
@@ -696,7 +864,27 @@
             });
         });
 
+        //Evento click del boton de imprimir Modal (Crear Servicio)
+        $("#btn-print").click(event => {
+            event.preventDefault();
+            $('#modal-servicios')
+            .modal('hide')                          //Oculta el modal abierto
+            .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
+                $('#event-print').modal('show');    //Muestra el nuevo modal
 
+                $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+            });
+        });
+
+        $("#form-print").submit(event => {
+            event.preventDefault();
+            swal({
+                text: "Oie!",
+                icon: "success"
+            });
+            $('#event-print')
+            .modal('hide')  
+        })
     });
 
 </script>

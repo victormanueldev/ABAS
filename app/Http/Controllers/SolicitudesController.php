@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use ABAS\Sede;
 use Auth;
+use DB;
 
 class SolicitudesController extends Controller
 {
@@ -86,12 +87,24 @@ class SolicitudesController extends Controller
     public function show(Request $request)
     {
         //
-
-        $solicitud = Solicitud::select('id', 'frecuencia', 'observaciones')
-                                ->where('cliente_id', $request->id_cliente)
-                                ->where('sede_id', $request->id_sede)
-                                ->limit(1)
+        if ($request->id_sede === 0) {
+            # code...
+            $solicitud = DB::table('solicitudes')
+                                    ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'sedes.direccion', 'sedes.barrio', 'sedes.nombre_contacto', 'sedes.telefono_contacto')
+                                    ->join('sedes', 'solicitudes.sede_id', 'sedes.id')
+                                    ->where('solicitudes.cliente_id', $request->id_cliente)
+                                    ->where('solicitudes.sede_id', $request->id_sede)
+                                    ->get();
+        } else {
+            # code...
+            $solicitud = DB::table('solicitudes')
+                                ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'clientes.barrio', 'clientes.nombre_contacto', 'clientes.celular AS telefono_contacto', 'clientes.direccion')
+                                ->join('clientes', 'solicitudes.cliente_id', 'clientes.id')
+                                ->where('solicitudes.cliente_id', $request->id_cliente)
+                                ->where('solicitudes.sede_id', $request->id_sede)
                                 ->get();
+        }
+        
         
         return $solicitud;
     }

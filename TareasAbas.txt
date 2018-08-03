@@ -7,6 +7,7 @@ Otros Ajustes
         - Crear Cliente 
             - Organizar HTML de telefono
             - Validar campos obligatorios
+            - Razon social
         - Mostrar novedades segun el area del empleado
         - Horas de Observaciones en formato 24Hrs (ClockPicker crear cliente)
         - Verificar JS de seleccion de vista (li="active")
@@ -22,6 +23,8 @@ Otros Ajustes
             - Generar Codigo aleatorio con JS
             - Sumar horas de visitas (reactivo)
             - Revisar HTML
+            - Cargo: (formato, asesor y numero consecutivo)
+            - Seleccion de sedes NO obligatiorias
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
         NOTA: Revisar anotaciones cuaderno
@@ -36,3 +39,10 @@ Otros Ajustes
             - Imprimir documentos, seleccionar cualquier doc - Imprimir todos los docs por dia->seleccionar los docs
             - Horas de militar a formato 12 hrs. -- Español, formato 24Hrs (Revisado)
             - Imprimir servicios por tecnicos-> todas los horarios de todos y cada uno de los tecnicos
+            - Filtro por nombre y NIT
+            - Select dinamico con respuesta del API
+            - Varios tipos de serivicios y varios tecnicos en la creacion de servicios
+            - Vistas para ver y editar servicios
+            - No permitir editar el servicio despues de confirmado o pasado (dropable: false)
+            - Permitir editar todos los datos del servicio
+            - Mostrar el calendario por tecnico

@@ -65,8 +65,13 @@ Route::resource('solicitud', 'SolicitudesController', [
 ]);
 Route::post('solicitud/show', 'SolicitudesController@show');
 
+//Servicios
 Route::resource('servicios', 'ServicioController');
+Route::post('servicios/{id}/print', 'ServicioController@print')->name('servicios.print');
 
+//Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
-
 Route::get('tecnicos/getColor/{id}', 'TecnicoController@getColor');
+
+//Tipos de Servicios
+Route::resource('tipos', 'TipoServicioController');
