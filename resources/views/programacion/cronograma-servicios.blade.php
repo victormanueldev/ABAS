@@ -7,6 +7,8 @@
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 <link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/select2/select2.min.css')}}" rel="stylesheet">
+<link href="{{asset('css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
+
 @endsection
 {{-- Contenido --}}
 @section('content')
@@ -187,45 +189,49 @@
                 /* Modal de Ver Info de Servicio */
                 ====================================================-->
                 <div class="modal inmodal fade" id="event-option" tabindex="-1" role="dialog"  aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                    <div class="modal-dialog modal-lg" >
+                        <div class="modal-content " id="modal-dialog">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <h6 class="modal-title">Información del servicio</h6>
-                                
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body ibox-content sk-loading" style="padding: 20px 30px 0px 30px;">
+                                <!-- Loader -->
+                                <div class="sk-spinner sk-spinner-double-bounce">
+                                    <div class="sk-double-bounce1"></div>
+                                    <div class="sk-double-bounce2"></div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-6 b-r">
                                         <div class="row">
-                                                    <div class="col-sm-12" style="margin-bottom: 15px;">
-                                                        <h3>Información del cliente </h3>
-                                                    </div>
-                        
-                                                    <div class="form-group col-xs-12 col-lg-6">
-                                                        <label class="control-label">Cliente </label>
-                                                        <input type="text" disabled class="form-control" id="ver_nombre_cliente" style="width: 100%;background-color: #fff;">
-                                                    </div>
-                                                    <div class="form-group col-xs-12 col-lg-6">
-                                                        <label class="control-label">Sede/Residencia </label>
-                                                        <input type="text" disabled class="form-control" id="ver_nombre_sede" style="width: 100%;background-color: #fff;">
-                                                    </div>
-                                                    <div class="form-group col-xs-12 col-lg-6">
-                                                        <label class="control-label">Dirección </label>
-                                                        <input type="text" disabled class="form-control" id="ver_direccion_sede" style="width: 100%;background-color: #fff;">
-                                                    </div>
-                                                    <div class="form-group col-xs-12 col-lg-6">
-                                                        <label class="control-label">Barrio </label>
-                                                        <input type="text" disabled class="form-control" id="ver_barrio_sede" style="width: 100%;background-color: #fff;">
-                                                    </div>
-                                                    <div class="form-group col-xs-12 col-lg-6">
-                                                        <label class="control-label">Contacto </label>
-                                                        <input type="text" disabled class="form-control" id="ver_contacto_sede" style="width: 100%;background-color: #fff;">
-                                                    </div>
-                                                    <div class="form-group col-xs-12 col-lg-6">
-                                                            <label class="control-label">Teléfono </label>
-                                                            <input type="text" disabled class="form-control" id="ver_telefono_sede" style="width: 100%;background-color: #fff;">
-                                                        </div>
+                                            <div class="col-sm-12" style="margin-bottom: 15px;">
+                                                <h3>Información del cliente </h3>
+                                            </div>
+                
+                                            <div class="form-group col-xs-12 col-lg-6">
+                                                <label class="control-label">Cliente </label>
+                                                <input type="text" disabled class="form-control" id="ver_nombre_cliente" style="width: 100%;background-color: #fff;">
+                                            </div>
+                                            <div class="form-group col-xs-12 col-lg-6">
+                                                <label class="control-label">Sede/Residencia </label>
+                                                <input type="text" disabled class="form-control" id="ver_nombre_sede" style="width: 100%;background-color: #fff;">
+                                            </div>
+                                            <div class="form-group col-xs-12 col-lg-6">
+                                                <label class="control-label">Dirección </label>
+                                                <input type="text" disabled class="form-control" id="ver_direccion_sede" style="width: 100%;background-color: #fff;">
+                                            </div>
+                                            <div class="form-group col-xs-12 col-lg-6">
+                                                <label class="control-label">Barrio </label>
+                                                <input type="text" disabled class="form-control" id="ver_barrio_sede" style="width: 100%;background-color: #fff;">
+                                            </div>
+                                            <div class="form-group col-xs-12 col-lg-6">
+                                                <label class="control-label">Contacto </label>
+                                                <input type="text" disabled class="form-control" id="ver_contacto_sede" style="width: 100%;background-color: #fff;">
+                                            </div>
+                                            <div class="form-group col-xs-12 col-lg-6">
+                                                    <label class="control-label">Teléfono </label>
+                                                    <input type="text" disabled class="form-control" id="ver_telefono_sede" style="width: 100%;background-color: #fff;">
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -269,14 +275,12 @@
                                                     </div>
                                                     <div class="form-group col-lg-6" >
                                                             <label >Duración del servicio</label>
-                                                            <div class="input-group">
-                                                                <input type="text" disabled class="form-control" id="ver_duracion" style="width: 100%;background-color: #fff;">
-                                                            </div>
+                                                            <input type="text" disabled class="form-control" id="ver_duracion" style="width: 100%;background-color: #fff;">
                                                     </div>
                                                     <div class="form-group col-lg-12">
-                                                            <label>Instrucciones y Observaciones</label>
-                                                            <textarea class="form-control" rows="1" name="instrucciones" id="ver_instrucciones"></textarea>
-                                                        </div>
+                                                        <label>Instrucciones y Observaciones</label>
+                                                        <textarea class="form-control" readonly rows="1" name="instrucciones" style="background-color: #fff;" id="ver_instrucciones"></textarea>
+                                                    </div>
                                         </div>
                                     </div>
 
@@ -285,70 +289,7 @@
                                 <div class="row">
                                     
                                 </div>
-                                {{-- <div class="row">
-                                        <div class="form-group col-xs-6 col-lg-4">
-                                            <label class="control-label">Servicio </label>
-                                            <select class="form-control" id="select_tipo" name="tipo_servicio_editar">
-                                                <option value="0" selected disabled>Selecciona un Servicio</option>
-                                                <option value="Fumigacion">Fumigación</option>
-                                                <option value="Desratizacion">Desratización</option>
-                                                <option value="Plagas">Control de plagas</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-lg-2">
-                                            <label for="" style="margin-bottom: 6px;">¿Confirmado?</label>
-                                            <div class="switch">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" checked class="onoffswitch-checkbox" id="confirmado">
-                                                        <label class="onoffswitch-label" for="confirmado">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        <div class="form-group col-lg-1">
-                                            <label class="control-label">Actual</label>
-                                            <div class="circle" id="color_tecnico_editar" style="background-color: white;"></div>
-                                        </div>
-                                        <div class="form-group col-xs-12 col-lg-5">
-                                            <label class="control-label">Nuevo técnico </label>
-                                            <select class="form-control" id="select_tecnicos">
-                                                <option value="" selected disabled>Selecciona un Técnico</option>
-                                                @foreach($tecnicos as $tecnico)
-                                                    <option value="{{$tecnico->id}}">{{$tecnico->nombre}} </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                </div> --}}
-                                {{-- <div class="row">
-                                    <div class="form-group col-lg-2">
-                                        <label>Frecuencia Actual</label>
-                                        <input type="text" class="form-control" id="frecuencia_solicitud">
-                                    </div>
-                                    <div class="form-group col-lg-1">
-                                        <label>Otra</label>
-                                        <input type="checkbox" class="form-control" id="check">
-                                    </div>
-                                    <div class="form-group col-lg-3">
-                                        <label>Frecuencia</label>
-                                        <select class="form-control" id="select_frecuencia_editar" name="frecuencia_calidad" disabled>
-                                            <option value="">Seleccione una frec.</option>
-                                            <option value="7">Semanal</option>
-                                            <option value="15">Quincenal</option>
-                                            <option value="30">Mensual</option>
-                                            <option value="60">Bimestral</option>
-                                            <option value="90">Trimestral</option>
-                                            <option value="120">Cada 4 Meses</option>
-                                            <option value="180">Semestral</option>
-                                            <option value="360">Anual</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <label>Instrucciones y Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="1" name="instrucciones" id="text-instrucciones"></textarea>
-                                    </div>
-                                </div> --}}
+
                             </div>
                             <div class="modal-footer">
                                 <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
@@ -668,46 +609,61 @@
             
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: function (event, jsEvent, view) {
+                //Variables locales
+                var nombre_sede;
+                var direccion_cliente;
+                var barrio_cliente;
+                var telefono_cliente;
+                var nombre_contacto;
                 crsfToken = document.getElementsByName("_token")[0].value;
-                $("#btn-lock").empty();
-                // var con=confirm("Esta seguro que desea eliminar el evento");//Muestra alert con botones de aceptar y cancelar
-                // if(con){//En caso de presionar aceptar
-                //     $.ajax({
-                //     url: '/eventos/elminar-evento',
-                //     data: 'id=' + event.id,
-                //     headers: {
-                //         "X-CSRF-TOKEN": crsfToken
-                //         },
-                //     type: "POST",
-                //     success: function () {
-                //             $('#calendar').fullCalendar('removeEvents', event._id);
-                //             console.log("Evento eliminado");
-                //         }
-                //     });
-                // }else{
-                // console.log("Cancelado");
-                // }
+                $("#btn-lock").empty(); //Limpia el boton de bloqueado
+                //Peticion al servidor para obtener los datos del servicio seleccionado
                 $.get(`/servicios/${event.id}/edit`)
                 .then((res) => {
-                    //console.log(res[0]);
-                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
-                    $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
-                    $("#ver_nombre_sede").val(res[0].solicitud.sede.nombre)
-                    $("#ver_direccion_sede").val(res[0].solicitud.sede.direccion)
-                    $("#ver_barrio_sede").val(res[0].solicitud.sede.barrio)
-                    $("#ver_contacto_sede").val(res[0].solicitud.sede.nombre_contacto)
-                    $("#ver_telefono_sede").val(res[0].solicitud.sede.telefono_contacto)
+                    //Quita el loader de la vista
+                    $(".modal-body").removeClass('sk-loading');
+                    //Valida que el cliente sea persona natural o juridica
+                    if(res[0].solicitud.sede){
+                        nombre_sede = res[0].solicitud.sede.nombre;
+                        direccion_cliente = res[0].solicitud.sede.direccion;
+                        barrio_cliente = res[0].solicitud.sede.barrio;
+                        telefono_cliente = res[0].solicitud.sede.telefono_contacto;
+                        nombre_contacto = res[0].solicitud.sede.nombre_contacto;
+                    }else{
+                        nombre_sede = 'Sede única';
+                        direccion_cliente = res[0].solicitud.cliente.direccion;
+                        barrio_cliente = res[0].solicitud.cliente.barrio;
+                        telefono_cliente = res[0].solicitud.cliente.celular;
+                        nombre_contacto = res[0].solicitud.cliente.nombre_contacto;
+                    }
+                    //Valida si el servicio esta bloqueado o no
+                    if(res[0].confirmado === 0){
+                        $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
+                    }else{
+                        $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`).addClass('active');
+                    }
+                    //Conversiones y procesamiento de las fechas para su correcta visualización
                     var date1 = moment(res[0].fecha_inicio+" "+res[0].hora_inicio).format('YYYY-MM-DD hh:mm a');
-                    var date2 = Date.parse(res[0].hora_inicio);
+                    var date2 = moment(res[0].fecha_fin+" "+res[0].hora_fin).format('YYYY-MM-DD hh.mm a');
+                    var hours = Math.floor((res[0].duracion)/60);
+                    var minutes = (res[0].duracion % 60);
+                    //Llena los input con los valores de la respuesta del servidor
+                    $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
+                    $("#ver_nombre_sede").val(nombre_sede);
+                    $("#ver_direccion_sede").val(direccion_cliente);
+                    $("#ver_barrio_sede").val(barrio_cliente);
+                    $("#ver_contacto_sede").val(nombre_contacto);
+                    $("#ver_telefono_sede").val(telefono_cliente);
                     $("#ver_hora_inicio").val(date1);
-                    $("#ver_datos_fin")
-                    $("#frecuencia_calidad")
-                    $("#ver_duracion")
-                    $("#ver_instrucciones")
+                    $("#ver_datos_fin").val(date2);
+                    $("#ver_frecuencia").val(res[0].frecuencia).change();
+                    $("#ver_duracion").val(hours+" hora(s) "+minutes+" minuto(s)");
+                    $("#ver_instrucciones").val(res[0].solicitud.observaciones)
                     $("#color_tecnico_editar").attr('style', `background-color: ${res[0].color}`);
-                    console.log('GET EditService Successfull');
+                    console.log('GET ver servicios Successfully');
                 })
                 .catch((err) => {
+                    $(".modal-body").removeClass('sk-loading');
                     console.log(err);
                 })
                 document.getElementById("btn-modal2").click();
@@ -737,20 +693,6 @@
                 console.log(err);
             });
         });
-        
-
-        //Evento click del checbox
-        $("#check").on('click', function () {
-            if ($("#check:checked").length == 1) {  //valida que el checkbox este seleccionado
-                $("#select_frecuencia").attr('disabled', false);        //Habilita el select
-                $("#frecuencia_solicitud").attr('disabled', true);      //Deshabilita el input
-                checkbox = true;
-            }else{
-                $("#select_frecuencia").attr('disabled', 'disabled');   //Deshabilita el select
-                $("#frecuencia_solicitud").attr('disabled', false);     //Habilita el input
-                checkbox = false;
-            }
-        })
         
         //Evento change del select de tecnicos
         $(".tecnicos").change(event => {

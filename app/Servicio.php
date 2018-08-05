@@ -59,6 +59,10 @@ class Servicio extends Model
     public function solicitud()
     {
         # code...
-        return $this->belongsTo(Solicitud::class)->with('sede:id,nombre,direccion,nombre_contacto,barrio,telefono_contacto', 'cliente:id,nombre_cliente');
+        return $this->belongsTo(Solicitud::class)
+            ->with(
+                'sede:id,nombre,direccion,nombre_contacto,barrio,telefono_contacto', 
+                'cliente:id,nombre_cliente,direccion,barrio,nombre_contacto,celular'
+            );
     }
 }
