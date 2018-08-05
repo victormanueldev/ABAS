@@ -141,9 +141,22 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request, $id)
     {
         //
+        if ($request->ajax()) {
+            # code...
+            $servicios = Servicio::with('tipos', 'tecnicos')->where('id', $id)->get();
+            return  $servicios;
+        } else {
+            # code...
+            $servicio =Servicio::find($id);
+            $tipos = TipoServicio::all();
+            $tecnicos = Tecnico::all();
+            return view('programacion.editar-servicios', compact('servicio', 'tipos', 'tecnicos'));
+        }
+        
+
     }
 
     /**

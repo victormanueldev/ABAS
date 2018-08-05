@@ -239,17 +239,8 @@
                                                 <div class="col-sm-6 col-xs-12" style="margin-bottom: 7px;">
                                                         <a class="btn btn-primary btn-outline" id="btn-lock" style="cursor: not-allowed;"></a>
                                                 </div>
-                                                <div class="col-sm-6 col-xs-12" style="margin-bottom: 7px;">
-                                                    <label >Opciones: </label>
-                                                    <a class="btn btn-default btn-outline" title="Editar Servicio">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <a class="btn btn-default btn-outline" title="Imprimir Documentos">
-                                                        <i class="fa fa-print"></i>
-                                                    </a>
-                                                    <a class="btn btn-default btn-outline">
-                                                        <i class="fa fa-wrench"></i>
-                                                    </a>
+                                                <div class="col-sm-6 col-xs-12" style="margin-bottom: 7px;padding-left: 50px;" id="div-opciones">
+
                                                 </div>
                                                 <div class="form-group col-xs-12 col-lg-6">
                                                     <label class="control-label">Hora de inicio </label>
@@ -287,7 +278,32 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    
+                                    <div class="col-lg-6">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tipo de Servicio</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody-tipos">
+                                        
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                    <div class="col-lg-6">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre del Técnico</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbody-tecnicos">
+                                        
+                                        </tbody>
+                                    </table>
+                                    </div>
                                 </div>
 
                             </div>
@@ -608,20 +624,32 @@
             },
             
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
-            eventClick: function (event, jsEvent, view) {
+            eventClick: (event, jsEvent, view) => {
+                $("#div-opciones").empty();
+                //Añadir opciones al modal de ver servicio
+                $("#div-opciones").append(
+                    `<label>Opciones: </label>
+                    <a href="/servicios/${event.id}" class="btn btn-default btn-outline" id="btn-editar-servicio" title="Editar Servicio">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="btn btn-default btn-outline" id="btn-imprimir-servicio" title="Imprimir Documentos">
+                        <i class="fa fa-print"></i>
+                    </a>`
+                )
                 //Variables locales
+                var id_servicio = event.id;
                 var nombre_sede;
                 var direccion_cliente;
                 var barrio_cliente;
                 var telefono_cliente;
                 var nombre_contacto;
                 crsfToken = document.getElementsByName("_token")[0].value;
+                $("#tbody-tipos").empty();
+                $("#tbody-tecnicos").empty();
                 $("#btn-lock").empty(); //Limpia el boton de bloqueado
                 //Peticion al servidor para obtener los datos del servicio seleccionado
                 $.get(`/servicios/${event.id}/edit`)
                 .then((res) => {
-                    //Quita el loader de la vista
-                    $(".modal-body").removeClass('sk-loading');
                     //Valida que el cliente sea persona natural o juridica
                     if(res[0].solicitud.sede){
                         nombre_sede = res[0].solicitud.sede.nombre;
@@ -658,8 +686,23 @@
                     $("#ver_datos_fin").val(date2);
                     $("#ver_frecuencia").val(res[0].frecuencia).change();
                     $("#ver_duracion").val(hours+" hora(s) "+minutes+" minuto(s)");
-                    $("#ver_instrucciones").val(res[0].solicitud.observaciones)
-                    $("#color_tecnico_editar").attr('style', `background-color: ${res[0].color}`);
+                    $("#ver_instrucciones").val(res[0].solicitud.observaciones);
+                    res[0].tipos.forEach((value,index) => {
+                        $("#tbody-tipos").append(
+                            `<tr>    
+                                <td>${index+1}</td>
+                                <td>${value.nombre}</td>
+                            </tr>`);
+                    });
+                    res[0].tecnicos.forEach((value,index) => {
+                        $("#tbody-tecnicos").append(
+                            `<tr>    
+                                <td>${index+1}</td>
+                                <td>${value.nombre}</td>
+                            </tr>`);
+                    });
+                    //Quita el loader de la vista
+                    $(".modal-body").removeClass('sk-loading');
                     console.log('GET ver servicios Successfully');
                 })
                 .catch((err) => {
@@ -669,7 +712,7 @@
                 document.getElementById("btn-modal2").click();
             } 
         });
-
+        
         //Change del input de autocompletado
         $input.change(function() {
             var current = $input.typeahead("getActive");
