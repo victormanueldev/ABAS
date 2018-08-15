@@ -88,7 +88,6 @@ class SolicitudesController extends Controller
     {
         //
         if ($request->id_sede === 0) {
-            # code...
             $solicitud = DB::table('solicitudes')
                                     ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'sedes.direccion', 'sedes.barrio', 'sedes.nombre_contacto', 'sedes.telefono_contacto')
                                     ->join('sedes', 'solicitudes.sede_id', 'sedes.id')
@@ -96,7 +95,6 @@ class SolicitudesController extends Controller
                                     ->where('solicitudes.sede_id', $request->id_sede)
                                     ->get();
         } else {
-            # code...
             $solicitud = DB::table('solicitudes')
                                 ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'clientes.barrio', 'clientes.nombre_contacto', 'clientes.celular AS telefono_contacto', 'clientes.direccion')
                                 ->join('clientes', 'solicitudes.cliente_id', 'clientes.id')
@@ -104,8 +102,6 @@ class SolicitudesController extends Controller
                                 ->where('solicitudes.sede_id', $request->id_sede)
                                 ->get();
         }
-        
-        
         return $solicitud;
     }
 

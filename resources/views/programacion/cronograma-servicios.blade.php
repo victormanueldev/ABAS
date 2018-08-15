@@ -158,13 +158,22 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-lg-12">
+                                                    <div class="form-group col-lg-9">
                                                         <label >Tecnicos</label>
                                                         <select class="form-control" id="select_tecnicos2" multiple="multiple">
                                                             @foreach($tecnicos as $tecnico)
                                                                 <option value="{{$tecnico->id}}">{{$tecnico->nombre}} </option>
                                                             @endforeach
                                                         </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-3">
+                                                        <label style="width: 100%">Historial</label>
+                                                        <button type="button" class="btn btn-white" id="historial_tecnicos"> <i class="fa fa-eye"></i> </button>
+                                                        <div id="list-historic" style="display: none"> 
+                                                                <ul class="list-group" id="list-tecnicos">
+
+                                                                </ul>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-lg-12">
                                                         <label>Instrucciones y Observaciones</label>
@@ -511,6 +520,7 @@
                 inicio_servicio = start.format("YYYY-MM-DD");
                 //Limpiar elementos
                 $("#select_sedes").empty();
+                $(".list-group-item").remove();
                 $('#input_autocomplete').val('');
                 $("#dir_sede").val('');
                 $("#barrio_sede").val('');
@@ -522,6 +532,7 @@
                 $("#num_minutos").val('');
                 $('#select_servicios').select2("val", "");
                 $('#select_tecnicos2').select2("val", "");
+                $("#historial_tecnicos").popover('destroy');
             },
             
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -646,7 +657,8 @@
                 crsfToken = document.getElementsByName("_token")[0].value;
                 $("#tbody-tipos").empty();
                 $("#tbody-tecnicos").empty();
-                $("#btn-lock").empty(); //Limpia el boton de bloqueado
+                $("#btn-lock").empty();                 //Limpia el boton de bloqueado
+                $("#btn-lock").removeClass('active');   //Quita la clase css del elemento HTML
                 //Peticion al servidor para obtener los datos del servicio seleccionado
                 $.get(`/servicios/${event.id}/edit`)
                 .then((res) => {
@@ -737,15 +749,6 @@
             });
         });
         
-        //Evento change del select de tecnicos
-        $(".tecnicos").change(event => {
-            $.get(`/tecnicos/getColor/${event.target.value}`, function (res) {
-                //Peticion para obtener el color de un técnico
-                $(".color_tecnico").attr('style', `background-color: ${res[0].color}`); //Cambia el color del elemento
-                color = res[0].color;   //Guarda el color en la variable publica
-            });
-        })
-        
         //Peticion al servidor para obtener la solicitud de una sede
         function obtenerSolicitudSede(id_sede, crsfToken ) {
             $.ajax({
@@ -765,23 +768,38 @@
                         //$("#select_frecuencia option:eq(0)").attr('selected', 'selected');
                         id_solicitud = '';
                     }else{
-                        console.log(res);
                         $("#text-instrucciones").val(res[0]['observaciones']);
                         $("#dir_sede").val(res[0].direccion);
                         $("#barrio_sede").val(res[0].barrio);
                         $("#contacto_sede").val(res[0].nombre_contacto);
                         $("#tel_sede").val(res[0].telefono_contacto);
-                        //console.log(res[0]['frecuencia']);
+                        //Inicializacion del Popover
+                        $('#historial_tecnicos').popover({
+                            title: "Historial de Tecnicos", 
+                            container: false, 
+                            animation: true,
+                            html: true,
+                            template: '<div class="popover" role="tooltip" style="top: -1.93333px; left: 55px; display: block;width: 250px;"><div class="arrow"></div><h3 class="popover-title" style="text-align: center;"></h3><div class="popover-content"></div></div>',
+                            content: function () {
+                                return $("#list-historic").html();  //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
+                            }
+                        }); 
                         id_solicitud = res[0]['id'];
-                        // $.get(`/tecnicos/${id_solicitud}`, function (data) {
-                        //     $("#rows-table-history").empty();
-                        //     data.forEach(element => {
-                        //         console.log(element);
-                        //         $("#rows-table-history").append(`<tr><td>${element.nombre}</td><td>${element.servicios}</td> </tr>`);
-                        //     });
-                        // });
+                        //Servicio para obtener el historia de tecnicos del cliente seleccionado
+                        $.get(`/tecnicos/${id_solicitud}`, function (data) {
+                            $(".list-group-item").remove(); //Quita los elementos del DOM que contengan esta clase
+                            if (data == '') {   //Valida que haya tenido servicios
+                                $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center">Todavia no hay servicios en esta sede.</li>`); //Agreaga elementos HTML en el elem con el ID seleccionado
+                            } else { 
+                                data.forEach(element => {
+                                    $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center">${element.nombre}</li>`);
+                                });
+                                
+                            }
+                        });
                         frecuencia_solicitud = res[0]['frecuencia']; //Guarda la frecuencia en la variable publica
-                        $("#select_frecuencia").val(frecuencia_solicitud).change(); //Cambia el valor del input      
+                        $("#select_frecuencia").val(frecuencia_solicitud).change(); //Cambia el valor del input   
+
                     }
                 },
                 error: function (err) {
@@ -821,7 +839,7 @@
             crsfToken = document.getElementsByName("_token")[0].value;
             //Peticion HTTP para guardar el evento
             $.ajax({
-                url: '/servicios',//Redirecciona a la direccion URL
+                url: '/servicios',//URL del servicio
                 data:
                     //Datos que enviará
                     {

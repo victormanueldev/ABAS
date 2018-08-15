@@ -126,7 +126,6 @@ class ServicioController extends Controller
                     }
                 }
                 return response()->json(["Servicio Guardado con Exito"], 200);
-                // return response()->json($max_id);
             }else{
                 return response()->json("Error en la petición AJAX", 406);
             }
@@ -180,9 +179,40 @@ class ServicioController extends Controller
      * @param  \ABAS\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Servicio $servicio)
+    public function update($id, Request $request)
     {
-        //
+        //Actualizar datos del servicio
+        $servicio = Servicio::find($id);
+        $servicio->fecha_inicio = $request->fecha_inicio;
+        $servicio->fecha_fin = $request->fecha_fin;
+        $servicio->hora_inicio = $request->hora_inicio;
+        $servicio->hora_fin = $request->hora_fin;
+        $servicio->frecuencia = $request->frecuencia;
+        $servicio->duracion = $request->duracion;
+        $servicio->confirmado = $request->confirmado;
+        //Borrar los registros actuales de las tablas pivot
+        DB::table('servicio_tecnico')->where('servicio_id', $id)->delete();
+        DB::table('servicio_tipo_servicio')->where('servicio_id', $id)->delete();
+        //Actualiza el servicio con sus nuevos valores
+        $servicio->save();
+        //Insertar los registros en la tabla pivot (Servicio_tecnico)
+        foreach ($request->tecnicos as $index => $value) {
+            DB::table('servicio_tecnico')->insert([
+                'servicio_id' => $id,
+                'tecnico_id' => $value
+            ]);
+        }
+        //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+        foreach ($request->tipos as $index => $value) {
+            DB::table('servicio_tipo_servicio')->insert([
+                'servicio_id' => $id,
+                'tipo_servicio_id' => $value
+            ]);
+        }
+
+        return response()->json('Servicio Actualizado con éxtio',200);
+        
+        
     }
 
     /**

@@ -52,7 +52,8 @@ class TecnicoController extends Controller
         $now = Carbon::now();
         $three_months_ago = $now->subMonths(3); //Restar 3 MEses a la fecha actual
         $tecnicos = Servicio::select('tecnicos.nombre', DB::raw('count(servicios.id) as servicios'))
-                                ->join('tecnicos', 'servicios.tecnico_id', '=', 'tecnicos.id')
+                                ->join('servicio_tecnico', 'servicios.id', '=','servicio_tecnico.servicio_id')
+                                ->join('tecnicos', 'servicio_tecnico.tecnico_id', '=', 'tecnicos.id')
                                 ->where('servicios.solicitud_id', $id)
                                 ->where('servicios.fecha_inicio', '>=', $three_months_ago->toDateString())
                                 ->groupBy('tecnicos.nombre')
