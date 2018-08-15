@@ -765,7 +765,19 @@
                 },
                 success: function(res){
                     if(res == ''){  //Valida que la respueta este vacia
-                        //$("#select_frecuencia option:eq(0)").attr('selected', 'selected');
+                        console.log('Esta sede no tiene una solicitud creada, por favor creela');
+                        $(".list-group-item").remove();
+                        $('#input_autocomplete').val('');
+                        $("#dir_sede").val('');
+                        $("#barrio_sede").val('');
+                        $("#contacto_sede").val('');
+                        $("#tel_sede").val('');
+                        $("#select_frecuencia").val('0').change();
+                        $("#hora_inicio").val('');
+                        $("#num_horas").val('');
+                        $("#num_minutos").val('');
+                        $('#select_servicios').select2("val", "");
+                        $('#select_tecnicos2').select2("val", "");
                         id_solicitud = '';
                     }else{
                         $("#text-instrucciones").val(res[0]['observaciones']);
@@ -814,7 +826,6 @@
             var id_sede = $("#select_sedes").val();
             //Referencia al metodo de obtener la solicitud del cliente
             obtenerSolicitudSede(id_sede, crsfToken);
-            
         });
 
         //Evento Submit del modal de crear Servicio
