@@ -18,6 +18,8 @@ class TecnicoController extends Controller
     public function index()
     {
         //
+        $tecnicos = Tecnico::all();
+        return view('programacion.calendario-tecnicos', compact('tecnicos'));
     }
 
     /**
@@ -100,5 +102,23 @@ class TecnicoController extends Controller
     {
         $color = Tecnico::select('color')->where('id', $id)->get();
         return $color;
+    }
+
+    public function getService($id)
+    {
+        $servicios = Tecnico::with('servicios')->where('id', $id)->get();
+        $data = collect();
+        foreach ($servicios[0]->servicios as $servicio) {
+            # code..
+            $data->push([
+                'id' => $servicio->id,
+                'title' => $servicios[0]->nombre,
+                'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                "end" => $servicio->fecha_fin." ".$servicio->hora_fin,
+                'backgroundColor' => $servicios[0]->color, 
+                'borderColor' => $servicios[0]->color
+            ]);
+        }
+        return $data;
     }
 }

@@ -848,6 +848,7 @@
             //Prueba de fechas y horas
             console.log($("#hora_inicio").val());//email, start1.format('YYYY-MM-DD HH:mm'));
             crsfToken = document.getElementsByName("_token")[0].value;
+            
             //Peticion HTTP para guardar el evento
             $.ajax({
                 url: '/servicios',//URL del servicio
@@ -870,7 +871,7 @@
                 success: function(events) {     //En caso de ser exitoso el envio de datos
                     console.log('Evento creado'); //Escribe en la consola
                     document.getElementById("btn-close2").click();
-                    $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+                    $('#calendar').fullCalendar('updateEvents', url);//Refresca todos los eventos dentro del calendario
                 },
                 error: function(json){//En caso de ser erroneo el envio de datos 
                     console.log("Error al crear evento");//Escribe en console
@@ -879,15 +880,23 @@
         });
 
         //Evento click del boton de imprimir Modal (Crear Servicio)
+       
         $("#btn-print").click(event => {
+        // $("#btn-imprimir-servicio").click(event => {
             event.preventDefault();
-            $('#modal-servicios')
-            .modal('hide')                          //Oculta el modal abierto
-            .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
-                $('#event-print').modal('show');    //Muestra el nuevo modal
+            console.log("Refecth");
 
-                $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
-            });
+            var url="/eventos/index";
+            // $('#calendar').fullCalendar({ events: {url: url}    });//Refresca todos los eventos dentro del calendario
+            $('#calendar').fullCalendar('removeEvents');
+            $('#calendar').fullCalendar('addEventSource', url);
+        //     $('#modal-servicios')
+        //     .modal('hide')                          //Oculta el modal abierto
+        //     .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
+        //         $('#event-print').modal('show');    //Muestra el nuevo modal
+
+        //         $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+        //     });
         });
 
         $("#form-print").submit(event => {

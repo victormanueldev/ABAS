@@ -91,6 +91,10 @@
                         <li id="m-cronograma">
                             <a href="{{route('servicios.create')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
                         </li>
+
+                        <li id="m-calendario-tecnicos">
+                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar"></i> <span class="nav-label">Horarios</span></a>
+                        </li>
                         
                     @else
 
