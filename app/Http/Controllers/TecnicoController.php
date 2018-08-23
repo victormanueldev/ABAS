@@ -53,12 +53,13 @@ class TecnicoController extends Controller
     {
         $now = Carbon::now();
         $three_months_ago = $now->subMonths(3); //Restar 3 MEses a la fecha actual
-        $tecnicos = Servicio::select('tecnicos.nombre', DB::raw('count(servicios.id) as servicios'))
+        $tecnicos = Servicio::select('tecnicos.nombre', DB::raw('count(servicios.id) as servicios'), 'tecnicos.id')
                                 ->join('servicio_tecnico', 'servicios.id', '=','servicio_tecnico.servicio_id')
                                 ->join('tecnicos', 'servicio_tecnico.tecnico_id', '=', 'tecnicos.id')
                                 ->where('servicios.solicitud_id', $id)
                                 ->where('servicios.fecha_inicio', '>=', $three_months_ago->toDateString())
-                                ->groupBy('tecnicos.nombre')
+                                ->groupBy('tecnicos.nombre', 'tecnicos.id')
+                                ->orderBy('servicios', 'desc')
                                 ->limit(3)
                                 ->get();
         return $tecnicos;
@@ -120,5 +121,16 @@ class TecnicoController extends Controller
             ]);
         }
         return $data;
+    }
+
+    public function getDatesServices($solicitud, $tecnico)
+    {
+        $servicios = Servicio::select('servicios.fecha_inicio')
+                            ->join('servicio_tecnico', 'servicios.id', '=','servicio_tecnico.servicio_id')
+                            ->join('tecnicos', 'servicio_tecnico.tecnico_id', '=', 'tecnicos.id')
+                            ->where('servicios.solicitud_id', $solicitud)
+                            ->where('tecnicos.id', $tecnico)
+                            ->get();
+        return $servicios;
     }
 }

@@ -379,8 +379,10 @@
 <!-- Typehead -->
 <script src="{{asset('js/plugins/typehead/bootstrap3-typeahead.min.js')}}"></script>
 <script>
+ 
 
     $(document).ready(function() {
+
 
         $("#select_servicios").select2({
             width: '100%',
@@ -767,7 +769,6 @@
                     if(res == ''){  //Valida que la respueta este vacia
                         console.log('Esta sede no tiene una solicitud creada, por favor creela');
                         $(".list-group-item").remove();
-                        $('#input_autocomplete').val('');
                         $("#dir_sede").val('');
                         $("#barrio_sede").val('');
                         $("#contacto_sede").val('');
@@ -798,15 +799,16 @@
                         }); 
                         id_solicitud = res[0]['id'];
                         //Servicio para obtener el historia de tecnicos del cliente seleccionado
-                        $.get(`/tecnicos/${id_solicitud}`, function (data) {
+                        $.get(`/tecnicos/${id_solicitud}`)
+                        .then((data) => {
                             $(".list-group-item").remove(); //Quita los elementos del DOM que contengan esta clase
                             if (data == '') {   //Valida que haya tenido servicios
                                 $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center">Todavia no hay servicios en esta sede.</li>`); //Agreaga elementos HTML en el elem con el ID seleccionado
                             } else { 
-                                data.forEach(element => {
-                                    $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center">${element.nombre}</li>`);
+                                data.forEach((value, index) => {
+                                    $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center" id="tec${index}" onmouseover="tool(${index},${value.id},${id_solicitud})" onmouseout="quit(${index})">${value.nombre}</li>`);
                                 });
-                                
+                              
                             }
                         });
                         frecuencia_solicitud = res[0]['frecuencia']; //Guarda la frecuencia en la variable publica
@@ -819,6 +821,7 @@
                 }
             });
         }
+
 
         //Evento change del select de Sedes
         $("#select_sedes").change(event => {
@@ -908,7 +911,70 @@
             $('#event-print')
             .modal('hide')  
         })
+
     });
+
+    /**
+    * Evento MouseOver del item de la lista del historial de tecnicos
+    * Muestra el tooltip para cada elemento de la lista
+    * @param {id} ID del elemento HTML
+    * @param {tecnico} ID del tecnico (BD)
+    * @param {id_solicitud} ID de la solicitud
+    */
+    function tool(id, tecnico, id_solicitud) {
+        //Variable que guarda el contenido HTML del tooltip a mostrar
+        var tooltip2 = 
+        `<div 
+            class="tooltipevent" 
+            style=" border: 1px solid #d2d2d2;
+                    width:200px;
+                    height:auto;
+                    padding:10px;
+                    color:inherit;
+                    background:#fff;
+                    position:absolute;
+                    z-index:10001;
+                    right: 230px;
+                    bottom:-45px;
+                    background-color: rgba(0,0,0,0.85);
+                    color:#fff;">
+            <div class="row">
+                <h4>Fechas de servicios</h4>
+                <div class="col-lg-12">
+                    <ul class="list-group" style="margin-bottom: 0px;" id="list-dates">
+                        <div class="sk-spinner sk-spinner-pulse" id="loader"></div>
+                    </ul>
+                </div>
+            </div>
+        </div>`;
+
+        //Agrega el elemento al DOM (Elemento de la lista de historial de tecnicos)
+        $(`#tec${id}`).append(tooltip2);
+        //Peticion al servidor para obtener las fechas de los servicios realizados en esta sede por tecnico
+        $.get(`/tecnicos/fechas/${id_solicitud}/${tecnico}`)
+        .then((res) => {
+            //Quita el loader
+            $("#loader").remove();
+            //Borra los items de la lista existente (tooltip)
+            $(".date-service").remove();
+            //Recorre el array de la respuesta del servidor
+            res.forEach(value => {
+                //Añade un item a la lista de fechas (tooltip)
+                $("#list-dates").append(`<li class="list-group-item date-service" style="border: none;">${value.fecha_inicio}</li>`);
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
+    /**
+    * Quita el tooltip activado
+    * @param {id} ID del elemento HTML
+    */
+    function quit(id) {
+        $(".tooltipevent").remove();
+    }
 
 </script>
 @endsection
