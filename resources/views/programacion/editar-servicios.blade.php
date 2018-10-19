@@ -47,14 +47,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-lg-6" id="data_1">
-                                    <label>Fecha de finalización</label>
-                                    <div class="input-group date">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" class="form-control" placeholder="" name="fecha_fin" id="fecha_fin" value="{{$servicio->fecha_fin}}">
-                                    </div>
-                                </div>
-
                                  <div class="form-group col-lg-6">
                                     <label>Hora de inicio*</label>
                                     <div class="input-group clockpicker" data-autoclose="true">
@@ -62,16 +54,6 @@
                                             <span class="fa fa-clock-o"></span>
                                         </span>
                                         <input type="text" class="form-control" placeholder="09:30" name="hora_inicio" id="hora_inicio" value="{{$servicio->hora_inicio}}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-6">
-                                    <label>Hora de Finalización*</label>
-                                    <div class="input-group clockpicker" data-autoclose="true">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-clock-o"></span>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="09:30" name="hora_fin" id="hora_fin" value="{{$servicio->hora_fin}}">
                                     </div>
                                 </div>
                                 
@@ -150,7 +132,8 @@
 @section('ini-scripts')
     <!-- Select2 -->
     <script src="{{asset('js/plugins/select2/select2.full.min.js')}}"></script>
-
+    <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+    <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
     <script>
         var switchery
         var id_servicio;
@@ -204,56 +187,84 @@
             
             $("#form-editar").submit(event => {
                 event.preventDefault();
-                //Variables locales
-                var frecuencia;
-                var tecnicos = []; 
-                var tipos_servicio = [];
-                var duracion;
-                var confirmado;
-                var crsfToken;
-                //Setting de variables para estructuracion de informacion
-                duracion = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val()) 
-                frecuencia = parseInt($("#select_frecuencia").val());
-                $("#select_tecnicos2").val().forEach((value, index) => {
-                    tecnicos[index] = value;
-                });
-                $("#select_servicios").val().forEach((value, index) => {
-                    tipos_servicio[index] = value
-                });
-                //valida que el checkbox esta seleccionado
-                if($("#confirmado:checked").length == 1){
-                    confirmado = 1;
-                }else{
-                    confirmado = 0;
-                }
-                crsfToken = document.getElementsByName("_token")[0].value;
-                //Peticion al servidor para actualizar el servicio
-                $.ajax({
-                    url: '/servicios/'+id_servicio,
-                    data: {
-                        fecha_inicio: $("#fecha_inicio").val(),
-                        fecha_fin: $("#fecha_fin").val(),
-                        hora_inicio: $("#hora_inicio").val(),
-                        hora_fin: $("#hora_fin").val(),
-                        frecuencia: frecuencia,
-                        duracion: duracion,
-                        tecnicos: tecnicos,
-                        tipos: tipos_servicio,
-                        confirmado: confirmado
-                    },
-                    type: "PUT",//Método de envío
-                    headers: {
-                        "Content-Type": 'application/x-www-form-urlencoded',
-                        "X-CSRF-TOKEN": crsfToken   //Token de seguridad
-                    },
-                    success: function(events) {     //En caso de ser exitoso el envio de datos
-                        console.log('Actualizacion Exitosa!');
-                        window.location.href = '/servicios/create';
-                    },
-                    error: function(json){//En caso de ser erroneo el envio de datos 
-                        console.log("Error al actualizar evento evento");//Escribe en console
+                //Alert de confirmacion
+                swal({
+                    title: "¡Advertencia!",
+                    text: "¿Estás seguro de guardar esta información?",
+                    icon: "warning",
+                    buttons: {
+                        cancel: true,
+                        confirm: {
+                            text: 'Aceptar',
+                            visible: true,
+                            value: true,
+                            closeModal: false, //Muestra el Loader
+                        }
                     }
                 })
+                .then(isConfirm =>  { //Boton Aceptar presionado
+                    if (isConfirm) {
+                        //Variables locales
+                        var frecuencia;
+                        var tecnicos = []; 
+                        var tipos_servicio = [];
+                        var duracion;
+                        var confirmado;
+                        var crsfToken;
+                        //Setting de variables para estructuracion de informacion
+                        duracion = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val()) 
+                        frecuencia = parseInt($("#select_frecuencia").val());
+                        $("#select_tecnicos2").val().forEach((value, index) => {
+                            tecnicos[index] = value;
+                        });
+                        $("#select_servicios").val().forEach((value, index) => {
+                            tipos_servicio[index] = value
+                        });
+                        //valida que el checkbox esta seleccionado
+                        if($("#confirmado:checked").length == 1){
+                            confirmado = 1;
+                        }else{
+                            confirmado = 0;
+                        }
+                        crsfToken = document.getElementsByName("_token")[0].value;
+                        var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
+                        //Peticion al servidor para actualizar el servicio
+                        $.ajax({
+                            url: '/servicios/'+id_servicio,
+                            data: {
+                                fecha_inicio: $("#fecha_inicio").val(),
+                                hora_inicio: horaInicioFormat,
+                                frecuencia: frecuencia,
+                                duracion: duracion,
+                                tecnicos: tecnicos,
+                                tipos: tipos_servicio,
+                                confirmado: confirmado
+                            },
+                            type: "PUT",//Método de envío
+                            headers: {
+                                "Content-Type": 'application/x-www-form-urlencoded',
+                                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+                            },
+                        })
+                        .then((res) => {
+                            console.log(res);
+                            swal("Actualizado!", "El servicio ha sido actualizado.", "success")
+                            .then(value => { //Boton OK actualizado
+                                if(value){
+                                    window.location.href = "/servicios/create"
+                                }
+                            })
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                            swal("¡Error!", "Ha ocurrido un error inesperado.", "error")
+                        })
+                        
+                    } else {
+                        swal("Cancelado", "Actualización cancelada.", "error");
+                    }
+                })
+
             })
         });
 

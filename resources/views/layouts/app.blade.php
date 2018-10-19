@@ -89,7 +89,7 @@
                     @elseif(Auth::user()->area_id == '3')
 
                         <li id="m-cronograma">
-                            <a href="{{route('servicios.create')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
+                            <a href="{{route('servicios.create')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
                         </li>
 
                         <li id="m-calendario-tecnicos">
@@ -198,7 +198,9 @@
                     format: "yyyy-mm-dd"
                 });
 
-                $('.clockpicker').clockpicker();
+                $('.clockpicker').clockpicker({
+                    twelvehour: true
+                });
             }); 
     
     </script>

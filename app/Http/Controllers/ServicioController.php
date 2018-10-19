@@ -22,16 +22,40 @@ class ServicioController extends Controller
     public function index()
     {
         //
-        $servicios = Servicio::all();
+        $servicios = Servicio::with('solicitud')->get();
         $data = collect();
         foreach ($servicios as $servicio) {
+            //Valida que el cliente sea persona natural o juridica (Si tiene sedes)
+            if($servicio->solicitud->sede != ''){
+                $titleService = $servicio->solicitud->sede["nombre"];
+                $dirClient = $servicio->solicitud->sede["direccion"];
+                $telClient = $servicio->solicitud->sede["telefono_contacto"];
+                $nameContact = $servicio->solicitud->sede["nombre_contacto"];
+            }else{
+                $titleService = $servicio->solicitud->cliente["nombre_cliente"];
+                $dirClient = $servicio->solicitud->cliente["direccion"];
+                $telClient = $servicio->solicitud->cliente["celular"];
+                $nameContact = $servicio->solicitud->cliente["nombre_contacto"];
+            }
+
+            if($servicio->confirmado == 1){
+                $editableEvent = false;
+            }else{
+                $editableEvent = true;
+            }
+
             $data->push([
                 'id' => $servicio->id, 
-                'title' => $servicio->tipo, 
+                'title' => $titleService, 
                 'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
                 'end' => $servicio->fecha_fin." ".$servicio->hora_fin, 
                 'backgroundColor' => $servicio->color, 
-                'borderColor' => $servicio->color
+                'borderColor' => $servicio->color,
+                'lock' => $servicio->confirmado,
+                'dirClient' => $dirClient,
+                "contactClient" => $nameContact,
+                "telClient" => $telClient,
+                "editable" => $editableEvent
                 ]);
         }
         $data->toJson();//Convierte la colecciona a formato JSON
@@ -80,6 +104,9 @@ class ServicioController extends Controller
                 $servicio->save();
                 //Obtiene el ultimo servicio agendado
                 $max_id = DB::table('servicios')->max('id');
+                $serie = "S".$max_id;
+                //Actualizar el registro creado con el numero de serie S+$max_id
+                DB::table('servicios')->where('id', $max_id)->update(['serie' => $serie]);
                 //Crea el registro en la table pivot (servicio_tecnico) del actual servicio agendado
                 foreach ($request->id_tecnicos as $index => $value) {
                     DB::table('servicio_tecnico')->insert([
@@ -102,6 +129,7 @@ class ServicioController extends Controller
                     //Insertar varios registros con diferentes fechas de inicio en la BD
                     $id_servicio = DB::table('servicios')->insertGetId([
                         'frecuencia' => $request->frecuencia,
+                        'serie' => $serie,
                         "fecha_inicio" => $nueva_fecha,
                         'hora_inicio' => $request->hora_inicio,
                         'duracion' => $request->duracion,
@@ -144,11 +172,9 @@ class ServicioController extends Controller
     {
         //
         if ($request->ajax()) {
-            # code...
             $servicios = Servicio::with('tipos', 'tecnicos')->where('id', $id)->get();
             return  $servicios;
         } else {
-            # code...
             $servicio =Servicio::find($id);
             $tipos = TipoServicio::all();
             $tecnicos = Tecnico::all();
@@ -181,12 +207,15 @@ class ServicioController extends Controller
      */
     public function update($id, Request $request)
     {
+        //Convierte la fecha del request en un objeto Carbon
+        $dt_ini = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);   //Convierte el request en un objeto Carbon
         //Actualizar datos del servicio
         $servicio = Servicio::find($id);
         $servicio->fecha_inicio = $request->fecha_inicio;
-        $servicio->fecha_fin = $request->fecha_fin;
         $servicio->hora_inicio = $request->hora_inicio;
-        $servicio->hora_fin = $request->hora_fin;
+        $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
+        $servicio->fecha_fin = $dt_fin->toDateString();
+        $servicio->hora_fin = $dt_fin->toTimeString(); 
         $servicio->frecuencia = $request->frecuencia;
         $servicio->duracion = $request->duracion;
         $servicio->confirmado = $request->confirmado;
@@ -209,10 +238,7 @@ class ServicioController extends Controller
                 'tipo_servicio_id' => $value
             ]);
         }
-
-        return response()->json('Servicio Actualizado con éxtio',200);
-        
-        
+        return response()->json(["hora" => $servicio->fecha_fin, "inicio" => $dt_ini, "fin" => $dt_fin],200);
     }
 
     /**
@@ -221,9 +247,51 @@ class ServicioController extends Controller
      * @param  \ABAS\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Servicio $servicio)
+    public function destroy($idServicio, Request $request)
     {
         //
+        if($request->ajax()){
+            switch ($request->option) {
+                case '1':
+                    Servicio::destroy('id', $idServicio);
+                    //Borrar los registros actuales de las tablas pivot
+                    DB::table('servicio_tecnico')->where('servicio_id', $idServicio)->delete();
+                    DB::table('servicio_tipo_servicio')->where('servicio_id', $idServicio)->delete();
+                    break;
+                case '2':
+                    //Obtiene la seria a la que pertenece el ID del servicio
+                    $serieServicio = DB::table('servicios')->select('id','serie')->where('id', $idServicio)->get();
+                    //Obtiene los servicios pertenecientes de a esta serie
+                    $servicios = DB::table('servicios')->where('serie', $serieServicio[0]->serie)->get();
+                    //Recorre los servicios obtenidos
+                    foreach ($servicios as $servicio ) {
+                        //Valida que no sea el ID del servicio seleccionado
+                        if($servicio->id != $serieServicio[0]->id){
+                            //Borra el servicio de la BD
+                            Servicio::destroy('id', $servicio->id);
+                            //Borra los registros de este ID de las tablas pivot
+                            DB::table('servicio_tecnico')->where('servicio_id', $servicio->id)->delete();
+                            DB::table('servicio_tipo_servicio')->where('servicio_id', $servicio->id)->delete();
+                        }
+                    }
+                    break;
+                case '3':
+                    $serieServicio = DB::table('servicios')->select('id','serie')->where('id', $idServicio)->get();
+                    $servicios = DB::table('servicios')->where('serie', $serieServicio[0]->serie)->get();
+                    foreach ($servicios as $servicio ) {
+                        //Borra todos los servicios incluyendo el ID seleccionado
+                        Servicio::destroy('id', $servicio->id);
+                        DB::table('servicio_tecnico')->where('servicio_id', $servicio->id)->delete();
+                        DB::table('servicio_tipo_servicio')->where('servicio_id', $servicio->id)->delete();
+                    }
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            return response()->json('Delete Successfully' ,200);
+        }
     }
 
     /**
@@ -234,6 +302,27 @@ class ServicioController extends Controller
      */
     public function print($id, Request $request)
     {
+        
+    }
+
+    /**
+     * Guardar servicio Neutro con información básica
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveNeutralService(Request $request)
+    {
+        if($request->ajax()){
+            try{
+                Servicio::create($request->all());
+            }catch(\Exception $e ){
+                return response()->json($e, 500);
+            }
+            return response()->json('Creation Success', 201);   
+
+        }else{
+            return response()->json(['error: ' => 'Error en la petición'], 500);
+        }
         
     }
 }
