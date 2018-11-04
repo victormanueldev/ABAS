@@ -74,6 +74,7 @@ Route::resource('tecnicos', 'TecnicoController');
 Route::get('tecnicos/getColor/{id}', 'TecnicoController@getColor');
 Route::get('tecnicos/servicios/{id}', 'TecnicoController@getService');
 Route::get('tecnicos/fechas/{solicitud}/{tecnico}', 'TecnicoController@getDatesServices');
+Route::get('tecnicos/serviciosPorFecha/{id}/{fechaInicio}/{fechaFin}', 'TecnicoController@getServicesByDate');
 
 //Tipos de Servicios
 Route::resource('tipos', 'TipoServicioController');

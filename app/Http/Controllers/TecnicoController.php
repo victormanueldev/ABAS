@@ -123,6 +123,30 @@ class TecnicoController extends Controller
         return $data;
     }
 
+    public function getServicesByDate($id, $dateStart, $dateEnd)
+    {
+        // $servicios = Tecnico::with('servicios')->where('id', $id)->get();
+        $servicios = Servicio::select('servicios.fecha_inicio', 'sedes.nombre', 'sedes.direccion','servicios.hora_inicio', 'servicios.fecha_fin', 'servicios.hora_fin')
+                            ->join('servicio_tecnico', 'servicios.id', '=','servicio_tecnico.servicio_id')
+                            ->join('tecnicos', 'servicio_tecnico.tecnico_id', '=', 'tecnicos.id')
+                            ->join('solicitudes', 'servicios.solicitud_id', '=', 'solicitudes.id')
+                            ->join('sedes', 'solicitudes.sede_id', '=', 'sedes.id')
+                            ->where('servicios.fecha_inicio', '>=', $dateStart)
+                            ->where('servicios.fecha_inicio', '<=', $dateEnd)
+                            ->where('tecnicos.id', $id)
+                            ->get();
+        $data = collect();
+        foreach ($servicios as $servicio) {
+                $data->push([
+                    'nombre' => $servicio->nombre,
+                    'direccion' => $servicio->direccion,
+                    'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                    "end" => $servicio->fecha_fin." ".$servicio->hora_fin
+                ]);
+        }
+        return $data;
+    }
+
     public function getDatesServices($solicitud, $tecnico)
     {
         $servicios = Servicio::select('servicios.fecha_inicio')
