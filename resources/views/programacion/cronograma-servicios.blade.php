@@ -130,7 +130,17 @@
                                         <h3 class="m-t-none m-b">Información del servicio</h3>
                                         <p>Diligencie todos los campos del referentes al servicio</p>
                                         <div class="row">
-                                            <div class="form-group col-lg-12">
+                                                <div class="form-group col-lg-6">
+                                                <label>Tipo de Servicio: </label>
+                                                <select class="form-control"  style="margin-top: 10px;">
+                                                    <option value="">Seleccione una tipo.</option>
+                                                    <option value="7">Normal</option>
+                                                    <option value="60">Refuerzo</option>
+                                                    <option value="15">Neutro</option>
+                                                    <option value="30">Mensajeria</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-lg-6">
                                                 <label>Frecuencia: </label>
                                                 <select class="form-control" id="select_frecuencia" name="frecuencia_calidad" style="margin-top: 10px;">
                                                     <option value="">Seleccione una frecencia.</option>
@@ -196,7 +206,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="button" id="btn-servicio-neutro" class="btn btn-outline btn-primary">Guardar como neutro</button>
                                 <button type="submit" class="btn btn-primary">Sólo Guardar</button> {{-- No se si este boton de guardar sea necesario. --}}
                                 <button id="btn-print" type="button" class="btn btn-primary">Guardar e imprimir</button>
                             </div>
@@ -1170,15 +1179,6 @@
                 console.log(err)
             }
         });
-    });
-
-    $("#btn-servicio-neutro").on('click', e => {
-        e.preventDefault();
-        crsfToken = document.getElementsByName("_token")[0].value;
-
-        $.ajax({
-
-        })
     });
 </script> 
 @endsection

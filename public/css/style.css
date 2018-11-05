@@ -4159,6 +4159,10 @@ table.table-mail tr td {
 .text-primary {
   color: inherit;
 }
+a.text-primary:focus, a.text-primary:hover{
+  color: #45821d !important;
+  font-weight: bold !important;
+}
 .text-success {
   color: #45821d;
 }

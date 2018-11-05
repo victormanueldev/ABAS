@@ -98,8 +98,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                    <button type="button" class="btn btn-primary" id="filter-dates">Filtrar</button>
-                                                    <button type="button" class="btn btn-default" id="filter-today">Quitar filtro</button>
+                                                    <button type="button" class="btn btn-outline btn-primary" id="filter-dates">Filtrar</button>
+                                                    <button type="button" class="btn btn-outline btn-primary" id="filter-today">Quitar filtro</button>
                                             </div>
                                         </div>
                                     </div>
@@ -109,13 +109,97 @@
                                     <div class="col-sm-6 b-r">
                                         <h3>Lisado de servicios por realizar</h3>
                                         <div class="sk-spinner sk-spinner-pulse" id="loader"></div>
-                                        <ul class="todo-list m-t ui-sortable" id="lista-servicios">
+                                        <ul class="todo-list m-t ui-sortable" id="lista-servicios" style="cursor: pointer">
                                             {{-- Servicios --}}
                                         </ul>
                                     </div>
                                     <div class="col-sm-6 b-r">
                                         <h3>Opciones de impresión</h3>
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
 
+                                                <td class="row" colspan="2">
+                                                    <div class="col-sm-6 col-md-2" style="padding: 0">
+                                                        <button id="print-opt1" type="button" class="btn btn-danger m-r-sm">
+                                                            PC
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-10" style="padding: 0">
+                                                        <p style="margin-bottom: 0">Paquete Completo  de Documentos<br><i style="font-size: 10px;position: absolute;">(Órdenes de Servicio y todas las rutas) 12 Páginas.</i></p>
+                                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                                           <tr>
+
+                                            <td class="row">
+                                                    <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                        <button type="button" class="btn btn-success m-r-sm">OS</button>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-8" style="padding: 0">
+                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i style="font-size: 10px;position: absolute;">8 Páginas.</i></p>
+                                                    </div>
+                                                </td>
+
+                                                <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm">RS</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+    
+                                                                <p style="margin-bottom: 0">Ruta de Saneamiento <br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                        </div>
+                                                    </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                
+                                                <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm">RI</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+    
+                                                                <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                        </div>
+                                                    </td>
+    
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm">RE</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+    
+                                                                <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="row">
+                                                            <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                                <button type="button" class="btn btn-primary m-r-sm">RL</button>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-8" style="padding: 0">
+        
+                                                                    <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="row">
+                                                                <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                                    <button type="button" class="btn btn-warning m-r-sm">CT</button>
+                                                                </div>
+                                                                <div class="col-sm-6 col-md-8" style="padding: 0">
+            
+                                                                        <p style="margin-bottom: 0">Certificados <br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                                </div>
+                                                            </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +255,7 @@
 <script>
     $(document).ready(function() {
         $("#date-start").val(moment().tz("America/Bogota").format("MM/DD/YYYY"));
-        $("#date-end").val(moment().tz("America/Bogota").add(5, "days").format("MM/DD/YYYY"));
+        $("#date-end").val(moment().tz("America/Bogota").add(13, "days").format("MM/DD/YYYY"));
         
         $('#data_5 .input-daterange').datepicker({
             keyboardNavigation: false,
@@ -231,7 +315,7 @@
                         if( diffDates >= 24 ){  //Valida la diferencia de fechas en Dias
                             $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
-                                    <span class="m-l-xs"><b>${value.nombre}</b> ${value.direccion}</span>
+                                    <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
                                     <small class="label label-info pull-right"><i class="fa fa-clock-o"></i> ${dateStart.diff(dateEnd, 'days')} días</small>
                                 </li>
                             `);
@@ -239,7 +323,7 @@
                             console.log(diffDates)
                             $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
-                                    <span class="m-l-xs"><b>${value.nombre}</b> ${value.direccion}</span>
+                                    <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
                                     <small class="label label-danger pull-right"><i class="fa fa-clock-o"></i> ${dateStart.diff(dateEnd, 'minutes')} min</small>
                                 </li>
                             `);
@@ -248,7 +332,7 @@
                         }else{  //Valida la diferencia de fechas en Horas
                             $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
-                                    <span class="m-l-xs"><b>${value.nombre}</b> ${value.direccion}</span>
+                                    <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
                                     <small class="label label-primary pull-right"><i class="fa fa-clock-o"></i> ${diffDates} hors</small>
                                 </li>
                             `);
@@ -271,6 +355,11 @@
             //Añande un nuevo source de los eventos para mostrar en el calendario
             $('#calendar').fullCalendar('addEventSource', url);
         });
+        $("#lista-servicios").click(event => {
+            console.log(event.target.id)
+        })
     });
+        
+
 </script>
 @endsection

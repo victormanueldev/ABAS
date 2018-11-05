@@ -149,6 +149,7 @@ class ClientesController extends Controller
 
         $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user')->where('id', $id)->get();
         return view('general.ver-cliente', compact('cliente'));
+        // return $cliente;
 
     }
 
