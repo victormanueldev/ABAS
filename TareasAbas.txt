@@ -12,7 +12,6 @@ Otros Ajustes
         - Horas de Observaciones en formato 24Hrs (ClockPicker crear cliente)
         - Verificar JS de seleccion de vista (li="active")
         - Editar Cliente
-            - Modal de añadir cotizacion (CRUD)
             - Modal de Añadir sede
             - Modal de Editar datos de cliente
             - Guardar Documentos en la BD (Boolean)
@@ -27,22 +26,15 @@ Otros Ajustes
             - Seleccion de sedes NO obligatiorias
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
+            - Novedades urgentes
         NOTA: Revisar anotaciones cuaderno
     AREA PROGRAMACION
-        - Calendario
-            - Crear tabla en BD de servicios
-            - Historial de tecnicos (Servicio-Tecnico) Ultimos 3 meses (Hecho)
-            - Candado de confirmacion (InProgress)
-            - Informacion del servicio Pop-up mouseover (InProgress)
-            - Editar servicio con un click (InProgress)
-            - Eventos de mas de 1 dia (Hecho)
-            - Imprimir documentos, seleccionar cualquier doc - Imprimir todos los docs por dia->seleccionar los docs
-            - Horas de militar a formato 12 hrs. -- Español, formato 24Hrs (Revisado)
-            - Imprimir servicios por tecnicos-> todas los horarios de todos y cada uno de los tecnicos
-            - Filtro por nombre y NIT
-            - Select dinamico con respuesta del API
-            - Varios tipos de serivicios y varios tecnicos en la creacion de servicios
-            - Vistas para ver y editar servicios
-            - No permitir editar el servicio despues de confirmado o pasado (dropable: false)
-            - Permitir editar todos los datos del servicio
-            - Mostrar el calendario por tecnico
+        - Opciones de impresion en Creacion de servicios 
+        - Generacion de PDFs (Ordenes) por servicio y añadirlos a una coleccion para su futuro recorrido (HTML Basico)
+        - Consulta de Rutas por servicio y añadir a la coleccion
+        - Consulta de certificados por servicio
+        - Filtro por varios clientes e individual para consulta y generacion de PDFs
+        - Opcion de bloquear/desbloquear servicio directamente desde ver info del servicio
+        - Mensaje de "no hay servicios asignados a este técnico"
+    AREA CALIDAD
+        - Generacion de Documentos (CRUD)

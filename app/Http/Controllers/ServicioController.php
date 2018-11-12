@@ -295,14 +295,18 @@ class ServicioController extends Controller
     }
 
     /**
-     * Renderizar PDF con la informacion relacionada con el sercisio
+     * Renderizar PDF con la informacion relacionada con el servicio
      * 
      * @param Servicio $id
      * @return \Illuminate\Http\Response
      */
-    public function print($id, Request $request)
+    public function print(Request $request)
     {
-        
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->setPaper('letter');
+        $pdf->loadView('layouts.plantilla-impresion');
+        // return $pdf->stream();
+        return view('layouts.plantilla-impresion');
     }
 
     /**

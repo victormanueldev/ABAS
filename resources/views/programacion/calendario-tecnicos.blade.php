@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                     <button type="button" class="btn btn-outline btn-primary" id="filter-dates">Filtrar</button>
-                                                    <button type="button" class="btn btn-outline btn-primary" id="filter-today">Quitar filtro</button>
+                                                    <button type="button" class="btn btn-outline btn-primary" id="filter-day-selected">Quitar filtro</button>
                                             </div>
                                         </div>
                                     </div>
@@ -121,12 +121,12 @@
 
                                                 <td class="row" colspan="2">
                                                     <div class="col-sm-6 col-md-2" style="padding: 0">
-                                                        <button id="print-opt1" type="button" class="btn btn-danger m-r-sm">
+                                                        <button id="print-all" type="button" class="btn btn-danger m-r-sm">
                                                             PC
                                                         </button>
                                                     </div>
                                                     <div class="col-sm-6 col-md-10" style="padding: 0">
-                                                        <p style="margin-bottom: 0">Paquete Completo  de Documentos<br><i style="font-size: 10px;position: absolute;">(Órdenes de Servicio y todas las rutas) 12 Páginas.</i></p>
+                                                        <p style="margin-bottom: 0">Paquete Completo  de Documentos<br><i style="font-size: 10px;position: absolute;">(Órdenes de Servicio y todas las rutas)</i></p>
                                                     </div>
                                                 </td>
                                                 
@@ -138,7 +138,7 @@
                                                         <button type="button" class="btn btn-success m-r-sm">OS</button>
                                                     </div>
                                                     <div class="col-sm-6 col-md-8" style="padding: 0">
-                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i style="font-size: 10px;position: absolute;">8 Páginas.</i></p>
+                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i style="font-size: 10px;position: absolute;">(Generadas por ABAS)</i></p>
                                                     </div>
                                                 </td>
 
@@ -148,7 +148,7 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
     
-                                                                <p style="margin-bottom: 0">Ruta de Saneamiento <br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                                <p style="margin-bottom: 0">Ruta de Saneamiento <br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
                                                         </div>
                                                     </td>
                                                 
@@ -161,7 +161,7 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
     
-                                                                <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                                <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
                                                         </div>
                                                     </td>
     
@@ -171,7 +171,7 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
     
-                                                                <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                                <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
                                                         </div>
                                                     </td>
                                                     
@@ -184,7 +184,7 @@
                                                             </div>
                                                             <div class="col-sm-6 col-md-8" style="padding: 0">
         
-                                                                    <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                                    <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
                                                             </div>
                                                         </td>
 
@@ -194,7 +194,7 @@
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-8" style="padding: 0">
             
-                                                                        <p style="margin-bottom: 0">Certificados <br><i style="font-size: 10px;position: absolute;">15 Páginas.</i></p>
+                                                                        <p style="margin-bottom: 0">Certificados <br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
                                                                 </div>
                                                             </td>
                                                 </tr>
@@ -253,17 +253,25 @@
 
 
 <script>
+
+    /** Definicion de variables globales **/
+    var daySelected;
+
+    /** Definicion de funcionaes JQuery **/
     $(document).ready(function() {
+
+        /** Asignacion de fechas por default a dateRange **/
         $("#date-start").val(moment().tz("America/Bogota").format("MM/DD/YYYY"));
         $("#date-end").val(moment().tz("America/Bogota").add(13, "days").format("MM/DD/YYYY"));
-        
+
+        /** Inicializacion del Date Range **/
         $('#data_5 .input-daterange').datepicker({
             keyboardNavigation: false,
             forceParse: false,
             autoclose: true
         });
 
-
+        /** Inicializacion del Calendario **/
         $("#calendar").fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -289,9 +297,27 @@
             dayClick: function(start, end, allDay) {
                 $("#lista-servicios").empty();
                 $("#btn-modal-p-o").click();
+                daySelected = start.format("YYYY-MM-DD");
                 getServicesByDates($("#select_tecnicos").val(), start.format("YYYY-MM-DD"), start.format("YYYY-MM-DD"));
             },
 
+        });
+
+        //Evento click del boton
+        $("#btn-buscar").click(event => {
+                event.preventDefault();
+                //Borra todos los URL existentes en el calendario
+                $('#calendar').fullCalendar('removeEventSources', url);
+                //Concatena el valor del select de tecnicos
+                var url="/tecnicos/servicios/"+$("#select_tecnicos").val();
+                //Borra los eventos del calendario (Los quita de la interfaz)
+                $('#calendar').fullCalendar('removeEvents');
+                //Añande un nuevo source de los eventos para mostrar en el calendario
+                $('#calendar').fullCalendar('addEventSource', url);
+            });
+            $("#lista-servicios").click(event => {
+                console.log(event.target.id)
+            })
         });
         
         /**
@@ -343,23 +369,24 @@
                     console.log(err)
                 })
         }
-        //Evento click del boton
-        $("#btn-buscar").click(event => {
-            event.preventDefault();
-            //Borra todos los URL existentes en el calendario
-            $('#calendar').fullCalendar('removeEventSources', url);
-            //Concatena el valor del select de tecnicos
-            var url="/tecnicos/servicios/"+$("#select_tecnicos").val();
-            //Borra los eventos del calendario (Los quita de la interfaz)
-            $('#calendar').fullCalendar('removeEvents');
-            //Añande un nuevo source de los eventos para mostrar en el calendario
-            $('#calendar').fullCalendar('addEventSource', url);
-        });
-        $("#lista-servicios").click(event => {
-            console.log(event.target.id)
+
+        //Evento Click en filtro por rango de fechas
+        $("#filter-dates").click(event => {
+            let dateStart = moment($("#date-start").val(), 'MM/DD/YYYY').format("YYYY-MM-DD");
+            let dateEnd = moment($("#date-end").val(), 'MM/DD/YYYY').format("YYYY-MM-DD");
+
+            getServicesByDates($("#select_tecnicos").val(), dateStart, dateEnd);
         })
-    });
-        
+
+        //Evento Click en filtro por rango de fechas
+        $("#filter-day-selected").click(event => {
+            $("#lista-servicios").empty();
+            getServicesByDates($("#select_tecnicos").val(), daySelected, daySelected);
+        })
+
+        $("#print-all").click(event => {
+            window.location.href="/servicios/print";
+        })
 
 </script>
 @endsection

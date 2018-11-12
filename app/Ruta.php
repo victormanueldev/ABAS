@@ -4,32 +4,30 @@ namespace ABAS;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Solicitud extends Model
+class Ruta extends Model
 {
-    protected $table  = 'solicitudes';
-    protected $fillable = [
-    	'id',
-    	'codigo',
-        'cliente_id',
-        'sede_id', 
-        'frecuencia',
-        'fecha',
-        'contacto_factura',
-        'telefono',
-        'celular',
-        'observaciones'
+    //
+    protected $casts = [
+        'contenido' => 'array'
     ];
 
-    /**
-     * Relacion Solicitud-Cliente
-     */
+    protected $fillable = [
+        'tipo',
+        'contenido',
+        'cliente_id',
+        'sede_id'
+    ];
+
     public function cliente()
     {
+        
         return $this->belongsTo(Cliente::class);
     }
 
     public function sede()
     {
+        
         return $this->belongsTo(Sede::class);
     }
+
 }
