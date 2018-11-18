@@ -16,9 +16,9 @@ class CreateRutasTable extends Migration
         Schema::create('rutas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo');
+            $table->string('codigo')->unique();
             $table->json('contenido');
-            $table->integer('cliente_id');
-            $table->integer('sede_id')->default(0)->nullable();
+            $table->integer('solicitud_id');
             $table->timestamps();
         });
     }

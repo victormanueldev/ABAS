@@ -1,10 +1,12 @@
 @extends('layouts.app')
 {{-- Css --}}
 @section('custom-css')
+<link href="{{asset('css/plugins/iCheck/custom.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.print.css')}}" rel='stylesheet' media='print'>
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
-{{-- <link href="{{asset('css/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel='stylesheet'> --}}
+{{--
+<link href="{{asset('css/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel='stylesheet'> --}}
 @endsection
 {{-- Contenido --}}
 @section('content')
@@ -33,7 +35,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Técnicos  </h5>
+                    <h5>Técnicos </h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -46,24 +48,25 @@
                 <div class="ibox-content">
                     <div class="row">
                         <form class="form-inline">
-                        <div class="form-group col-sm-9 col-lg-9">
-                            <label>Frecuencia: </label>
-                            <select class="form-control" style="width: 85%" id="select_tecnicos" >
-                                <option value="" selected>Seleccione un técnico</option>
-                                @foreach($tecnicos as $tecnico)
+                            <div class="form-group col-sm-9 col-lg-9">
+                                <label>Frecuencia: </label>
+                                <select class="form-control" style="width: 85%" id="select_tecnicos">
+                                    <option value="" selected>Seleccione un técnico</option>
+                                    @foreach($tecnicos as $tecnico)
                                     <option value="{{$tecnico->id}}">{{$tecnico->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-3 col-lg-3">
-                            <button class="btn btn-primary" type="button" id="btn-buscar">Ver cronograma</button>
-                        </div>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3 col-lg-3">
+                                <button class="btn btn-primary" type="button" id="btn-buscar">Ver cronograma</button>
+                            </div>
                         </form>
                     </div>
                 </div>
 
                 {{-- Botones para mostrar modals --}}
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-print-options" id="btn-modal-p-o">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-print-options"
+                    id="btn-modal-p-o">
                     Modal Print
                 </button>
 
@@ -81,25 +84,40 @@
                                 </button>
                                 <h4 class="modal-title">Imprimir Servicios</h4>
                             </div>
-                            <div class="modal-body ibox-content"  style="padding: 20px 30px 15px 30px;">
+                            <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
                                 <div class="row">
                                     <div class="col-lg12 col-sm-12">
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <h3>Filtrar por fechas</h3>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group" id="data_5" >
+                                            <div class="col-md-5">
+                                                <div class="form-group" id="data_5">
                                                     <div class="input-daterange input-group" id="datepicker" style="width: 100%;">
-                                                        <input type="text" id="date-start" class="form-control-sm form-control" name="start" value="01/14/2018"/>
+                                                        <input type="text" id="date-start" class="form-control-sm form-control"
+                                                            name="start" value="01/14/2018" />
                                                         <span class="input-group-addon">hasta</span>
-                                                        <input type="text" id="date-end" class="form-control-sm form-control" name="end" value="01/22/2018" />
+                                                        <input type="text" id="date-end" class="form-control-sm form-control"
+                                                            name="end" value="01/22/2018" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                    <button type="button" class="btn btn-outline btn-primary" id="filter-dates">Filtrar</button>
-                                                    <button type="button" class="btn btn-outline btn-primary" id="filter-day-selected">Quitar filtro</button>
+                                            <div class="col-md-2">
+                                                {{-- <button type="button" class="btn btn-outline btn-primary" id="filter-day-selected">Quitar
+                                                    filtro</button> --}}
+                                                <h3 style="width: 40px;display: inline-block;position: relative;top: -15px;margin-right: 10px;">Filtro</h3>
+                                                <div id="filter" class="switch" style="width: 60px;display: inline-block;position: relative;">
+                                                    <div class="onoffswitch">
+                                                        <input type="checkbox" class="onoffswitch-checkbox" id="filter-check">
+                                                        <label class="onoffswitch-label" for="filter-check">
+                                                            <span class="onoffswitch-inner"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-outline btn-primary" id="filter-dates">Aplicar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -112,91 +130,110 @@
                                         <ul class="todo-list m-t ui-sortable" id="lista-servicios" style="cursor: pointer">
                                             {{-- Servicios --}}
                                         </ul>
+                                        <div style="margin: 20px 20px 0 0; width: 68%;position: relative;display: inline-block;">
+                                            <label>
+                                                <input type="checkbox" id="select-all" value="1">
+                                                <i></i> <b>Seleccionar todos</b> </label>
+                                        </div>
+                                        <div style="display: inline-block;position: relative;">
+                                            <i id="filter-state">(Filtro no aplicado)</i>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 b-r">
                                         <h3>Opciones de impresión</h3>
                                         <table class="table">
                                             <tbody>
-                                            <tr>
+                                                <tr>
 
-                                                <td class="row" colspan="2">
-                                                    <div class="col-sm-6 col-md-2" style="padding: 0">
-                                                        <button id="print-all" type="button" class="btn btn-danger m-r-sm">
-                                                            PC
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-10" style="padding: 0">
-                                                        <p style="margin-bottom: 0">Paquete Completo  de Documentos<br><i style="font-size: 10px;position: absolute;">(Órdenes de Servicio y todas las rutas)</i></p>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                           <tr>
-
-                                            <td class="row">
-                                                    <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                        <button type="button" class="btn btn-success m-r-sm">OS</button>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-8" style="padding: 0">
-                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i style="font-size: 10px;position: absolute;">(Generadas por ABAS)</i></p>
-                                                    </div>
-                                                </td>
-
-                                                <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm">RS</button>
+                                                    <td class="row" colspan="2">
+                                                        <div class="col-sm-6 col-md-2" style="padding: 0">
+                                                            <button id="print-all" type="button" class="btn btn-danger m-r-sm">
+                                                                PC
+                                                            </button>
                                                         </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-    
-                                                                <p style="margin-bottom: 0">Ruta de Saneamiento <br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
+                                                        <div class="col-sm-6 col-md-10" style="padding: 0">
+                                                            <p style="margin-bottom: 0">Paquete Completo de Documentos<br><i
+                                                                    style="font-size: 10px;position: absolute;">(Órdenes
+                                                                    de Servicio y todas las rutas)</i></p>
                                                         </div>
                                                     </td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                
-                                                <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm">RI</button>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-    
-                                                                <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
-                                                        </div>
-                                                    </td>
-    
-                                                    <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm">RE</button>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-    
-                                                                <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
-                                                        </div>
-                                                    </td>
-                                                    
+
                                                 </tr>
                                                 <tr>
 
                                                     <td class="row">
-                                                            <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                                <button type="button" class="btn btn-primary m-r-sm">RL</button>
-                                                            </div>
-                                                            <div class="col-sm-6 col-md-8" style="padding: 0">
-        
-                                                                    <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
-                                                            </div>
-                                                        </td>
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-success m-r-sm" id="print-ods">OS</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i
+                                                                    style="font-size: 10px;position: absolute;">(Generadas
+                                                                    por ABAS)</i></p>
+                                                        </div>
+                                                    </td>
 
-                                                        <td class="row">
-                                                                <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                                    <button type="button" class="btn btn-warning m-r-sm">CT</button>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-8" style="padding: 0">
-            
-                                                                        <p style="margin-bottom: 0">Certificados <br><i style="font-size: 10px;position: absolute;">(Tomado de la BD)</i></p>
-                                                                </div>
-                                                            </td>
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rs">RS</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta de Saneamiento <br><i
+                                                                    style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rri">RI</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rre">RE</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i
+                                                                    style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rl">RL</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-warning m-r-sm">CT</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Certificados <br><i style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -217,7 +254,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Calendario  </h5>
+                    <h5>Calendario </h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -240,7 +277,8 @@
 <!-- iCheck -->
 <script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>
 <!-- Date Range -->
-{{-- <script src="{{asset('js/plugins/daterangepicker/daterangepicker.js')}}"></script> --}}
+{{--
+<script src="{{asset('js/plugins/daterangepicker/daterangepicker.js')}}"></script> --}}
 <!-- Full Calendar -->
 <script src="{{asset('js/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/locale/es.js')}}"></script>
@@ -256,13 +294,20 @@
 
     /** Definicion de variables globales **/
     var daySelected;
+    var filterState = false;
 
     /** Definicion de funcionaes JQuery **/
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         /** Asignacion de fechas por default a dateRange **/
         $("#date-start").val(moment().tz("America/Bogota").format("MM/DD/YYYY"));
         $("#date-end").val(moment().tz("America/Bogota").add(13, "days").format("MM/DD/YYYY"));
+
+        /** Inicializacion del iCheck **/
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
 
         /** Inicializacion del Date Range **/
         $('#data_5 .input-daterange').datepicker({
@@ -289,12 +334,12 @@
             eventLimit: true,
             nowIndicator: true,
             businessHours: {
-                dow: [ 1, 2, 3, 4, 5, 6 ], 
-                start: '07:00', 
-                end: '18:00', 
+                dow: [1, 2, 3, 4, 5, 6],
+                start: '07:00',
+                end: '18:00',
             },
-            droppable: true, 
-            dayClick: function(start, end, allDay) {
+            droppable: true,
+            dayClick: function (start, end, allDay) {
                 $("#lista-servicios").empty();
                 $("#btn-modal-p-o").click();
                 daySelected = start.format("YYYY-MM-DD");
@@ -305,88 +350,196 @@
 
         //Evento click del boton
         $("#btn-buscar").click(event => {
-                event.preventDefault();
-                //Borra todos los URL existentes en el calendario
-                $('#calendar').fullCalendar('removeEventSources', url);
-                //Concatena el valor del select de tecnicos
-                var url="/tecnicos/servicios/"+$("#select_tecnicos").val();
-                //Borra los eventos del calendario (Los quita de la interfaz)
-                $('#calendar').fullCalendar('removeEvents');
-                //Añande un nuevo source de los eventos para mostrar en el calendario
-                $('#calendar').fullCalendar('addEventSource', url);
-            });
-            $("#lista-servicios").click(event => {
-                console.log(event.target.id)
-            })
+            event.preventDefault();
+            //Borra todos los URL existentes en el calendario
+            $('#calendar').fullCalendar('removeEventSources', url);
+            //Concatena el valor del select de tecnicos
+            var url = "/tecnicos/servicios/" + $("#select_tecnicos").val();
+            //Borra los eventos del calendario (Los quita de la interfaz)
+            $('#calendar').fullCalendar('removeEvents');
+            //Añande un nuevo source de los eventos para mostrar en el calendario
+            $('#calendar').fullCalendar('addEventSource', url);
         });
-        
-        /**
-         * Obtiene los servicios dentro de un rango de fechas
-         * @param idTecnicos
-         * @param dateStart
-         * @param dateEnd
-         */
-        function getServicesByDates(idTecnician, dateStart, dateEnd) {
-            $.get(`tecnicos/serviciosPorFecha/${idTecnician}/${dateStart}/${dateEnd}`)
-                .then((res) => {
-                    //Variables de fechas
-                    var dateStart, dateEnd, diffDates;
-                    //Recorre los servicios retornados
-                    res.forEach((value, index) => {
-                        $("#loader").remove();
-                        //Formate las fechas con Moment
-                        dateStart = moment(value.start);    //Hora Inicio del servicio
-                        dateEnd = moment().tz('America/Bogota');    //Hora Actual Colombia
-                        diffDates = dateStart.diff(dateEnd, 'hours');
-                        if( diffDates >= 24 ){  //Valida la diferencia de fechas en Dias
-                            $("#lista-servicios").append(`
+    });
+
+    /**
+     * Obtiene los servicios dentro de un rango de fechas
+     * @param idTecnicos: ID del Tecnico seleccionado
+     * @param dateStart: Fecha de inicio de la busqueda
+     * @param dateEnd: Fecha de fin de la busqueda
+     */
+    function getServicesByDates(idTecnician, dateStart, dateEnd) {
+        $.get(`tecnicos/serviciosPorFecha/${idTecnician}/${dateStart}/${dateEnd}`)
+            .then((res) => {
+                console.log(res);
+                //Variables de fechas
+                var dateStart, dateEnd, diffDates;
+                //Recorre los servicios retornados
+                res.forEach((value, index) => {
+                    $("#loader").remove();
+                    //Formate las fechas con Moment
+                    dateStart = moment(value.start);    //Hora Inicio del servicio
+                    dateEnd = moment().tz('America/Bogota');    //Hora Actual Colombia
+                    diffDates = dateStart.diff(dateEnd, 'hours');
+                    if (diffDates >= 24) {  //Valida la diferencia de fechas en Dias
+                        $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
+                                    <input type="radio" value="${value.id}"  name="selected-service" class="i-checks"/>
                                     <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
                                     <small class="label label-info pull-right"><i class="fa fa-clock-o"></i> ${dateStart.diff(dateEnd, 'days')} días</small>
                                 </li>
                             `);
-                        }else if(diffDates >= 0 && diffDates <=1){  //Valida la diferencia de fechas en Minutos
-                            console.log(diffDates)
-                            $("#lista-servicios").append(`
+                        /** Inicializacion del iCheck **/
+                        $('.i-checks').iCheck({
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
+                        });
+                    } else if (diffDates >= 0 && diffDates <= 1) {  //Valida la diferencia de fechas en Minutos
+                        $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
+                                    <input type="radio" value="${value.id}"  name="selected-service" class="i-checks"/>
                                     <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
                                     <small class="label label-danger pull-right"><i class="fa fa-clock-o"></i> ${dateStart.diff(dateEnd, 'minutes')} min</small>
                                 </li>
                             `);
-                        }else if(diffDates < 0 ) {   //Valida que hayan servicios realizados
-                            return;
-                        }else{  //Valida la diferencia de fechas en Horas
-                            $("#lista-servicios").append(`
+                        /** Inicializacion del iCheck **/
+                        $('.i-checks').iCheck({
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
+                        });
+                    } else if (diffDates < 0) {   //Valida que hayan servicios realizados
+                        return;
+                    } else {  //Valida la diferencia de fechas en Horas
+                        $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
+                                    <input type="radio" value="${value.id}"  name="selected-service" class="i-checks"/>
                                     <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
                                     <small class="label label-primary pull-right"><i class="fa fa-clock-o"></i> ${diffDates} hors</small>
                                 </li>
                             `);
-                        }
-                    });
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+                        /** Inicializacion del iCheck **/
+                        $('.i-checks').iCheck({
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
+                        });
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    /** Valida el estado del  checkbox de seleccionar todos **/
+    function verifySelectedAll() {
+        //Valida que no haya seleccionado ningun servicio
+        if ($("#select-all:checked").length != 1 && !$("input[name='selected-service']:checked").val()) {
+            return "None selected";
         }
+        //Valida si el checkbox está checkeado
+        else if ($("#select-all:checked").length == 1) {
+            return true;
+        }
+        return false;
 
-        //Evento Click en filtro por rango de fechas
-        $("#filter-dates").click(event => {
-            let dateStart = moment($("#date-start").val(), 'MM/DD/YYYY').format("YYYY-MM-DD");
-            let dateEnd = moment($("#date-end").val(), 'MM/DD/YYYY').format("YYYY-MM-DD");
+    }
 
-            getServicesByDates($("#select_tecnicos").val(), dateStart, dateEnd);
-        })
+    /** Retorna las fechas seleccionadas **/
+    function selectedDates() {
+        var selectedDates = {
+            start: moment($("#date-start").val(), 'MM/DD/YYYY').format("YYYY-MM-DD"),
+            end: moment($("#date-end").val(), 'MM/DD/YYYY').format("YYYY-MM-DD")
+        }
+        return selectedDates;
+    }
 
-        //Evento Click en filtro por rango de fechas
-        $("#filter-day-selected").click(event => {
-            $("#lista-servicios").empty();
+    //Evento Click en filtro por rango de fechas
+    $("#filter-dates").click(event => {
+        $("#lista-servicios").empty();
+        $("#filter-state").empty();
+        if ($("#filter-check:checked").length == 1) {
+            let dates = selectedDates();
+            getServicesByDates($("#select_tecnicos").val(), dates.start, dates.end);
+            $("#filter-state").append("(Filtro aplicado)");
+            filterState = true;
+        } else {
             getServicesByDates($("#select_tecnicos").val(), daySelected, daySelected);
-        })
+            $("#filter-state").append("(Filtro no aplicado)");
+            filterState = false;
+        }
+    })
 
-        $("#print-all").click(event => {
-            window.location.href="/servicios/print";
-        })
+    /**
+    * Abre la pestaña con la informacion de la opcion de impresion seleccionada
+    * @param option: Opcion de impresion
+    * @param idTecnico: ID del Tecnico seleccionado
+    * @param idService: ID  del servicio seleccionado
+    **/
+    function printOptions(option) {
+        let dates = selectedDates();
+        let verifySelected = verifySelectedAll();
+        if (verifySelected === true) {
+            //Valida que el filtro por fechas esté aplicado
+            console.log(filterState)
+            if (filterState === true) {
+                //Envia el rango de fechas seleccionadas
+                window.open(`tecnicos/imprimir-${option}/${$("#select_tecnicos").val()}/${dates.start}/${dates.end}/all`);
+            } else {
+                window.open(`tecnicos/imprimir-${option}/${$("#select_tecnicos").val()}/${daySelected}/${daySelected}/all`);
+            }
+        } else if (!verifySelected) {
+            //Envia el ID del servicio seleccionado en los Radiobuttons
+            if (filterState === true) {
+                window.open(`tecnicos/imprimir-${option}/${$("#select_tecnicos").val()}/${dates.start}/${dates.end}/${$("input[name='selected-service']:checked").val()}`);
+            } else {
+                window.open(`tecnicos/imprimir-${option}/${$("#select_tecnicos").val()}/${daySelected}/${daySelected}/${$("input[name='selected-service']:checked").val()}`);
+            }
+        } else {
+            swal("Información", "Selecciona al menos un servicio antes de imprimir", "info")
+        }
+    }
+
+    //Evento Click del boton de imprimir paquete completo
+    $("#print-all").click(event => {
+        printOptions('todo')
+    })
+
+    //Evento Click del boton de imprimir solo ordenes de servicio
+    $("#print-ods").click(event => {
+        printOptions('ods')
+    })
+
+    //Evento Click del boton de imprimir solo rutas de saneamiento
+    $("#print-rs").click(event => {
+        printOptions('rs')
+    })
+
+    //Evento Click del boton de imprimir solo rutas de roedores internas
+    $("#print-rri").click(event => {
+        printOptions('rri')
+    })
+
+    //Evento Click del boton de imprimir solo rutas de roedores externas
+    $("#print-rre").click(event => {
+        printOptions('rre')
+    })
+
+    //Evento Click del boton de imprimir solo rutas de lamparas
+    $("#print-rl").click(event => {
+        printOptions('rl')
+    })
+
+    //Evento click del checkbox de Seleccionar todos
+    $("#select-all").click(event => {
+        if ($("#select-all:checked").length == 1) {
+            //Deshabilita los Radio Buttons
+            $("input[type=radio]").attr("disabled", "disabled");
+        } else {
+            //Habilita los Radio Buttons
+            $("input[type=radio]").removeAttr("disabled");
+        }
+    })
+
 
 </script>
 @endsection

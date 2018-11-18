@@ -13,21 +13,9 @@ class Ruta extends Model
 
     protected $fillable = [
         'tipo',
+        'codigo',
         'contenido',
-        'cliente_id',
-        'sede_id'
+        'solicitud_id',
     ];
-
-    public function cliente()
-    {
-        
-        return $this->belongsTo(Cliente::class);
-    }
-
-    public function sede()
-    {
-        
-        return $this->belongsTo(Sede::class);
-    }
 
 }

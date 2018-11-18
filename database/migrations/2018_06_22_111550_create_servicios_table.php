@@ -17,6 +17,7 @@ class CreateServiciosTable extends Migration
             $table->increments('id');
             $table->unsignedSmallInteger('frecuencia')->nullable();
             $table->string('serie', 10)->nullable();
+            $table->string('tipo')->default('Normal');
             $table->date('fecha_inicio');
             $table->time('hora_inicio');
             $table->date('fecha_fin')->nullable();

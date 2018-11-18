@@ -184,7 +184,6 @@
    <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
 
-
    @yield('ini-scripts');
     <script>
             $(document).ready(function(){
@@ -201,6 +200,7 @@
                 $('.clockpicker').clockpicker({
                     twelvehour: true
                 });
+
             }); 
     
     </script>

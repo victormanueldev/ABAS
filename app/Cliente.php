@@ -62,4 +62,12 @@ class Cliente extends Model
     {
         return $this->hasMany(Telefono::class);
     }
+
+    /**
+     * Relacion entre Clientes-Rutas
+     */
+    public function rutas()
+    {
+        return $this->hasMany(Ruta::class);
+    }
 }

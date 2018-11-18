@@ -132,12 +132,12 @@
                                         <div class="row">
                                                 <div class="form-group col-lg-6">
                                                 <label>Tipo de Servicio: </label>
-                                                <select class="form-control"  style="margin-top: 10px;">
+                                                <select class="form-control"  style="margin-top: 10px;" id="select_tipo_servicio">
                                                     <option value="">Seleccione una tipo.</option>
-                                                    <option value="7">Normal</option>
-                                                    <option value="60">Refuerzo</option>
-                                                    <option value="15">Neutro</option>
-                                                    <option value="30">Mensajeria</option>
+                                                    <option value="Normal">Normal</option>
+                                                    <option value="Refuerzo">Refuerzo</option>
+                                                    <option value="Neutro">Neutro</option>
+                                                    <option value="Mensajeria">Mensajeria</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-lg-6">
@@ -491,6 +491,7 @@
             .then((res) => {
                 //Recorre la respueta
                 res.forEach((value, index) => {
+                    //Convertir a formato JSON para poder ser mostrados en el typehead
                     nit_clientes[index] = JSON.parse(`{"name": "${value.nit_cedula}", "id": "${value.id}"}`);
                     nombres_clientes[index] = JSON.parse(`{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
                     if (value.razon_social == 'null' || value.razon_social == null) {
@@ -775,6 +776,7 @@
                 //Peticion al servidor para obtener los datos del servicio seleccionado
                 $.get(`/servicios/${event.id}/edit`)
                     .then((res) => {
+                        console.log(res)
                         //Valida que el cliente sea persona natural o juridica
                         if (res[0].solicitud.sede) {
                             nombre_sede = res[0].solicitud.sede.nombre;
@@ -892,6 +894,7 @@
                         $('#select_tecnicos2').select2("val", "");
                         id_solicitud = '';
                     } else {
+                        console.log(res);
                         $("#text-instrucciones").val(res[0]['observaciones']);
                         $("#dir_sede").val(res[0].direccion);
                         $("#barrio_sede").val(res[0].barrio);
@@ -949,6 +952,7 @@
             var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
             var frecuencia;
             var start_event = inicio_servicio;
+            var tipoServicio = $("#select_tipo_servicio").val();
             frecuencia = parseInt($("#select_frecuencia").val());
             var tecnicos = [];
             $("#select_tecnicos2").val().forEach((value, index) => {
@@ -988,6 +992,7 @@
                         {
                             tipos: tipos_servicio,
                             frecuencia: frecuencia,
+                            tipo_servicio: tipoServicio,
                             start: start_event,
                             hora_inicio: horaInicioFormat,
                             duracion: duracion_servicio,

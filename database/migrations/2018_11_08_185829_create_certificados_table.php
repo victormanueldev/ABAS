@@ -20,8 +20,7 @@ class CreateCertificadosTable extends Migration
             $table->string('frecuencia');
             $table->json('tratamientos');
             $table->json('productos');
-            $table->integer('cliente_id');
-            $table->integer('sede_id')->default(0)->nullable();
+            $table->integer('solicitud_id');
             $table->timestamps();
         });
     }

@@ -21,17 +21,4 @@ class Certificado extends Model
         'sede_id'
     ];
 
-    public function cliente()
-    {
-        
-        return $this->belongsTo(Cliente::class);
-    }
-
-    public function sede()
-    {
-        
-        return $this->belongsTo(Sede::class);
-    }
-
-
 }

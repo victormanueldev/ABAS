@@ -312,7 +312,7 @@
                                     <label>Cliente/Sede: </label>
                                     <select class="form-control" id="cliente-certificado" name="cliente-sede" style="background-color: #fff;">
                                         @if(count($cliente[0]->sedes) == 0)
-                                        <option value="{{$cliente[0]->id}}">{{$cliente[0]->nombre_cliente}}</option>
+                                        <option value="{{$cliente[0]->id.',0'}}">{{$cliente[0]->nombre_cliente}}</option>
                                         @else
                                         @foreach($cliente[0]->sedes as $sede)
                                         <option value="{{$sede->id.",".$cliente[0]->id}}">{{$sede->nombre}}</option>
@@ -794,10 +794,10 @@
         let tratamientos = [];
         let productos = [];
         let cliente = $("#cliente-certificado").val().split(',');  //Separacion del string por coma
-        let clienteId = cliente[1];
-        let sedeId = cliente[0];
+        let clienteId = cliente[0];
+        let sedeId = cliente[1];
         let crsfToken = document.getElementsByName("_token")[0].value;
-
+        console.log(cliente)
         //Recorrido de los controles del HTML como arreglos
         for (let index = 0; index < contTratamientos; index++) {
             tratamientos[index] = $(`#tratamiento-${index}`).val();

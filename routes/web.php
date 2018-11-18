@@ -66,10 +66,9 @@ Route::resource('solicitud', 'SolicitudesController', [
 Route::post('solicitud/show', 'SolicitudesController@show');
 
 //Servicios
-// Route::resource('servicios', 'ServicioController', [
-//     'except' => 'print'
-// ]);
-Route::get('servicios/print', 'ServicioController@print')->name('servicios.print');
+Route::resource('servicios', 'ServicioController', [
+    'except' => 'print'
+]);
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -77,6 +76,13 @@ Route::get('tecnicos/getColor/{id}', 'TecnicoController@getColor');
 Route::get('tecnicos/servicios/{id}', 'TecnicoController@getService');
 Route::get('tecnicos/fechas/{solicitud}/{tecnico}', 'TecnicoController@getDatesServices');
 Route::get('tecnicos/serviciosPorFecha/{id}/{fechaInicio}/{fechaFin}', 'TecnicoController@getServicesByDate');
+Route::get('tecnicos/imprimir-todo/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printAll');
+Route::get('tecnicos/imprimir-ods/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printODS');
+Route::get('tecnicos/imprimir-rs/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRS');
+Route::get('tecnicos/imprimir-rl/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRL');
+Route::get('tecnicos/imprimir-rri/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRI');
+Route::get('tecnicos/imprimir-rre/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRE');
+Route::get('tecnicos/imprimir-ctf/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printCertificates');
 
 //Tipos de Servicios
 Route::resource('tipos', 'TipoServicioController');
@@ -86,3 +92,6 @@ Route::resource('certificados', 'CertificadoController');
 
 //Rutas
 Route::resource('rutas', 'RutaController');
+
+//Impresiones
+Route::get('impresiones/fechas/{id}/{inicio}/{fin}', 'ImpresionController@imprimirTodo');

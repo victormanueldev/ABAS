@@ -87,7 +87,7 @@ class SolicitudesController extends Controller
     public function show(Request $request)
     {
         //
-        if ($request->id_sede === 0) {
+        if ($request->id_sede != 0) {
             $solicitud = DB::table('solicitudes')
                                     ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'sedes.direccion', 'sedes.barrio', 'sedes.nombre_contacto', 'sedes.telefono_contacto')
                                     ->join('sedes', 'solicitudes.sede_id', 'sedes.id')

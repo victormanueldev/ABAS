@@ -12,6 +12,7 @@ class Servicio extends Model
         'frecuencia',
         'fecha_inicio',
         'hora_inicio',
+        'tipo',
         'hora_fin',
         'fecha_fin',
         'duracion',
@@ -53,16 +54,18 @@ class Servicio extends Model
         return $this->belongsToMany(TipoServicio::class);
     }
 
-    /**
+        /**
      * Relacion servicio tiene una solicitud
      */
     public function solicitud()
     {
         # code...
-        return $this->belongsTo(Solicitud::class)
-            ->with(
-                'sede:id,nombre,direccion,nombre_contacto,barrio,telefono_contacto', 
-                'cliente:id,nombre_cliente,direccion,barrio,nombre_contacto,celular'
-            );
+        return $this->belongsTo(Solicitud::class);
+            // ->with(
+            //     'sede:id,nombre,direccion,nombre_contacto,barrio,telefono_contacto', 
+            //     'cliente:id,nombre_cliente,direccion,barrio,nombre_contacto,celular'
+            // );
+            //->with('sede:*', 'cliente:*', 'rutas:*');
     }
+
 }

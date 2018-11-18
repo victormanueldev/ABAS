@@ -4,6 +4,7 @@ namespace ABAS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ABAS\Certificado;
+use ABAS\Solicitud;
 
 class CertificadoController extends Controller
 {
@@ -40,15 +41,19 @@ class CertificadoController extends Controller
         //
         if($request->ajax()){
             try{
-                $certificado = new Certificado();
-                $certificado->area_tratada = $request->area_tratada;
-                $certificado->frecuencia = $request->frecuencia;
-                $certificado->tratamientos = $request->tratamientos;
-                $certificado->productos = $request->productos;
-                $certificado->cliente_id = $request->cliente_id;
-                $certificado->sede_id = $request->sede_id;
-                $certificado->save();
-                return response()->json(['success' => 'Certificado creado correctamente']);
+                $solicitudId = Solicitud::select('id')->where('cliente_id', $request->cliente_id)->where('sede_id', $request->sede_id)->get();
+                if(empty($solicitudId[0])){
+                    return response()->json('Solicitud a programacion invalida', 400); 
+                }else{
+                    $certificado = new Certificado();
+                    $certificado->area_tratada = $request->area_tratada;
+                    $certificado->frecuencia = $request->frecuencia;
+                    $certificado->tratamientos = $request->tratamientos;
+                    $certificado->productos = $request->productos;
+                    $certificado->solicitud_id = $solicitudId[0]->id;
+                    $certificado->save();
+                    return response()->json(['success' => 'Certificado creado correctamente']);
+                }
             }catch(\Exception $e){
                 return response()->json($e, 500);
             }

@@ -95,6 +95,7 @@ class ServicioController extends Controller
                 $servicio->fecha_inicio = $dt_ini->toDateString();  //Fecha de inicio (YYYY-DD-MM)
                 $servicio->hora_inicio = $request->hora_inicio;
                 $servicio->duracion = $request->duracion;
+                $servicio->tipo = $request->tipo_servicio;
                 $color_tecnico = Tecnico::select('color')->where('id', $request->id_tecnicos[0])->get();
                 $servicio->color = $color_tecnico[0]['color'];
                 $servicio->solicitud_id = $request->id_solicitud;
@@ -129,6 +130,7 @@ class ServicioController extends Controller
                     //Insertar varios registros con diferentes fechas de inicio en la BD
                     $id_servicio = DB::table('servicios')->insertGetId([
                         'frecuencia' => $request->frecuencia,
+                        'tipo' => $request->tipo_servicio,
                         'serie' => $serie,
                         "fecha_inicio" => $nueva_fecha,
                         'hora_inicio' => $request->hora_inicio,
@@ -158,7 +160,8 @@ class ServicioController extends Controller
                 return response()->json("Error en la petición AJAX", 406);
             }
         }catch(\Exception $e){
-            return response()->json(["Error al intentar guardar el servicio", $e], 500);
+            // return response()->json(["Error al intentar guardar el servicio", $e], 500);
+            return response()->json($e, 500);
         }
     }
 
@@ -194,7 +197,7 @@ class ServicioController extends Controller
     {
         //
         //Seleccionar columnas en las relaciones de eloquent
-        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud')->where('id', $id)->get();
+        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede')->where('id', $id)->get();
         return $servicio;
     }
 
