@@ -4552,6 +4552,10 @@ a.close-canvas-menu:hover {
   width: 96px;
   height: 96px;
 }
+.img-lg-logo {
+  width: 190px;
+  height: 86px;
+}
 .b-r-xs {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;

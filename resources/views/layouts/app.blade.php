@@ -128,7 +128,7 @@
                         </div>
                         <ul class="nav navbar-top-links navbar-right" id="notificacion">
                             <li>
-                                <span class="m-r-sm text-muted welcome-message">Bienvenido a ABAS</span>
+                                <span class="m-r-sm text-muted welcome-message">Sanicontrol S.A. &copy; 2018</span>
                             </li>
 
                             <notificaciones></notificaciones>

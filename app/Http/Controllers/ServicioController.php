@@ -55,10 +55,11 @@ class ServicioController extends Controller
                 'dirClient' => $dirClient,
                 "contactClient" => $nameContact,
                 "telClient" => $telClient,
-                "editable" => $editableEvent
+                "editable" => $editableEvent,
+                'duration' => $servicio->duracion
                 ]);
         }
-        $data->toJson();//Convierte la colecciona a formato JSON
+        //$data->toJson();//Convierte la colecciona a formato JSON
         return $data;
     }
 
@@ -84,7 +85,7 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $nueva_fecha = '';
         try{
             if($request->ajax()){
                 //Convierte la fecha del request en un objeto Carbon
@@ -101,7 +102,7 @@ class ServicioController extends Controller
                 $servicio->solicitud_id = $request->id_solicitud;
                 $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
                 $servicio->fecha_fin = $dt_fin->toDateString();
-                $servicio->hora_fin = $dt_fin->toTimeString(); 
+                $servicio->hora_fin = $request->hora_fin; 
                 $servicio->save();
                 //Obtiene el ultimo servicio agendado
                 $max_id = DB::table('servicios')->max('id');
@@ -123,37 +124,157 @@ class ServicioController extends Controller
                     ]);
                 }
 
+                $index = 0;
+
                 //Crea servicios dependiendo de la frecuencia solicitada
-                for ($i = 0; $i<=2; $i++){
-                    //Obtiene la nueva fecha luego de haber sumado los dias a la fecha seleccionada en el calendario
-                    $nueva_fecha = $dt_ini->addDays($request->frecuencia);
-                    //Insertar varios registros con diferentes fechas de inicio en la BD
-                    $id_servicio = DB::table('servicios')->insertGetId([
-                        'frecuencia' => $request->frecuencia,
-                        'tipo' => $request->tipo_servicio,
-                        'serie' => $serie,
-                        "fecha_inicio" => $nueva_fecha,
-                        'hora_inicio' => $request->hora_inicio,
-                        'duracion' => $request->duracion,
-                        'color' => $color_tecnico[0]['color'],
-                        'solicitud_id' => $request->id_solicitud,
-                        'fecha_fin' => $nueva_fecha,
-                        'hora_fin' => $nueva_fecha->toTimeString()
-                    ]);
-                    //Insertar los registros en la tabla pivot (Servicio_tecnico)
-                    foreach ($request->id_tecnicos as $index => $value) {
-                        DB::table('servicio_tecnico')->insert([
-                            'servicio_id' => $id_servicio,
-                            'tecnico_id' => $value
-                        ]);
+                while($dt_ini->year < 2019){
+                    if($index > 0){
+                        if($request->opcionFrecuencia == "meses"){
+                            if(!empty($request->diaDelMes)){
+                                $nueva_fecha = Carbon::parse($dt_ini->day." ".$dt_ini->format("F")." ".$dt_ini->year); // Repetir un dia especifico
+                            }else{
+                                $nueva_fecha = Carbon::parse($request->diaOrdinal." ".$request->nombreDia." of ".$dt_ini->format("F")." ".$dt_ini->year); // Repetir en una expresion dada
+                            }
+                            //Inserta el servicio a la BD y obtiene el ID
+                            $id_servicio = DB::table('servicios')->insertGetId([
+                                'frecuencia' => $request->frecuencia,
+                                'tipo' => $request->tipo_servicio,
+                                'serie' => $serie,
+                                "fecha_inicio" => $nueva_fecha,
+                                'hora_inicio' => $request->hora_inicio,
+                                'duracion' => $request->duracion,
+                                'color' => $color_tecnico[0]['color'],
+                                'solicitud_id' => $request->id_solicitud,
+                                'fecha_fin' => $nueva_fecha,
+                                'hora_fin' => $request->hora_fin
+                            ]);
+                    
+                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                            foreach ($request->id_tecnicos as $index => $value) {
+                                DB::table('servicio_tecnico')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tecnico_id' => $value
+                                ]);
+                            }
+                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                            foreach ($request->tipos as $index => $value) {
+                                DB::table('servicio_tipo_servicio')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tipo_servicio_id' => $value
+                                ]);
+                            }
+                            $dt_ini->addMonths($request->frecuencia);
+                        }elseif($request->opcionFrecuencia == 'semanas'){
+                            $nueva_fecha = $dt_ini;
+
+                            //Inserta el servicio a la BD y obtiene el ID
+                            $id_servicio = DB::table('servicios')->insertGetId([
+                                'frecuencia' => $request->frecuencia,
+                                'tipo' => $request->tipo_servicio,
+                                'serie' => $serie,
+                                "fecha_inicio" => $nueva_fecha,
+                                'hora_inicio' => $request->hora_inicio,
+                                'duracion' => $request->duracion,
+                                'color' => $color_tecnico[0]['color'],
+                                'solicitud_id' => $request->id_solicitud,
+                                'fecha_fin' => $nueva_fecha,
+                                'hora_fin' => $request->hora_fin
+                            ]);
+                    
+                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                            foreach ($request->id_tecnicos as $index => $value) {
+                                DB::table('servicio_tecnico')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tecnico_id' => $value
+                                ]);
+                            }
+                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                            foreach ($request->tipos as $index => $value) {
+                                DB::table('servicio_tipo_servicio')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tipo_servicio_id' => $value
+                                ]);
+                            }
+                           $dt_ini->addWeeks($request->frecuencia);
+                        }elseif($request->opcionFrecuencia == "anios"){
+                            $nueva_fecha = $dt_ini;
+                            //Inserta el servicio a la BD y obtiene el ID
+                            $id_servicio = DB::table('servicios')->insertGetId([
+                                'frecuencia' => $request->frecuencia,
+                                'tipo' => $request->tipo_servicio,
+                                'serie' => $serie,
+                                "fecha_inicio" => $nueva_fecha,
+                                'hora_inicio' => $request->hora_inicio,
+                                'duracion' => $request->duracion,
+                                'color' => $color_tecnico[0]['color'],
+                                'solicitud_id' => $request->id_solicitud,
+                                'fecha_fin' => $nueva_fecha,
+                                'hora_fin' => $request->hora_fin
+                            ]);
+                    
+                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                            foreach ($request->id_tecnicos as $index => $value) {
+                                DB::table('servicio_tecnico')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tecnico_id' => $value
+                                ]);
+                            }
+                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                            foreach ($request->tipos as $index => $value) {
+                                DB::table('servicio_tipo_servicio')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tipo_servicio_id' => $value
+                                ]);
+                            }
+                            $dt_ini->addYears($request->frecuencia);
+
+                        }else{
+                            $nueva_fecha = $dt_ini->addMinutes($request->duration);
+                            if($nueva_fecha->isSunday()){
+                                $nueva_fecha->next(Carbon::MONDAY);
+                            }
+                            //Inserta el servicio a la BD y obtiene el ID
+                            $id_servicio = DB::table('servicios')->insertGetId([
+                                'frecuencia' => $request->frecuencia,
+                                'tipo' => $request->tipo_servicio,
+                                'serie' => $serie,
+                                "fecha_inicio" => $nueva_fecha,
+                                'hora_inicio' => $request->hora_inicio,
+                                'duracion' => $request->duracion,
+                                'color' => $color_tecnico[0]['color'],
+                                'solicitud_id' => $request->id_solicitud,
+                                'fecha_fin' => $nueva_fecha,
+                                'hora_fin' => $request->hora_fin
+                            ]);
+                    
+                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                            foreach ($request->id_tecnicos as $index => $value) {
+                                DB::table('servicio_tecnico')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tecnico_id' => $value
+                                ]);
+                            }
+                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                            foreach ($request->tipos as $index => $value) {
+                                DB::table('servicio_tipo_servicio')->insert([
+                                    'servicio_id' => $id_servicio,
+                                    'tipo_servicio_id' => $value
+                                ]);
+                            }
+                            $dt_ini->addDays($request->frecuencia);
+                        }
+                    }else{
+                        if($request->opcionFrecuencia == "meses"){
+                            $dt_ini->addMonths($request->frecuencia);
+                        }elseif($request->opcionFrecuencia == "semanas"){
+                            $dt_ini->addWeeks($request->frecuencia);
+                        } elseif($request->opcionFrecuencia == "dias"){
+                            $dt_ini->addDays($request->frecuencia);
+                        }else{
+                            $dt_ini->addYears($request->frecuencia);
+                        }
                     }
-                    //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
-                    foreach ($request->tipos as $index => $value) {
-                        DB::table('servicio_tipo_servicio')->insert([
-                            'servicio_id' => $id_servicio,
-                            'tipo_servicio_id' => $value
-                        ]);
-                    }
+                    $index++;
                 }
                 return response()->json(["Servicio Guardado con Exito"], 200);
             }else{
@@ -218,7 +339,7 @@ class ServicioController extends Controller
         $servicio->hora_inicio = $request->hora_inicio;
         $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
         $servicio->fecha_fin = $dt_fin->toDateString();
-        $servicio->hora_fin = $dt_fin->toTimeString(); 
+        $servicio->hora_fin = $request->hora_fin; 
         $servicio->frecuencia = $request->frecuencia;
         $servicio->duracion = $request->duracion;
         $servicio->confirmado = $request->confirmado;
@@ -298,21 +419,6 @@ class ServicioController extends Controller
     }
 
     /**
-     * Renderizar PDF con la informacion relacionada con el servicio
-     * 
-     * @param Servicio $id
-     * @return \Illuminate\Http\Response
-     */
-    public function print(Request $request)
-    {
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->setPaper('letter');
-        $pdf->loadView('layouts.plantilla-impresion');
-        // return $pdf->stream();
-        return view('layouts.plantilla-impresion');
-    }
-
-    /**
      * Guardar servicio Neutro con información básica
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -328,8 +434,196 @@ class ServicioController extends Controller
             return response()->json('Creation Success', 201);   
 
         }else{
-            return response()->json(['error: ' => 'Error en la petición'], 500);
+            response()->json(['error: ' => 'Error en la petición'], 500);
         }
         
+    }
+
+    /**
+     * Actualiza la frecuencia de uno o varios servicios junto con sus respectivas fechas
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function updateFrecuency(Request $request)
+    {
+        $nueva_fecha;
+        $servicio;
+        if($request->ajax()){
+            try{
+                $dt_ini = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);
+                $time_ini = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);
+                //Valida la opcion de actualizacion seleccionada por el usuario
+                switch ($request->optionActl) {
+                    case '1':
+                    $servicio = Servicio::where('id', $request->idServicio)->get();
+                        //Valida la frecuencia seleccionada por el usuario
+                        if($request->opcionFrecuencia == "meses"){
+                            $dt_ini->addMonths($request->frecuencia);
+                            //Valida si la opcion seleccionada es por el dia especifico
+                            if(!empty($request->diaDelMes)){
+                                $nueva_fecha = Carbon::parse($dt_ini->day." ".$dt_ini->format("F")." ".$dt_ini->year." ".$request->hora_inicio); // Repetir un dia especifico
+                            }else{
+                                $nueva_fecha = Carbon::parse($request->diaOrdinal." ".$request->nombreDia." of ".$dt_ini->format("F")." ".$dt_ini->year." ".$request->hora_inicio); // Repetir en una expresion dada
+                            }
+                            $servicio[0]->fecha_inicio = $nueva_fecha;
+                            $servicio[0]->hora_inicio = $nueva_fecha->toTimeString();
+                           
+                            $servicio[0]->fecha_fin =$nueva_fecha;
+                            $servicio[0]->hora_fin = $request->hora_fin;
+                            $servicio[0]->save();
+                        }elseif ($request->opcionFrecuencia == "semanas") {
+                            # code...
+                            $dt_ini->addWeeks($request->frecuencia);
+                            $nueva_fecha = $dt_ini;
+                            $servicio[0]->fecha_inicio = $nueva_fecha;
+                            $servicio[0]->hora_inicio = $nueva_fecha->toTimeString();
+                            $servicio[0]->fecha_fin =$nueva_fecha;
+                            $servicio[0]->hora_fin = $request->hora_fin;
+                            $servicio[0]->save();
+                        }elseif ($request->opcionFrecuencia == "dias") {
+                            # code...
+                            $dt_ini->addDays($request->frecuencia);
+                            $nueva_fecha = $dt_ini;
+                            //Valida que sea domingo
+                            if($nueva_fecha->isSunday()){
+                                //Pasa el servicio al linex proximo
+                                $nueva_fecha->next(Carbon::MONDAY);
+                                //Asigna la hora de inicio del servicio enviado
+                                $nueva_fecha->setTime($time_ini->hour, $time_ini->minute, $time_ini->second);
+                            }
+                            $servicio[0]->fecha_inicio = $nueva_fecha;
+                            $servicio[0]->hora_inicio = $nueva_fecha->toTimeString();
+                            $servicio[0]->fecha_fin =$nueva_fecha;
+                            $servicio[0]->hora_fin = $request->hora_fin;
+                            $servicio[0]->save();
+                        }else{
+                            $dt_ini->addYears($request->frecuencia);
+                            $nueva_fecha = $dt_ini;
+                            $servicio[0]->fecha_inicio = $nueva_fecha;
+                            $servicio[0]->hora_inicio = $nueva_fecha->toTimeString();
+                           
+                            $servicio[0]->fecha_fin =$nueva_fecha;
+                            $servicio[0]->hora_fin = $request->hora_fin;
+                            $servicio[0]->save();
+                        }     
+                        break;
+                    case '2':
+                        //Obtiene la seria a la que pertenece el ID del servicio
+                        $serieServicio = Servicio::select('id','serie')->where('id', $request->idServicio)->get();
+                        //Obtiene los servicios pertenecientes de a esta serie
+                        $servicios = Servicio::where('serie', $serieServicio[0]->serie)->get();
+                        foreach ($servicios as $servicio) {
+                            $nueva_fecha = '';
+                           if($servicio->id > $request->idServicio){
+                            if($request->opcionFrecuencia == "meses"){
+                                $dt_ini->addMonths($request->frecuencia);
+                                if(!empty($request->diaDelMes)){
+                                    $nueva_fecha = Carbon::parse($dt_ini->day." ".$dt_ini->format("F")." ".$dt_ini->year." ".$request->hora_inicio); // Repetir un dia especifico
+                                }else{
+                                    $nueva_fecha = Carbon::parse($request->diaOrdinal." ".$request->nombreDia." of ".$dt_ini->format("F")." ".$dt_ini->year." ".$request->hora_inicio); // Repetir en una expresion dada
+                                }
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;
+                                $servicio->save();
+                            }elseif ($request->opcionFrecuencia == "semanas") {
+                                # code...
+                                $dt_ini->addWeeks($request->frecuencia);
+                                $nueva_fecha = $dt_ini;
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;//$nueva_fecha->addMinutes($request->duracion);
+                                $servicio->save();
+                            }elseif ($request->opcionFrecuencia == "dias") {
+                                # code...
+                                $dt_ini->addDays($request->frecuencia);
+                                $nueva_fecha = $dt_ini;
+                                if($nueva_fecha->isSunday()){
+                                    $nueva_fecha->next(Carbon::MONDAY);
+                                    $nueva_fecha->setTime($time_ini->hour, $time_ini->minute, $time_ini->second);
+                                }
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;
+                                $servicio->save();
+                            }else{
+                                $dt_ini->addYears($request->frecuencia);
+                                $nueva_fecha = $dt_ini;
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;
+                                $servicio->save();
+                            }    
+                           }
+                        }
+                        break;
+                    case '3':
+                        //Obtiene la seria a la que pertenece el ID del servicio
+                        $serieServicio = Servicio::select('id','serie')->where('id', $request->idServicio)->get();
+                        //Obtiene los servicios pertenecientes de a esta serie
+                        $servicios = Servicio::where('serie', $serieServicio[0]->serie)->get();
+                        foreach ($servicios as $servicio) {
+                            $nueva_fecha = '';
+                           //if($servicio->id != $serieServicio[0]->id){
+                            if($request->opcionFrecuencia == "meses"){
+                                $dt_ini->addMonths($request->frecuencia);
+                                if(!empty($request->diaDelMes)){
+                                    $nueva_fecha = Carbon::parse($dt_ini->day." ".$dt_ini->format("F")." ".$dt_ini->year." ".$request->hora_inicio); // Repetir un dia especifico
+                                }else{
+                                    $nueva_fecha = Carbon::parse($request->diaOrdinal." ".$request->nombreDia." of ".$dt_ini->format("F")." ".$dt_ini->year." ".$request->hora_inicio); // Repetir en una expresion dada
+                                }
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;
+                                $servicio->save();
+                            }elseif ($request->opcionFrecuencia == "semanas") {
+                                # code...
+                                $dt_ini->addWeeks($request->frecuencia);
+                                $nueva_fecha = $dt_ini;
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;//$nueva_fecha->addMinutes($request->duracion);
+                                $servicio->save();
+                            }elseif ($request->opcionFrecuencia == "dias") {
+                                # code...
+                                $dt_ini->addDays($request->frecuencia);
+                                $nueva_fecha = $dt_ini;
+                                if($nueva_fecha->isSunday()){
+                                    $nueva_fecha->next(Carbon::MONDAY);
+                                    $nueva_fecha->setTime($time_ini->hour, $time_ini->minute, $time_ini->second);
+                                }
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;
+                                $servicio->save();
+                            }else{
+                                $dt_ini->addYears($request->frecuencia);
+                                $nueva_fecha = $dt_ini;
+                                $servicio->fecha_inicio = $nueva_fecha;
+                                $servicio->hora_inicio = $nueva_fecha->toTimeString();
+                                $servicio->fecha_fin =$nueva_fecha;
+                                $servicio->hora_fin = $request->hora_fin;
+                                $servicio->save();
+                            }    
+                           }
+                        //}
+                        break; 
+                    default:
+                        throw new \Exception("Error Processing Request", 1);
+                        break;
+                }
+            }catch(\Exception $e ){
+                return response()->json($e, 500);
+            }
+            return response()->json('Update Success', 200);   
+        }else{
+            response()->json(['error: ' => 'Error en la petición'], 500);
+        }
     }
 }

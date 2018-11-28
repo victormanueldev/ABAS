@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,8 +68,9 @@ Route::post('solicitud/show', 'SolicitudesController@show');
 
 //Servicios
 Route::resource('servicios', 'ServicioController', [
-    'except' => 'print'
+    'except' => 'updateFrecuency'
 ]);
+Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -95,3 +97,33 @@ Route::resource('rutas', 'RutaController');
 
 //Impresiones
 Route::get('impresiones/fechas/{id}/{inicio}/{fin}', 'ImpresionController@imprimirTodo');
+
+Route::get('testdates', function(){
+    $dateIni = Carbon::parse('2018-05-20');
+    $ordinal = 'Last';
+    $day = "Monday";
+    $cont=0;
+    $arrayDates = [];
+    $dt_fin = $dateIni->addMinutes(120);
+    while($dateIni->year <= 2019){
+        //$dateEnd = Carbon::parse($ordinal." ".$day." of ".$dateIni->format('F')." ".$dateIni->year);
+        //$dateEnd = Carbon::parse($day." ".$dateIni->format('F')." ".$dateIni->year); Repetir un dia especifico
+        // $dateEnd = Carbon::parse($dateIni);
+        // if($dateEnd->isSunday()){
+        //     $cont++;
+        //     $dateEnd->next(Carbon::MONDAY);
+        // }
+        //$dateIni->addWeeks($request->frecuencia);
+        $nueva_fecha = $dateIni;
+        //$dt_fin = $nueva_fecha;
+        //$servicio->fecha_inicio = $nueva_fecha;
+        //$servicio->hora_inicio = $nueva_fecha->toTimeString();
+        //$dt_fin->addMinutes(120);
+        array_push($arrayDates, $nueva_fecha->toDateTimeString());
+        //$servicio->fecha_fin =$dt_fin;
+        //$servicio->hora_fin = $dt_fin->toTimeString();
+        $dateIni->addWeek(2);
+    }
+    // $date = Carbon::parse('Last thursday of December 2018');
+    return $arrayDates;
+});

@@ -25,7 +25,7 @@
 </head>
 <body class="gray-bg" style="background-image: url({{asset('img/bg1.jpg')}}); background-position: center;background-size: 100% 100%; background-attachment: fixed;">
 
-    <div class="loginColumns animated fadeInDown" style="padding-top: 70px;" >
+    <div class="loginColumns animated fadeInDown" style="padding-top: 50px;" >
         <div class="row">
             @if(count($errors) > 0)
                 @foreach ($errors->all() as $error)
@@ -44,7 +44,7 @@
                 </div>
             </div> --}}
             <div class="col-md-12" style="padding-left: 0;padding-right: 0;">
-                <div class="ibox-content" style="border-radius: 30px; border: none; background-color: #0009; padding: 50px 120px 50px 120px;"> {{-- #f2f6f8 --}}
+                <div class="ibox-content" style="border-radius: 30px; border: none; background-color: #0009; padding: 50px 120px 18px 120px;"> {{-- #f2f6f8 --}}
                     <form method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 						<div class="form-group text-center">
@@ -55,7 +55,8 @@
                             </button>
                         </div>
 						
-                        <h5 style="text-align: center;font-size: 18px;font-weight: normal;margin-bottom: 30px;color: white;">Bienvenido a ABAS</h5>
+                        <h5 style="text-align: center;font-size: 18px;font-weight: normal;margin-bottom: 30px;color: white;">ABAS SOFT <br><small style="color: white;"> Administrador de base de datos de Sanicontrol S.A.</small></h5>
+                        
 						<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <input id="email" type="email" class="form-control" placeholder="Email" required="" value="{{ old('email') }}" name="email">
 

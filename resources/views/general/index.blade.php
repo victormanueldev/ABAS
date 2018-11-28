@@ -19,7 +19,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row m-b-lg m-t-lg">
-        <div class="col-md-7">
+        <div class="col-md-6">
 
             <div class="profile-image">
                 <img src="{{ Storage::url($user->foto)}}" class="img-circle circle-border m-b-md" alt="profile">
@@ -40,11 +40,18 @@
             </div>
         </div>
 
-        <div class="col-md-5">
-            <small>Área de desempeño</small>
+        <div class="col-md-3">
+             <small>Área de desempeño</small>
             <h2 class="no-margins">{{$user->area->descripcion}}</h2>
-            <div id="sparkline1"></div> 
+            {{-- <div id="sparkline1"></div>  --}}
+            <img alt="image" class="img-lg-logo img-responsive" src="{{ asset('img/logo-2.png')}}" />
         </div>
+        <div class="col-md-3">
+                <h3 class="no-margins"></h3>
+                <img src="{{asset('img/zender_logo.png')}}" class="img-fluid">
+                <p class="small">
+                    Administrador de base de datos de <br> Sanicontrol S.A.S. &copy; 2018 </p>
+       </div>
 
 
     </div>

@@ -1,5 +1,5 @@
-@extends('layouts.app') 
-{{-- Css --}} 
+@extends('layouts.app')
+{{-- Css --}}
 @section('custom-css')
 <link href="{{asset('css/plugins/iCheck/custom.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet">
@@ -7,9 +7,9 @@
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 <link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/select2/select2.min.css')}}" rel="stylesheet">
-<link href="{{asset('css/plugins/toastr/toastr.min.css')}}" rel="stylesheet"> 
-@endsection 
-{{-- Contenido --}} 
+<link href="{{asset('css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
+@endsection
+{{-- Contenido --}}
 @section('content')
 <script>
     document.getElementById('m-cronograma').setAttribute("class", "active");
@@ -48,10 +48,12 @@
                 </div>
 
                 {{-- Botones de mostrar modal --}}
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-servicios" id="btn-modal">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-servicios"
+                    id="btn-modal">
                     Launch modal
                 </button>
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#event-option" id="btn-modal2">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#event-option"
+                    id="btn-modal2">
                     Launch modal
                 </button>
 
@@ -70,7 +72,8 @@
                 <div id="modal-servicios" class="modal inmodal fade" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
-                            {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario']) !!}
+                            {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id'
+                            =>'form-calendario']) !!}
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">
                                     <span aria-hidden="true">&times;</span>
@@ -88,15 +91,19 @@
                                                 <label class="col-sm-4 control-label">Buscar cliente por: </label>
                                                 <div class="col-sm-8">
                                                     <label class="radio-inline">
-                                                        <input class="radio-options" type="radio" value="1" id="por_nombre" name="optionsRadios"> Nombre </label>
+                                                        <input class="radio-options" type="radio" value="1" id="por_nombre"
+                                                            name="optionsRadios"> Nombre </label>
                                                     <label class="radio-inline">
-                                                        <input class="radio-options" type="radio" value="2" id="por_rs" name="optionsRadios"> Razon Social </label>
+                                                        <input class="radio-options" type="radio" value="2" id="por_rs"
+                                                            name="optionsRadios"> Razon Social </label>
                                                     <label class="radio-inline">
-                                                        <input class="radio-options" type="radio" value="3" id="por_nit" name="optionsRadios"> NIT/CC </label>
+                                                        <input class="radio-options" type="radio" value="3" id="por_nit"
+                                                            name="optionsRadios"> NIT/CC </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12" style="margin-top: 10px;">
-                                                <input type="text" placeholder="Cliente..." class="typeahead_1 form-control" id="input_autocomplete" autocomplete="off" />
+                                                <input type="text" placeholder="Cliente..." class="typeahead_1 form-control"
+                                                    id="input_autocomplete" autocomplete="off" />
                                             </div>
                                             <div class="form-group col-lg-12" style="margin-top: 15px;">
                                                 <label class="control-label">Sede *</label>
@@ -106,7 +113,8 @@
                                             </div>
                                         </div>
                                         <h3 class="m-t-none m-b">Información de Sede/Residencia</h3>
-                                        <p style="margin-bottom: 14px;">Confirma la información del lugar donde se realizará el servicio.</p>
+                                        <p style="margin-bottom: 14px;">Confirma la información del lugar donde se
+                                            realizará el servicio.</p>
                                         <div class="row">
                                             <div class="form-group col-lg-6">
                                                 <label>Dirección</label>
@@ -130,9 +138,9 @@
                                         <h3 class="m-t-none m-b">Información del servicio</h3>
                                         <p>Diligencie todos los campos del referentes al servicio</p>
                                         <div class="row">
-                                                <div class="form-group col-lg-6">
+                                            <div class="form-group col-lg-12">
                                                 <label>Tipo de Servicio: </label>
-                                                <select class="form-control"  style="margin-top: 10px;" id="select_tipo_servicio">
+                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio">
                                                     <option value="">Seleccione una tipo.</option>
                                                     <option value="Normal">Normal</option>
                                                     <option value="Refuerzo">Refuerzo</option>
@@ -140,19 +148,23 @@
                                                     <option value="Mensajeria">Mensajeria</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-lg-6">
-                                                <label>Frecuencia: </label>
-                                                <select class="form-control" id="select_frecuencia" name="frecuencia_calidad" style="margin-top: 10px;">
-                                                    <option value="">Seleccione una frecencia.</option>
-                                                    <option value="7">Semanal</option>
-                                                    <option value="15">Quincenal</option>
-                                                    <option value="30">Mensual</option>
-                                                    <option value="60">Bimestral</option>
-                                                    <option value="90">Trimestral</option>
-                                                    <option value="120">Cada 4 Meses</option>
-                                                    <option value="180">Semestral</option>
-                                                    <option value="360">Anual</option>
-                                                </select>
+                                            <div class="form-group col-md-12">
+                                                <label>Repetir cada:</label>
+                                                <div class="input-group">
+                                                    <input style="width: 20%;margin-right: 10px;" type="number" name="indice-frecuencia"
+                                                        id="indice-frecuencia" class="form-control">
+                                                    <select style="width: 30%;margin-left: 10px;" name="opcion-frecuencia"
+                                                        id="opcion-frecuencia" class="form-control">
+                                                        <option value="dias" selected>Días</option>
+                                                        <option value="semanas">Semanas</option>
+                                                        <option value="meses">Meses</option>
+                                                        <option value="anios">Años</option>
+                                                    </select>
+                                                    <select style="width: 42.5%;margin-left: 10px;" name="" id="opcion-personalizada"
+                                                        class="form-control">
+                                                        <option value="">Opción personalizada</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label>Hora de inicio*</label>
@@ -163,8 +175,10 @@
                                             <div class="form-group col-lg-8">
                                                 <label>Duración del servicio</label>
                                                 <div class="input-group">
-                                                    <input style="width: 45%;margin-right: 10px;" type="number" min="0" class="form-control" id="num_horas" placeholder="Horas">
-                                                    <input style="width: 47%;margin-left: 10px;" type="number" min="0" max="60" class="form-control" id="num_minutos" placeholder="Minutos">
+                                                    <input style="width: 45%;margin-right: 10px;" type="number" min="0"
+                                                        max="11" class="form-control" id="num_horas" placeholder="Horas">
+                                                    <input style="width: 47%;margin-left: 10px;" type="number" min="0"
+                                                        max="60" class="form-control" id="num_minutos" placeholder="Minutos">
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-12">
@@ -196,8 +210,8 @@
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label>Instrucciones y Observaciones</label>
-                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico." rows="1" name="instrucciones"
-                                                    id="text-instrucciones"></textarea>
+                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
+                                                    rows="1" name="instrucciones" id="text-instrucciones"></textarea>
                                             </div>
                                         </div>
 
@@ -205,8 +219,10 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Sólo Guardar</button> {{-- No se si este boton de guardar sea necesario. --}}
+                                <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-default"
+                                    data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Sólo Guardar</button> {{-- No se si este
+                                boton de guardar sea necesario. --}}
                                 <button id="btn-print" type="button" class="btn btn-primary">Guardar e imprimir</button>
                             </div>
                             {!! Form::close() !!}
@@ -242,27 +258,33 @@
 
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Cliente </label>
-                                                <input type="text" disabled class="form-control" id="ver_nombre_cliente" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_nombre_cliente"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Sede/Residencia </label>
-                                                <input type="text" disabled class="form-control" id="ver_nombre_sede" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_nombre_sede"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Dirección </label>
-                                                <input type="text" disabled class="form-control" id="ver_direccion_sede" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_direccion_sede"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Barrio </label>
-                                                <input type="text" disabled class="form-control" id="ver_barrio_sede" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_barrio_sede"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Contacto </label>
-                                                <input type="text" disabled class="form-control" id="ver_contacto_sede" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_contacto_sede"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Teléfono </label>
-                                                <input type="text" disabled class="form-control" id="ver_telefono_sede" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_telefono_sede"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                         </div>
                                     </div>
@@ -271,38 +293,34 @@
                                             <div class="col-sm-5 col-xs-12" style="margin-bottom: 7px;">
                                                 <a class="btn btn-primary" id="btn-lock" style="cursor: not-allowed;"></a>
                                             </div>
-                                            <div class="col-sm-7 col-xs-12" style="margin-bottom: 7px;padding-left: 50px;" id="div-opciones">
+                                            <div class="col-sm-7 col-xs-12" style="margin-bottom: 7px;padding-left: 50px;"
+                                                id="div-opciones">
 
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Hora de inicio </label>
-                                                <input type="text" disabled class="form-control" id="ver_hora_inicio" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_hora_inicio"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
                                                 <label class="control-label">Fecha/Hora de fin. </label>
-                                                <input type="text" disabled class="form-control" id="ver_datos_fin" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_datos_fin"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
 
                                             <div class="form-group col-sm-6">
                                                 <label>Frecuencia: </label>
-                                                <select class="form-control" id="ver_frecuencia" name="frecuencia_calidad" style="background-color: #fff;" disabled>
-                                                    <option value="7">Semanal</option>
-                                                    <option value="15">Quincenal</option>
-                                                    <option value="30">Mensual</option>
-                                                    <option value="60">Bimestral</option>
-                                                    <option value="90">Trimestral</option>
-                                                    <option value="120">Cada 4 Meses</option>
-                                                    <option value="180">Semestral</option>
-                                                    <option value="360">Anual</option>
-                                                </select>
+                                                <input type="button" class="form-control" value="Cambiar frecuencia" id="change-frecuency">
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label>Duración del servicio</label>
-                                                <input type="text" disabled class="form-control" id="ver_duracion" style="width: 100%;background-color: #fff;">
+                                                <input type="text" disabled class="form-control" id="ver_duracion"
+                                                    style="width: 100%;background-color: #fff;">
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label>Instrucciones y Observaciones</label>
-                                                <textarea class="form-control" readonly rows="1" name="instrucciones" style="background-color: #fff;" id="ver_instrucciones"></textarea>
+                                                <textarea class="form-control" readonly rows="1" name="instrucciones"
+                                                    style="background-color: #fff;" id="ver_instrucciones"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -435,12 +453,74 @@
                     </div>
                 </div>
 
+                <!--===================================================
+                /* Modal opciones de Actualizacion de Frecuencia
+                ====================================================-->
+                <div class="modal inmodal fade" id="modal-update-options" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <h2 class="modal-title" style="font-size: 23px;">Opciones de Actualización</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>Repetir cada:</label>
+                                        <div class="input-group">
+                                            <input style="width: 20%;margin-right: 10px;" type="number" name="indice-frecuencia"
+                                                id="indice-frecuencia-actl" class="form-control">
+                                            <select style="width: 30%;margin-left: 10px;" name="opcion-frecuencia" id="opcion-frecuencia-actl"
+                                                class="form-control">
+                                                <option value="dias" selected>Días</option>
+                                                <option value="semanas">Semanas</option>
+                                                <option value="meses">Meses</option>
+                                                <option value="anios">Años</option>
+                                            </select>
+                                            <select style="width: 42.5%;margin-left: 10px;" name="" id="opcion-personalizada-actl"
+                                                class="form-control">
+                                                <option value="">Opción personalizada</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="i-checks">
+                                            <label>
+                                                <input type="radio" value="1" name="update-op">
+                                                <i></i> Servicio actual </label>
+                                        </div>
+                                        <div class="i-checks">
+                                            <label>
+                                                <input type="radio" value="2" name="update-op">
+                                                <i></i> Servicios posteriores </label>
+                                        </div>
+                                        <div class="i-checks">
+                                            <label>
+                                                <input type="radio" value="3" name="update-op">
+                                                <i></i> Todos los servicios </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button id="btn-actl-servicio" type="button" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-@endsection 
-{{-- JavaScript --}} 
+@endsection
+{{-- JavaScript --}}
 @section('ini-scripts')
 <!-- iCheck -->
 <script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>
@@ -464,6 +544,9 @@
 <script src="{{asset('js/plugins/typehead/bootstrap3-typeahead.min.js')}}"></script>
 <script>
 
+    //Inicializacion de variables globales
+    var infoServiceSelected = {id: '',duration: ''};
+    var inicio_servicio;
 
     $(document).ready(function () {
 
@@ -559,7 +642,6 @@
         var m = date.getMonth();
         var y = date.getFullYear();
         //Declaracion de Variables publicas de Servicio
-        var inicio_servicio;
         var checkbox = false;
         var color;
         var frecuencia_solicitud;
@@ -588,6 +670,7 @@
             editable: true,
             eventLimit: true,
             nowIndicator: true,
+            firstDay: 0,
             businessHours: {
                 // Dias de la semana en un array (0=Domingo)
                 dow: [1, 2, 3, 4, 5, 6], // Lunes a Sabado
@@ -624,6 +707,8 @@
                 $("#hora_inicio").val('');
                 $("#num_horas").val('');
                 $("#num_minutos").val('');
+                $("#opcion-personalizada").empty();
+                $("#opcion-personalizada").append(`<option>Opción personalizad</option>`);
                 $('#select_servicios').select2("val", "");
                 $('#select_tecnicos2').select2("val", "");
                 $("#historial_tecnicos").popover('destroy');
@@ -687,7 +772,7 @@
             eventMouseover: function (event, jsEvent, view) {
                 var start = (event.start.format("HH:mm"));
                 var back = event.backgroundColor;
-                if (event.end) {
+                if (event.end != null) {
                     var end = event.end.format("HH:mm");
                 } else {
                     var end = "No definido";
@@ -747,6 +832,9 @@
 
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: (event, jsEvent, view) => {
+                infoServiceSelected.id = event.id;
+                infoServiceSelected.duration = event.duration;
+                inicio_servicio = event.start.format("YYYY-MM-DD HH:mm:ss");
                 $("#div-opciones").empty();
                 //Añadir opciones al modal de ver servicio
                 $("#div-opciones").append(
@@ -945,6 +1033,10 @@
             obtenerSolicitudSede(id_sede, crsfToken);
         });
 
+        $("#opcion-frecuencia").change(event => {
+            addOptionsAtSelects('frecuencia', 'personalizada');
+        })
+
         //Evento Submit del modal de crear Servicio
         $('#form-calendario').submit(event => {
             event.preventDefault();
@@ -953,7 +1045,7 @@
             var frecuencia;
             var start_event = inicio_servicio;
             var tipoServicio = $("#select_tipo_servicio").val();
-            frecuencia = parseInt($("#select_frecuencia").val());
+            frecuencia = parseInt($("#indice-frecuencia").val());
             var tecnicos = [];
             $("#select_tecnicos2").val().forEach((value, index) => {
                 tecnicos[index] = value;
@@ -966,10 +1058,48 @@
             //Prueba de fechas y horas
             console.log($("#hora_inicio").val());//email, start1.format('YYYY-MM-DD HH:mm'));
             crsfToken = document.getElementsByName("_token")[0].value;
-            var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
+            var start_service = moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA');
+            var end_service = start_service.add(duracion_servicio, 'minutes');
+            //var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
+            let dataToSend = {
+                tipos: tipos_servicio,
+                frecuencia: frecuencia,
+                tipo_servicio: tipoServicio,
+                start: start_event,
+                hora_inicio: moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA').format("HH:mm"),
+                hora_fin: end_service.format("HH:mm"),
+                duracion: duracion_servicio,
+                id_tecnicos: tecnicos,
+                id_solicitud: id_solicitud,
+                opcionFrecuencia: '',
+                diaOrdinal: '',
+                nombreDia: '',
+                dayOfWeek: '',
+                diaDelMes: ''
+            };
+            if ($("#opcion-frecuencia").val() == 'semanas') {
+                dataToSend.opcionFrecuencia = "semanas";
+                dataToSend.dayOfWeek = $("#opcion-personalizada").val();
+            } else if ($("#opcion-frecuencia").val() == 'meses') {
+                dataToSend.opcionFrecuencia = "meses";
+                let arrCustomOption = ($("#opcion-personalizada").val()).split('-');
+                console.log(arrCustomOption);
+                if (arrCustomOption[0] != 'all') {
+                    dataToSend.diaOrdinal = arrCustomOption[0];
+                    dataToSend.nombreDia = arrCustomOption[1];
+                } else {
+                    dataToSend.diaDelMes = arrCustomOption[1];
+                }
+
+            } else if ($("#opcion-frecuencia").val() == 'dias') {
+                dataToSend.opcionFrecuencia = "dias";
+            } else {
+                dataToSend.opcionFrecuencia = "anios";
+            }
+            console.log(dataToSend)
             //Alert de confirmacion
             swal({
-            title: "¡Advertencia!",
+                title: "¡Advertencia!",
                 text: "¿Estás seguro de guardar este servicio?",
                 icon: "warning",
                 buttons: {
@@ -982,45 +1112,45 @@
                     }
                 }
             })
-            .then(isConfirm => {
-                if(isConfirm){
-                    //Peticion HTTP para guardar el evento
-                    $.ajax({
-                        url: '/servicios',//URL del servicio
-                        data:
-                        //Datos que enviará
-                        {
-                            tipos: tipos_servicio,
-                            frecuencia: frecuencia,
-                            tipo_servicio: tipoServicio,
-                            start: start_event,
-                            hora_inicio: horaInicioFormat,
-                            duracion: duracion_servicio,
-                            id_tecnicos: tecnicos,
-                            id_solicitud: id_solicitud
-                        },
-                        type: "POST",//Método de envío
-                        headers: {
-                            "Content-Type": 'application/x-www-form-urlencoded',
-                            "X-CSRF-TOKEN": crsfToken       //Token de seguridad
-                        },
+                .then(isConfirm => {
+                    if (isConfirm) {
+                        //Peticion HTTP para guardar el evento
+                        $.ajax({
+                            url: '/servicios',//URL del servicio
+                            data: dataToSend,
+                            //Datos que enviará
+                            /*{
+                                tipos: tipos_servicio,
+                                frecuencia: frecuencia,
+                                tipo_servicio: tipoServicio,
+                                start: start_event,
+                                hora_inicio: horaInicioFormat,
+                                duracion: duracion_servicio,
+                                id_tecnicos: tecnicos,
+                                id_solicitud: id_solicitud
+                            },*/
+                            type: "POST",//Método de envío
+                            headers: {
+                                "Content-Type": 'application/x-www-form-urlencoded',
+                                "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                            },
 
-                    })
-                    .then(events => {
-                        swal("¡Creación Correcta!", "Servicios creados correctamente.", "success")
-                            .then(value => { //Boton OK actualizado
-                                if(value){
-                                    console.log('Evento creado');   //Escribe en la consola
-                                   $("#btn-close2").click();
-                                    $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
-                                }
+                        })
+                            .then(events => {
+                                swal("¡Creación Correcta!", "Servicios creados correctamente.", "success")
+                                    .then(value => { //Boton OK actualizado
+                                        if (value) {
+                                            console.log('Evento creado');   //Escribe en la consola
+                                            $("#btn-close2").click();
+                                            $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+                                        }
+                                    })
                             })
-                    })
-                    .catch(error => {
-                        swal("¡Error!", error.responseJSON[0], "error")
-                    })
-                }
-            })
+                            .catch(error => {
+                                swal("¡Error!", error.responseJSON[0], "error")
+                            })
+                    }
+                })
         });
 
         //Evento click del boton de imprimir Modal (Crear Servicio)
@@ -1063,6 +1193,210 @@
 
     //Variables globales
     var idEventVal;
+
+    /**
+* Obtiene el texto en español del lugar del dia en el mes.
+* @param {Number} weekContainer: Numero de la semana que contiene el dia seleccionado
+* @return {Array} Texto en español. 
+**/
+    function getOrdinalDay(weekContainer) {
+        console.log(weekContainer)
+        let text = [];
+        switch (weekContainer) {
+            case 1:
+                text = ['Primer', 'First'];
+                break;
+            case 2:
+                text = ['Segundo', 'Second'];
+                break;
+            case 3:
+                text = ['Tercer', 'Third'];
+                break;
+            case 4:
+                text = ['Cuarto', 'Fourth'];
+                break;
+            default:
+                text = ['Último', 'Last'];
+                break;
+        }
+        return text;
+    }
+
+    /**
+    * Obtiene el numero de la semana en la que se encuentra un dia del mes
+    * @param {Number} year: El presente año
+    * @param {Number} month: El mes seleccionado en el calendario
+    * @param {Number} numberOfDay: Numero del dia en el mes seleccionado
+    * @return {Number} Retorna el numero de la semana que contiene el dia evaluado
+    **/
+    function getWeeksContainerOfDay(year, month, numberOfDay, indexDay) {
+        //Declara las variables de inicio y fin
+        var monthStart = moment().year(year).month(month).date(1);
+        var monthEnd = moment().year(year).month(month).endOf('month');
+        var numDaysInMonth = moment().year(year).month(month).endOf('month').date();
+        var numberDay = numberOfDay;
+        //Calculas las semanas del mes recibido
+        var weeks = Math.ceil((numDaysInMonth + monthStart.day()) / 7);
+        var weekRange = [];
+        var weekStart = moment().year(year).month(month).date(1);
+        var i = 0;
+        var j = 1;
+
+        while (i < weeks) {
+            var weekEnd = moment(weekStart);
+            var daysOfWeek = [];
+            var indexDayOfWeek = [];
+            //valida que el ultimo dia de la semana sea menor que el numero de dias del mes dado
+            //y que la semana evaluada pertenezca al mes dado
+            if (weekEnd.endOf('week').date() <= numDaysInMonth && weekEnd.month() == month) {
+                //Obtiene el dia de fin de la semana
+                weekEnd = weekEnd.endOf('week').format('DD');
+            } else {
+                //Obtiene el dia de fin de la semana
+                weekEnd = moment(monthEnd);
+                weekEnd = weekEnd.format('DD')
+            }
+            //Crea un array de el numero del dia en el mes por cada semana obtenida en el ciclo
+            while (j <= parseInt(weekEnd)) {
+                //Agrega un elemento al array
+                daysOfWeek.push(j);
+                indexDayOfWeek.push(moment(`${year}-${month + 1}-${j}`, "YYYY-MM-DD").day())
+                j++;
+            }
+
+            //Agrega un elemento al array
+            weekRange.push({
+                'weekStart': weekStart.format('DD'),
+                'weekEnd': weekEnd,
+                'daysOfWeek': daysOfWeek,
+                'indexDayOnWeek': indexDayOfWeek,
+                'numberOfWeek': i + 1
+            });
+
+            weekStart = weekStart.weekday(7);
+            i++;
+        }
+
+        //Recorre el rango de las fechas
+        weekRange.forEach((value, index) => {
+            //valida que el numero del dia dado, esté contenido dentro del array
+            //de de dias de cualquier semana del mes.
+            if (value.daysOfWeek.includes(numberDay)) {
+                //valida que el dia de la semana seleccionado se encuentre en el rango de la primera
+                //semana del mes seleccionado 
+                if (!weekRange[0].indexDayOnWeek.includes(indexDay)) {
+                    //Asignar el valor de la semana contenedora
+                    switch (value.numberOfWeek) {
+                        case 2:
+                            weekContainer = 1
+                            break;
+                        case 3:
+                            weekContainer = 2;
+                            break;
+                        case 4:
+                            weekContainer = 3;
+                            break;
+                        case 5:
+                            //Valida que el mes seleccionado tenga 6 rangos de semanas
+                            //y que el dia de la semana seleccionado no se encuentre en el ultimo rango de semanas
+                            if (index == 5 && !weekRange[5].indexDayOnWeek.includes(indexDay)) {
+                                weekContainer = 5;
+                            } else if (index == 4 && weekRange[4].indexDayOnWeek.includes(indexDay) && month == 1) {
+                                weekContainer = 5;
+                            } else {
+                                weekContainer = 4;
+                            }
+                            break;
+                        default:
+                            weekContainer = 5;
+                            break;
+                    }
+                } else {
+                    //Valida que el dia de la semana seleccionado no esté contenido entre el ultimo rango de fechas
+                    if (value.numberOfWeek == 4 && !weekRange[4].indexDayOnWeek.includes(indexDay)) {
+                        weekContainer = 5;
+                    } else {
+                        weekContainer = value.numberOfWeek;
+                    }
+                }
+            }
+        });
+
+        let text = getOrdinalDay(weekContainer);
+        return text;
+    }
+
+    /**
+    * Obtiene el nombre del dia en español
+    * @param {Number} indexDay: Indice del dia en la semana
+    * @return {String} El nombre del dia
+    **/
+    function getNameOfDaySpanish(indexDay) {
+        let nameOfDaySpanish;
+        switch (indexDay) {
+            case 0:
+                nameOfDaySpanish = 'domingo';
+                break;
+            case 1:
+                nameOfDaySpanish = 'lunes';
+                break;
+            case 2:
+                nameOfDaySpanish = 'martes';
+                break;
+            case 3:
+                nameOfDaySpanish = 'miercoles';
+                break;
+            case 4:
+                nameOfDaySpanish = 'jueves';
+                break;
+            case 5:
+                nameOfDaySpanish = 'viernes';
+                break;
+            case 6:
+                nameOfDaySpanish = 'sábado';
+                break;
+            default:
+                console.log('default');
+                break;
+        }
+        return nameOfDaySpanish;
+    }
+
+    /**
+     * Añade y cambia propiedades de los inputs(selects) con el ID seleccionado
+     * @param {String} slctFrecuency: ID del Input de opciones de frecuencia
+     * @param {String} slctCustomOpt: ID del input de opciones personalizadas
+     **/
+    function addOptionsAtSelects(slctFrecuency, slctCustomOpt) {
+        let dateSelected = moment(inicio_servicio);
+        if ($(`#opcion-${slctFrecuency}`).val() == 'semanas') {
+            $(`#opcion-${slctCustomOpt}`).empty();
+            $(`#opcion-${slctCustomOpt}`).append(`
+                <option value="1">Todos los lunes</option>
+                <option value="2">Todos los martes</option>
+                <option value="3">Todos los miércoles</option>
+                <option value="4">Todos los jueves</option>
+                <option value="5">Todos los viernes</option>
+                <option value="6">Todos los sábados</option>
+            `);
+            $(`#opcion-${slctCustomOpt}`).val(dateSelected.day().toString()).change();
+            $(`#opcion-${slctCustomOpt}`).attr("disabled", "disabled");
+        } else if ($(`#opcion-${slctFrecuency}`).val() == 'meses') {
+            $(`#opcion-${slctCustomOpt}`).empty();
+            let ordinalTextOfDay = getWeeksContainerOfDay(dateSelected.year(), dateSelected.month(), dateSelected.date(), dateSelected.day());
+            let nameOfDaySpanish = getNameOfDaySpanish(dateSelected.day());
+            $(`#opcion-${slctCustomOpt}`).append(`
+                <option value="all-${dateSelected.date()}">El ${dateSelected.date()} de cada mes</option>
+                <option value="${ordinalTextOfDay[1]}-${dateSelected.format('dddd')}">El ${ordinalTextOfDay[0]} ${nameOfDaySpanish} de cada mes</option>
+            `)
+            $(`#opcion-${slctCustomOpt}`).prop("disabled", false);
+        } else {
+            $(`#opcion-${slctCustomOpt}`).empty();
+            $(`#opcion-${slctCustomOpt}`).append(`
+                <option value="">Opción personalizada</option>
+            `);
+        }
+    }
 
     /**
     * Evento MouseOver del item de la lista del historial de tecnicos
@@ -1185,5 +1519,75 @@
             }
         });
     });
-</script> 
+
+    $("#change-frecuency").click(event => {
+        $('#event-option')
+            .modal('hide')                          //Oculta el modal abierto
+            .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
+                $('#modal-update-options').modal('show');    //Muestra el nuevo modal
+
+                $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+            });
+    })
+
+    $("#opcion-frecuencia-actl").change(() => {
+        addOptionsAtSelects('frecuencia-actl', 'personalizada-actl')
+    })
+
+    $("#btn-actl-servicio").click(() => {
+        let formattedDate = moment(inicio_servicio, 'YYYY-MM-DD HH:mm:ss');
+        let dateEnd = moment(inicio_servicio, 'YYYY-MM-DD HH:mm:ss').add(parseInt(infoServiceSelected.duration), 'minutes');
+        let dataToSendUpdt = {
+            idServicio: infoServiceSelected.id,
+            duracion: infoServiceSelected.duration,
+            frecuencia: $("#indice-frecuencia-actl").val(),
+            fecha_inicio: formattedDate.format("YYYY-MM-DD"),
+            hora_inicio: formattedDate.format('HH:mm:ss'),
+            hora_fin: dateEnd.format("HH:mm:ss"),
+            opcionFrecuencia: '',
+            dayOfWeek: '',
+            diaOrdinal: '',
+            nombreDia: '',
+            diaDelMes: '',
+            optionActl: $("input[name=update-op]:checked").val()
+        };
+        if ($("#opcion-frecuencia-actl").val() == 'semanas') {
+                dataToSendUpdt.opcionFrecuencia = "semanas";
+                dataToSendUpdt.dayOfWeek = $("#opcion-personalizada-actl").val();
+        } else if ($("#opcion-frecuencia-actl").val() == 'meses') {
+            dataToSendUpdt.opcionFrecuencia = "meses";
+            let arrCustomOption = ($("#opcion-personalizada-actl").val()).split('-');
+            if (arrCustomOption[0] != 'all') {
+                dataToSendUpdt.diaOrdinal = arrCustomOption[0];
+                dataToSendUpdt.nombreDia = arrCustomOption[1];
+            } else {
+                dataToSendUpdt.diaDelMes = arrCustomOption[1];
+            }
+
+        } else if ($("#opcion-frecuencia-actl").val() == 'dias') {
+            dataToSendUpdt.opcionFrecuencia = "dias";
+        } else {
+            dataToSendUpdt.opcionFrecuencia = "anios";
+        }
+        let crsfToken = document.getElementsByName("_token")[0].value; 
+        
+        $.ajax({
+            url: '/servicios/edit/frecuency',
+            type: 'PUT',
+            data: dataToSendUpdt,
+            headers:{
+                "Content-Type": 'application/x-www-form-urlencoded',
+                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            },
+            success: (res)=> {
+                console.log(res)
+                $('#calendar').fullCalendar('refetchEvents'); //Actualiza los servicios del calendario
+                $("#modal-update-options").modal('hide'); //Oculta el modal abierto
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        });
+    })
+</script>
 @endsection

@@ -11,10 +11,19 @@ Otros Ajustes
         - Mostrar novedades segun el area del empleado
         - Horas de Observaciones en formato 24Hrs (ClockPicker crear cliente)
         - Verificar JS de seleccion de vista (li="active")
+        - Reporte de cierres y ventas realizadas con respecto a la meta
+        - Estado del cliente (cerrado, prospecto)
+        - Crear cliente una sola interfaz
+        - Crear y editar la cotización (valor estado:final, inicial y relacion por ID de cliente)
+        - Interfaz de ver prospectos (tabla con buscador y boton de editar cliente)
+        - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
+        - 
         - Editar Cliente
             - Modal de Añadir sede
             - Modal de Editar datos de cliente
             - Guardar Documentos en la BD (Boolean)
+            - Guardar la cotizacion (codigo y valor)
+            - Observaciones fijas para clientes (ej: Llevar 2 tecnicos a prestar el servicio)  
         - Calendario
             - Verificar horario de trabajo
             - Editar Evento dando Click
@@ -29,12 +38,27 @@ Otros Ajustes
             - Novedades urgentes
         NOTA: Revisar anotaciones cuaderno
     AREA PROGRAMACION
-        - Opciones de impresion en Creacion de servicios 
-        - Generacion de PDFs (Ordenes) por servicio y añadirlos a una coleccion para su futuro recorrido (HTML Basico)
-        - Consulta de Rutas por servicio y añadir a la coleccion
-        - Consulta de certificados por servicio
-        - Filtro por varios clientes e individual para consulta y generacion de PDFs
         - Opcion de bloquear/desbloquear servicio directamente desde ver info del servicio
-        - Mensaje de "no hay servicios asignados a este técnico"
+        - Validacion del cliente en mora  antes de crear servicios
+        - Check list de notificaciones tenporales por clientes.
+        - Asignar numero de factura y valor del servicio seleccionado en el calendario (ver servicio)
+        - Informe de registro de actividad por tecnico y rango de fechas.
+
     AREA CALIDAD
         - Generacion de Documentos (CRUD)
+        - Registro de novedades de clientes luego de los servicios.
+        - Relacionar el cliente y la sede con la novedad.
+        - 
+    AREA DE CONTABILIDAD
+        - Listado de todos los clientes y prospectos (Estado del cliente)
+        - Asignacion de metas por inspector comercial (preguntar si va en esta area)
+        - "             "         Director comercial (preguntar)
+        - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
+        - Reporte de servicios con sus respectivas facturas.
+
+    AREA DE INVENTARIOS
+        - CRUD de productos
+        - Reporte de entrada de productos (Compras)
+        - Reporte de salida de productos (Gasto de tecnicos)
+        - Inventario General por rango de fechasy Frecuencias
+        - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
