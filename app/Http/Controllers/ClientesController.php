@@ -147,7 +147,7 @@ class ClientesController extends Controller
     public function show($id)
     {
 
-        $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user')->where('id', $id)->get();
+        $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user', 'cotizacion')->where('id', $id)->get();
         return view('general.ver-cliente', compact('cliente'));
         // return $cliente;
 

@@ -70,4 +70,9 @@ class Cliente extends Model
     {
         return $this->hasMany(Ruta::class);
     }
+
+    public function cotizacion()
+    {
+        return $this->hasOne(Cotizacion::class);
+    }
 }

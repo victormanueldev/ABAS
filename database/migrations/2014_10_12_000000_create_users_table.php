@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->integer('cedula')->unique();
             $table->string('nombres', 45);
             $table->string('apellidos', 45);
+            $table->string('iniciales', 3);
             $table->string('telefono', 13);
             $table->string('foto');
             $table->string('email', 99)->unique();

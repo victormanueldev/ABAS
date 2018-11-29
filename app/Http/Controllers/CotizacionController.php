@@ -4,6 +4,7 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\Cotizacion;
 use Illuminate\Http\Request;
+use Auth;
 
 class CotizacionController extends Controller
 {
@@ -36,6 +37,23 @@ class CotizacionController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->ajax()){
+            try{
+                $user = Auth::user();
+                $cotizacion = new Cotizacion();
+                $codigo = "CT-".$user->iniciales."-".$request->idCliente;
+                $cotizacion->codigo = $codigo;
+                $cotizacion->estado = $request->estado;
+                $cotizacion->valor =$request->valor;
+                $cotizacion->cliente_id = $request->idCliente;
+                $cotizacion->save();
+                return response()->json('Creation Successfully', 201);
+            }catch(\Exception $e){
+                return response()->json($e, 500);
+            }
+        }else{
+            return response()->json('Error en la peticion AJAX', 401);
+        }
     }
 
     /**

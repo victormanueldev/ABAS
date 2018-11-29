@@ -35,15 +35,25 @@
                                 <a href="#" class="btn btn-warning btn-xs pull-right">Editar cliente</a>
                                 <a href="#" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px">Añadir
                                     Sede</a>
-                                <a href="#" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px">Añadir
-                                    Cotización</a>
+                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"  data-toggle="modal" data-target="#modal-create-cotizacion">Añadir
+                                    Cotización</button>
                                 <h2>{{$cliente[0]->nombre_cliente}}</h2>
                             </div>
                             @if($cliente[0]->tipo_cliente == 'Persona Juridica')
-                            <dl class="dl-horizontal">
-                                <dt>Tipo de Cliente:</dt>
-                                <dd><span class="label label-primary">{{$cliente[0]->tipo_cliente}}</span></dd>
-                            </dl>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Tipo de Cliente:</dt>
+                                        <dd><span class="label label-default">{{$cliente[0]->tipo_cliente}}</span></dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Estado del Cliente:</dt>
+                                        <dd ><span class="label label-danger">Prospecto</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -59,10 +69,20 @@
                                 <dd> {{$cliente[0]->cargo_contacto}} </dd>
                             </dl>
                             @else
-                            <dl class="dl-horizontal">
-                                <dt>Tipo de Cliente:</dt>
-                                <dd><span class="label label-warning">{{$cliente[0]->tipo_cliente}}</span></dd>
-                            </dl>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Tipo de Cliente:</dt>
+                                        <dd><span class="label label-default">{{$cliente[0]->tipo_cliente}}</span></dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Estado del Cliente:</dt>
+                                        <dd ><span class="label label-danger">Prospecto</span></dd>
+                                    </dl>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -216,13 +236,14 @@
                                         </div>
                                         <div class="tab-pane" id="tab-3">
                                             <div class="row">
-
-                                                <div class="col-lg-6" style="padding: 0 30px">
-                                                    <h5>Cotización</h5>
-                                                    <h1 class="no-margins">CT-MO-AS-12</h1>
-                                                    <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
-                                                    <strong>Creación: </strong><small>2018-04-05 18:04:12</small>
-                                                </div>
+                                                @if($cliente[0]->cotizacion != [])
+                                                    <div class="col-lg-6" style="padding: 0 30px">
+                                                        <h5>Cotización</h5>
+                                                    <h1 class="no-margins">{{$cliente[0]->cotizacion->codigo}}</h1>
+                                                        <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
+                                                        <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
+                                                    </div>
+                                                @endif
 
                                             </div>
                                         </div>
@@ -289,6 +310,51 @@
                         de lámparas</button>
                     <button type="button" class="btn btn-primary btn-block btn-outline" data-toggle="modal" data-target="#modal-create-route-r">Ruta
                         de roedores</button>
+                </div>
+            </div>
+
+            <!--===================================================
+            /* Modal Crear Cotizacion
+            ====================================================-->
+            <div class="modal inmodal fade" id="modal-create-cotizacion" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {!! Form::open(['id' =>'form-certificate']) !!}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title">Creación de Cotizacion</h4>
+                        </div>
+                        <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-md-4">
+                                    <label>Cliente: </label>
+                                    <select class="form-control" id="cliente-cotizacion" name="cliente-sede" style="background-color: #fff;">
+                                        <option value="{{$cliente[0]->id}}" selected>{{$cliente[0]->nombre_cliente}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-12 col-md-4">
+                                    <label>Estado de la Cotización: </label>
+                                    <select class="form-control" id="estado-cotizacion" name="cliente-sede" style="background-color: #fff;">
+                                        <option value="Inicial">Inicial</option>
+                                        <option value="Final">Final</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-4">
+                                    <label>Valor Acordado:</label>
+                                    <input type="number" class="form-control" id="valor-cotizacion" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                            <button type="button" id="btn-save-cotizacion" class="btn btn-primary">Guardar</button>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
 
@@ -944,6 +1010,30 @@
         saveRoute('rr', clienteId, sedeId, contenidoRutaRoedores, crsfToken)
             .then((res) => console.log(res))    //Success
             .catch((err) => console.log(err.responseJSON.errorInfo[2])) //Error
+    })
+
+    $("#btn-save-cotizacion").click(event => {
+        event.preventDefault();
+        let cotizacion = {
+            estado: $("#estado-cotizacion").val(),
+            valor: $("#valor-cotizacion").val(),
+            idCliente: $("#cliente-cotizacion").val(),
+        };
+        let crsfToken = document.getElementsByName("_token")[0].value;
+        $.ajax({
+            url: '/cotizaciones',
+            data: cotizacion,
+            type: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": crsfToken
+            },
+            success: (res) => {
+                console.log(res)
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        })
     })
     
 </script>

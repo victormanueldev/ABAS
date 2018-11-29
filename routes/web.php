@@ -127,3 +127,6 @@ Route::get('testdates', function(){
     // $date = Carbon::parse('Last thursday of December 2018');
     return $arrayDates;
 });
+
+//Cotizaciones
+Route::resource('cotizaciones', 'CotizacionController');
