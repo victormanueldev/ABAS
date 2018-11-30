@@ -130,3 +130,5 @@ Route::get('testdates', function(){
 
 //Cotizaciones
 Route::resource('cotizaciones', 'CotizacionController');
+
+Route::resource('metas', 'MetaController');

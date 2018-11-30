@@ -34,8 +34,8 @@ class UserSeeder extends Seeder
                 'foto' => 'a6.jpg',
                 'email' => 'yurani@gmail.com',
                 'password' => bcrypt('1234567'),
-                'area_id' => '1',
-                'cargo_id' => '1' 
+                'area_id' => '2',
+                'cargo_id' => '2' 
             ],
             '2' => [
                 'cedula' => '123456789',
@@ -46,8 +46,8 @@ class UserSeeder extends Seeder
                 'foto' => 'a1.jpg',
                 'email' => 'andres@gmail.com',
                 'password' => bcrypt('1234567'),
-                'area_id' => '2',
-                'cargo_id' => '2' 
+                'area_id' => '1',
+                'cargo_id' => '1' 
             ],
             '3' => [
                 'cedula' => '987654621',

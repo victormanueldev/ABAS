@@ -85,6 +85,11 @@
                                 <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li>
                             </ul>
                         </li>
+                    @elseif(Auth::user()->area_id == '2')
+
+                        <li id="m-metas-comerciales" >
+                            <a href="/metas/create" style="background-color: #5cae27;color: white;" id="a-metas-comerciales"><i class="fa fa-trophy"></i> <span class="nav-label">Metas Comerciales</span></a>
+                        </li>
 
                     @elseif(Auth::user()->area_id == '3')
 

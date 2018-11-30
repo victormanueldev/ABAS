@@ -17,7 +17,7 @@ Otros Ajustes
         - Crear y editar la cotización (valor estado:final, inicial y relacion por ID de cliente)
         - Interfaz de ver prospectos (tabla con buscador y boton de editar cliente)
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
-        - 
+        
         - Editar Cliente
             - Modal de Añadir sede
             - Modal de Editar datos de cliente
