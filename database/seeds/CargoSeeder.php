@@ -15,7 +15,7 @@ class CargoSeeder extends Seeder
         $cargos = [
             '0' => [
                 'nombre' => 'asesorcom',
-                'descripcion' => 'Asesor Comercial'
+                'descripcion' => 'Inspector Comercial'
             ],
             '1' => [
                 'nombre' => 'contabilidad',
@@ -24,6 +24,10 @@ class CargoSeeder extends Seeder
             '2' => [
                 'nombre' => 'programacion',
                 'descripcion' => 'Programador'
+            ],
+            '3' => [
+                'nombre' => 'directorcom',
+                'descripcion' => 'Director Comercial'
             ]
         ];
         DB::table('cargos')->insert($cargos);

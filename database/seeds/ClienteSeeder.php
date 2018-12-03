@@ -57,7 +57,7 @@ class ClienteSeeder extends Seeder
                 'celular' => '311565468',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
-                'user_id' => 1,
+                'user_id' => 3,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
             ],
@@ -81,7 +81,7 @@ class ClienteSeeder extends Seeder
                 'celular' => '318546813',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
-                'user_id' => 1,
+                'user_id' => 3,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
             ],

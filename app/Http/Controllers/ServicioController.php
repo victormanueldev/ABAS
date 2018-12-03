@@ -318,10 +318,10 @@ class ServicioController extends Controller
     {
         //
         //Seleccionar columnas en las relaciones de eloquent
-        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede')->where('id', $id)->get();
+        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede', 'factura')->where('id', $id)->get();
         return $servicio;
     }
-
+ 
     /**
      * Update the specified resource in storage.
      *

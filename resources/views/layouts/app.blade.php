@@ -87,8 +87,12 @@
                         </li>
                     @elseif(Auth::user()->area_id == '2')
 
-                        <li id="m-metas-comerciales" >
-                            <a href="/metas/create" style="background-color: #5cae27;color: white;" id="a-metas-comerciales"><i class="fa fa-trophy"></i> <span class="nav-label">Metas Comerciales</span></a>
+                    <li id="m-metas-comerciales">
+                            <a href="{{ url('/metas') }}" style="background-color: #5cae27;color: white;" id="a-metas-comerciales"><i class="fa fa-trophy"></i> <span class="nav-label">Metas Comerciales</span></a>  
+                            <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
+                                <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;"><a href="/metas/comerciales" style="color: white;"><i class="fa fa-users"></i><span class="nav-label">Progreso Inspectores</span></a></li>
+                                <li id="ml2-progreso-directores"><a href="/metas/director" style="color: white;"><i class="fa fa-user-circle"></i><span class="nav-label">Progreso Directores</span></a></li>
+                            </ul>
                         </li>
 
                     @elseif(Auth::user()->area_id == '3')

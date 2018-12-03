@@ -1,5 +1,5 @@
 <?php
-
+use ABAS\User;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -131,4 +131,25 @@ Route::get('testdates', function(){
 //Cotizaciones
 Route::resource('cotizaciones', 'CotizacionController');
 
-Route::resource('metas', 'MetaController');
+//Metas Comerciales
+Route::resource('metas/comerciales', 'MetaController');
+Route::get('metas/director', 'MetaController@progresoDirector');
+
+Route::get('clientes/servicios/test', function(){
+    $infoUsuarios = DB::table('users')
+                        ->join('clientes', 'users.id', 'clientes.user_id')
+                        ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
+                        ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
+                        ->join('facturas', 'servicios.id', 'facturas.servicio_id')
+                        ->join('cargos', 'users.cargo_id', 'cargos.id')
+                        ->join('areas', 'users.area_id', 'areas.id')
+                        ->select('cargos.descripcion', 'users.nombres' , DB::raw('SUM(facturas.valor) as total'), 'users.id', 'users.foto')
+                        ->where('areas.id', '1')
+                        ->where('servicios.fecha_inicio', '>=', '2018-11-26')
+                        ->where('servicios.fecha_inicio', '<=', '2019-01-01')
+                        ->groupBy('users.id')
+                        ->get();
+    return $infoUsuarios;
+});
+
+Route::resource('facturas', 'FacturaController');

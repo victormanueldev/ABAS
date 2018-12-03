@@ -326,7 +326,28 @@
                                     </div>
 
                                 </div>
-                                <hr>
+                                <div class="row">
+                                        <div class="col-lg-12">
+                                            <h3>Información de factura <i id="ind-fac" class="fa fa-warning" style="color:rgb(219, 165, 37)"></i></h3>
+                                            
+                                        </div>
+                                        <div class="col-lg-5">
+                                                <div class="form-group col-md-12" style="padding-left: 0;">
+                                                        <label>Número de Factura: </label>
+                                                        <input type="text" class="form-control" id="num-fac">
+                                                    </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                                <div class="form-group col-md-12">
+                                                        <label>Frecuencia: </label>
+                                                        <input type="number" class="form-control" id="val-fac">
+                                                    </div>
+                                        </div>
+                                        <div class="col-lg-2" style="margin-top: 23px;">
+                                                <button type="button" class="btn btn-primary" id="save-fac">Crear factura</button>
+                                        </div>
+                                    </div>
+                                <hr style="margin-top: 10px;">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <table class="table table-hover">
@@ -355,6 +376,7 @@
                                         </table>
                                     </div>
                                 </div>
+  
 
                             </div>
                             <div class="modal-footer">
@@ -857,6 +879,7 @@
                 var telefono_cliente;
                 var nombre_contacto;
                 crsfToken = document.getElementsByName("_token")[0].value;
+                $("#ind-fac").removeClass('hidden')
                 $("#tbody-tipos").empty();
                 $("#tbody-tecnicos").empty();
                 $("#btn-lock").empty();                 //Limpia el boton de bloqueado
@@ -916,6 +939,17 @@
                                 <td>${value.nombre}</td>
                             </tr>`);
                         });
+                        if(res[0].factura){
+                            $("#ind-fac").addClass('hidden')
+                            $("#save-fac").prop('disabled', true);
+                            $("#num-fac").val(res[0].factura.numero_factura);
+                            $("#val-fac").val(res[0].factura.valor);
+                        }else{
+                            $("#ind-fac").removeClass('hidden')
+                            $("#save-fac").prop('disabled', false);
+                            $("#num-fac").val('');
+                            $("#val-fac").val('');
+                        }
                         //Quita el loader de la vista
                         $(".modal-body").removeClass('sk-loading');
                         console.log('GET ver servicios Successfully');
@@ -1589,5 +1623,30 @@
             }
         });
     })
+
+    $("#save-fac").click(() => {
+        let factura = {
+            numFac: $("#num-fac").val(),
+            valFac: $("#val-fac").val(),
+            idServicio: infoServiceSelected.id
+        };
+
+        $.ajax({
+            url: '/facturas',
+            data: factura,
+            type: 'POST',
+            headers:{
+                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            },
+            success: (res) => {
+                $("#ind-fac").remove();
+                $("#save-fac").attr('disabled', 'disabled');
+                console.log(res);
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        })
+    });
 </script>
 @endsection
