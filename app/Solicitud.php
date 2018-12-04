@@ -42,4 +42,9 @@ class Solicitud extends Model
     {
         return $this->hasMany(Certificado::class);
     }
+
+    public function servicios()
+    {
+        return $this->hasMany(Servicio::class);
+    }
 }

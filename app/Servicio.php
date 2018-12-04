@@ -54,7 +54,7 @@ class Servicio extends Model
         return $this->belongsToMany(TipoServicio::class);
     }
 
-        /**
+    /**
      * Relacion servicio tiene una solicitud
      */
     public function solicitud()
@@ -66,6 +66,11 @@ class Servicio extends Model
             //     'cliente:id,nombre_cliente,direccion,barrio,nombre_contacto,celular'
             // );
             //->with('sede:*', 'cliente:*', 'rutas:*');
+    }
+
+    public function factura()
+    {
+        return $this->hasOne(Factura::class);
     }
 
 }

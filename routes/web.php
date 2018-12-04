@@ -1,5 +1,5 @@
 <?php
-
+use ABAS\User;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -132,3 +132,8 @@ Route::get('testdates', function(){
 Route::resource('cotizaciones', 'CotizacionController');
 
 Route::resource('metas', 'MetaController');
+
+Route::get('clientes/servicios/test', function(){
+    $servicios = User::select('users.*','clientes.user_id', 'solicitudes.cliente_id','servicio.solicitud_id','facturas.servicio_id')->with('clientes.solicitudes.servicios.factura')->get();
+    return $servicios;
+});
