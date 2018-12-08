@@ -189,4 +189,9 @@ class ClientesController extends Controller
         //
     }
 
+    public function summary(Request $request)
+    {
+        $clientes = Cliente::where('')
+    }
+
 }

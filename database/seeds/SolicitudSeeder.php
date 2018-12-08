@@ -54,6 +54,28 @@ class SolicitudSeeder extends Seeder
                 'sede_id' => 3,
                 'created_at' => '2018-02-19 15:21:00',
                 'updated_at' => '2018-02-20 20:21:00'
+            ],
+
+            '4' => [
+                'codigo' => 'FS006',
+                'cliente_id' => 5,
+                'fecha' => '2018-04-19 15:21:00',
+                'frecuencia' => 30,
+                'observaciones' => "Observacion FS06",
+                'sede_id' => 5,
+                'created_at' => '2018-02-19 15:21:00',
+                'updated_at' => '2018-02-20 20:21:00'
+            ],
+
+            '5' => [
+                'codigo' => 'FS007',
+                'cliente_id' => 6,
+                'fecha' => '2018-04-19 15:21:00',
+                'frecuencia' => 30,
+                'observaciones' => "Observacion FS06",
+                'sede_id' => 0,
+                'created_at' => '2018-02-19 15:21:00',
+                'updated_at' => '2018-02-20 20:21:00'
             ]
         ];
         DB::table('solicitudes')->insert($solicitudes);

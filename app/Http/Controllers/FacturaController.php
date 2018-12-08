@@ -36,6 +36,20 @@ class FacturaController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->ajax()){
+            try{
+                $factura = new Factura();
+                $factura->numero_factura = $request->numFac;
+                $factura->valor = $request->valFac;
+                $factura->servicio_id = $request->idServicio;
+                $factura->save();
+                return response()->json('Creation Success', 201);
+            }catch(\Exception $e){
+                return response()->json($e, 500);
+            }
+        }else{
+            return response()->json('Error en la peticion AJAX', 401);
+        }
     }
 
     /**

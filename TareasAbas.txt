@@ -51,8 +51,6 @@ Otros Ajustes
         - 
     AREA DE CONTABILIDAD
         - Listado de todos los clientes y prospectos (Estado del cliente)
-        - Asignacion de metas por inspector comercial (preguntar si va en esta area)
-        - "             "         Director comercial (preguntar)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Reporte de servicios con sus respectivas facturas.
 

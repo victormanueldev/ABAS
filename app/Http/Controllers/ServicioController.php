@@ -127,7 +127,7 @@ class ServicioController extends Controller
                 $index = 0;
 
                 //Crea servicios dependiendo de la frecuencia solicitada
-                while($dt_ini->year < 2019){
+                while($dt_ini->year < 2020){
                     if($index > 0){
                         if($request->opcionFrecuencia == "meses"){
                             if(!empty($request->diaDelMes)){
@@ -318,10 +318,10 @@ class ServicioController extends Controller
     {
         //
         //Seleccionar columnas en las relaciones de eloquent
-        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede')->where('id', $id)->get();
+        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede', 'factura')->where('id', $id)->get();
         return $servicio;
     }
-
+ 
     /**
      * Update the specified resource in storage.
      *

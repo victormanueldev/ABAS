@@ -60,7 +60,19 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('1234567'),
                 'area_id' => '3',
                 'cargo_id' => '3' 
-            ]
+            ],
+            '4' => [
+                'cedula' => '654159789',
+                'nombres' => 'Jhonny',
+                'apellidos' => 'Vargas Perez',
+                'iniciales' => 'JVP',
+                'telefono' => '3177777750',
+                'foto' => 'a9.jpg',
+                'email' => 'jhonny@gmail.com',
+                'password' => bcrypt('1234567'),
+                'area_id' => '3',
+                'cargo_id' => '4' 
+            ],
         ];
         DB::table('users')-> insert($users);
     }

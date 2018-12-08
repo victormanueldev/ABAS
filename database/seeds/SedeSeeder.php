@@ -60,6 +60,18 @@ class SedeSeeder extends Seeder
                 'celular_contacto' => '31321898',
                 'email' => 'Jorge@gmail.com',
                 'cliente_id'=> '4'
+            ],
+            '5' => [
+                'nombre' => 'California La Rivera',
+                'direccion' => 'CLL 70 #35 - 44',
+                'ciudad' => 'Cali',
+                'barrio' => 'La Rivera',
+                'zona_ruta' => 'Norte',
+                'nombre_contacto' => 'Alfredo',
+                'telefono_contacto' => '9516546',
+                'celular_contacto' => '31321800',
+                'email' => 'alfredo@gmail.com',
+                'cliente_id'=> '5'
             ]
         ];
         DB::table('sedes')->insert($sedes);

@@ -16,13 +16,13 @@ class CreateMetasTable extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meta_clientes_nuevos');
-            $table->integer('meta_equipo_clientes_nuevos')->default(0);
+            $table->integer('meta_equipo_clientes_nuevos')->default(0)->nullable();
             $table->integer('meta_recompras');
+            $table->integer('meta_equipo_recompras')->default(0)->nullable();
             $table->integer('mes_vigencia');
-            $table->integer('meta_equipo_recompras')->default(0);
-            $table->integer('meta_anual_inpector')->default(0);
-            $table->integer('meta_anual_equipo')->default(0);
-            $table->integer('amio_vigencia');
+            $table->integer('meta_anual_inpector')->default(0)->nullable();
+            $table->integer('meta_anual_equipo')->default(0)->nullable();
+            $table->integer('anio_vigencia');
             $table->integer('user_id');
             $table->timestamps();
         });
