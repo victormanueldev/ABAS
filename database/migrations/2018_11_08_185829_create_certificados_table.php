@@ -18,8 +18,8 @@ class CreateCertificadosTable extends Migration
             $table->increments('id');
             $table->string('area_tratada');
             $table->string('frecuencia');
-            $table->json('tratamientos');
-            $table->json('productos');
+            $table->string('tratamientos');
+            $table->string('productos');
             $table->integer('solicitud_id');
             $table->timestamps();
         });

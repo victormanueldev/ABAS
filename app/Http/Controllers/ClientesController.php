@@ -218,4 +218,27 @@ class ClientesController extends Controller
         $clientes = Cliente::where('');
     }
 
+    public function updateCliente(Request $request, $id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        
+        $cliente->tipo_cliente = $request->get('tipo_cliente');
+        $cliente->nit_cedula = $request->get('nit_cedula');
+        $cliente->nombre_cliente = $request->get('nombre_cliente');
+        $cliente->sector_economico = $request->get('sector_economico');
+        $cliente->municipio = $request->get('municipio');
+        $cliente->direccion = $request->get('direccion');
+        $cliente->barrio = $request->get('barrio');
+        $cliente->zona = $request->get('zona');
+        $cliente->nombre_contacto = $request->get('nombre_contacto');
+        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
+        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
+        $cliente->cargo_contacto = $request->get('cargo_contacto');
+        $cliente->email = $request->get('email');
+        $cliente->celular = $request->get('celular');
+        $cliente->save();
+
+        return Redirect::to('home');
+    }
+
 }
