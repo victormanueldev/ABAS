@@ -32759,11 +32759,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-   mounted: function mounted() {
-      console.log("componente-documents");
-   }
+    mounted: function mounted() {
+        this.fetchDocsClient();
+    },
+    data: function data() {
+        return {
+            typeClient: '',
+            docs: {
+                rut: false,
+                camAndCommerce: false,
+                ident: false
+            },
+            idClient: ''
+        };
+    },
+
+    methods: {
+        fetchDocsClient: function fetchDocsClient() {
+            var _this = this;
+
+            var url = window.location.pathname.split("/");
+            this.idClient = url[2];
+            axios.get('/clientes/' + this.idClient + '/edit').then(function (res) {
+                _this.typeClient = res.data[0].tipo_cliente;
+                _this.docs.rut = res.data[0].doc_rut;
+                _this.docs.camAndCommerce = res.data[0].doc_camara_comercio;
+                _this.docs.ident = res.data[0].doc_identidad;
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        updateDocs: function updateDocs(type) {
+            axios.put('/clientes/' + this.idClient, {
+                docToUpdate: 'doc_' + type,
+                value: this.docs[type] == true ? false : true
+            }).then(function (res) {
+                console.log(res);
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -32774,69 +32813,198 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ibox" }, [
-      _c("div", { staticClass: "ibox-content" }, [
-        _c("h2", [_vm._v("Documentos")]),
+  return _c("div", { staticClass: "ibox" }, [
+    _c("div", { staticClass: "ibox-content" }, [
+      _c("h2", [_vm._v("Documentos")]),
+      _vm._v(" "),
+      _c("small", [_vm._v("Listado de documentos del cliente")]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "todo-list m-t small-list" }, [
+        _c("li", [
+          _c(
+            "div",
+            {
+              staticClass: "checkbox checkbox-success",
+              staticStyle: { "padding-right": "3px", margin: "2px" }
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.docs.rut,
+                    expression: "docs.rut"
+                  }
+                ],
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: _vm.docs.rut,
+                  checked: Array.isArray(_vm.docs.rut)
+                    ? _vm._i(_vm.docs.rut, null) > -1
+                    : _vm.docs.rut
+                },
+                on: {
+                  click: function($event) {
+                    _vm.updateDocs("rut")
+                  },
+                  change: function($event) {
+                    var $$a = _vm.docs.rut,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && _vm.$set(_vm.docs, "rut", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.docs,
+                            "rut",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.docs, "rut", $$c)
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", [_vm._v("RUT")])
+            ]
+          )
+        ]),
         _vm._v(" "),
-        _c("small", [_vm._v("Listado de documentos del cliente")]),
+        _vm.typeClient == "Persona Juridica"
+          ? _c("li", [
+              _c(
+                "div",
+                {
+                  staticClass: "checkbox checkbox-success",
+                  staticStyle: { "padding-right": "3px", margin: "2px" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.docs.camAndCommerce,
+                        expression: "docs.camAndCommerce"
+                      }
+                    ],
+                    attrs: { type: "checkbox" },
+                    domProps: {
+                      checked: _vm.docs.camAndCommerce,
+                      checked: Array.isArray(_vm.docs.camAndCommerce)
+                        ? _vm._i(_vm.docs.camAndCommerce, null) > -1
+                        : _vm.docs.camAndCommerce
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.updateDocs("camAndCommerce")
+                      },
+                      change: function($event) {
+                        var $$a = _vm.docs.camAndCommerce,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.docs,
+                                "camAndCommerce",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.docs,
+                                "camAndCommerce",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.docs, "camAndCommerce", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("Cámara y Comercio")])
+                ]
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
-        _c("ul", { staticClass: "todo-list m-t small-list" }, [
-          _c("li", [
-            _c(
-              "div",
-              {
-                staticClass: "checkbox checkbox-success",
-                staticStyle: { "padding-right": "3px", margin: "2px" }
-              },
-              [
-                _c("input", { attrs: { type: "checkbox" } }),
-                _vm._v(" "),
-                _c("label", [_vm._v("RUT")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "div",
-              {
-                staticClass: "checkbox checkbox-success",
-                staticStyle: { "padding-right": "3px", margin: "2px" }
-              },
-              [
-                _c("input", { attrs: { type: "checkbox" } }),
-                _vm._v(" "),
-                _c("label", [_vm._v("Cámara y Comercio")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "div",
-              {
-                staticClass: "checkbox checkbox-success",
-                staticStyle: { "padding-right": "3px", margin: "2px" }
-              },
-              [
-                _c("input", { attrs: { type: "checkbox" } }),
-                _vm._v(" "),
-                _c("label", [_vm._v("Cédula Rep. Legal")])
-              ]
-            )
-          ])
+        _c("li", [
+          _c(
+            "div",
+            {
+              staticClass: "checkbox checkbox-success",
+              staticStyle: { "padding-right": "3px", margin: "2px" }
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.docs.ident,
+                    expression: "docs.ident"
+                  }
+                ],
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: _vm.docs.ident,
+                  checked: Array.isArray(_vm.docs.ident)
+                    ? _vm._i(_vm.docs.ident, null) > -1
+                    : _vm.docs.ident
+                },
+                on: {
+                  click: function($event) {
+                    _vm.updateDocs("ident")
+                  },
+                  change: function($event) {
+                    var $$a = _vm.docs.ident,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.docs, "ident", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.docs,
+                            "ident",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.docs, "ident", $$c)
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.typeClient == "Persona Juridica"
+                ? _c("label", [_vm._v("Cédula Rep. Legal")])
+                : _c("label", [_vm._v("Cédula")])
+            ]
+          )
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

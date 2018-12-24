@@ -2,6 +2,7 @@
 @section('content')
 @section('custom-css')
 <link href="{{asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+<link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
 <script>
     document.getElementById('m-clientes').setAttribute("class", "active");
@@ -35,7 +36,8 @@
                                 <a href="#" class="btn btn-warning btn-xs pull-right">Editar cliente</a>
                                 <a href="#" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px">Añadir
                                     Sede</a>
-                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"  data-toggle="modal" data-target="#modal-create-cotizacion">Añadir
+                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"
+                                    data-toggle="modal" data-target="#modal-create-cotizacion">Añadir
                                     Cotización</button>
                                 <h2>{{$cliente[0]->nombre_cliente}}</h2>
                             </div>
@@ -50,7 +52,7 @@
                                 <div class="col-md-6">
                                     <dl class="dl-horizontal">
                                         <dt>Estado del Cliente:</dt>
-                                        <dd ><span class="label label-danger">Prospecto</span></dd>
+                                        <dd><span class="label label-danger">Prospecto</span></dd>
                                     </dl>
                                 </div>
                             </div>
@@ -79,7 +81,7 @@
                                 <div class="col-md-6">
                                     <dl class="dl-horizontal">
                                         <dt>Estado del Cliente:</dt>
-                                        <dd ><span class="label label-danger">Prospecto</span></dd>
+                                        <dd><span class="label label-danger">Prospecto</span></dd>
                                     </dl>
                                 </div>
                             </div>
@@ -204,11 +206,8 @@
                                                                 </div>
 
                                                                 <div class="m-t-sm">
-                                                                    <a href="#" class="text-muted"><i class="fa fa-gift"></i>
+                                                                    <a href="#" class="text-muted"><i class="fa fa-edit"></i>
                                                                         Editar información</a>
-                                                                    |
-                                                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i>
-                                                                        Eliminar sede</a>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -237,12 +236,12 @@
                                         <div class="tab-pane" id="tab-3">
                                             <div class="row">
                                                 @if($cliente[0]->cotizacion != [])
-                                                    <div class="col-lg-6" style="padding: 0 30px">
-                                                        <h5>Cotización</h5>
+                                                <div class="col-lg-6" style="padding: 0 30px">
+                                                    <h5>Cotización</h5>
                                                     <h1 class="no-margins">{{$cliente[0]->cotizacion->codigo}}</h1>
-                                                        <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
-                                                        <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
-                                                    </div>
+                                                    <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
+                                                    <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
+                                                </div>
                                                 @endif
 
                                             </div>
@@ -270,33 +269,7 @@
             </div>
         </div>
         <div class="col-lg-3" id="documentos">
-            @if($cliente[0]->tipo_cliente == 'Persona Juridica')
             <documentos></documentos>
-            @else
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h2>Documentos</h2>
-                    <small>Listado de documentos del cliente.</small>
-                    <ul class="todo-list m-t small-list">
-                        <li>
-                            <div class="checkbox checkbox-success" style="padding-right: 3px;margin: 2px;">
-                                <input type="checkbox" id="checkbox">
-                                <label>RUT</label>
-                                <!-- <span class="badge badge-success pull-right" >E</span> -->
-                            </div>
-                        </li>
-                        <li>
-                            <div class="checkbox checkbox-success" style="padding-right: 3px;margin: 2px;">
-                                <input type="checkbox" id="checkbox">
-                                <label>Cédula</label>
-                                <!-- <span class="badge badge-success pull-right" >E</span> -->
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-            @endif
 
             <div class="ibox">
                 <div class="ibox-content">
@@ -321,7 +294,7 @@
                     <div class="modal-content">
                         {!! Form::open(['id' =>'form-certificate']) !!}
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
+                            <button id="btn-close-cotization" type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>
@@ -366,7 +339,7 @@
                     <div class="modal-content">
                         {!! Form::open(['id' =>'form-certificate']) !!}
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
+                            <button id="btn-close-certificate" type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>
@@ -489,7 +462,7 @@
                     <div class="modal-content">
                         {!! Form::open(['id' =>'form-rs']) !!}
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
+                            <button id="btn-close-rs" type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>
@@ -501,10 +474,10 @@
                                     <label>Cliente/Sede: </label>
                                     <select class="form-control" id="cliente-rs" style="background-color: #fff;">
                                         @if(count($cliente[0]->sedes) == 0)
-                                            <option value="{{$cliente[0]->id.",0"}}">{{$cliente[0]->nombre_cliente}}</option>
+                                        <option value="{{$cliente[0]->id.",0"}}">{{$cliente[0]->nombre_cliente}}</option>
                                         @else
                                         @foreach($cliente[0]->sedes as $sede)
-                                            <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
+                                        <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -543,7 +516,7 @@
                         </div>
                         <div class="modal-footer">
                             <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                            <button type="button" id="btn-save-rs"class="btn btn-primary">Guardar Ruta</button>
+                            <button type="button" id="btn-save-rs" class="btn btn-primary">Guardar Ruta</button>
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -559,7 +532,7 @@
                     <div class="modal-content">
                         {!! Form::open(['id' =>'form-rl']) !!}
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
+                            <button id="btn-close-rl" type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>
@@ -571,10 +544,10 @@
                                     <label>Cliente/Sede: </label>
                                     <select class="form-control" id="cliente-rl" style="background-color: #fff;">
                                         @if(count($cliente[0]->sedes) == 0)
-                                            <option value="{{$cliente[0]->id.",0"}}">{{$cliente[0]->nombre_cliente}}</option>
+                                        <option value="{{$cliente[0]->id.",0"}}">{{$cliente[0]->nombre_cliente}}</option>
                                         @else
                                         @foreach($cliente[0]->sedes as $sede)
-                                            <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
+                                        <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -586,8 +559,9 @@
                                     <h3>Áreas de ubicación de lámparas</h3>
                                 </div>
                                 <div class="col-sm-4 col-md-5">
-                                    <button id="btn-add-area-lamp" type="button" class="btn btn-primary pull-right" style="position: relative; display: inline-block;"><span
-                                            class="bold">Añadir áreas &nbsp;</span><i class="fa fa-plus"></i></button>
+                                    <button id="btn-add-area-lamp" type="button" class="btn btn-primary pull-right"
+                                        style="position: relative; display: inline-block;"><span class="bold">Añadir
+                                            áreas &nbsp;</span><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="row" id="columna-areas-lamparas" style="margin-top: 15px;">
@@ -608,7 +582,7 @@
                         </div>
                         <div class="modal-footer">
                             <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                            <button type="button" id="btn-save-rl"class="btn btn-primary">Guardar</button>
+                            <button type="button" id="btn-save-rl" class="btn btn-primary">Guardar</button>
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -624,7 +598,7 @@
                     <div class="modal-content">
                         {!! Form::open(['id' =>'form-rr']) !!}
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
+                            <button id="btn-close-rr" type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>
@@ -636,10 +610,10 @@
                                     <label>Cliente/Sede: </label>
                                     <select class="form-control" id="cliente-rr" style="background-color: #fff;">
                                         @if(count($cliente[0]->sedes) == 0)
-                                            <option value="{{$cliente[0]->id.",0"}}">{{$cliente[0]->nombre_cliente}}</option>
+                                        <option value="{{$cliente[0]->id.",0"}}">{{$cliente[0]->nombre_cliente}}</option>
                                         @else
                                         @foreach($cliente[0]->sedes as $sede)
-                                            <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
+                                        <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -717,6 +691,8 @@
     </div>
 </div>
 @section('ini-scripts')
+<!-- Sweet Alert -->
+<script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <script>
     //Inicializacion de Contadores
     var contTratamientos = 1;
@@ -802,11 +778,11 @@
         $("#columna-areas-lamparas").append(`
             <div class="form-group col-sm-12 col-md-6">
                 <label>Nombre del área</label>
-                <input type="text" id="area-lampara-${contAreasLampara-1}" class="form-control">
+                <input type="text" id="area-lampara-${contAreasLampara - 1}" class="form-control">
             </div>
             <div class="form-group col-sm-12 col-md-6">
                 <label>Tipo de lámpara</label>
-                <select class="form-control" id="tipo-lampara-${contAreasLampara-1}" style="background-color: #fff;">
+                <select class="form-control" id="tipo-lampara-${contAreasLampara - 1}" style="background-color: #fff;">
                     <option value="Con lámina adhesiva">Con lámina adhesiva</option>
                     <option value="Electroconductora">Electroconductora</option>
                 </select>
@@ -875,29 +851,60 @@
                 toxicidad: $(`#toxicidad-${index}`).val()
             }
         }
-
-        //Petición AJAX para guardar el certificado
-        $.ajax({
-            url: '/certificados',
-            data: {
-                area_tratada: $("#area-tratada").val(),
-                frecuencia: $("#frecuencia-certificado").val(),
-                tratamientos: tratamientos,
-                productos: productos,
-                cliente_id: clienteId,
-                sede_id: sedeId
-            },
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": crsfToken
-            },
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar este Certificado?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
         })
-            .then((res) => {
-                console.log(res);
+            .then(isConfirm => {
+                if (isConfirm) {
+                    //Petición AJAX para guardar el certificado
+                    $.ajax({
+                        url: '/certificados',
+                        data: {
+                            area_tratada: $("#area-tratada").val(),
+                            frecuencia: $("#frecuencia-certificado").val(),
+                            tratamientos: tratamientos,
+                            productos: productos,
+                            cliente_id: clienteId,
+                            sede_id: sedeId
+                        },
+                        type: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        },
+                        // error: (err) => {
+
+                        // }
+                    })
+                        .then(events => {
+                            swal("¡Creación Correcta!", "Certificado guardada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-certificate").click();
+                                    }
+                                })
+                        })
+                        .catch(err => {
+                            swal("¡Error!", err.statusText, 'error')
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-certificate").click();
+                                    }
+                                })
+                        })
+                }
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
 
     });
 
@@ -932,6 +939,7 @@
                 return err;
             }
         })
+
     }
 
     /**
@@ -950,9 +958,43 @@
                 frecuencia: $(`#frecuencia-area-${index}`).val()
             };
         }
-        saveRoute('rs', clienteId, sedeId, contenidRutaSaneamiento, crsfToken)
-            .then((res) => console.log(res))    //Success
-            .catch((err) => console.log(err.responseJSON.errorInfo[2])) //Error
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar esta ruta?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    saveRoute('rs', clienteId, sedeId, contenidRutaSaneamiento, crsfToken)
+                        .then((res) => {
+                            swal("¡Creación Correcta!", "Ruta guardada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-rs").click();
+                                    }
+                                })
+
+                        })
+                        .catch((err) => {
+                            swal("¡Error!", err.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-rs").click();
+                                    }
+                                })
+                        })
+                }
+            })
+
     })
 
     /**
@@ -972,10 +1014,41 @@
                 tipoLampara: $(`#tipo-lampara-${index}`).val()
             };
         }
-
-        saveRoute('rl', clienteId, sedeId, contenidoRutaLamparas, crsfToken)
-            .then((res) => console.log(res))    //Success
-            .catch((err) => console.log(err.responseJSON.errorInfo[2])) //Error
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar esta ruta?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+        .then(isConfirm => {
+                if (isConfirm) {
+                    saveRoute('rl', clienteId, sedeId, contenidoRutaLamparas, crsfToken)
+                        .then((res) => {
+                            swal("¡Creación Correcta!", "Ruta guardada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-rl").click();
+                                    }
+                                })
+                        }) 
+                        .catch((err) => {
+                            swal("¡Error!", err.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-rl").click();
+                                    }
+                                })
+                        })
+                }
+            })
     })
 
     /**
@@ -1006,10 +1079,41 @@
                 tipoTrampa: $(`#tipo-trampa-ai-${index}`).val()
             };
         }
-
-        saveRoute('rr', clienteId, sedeId, contenidoRutaRoedores, crsfToken)
-            .then((res) => console.log(res))    //Success
-            .catch((err) => console.log(err.responseJSON.errorInfo[2])) //Error
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar esta ruta?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+        .then(isConfirm => {
+                if (isConfirm) {
+                    saveRoute('rr', clienteId, sedeId, contenidoRutaRoedores, crsfToken)
+                        .then((res) => {
+                            swal("¡Creación Correcta!", "Ruta guardada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-rr").click();
+                                    }
+                                })
+                        })
+                        .catch((err) =>{
+                            swal("¡Error!", err.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-rr").click();
+                                    }
+                                })
+                        })
+                }
+            })
     })
 
     $("#btn-save-cotizacion").click(event => {
@@ -1020,22 +1124,56 @@
             idCliente: $("#cliente-cotizacion").val(),
         };
         let crsfToken = document.getElementsByName("_token")[0].value;
-        $.ajax({
-            url: '/cotizaciones',
-            data: cotizacion,
-            type: 'POST',
-            headers: {
-                "X-CSRF-TOKEN": crsfToken
-            },
-            success: (res) => {
-                console.log(res)
-            },
-            error: (err) => {
-                console.log(err);
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar esta cotización?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
             }
         })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                        url: '/cotizaciones',
+                        data: cotizacion,
+                        type: 'POST',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        },
+                        success: (res) => {
+                            console.log(res)
+                        },
+                        error: (err) => {
+                            console.log(err);
+                        }
+                    })
+                        .then(events => {
+                            swal("¡Creación Correcta!", "Cotización guardada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-cotization").click();
+                                    }
+                                })
+                        })
+                        .catch(error => {
+                            swal("¡Error!", error.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-cotization").click();
+                                    }
+                                })
+                        })
+                }
+            })
     })
-    
+
 </script>
 @endsection
 @endsection

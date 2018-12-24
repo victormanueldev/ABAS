@@ -10,6 +10,7 @@ use ABAS\Evento;
 use ABAS\Novedad;
 use ABAS\Telefono;
 use Auth;
+use Carbon\Carbon;
 
 class ClientesController extends Controller
 {
@@ -116,8 +117,9 @@ class ClientesController extends Controller
 
         if($request->fecha_inicio != '' || $request->fecha_inicio != null){
             $evento = new Evento();
+            $dt = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);
             $evento->tipo  = $request->tipo_evento;
-            $evento->fecha_inicio = $request->fecha_inicio." ".$request->hora_inicio.":00";
+            $evento->fecha_inicio = $dt->toDateString()." ".$dt->toTimeString();
             $evento->asunto = $request->asunto;
             $evento->user_id = Auth::user()->id;
             $evento->save();
@@ -176,6 +178,28 @@ class ClientesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->ajax()){
+            $cliente = Cliente::findOrFail($id);
+            //Actualiza segun el request enviado
+            switch ($request->docToUpdate) {
+                case 'doc_ident':
+                    $cliente->doc_identidad = $request->value;
+                    $cliente->save();
+                    break;
+                case 'doc_rut':
+                    $cliente->doc_rut = $request->value;
+                    $cliente->save();
+                    break;
+                case 'doc_camAndCommerce':
+                    $cliente->doc_camara_comercio = $request->value;
+                    $cliente->save();
+                    break;
+                default:
+                    return response()->json("Docs Update Failed", 400);
+                    break;
+            }
+            return response()->json("Docs Update Successfully", 200);
+        }
     }
 
     /**
@@ -191,7 +215,7 @@ class ClientesController extends Controller
 
     public function summary(Request $request)
     {
-        $clientes = Cliente::where('')
+        $clientes = Cliente::where('');
     }
 
 }

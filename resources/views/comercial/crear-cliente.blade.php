@@ -97,20 +97,6 @@
                                                         
                                                     </div>
 
-                                                    <div class="col-lg-6 columna_clonada2">
-                                                            
-                                                        <label class="control-label">Teléfono *</label>
-                                                        
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                                            </span>
-                                                                
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
-                                                            
-                                                        </div>                                                        
-                                                    </div>
-
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
                                                         <select class="form-control" name="medio_contacto">
@@ -127,6 +113,20 @@
                                                         <label class="control-label">Otro ¿Cúal?</label>
                                                         <input type="text" name="otro" placeholder="Otros medios" class="form-control">
                                                         <br>
+                                                    </div>
+
+                                                    <div class="col-lg-6 columna_clonada2">
+                                                            
+                                                        <label class="control-label">Teléfono *</label>
+                                                        
+                                                        <div class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                            </span>
+                                                                
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
+                                                            
+                                                        </div>                                                        
                                                     </div>
                         
 
@@ -336,17 +336,6 @@
                                                         <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
                                                         
                                                     </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label class="control-label">Teléfono *</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                                            </span>
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
-                                                        </div>                                                        
-                                                    </div>
-
                                                     
                                                     <div class="row">
                                                         <div class="col-lg-12" id="columna_principal3">
@@ -380,6 +369,16 @@
                                                         <label class="control-label">Otro ¿Cúal?</label>
                                                         <input type="text" name="otro" placeholder="Otros medios" class="form-control">
                                                         <br>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label class="control-label">Teléfono *</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                            </span>
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
+                                                        </div>                                                        
                                                     </div>
 
                                                 </div>

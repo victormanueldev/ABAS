@@ -33,6 +33,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '3154874545',
                 'empresa_actual' => 'Plagas S.A.S.',
                 'razon_cambio' => 'Mal servicio',
+                'doc_rut' => true,
+                'doc_identidad' => true,
+                'doc_camara_comercio' => true,
                 'user_id' => 1,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
@@ -57,6 +60,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '311565468',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
+                'doc_rut' => false,
+                'doc_identidad' => true,
+                'doc_camara_comercio' => false,
                 'user_id' => 3,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
@@ -81,6 +87,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '318546813',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
+                'doc_rut' => true,
+                'doc_identidad' => true,
+                'doc_camara_comercio' => false,
                 'user_id' => 3,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
@@ -105,6 +114,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '3154874545',
                 'empresa_actual' => 'Plagas S.A.S.',
                 'razon_cambio' => 'Mal servicio',
+                'doc_rut' => false,
+                'doc_identidad' => false,
+                'doc_camara_comercio' => false,
                 'user_id' => 1,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
@@ -129,6 +141,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '3106546567',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'ninguna',
+                'doc_rut' => false,
+                'doc_identidad' => false,
+                'doc_camara_comercio' => true,
                 'user_id' => 5,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'
@@ -153,6 +168,9 @@ class ClienteSeeder extends Seeder
                 'celular' => '3195191511',
                 'empresa_actual' => 'indefinido',
                 'razon_cambio' => 'indefinido',
+                'doc_rut' => true,
+                'doc_identidad' => false,
+                'doc_camara_comercio' => false,
                 'user_id' => 5,
                 'created_at' => '2018-05-07 08:50:00',
                 'updated_at' => '2018-05-08 10:31:00'

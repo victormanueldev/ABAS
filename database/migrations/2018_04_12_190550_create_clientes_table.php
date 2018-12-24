@@ -37,6 +37,10 @@ class CreateClientesTable extends Migration
             //Informacion de otros servicios
             $table->string('empresa_actual', 100)->nullable();//Empresa que le prestaba al cliente el servicio (fumigacion)
             $table->string('razon_cambio', 100)->nullable();//Porqué quiere empezar con Sanicontrol
+            //Documentos entregados
+            $table->boolean('doc_rut')->default(false);
+            $table->boolean('doc_identidad')->default(false);
+            $table->boolean('doc_camara_comercio')->default(false);
             //Informacion del Asesor que registra al cliente
             $table->integer('user_id');
             $table->timestamps();
