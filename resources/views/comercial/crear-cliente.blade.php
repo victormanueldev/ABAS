@@ -150,37 +150,40 @@
                                                 <div class="col-lg-12">
                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
-                                                        <input type="text" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                                        <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" placeholder="Escriba la dirección" class="form-control">
+                                                        <input type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                                        <input type="text" placeholder="Escriba la ciudad" class="form-control">
+                                                        <input type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input type="text" placeholder="Escriba el Barrio" class="form-control">
+                                                        <input type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
-                                                        <input type="text" placeholder="Zona Ruta" class="form-control">
+                                                        <input type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
                                                     </div>
                                 
-                                                    
+                                                    <div class="form-group col-lg-6"><label class="control-label">Nombre de Contacto *</label>
+                                                        <input type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
+                                                    </div>
+
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" placeholder="Celular del contacto" class="form-control">
+                                                        <input type="text" id="telefono_sedes" placeholder="Celular del contacto" class="form-control">
                                                     </div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" placeholder="Email de contacto" class="form-control">
+                                                        <input type="email" id="celular_sedes" placeholder="Email de contacto" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                                        <input type="text" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                                        <input type="text" id="email_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
                                                         
                                                     </div>
 
@@ -239,7 +242,8 @@
                                             </div>
 
                                             <div class="ibox-footer">
-                                                <button type="submit" class="btn btn-w-m btn-primary">Guardar</button>
+                                                <button type="submit" id="createSedes" class="btn btn-w-m btn-primary">Guardar</button>
+                                                {{-- <button type="button" id="createSedes" class="btn btn-w-m btn-warning">prueba</button> --}}
                                                 <button type="button" class="btn btn-w-m btn-default">Cancelar</button>
                                             </div>
 
@@ -396,36 +400,36 @@
                                                 <div class="col-lg-12">
                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
-                                                        <input type="text" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                                        <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" placeholder="Escriba la dirección" class="form-control">
+                                                        <input type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                                        <input type="text" placeholder="Escriba la ciudad" class="form-control">
+                                                        <input type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input type="text" placeholder="Escriba el Barrio" class="form-control">
+                                                        <input type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
-                                                        <input type="text" placeholder="Zona Ruta" class="form-control">
+                                                        <input type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
                                                     </div>
                                 
                                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                                        <input type="text" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                                        <input type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
                                                         
                                                     </div>
                         
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" placeholder="Celular del contacto" class="form-control">
+                                                        <input type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" placeholder="Email de contacto" class="form-control">
+                                                        <input type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
                                                         
                                                     </div>
 
@@ -484,7 +488,8 @@
                                             </div>
 
                                             <div class="ibox-footer">
-                                                <button type="submit" class="btn btn-w-m btn-primary">Guardar</button>
+                                                <button type="submit" id="createSedes" class="btn btn-w-m btn-primary">Guardar</button>
+                                                <button type="button" id="createSedes" class="btn btn-w-m btn-warning">prueba</button>
                                                 <button type="button" class="btn btn-w-m btn-default">Cancelar</button>
                                             </div>   
 
@@ -531,6 +536,31 @@
         cont3 = cont3 + 1;
         $("#columna_principal3").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont3 }*</label><input type="text" name="telefono[${cont3 -1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
     });
+
+    $("#createSedes").click(event => {
+        let dataSedes = {
+            nombre_sedes: $("#nombre_sedes").val(),
+            direccion_sedes: $("#direccion_sedes").val(),
+            ciudad_sedes: $("#ciudad_sedes").val(),
+            barrio_sedes: $("#barrio_sedes").val(),
+            ruta_sedes: $("#ruta_sedes").val(),
+            nombre_contacto: $("#nombre_contacto").val(),
+            telefono_sedes: $("#telefono_sedes").val(),
+            celular_sedes: $("#celular_sedes").val(),
+            email_sedes: $("#email_sedes").val(),
+        };
+        console.log(dataSedes);
+        let crsfToken = document.getElementsByName("_token")[0].value;
+        $.ajax({
+            url: '/sedes',
+            data: dataSedes,
+            type: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": crsfToken
+            }
+        });
+    });
+
 </script>
 @endsection
 @endsection

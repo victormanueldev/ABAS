@@ -92,7 +92,7 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Cliente
         $cliente = new Cliente();
 
         $cliente->tipo_cliente = $request->get('tipo_cliente');
@@ -113,6 +113,13 @@ class ClientesController extends Controller
         $cliente->empresa_actual = $request->get('empresa_actual');
         $cliente->razon_cambio = $request->get('razon_cambio');
         $cliente->user_id = Auth::user()->id;
+
+        //Sedes
+        // if (nombre_sedes != '' || nombre_sedes != null) {
+        //     # code...
+        // }
+
+
         $cliente->save();   
 
         if($request->fecha_inicio != '' || $request->fecha_inicio != null){
