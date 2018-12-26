@@ -47,6 +47,7 @@ Route::get('novedades/listado', 'NovedadesController@show')->name('novedades.sho
 
 //Clientees
 Route::resource('clientes', 'ClientesController');
+Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('clientes.updateCliente');
 // Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
 // Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
 

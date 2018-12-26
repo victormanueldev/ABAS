@@ -92,7 +92,7 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Cliente
         $cliente = new Cliente();
 
         $cliente->tipo_cliente = $request->get('tipo_cliente');
@@ -113,6 +113,13 @@ class ClientesController extends Controller
         $cliente->empresa_actual = $request->get('empresa_actual');
         $cliente->razon_cambio = $request->get('razon_cambio');
         $cliente->user_id = Auth::user()->id;
+
+        //Sedes
+        // if (nombre_sedes != '' || nombre_sedes != null) {
+        //     # code...
+        // }
+
+
         $cliente->save();   
 
         if($request->fecha_inicio != '' || $request->fecha_inicio != null){
@@ -216,6 +223,29 @@ class ClientesController extends Controller
     public function summary(Request $request)
     {
         $clientes = Cliente::where('');
+    }
+
+    public function updateCliente(Request $request, $id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        
+        $cliente->tipo_cliente = $request->get('tipo_cliente');
+        $cliente->nit_cedula = $request->get('nit_cedula');
+        $cliente->nombre_cliente = $request->get('nombre_cliente');
+        $cliente->sector_economico = $request->get('sector_economico');
+        $cliente->municipio = $request->get('municipio');
+        $cliente->direccion = $request->get('direccion');
+        $cliente->barrio = $request->get('barrio');
+        $cliente->zona = $request->get('zona');
+        $cliente->nombre_contacto = $request->get('nombre_contacto');
+        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
+        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
+        $cliente->cargo_contacto = $request->get('cargo_contacto');
+        $cliente->email = $request->get('email');
+        $cliente->celular = $request->get('celular');
+        $cliente->save();
+
+        return Redirect::to('home');
     }
 
 }

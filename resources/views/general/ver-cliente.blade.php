@@ -33,12 +33,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="m-b-md">
-                                <a href="#" class="btn btn-warning btn-xs pull-right">Editar cliente</a>
-                                <a href="#" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px">Añadir
-                                    Sede</a>
+                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"  data-toggle="modal" data-target="#modal-update-cliente">Editar cliente</button>
+                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px" data-toggle="modal" data-target="#modal-create-sede">Añadir Sede</a>
                                 <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"
-                                    data-toggle="modal" data-target="#modal-create-cotizacion">Añadir
-                                    Cotización</button>
+                                    data-toggle="modal" data-target="#modal-create-cotizacion">Añadir Cotización</button>
                                 <h2>{{$cliente[0]->nombre_cliente}}</h2>
                             </div>
                             @if($cliente[0]->tipo_cliente == 'Persona Juridica')
@@ -318,6 +316,169 @@
                         de roedores</button>
                 </div>
             </div>
+
+            <!--===================================================
+            /* Modal Editar Cliente
+            ====================================================-->
+            <div class="modal inmodal fade" id="modal-update-cliente" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' => 'POST', 'autocomplete' => 'on')) !!}
+                        {{-- {!! Form::open(['route' => ['clientes.updateCliente', $cliente[0] -> id]]) !!} --}}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title">Editar Cliente</h4>
+                        </div>
+                        <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Nombre Cliente: </label>
+                                    <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" value="{{$cliente[0]->nombre_cliente}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Tipo de Cliente: </label>
+                                    <select class="form-control" id="tipo_cliente" name="tipo_cliente">
+                                        @if($cliente[0]->tipo_cliente == 'Persona Natural')
+                                            <option value="Persona Natural" selected>Persona Natural</option>
+                                            <option value="Persona Juridica">Persona Juridica</option>
+                                        @else
+                                            <option value="Persona Natural">Persona Natural</option>
+                                            <option value="Persona Juridica" selected>Persona Juridica</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>NIT: </label>
+                                    <input type="text" min="0" class="form-control" id="nit_cedula" name="nit_cedula" value="{{$cliente[0]->nit_cedula}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Sector Económico: </label>
+                                    <input type="text" class="form-control" id="sector_economico" name="sector_economico" value="{{$cliente[0]->sector_economico}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Nombre Contacto: </label>
+                                    <input type="text" class="form-control" id="nombre_contacto" name="nombre_contacto" value="{{$cliente[0]->nombre_contacto}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Nombre Contacto Técnico: </label>
+                                    <input type="text" class="form-control" id="contacto_tecnico" name="contacto_tecnico" value="{{$cliente[0]->contacto_tecnico}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Cargo Contacto: </label>
+                                    <input type="text" class="form-control" id="cargo_contacto_tecnico" name="cargo_contacto_tecnico" value="{{$cliente[0]->cargo_contacto_tecnico}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Municipio: </label>
+                                    <input type="text" class="form-control" id="municipio" name="municipio" value="{{$cliente[0]->municipio}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Dirección: </label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion" value="{{$cliente[0]->direccion}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Barrio: </label>
+                                    <input type="text" class="form-control" id="barrio" name="barrio" value="{{$cliente[0]->barrio}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Zona: </label>
+                                    <input type="text" class="form-control" id="zona" name="zona" value="{{$cliente[0]->zona}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Email: </label>
+                                    <input type="text" class="form-control" id="email" name="email" value="{{$cliente[0]->email}}">
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Celular: </label>
+                                    <input type="text" class="form-control" id="celular" name="celular" value="{{$cliente[0]->celular}}">
+                                </div>
+                                {{-- <div class="form-group col-sm-12 col-md-6">
+                                    <label>Telefonos: </label>
+                                    <input type="text" class="form-control" id="telefonos-cliente">
+                                </div> --}}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+
+            <!--===================================================
+            /* Modal Añadir Sede
+            ====================================================-->
+            <div class="modal inmodal fade" id="modal-create-sede" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{-- {!! Form::open(['id' =>'form-sede']) !!} --}}
+                        <div class="modal-header">
+                            <button id="btn-close-cotization" type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title">Añadir Sede</h4>
+                        </div>
+                        <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
+                            <div class="row">
+                    
+                                <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
+                                    <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
+                                    <input type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
+                                    <input type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
+                                    <input type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
+                                    <input type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Nombre de Contacto *</label>
+                                    <input type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
+                                </div>
+            
+                                <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
+                                    <input type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                    
+                                </div>
+    
+                                <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                    <input type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Email *</label>
+                                    <input type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
+                                    
+                                </div>
+
+                                <div class="form-group col-lg-12">
+                                    <br>
+                                    <strong>Nota: </strong>Diligencia el formulario de Sede si la empresa tiene mas sedes además de la principal, en caso contrario no llenar este modal.
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button style="margin-bottom: 0;" type="button" id="btn-close-sedes" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                            <button type="button" id="btn-save-sedes" class="btn btn-primary">Guardar</button>
+                        </div>
+                        {{-- {!! Form::close() !!} --}}
+                    </div>
+                </div>
+            </div>            
 
             <!--===================================================
             /* Modal Crear Cotizacion
@@ -1206,6 +1367,72 @@
                 }
             })
     })
+
+    $("#btn-save-sedes").click(event => {
+        console.log("-------------------HOLA----------------------");
+        event.preventDefault();
+        let dataSedes = {
+            nombre_sedes: $("#nombre_sedes").val(),
+            direccion_sedes: $("#direccion_sedes").val(),
+            ciudad_sedes: $("#ciudad_sedes").val(),
+            barrio_sedes: $("#barrio_sedes").val(),
+            ruta_sedes: $("#ruta_sedes").val(),
+            nombre_contacto: $("#nombre_contacto").val(),
+            telefono_sedes: $("#telefono_sedes").val(),
+            celular_sedes: $("#celular_sedes").val(),
+            email_sedes: $("#email_sedes").val(),
+            cliente_id: parseInt({{$cliente[0]->id}})
+        };
+        console.log(dataSedes);
+        let crsfToken = document.getElementsByName("_token")[0].value;
+
+         swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar esta sede?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        }) .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                       url: '/sedes',
+                        data: dataSedes,
+                        type: 'POST',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        },
+                        success: (res) => {
+                            console.log(res)
+                        },
+                        error: (err) => {
+                            console.log(err);
+                        }
+                    }).then(events => {
+                            swal("¡Creación Correcta!", "Sede guardada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-sedes").click();
+                                    }
+                                })
+                        })
+                        .catch(error => {
+                            swal("¡Error!", "Campos Incorrectos", "error")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $("#btn-close-sedes").click();
+                                    }
+                                })
+                        })
+                }
+            })
+    });
 
 </script>
 @endsection
