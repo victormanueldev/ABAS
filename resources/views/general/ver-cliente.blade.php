@@ -144,6 +144,7 @@
                                             <li class=""><a href="#tab-2" data-toggle="tab">Solicitudes</a></li>
                                             <li class=""><a href="#tab-3" data-toggle="tab">Cotizaciones</a></li>
                                             <li class=""><a href="#tab-4" data-toggle="tab">Certificados</a></li>
+                                            <li class=""><a href="#tab-5" data-toggle="tab">Rutas</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -248,16 +249,48 @@
                                         </div>
                                         <div class="tab-pane" id="tab-4">
                                             <div class="row">
-
-                                                <div class="col-lg-6 " style="padding: 0 30px">
-                                                    <h5>Certificado</h5>
-                                                    <h1 class="no-margins">CTF-001</h1>
-                                                    <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
-                                                    <strong>Creación: </strong><small>2018-04-05 18:04:12</small>
-                                                </div>
-
+                                                @if($cliente[0]->solicitudes != [])
+                                                    @if(count($cliente[0]->solicitudes[0]->certificados) == 0 )
+                                                        <div></div>
+                                                    @else
+                                                        <div class="col-lg-6 " style="padding: 0 30px">
+                                                            <h5>Certificado</h5>
+                                                            <dl class="dl-horizontal no-margins">
+                                                                <dt style="text-align:left;width: 30%;">Frecuencia:</dt>
+                                                                <dd style="text-align:left;margin-left:0"><span >{{$cliente[0]->solicitudes[0]->certificados[0]->frecuencia}}</span></dd>
+                                                            </dl>
+                                                            <dl class="dl-horizontal no-margins">
+                                                                <dt style="text-align:left;width: 30%;">Area Tratada:</dt>
+                                                                <dd style="text-align:left;margin-left:0"><span >{{$cliente[0]->solicitudes[0]->certificados[0]->area_tratada}}</span></dd>
+                                                            </dl>
+                                                            <dl class="dl-horizontal ">
+                                                                @foreach($cliente[0]->solicitudes[0]->certificados[0]->tratamientos as $tratamiento)
+                                                                <dt style="text-align:left;width: 30%;">Tratamiento {{$loop->index + 1 }}:</dt>
+                                                                <dd style="text-align:left;margin-left:0"><span >{{$tratamiento}} </span></dd>
+                                                                @endforeach
+                                                            </dl>
+                                                            <strong>Creación: </strong><small>{{$cliente[0]->solicitudes[0]->certificados[0]->created_at}}</small>
+                                                        </div>
+                                                    @endif
+                                                @endif
                                             </div>
                                         </div>
+                                        <div class="tab-pane" id="tab-5">
+                                                <div class="row">
+                                                    @if($cliente[0]->solicitudes != [])
+                                                        @if($cliente[0]->solicitudes[0]->rutas != [] )
+                                                            @foreach ($cliente[0]->solicitudes[0]->rutas as $ruta)
+                                                                <div class="col-lg-6 " style="padding: 0 30px;margin-bottom: 15px;">
+                                                                    {{-- <h5>{{$ruta->tipo}}</h5> --}}
+                                                                    <b >R<b style="text-transform: lowercase">{{ substr($ruta->tipo, 1)}}</b> </b>
+                                                                    <h1 class="no-margins">{{$ruta->codigo}}</h1>
+                                                                    <strong>Creación: </strong><small>{{$ruta->created_at}}</small>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </div>
                                     </div>
 
                                 </div>
