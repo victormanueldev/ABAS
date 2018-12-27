@@ -82,7 +82,7 @@
                                 
                                 <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Solicitud de Programación</span></a></li>
                                 
-                                <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li>
+                                {{-- <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li> --}}
                             </ul>
                         </li>
                     @elseif(Auth::user()->area_id == '2')

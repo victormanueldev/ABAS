@@ -623,7 +623,28 @@ class ServicioController extends Controller
             }
             return response()->json('Update Success', 200);   
         }else{
-            response()->json(['error: ' => 'Error en la petición'], 500);
+            return response()->json(['error: ' => 'Error en la petición'], 500);
         }
+    }
+    
+    public function updateState(Request $request)
+    {
+        if($request->ajax()){
+            try{
+                $servicio = Servicio::findOrFail($request->id);
+                if(!$servicio->confirmado){
+                    $servicio->confirmado = true;
+                }else{
+                    $servicio->confirmado = false;
+                }
+                $servicio->save();
+            }catch(\Exception $e){
+                return response()->json($e, 500);
+            }
+            return response()->json($servicio->confirmado, 200);
+        }else{
+            return response()->json(['error: ' => 'Error en la petición'], 500);
+        }
+
     }
 }

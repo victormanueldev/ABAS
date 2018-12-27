@@ -46,8 +46,8 @@
 					            <div class="col-lg-12">
                                     <div class="ibox-title col-lg-12">
                                             {{-- <label class="control-label">AM-CM-01</label> --}}
-                                        <h1>AM-CM-01</h1>
-                                        <button type="button" class="btn btn-w-m btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true" style="margin-right: 8px;"></span> Generar Código</button>
+                                        <h1>SOLICITUD A PROGRAMACIÓN</h1>
+                                        {{-- <button type="button" class="btn btn-w-m btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true" style="margin-right: 8px;"></span> Generar Código</button> --}}
                                         <br>
                                         <br>                                                   
                                     </div>
@@ -154,7 +154,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control" id="select_sedes" name="id_sede" required>
+                                        <select class="form-control" id="select_sedes" name="id_sede" >
                                             <option value="">Selecciona una sede</option>
                                         </select>
 

@@ -17,7 +17,7 @@ class CreateRutasTable extends Migration
             $table->increments('id');
             $table->string('tipo');
             $table->string('codigo')->unique();
-            $table->json('contenido');
+            $table->string('contenido');
             $table->integer('solicitud_id');
             $table->timestamps();
         });

@@ -14,8 +14,14 @@ class CreateServicioTipoServicioTable extends Migration
     public function up()
     {
         Schema::create('servicio_tipo_servicio', function (Blueprint $table) {
+            $table->increments('id_servicio_tipo');
             $table->integer('servicio_id');
             $table->integer("tipo_servicio_id");
+            $table->string('numero_factura')->nullable();
+            $table->integer('valor')->nullable();
+            $table->string('estado')->default('Pendiente');
+            $table->timestamps();
+
         });
     }
 

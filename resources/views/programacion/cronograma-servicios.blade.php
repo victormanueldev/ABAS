@@ -221,9 +221,9 @@
                             <div class="modal-footer">
                                 <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-default"
                                     data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Sólo Guardar</button> {{-- No se si este
+                                <button type="submit" class="btn btn-primary">Crear servicios</button> {{-- No se si este
                                 boton de guardar sea necesario. --}}
-                                <button id="btn-print" type="button" class="btn btn-primary">Guardar e imprimir</button>
+                                {{-- <button id="btn-print" type="button" class="btn btn-primary">Guardar e imprimir</button> --}}
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -291,7 +291,7 @@
                                     <div class="col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-5 col-xs-12" style="margin-bottom: 7px;">
-                                                <a class="btn btn-primary" id="btn-lock" style="cursor: not-allowed;"></a>
+                                                <a class="btn btn-primary" id="btn-lock" ></a>
                                             </div>
                                             <div class="col-sm-7 col-xs-12" style="margin-bottom: 7px;padding-left: 50px;"
                                                 id="div-opciones">
@@ -326,7 +326,7 @@
                                     </div>
 
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                         <div class="col-lg-12">
                                             <h3>Información de factura <i id="ind-fac" class="fa fa-warning" style="color:rgb(219, 165, 37)"></i></h3>
                                             
@@ -346,15 +346,18 @@
                                         <div class="col-lg-2" style="margin-top: 23px;">
                                                 <button type="button" class="btn btn-primary" id="save-fac">Crear factura</button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 <hr style="margin-top: 10px;">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-8">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Tipo de Servicio</th>
+                                                    <th>Numero de Factura</th>
+                                                    <th>Valor Total</th>
+                                                    <th>Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody-tipos">
@@ -362,7 +365,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -567,7 +570,7 @@
 <script>
 
     //Inicializacion de variables globales
-    var infoServiceSelected = {id: '',duration: ''};
+    var infoServiceSelected = {id: '',duration: '', state: 0};
     var inicio_servicio;
 
     $(document).ready(function () {
@@ -864,9 +867,9 @@
                     <a href="/servicios/${event.id}" class="btn btn-default btn-outline" id="btn-editar-servicio" title="Editar Servicio">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <button class="btn btn-default btn-outline" id="btn-imprimir-servicio" onclick="printOptions()" title="Imprimir Documentos">
+                    <!--<button class="btn btn-default btn-outline" id="btn-imprimir-servicio" onclick="printOptions()" title="Imprimir Documentos">
                         <i class="fa fa-print"></i>
-                    </button>
+                    </button>-->
                     <button class="btn btn-default btn-outline" id="btn-eliminar-servicio" onclick="deleteEvent(${event.id})" title="Eliminar Servicios">
                         <i class="fa fa-trash-o"></i>
                     </button>`
@@ -903,6 +906,7 @@
                             nombre_contacto = res[0].solicitud.cliente.nombre_contacto;
                         }
                         //Valida si el servicio esta bloqueado o no
+                        infoServiceSelected.state = res[0].confirmado;
                         if (res[0].confirmado === 0) {
                             $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
                         } else {
@@ -930,6 +934,10 @@
                                 `<tr>    
                                 <td>${index + 1}</td>
                                 <td>${value.nombre}</td>
+                                <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
+                                <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.valor)}"/></td>
+                                <td><button class="btn btn-primary" id="btn-save-fac" onclick="assignBill(${value.pivot.id_servicio_tipo})"><i class="fa fa-save"></i></button></td>
+
                             </tr>`);
                         });
                         res[0].tecnicos.forEach((value, index) => {
@@ -1181,7 +1189,7 @@
                                     })
                             })
                             .catch(error => {
-                                swal("¡Error!", error.responseJSON[0], "error")
+                                swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios', "error")
                             })
                     }
                 })
@@ -1229,10 +1237,10 @@
     var idEventVal;
 
     /**
-* Obtiene el texto en español del lugar del dia en el mes.
-* @param {Number} weekContainer: Numero de la semana que contiene el dia seleccionado
-* @return {Array} Texto en español. 
-**/
+    * Obtiene el texto en español del lugar del dia en el mes.
+    * @param {Number} weekContainer: Numero de la semana que contiene el dia seleccionado
+    * @return {Array} Texto en español. 
+    **/
     function getOrdinalDay(weekContainer) {
         console.log(weekContainer)
         let text = [];
@@ -1648,5 +1656,52 @@
             }
         })
     });
+
+    $("#btn-lock").click( event => {
+        let state;
+
+        $.ajax({
+            url: '/servicios/edit/state',
+            data: infoServiceSelected,
+            type: 'PUT',
+            headers:{
+                "Content-Type": 'application/x-www-form-urlencoded',
+                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            },
+            success: (res) => {
+                $("#btn-lock").empty();
+                if(!res){
+                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`).removeClass('active');
+                }else{
+                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Bloqueado`).addClass('active');
+                }
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    });
+
+    function assignBill(idTypeService) {
+        $.ajax({
+            url: "/tipo/bill",
+            data: {
+                idTypeService: idTypeService,
+                bill: $(`#num-factura-${idTypeService}`).val(),
+                value: $(`#val-factura-${idTypeService}`).val(),
+            },
+            type: 'PUT',
+            headers:{
+                "Content-Type": 'application/x-www-form-urlencoded',
+                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            },
+            success: (res) => {
+                console.log(res)
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    }
 </script>
 @endsection

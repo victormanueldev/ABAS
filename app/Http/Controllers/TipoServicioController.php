@@ -4,6 +4,7 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\TipoServicio;
 use Illuminate\Http\Request;
+use DB;
 
 class TipoServicioController extends Controller
 {
@@ -83,5 +84,24 @@ class TipoServicioController extends Controller
     public function destroy(TipoServicio $tipoServicio)
     {
         //
+    }
+
+    public function assignBill(Request $request)
+    {
+        if($request->ajax()){
+            try{
+                $tipo_servicio = DB::table('servicio_tipo_servicio')
+                                    ->where('id_servicio_tipo', $request->idTypeService)
+                                    ->update([
+                                        'numero_factura' => $request->bill,
+                                        'valor' => $request->value
+                                    ]);
+                return response()->json('Update Success', 200);
+            }catch(\Exception $e){
+                return response()->json($e, 500);
+            }
+        }else{
+            return response()->json(['error: ' => 'Error en la petición'], 500);
+        }
     }
 }

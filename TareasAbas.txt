@@ -60,3 +60,23 @@ Otros Ajustes
         - Reporte de salida de productos (Gasto de tecnicos)
         - Inventario General por rango de fechasy Frecuencias
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
+
+
+
+Resultado Pruebas Comercial
+- Todos los inputs en mayusculas
+- CREAR CLIENTE
+    * Prospecto: Razon social, Numero telefonico, Direccion, Contacto *
+    * Sector Economico: SELECT (Residencial, Comercial, Serivicio, Industrial)
+    * Tipo de cliente, Actualizacion - Creacion (Prospecto, Cliente)
+    * NIT Separado con numero de verificacion
+    * Cliente: 
+        + Autocomplete off
+        + Razon Social, Tipo, NIT, Direccion, Barrio, Contacto, Telefono, Ciudad
+        + Un amigo -> Referido, publicidad en vehiculo, redes sociales
+- CALENDARIO
+    * Quitar Tipo Control
+    * Hipervinculo de vistas del mes a la vista dia
+
+- SOLICITUDES
+    * Mostrar la fecha Actual

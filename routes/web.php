@@ -69,9 +69,11 @@ Route::post('solicitud/show', 'SolicitudesController@show');
 
 //Servicios
 Route::resource('servicios', 'ServicioController', [
-    'except' => 'updateFrecuency'
+    'except' => 'updateFrecuency',
+    'except' => 'updateState'
 ]);
 Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
+Route::put('servicios/edit/state', 'ServicioController@updateState');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -154,3 +156,5 @@ Route::get('clientes/servicios/test', function(){
 });
 
 Route::resource('facturas', 'FacturaController');
+
+Route::put('tipo/bill', 'TipoServicioController@assignBill');
