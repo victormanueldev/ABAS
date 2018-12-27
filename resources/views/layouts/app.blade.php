@@ -39,7 +39,7 @@
 
 <body class="md-skin" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <nav class="navbar-default  navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
@@ -129,7 +129,7 @@
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="row border-bottom">
-                    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
                         <div class="navbar-header">
                             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" style="background-color: #5CAE27;border-color: #5CAE27;"><i class="fa fa-bars"></i> </a>
                             {{--  <form role="search" class="navbar-form-custom" action="search_results.html">

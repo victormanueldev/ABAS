@@ -3641,6 +3641,7 @@ video {
 #wrapper {
   width: 100%;
   overflow-x: hidden;
+  margin-top: 56px;
 }
 .wrapper {
   padding: 0 20px;
@@ -8577,4 +8578,9 @@ body.md-skin {
   #page-wrapper {
     margin: 0;
   }
+}
+
+.navbar-static-side {
+  position: fixed !important;
+  top: 60px !important;
 }

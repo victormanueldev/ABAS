@@ -175,9 +175,9 @@
                                             <div class="form-group col-lg-8">
                                                 <label>Duración del servicio</label>
                                                 <div class="input-group">
-                                                    <input style="width: 45%;margin-right: 10px;" type="number" min="0"
+                                                    <input style="width: 40%;margin-right: 10px;" type="number" min="0"
                                                         max="11" class="form-control" id="num_horas" placeholder="Horas">
-                                                    <input style="width: 47%;margin-left: 10px;" type="number" min="0"
+                                                    <input style="width: 42%;margin-left: 10px;" type="number" min="0"
                                                         max="60" class="form-control" id="num_minutos" placeholder="Minutos">
                                                 </div>
                                             </div>
@@ -737,6 +737,7 @@
                 $('#select_servicios').select2("val", "");
                 $('#select_tecnicos2').select2("val", "");
                 $("#historial_tecnicos").popover('destroy');
+                $("#text-instrucciones").val("")
             },
 
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -1010,7 +1011,7 @@
                 },
                 success: function (res) {
                     if (res == '') {  //Valida que la respueta este vacia
-                        console.log('Esta sede no tiene una solicitud creada, por favor creela');
+                        swal('¡Error!', 'Esta sede no tiene una solicitud a programación.', 'error');
                         $(".list-group-item").remove();
                         $("#dir_sede").val('');
                         $("#barrio_sede").val('');
@@ -1022,6 +1023,7 @@
                         $("#num_minutos").val('');
                         $('#select_servicios').select2("val", "");
                         $('#select_tecnicos2').select2("val", "");
+                        $("#text-instrucciones").val('');
                         id_solicitud = '';
                     } else {
                         console.log(res);
@@ -1061,7 +1063,7 @@
                     }
                 },
                 error: function (err) {
-                    console.log(err);
+                   swal('¡Error!', 'Error al obtener la información de la sede', 'error');
                 }
             });
         }
@@ -1673,7 +1675,7 @@
                 if(!res){
                     $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`).removeClass('active');
                 }else{
-                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Bloqueado`).addClass('active');
+                    $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`).addClass('active');
                 }
             },
             error: (err) => {
@@ -1696,10 +1698,10 @@
                 "X-CSRF-TOKEN": crsfToken   //Token de seguridad
             },
             success: (res) => {
-                console.log(res)
+                swal('¡Excelente!', 'La factura ha sido asignada con éxito', 'success')
             },
             error: (err) => {
-                console.log(err)
+                swal('Error!', 'Ha ocurrido un error al intentar guardar la factura', 'error')
             }
         })
     }
