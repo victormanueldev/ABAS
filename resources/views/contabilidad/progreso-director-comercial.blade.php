@@ -119,6 +119,7 @@
                             });
                             repurchasesDirector[index] = value.total_facturas;
                         }
+                            console.log(value)
                         if (value.fecha_inicio.month() == now.month()) {
                             sumTeamRepurchases += value.total_facturas
                         }

@@ -68,7 +68,7 @@
                                                 <img alt="image" style="margin: 15px" class="img-circle img-responsive" src="{{asset('img/${value.avatar}')}}">
                                             </div>
                                             <div class="col-lg-12 ">
-                                                <div style="margin: 0px 15px 15px 20px;" class="font-bold">${value.role}</div>
+                                                <div style="margin: 0px 15px 15px 20px;width: 100%;" class="font-bold">${value.role}</div>
                                             </div>
                                         </div>
                                     </div>
