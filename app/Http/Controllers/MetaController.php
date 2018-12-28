@@ -22,10 +22,10 @@ class MetaController extends Controller
                             ->join('clientes', 'users.id', 'clientes.user_id')
                             ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
                             ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
-                            ->join('facturas', 'servicios.id', 'facturas.servicio_id')
+                            ->join('servicio_tipo_servicio', 'servicios.id', 'servicio_tipo_servicio.servicio_id')
                             ->join('cargos', 'users.cargo_id', 'cargos.id')
                             ->join('areas', 'users.area_id', 'areas.id')
-                            ->select('cargos.descripcion', 'users.nombres' , DB::raw('SUM(facturas.valor) as total'), 'users.id', 'users.foto', 'users.apellidos')
+                            ->select('cargos.descripcion', 'users.nombres' , DB::raw('SUM(servicio_tipo_servicio.valor) as total'), 'users.id', 'users.foto', 'users.apellidos')
                             ->where('areas.id', '1')
                             ->where('users.cargo_id', '1')
                             ->where('servicios.fecha_inicio', '>=', '2018-12-01')
@@ -50,6 +50,7 @@ class MetaController extends Controller
             return $data;
         }
         return view('contabilidad.progreso-inspectores-comerciales');
+        // return $data;
     }
 
     /**
@@ -63,8 +64,10 @@ class MetaController extends Controller
         $users = User::with('cargo:id,descripcion')
                         ->select('id','cedula', 'nombres', 'apellidos', 'area_id', 'cargo_id')
                         ->where('area_id', '1')
+                        ->orWhere('cargo_id', '4')
                         ->get();
         return view("contabilidad.asignacion-metas", compact('users'));
+
     }
 
     /**
@@ -161,9 +164,10 @@ class MetaController extends Controller
                         ->join('clientes', 'users.id', 'clientes.user_id')
                         ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
                         ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
-                        ->join('facturas', 'servicios.id', 'facturas.servicio_id')
+                        //->join('facturas', 'servicios.id', 'facturas.servicio_id')
+                        ->join('servicio_tipo_servicio', 'servicios.id', 'servicio_tipo_servicio.servicio_id')
                         ->join('areas', 'users.area_id', 'areas.id')
-                        ->select('facturas.valor as total_facturas', 'users.id as user_id', 'users.cargo_id as cargo', 'servicios.fecha_inicio')
+                        ->select('servicio_tipo_servicio.valor as total_facturas', 'users.id as user_id', 'users.cargo_id as cargo', 'servicios.fecha_inicio')
                         //->where('areas.id', '1')
                         //->where('servicios.fecha_inicio', '>=', '2018-12-01')
                         //->where('servicios.fecha_inicio', '<=', '2019-31-12')

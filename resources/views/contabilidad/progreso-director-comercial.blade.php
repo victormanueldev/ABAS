@@ -60,23 +60,35 @@
                             fecha_inicio: moment(value.fecha_inicio, "YYYY-MM-DD"),
                             total_facturas: value.total_facturas
                         }
-                        if (value.cargo == 4) {
-                            res.metas.forEach((val, index2) => {
-                                if (value.user_id == val.user_id) {
-                                    directorInfo.goalNewClients = val.meta_clientes_nuevos;
-                                    directorInfo.goalRepurchases = val.meta_recompras;
-                                    directorInfo.goalTeamNewClients = val.meta_equipo_clientes_nuevos;
-                                    directorInfo.goalTeamRepurchases = val.meta_equipo_recompras;
-                                    directorInfo.goalYearlyTeam = val.meta_anual_equipo;
-                                    directorInfo.goalYearlyInspect = val.meta_anual_inpector;
-                                    directorInfo.name = val.nombres;
-                                    directorInfo.lastName = val.apellidos;
-                                    directorInfo.avatar = val.foto;
+                        // if (value.cargo == 4) {
+                        //     res.metas.forEach((val, index2) => {
+                        //         if (value.user_id == val.user_id) {
+                        //             directorInfo.goalNewClients = val.meta_clientes_nuevos;
+                        //             directorInfo.goalRepurchases = val.meta_recompras;
+                        //             directorInfo.goalTeamNewClients = val.meta_equipo_clientes_nuevos;
+                        //             directorInfo.goalTeamRepurchases = val.meta_equipo_recompras;
+                        //             directorInfo.goalYearlyTeam = val.meta_anual_equipo;
+                        //             directorInfo.goalYearlyInspect = val.meta_anual_inpector;
+                        //             directorInfo.name = val.nombres;
+                        //             directorInfo.lastName = val.apellidos;
+                        //             directorInfo.avatar = val.foto;
 
-                                }
-                            })
-                        }
+                        //         }
+                        //     })
+                        // }
                     });
+
+                    res.metas.forEach((val, index2) => {
+                            directorInfo.goalNewClients = val.meta_clientes_nuevos;
+                            directorInfo.goalRepurchases = val.meta_recompras;
+                            directorInfo.goalTeamNewClients = val.meta_equipo_clientes_nuevos;
+                            directorInfo.goalTeamRepurchases = val.meta_equipo_recompras;
+                            directorInfo.goalYearlyTeam = val.meta_anual_equipo;
+                            directorInfo.goalYearlyInspect = val.meta_anual_inpector;
+                            directorInfo.name = val.nombres;
+                            directorInfo.lastName = val.apellidos;
+                            directorInfo.avatar = val.foto;
+                    })
 
                     res.cotizaciones.forEach((value, index) => {
                         cotizations[index] = {
@@ -157,10 +169,10 @@
                                     <div class="ibox">
                                         <div class="ibox-content">
                                             <h5>Clientes Nuevos</h5>
-                                            <h2>${((directorInfo.personalNewClients/directorInfo.goalNewClients)*100).toFixed(0)}% <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.personalNewClients}</small></h2>
+                                            <h2>${((directorInfo.personalNewClients / directorInfo.goalNewClients) * 100).toFixed(0)}% <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.personalNewClients}</small></h2>
                                             
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.personalNewClients/directorInfo.goalNewClients)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.personalNewClients / directorInfo.goalNewClients) * 100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalNewClients}</div>
@@ -171,11 +183,11 @@
                                     <div class="ibox">
                                         <div class="ibox-content">
                                             <h5>Clientes Nuevos Equipo</h5>
-                                            <h2>${((directorInfo.teamNewClientsMonthly/directorInfo.goalTeamNewClients)*100).toFixed(0)}%
+                                            <h2>${((directorInfo.teamNewClientsMonthly / directorInfo.goalTeamNewClients) * 100).toFixed(0)}%
                                                 <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.teamNewClientsMonthly}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.teamNewClientsMonthly/directorInfo.goalTeamNewClients)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.teamNewClientsMonthly / directorInfo.goalTeamNewClients) * 100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalTeamNewClients}</div>
@@ -186,11 +198,11 @@
                                     <div class="ibox">
                                         <div class="ibox-content">
                                             <h5>Total Equipo Anual</h5>
-                                            <h2>${((directorInfo.yearlyByTeam/directorInfo.goalYearlyTeam)*100).toFixed(0)}%
+                                            <h2>${((directorInfo.yearlyByTeam / directorInfo.goalYearlyTeam) * 100).toFixed(0)}%
                                                 <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.yearlyByTeam}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.yearlyByTeam/directorInfo.goalYearlyTeam)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.yearlyByTeam / directorInfo.goalYearlyTeam) * 100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalYearlyTeam}</div>
@@ -201,11 +213,11 @@
                                     <div class="ibox">
                                         <div class="ibox-content">
                                             <h5>Recompras</h5>
-                                            <h2>${((directorInfo.personalRepurchases/directorInfo.goalRepurchases)*100).toFixed(0)}%
+                                            <h2>${((directorInfo.personalRepurchases / directorInfo.goalRepurchases) * 100).toFixed(0)}%
                                                 <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.personalRepurchases}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.personalRepurchases/directorInfo.goalRepurchases)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.personalRepurchases / directorInfo.goalRepurchases) * 100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalRepurchases}</div>
@@ -216,11 +228,11 @@
                                     <div class="ibox">
                                         <div class="ibox-content">
                                             <h5>Recompras Equipo</h5>
-                                            <h2>${((directorInfo.teamRepurcahsesMonthly/directorInfo.goalTeamRepurchases)*100).toFixed(0)}%
+                                            <h2>${((directorInfo.teamRepurcahsesMonthly / directorInfo.goalTeamRepurchases) * 100).toFixed(0)}%
                                                 <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.teamRepurcahsesMonthly}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.teamRepurcahsesMonthly/directorInfo.goalTeamRepurchases)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.teamRepurcahsesMonthly / directorInfo.goalTeamRepurchases) * 100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalTeamRepurchases}</div>

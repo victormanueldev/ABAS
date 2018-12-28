@@ -937,7 +937,7 @@
                                 <td>${value.nombre}</td>
                                 <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
                                 <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.valor)}"/></td>
-                                <td><button class="btn btn-primary" id="btn-save-fac" onclick="assignBill(${value.pivot.id_servicio_tipo})"><i class="fa fa-save"></i></button></td>
+                                <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>
 
                             </tr>`);
                         });
@@ -1699,6 +1699,7 @@
             },
             success: (res) => {
                 swal('¡Excelente!', 'La factura ha sido asignada con éxito', 'success')
+                $(`#btn-save-fac-${idTypeService}`).attr('disabled','disabled')
             },
             error: (err) => {
                 swal('Error!', 'Ha ocurrido un error al intentar guardar la factura', 'error')

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('custom-css')
+<link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
+@endsection
 @section('content')
 <script>
     document.getElementById('m-asignar-metas').setAttribute("class", "active");
@@ -37,7 +40,10 @@
                     id="btn-modal">
                     Launch modal
                 </button>
-
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#assign-goal-inspect"
+                    id="btn-modal-inspect">
+                    Launch modal
+                </button>
                 <div class="ibox-content">
                     <table class="table table-hover">
                         <thead>
@@ -56,7 +62,7 @@
                                 <td style="padding: 15px;">{{$user->nombres}}</td>
                                 <td style="padding: 15px;">{{$user->apellidos}}</td>
                                 <td style="padding: 15px;">{{$user->cargo->descripcion}}</td>
-                            <td class="text-primary"> <button class="btn btn-primary" onclick="assignGoal({{$user->id}},'{{$user->nombres}}',{{$user->cargo->id}},'{{$user->cargo->descripcion}}')"><i
+                                <td class="text-primary"> <button class="btn btn-primary" onclick="assignGoal({{$user->id}},'{{$user->nombres}}',{{$user->cargo->id}},'{{$user->cargo->descripcion}}')"><i
                                 class="fa fa-edit"></i> Asignar meta</button></td>
                             </tr>
                             @endforeach
@@ -68,10 +74,68 @@
                 <!--===================================================
                 /* Modal de Asignacion de metas
                 ====================================================-->
+                <div class="modal inmodal fade" id="assign-goal-inspect" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            {!! Form::open(['id' =>'form-assignmet-goal']) !!}
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <h2 class="modal-title" style="font-size: 23px;">Asignacion de Metas</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Nombre:</label>
+                                            <input type="text" id="name-user-inspect" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Cargo:</label>
+                                            <input type="text" id="role-user-inspect" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    @for ($i = 0; $i < 12; $i++)                                      
+                                        <div class="form-group col-md-4">
+                                            <label>Mes de vigencia:</label> 
+                                        <input id="month-validity-{{$i}}" class="form-control"/>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Clientes Nuevos:</label>
+                                            <input type="number" id="new-clients-{{$i}}" class="form-control" placeholder="Ingresa el nuevo monto">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Recompras:</label>
+                                                <input type="number" id="repurchase-m-{{$i}}" class="form-control" placeholder="Ingresa el nuevo monto">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button id="btn-save-goal-{{$i}}" type="button" class="btn btn-primary" style="margin-top: 24px;" onclick="saveGoal({{$i}})">Asignar</button>
+                                        </div>
+                                    @endfor 
+                                        
+                                        
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button id="btn-save-goal" type="button" class="btn btn-primary">Asignar</button>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--===================================================
+                /* Modal de Asignacion de metas director comercial
+                ====================================================-->
                 <div class="modal inmodal fade" id="assign-goal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
-                                    {!! Form::open(['id' =>'form-assignmet-goal']) !!}
+                                {!! Form::open(['id' =>'form-assignmet-goal']) !!}
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">&times;</span>
@@ -125,7 +189,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                    <button id="btn-save-goal" type="button" class="btn btn-primary">Asignar</button>
+                                    <button id="btn-save-goal-dir" type="button" class="btn btn-primary">Asignar</button>
                                 </div>
                                 {!! Form::close() !!}
                             </div>
@@ -138,6 +202,8 @@
 @endsection
 @section('ini-scripts')
 <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+<!-- Sweet Alert -->
+<script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <script>
 
     /**
@@ -159,6 +225,9 @@
         Calculo de los meses posteriores al actual
         -------------------------------------------------------------*/
         let months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+        months.forEach((value,index) => {
+            $(`#month-validity-${index}`).val(value);
+        })
         now.month = moment().month();
         now.year = moment().year();
         months.forEach((value, index) =>{
@@ -182,25 +251,58 @@
         //Set global variable
         userSelected.id = idUser;
         userSelected.role = idRole;
-        $("#name-user").val(nameUser);
-        $("#role-user").val(role);
+
         //Valida que el rol sea Director Comercial
         if(idRole != 4){
-            $("#new-clients-team-m").attr('disabled', 'disabled')
-            $("#repurchase-team-m").attr('disabled', 'disabled')
-            $("#adviser-y").attr('disabled', 'disabled')
-            $("#team-y").attr('disabled', 'disabled')
+            $("#name-user-inspect").val(nameUser);
+            $("#role-user-inspect").val(role);
+            $("#new-clients-team-m").attr('disabled', 'disabled');
+            $("#repurchase-team-m").attr('disabled', 'disabled');
+            $("#adviser-y").attr('disabled', 'disabled');
+            $("#team-y").attr('disabled', 'disabled');
+            $("#btn-modal-inspect").click();
         }else{
+            $("#name-user").val(nameUser);
+            $("#role-user").val(role);
             $("#new-clients-team-m").prop('disabled', false);
             $("#repurchase-team-m").prop('disabled', false);
             $("#adviser-y").prop('disabled', false);
             $("#team-y").prop('disabled', false);
+            $("#btn-modal").click();
         }
-        $("#btn-modal").click();
+    }
+
+    function saveGoal(idMonthGoal) {
+        let goal = {
+            clientesNuevos:$(`#new-clients-${idMonthGoal}`).val(),
+            recompras:$(`#repurchase-m-${idMonthGoal}`).val(),
+            mesVigencia:idMonthGoal,
+            anioVigencia:now.year,
+            idUser: userSelected.id,
+            role: userSelected.rol
+        }
+
+        $.ajax({
+            url: '/metas/comerciales',
+            data: goal,
+            type: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            },
+            success: (res) => {
+                swal('¡Excelente!', 'La Meta ha sido asignada con éxito', 'success')
+
+                console.log(res);
+            },
+            error: (err) => {
+                swal('Error!', 'Ha ocurrido un error al intentar guardar la meta', 'error')
+                console.log(err);
+            }
+        });
     }
 
     //Guardar Meta
-    $("#btn-save-goal").click((event) => {
+    $("#btn-save-goal-dir").click((event) => {
         event.preventDefault();
         let goal = {
             clientesNuevos:$("#new-clients-m").val(),
