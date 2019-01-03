@@ -1,6 +1,5 @@
 Clientes:
 - Vista de Editar cliente (registro de multiples sedes, seguimiento por sedes- visitas e inspecciones)
-- Ver cliente (Vista completa)
 
 Otros Ajustes
     AREA COMERCIAL
@@ -38,10 +37,8 @@ Otros Ajustes
             - Novedades urgentes
         NOTA: Revisar anotaciones cuaderno
     AREA PROGRAMACION
-        - Opcion de bloquear/desbloquear servicio directamente desde ver info del servicio
-        - Validacion del cliente en mora  antes de crear servicios
+        - Validacion del cliente en mora  antes de crear servicios.
         - Check list de notificaciones tenporales por clientes.
-        - Asignar numero de factura y valor del servicio seleccionado en el calendario (ver servicio)
         - Informe de registro de actividad por tecnico y rango de fechas.
 
     AREA CALIDAD
@@ -66,17 +63,17 @@ Otros Ajustes
 Resultado Pruebas Comercial
 - Todos los inputs en mayusculas
 - CREAR CLIENTE
-    * Prospecto: Razon social, Numero telefonico, Direccion, Contacto *
-    * Sector Economico: SELECT (Residencial, Comercial, Serivicio, Industrial)
-    * Tipo de cliente, Actualizacion - Creacion (Prospecto, Cliente)
-    * NIT Separado con numero de verificacion
+    * Prospecto: Razon social, Numero telefonico, Direccion, Contacto * (Poner campos obligatorios en el formulario de prospecto)
+    * Sector Economico: SELECT (Residencial, Comercial, Serivicio, Industrial) (Poner Select con esas opciones)
+    * Tipo de cliente, Actualizacion - Creacion (Prospecto, Cliente) (Select con esas opciones y CRUD de eso, que se pueda cambiar ese estado)
+    * NIT Separado con numero de verificacion (Hacer un input pequeño para un numero de verificacion del NIT 
+	ej: 12344789 - 7 el 7 en un campo aparte, probar y hacer CRU hacer la concatenacion en el backend para guardarlo en un solo campo de la BD)
     * Cliente: 
-        + Autocomplete off
-        + Razon Social, Tipo, NIT, Direccion, Barrio, Contacto, Telefono, Ciudad
-        + Un amigo -> Referido, publicidad en vehiculo, redes sociales
+        + Autocomplete off (Formulario de Cliente)
+        + Razon Social, Tipo, NIT, Direccion, Barrio, Contacto, Telefono, Ciudad (Campos obligatorios)
+        + Un amigo -> Referido, publicidad en vehiculo, redes sociales (Añadir estas opciones al select)
 - CALENDARIO
-    * Quitar Tipo Control
-    * Hipervinculo de vistas del mes a la vista dia
+    * Quitar Tipo Control (Quitar del sweetalert la opcion de control)
 
 - SOLICITUDES
-    * Mostrar la fecha Actual
+    * Mostrar la fecha Actual (Poner la fecha Actual de una vez en el calendario con Momentjs (America/Bogota))
