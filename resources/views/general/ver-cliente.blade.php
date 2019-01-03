@@ -232,19 +232,19 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="tab-3">
+                                        {{-- <div class="tab-pane" id="tab-3">
                                             <div class="row">
                                                 @if(count($cliente[0]->cotizacion) != 0)
                                                 <div class="col-lg-6" style="padding: 0 30px">
                                                     <h5>Cotización</h5>
                                                     <h1 class="no-margins">{{$cliente[0]->cotizacion->codigo}}</h1>
-                                                    {{-- <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a> --}}
+                                                    <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
                                                     <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
                                                 </div>
                                                 @endif
                                             </div>
-                                        </div>
-                                         <div class="tab-pane" id="tab-4">
+                                        </div> --}}
+                                         {{-- <div class="tab-pane" id="tab-4">
                                             <div class="row">
                                                 @if(count($cliente[0]->solicitudes) != 0)
                                                    @if(count($cliente[0]->solicitudes[0]->certificados) == 0)
@@ -271,14 +271,14 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                        </div>
-                                         <div class="tab-pane" id="tab-5">
+                                        </div> --}}
+                                         {{-- <div class="tab-pane" id="tab-5">
                                             <div class="row">
                                                 @if(count($cliente[0]->solicitudes) != 0)
                                                     @if(count($cliente[0]->solicitudes[0]->rutas) != 0 )
                                                         @foreach ($cliente[0]->solicitudes[0]->rutas as $ruta)
                                                             <div class="col-lg-6 " style="padding: 0 30px;margin-bottom: 15px;">
-                                                                {{-- <h5>{{$ruta->tipo}}</h5> --}}
+                                                                <h5>{{$ruta->tipo}}</h5>
                                                                 <b >R<b style="text-transform: lowercase">{{ substr($ruta->tipo, 1)}}</b> </b>
                                                                 <h1 class="no-margins">{{$ruta->codigo}}</h1>
                                                                 <strong>Creación: </strong><small>{{$ruta->created_at}}</small>
@@ -287,7 +287,7 @@
                                                     @endif
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
                                       
                                     </div>
 

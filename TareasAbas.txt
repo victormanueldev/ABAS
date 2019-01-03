@@ -36,20 +36,25 @@ Otros Ajustes
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
             - Novedades urgentes
         NOTA: Revisar anotaciones cuaderno
+
     AREA PROGRAMACION
-        - Validacion del cliente en mora  antes de crear servicios.
-        - Check list de notificaciones tenporales por clientes.
+        - Validacion del cliente en mora antes de crear servicios.
+        - Check list de notificaciones tenporales por clientes. (VUE)
         - Informe de registro de actividad por tecnico y rango de fechas.
 
     AREA CALIDAD
         - Generacion de Documentos (CRUD)
         - Registro de novedades de clientes luego de los servicios.
         - Relacionar el cliente y la sede con la novedad.
-        - 
+
     AREA DE CONTABILIDAD
         - Listado de todos los clientes y prospectos (Estado del cliente)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Reporte de servicios con sus respectivas facturas.
+        - Filtro de metas por mes para inspectores y director Comercial
+        - Asignacion de metas por mes para director
+        - Registro de pagos de facturas
+        - Comisiones para inspectores
 
     AREA DE INVENTARIOS
         - CRUD de productos
@@ -77,3 +82,8 @@ Resultado Pruebas Comercial
 
 - SOLICITUDES
     * Mostrar la fecha Actual (Poner la fecha Actual de una vez en el calendario con Momentjs (America/Bogota))
+
+
+BUGS
+- Ver clientes, count() del array
+- Mostrar telefonos

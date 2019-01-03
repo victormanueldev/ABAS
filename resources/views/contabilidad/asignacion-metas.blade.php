@@ -105,11 +105,11 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Clientes Nuevos:</label>
-                                            <input type="number" id="new-clients-{{$i}}" class="form-control" placeholder="Ingresa el nuevo monto">
+                                            <input type="number" id="new-clients-{{$i}}" class="form-control" placeholder="$">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Recompras:</label>
-                                                <input type="number" id="repurchase-m-{{$i}}" class="form-control" placeholder="Ingresa el nuevo monto">
+                                                <input type="number" id="repurchase-m-{{$i}}" class="form-control" placeholder="$">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button id="btn-save-goal-{{$i}}" type="button" class="btn btn-primary" style="margin-top: 24px;" onclick="saveGoal({{$i}})">Asignar</button>
@@ -121,7 +121,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                <button id="btn-save-goal" type="button" class="btn btn-primary">Asignar</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -326,9 +325,11 @@
             },
             success: (res) => {
                 console.log(res);
+                swal('¡Excelente!', 'La Meta ha sido asignada con éxito', 'success')
             },
             error: (err) => {
                 console.log(err);
+                swal('Error!', 'Ha ocurrido un error al intentar guardar la meta', 'error')
             }
         });
     });

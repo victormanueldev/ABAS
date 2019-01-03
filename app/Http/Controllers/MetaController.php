@@ -30,7 +30,7 @@ class MetaController extends Controller
                             ->where('users.cargo_id', '1')
                             ->where('servicios.fecha_inicio', '>=', '2018-12-01')
                             ->where('servicios.fecha_inicio', '<=', '2019-31-12')
-                            ->groupBy('users.id')
+                            ->groupBy('users.id','cargos.descripcion','users.nombres','users.id','users.foto','users.apellidos')
                             ->get());
         $clientesNuevos = DB::table('users')
                             ->join('clientes', 'users.id', 'clientes.user_id')
@@ -43,6 +43,7 @@ class MetaController extends Controller
                             ->join('metas', 'users.id', 'metas.user_id')
                             ->select('users.id', 'metas.*')
                             ->where('users.cargo_id', '1')
+                            ->where('metas.mes_vigencia', '0')
                             ->get();
         $data->put('cotizaciones', $clientesNuevos);
         $data->put('metas',  $metasUsers);
