@@ -97,6 +97,12 @@
                         <li id="m-asignar-metas">
                             <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
                         </li>
+                        <li id="m-listado-clientes">
+                            <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
+                        </li>
+                        <li id="m-control-facturacion">
+                                <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                            </li>
 
                     @elseif(Auth::user()->area_id == '3')
 

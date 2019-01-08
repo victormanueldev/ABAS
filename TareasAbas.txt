@@ -48,7 +48,6 @@ Otros Ajustes
         - Relacionar el cliente y la sede con la novedad.
 
     AREA DE CONTABILIDAD
-        - Listado de todos los clientes y prospectos (Estado del cliente)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Reporte de servicios con sus respectivas facturas.
         - Filtro de metas por mes para inspectores y director Comercial

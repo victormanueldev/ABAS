@@ -248,4 +248,31 @@ class ClientesController extends Controller
         return Redirect::to('home');
     }
 
+    public function indexContablilidad(Request $request)
+    {
+        if($request->ajax()){
+            $clientes = Cliente::with('user','sedes')->get();
+            return $clientes;
+        }
+        return view('contabilidad.index-clientes');
+    }
+
+    public function billingControl(Request $request)
+    {
+        return view('contabilidad.control-facturacion');
+    }
+
+    public function clientBills(Request $request, $idCliente, $idSede)
+    {
+        $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
+                                $query->where('id',$idSede);
+                            },'solicitudes.servicios' => function($query){
+                                $query->select('id', 'solicitud_id');
+                            } , 'solicitudes.servicios.tipos'])
+                            ->select('id')
+                            ->where('id', $idCliente)
+                            ->get();
+        return $facturas;
+    }
+
 }

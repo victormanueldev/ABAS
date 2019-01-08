@@ -158,3 +158,7 @@ Route::get('clientes/servicios/test', function(){
 Route::resource('facturas', 'FacturaController');
 
 Route::put('tipo/bill', 'TipoServicioController@assignBill');
+
+Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
+Route::get('contabilidad/facturacion', 'ClientesController@billingControl');
+Route::get('facturacion/cliente/{id}/{sede}', 'ClientesController@clientBills');
