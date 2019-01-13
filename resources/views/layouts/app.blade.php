@@ -111,7 +111,12 @@
                         </li>
 
                         <li id="m-calendario-tecnicos">
-                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar"></i> <span class="nav-label">Horarios</span></a>
+                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios de técnicos</span></a>
+                        </li>
+
+
+                        <li id="m-listado-servicios">
+                            <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de servicios</span></a>
                         </li>
                         
                     @else

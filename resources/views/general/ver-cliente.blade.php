@@ -143,6 +143,7 @@
                                             <li class=""><a href="#tab-3" data-toggle="tab">Cotizaciones</a></li>
                                             <li class=""><a href="#tab-4" data-toggle="tab">Certificados</a></li>
                                             <li class=""><a href="#tab-5" data-toggle="tab">Rutas</a></li>
+                                            <li class=""><a href="#tab-6" data-toggle="tab">Novedades Temporales</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -288,7 +289,11 @@
                                                 @endif
                                             </div>
                                         </div> --}}
-                                      
+                                        <div class="tab-pane" id="tab-6">
+                                            <div id="temporales">
+                                                <novedades-temporales></novedades-temporales>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>

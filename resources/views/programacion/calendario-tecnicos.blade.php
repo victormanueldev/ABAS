@@ -284,7 +284,6 @@
 <script src="{{asset('js/plugins/fullcalendar/locale/es.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/moment-timezone.js')}}"></script>
-<script src="{{asset('js/date.js')}}"></script>
 
 <!-- Sweet Alert -->
 <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>

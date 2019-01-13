@@ -74,6 +74,7 @@ Route::resource('servicios', 'ServicioController', [
 ]);
 Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
 Route::put('servicios/edit/state', 'ServicioController@updateState');
+Route::get('list/services','ServicioController@listServices');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -162,3 +163,8 @@ Route::put('tipo/bill', 'TipoServicioController@assignBill');
 Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
 Route::get('contabilidad/facturacion', 'ClientesController@billingControl');
 Route::get('facturacion/cliente/{id}/{sede}', 'ClientesController@clientBills');
+
+Route::resource('temporales/novedad', 'NovedadTemporalController', [
+    'except' => 'show'
+]);
+Route::get('temporales/novedad/{idCliente}/{idSede}', 'NovedadTemporalController@show');

@@ -1,86 +1,57 @@
-Clientes:
-- Vista de Editar cliente (registro de multiples sedes, seguimiento por sedes- visitas e inspecciones)
-
 Otros Ajustes
-    AREA COMERCIAL
+    AREA COMERCIAL (1 Dia)
         - Crear Cliente 
-            - Organizar HTML de telefono
             - Validar campos obligatorios
             - Razon social
-        - Mostrar novedades segun el area del empleado
-        - Horas de Observaciones en formato 24Hrs (ClockPicker crear cliente)
-        - Verificar JS de seleccion de vista (li="active")
-        - Reporte de cierres y ventas realizadas con respecto a la meta
-        - Estado del cliente (cerrado, prospecto)
-        - Crear cliente una sola interfaz
-        - Crear y editar la cotización (valor estado:final, inicial y relacion por ID de cliente)
-        - Interfaz de ver prospectos (tabla con buscador y boton de editar cliente)
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
-        
+
         - Editar Cliente
-            - Modal de Añadir sede
-            - Modal de Editar datos de cliente
-            - Guardar Documentos en la BD (Boolean)
-            - Guardar la cotizacion (codigo y valor)
-            - Observaciones fijas para clientes (ej: Llevar 2 tecnicos a prestar el servicio)  
-        - Calendario
-            - Verificar horario de trabajo
-            - Editar Evento dando Click
+            - Editar Sede - Eliminar
+            - Editar solicitud
+            - 
+
         - Solicitudes
-            - Generar Codigo aleatorio con JS
             - Sumar horas de visitas (reactivo)
             - Revisar HTML
             - Cargo: (formato, asesor y numero consecutivo)
-            - Seleccion de sedes NO obligatiorias
+            - Seleccion de sedes NO obligatiorias o sede unica (personas naturales)
+            - Guardar en DB
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
             - Novedades urgentes
-        NOTA: Revisar anotaciones cuaderno
 
-    AREA PROGRAMACION
-        - Validacion del cliente en mora antes de crear servicios.
-        - Check list de notificaciones tenporales por clientes. (VUE)
+    AREA PROGRAMACION (2 Dias)
+        - Servicios neutros sin tipo ni tecnico
+        - Cambio de tipo en Editar servicio
         - Informe de registro de actividad por tecnico y rango de fechas.
+        - Plantillas para impresion excel->html
+        - Revisar Consultas y detalles de interfaz
 
-    AREA CALIDAD
-        - Generacion de Documentos (CRUD)
+    AREA CALIDAD (2 Dias)
+        - Generacion de Documentos (CRUD) (Copiar lo que esta en Comercial)
         - Registro de novedades de clientes luego de los servicios.
         - Relacionar el cliente y la sede con la novedad.
+        - Revisar Consultas y detalles de interfaz
 
-    AREA DE CONTABILIDAD
+    AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Reporte de servicios con sus respectivas facturas.
         - Filtro de metas por mes para inspectores y director Comercial
         - Asignacion de metas por mes para director
         - Registro de pagos de facturas
         - Comisiones para inspectores
+        - Revisar Consultas y detalles de interfaz
 
-    AREA DE INVENTARIOS
+    AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos
         - Reporte de entrada de productos (Compras)
         - Reporte de salida de productos (Gasto de tecnicos)
         - Inventario General por rango de fechasy Frecuencias
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
+        - Revisar Consultas y detalles de interfaz
 
-
-
-Resultado Pruebas Comercial
-- Todos los inputs en mayusculas
-- CREAR CLIENTE
-    * Prospecto: Razon social, Numero telefonico, Direccion, Contacto * (Poner campos obligatorios en el formulario de prospecto)
-    * Sector Economico: SELECT (Residencial, Comercial, Serivicio, Industrial) (Poner Select con esas opciones)
-    * Tipo de cliente, Actualizacion - Creacion (Prospecto, Cliente) (Select con esas opciones y CRUD de eso, que se pueda cambiar ese estado)
-    * NIT Separado con numero de verificacion (Hacer un input pequeño para un numero de verificacion del NIT 
-	ej: 12344789 - 7 el 7 en un campo aparte, probar y hacer CRU hacer la concatenacion en el backend para guardarlo en un solo campo de la BD)
-    * Cliente: 
-        + Autocomplete off (Formulario de Cliente)
-        + Razon Social, Tipo, NIT, Direccion, Barrio, Contacto, Telefono, Ciudad (Campos obligatorios)
-        + Un amigo -> Referido, publicidad en vehiculo, redes sociales (Añadir estas opciones al select)
-- CALENDARIO
-    * Quitar Tipo Control (Quitar del sweetalert la opcion de control)
-
-- SOLICITUDES
-    * Mostrar la fecha Actual (Poner la fecha Actual de una vez en el calendario con Momentjs (America/Bogota))
+    SESIONES VIP (2 Dias)
+        - Visualizar informacion
 
 
 BUGS

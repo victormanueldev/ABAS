@@ -90,20 +90,53 @@ class ServicioController extends Controller
             if($request->ajax()){
                 //Convierte la fecha del request en un objeto Carbon
                 $dt_ini = Carbon::parse($request->start." ".$request->hora_inicio);   //Convierte el request en un objeto Carbon
+                //$time_ini = Carbon::parse($request->start." ".$request->hora_inicio);
+                //Valida si es Domingo
+                if($dt_ini->isSunday()){
+                    $dt_ini->next(Carbon::MONDAY);  //Pasa el servicio para el siguiente lunes
+                }
+
                 //Datos de Servicio
                 $servicio = new Servicio();
-                $servicio->frecuencia = $request->frecuencia;
                 $servicio->fecha_inicio = $dt_ini->toDateString();  //Fecha de inicio (YYYY-DD-MM)
+                $servicio->solicitud_id = $request->id_solicitud;
+                
+                //Definicion de tipo y color de servicios
+                $color_servicio = '';
+                switch ($request->tipo_servicio) {
+                    case 'Normal':
+                        $color_tecnico = Tecnico::select('color')->where('id', $request->id_tecnicos[0])->get();
+                        $color_servicio = $color_tecnico[0]['color'];
+                        break;
+                    case 'Refuerzo':
+                        $color_servicio = 'rgb(143, 143, 143)';
+                        break;
+                    case 'Mensajeria':
+                        $color_servicio = 'rgb(35,198,200)';
+                        break;
+                    case 'Neutro':
+                        $color_servicio = 'rgb(236,71,88)';
+                        break;
+                    default:
+                        $color_tecnico = Tecnico::select('color')->where('id', $request->id_tecnicos[0])->get();
+                        $color_servicio = $color_tecnico[0]['color'];
+                        break;
+                }
+                $servicio->tipo = $request->tipo_servicio;
+                $servicio->color = $color_servicio;
+                if($request->tipo_servicio == 'Neutro' || $request->tipo_servicio == 'Mensajeria'){
+                    $servicio->hora_inicio = "00:00:00";
+                    $servicio->save();
+                    return response()->json(["Servicio Guardado con Exito"], 200);
+                }
+                $servicio->frecuencia = $request->frecuencia;
                 $servicio->hora_inicio = $request->hora_inicio;
                 $servicio->duracion = $request->duracion;
-                $servicio->tipo = $request->tipo_servicio;
-                $color_tecnico = Tecnico::select('color')->where('id', $request->id_tecnicos[0])->get();
-                $servicio->color = $color_tecnico[0]['color'];
-                $servicio->solicitud_id = $request->id_solicitud;
                 $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
                 $servicio->fecha_fin = $dt_fin->toDateString();
                 $servicio->hora_fin = $request->hora_fin; 
                 $servicio->save();
+
                 //Obtiene el ultimo servicio agendado
                 $max_id = DB::table('servicios')->max('id');
                 $serie = "S".$max_id;
@@ -129,13 +162,18 @@ class ServicioController extends Controller
                 $index = 0;
 
                 //Crea servicios dependiendo de la frecuencia solicitada
-                while($dt_ini->year < 2020){
+                while($dt_ini->year < 2021){
                     if($index > 0){
                         if($request->opcionFrecuencia == "meses"){
                             if(!empty($request->diaDelMes)){
                                 $nueva_fecha = Carbon::parse($dt_ini->day." ".$dt_ini->format("F")." ".$dt_ini->year); // Repetir un dia especifico
                             }else{
                                 $nueva_fecha = Carbon::parse($request->diaOrdinal." ".$request->nombreDia." of ".$dt_ini->format("F")." ".$dt_ini->year); // Repetir en una expresion dada
+                            }
+                            if($nueva_fecha->isSunday()){
+                                $nueva_fecha->next(Carbon::MONDAY);
+                                //Asigna la hora de inicio del servicio enviado
+                                //$nueva_fecha->setTime($time_ini->hour, $time_ini->minute, $time_ini->second);
                             }
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
@@ -145,7 +183,7 @@ class ServicioController extends Controller
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
-                                'color' => $color_tecnico[0]['color'],
+                                'color' => $color_servicio,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -171,7 +209,11 @@ class ServicioController extends Controller
                             $dt_ini->addMonths($request->frecuencia);
                         }elseif($request->opcionFrecuencia == 'semanas'){
                             $nueva_fecha = $dt_ini;
-
+                            if($nueva_fecha->isSunday()){
+                                $nueva_fecha->next(Carbon::MONDAY);
+                                //Asigna la hora de inicio del servicio enviado
+                                //$nueva_fecha->setTime($time_ini->hour, $time_ini->minute, $time_ini->second);
+                            }
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
                                 'frecuencia' => $request->frecuencia,
@@ -180,7 +222,7 @@ class ServicioController extends Controller
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
-                                'color' => $color_tecnico[0]['color'],
+                                'color' => $color_servicio,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -205,6 +247,11 @@ class ServicioController extends Controller
                            $dt_ini->addWeeks($request->frecuencia);
                         }elseif($request->opcionFrecuencia == "anios"){
                             $nueva_fecha = $dt_ini;
+                            if($nueva_fecha->isSunday()){
+                                $nueva_fecha->next(Carbon::MONDAY);
+                                //Asigna la hora de inicio del servicio enviado
+                                //$nueva_fecha->setTime($time_ini->hour, $time_ini->minute, $time_ini->second);
+                            }
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
                                 'frecuencia' => $request->frecuencia,
@@ -213,7 +260,7 @@ class ServicioController extends Controller
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
-                                'color' => $color_tecnico[0]['color'],
+                                'color' => $color_servicio,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -250,7 +297,7 @@ class ServicioController extends Controller
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
-                                'color' => $color_tecnico[0]['color'],
+                                'color' => $color_servicio,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -659,5 +706,33 @@ class ServicioController extends Controller
             return response()->json(['error: ' => 'Error en la petición'], 500);
         }
 
+    }
+
+    public function listServices(Request $request)
+    {
+        if($request->ajax()){
+            $servicios = Servicio::with([
+                                        'solicitud.sede' => function($query){
+                                            $query->select('id','nombre');
+                                        },
+                                        'solicitud.cliente' => function($query){
+                                            $query->select('id','nombre_cliente');
+                                        },
+                                        'tecnicos' => function($query){
+                                          $query->select('id','nombre');  
+                                        },
+                                        'tipos' => function($query) {
+                                            $query->select('id','nombre');
+                                        },'solicitud' => function($query){
+                                            $query->select('id', 'cliente_id', 'sede_id');
+                                        }])
+                                    ->select('id', 'solicitud_id','tipo','duracion','frecuencia', DB::raw('CONCAT(fecha_inicio, " ",hora_inicio) as fecha_inicio'), DB::raw('CONCAT(fecha_fin, " ",hora_fin) as fecha_fin'))
+                                    ->where('fecha_inicio','>=', $request->dateIni)
+                                    ->where('fecha_inicio','<=', $request->dateEnd)
+                                    ->get();
+            return $servicios;
+            // return response()->json($request, 200);
+        }
+        return view('programacion.listado-servicios');
     }
 }
