@@ -17,6 +17,7 @@ class Servicio extends Model
         'fecha_fin',
         'duracion',
         'color',
+        'observaciones',
         'tecnico_id',
         'solicitud_id',
         'fecha_fin'

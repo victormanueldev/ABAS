@@ -438,7 +438,6 @@
                 <div class="modal inmodal fade" id="neutral-service" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
-                            {!! Form::open(['id' => 'form-delete']) !!}
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">
                                     <span aria-hidden="true">&times;</span>
@@ -485,13 +484,17 @@
                                         <input type="text" disabled class="form-control" id="ver_telefono_sede_3"
                                             style="width: 100%;background-color: #fff;">
                                     </div>
+                                    <div class="form-group col-xs-12 col-md-12">
+                                        <label class="control-label">Observaciones</label>
+                                        <textarea class="form-control" id="ver_observaciones_3"
+                                        rows="1" ></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                                <button id="btn-delete-servicio" type="submit" class="btn btn-primary">Eliminar</button>
+                                <button id="edit-neutral-service" class="btn btn-primary">Editar</button>
                             </div>
-                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
@@ -547,6 +550,11 @@
                                         <label class="control-label">Teléfono </label>
                                         <input type="text" disabled class="form-control" id="ver_telefono_sede_4"
                                             style="width: 100%;background-color: #fff;">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-12">
+                                        <label class="control-label">Observaciones</label>
+                                        <textarea class="form-control" id="ver_observaciones_4"
+                                        rows="1" ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1013,6 +1021,7 @@
                 var barrio_cliente;
                 var telefono_cliente;
                 var nombre_contacto;
+                var observaciones;
                 crsfToken = document.getElementsByName("_token")[0].value;
                 $("#ind-fac").removeClass('hidden')
                 $("#info-client").empty();
@@ -1098,24 +1107,24 @@
                         $(".modal-body").removeClass('sk-loading');
                         console.log('GET ver servicios Successfully');
                         if(res[0].tipo == 'Neutro'){
-                            //$("#neutral-service").click();
-                            document.getElementById("btn-modal3").click()
                             $("#ver_nombre_cliente_3").val(res[0].solicitud.cliente.nombre_cliente);
                             $("#ver_nombre_sede_3").val(nombre_sede);
                             $("#ver_direccion_sede_3").val(direccion_cliente);
                             $("#ver_barrio_sede_3").val(barrio_cliente);
                             $("#ver_contacto_sede_3").val(nombre_contacto);
                             $("#ver_telefono_sede_3").val(telefono_cliente);
+                            $("#ver_observaciones_3").val(res[0].observaciones);
+                            document.getElementById("btn-modal3").click()
                             return;
                         }
                         if(res[0].tipo == 'Mensajeria'){
-                            //$("#delivery-service").click();
                             $("#ver_nombre_cliente_4").val(res[0].solicitud.cliente.nombre_cliente);
                             $("#ver_nombre_sede_4").val(nombre_sede);
                             $("#ver_direccion_sede_4").val(direccion_cliente);
                             $("#ver_barrio_sede_4").val(barrio_cliente);
                             $("#ver_contacto_sede_4").val(nombre_contacto);
                             $("#ver_telefono_sede_4").val(telefono_cliente);
+                            $("#ver_observaciones_4").val(res[0].observaciones);
                             document.getElementById("btn-modal4").click()
                             return ;
                         }
@@ -1292,6 +1301,7 @@
             var frecuencia;
             var start_event = inicio_servicio;
             var tipoServicio = $("#select_tipo_servicio").val();
+            var observaciones = $("#text-instrucciones").val();
             frecuencia = parseInt($("#indice-frecuencia").val());
             var tecnicos = [];
             $("#select_tecnicos2").val().forEach((value, index) => {
@@ -1322,7 +1332,8 @@
                 diaOrdinal: '',
                 nombreDia: '',
                 dayOfWeek: '',
-                diaDelMes: ''
+                diaDelMes: '',
+                observaciones: observaciones
             };
             if ($("#opcion-frecuencia").val() == 'semanas') {
                 dataToSend.opcionFrecuencia = "semanas";
@@ -1921,7 +1932,7 @@
                 $("#num_minutos").attr("disabled", "disabled");
                 $("#select_servicios").attr("disabled", "disabled");
                 $("#select_tecnicos2").attr("disabled", "disabled");
-                $("#text-instrucciones").attr("disabled", "disabled");
+                //$("#text-instrucciones").attr("disabled", "disabled");
         }else{
                 $("#indice-frecuencia").prop("disabled", false);
                 $("#opcion-frecuencia").prop("disabled", false);
@@ -1931,7 +1942,7 @@
                 $("#num_minutos").prop("disabled", false);
                 $("#select_servicios").prop("disabled", false);
                 $("#select_tecnicos2").prop("disabled", false);
-                $("#text-instrucciones").prop("disabled", false);
+                //$("#text-instrucciones").prop("disabled", false);
         }
     }
 
@@ -1947,6 +1958,10 @@
                 disableInputs(0);
                 break;
         }
+    });
+
+    $("#edit-neutral-service").click(e => {
+        window.location.href = `/neutral/edit/${infoServiceSelected.id}`;
     })
 </script>
 @endsection

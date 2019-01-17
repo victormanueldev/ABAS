@@ -86,7 +86,7 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         $nueva_fecha = '';
-        try{
+        // try{
             if($request->ajax()){
                 //Convierte la fecha del request en un objeto Carbon
                 $dt_ini = Carbon::parse($request->start." ".$request->hora_inicio);   //Convierte el request en un objeto Carbon
@@ -124,12 +124,14 @@ class ServicioController extends Controller
                 }
                 $servicio->tipo = $request->tipo_servicio;
                 $servicio->color = $color_servicio;
+                $servicio->observaciones = $request->observaciones;
                 if($request->tipo_servicio == 'Neutro' || $request->tipo_servicio == 'Mensajeria'){
                     $servicio->hora_inicio = "00:00:00";
                     $servicio->save();
                     return response()->json(["Servicio Guardado con Exito"], 200);
                 }
                 $servicio->frecuencia = $request->frecuencia;
+                $servicio->frecuencia_str = $request->opcionFrecuencia;
                 $servicio->hora_inicio = $request->hora_inicio;
                 $servicio->duracion = $request->duracion;
                 $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
@@ -178,12 +180,14 @@ class ServicioController extends Controller
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
                                 'frecuencia' => $request->frecuencia,
+                                'frecuencia_str' => $request->opcionFrecuencia,
                                 'tipo' => $request->tipo_servicio,
                                 'serie' => $serie,
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
                                 'color' => $color_servicio,
+                                'observaciones' => $request->observaciones,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -217,12 +221,14 @@ class ServicioController extends Controller
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
                                 'frecuencia' => $request->frecuencia,
+                                'frecuencia_str' => $request->opcionFrecuencia,
                                 'tipo' => $request->tipo_servicio,
                                 'serie' => $serie,
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
                                 'color' => $color_servicio,
+                                'observaciones' => $request->observaciones,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -255,12 +261,14 @@ class ServicioController extends Controller
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
                                 'frecuencia' => $request->frecuencia,
+                                'frecuencia_str' => $request->opcionFrecuencia,
                                 'tipo' => $request->tipo_servicio,
                                 'serie' => $serie,
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
                                 'color' => $color_servicio,
+                                'observaciones' => $request->observaciones,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -292,12 +300,14 @@ class ServicioController extends Controller
                             //Inserta el servicio a la BD y obtiene el ID
                             $id_servicio = DB::table('servicios')->insertGetId([
                                 'frecuencia' => $request->frecuencia,
+                                'frecuencia_str' => $request->opcionFrecuencia,
                                 'tipo' => $request->tipo_servicio,
                                 'serie' => $serie,
                                 "fecha_inicio" => $nueva_fecha,
                                 'hora_inicio' => $request->hora_inicio,
                                 'duracion' => $request->duracion,
                                 'color' => $color_servicio,
+                                'observaciones' => $request->observaciones,
                                 'solicitud_id' => $request->id_solicitud,
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
@@ -338,10 +348,10 @@ class ServicioController extends Controller
             }else{
                 return response()->json("Error en la petición AJAX", 406);
             }
-        }catch(\Exception $e){
-            // return response()->json(["Error al intentar guardar el servicio", $e], 500);
-            return response()->json($e, 500);
-        }
+        // }catch(\Exception $e){
+        //     // return response()->json(["Error al intentar guardar el servicio", $e], 500);
+        //     return response()->json($e, 500);
+        // }
     }
 
     /**
@@ -398,8 +408,29 @@ class ServicioController extends Controller
         $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
         $servicio->fecha_fin = $dt_fin->toDateString();
         $servicio->hora_fin = $request->hora_fin; 
-        $servicio->frecuencia = $request->frecuencia;
         $servicio->duracion = $request->duracion;
+        //Definicion de tipo y color de servicios
+        $color_servicio = '';
+        switch ($request->tipoServicio) {
+            case 'Normal':
+                $color_tecnico = Tecnico::select('color')->where('id', $request->tecnicos[0])->get();
+                $color_servicio = $color_tecnico[0]['color'];
+                break;
+            case 'Refuerzo':
+                $color_servicio = 'rgb(143, 143, 143)';
+                break;
+            case 'Mensajeria':
+                $color_servicio = 'rgb(35,198,200)';
+                break;
+            case 'Neutro':
+                $color_servicio = 'rgb(236,71,88)';
+                break;
+            default:
+                $color_tecnico = Tecnico::select('color')->where('id', $request->tecnicos[0])->get();
+                $color_servicio = $color_tecnico[0]['color'];
+        }
+        $servicio->color = $color_servicio;
+        $servicio->tipo = $request->tipoServicio;
         $servicio->confirmado = $request->confirmado;
         //Borrar los registros actuales de las tablas pivot
         DB::table('servicio_tecnico')->where('servicio_id', $id)->delete();
@@ -734,5 +765,14 @@ class ServicioController extends Controller
             // return response()->json($request, 200);
         }
         return view('programacion.listado-servicios');
+    }
+    
+    public function editNeutralService($id)
+    {
+            $servicio =Servicio::with('solicitud.sede', 'solicitud.cliente')->where('id',$id)->get();
+            $tipos = TipoServicio::all();
+            $tecnicos = Tecnico::all();
+        return view("programacion.editar-servicio-neutro", compact('servicio','tipos','tecnicos'));
+        // return $servicio;
     }
 }

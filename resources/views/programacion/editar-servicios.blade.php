@@ -57,18 +57,14 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group col-xs-6 col-lg-6">
-                                    <label class="control-label">Frecuencia </label>
-                                    <select class="form-control" id="select_frecuencia" name="frecuencia_calidad">
-                                        <option value="">Seleccione una frecencia.</option>
-                                        <option value="7">Semanal</option>
-                                        <option value="15">Quincenal</option>
-                                        <option value="30">Mensual</option>
-                                        <option value="60">Bimestral</option>
-                                        <option value="90">Trimestral</option>
-                                        <option value="120">Cada 4 Meses</option>
-                                        <option value="180">Semestral</option>
-                                        <option value="360">Anual</option>
+                                <div class="form-group col-lg-6">
+                                    <label>Tipo de servicio: </label>
+                                    <select class="form-control" id="select_tipo_servicio">
+                                        <option value="">Seleccione una tipo.</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Refuerzo">Refuerzo</option>
+                                        <option value="Neutro">Neutro</option>
+                                        <option value="Mensajeria">Mensajeria</option>
                                     </select>
                                 </div>
 
@@ -81,7 +77,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <label >Tipo de servicio</label>
+                                    <label >Servicio a realizar</label>
                                     <select class="form-control" id="select_servicios" multiple="multiple">
                                         @foreach($tipos as $tipo)
                                             <option value="{{$tipo->id}}">{{$tipo->nombre}} </option>
@@ -238,7 +234,8 @@
                                 duracion: duracion,
                                 tecnicos: tecnicos,
                                 tipos: tipos_servicio,
-                                confirmado: confirmado
+                                confirmado: confirmado,
+                                tipoServicio: $("#select_tipo_servicio").val()
                             },
                             type: "PUT",//Método de envío
                             headers: {

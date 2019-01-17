@@ -168,3 +168,5 @@ Route::resource('temporales/novedad', 'NovedadTemporalController', [
     'except' => 'show'
 ]);
 Route::get('temporales/novedad/{idCliente}/{idSede}', 'NovedadTemporalController@show');
+
+Route::get('neutral/edit/{id}', 'ServicioController@editNeutralService');

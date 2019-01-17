@@ -21,9 +21,6 @@ Otros Ajustes
             - Novedades urgentes
 
     AREA PROGRAMACION (2 Dias)
-        - Servicios neutros sin tipo ni tecnico
-        - Cambio de tipo en Editar servicio
-        - Informe de registro de actividad por tecnico y rango de fechas.
         - Plantillas para impresion excel->html
         - Revisar Consultas y detalles de interfaz
 
