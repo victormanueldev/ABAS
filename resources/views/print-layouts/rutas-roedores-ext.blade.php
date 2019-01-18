@@ -2957,7 +2957,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
   <td colspan=4 rowspan=2 class=xl140129955>HORA</td>
   <td class=xl136829955></td>
   <td colspan=6 rowspan=4 class=xl140729955>TECNICO(S):</td>
-  <td colspan=17 rowspan=2 class=xl140429955 style="text-transform: uppercase">{{{$data["ods"][$loop->index]->tecnicos[0]->nombre}}}</td>
+  <td colspan=17 rowspan=2 class=xl140429955 style="text-transform: uppercase">{{$data["ods"][$loop->index]->tecnicos[0]->nombre}}</td>
   <td class=xl133929955></td>
   <td class=xl133929955></td>
   <td class=xl133929955></td>

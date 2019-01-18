@@ -261,6 +261,8 @@ class TecnicoController extends Controller
             'rre' => $rutasRoedoresExternas,
             'rri' => $rutasRoedoresInternas
         ]);
+        $fechaActual = Carbon::now()->toDateString();
+        $data->push(['now' => $fechaActual]);
         // return $data;
         return view('print-layouts.paquete-completo', compact('data'));
     }

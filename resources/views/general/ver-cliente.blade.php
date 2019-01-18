@@ -772,8 +772,8 @@
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Tipo de lámpara</label>
                                     <select class="form-control" id="tipo-lampara-0" style="background-color: #fff;">
-                                        <option value="Con lámina adhesiva">Con lámina adhesiva</option>
-                                        <option value="Electroconductora">Electroconductora</option>
+                                        <option value="lamina">Con lámina adhesiva</option>
+                                        <option value="electroconductora">Electroconductora</option>
                                     </select>
                                 </div>
 
