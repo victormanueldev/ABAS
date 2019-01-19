@@ -21,7 +21,6 @@ Otros Ajustes
             - Novedades urgentes
 
     AREA PROGRAMACION (2 Dias)
-        - Plantillas para impresion excel->html
         - Revisar Consultas y detalles de interfaz
 
     AREA CALIDAD (2 Dias)

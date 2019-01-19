@@ -630,10 +630,17 @@ class TecnicoController extends Controller
         }
 
         //Organiza la informacion para mayor facilidad de acceso a sus propiedades
-        $data = collect([ 
+        $data = collect([
             'ods' => $ordenesServicios,
             'ctf' => $certs
         ]);
+        //Agrega pocisiones al array de datos con index iguales a la orden de servicio
+        $index = 0;
+        foreach ($data["ods"] as $ods) {
+            $nextMonth = Carbon::parse($ods->fecha_inicio)->addMonth();
+            $data->push($nextMonth->month);
+            $index++;
+        }
         return view('print-layouts.certificados', compact('data'));
         // return $data;
     }

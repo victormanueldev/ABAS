@@ -7,7 +7,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <meta name=ProgId content=Excel.Sheet>
 <meta name=Generator content="Microsoft Excel 15">
-<link rel=File-List href="ods/filelist.xml">
 
 <style id="ODS V5 - CENDIS_22905_Styles">
    table

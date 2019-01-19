@@ -226,7 +226,7 @@
 
                                                     <td class="row">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-warning m-r-sm">CT</button>
+                                                            <button type="button" class="btn btn-warning m-r-sm" id="print-ctf">CT</button>
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
 
@@ -407,7 +407,18 @@
                             radioClass: 'iradio_square-green'
                         });
                     } else if (diffDates < 0) {   //Valida que hayan servicios realizados
-                        return;
+                        $("#lista-servicios").append(`
+                                <li class="item-list" id="${index}">
+                                    <input type="radio" value="${value.id}"  name="selected-service" class="i-checks"/>
+                                    <span class="m-l-xs"><a id="${value.id}" class="text-primary" href="#" onclick="return false;">${value.nombre}</a> ${value.direccion}</span>
+                                    <small class="label label-default pull-right">Realizado</small>
+                                </li>
+                            `);
+                        /** Inicializacion del iCheck **/
+                        $('.i-checks').iCheck({
+                            checkboxClass: 'icheckbox_square-green',
+                            radioClass: 'iradio_square-green'
+                        });
                     } else {  //Valida la diferencia de fechas en Horas
                         $("#lista-servicios").append(`
                                 <li class="item-list" id="${index}">
@@ -526,6 +537,10 @@
     //Evento Click del boton de imprimir solo rutas de lamparas
     $("#print-rl").click(event => {
         printOptions('rl')
+    })
+
+    $("#print-ctf").click(event => {
+        printOptions('ctf')
     })
 
     //Evento click del checkbox de Seleccionar todos
