@@ -5,6 +5,7 @@ namespace ABAS\Http\Controllers;
 use ABAS\TipoServicio;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class TipoServicioController extends Controller
 {
@@ -70,7 +71,7 @@ class TipoServicioController extends Controller
      * @param  \ABAS\TipoServicio  $tipoServicio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipoServicio $tipoServicio)
+    public function update(Request $request)
     {
         //
     }
@@ -102,6 +103,50 @@ class TipoServicioController extends Controller
             }
         }else{
             return response()->json(['error: ' => 'Error en la petición'], 500);
+        }
+    }
+
+    public function registerPayment(Request $request)
+    {
+        if($request->ajax()){
+            $now = Carbon::now();
+            try{
+                DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
+                                                    ->update(['estado' => 'Pagado', 'updated_at' => $now]);
+                return response()->json("Payment success", 200);
+            }catch(\Exception $e){
+                return response()->json($e, 500);
+            }
+        }
+    }
+
+    public function updateBill(Request $request)
+    {
+        if($request->ajax()){
+            try{
+                if($request->option == 'update'){
+                    DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
+                                                        ->update([
+                                                            'numero_factura' => $request->num_fac,
+                                                            'valor' => $request->total_fac,
+                                                            'estado' => 'Pendiente'
+                                                        ]);
+                    return response()->json("Update success", 200);
+                }else{
+                    DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
+                    ->update([
+                        'numero_factura' => null,
+                        'valor' => null,
+                        'estado' => 'na',
+                        'updated_at' => null
+                    ]);
+                    return response()->json("Delete success", 200);
+                }
+            }catch(\Exception $e){
+                return response()->json($e, 500);
+            }
+        }else{
+            return response()->json("Error HTTP Request", 401);
         }
     }
 }

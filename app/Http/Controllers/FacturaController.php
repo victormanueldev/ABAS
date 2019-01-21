@@ -39,6 +39,7 @@ class FacturaController extends Controller
         if($request->ajax()){
             try{
                 $factura = new Factura();
+                $factura->estado = 'Pendiente';
                 $factura->numero_factura = $request->numFac;
                 $factura->valor = $request->valFac;
                 $factura->servicio_id = $request->idServicio;

@@ -50,6 +50,7 @@ Route::resource('clientes', 'ClientesController');
 Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('clientes.updateCliente');
 // Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
 // Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
+Route::put('estado/cliente', 'ClientesController@changeBillState');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [
@@ -137,6 +138,7 @@ Route::resource('cotizaciones', 'CotizacionController');
 
 //Metas Comerciales
 Route::resource('metas/comerciales', 'MetaController');
+Route::get('inspectores/metas', 'MetaController@progressInspect');
 Route::get('metas/director', 'MetaController@progresoDirector');
 
 Route::get('clientes/servicios/test', function(){
@@ -159,6 +161,8 @@ Route::get('clientes/servicios/test', function(){
 Route::resource('facturas', 'FacturaController');
 
 Route::put('tipo/bill', 'TipoServicioController@assignBill');
+Route::put('payment/register', 'TipoServicioController@registerPayment');
+Route::put('payment/update', 'TipoServicioController@updateBill');
 
 Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
 Route::get('contabilidad/facturacion', 'ClientesController@billingControl');

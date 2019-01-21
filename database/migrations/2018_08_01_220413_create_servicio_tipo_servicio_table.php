@@ -19,7 +19,7 @@ class CreateServicioTipoServicioTable extends Migration
             $table->integer("tipo_servicio_id");
             $table->string('numero_factura')->nullable();
             $table->integer('valor')->nullable();
-            $table->string('estado')->default('Pendiente');
+            $table->string('estado')->default('na');
             $table->timestamps();
 
         });

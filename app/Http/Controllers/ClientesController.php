@@ -267,12 +267,25 @@ class ClientesController extends Controller
         $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
                                 $query->where('id',$idSede);
                             },'solicitudes.servicios' => function($query){
-                                $query->select('id', 'solicitud_id');
+                                $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str');
                             } , 'solicitudes.servicios.tipos'])
-                            ->select('id')
+                            ->select('id','nombre_cliente')
                             ->where('id', $idCliente)
                             ->get();
         return $facturas;
+    }
+
+    public function changeBillState(Request $request)
+    {
+        $user = Cliente::findOrFail($request->idCliente);
+        if($user->estado_facturacion == 'Normal'){
+            $user->estado_facturacion = 'En mora';
+            $user->save();
+        }else{
+            $user->estado_facturacion = 'Normal';
+            $user->save();
+        }
+        return response()->json($user->estado_facturacion, 200);
     }
 
 }

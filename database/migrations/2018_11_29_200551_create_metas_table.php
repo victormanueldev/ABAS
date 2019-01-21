@@ -16,6 +16,7 @@ class CreateMetasTable extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meta_clientes_nuevos');
+            $table->string('tipo_meta', 15);
             $table->integer('meta_equipo_clientes_nuevos')->default(0)->nullable();
             $table->integer('meta_recompras');
             $table->integer('meta_equipo_recompras')->default(0)->nullable();

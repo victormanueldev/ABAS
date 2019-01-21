@@ -156,18 +156,9 @@
                                     <hr>
                                     <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label>Mes de vigencia:</label> 
-                                                <select id="month-validity" class="form-control">
-                                                </select>
+                                                <label>Metas mensuales:</label> 
+                                                <input id="month-validity" type="button" class="form-control btn btn-primary" value="Editar metas"/>
                                             </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Clientes Nuevos (M):</label>
-                                                <input type="number" id="new-clients-m" class="form-control" placeholder="Ingresa el nuevo monto">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Recompras (M):</label>
-                                                <input type="number" id="repurchase-m" class="form-control" placeholder="Ingresa el nuevo monto">
-                                        </div>
                                         <div class="form-group col-md-6">
                                             <label>Meta equipo clientes nuevos (M):</label>
                                                 <input type="number" id="new-clients-team-m" class="form-control" placeholder="Ingresa el nuevo monto">
@@ -211,6 +202,9 @@
     var userSelected = {
         id: '',
         role: '',
+        name: '',
+        idRole: 0
+
     }
     var now = {
         month: 0,
@@ -244,12 +238,21 @@
     })
 
     /**
-    * Abre el modal para asignacion de metas y setea algunos valores a inputs
+    * Abre el modal para asignacion de metas y asigna algunos valores a inputs
     **/
     function assignGoal(idUser, nameUser, idRole, role) {
+        //Limpiar los inputs
+        for (let index = 0; index < 12; index++) {
+            $(`#new-clients-${index}`).val("");
+            $(`#repurchase-m-${index}`).val("");
+            $(`#btn-save-goal-${index}`).prop("disabled", false);
+        }
+
         //Set global variable
         userSelected.id = idUser;
-        userSelected.role = idRole;
+        userSelected.idRole = idRole;
+        userSelected.name = nameUser;
+        userSelected.role = role;
 
         //Valida que el rol sea Director Comercial
         if(idRole != 4){
@@ -259,7 +262,34 @@
             $("#repurchase-team-m").attr('disabled', 'disabled');
             $("#adviser-y").attr('disabled', 'disabled');
             $("#team-y").attr('disabled', 'disabled');
-            $("#btn-modal-inspect").click();
+            $.get('/metas/comerciales/create')
+            .then(res => {
+                res.forEach(value => {
+                    if(value.id == idUser && value.metas.length > 0){
+                        value.metas.forEach((meta,index) => {
+                           if(meta.anio_vigencia == moment().year()){
+                            $(`#new-clients-${meta.mes_vigencia}`).val(meta.meta_clientes_nuevos);
+                            $(`#repurchase-m-${meta.mes_vigencia}`).val(meta.meta_recompras);
+                            $(`#btn-save-goal-${meta.mes_vigencia}`).attr('disabled','disabled');
+                           }
+                        })
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            if($('#assign-goal').hasClass('in')){   //Valida si el modal esta activo
+                $('#assign-goal')
+                .modal('hide')                          //Oculta el modal abierto
+                .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
+                    $('#assign-goal-inspect').modal('show');    //Muestra el nuevo modal
+
+                    $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+                });
+            }else{
+                $("#btn-modal-inspect").click();
+            }
         }else{
             $("#name-user").val(nameUser);
             $("#role-user").val(role);
@@ -278,7 +308,7 @@
             mesVigencia:idMonthGoal,
             anioVigencia:now.year,
             idUser: userSelected.id,
-            role: userSelected.rol
+            role: userSelected.idRole
         }
 
         $.ajax({
@@ -300,6 +330,10 @@
         });
     }
 
+    $("#month-validity").click(e => {
+        assignGoal(userSelected.id, userSelected.name, 1, userSelected.role);
+    })
+
     //Guardar Meta
     $("#btn-save-goal-dir").click((event) => {
         event.preventDefault();
@@ -313,7 +347,7 @@
             metaAnualPorInspector:$("#adviser-y").val(),
             anioVigencia:now.year,
             idUser: userSelected.id,
-            role: userSelected.rol
+            role: userSelected.idRole
         }
 
         $.ajax({

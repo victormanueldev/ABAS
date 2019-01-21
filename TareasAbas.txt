@@ -31,10 +31,6 @@ Otros Ajustes
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
-        - Reporte de servicios con sus respectivas facturas.
-        - Filtro de metas por mes para inspectores y director Comercial
-        - Asignacion de metas por mes para director
-        - Registro de pagos de facturas
         - Comisiones para inspectores
         - Revisar Consultas y detalles de interfaz
 
@@ -42,7 +38,7 @@ Otros Ajustes
         - CRUD de productos
         - Reporte de entrada de productos (Compras)
         - Reporte de salida de productos (Gasto de tecnicos)
-        - Inventario General por rango de fechasy Frecuencias
+        - Inventario General por rango de fechas y Frecuencias
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
         - Revisar Consultas y detalles de interfaz
 
