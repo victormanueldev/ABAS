@@ -21,13 +21,14 @@ class NovedadesController extends Controller
     {
         $foto = Auth::user()->foto;
         $id_auth = Auth::user()->id;
+        $area_auth = Auth::user()->area_id;
         $novedades = Novedad::with('user', 'user2')->get();//Consulta todas las novedades con su respectivo usuario
         $now = Carbon::now();
         $fecha_actual = $now->toDateString();
         $data = collect();//Instancia de Coleccion
         foreach ($novedades as $novedad) {
             if ($novedad->created_at->toDateString() == $fecha_actual || $novedad->estado == 'publicada') {//Muestra solo las novedades creadas en la fecha actual
-                if (!empty($novedad->user2->nombres)) {//valida si la novedad está resuleta
+                if (!empty($novedad->user2->nombres)) {//valida si la novedad está resuelta
                     //Agrega un elemento a la lista solo si el user2 existe
                     $data->push([
                         'id' => $novedad->id, 
@@ -44,7 +45,8 @@ class NovedadesController extends Controller
                         'apellidos_user2'=> $novedad->user2->apellidos,//Datos del usuario que resolvió
                         'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
                         'fecha_resuelto' => $novedad->updated_at->toDateString(),
-                        'hora_resuelto' => $novedad->updated_at->toTimeString()
+                        'hora_resuelto' => $novedad->updated_at->toTimeString(),
+                        'prioridad' => $novedad->prioridad
                     ]);
                 } else {
                     //Agrega todas las novedades a la coleccion
@@ -62,7 +64,10 @@ class NovedadesController extends Controller
                         'apellidos_user2'=> null,
                         'foto_user2' => null,
                         'foto_auth' => $foto,
-                        'id_auth' => $id_auth
+                        'id_auth' => $id_auth,
+                        'area_auth' => $area_auth,
+                        'area_id' => $novedad->area_id,
+                        'prioridad' => $novedad->prioridad
                     ]);
                 }
             }
@@ -81,6 +86,7 @@ class NovedadesController extends Controller
     public function create()
     {
         //
+        return view('calidad.registrar-novedades');
     }
 
     /**
@@ -95,6 +101,7 @@ class NovedadesController extends Controller
         $max_id = Novedad::max('id');//Obiente el maximo ID de la tabla novedades
         $novedad->id = $max_id + 1;//Hace un incremeneto en 1
         $novedad->descripcion = $request->descripcion;
+        $novedad->prioridad = $request->prioridad;
         $novedad->user_id = Auth::user()->id;//Obtiene el ID del usuario autenticado
         $novedad->area_id = $request->area;
         $novedad->save();//Guarda los datos en la tabla novedades

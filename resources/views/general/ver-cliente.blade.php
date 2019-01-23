@@ -27,17 +27,19 @@
 <div class="wrapper wrapper-content ">
     <div class="row">
 
-        <div class="col-lg-9">
+        <div class="col-lg-{{Auth::user()->area_id == "4" ? '9' : "12"}}">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="m-b-md">
-                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"  data-toggle="modal" data-target="#modal-update-cliente">Editar cliente</button>
-                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px" data-toggle="modal" data-target="#modal-create-sede">Añadir Sede</a>
                                 <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"
-                                    data-toggle="modal" data-target="#modal-create-cotizacion">Añadir Cotización</button>
-                                <h2>{{$cliente[0]->nombre_cliente}}</h2>
+                                    data-toggle="modal" data-target="#modal-update-cliente">Editar cliente</button>
+                                <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"
+                                    data-toggle="modal" data-target="#modal-create-sede">Añadir Sede</a>
+                                    <button type="button" class="btn btn-warning btn-xs pull-right" style="margin-right: 10px"
+                                        data-toggle="modal" data-target="#modal-create-cotizacion">Añadir Cotización</button>
+                                    <h2>{{$cliente[0]->nombre_cliente}}</h2>
                             </div>
                             @if($cliente[0]->tipo_cliente == 'Persona Juridica')
                             <div class="row">
@@ -227,7 +229,8 @@
                                                 <div class="col-lg-6" style="padding: 0 30px">
                                                     <h5>Solicitud</h5>
                                                     <h1 class="no-margins">{{$solicitud->codigo}}</h1>
-                                                    {{-- <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a> --}}
+                                                    {{-- <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
+                                                    --}}
                                                     <strong>Creación: </strong><small>{{$solicitud->created_at}}</small>
                                                 </div>
                                                 @endforeach
@@ -236,60 +239,69 @@
                                         <div class="tab-pane" id="tab-3">
                                             <div class="row">
                                                 @if(isset($cliente[0]->cotizacion))
-                                                    <div class="col-lg-6" style="padding: 0 30px">
-                                                        <h5>Cotización</h5>
-                                                        <h1 class="no-margins">{{$cliente[0]->cotizacion->codigo}}</h1>
-                                                        <a class="stat-percent font-bold text-navy">Editar <i class="fa fa-edit"></i></a>
-                                                        <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
-                                                    </div>
+                                                <div class="col-lg-6" style="padding: 0 30px">
+                                                    <h5>Cotización</h5>
+                                                    <h1 class="no-margins">{{$cliente[0]->cotizacion->codigo}}</h1>
+                                                    <a href="javascript: deleteCotization({{$cliente[0]->cotizacion->id}})"
+                                                        class="stat-percent font-bold text-navy">Eliminar <i class="fa fa-edit"></i></a>
+                                                    <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
+                                                </div>
                                                 @else
-                                                    <div></div>
+                                                <div></div>
                                                 @endif
                                             </div>
                                         </div>
-                                         <div class="tab-pane" id="tab-4">
+                                        <div class="tab-pane" id="tab-4">
                                             <div class="row">
                                                 @if(isset($cliente[0]->solicitudes))
-                                                   @if($cliente[0]->solicitudes[0]->certificados->count() == 0)
-                                                        <div></div>
-                                                    @else
-                                                        <div class="col-lg-6 " style="padding: 0 30px">
-                                                            <h5>Certificado</h5>
-                                                            <dl class="dl-horizontal no-margins">
-                                                                <dt style="text-align:left;width: 30%;">Frecuencia:</dt>
-                                                                <dd style="text-align:left;margin-left:0"><span >{{$cliente[0]->solicitudes[0]->certificados[0]->frecuencia}}</span></dd>
-                                                            </dl>
-                                                            <dl class="dl-horizontal no-margins">
-                                                                <dt style="text-align:left;width: 30%;">Area Tratada:</dt>
-                                                                <dd style="text-align:left;margin-left:0"><span >{{$cliente[0]->solicitudes[0]->certificados[0]->area_tratada}}</span></dd>
-                                                            </dl>
-                                                            <dl class="dl-horizontal ">
-                                                                @foreach($cliente[0]->solicitudes[0]->certificados[0]->tratamientos as $tratamiento)
-                                                                <dt style="text-align:left;width: 30%;">Tratamiento {{$loop->index + 1 }}:</dt>
-                                                                <dd style="text-align:left;margin-left:0"><span >{{$tratamiento}} </span></dd>
-                                                                @endforeach
-                                                            </dl>
-                                                            <strong>Creación: </strong><small>{{$cliente[0]->solicitudes[0]->certificados[0]->created_at}}</small>
-                                                        </div>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        </div>
-                                         <div class="tab-pane" id="tab-5">
-                                            <div class="row">
-                                                @if(isset($cliente[0]->solicitudes))
-                                                    @if($cliente[0]->solicitudes[0]->rutas->count() != 0)
-                                                        @foreach ($cliente[0]->solicitudes[0]->rutas as $ruta)
-                                                            <div class="col-lg-6 " style="padding: 0 30px;margin-bottom: 15px;">
-                                                                <h5>{{$ruta->tipo}}</h5>
-                                                                <b >R<b style="text-transform: lowercase">{{ substr($ruta->tipo, 1)}}</b> </b>
-                                                                <h1 class="no-margins">{{$ruta->codigo}}</h1>
-                                                                <strong>Creación: </strong><small>{{$ruta->created_at}}</small>
-                                                            </div>
+                                                @if($cliente[0]->solicitudes[0]->certificados->count() == 0)
+                                                <div></div>
+                                                @else
+                                                <div class="col-lg-6 " style="padding: 0 30px">
+                                                    <h5>Certificado</h5>
+                                                    <dl class="dl-horizontal no-margins">
+                                                        <dt style="text-align:left;width: 30%;">Frecuencia:</dt>
+                                                        <dd style="text-align:left;margin-left:0"><span>{{$cliente[0]->solicitudes[0]->certificados[0]->frecuencia}}</span></dd>
+                                                    </dl>
+                                                    <dl class="dl-horizontal no-margins">
+                                                        <dt style="text-align:left;width: 30%;">Area Tratada:</dt>
+                                                        <dd style="text-align:left;margin-left:0"><span>{{$cliente[0]->solicitudes[0]->certificados[0]->area_tratada}}</span></dd>
+                                                    </dl>
+                                                    <dl class="dl-horizontal ">
+                                                        @foreach($cliente[0]->solicitudes[0]->certificados[0]->tratamientos
+                                                        as $tratamiento)
+                                                        <dt style="text-align:left;width: 30%;">Tratamiento
+                                                            {{$loop->index + 1 }}:</dt>
+                                                        <dd style="text-align:left;margin-left:0"><span>{{$tratamiento}}
+                                                            </span></dd>
                                                         @endforeach
-                                                    @else
-                                                        <div></div>
-                                                    @endif
+                                                    </dl>
+                                                    <strong>Creación: </strong><small>{{$cliente[0]->solicitudes[0]->certificados[0]->created_at}}</small>
+                                                    <a href="javascript: deleteCertificate({{$cliente[0]->solicitudes[0]->certificados[0]->id}})"
+                                                        class="stat-percent font-bold text-navy">Eliminar <i class="fa fa-edit"></i></a>
+                                                </div>
+                                                @endif
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-5">
+                                            <div class="row">
+                                                @if(isset($cliente[0]->solicitudes))
+                                                @if($cliente[0]->solicitudes[0]->rutas->count() != 0)
+                                                @foreach ($cliente[0]->solicitudes[0]->rutas as $ruta)
+                                                <div class="col-lg-6 " style="padding: 0 30px;margin-bottom: 15px;">
+                                                    <h5>{{$ruta->tipo}}</h5>
+                                                    <b>R<b style="text-transform: lowercase">{{ substr($ruta->tipo,
+                                                            1)}}</b> </b>
+                                                    <h1 class="no-margins">{{$ruta->codigo}}</h1>
+                                                    <strong>Creación: </strong><small>{{$ruta->created_at}}</small>
+                                                    <a href="javascript: deleteRoute({{$ruta->id}})" class="stat-percent font-bold text-navy">Eliminar
+                                                        <i class="fa fa-edit"></i></a>
+                                                </div>
+                                                @endforeach
+                                                @else
+                                                <div></div>
+                                                @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -309,6 +321,7 @@
             </div>
         </div>
         <div class="col-lg-3" id="documentos">
+            @if (Auth::user()->area_id == '4')
             <documentos></documentos>
 
             <div class="ibox">
@@ -325,6 +338,7 @@
                         de roedores</button>
                 </div>
             </div>
+            @endif
 
             <!--===================================================
             /* Modal Editar Cliente
@@ -332,7 +346,8 @@
             <div class="modal inmodal fade" id="modal-update-cliente" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' => 'POST', 'autocomplete' => 'on')) !!}
+                        {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' =>
+                        'POST', 'autocomplete' => 'on')) !!}
                         {{-- {!! Form::open(['route' => ['clientes.updateCliente', $cliente[0] -> id]]) !!} --}}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">
@@ -345,39 +360,45 @@
                             <div class="row">
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Nombre Cliente: </label>
-                                    <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" value="{{$cliente[0]->nombre_cliente}}">
+                                    <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente"
+                                        value="{{$cliente[0]->nombre_cliente}}">
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Tipo de Cliente: </label>
                                     <select class="form-control" id="tipo_cliente" name="tipo_cliente">
                                         @if($cliente[0]->tipo_cliente == 'Persona Natural')
-                                            <option value="Persona Natural" selected>Persona Natural</option>
-                                            <option value="Persona Juridica">Persona Juridica</option>
+                                        <option value="Persona Natural" selected>Persona Natural</option>
+                                        <option value="Persona Juridica">Persona Juridica</option>
                                         @else
-                                            <option value="Persona Natural">Persona Natural</option>
-                                            <option value="Persona Juridica" selected>Persona Juridica</option>
+                                        <option value="Persona Natural">Persona Natural</option>
+                                        <option value="Persona Juridica" selected>Persona Juridica</option>
                                         @endif
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>NIT: </label>
-                                    <input type="text" min="0" class="form-control" id="nit_cedula" name="nit_cedula" value="{{$cliente[0]->nit_cedula}}">
+                                    <input type="text" min="0" class="form-control" id="nit_cedula" name="nit_cedula"
+                                        value="{{$cliente[0]->nit_cedula}}">
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Sector Económico: </label>
-                                    <input type="text" class="form-control" id="sector_economico" name="sector_economico" value="{{$cliente[0]->sector_economico}}">
+                                    <input type="text" class="form-control" id="sector_economico" name="sector_economico"
+                                        value="{{$cliente[0]->sector_economico}}">
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Nombre Contacto: </label>
-                                    <input type="text" class="form-control" id="nombre_contacto" name="nombre_contacto" value="{{$cliente[0]->nombre_contacto}}">
+                                    <input type="text" class="form-control" id="nombre_contacto" name="nombre_contacto"
+                                        value="{{$cliente[0]->nombre_contacto}}">
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Nombre Contacto Técnico: </label>
-                                    <input type="text" class="form-control" id="contacto_tecnico" name="contacto_tecnico" value="{{$cliente[0]->contacto_tecnico}}">
+                                    <input type="text" class="form-control" id="contacto_tecnico" name="contacto_tecnico"
+                                        value="{{$cliente[0]->contacto_tecnico}}">
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Cargo Contacto: </label>
-                                    <input type="text" class="form-control" id="cargo_contacto_tecnico" name="cargo_contacto_tecnico" value="{{$cliente[0]->cargo_contacto_tecnico}}">
+                                    <input type="text" class="form-control" id="cargo_contacto_tecnico" name="cargo_contacto_tecnico"
+                                        value="{{$cliente[0]->cargo_contacto_tecnico}}">
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Municipio: </label>
@@ -434,9 +455,10 @@
                         </div>
                         <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
                             <div class="row">
-                    
+
                                 <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
-                                    <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                    <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..."
+                                        class="form-control">
                                 </div>
 
                                 <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
@@ -456,38 +478,42 @@
                                 </div>
 
                                 <div class="form-group col-lg-6"><label class="control-label">Nombre de Contacto *</label>
-                                    <input type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
+                                    <input type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente"
+                                        class="form-control">
                                 </div>
-            
+
                                 <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                    <input type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
-                                    
+                                    <input type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente"
+                                        class="form-control">
+
                                 </div>
-    
+
                                 <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
                                     <input type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control">
                                 </div>
 
                                 <div class="form-group col-lg-6"><label class="control-label">Email *</label>
                                     <input type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
-                                    
+
                                 </div>
 
                                 <div class="form-group col-lg-12">
                                     <br>
-                                    <strong>Nota: </strong>Diligencia el formulario de Sede si la empresa tiene mas sedes además de la principal, en caso contrario no llenar este modal.
+                                    <strong>Nota: </strong>Diligencia el formulario de Sede si la empresa tiene mas
+                                    sedes además de la principal, en caso contrario no llenar este modal.
                                 </div>
 
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button style="margin-bottom: 0;" type="button" id="btn-close-sedes" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                            <button style="margin-bottom: 0;" type="button" id="btn-close-sedes" class="btn btn-white"
+                                data-dismiss="modal">Cerrar</button>
                             <button type="button" id="btn-save-sedes" class="btn btn-primary">Guardar</button>
                         </div>
                         {{-- {!! Form::close() !!} --}}
                     </div>
                 </div>
-            </div>            
+            </div>
 
             <!--===================================================
             /* Modal Crear Cotizacion
@@ -1048,10 +1074,12 @@
             tratamientos[index] = $(`#tratamiento-${index}`).val();
         }
         for (let index = 0; index < contProductos; index++) {
-            productos[index] = {
-                producto: $(`#producto-${index}`).val(),
-                nombreComercial: $(`#nombre-comercial-${index}`).val(),
-                toxicidad: $(`#toxicidad-${index}`).val()
+            if ($(`#nombre-comercial-${index}`).val() != "") {
+                productos[index] = {
+                    producto: $(`#producto-${index}`).val(),
+                    nombreComercial: $(`#nombre-comercial-${index}`).val(),
+                    toxicidad: $(`#toxicidad-${index}`).val()
+                }
             }
         }
         swal({
@@ -1069,7 +1097,7 @@
             }
         })
             .then(isConfirm => {
-                if (isConfirm) {
+                if (isConfirm && $("#area-tratada").val() != "") {
                     //Petición AJAX para guardar el certificado
                     $.ajax({
                         url: '/certificados',
@@ -1105,11 +1133,55 @@
                                     }
                                 })
                         })
+                } else if (isConfirm == null) {
+                    return;
+
+                } else {
+                    swal('Información', 'Por favor, escriba el area tratada', 'info')
                 }
             })
-
-
     });
+
+    function deleteCertificate(id) {
+        let crsfToken = document.getElementsByName("_token")[0].value;
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de eliminar este certificado?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                        url: `/certificados/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        }
+                    })
+                        .then((res) => {
+                            swal("¡Eliminación Correcta!", "Certificado eliminada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    window.location.reload();
+                                })
+                        })
+                        .catch((err) => {
+                            swal("¡Error!", err.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    return
+                                })
+                        })
+                }
+            })
+    }
 
     /**
      * Petición AJAX para guardar las rutas
@@ -1231,7 +1303,7 @@
                 }
             }
         })
-        .then(isConfirm => {
+            .then(isConfirm => {
                 if (isConfirm) {
                     saveRoute('rl', clienteId, sedeId, contenidoRutaLamparas, crsfToken)
                         .then((res) => {
@@ -1241,7 +1313,7 @@
                                         $("#btn-close-rl").click();
                                     }
                                 })
-                        }) 
+                        })
                         .catch((err) => {
                             swal("¡Error!", err.statusText, "error")
                                 .then(value => { //Boton OK actualizado
@@ -1296,7 +1368,7 @@
                 }
             }
         })
-        .then(isConfirm => {
+            .then(isConfirm => {
                 if (isConfirm) {
                     saveRoute('rr', clienteId, sedeId, contenidoRutaRoedores, crsfToken)
                         .then((res) => {
@@ -1307,7 +1379,7 @@
                                     }
                                 })
                         })
-                        .catch((err) =>{
+                        .catch((err) => {
                             swal("¡Error!", err.statusText, "error")
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
@@ -1318,6 +1390,47 @@
                 }
             })
     })
+
+    function deleteRoute(id) {
+        let crsfToken = document.getElementsByName("_token")[0].value;
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de eliminar esta ruta?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                        url: `/rutas/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        }
+                    })
+                        .then((res) => {
+                            swal("¡Eliminación Correcta!", "Ruta eliminada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    window.location.reload();
+                                })
+                        })
+                        .catch((err) => {
+                            swal("¡Error!", err.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    return
+                                })
+                        })
+                }
+            })
+    }
 
     $("#btn-save-cotizacion").click(event => {
         event.preventDefault();
@@ -1377,6 +1490,47 @@
             })
     })
 
+    function deleteCotization(id) {
+        let crsfToken = document.getElementsByName("_token")[0].value;
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de eliminar esta cotización?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                        url: `/cotizaciones/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        }
+                    })
+                        .then((res) => {
+                            swal("¡Eliminación Correcta!", "Cotizacion eliminada con éxito.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    window.location.reload();
+                                })
+                        })
+                        .catch((err) => {
+                            swal("¡Error!", err.statusText, "error")
+                                .then(value => { //Boton OK actualizado
+                                    return
+                                })
+                        })
+                }
+            })
+    }
+
     $("#btn-save-sedes").click(event => {
         console.log("-------------------HOLA----------------------");
         event.preventDefault();
@@ -1390,57 +1544,57 @@
             telefono_sedes: $("#telefono_sedes").val(),
             celular_sedes: $("#celular_sedes").val(),
             email_sedes: $("#email_sedes").val(),
-            cliente_id: parseInt({{$cliente[0]->id}})
+            cliente_id: parseInt({{ $cliente[0] -> id }})
         };
-        console.log(dataSedes);
-        let crsfToken = document.getElementsByName("_token")[0].value;
+    console.log(dataSedes);
+    let crsfToken = document.getElementsByName("_token")[0].value;
 
-         swal({
-            title: "¡Advertencia!",
-            text: "¿Estás seguro de guardar esta sede?",
-            icon: "warning",
-            buttons: {
-                cancel: true,
-                confirm: {
-                    text: 'Aceptar',
-                    visible: true,
-                    value: true,
-                    closeModal: false, //Muestra el Loader
-                }
+    swal({
+        title: "¡Advertencia!",
+        text: "¿Estás seguro de guardar esta sede?",
+        icon: "warning",
+        buttons: {
+            cancel: true,
+            confirm: {
+                text: 'Aceptar',
+                visible: true,
+                value: true,
+                closeModal: false, //Muestra el Loader
             }
-        }) .then(isConfirm => {
-                if (isConfirm) {
-                    $.ajax({
-                       url: '/sedes',
-                        data: dataSedes,
-                        type: 'POST',
-                        headers: {
-                            "X-CSRF-TOKEN": crsfToken
-                        },
-                        success: (res) => {
-                            console.log(res)
-                        },
-                        error: (err) => {
-                            console.log(err);
-                        }
-                    }).then(events => {
-                            swal("¡Creación Correcta!", "Sede guardada con éxito.", "success")
-                                .then(value => { //Boton OK actualizado
-                                    if (value) {
-                                        $("#btn-close-sedes").click();
-                                    }
-                                })
-                        })
-                        .catch(error => {
-                            swal("¡Error!", "Campos Incorrectos", "error")
-                                .then(value => { //Boton OK actualizado
-                                    if (value) {
-                                        $("#btn-close-sedes").click();
-                                    }
-                                })
-                        })
+        }
+    }).then(isConfirm => {
+        if (isConfirm) {
+            $.ajax({
+                url: '/sedes',
+                data: dataSedes,
+                type: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": crsfToken
+                },
+                success: (res) => {
+                    console.log(res)
+                },
+                error: (err) => {
+                    console.log(err);
                 }
+            }).then(events => {
+                swal("¡Creación Correcta!", "Sede guardada con éxito.", "success")
+                    .then(value => { //Boton OK actualizado
+                        if (value) {
+                            $("#btn-close-sedes").click();
+                        }
+                    })
             })
+                .catch(error => {
+                    swal("¡Error!", "Campos Incorrectos", "error")
+                        .then(value => { //Boton OK actualizado
+                            if (value) {
+                                $("#btn-close-sedes").click();
+                            }
+                        })
+                })
+        }
+    })
     });
 
 </script>

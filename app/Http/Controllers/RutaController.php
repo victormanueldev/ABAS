@@ -132,8 +132,11 @@ class RutaController extends Controller
      * @param  \ABAS\Ruta  $ruta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ruta $ruta)
+    public function destroy($id)
     {
         //
+        $ruta = Ruta::findOrFail($id);
+        $ruta->delete();
+        return response()->json("Delete success", 200);
     }
 }

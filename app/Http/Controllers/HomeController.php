@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = User::with('area','eventos')->where('id',Auth::user()->id)->get();
         $dt = Carbon::now();//DateTime Actual
         $fecha_actual = $dt->toDateString();//Fecha Actual
         $tomorrow = $dt->addDay(1);//Mañana
@@ -48,7 +48,8 @@ class HomeController extends Controller
                 ]);
             }
         }
-        //dd($data_eventos);
+        // dd($data_eventos);
+        // return $user;
         return view('general.index', compact('user', 'data_eventos', 'fecha_actual'));
     }
 }

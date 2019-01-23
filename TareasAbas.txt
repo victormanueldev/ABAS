@@ -25,6 +25,7 @@ Otros Ajustes
 
     AREA CALIDAD (2 Dias)
         - Generacion de Documentos (CRUD) (Copiar lo que esta en Comercial)
+        - Cronograma de visitas.
         - Registro de novedades de clientes luego de los servicios.
         - Relacionar el cliente y la sede con la novedad.
         - Revisar Consultas y detalles de interfaz

@@ -13689,71 +13689,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 //Importacion del Loadash
 
-Object.defineProperty(Vue.prototype, '$lodash', { value: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a });
+Object.defineProperty(Vue.prototype, "$lodash", { value: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a });
 /* harmony default export */ __webpack_exports__["default"] = ({
-    //Se ejecuta cuando se carga el documento
-    mounted: function mounted() {
-        this.fetchData();
+  //Se ejecuta cuando se carga el documento
+  mounted: function mounted() {
+    this.fetchData();
+  },
+  data: function data() {
+    /**
+     * Inicializacion de datos y variables
+     */
+    return {
+      novedades: [],
+      nueva_novedad: {
+        id: "",
+        descripcion: "",
+        area: ""
+      },
+      comentario_text: []
+    };
+  },
+
+  methods: {
+    /**
+     * Método para listar todas las novedades que se reciben desde el ENDPOINT
+     * convierte la respuesta del servidor en una novedad
+     */
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get("novedades").then(function (res) {
+        _this.novedades = res.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
     },
-    data: function data() {
-        /**
-        * Inicializacion de datos y variables
-        */
-        return {
-            novedades: [],
-            nueva_novedad: {
-                id: '',
-                descripcion: '',
-                area: ''
-            },
-            comentario_text: []
-        };
-    },
 
-    methods: {
-        /**
-        * Método para listar todas las novedades que se reciben desde el ENDPOINT
-        * convierte la respuesta del servidor en una novedad
-        */
-        fetchData: function fetchData() {
-            var _this = this;
+    /**
+     * Método para resolver la novedad
+     * envia una variable al servicio para actualizar la novedad
+     **/
+    resolver: function resolver(novedad) {
+      var _this2 = this;
 
-            axios.get('novedades').then(function (res) {
-                _this.novedades = res.data;
-            }).catch(function (err) {
-                console.log(err);
-            });
-        },
-
-        /**
-        * Método para resolver la novedad
-        * envia una variable al servicio para actualizar la novedad
-        **/
-        resolver: function resolver(novedad) {
-            var _this2 = this;
-
-            var url = 'novedades/' + novedad.id;
-            axios.put(url, {
-                estado: 'resuelta',
-                comentario: this.comentario_text[novedad.id]
-            }).then(function (res) {
-                _this2.fetchData();
-            }).catch(function (err) {
-                console.log(err);
-            });
-        }
-    },
-    computed: {
-        /**
-        * Ordena las novedades de forma descendiente por fecha y por hora de creacion
-        **/
-        novedadesOrdenadas: function novedadesOrdenadas() {
-            return _.orderBy(this.novedades, ['fecha_creacion', 'hora_creacion'], ['desc', 'desc']);
-        }
+      var url = "novedades/" + novedad.id;
+      axios.put(url, {
+        estado: "resuelta",
+        comentario: this.comentario_text[novedad.id]
+      }).then(function (res) {
+        _this2.fetchData();
+      }).catch(function (err) {
+        console.log(err);
+      });
     }
+  },
+  computed: {
+    /**
+     * Ordena las novedades de forma descendiente por fecha y por hora de creacion
+     **/
+    novedadesOrdenadas: function novedadesOrdenadas() {
+      return _.orderBy(this.novedades, ["fecha_creacion", "hora_creacion"], ["desc", "desc"]);
+    }
+  }
 });
 
 /***/ }),
@@ -30901,58 +30904,14 @@ var render = function() {
     "div",
     _vm._l(_vm.novedadesOrdenadas, function(novedad) {
       return _c("div", { key: novedad.id, staticClass: "social-feed-box" }, [
-        _vm._m(0, true),
-        _vm._v(" "),
-        _c("div", { staticClass: "social-avatar" }, [
-          _c("a", { staticClass: "pull-left", attrs: { href: "#" } }, [
-            _c("img", {
-              attrs: { alt: "image", src: "/storage/" + novedad.foto_user1 }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-body" }, [
-            _c(
-              "a",
-              { staticStyle: { color: "#676a6c" }, attrs: { href: "#" } },
-              [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(novedad.nombres_user1) +
-                    " " +
-                    _vm._s(novedad.apellidos_user1) +
-                    "\n                "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("small", { staticClass: "text-muted" }, [
-              _vm._v(
-                _vm._s(novedad.hora_creacion) +
-                  " - " +
-                  _vm._s(novedad.fecha_creacion)
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "social-body" }, [
-          _c("p", [
-            _vm._v(
-              "\n                " +
-                _vm._s(novedad.descripcion) +
-                "\n            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        novedad.estado == "resuelta"
-          ? _c("div", { staticClass: "social-footer" }, [
-              _c("div", { staticClass: "social-comment" }, [
-                _c("a", { staticClass: "pull-left", attrs: { href: "" } }, [
+        novedad.area_auth == novedad.area_id || novedad.area_id == 3
+          ? _c("div", [
+              _c("div", { staticClass: "social-avatar" }, [
+                _c("a", { staticClass: "pull-left", attrs: { href: "#" } }, [
                   _c("img", {
                     attrs: {
                       alt: "image",
-                      src: "/storage/" + novedad.foto_user2
+                      src: "/storage/" + novedad.foto_user1
                     }
                   })
                 ]),
@@ -30963,134 +30922,183 @@ var render = function() {
                     { staticStyle: { color: "#676a6c" }, attrs: { href: "#" } },
                     [
                       _vm._v(
-                        "\n                        " +
-                          _vm._s(novedad.nombres_user2) +
+                        _vm._s(novedad.nombres_user1) +
                           " " +
-                          _vm._s(novedad.apellidos_user2) +
-                          "\n                    "
-                      )
+                          _vm._s(novedad.apellidos_user1) +
+                          " "
+                      ),
+                      novedad.prioridad != "Normal"
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "label label-danger",
+                              staticStyle: {
+                                float: "right",
+                                "margin-top": "2px"
+                              }
+                            },
+                            [_vm._v("Urgente")]
+                          )
+                        : _vm._e()
                     ]
                   ),
-                  _vm._v(
-                    "\n                    Ha resuelto la novedad.\n                    "
-                  ),
-                  _c("br"),
                   _vm._v(" "),
-                  _vm._m(1, true),
-                  _vm._v(" -\n                    "),
                   _c("small", { staticClass: "text-muted" }, [
                     _vm._v(
-                      _vm._s(novedad.fecha_resuelto) +
+                      _vm._s(novedad.hora_creacion) +
                         " - " +
-                        _vm._s(novedad.hora_resuelto)
+                        _vm._s(novedad.fecha_creacion)
                     )
                   ])
                 ])
-              ])
-            ])
-          : novedad.id_auth == novedad.id_user1
-            ? _c("div")
-            : _c("div", { staticClass: "social-footer" }, [
-                _c("div", { staticClass: "social-comment" }, [
-                  _c("a", { staticClass: "pull-left", attrs: { href: "" } }, [
-                    _c("img", {
-                      attrs: {
-                        alt: "image",
-                        src: "/storage/" + novedad.foto_auth
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "media-body" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.comentario_text[novedad.id],
-                            expression: "comentario_text[novedad.id]"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { placeholder: "Escribe un comentario..." },
-                        domProps: { value: _vm.comentario_text[novedad.id] },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "social-body" }, [
+                _c("p", [_vm._v(_vm._s(novedad.descripcion) + " ")])
+              ]),
+              _vm._v(" "),
+              novedad.estado == "resuelta"
+                ? _c("div", { staticClass: "social-footer" }, [
+                    _c("div", { staticClass: "social-comment" }, [
+                      _c(
+                        "a",
+                        { staticClass: "pull-left", attrs: { href: "" } },
+                        [
+                          _c("img", {
+                            attrs: {
+                              alt: "image",
+                              src: "/storage/" + novedad.foto_user2
                             }
-                            _vm.$set(
-                              _vm.comentario_text,
-                              novedad.id,
-                              $event.target.value
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "media-body" }, [
+                        _c(
+                          "a",
+                          {
+                            staticStyle: { color: "#676a6c" },
+                            attrs: { href: "#" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(novedad.nombres_user2) +
+                                " " +
+                                _vm._s(novedad.apellidos_user2)
                             )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "btn-group text-muted pull-right" },
-                      [
-                        novedad.estado == "publicada"
-                          ? _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "btn btn-outline btn-success btn-xs",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.resolver(novedad)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-check-square-o"
-                                }),
-                                _vm._v(" Resolver")
-                              ]
-                            )
-                          : _c(
-                              "a",
-                              { staticClass: "btn btn-default btn-xs " },
-                              [
-                                _c("i", { staticClass: "fa fa-check" }),
-                                _vm._v(" Resuelto")
-                              ]
-                            )
-                      ]
-                    )
+                          ]
+                        ),
+                        _vm._v(
+                          "\n            Ha resuelto la novedad.\n            "
+                        ),
+                        _c("br"),
+                        _vm._v(" "),
+                        _vm._m(0, true),
+                        _vm._v(" -\n            "),
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v(
+                            _vm._s(novedad.fecha_resuelto) +
+                              " - " +
+                              _vm._s(novedad.hora_resuelto)
+                          )
+                        ])
+                      ])
+                    ])
                   ])
-                ])
-              ])
+                : novedad.id_auth == novedad.id_user1
+                  ? _c("div")
+                  : _c("div", { staticClass: "social-footer" }, [
+                      _c("div", { staticClass: "social-comment" }, [
+                        _c(
+                          "a",
+                          { staticClass: "pull-left", attrs: { href: "" } },
+                          [
+                            _c("img", {
+                              attrs: {
+                                alt: "image",
+                                src: "/storage/" + novedad.foto_auth
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.comentario_text[novedad.id],
+                                  expression: "comentario_text[novedad.id]"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                placeholder: "Escribe un comentario..."
+                              },
+                              domProps: {
+                                value: _vm.comentario_text[novedad.id]
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.comentario_text,
+                                    novedad.id,
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "btn-group text-muted pull-right" },
+                            [
+                              novedad.estado == "publicada"
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline btn-success btn-xs",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.resolver(novedad)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-check-square-o"
+                                      }),
+                                      _vm._v(" Resolver\n              ")
+                                    ]
+                                  )
+                                : _c(
+                                    "a",
+                                    { staticClass: "btn btn-default btn-xs" },
+                                    [
+                                      _c("i", { staticClass: "fa fa-check" }),
+                                      _vm._v(" Resuelto\n              ")
+                                    ]
+                                  )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
+            ])
+          : _vm._e()
       ])
     })
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pull-right social-action dropdown" }, [
-      _c(
-        "button",
-        {
-          staticClass: "dropdown-toggle btn-white",
-          attrs: { "data-toggle": "dropdown" }
-        },
-        [_c("i", { staticClass: "fa fa-angle-down" })]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "dropdown-menu m-t-xs" }, [
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ocultar")])])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -31102,7 +31110,10 @@ var staticRenderFns = [
         staticStyle: { color: "#676a6c" },
         attrs: { href: "#" }
       },
-      [_c("i", { staticClass: "fa fa-check" }), _vm._v(" Resuelto!")]
+      [
+        _c("i", { staticClass: "fa fa-check" }),
+        _vm._v(" Resuelto!\n            ")
+      ]
     )
   }
 ]
