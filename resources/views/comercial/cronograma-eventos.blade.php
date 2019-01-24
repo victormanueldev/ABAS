@@ -189,10 +189,6 @@
                             text: "Visita",
                             value: "Visita",
                         },
-                        follow: {
-                            text: "Control",
-                            value: "Seguimiento",
-                        },
                     },
                 })
                 //Evento de click en un boton

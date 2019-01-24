@@ -8578,3 +8578,9 @@ body.md-skin {
     margin: 0;
   }
 }
+
+
+/*=============CUSTOMER STYLE=============*/
+.swal-footer {
+  text-align: center !important; 
+}

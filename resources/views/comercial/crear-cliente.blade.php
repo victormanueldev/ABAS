@@ -46,7 +46,7 @@
                                         
                                         <div role="tabpanel" class="tab-pane active" id="prospecto">
 
-                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
+                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'off')) !!}
                                             {{Form::token()}}
 
                                             <div class="row">
@@ -57,23 +57,23 @@
                                                         <div class="col-lg-3">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Natural*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="Persona Natural" style="align-content: center;">
+                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;">
                                                             </label>
                                                         </div>
                                                         
                                                         <div class="form-group col-lg-3">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Juridica*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="Persona Juridica" style="text-align: center;">
+                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA JURIDICA" style="text-align: center;">
                                                             </label>
                                                         </div>
                                                         
                                                     </div>
                     
-                                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label><input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control"></div>
+                                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label><input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control" required></div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                                        <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control">
+                                                        <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control" required>
                                                         
                                                     </div>
                         
@@ -88,7 +88,7 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control">
+                                                        <input type="text" name="direccion" placeholder="Dirección del contacto o cliente" class="form-control" required>
                                                         
                                                     </div>
 
@@ -100,12 +100,15 @@
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
                                                         <select class="form-control" name="medio_contacto">
-                                                            <option value="amigo">Un amigo</option>
-                                                            <option value="internet">Internet</option>
-                                                            <option value="contacto_asesor">Contacto Asesor Directamente</option>
-                                                            <option value="llamada_telefonica">Llamada Telefónica</option>
-                                                            <option value="directorio">Directorio Telefónico</option>
-                                                            <option value="directorio">Otro</option>
+                                                            <option value="AMIGO">Un amigo</option>
+                                                            <option value="REFERIDO">Referido</option>
+                                                            <option value="INTERNET">Internet</option>
+                                                            <option value="CONTACTO_ASESOR">Contacto Asesor Directamente</option>
+                                                            <option value="LLAMADA_TELEFONICA">Llamada Telefónica</option>
+                                                            <option value="DIRECTORIO">Directorio Telefónico</option>
+                                                            <option value="PUBLICIDAD">Publicidad en Vehículo</option>
+                                                            <option value="REDES_SOCIALES">Redes Sociales</option>
+                                                            <option value="OTRO">Otro</option>
                                                         </select>
                                                     </div>
 
@@ -120,7 +123,7 @@
                                                         <label class="control-label">Teléfono *</label>
                                                         
                                                         <div class="input-group">
-                                                            <span class="input-group-btn">
+                                                            <span class="input-group-btn" required>
                                                                 <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
@@ -209,9 +212,9 @@
                                                     <div class="form-group col-lg-12">
                                                         <label>Tipo</label>
                                                         <select class="form-control" name="tipo_evento">
-                                                            <option value="Llamada">LLamada</option>
-                                                            <option value="Visita">Cotización</option>
-                                                            <option value="Seguimiento">Visita</option>
+                                                            <option value="LLAMADA">LLamada</option>
+                                                            <option value="VISITA">Cotización</option>
+                                                            <option value="SEGUIMIENTO">Visita</option>
                                                         </select>
                                                     </div>
                                     
@@ -243,7 +246,6 @@
 
                                             <div class="ibox-footer">
                                                 <button type="submit" id="createSedes" class="btn btn-w-m btn-primary">Guardar</button>
-                                                {{-- <button type="button" id="createSedes" class="btn btn-w-m btn-warning">prueba</button> --}}
                                                 <button type="button" class="btn btn-w-m btn-default">Cancelar</button>
                                             </div>
 
@@ -252,67 +254,76 @@
 
                                         <div role="tabpanel" class="tab-pane" id="cliente">
 
-                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'on')) !!}
+                                            {!! Form::open(array('route'=> ['clientes.store'], 'method'=>'POST', 'autocomplete'=>'off')) !!}
                                             {{Form::token()}}
 
                                             <div class="row">
                                                 <div class="col-lg-12">
 
-                                                    <div class="radio">
+                                                    <div class="radio" required>
                                                         
                                                         <div class="col-lg-3">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Natural*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="Persona Natural" style="align-content: center;">
+                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;">
                                                             </label>
                                                         </div>
                                                         
                                                         <div class="form-group col-lg-3">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Juridica*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="Persona Juridica" style="text-align: center;">
+                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA JURIDICA" style="text-align: center;">
                                                             </label>
                                                         </div>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
-                                                        <input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control">
+                                                        <input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control" required>
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                                        <input type="text" name="nit_cedula" placeholder="Nit o Cedula" class="form-control">
-                                                        
+                                                    <div class="form-group col-lg-5">
+                                                    <label class="control-label">Nit/Cedula *</label>
+                                                        <input type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group col-lg-1">
+                                                    <label class="control-label" style="visibility: hidden;">D</label>
+                                                        <input type="text" name="nit_number" id="nit_number" class="form-control" required>
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Sector Economico *</label>
-                                                        <input type="text" name="sector_economico" placeholder="Sector Economico de la empresa" class="form-control">
+                                                     <div class="form-group col-lg-6"><label class="control-label">Sector Economico *</label>
+                                                        <select class="form-control">
+                                                            <option value="RESIDENCIAL">Residencial</option>
+                                                            <option value="COMERCIAL">Comercial</option>
+                                                            <option value="SERVICIO">Servicio</option>
+                                                            <option value="INDUSTRIAL">Industrial</option>
+                                                        </select>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Municipio *</label>
-                                                        <input type="text" name="municipio" placeholder="Municipio" class="form-control">
+                                                        <input type="text" name="municipio" placeholder="Municipio" class="form-control" required>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control">
+                                                        <input type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control" required>
                                                         
                                                     </div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input type="text" name="barrio" placeholder="Barrio" class="form-control">
+                                                        <input type="text" name="barrio" placeholder="Barrio" class="form-control" required>
 
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                                        <input type="text" name="zona" placeholder="Barrio" class="form-control">
+                                                        <input type="text" name="zona" placeholder="Zona" class="form-control">
 
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                                        <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control">
+                                                        <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control" required>
                                                         
                                                     </div>
 
@@ -360,12 +371,15 @@
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
                                                         <select class="form-control" name="medio_contacto">
-                                                            <option value="amigo">Un amigo</option>
-                                                            <option value="internet">Internet</option>
-                                                            <option value="contacto_asesor">Contacto Asesor Directamente</option>
-                                                            <option value="llamada_telefonica">Llamada Telefónica</option>
-                                                            <option value="directorio">Directorio Telefónico</option>
-                                                            <option value="directorio">Otro</option>
+                                                            <option value="AMIGO">Un amigo</option>
+                                                            <option value="DIRECTORIO">Referido</option>
+                                                            <option value="INTERNET">Internet</option>
+                                                            <option value="CONTACTO_ASESOR">Contacto Asesor Directamente</option>
+                                                            <option value="LLAMADA_TELEFONICA">Llamada Telefónica</option>
+                                                            <option value="DIRECTORIO">Directorio Telefónico</option>
+                                                            <option value="PUBLICIDAD">Publicidad en Vehículo</option>
+                                                            <option value="REDES_SOCIALES">Redes Sociales</option>
+                                                            <option value="OTRO">Otro</option>
                                                         </select>
                                                     </div>
 
@@ -381,7 +395,7 @@
                                                             <span class="input-group-btn">
                                                                 <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
                                                         </div>                                                        
                                                     </div>
 
@@ -455,9 +469,9 @@
                                                     <div class="form-group col-lg-12">
                                                         <label>Tipo</label>
                                                         <select class="form-control" name="tipo_evento">
-                                                                <option value="Llamada">LLamada</option>
-                                                                <option value="Visita">Cotización</option>
-                                                                <option value="Seguimiento">Visita</option>
+                                                                <option value="LLAMADA">LLamada</option>
+                                                                <option value="VISITA">Cotización</option>
+                                                                <option value="SEGUIMIENTO">Visita</option>
                                                         </select>
                                                     </div>
                                     
@@ -489,13 +503,12 @@
 
                                             <div class="ibox-footer">
                                                 <button type="submit" id="createSedes" class="btn btn-w-m btn-primary">Guardar</button>
-                                                <button type="button" id="createSedes" class="btn btn-w-m btn-warning">prueba</button>
                                                 <button type="button" class="btn btn-w-m btn-default">Cancelar</button>
                                             </div>   
 
                                             {{Form::close()}}                               
+                                                <button type="submit" id="clientes" class="btn btn-w-m btn-primary">Pruebas</button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -537,19 +550,24 @@
         $("#columna_principal3").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont3 }*</label><input type="text" name="telefono[${cont3 -1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
     });
 
+    $("#clientes").click(event => {
+        var nit = $("#nit_number").val();
+        console.log(nit);
+    });
+
     $("#createSedes").click(event => {
-        let dataSedes = {
-            nombre_sedes: $("#nombre_sedes").val(),
-            direccion_sedes: $("#direccion_sedes").val(),
-            ciudad_sedes: $("#ciudad_sedes").val(),
-            barrio_sedes: $("#barrio_sedes").val(),
-            ruta_sedes: $("#ruta_sedes").val(),
-            nombre_contacto: $("#nombre_contacto").val(),
-            telefono_sedes: $("#telefono_sedes").val(),
-            celular_sedes: $("#celular_sedes").val(),
-            email_sedes: $("#email_sedes").val(),
-        };
-        console.log(dataSedes);
+        // let dataSedes = {
+        //     nombre_sedes: $("#nombre_sedes").val().strtoupper(),
+        //     direccion_sedes: $("#direccion_sedes").val().strtoupper(),
+        //     ciudad_sedes: $("#ciudad_sedes").val().strtoupper(),
+        //     barrio_sedes: $("#barrio_sedes").val().strtoupper(),
+        //     ruta_sedes: $("#ruta_sedes").val().strtoupper(),
+        //     nombre_contacto: $("#nombre_contacto").val().strtoupper(),
+        //     telefono_sedes: $("#telefono_sedes").val().strtoupper(),
+        //     celular_sedes: $("#celular_sedes").val().strtoupper(),
+        //     email_sedes: $("#email_sedes").val().strtoupper(),
+        // };
+        console.log('Si funciona');
         let crsfToken = document.getElementsByName("_token")[0].value;
         $.ajax({
             url: '/sedes',

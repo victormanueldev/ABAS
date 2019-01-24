@@ -154,7 +154,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control" id="select_sedes" name="id_sede" required>
+                                        <select class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -269,27 +269,27 @@
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 1</label>
-                                        <input type="text" name="visita_1" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="number" min="0" max="24" step=".5" name="visita_1" id="visita_1" placeholder="Ej: 1,77" class="form-control visita" value=0>
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 2</label>
-                                        <input type="text" name="visita_2" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="number" min="0" max="24" step=".5" name="visita_2" id="visita_2" placeholder="Ej: 1,77" class="form-control visita" value=0>
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 3</label>
-                                        <input type="text" name="visita_3" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="number" min="0" max="24" step=".5" name="visita_3" id="visita_3" placeholder="Ej: 1,77" class="form-control visita" value=0>
                                     </div>
 
                                     <div class="form-group col-lg-2">
                                         <label class="control-label">Visita 4</label>
-                                        <input type="text" name="visita_4" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="number" min="0" max="24" step=".5" name="visita_4" id="visita_4" placeholder="Ej: 1,77" class="form-control visita" value=0>
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Total Horas</label>
-                                        <input type="text" name="total_horas_visita" placeholder="Ej: 1,77" class="form-control">
+                                        <input type="text" name="total_horas_visita" id="total_horas_visita" disable="true" class="form-control" value=0>
                                     </div>
 
                                     <div class="form-group col-lg-4">
@@ -487,8 +487,7 @@
 
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
-                                                <button type="submit" class="btn btn-primary" id="btn-submit">Imprimir</button>
-                                                {{-- <button type="submit" class="btn btn-w-m btn-danger">Exportar a PDF</button> --}}
+                                                <button type="submit" class="btn btn-primary" id="btn-submit">Guardar</button>
                                                 <a href="\home"><button type="button" class="btn btn-default" style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
                                         </div>
                                     </div>
@@ -510,20 +509,23 @@
     <script>
 
         //Validación de campo fecha
-        function validacion(){
-        //         var c_fecha = document.getElementById('fecha'), 
-        //             boton = document.getElementById('btn');
-        // }
+        // function validacion(){
 
-            var valor = document.getElementById("fecha").value;
+            $(document).ready(function() {
+                var date = moment().format("YYYY-MM-DD");
+                $('#fecha_creacion').val(date);
+            });
 
-                if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
+
+            // var valor = document.getElementById("fecha").value;
+
+            //     if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
                     
-                    alert('¡Campo Fecha Vacio!');
-                    return false;
-            }
+            //         alert('¡Campo Fecha Vacio!');
+            //         return false;
+            // }
             
-        }
+        // }
 
         //Inicializador del Select AUTOCOMPLETAR
         $('.chosen-select').chosen({width: "100%"});
@@ -554,10 +556,45 @@
             //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
             $.get(`/sedes/cliente/${event.target.value}`,  function (res) {
                 $("#select_sedes").empty();//Limipia el select
-                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                $("#input-sede-direccion").val('');
+                $("#input-sede-direccion").val('');
+                $("#input-sede-ciudad").val('');
+                $("#input-sede-barrio").val('');
+                $("#input-sede-zona").val('');
+                $("#input-sede-contacto").val('');
+                $("#input-sede-telefono").val('');
+                $("#input-sede-celular").val('');
+                $("#input-sede-email").val('');
+                console.log(res);                
                 if(res == ''){//Valida que el cliente tenga sedes
-                    console.log('entra');
+                    $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
+                    $("#select_sedes").prop('required',false);
+
+                    $("#select_sedes").prop('disabled',true);
+                    $("#input-sede-nit").prop('disabled',true);
+                    $("#input-sede-direccion").prop('disabled',true);
+                    $("#input-sede-ciudad").prop('disabled', true);
+                    $("#input-sede-barrio").prop('disabled', true);
+                    $("#input-sede-zona").prop('disabled', true);
+                    $("#input-sede-contacto").prop('disabled', true);
+                    $("#input-sede-telefono").prop('disabled', true);
+                    $("#input-sede-celular").prop('disabled', true);
+                    $("#input-sede-email").prop('disabled', true);
                 }else{
+                    $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                    $("#select_sedes").prop('required',true);
+
+                    $("#select_sedes").prop('disabled',false);
+                    $("#input-sede-nit").prop('disabled',false);
+                    $("#input-sede-direccion").prop('disabled',false);
+                    $("#input-sede-ciudad").prop('disabled', false);
+                    $("#input-sede-barrio").prop('disabled', false);
+                    $("#input-sede-zona").prop('disabled', false);
+                    $("#input-sede-contacto").prop('disabled', false);
+                    $("#input-sede-telefono").prop('disabled', false);
+                    $("#input-sede-celular").prop('disabled', false);
+                    $("#input-sede-email").prop('disabled', false);
+
                     //Recorre la respuesta del servidor
                     res.forEach(element => {
                         //Añade Options al select de sedes dependiendo de la respues del servidor
@@ -601,6 +638,17 @@
                 return "FS"+randomCode.toString();
             }
         }
+
+        $('.visita').change(event => {
+            var v1 = parseFloat(jQuery("#visita_1").val());
+            var v2 = parseFloat(jQuery("#visita_2").val());
+            var v3 = parseFloat(jQuery("#visita_3").val());
+            var v4 = parseFloat(jQuery("#visita_4").val());
+            
+            var suma = v1+v2+v3+v4;
+
+            $('#total_horas_visita').val(suma);
+        });
         
         //Realiza la peticion POST al servidor (AJAX)
         function guardarSolicitud(codigo, fecha, frecuencia, id_cliente, id_sede, observaciones, crsfToken) {
