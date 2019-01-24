@@ -17,6 +17,7 @@ class Servicio extends Model
         'fecha_fin',
         'duracion',
         'color',
+        'observaciones',
         'tecnico_id',
         'solicitud_id',
         'fecha_fin'
@@ -51,7 +52,7 @@ class Servicio extends Model
      */
     public function tipos()
     {
-        return $this->belongsToMany(TipoServicio::class);
+        return $this->belongsToMany(TipoServicio::class)->withPivot('id_servicio_tipo','numero_factura','valor','estado')->withTimestamps();
     }
 
     /**

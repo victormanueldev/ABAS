@@ -39,7 +39,7 @@
 
 <body class="md-skin" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <nav class="navbar-default  navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
@@ -82,7 +82,7 @@
                                 
                                 <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Solicitud de Programación</span></a></li>
                                 
-                                <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li>
+                                {{-- <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li> --}}
                             </ul>
                         </li>
                     @elseif(Auth::user()->area_id == '2')
@@ -97,6 +97,12 @@
                         <li id="m-asignar-metas">
                             <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
                         </li>
+                        <li id="m-listado-clientes">
+                            <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
+                        </li>
+                        <li id="m-control-facturacion">
+                                <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                            </li>
 
                     @elseif(Auth::user()->area_id == '3')
 
@@ -105,7 +111,12 @@
                         </li>
 
                         <li id="m-calendario-tecnicos">
-                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar"></i> <span class="nav-label">Horarios</span></a>
+                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios de técnicos</span></a>
+                        </li>
+
+
+                        <li id="m-listado-servicios">
+                            <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de servicios</span></a>
                         </li>
                         
                     @else
@@ -129,7 +140,7 @@
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="row border-bottom">
-                    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
                         <div class="navbar-header">
                             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" style="background-color: #5CAE27;border-color: #5CAE27;"><i class="fa fa-bars"></i> </a>
                             {{--  <form role="search" class="navbar-form-custom" action="search_results.html">

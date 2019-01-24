@@ -22,15 +22,15 @@
         <div class="col-md-6">
 
             <div class="profile-image">
-                <img src="{{ Storage::url($user->foto)}}" class="img-circle circle-border m-b-md" alt="profile">
+                <img src="{{ Storage::url($user[0]->foto)}}" class="img-circle circle-border m-b-md" alt="profile">
             </div>
             <div class="profile-info">
                 <div class="">
                     <div>
                         <h2 class="no-margins">
-                            {{ $user->nombres}} {{ $user->apellidos}}
+                            {{ $user[0]->nombres}} {{ $user[0]->apellidos}}
                         </h2>
-                        <h4>{{ $user->cargo->descripcion}}</h4>
+                        <h4>{{ $user[0]->cargo->descripcion}}</h4>
                         <small>
                             Esta es la página principal, en donde podrás acceder a todas las funcionalidades de ABAS, ver tu actividad reciente
                             y la de tus compañeros de trabajo.
@@ -42,7 +42,7 @@
 
         <div class="col-md-3">
              <small>Área de desempeño</small>
-            <h2 class="no-margins">{{$user->area->descripcion}}</h2>
+            <h2 class="no-margins">{{$user[0]->area->descripcion}}</h2>
             {{-- <div id="sparkline1"></div>  --}}
             <img alt="image" class="img-lg-logo img-responsive" src="{{ asset('img/logo-2.png')}}" />
         </div>
@@ -85,21 +85,28 @@
                         </div> --}}
                         <div class="social-avatar">
                             <a href="" class="pull-left">
-                                <img alt="image" src="{{ Storage::url($user->foto)}}">
+                                <img alt="image" src="{{ Storage::url($user[0]->foto)}}">
                             </a>
                             <div class="media-body">
                                 <a href="#" style="color: #676a6c;">
-                                   {{ $user->nombres}} {{$user->apellidos}}
+                                   {{ $user[0]->nombres}} {{$user[0]->apellidos}}
                                 </a>
                             
                                 <small class="text-muted">
                                     <i class="fa fa-globe"></i> Visibilidad: 
                                     <select name="area" required>
-                                            <option value="1" selected>{{$user->area->descripcion}}</option>
+                                            <option value="{{$user[0]->area->id}}" selected>{{$user[0]->area->descripcion}}</option>
                                             <option value="2"> Area Contabilidad</option>
                                             <option value="3"> Pública</option>
                                     </select>
                                 </small>
+                                <small class="text-muted">
+                                        <select name="prioridad" required>
+                                                <option value="Normal" selected>Prioridad</option>
+                                                <option value="Normal"> Normal</option>
+                                                <option value="Urgente"> Urgente</option>
+                                        </select>
+                                    </small>
                             
                             </div>
                         

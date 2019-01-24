@@ -86,8 +86,8 @@ class User extends Authenticatable
     /**
      * Relacion Usuario-Meta
      */
-    public function meta()
+    public function metas()
     {
-        return $this->hasOne(Meta::class);
+        return $this->hasMany(Meta::class);
     }
 }

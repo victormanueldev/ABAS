@@ -27,12 +27,6 @@ const novedad = new Vue({
     el: '#novedad'
 });
 
-Vue.component('ver-clientes', require('./components/ver-clientes.vue'));
-
-const clientes = new Vue({
-    el: '#clientes'
-});
-
 Vue.component('notificaciones', require('./components/notificaciones.vue'));
 
 const notificacion = new Vue({
@@ -43,4 +37,10 @@ Vue.component('documentos', require('./components/documentos-cliente.vue'));
 
 const documentos = new Vue({
     el: '#documentos'
+});
+
+Vue.component('novedades-temporales', require('./components/novedades-temporales.vue'));
+
+const temporales = new Vue({
+    el: '#temporales'
 });

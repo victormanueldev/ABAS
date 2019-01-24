@@ -160,7 +160,7 @@ class ClientesController extends Controller
     public function show($id)
     {
 
-        $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user', 'cotizacion')->where('id', $id)->get();
+        $cliente = Cliente::with('sedes', 'solicitudes', 'telefonos', 'user', 'cotizacion', 'solicitudes.certificados', 'solicitudes.rutas')->where('id', $id)->get();
         return view('general.ver-cliente', compact('cliente'));
         // return $cliente;
 
@@ -251,6 +251,46 @@ class ClientesController extends Controller
         $cliente->save();
 
         return Redirect::to('home');
+    }
+
+    public function indexContablilidad(Request $request)
+    {
+        if($request->ajax()){
+            $clientes = Cliente::with('user','sedes')->get();
+            return $clientes;
+        }
+        return view('contabilidad.index-clientes');
+    }
+
+    public function billingControl(Request $request)
+    {
+        return view('contabilidad.control-facturacion');
+    }
+
+    public function clientBills(Request $request, $idCliente, $idSede)
+    {
+        $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
+                                $query->where('id',$idSede);
+                            },'solicitudes.servicios' => function($query){
+                                $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str');
+                            } , 'solicitudes.servicios.tipos'])
+                            ->select('id','nombre_cliente')
+                            ->where('id', $idCliente)
+                            ->get();
+        return $facturas;
+    }
+
+    public function changeBillState(Request $request)
+    {
+        $user = Cliente::findOrFail($request->idCliente);
+        if($user->estado_facturacion == 'Normal'){
+            $user->estado_facturacion = 'En mora';
+            $user->save();
+        }else{
+            $user->estado_facturacion = 'Normal';
+            $user->save();
+        }
+        return response()->json($user->estado_facturacion, 200);
     }
 
 }

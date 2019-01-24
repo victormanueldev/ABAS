@@ -1,62 +1,52 @@
-Clientes:
-- Vista de Editar cliente (registro de multiples sedes, seguimiento por sedes- visitas e inspecciones)
-- Ver cliente (Vista completa)
-
 Otros Ajustes
-    AREA COMERCIAL
+    AREA COMERCIAL (1 Dia)
         - Crear Cliente 
-            - Organizar HTML de telefono
             - Validar campos obligatorios
             - Razon social
-        - Mostrar novedades segun el area del empleado
-        - Horas de Observaciones en formato 24Hrs (ClockPicker crear cliente)
-        - Verificar JS de seleccion de vista (li="active")
-        - Reporte de cierres y ventas realizadas con respecto a la meta
-        - Estado del cliente (cerrado, prospecto)
-        - Crear cliente una sola interfaz
-        - Crear y editar la cotización (valor estado:final, inicial y relacion por ID de cliente)
-        - Interfaz de ver prospectos (tabla con buscador y boton de editar cliente)
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
-        
+
         - Editar Cliente
-            - Modal de Añadir sede
-            - Modal de Editar datos de cliente
-            - Guardar Documentos en la BD (Boolean)
-            - Guardar la cotizacion (codigo y valor)
-            - Observaciones fijas para clientes (ej: Llevar 2 tecnicos a prestar el servicio)  
-        - Calendario
-            - Verificar horario de trabajo
-            - Editar Evento dando Click
+            - Editar Sede - Eliminar
+            - Editar solicitud
+            - 
+
         - Solicitudes
-            - Generar Codigo aleatorio con JS
             - Sumar horas de visitas (reactivo)
             - Revisar HTML
             - Cargo: (formato, asesor y numero consecutivo)
-            - Seleccion de sedes NO obligatiorias
+            - Seleccion de sedes NO obligatiorias o sede unica (personas naturales)
+            - Guardar en DB
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
             - Novedades urgentes
-        NOTA: Revisar anotaciones cuaderno
-    AREA PROGRAMACION
-        - Opcion de bloquear/desbloquear servicio directamente desde ver info del servicio
-        - Validacion del cliente en mora  antes de crear servicios
-        - Check list de notificaciones tenporales por clientes.
-        - Asignar numero de factura y valor del servicio seleccionado en el calendario (ver servicio)
-        - Informe de registro de actividad por tecnico y rango de fechas.
 
-    AREA CALIDAD
-        - Generacion de Documentos (CRUD)
+    AREA PROGRAMACION (2 Dias)
+        - Revisar Consultas y detalles de interfaz
+
+    AREA CALIDAD (2 Dias)
+        - Generacion de Documentos (CRUD) (Copiar lo que esta en Comercial)
+        - Cronograma de visitas.
         - Registro de novedades de clientes luego de los servicios.
         - Relacionar el cliente y la sede con la novedad.
-        - 
-    AREA DE CONTABILIDAD
-        - Listado de todos los clientes y prospectos (Estado del cliente)
-        - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
-        - Reporte de servicios con sus respectivas facturas.
+        - Revisar Consultas y detalles de interfaz
 
-    AREA DE INVENTARIOS
+    AREA DE CONTABILIDAD (4 Dias)
+        - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
+        - Comisiones para inspectores
+        - Revisar Consultas y detalles de interfaz
+
+    AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos
         - Reporte de entrada de productos (Compras)
         - Reporte de salida de productos (Gasto de tecnicos)
-        - Inventario General por rango de fechasy Frecuencias
+        - Inventario General por rango de fechas y Frecuencias
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
+        - Revisar Consultas y detalles de interfaz
+
+    SESIONES VIP (2 Dias)
+        - Visualizar informacion
+
+
+BUGS
+- Ver clientes, count() del array
+- Mostrar telefonos

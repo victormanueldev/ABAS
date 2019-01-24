@@ -261,6 +261,8 @@ class TecnicoController extends Controller
             'rre' => $rutasRoedoresExternas,
             'rri' => $rutasRoedoresInternas
         ]);
+        $fechaActual = Carbon::now()->toDateString();
+        $data->push(['now' => $fechaActual]);
         // return $data;
         return view('print-layouts.paquete-completo', compact('data'));
     }
@@ -270,7 +272,7 @@ class TecnicoController extends Controller
         //Valida que la opcion de impresion sea todos los servicios
         if($idServicio == 'all'){
             //Obtiene la informacion necesaria para crear ordenes de servicio
-            $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
+            $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos','solicitud.cliente.user','solicitud.cliente.telefonos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
@@ -281,7 +283,7 @@ class TecnicoController extends Controller
         //Valida que la opcion de imprimir sea de un servicio en especifico
         }else{
             //Obtiene la informacion de un servicio especifico
-            $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
+            $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos','solicitud.cliente.user','solicitud.cliente.telefonos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
                                         ->where('id', $idServicio)
@@ -292,6 +294,8 @@ class TecnicoController extends Controller
         $data = collect([
             'ods' => $ordenesServicios
         ]);
+        $fechaActual = Carbon::now()->toDateString();
+        $data->push(['now' => $fechaActual]);
         // return $data;
         return view('print-layouts.ordenes-servicios', compact('data'));
     }
@@ -626,10 +630,17 @@ class TecnicoController extends Controller
         }
 
         //Organiza la informacion para mayor facilidad de acceso a sus propiedades
-        $data = collect([ 
+        $data = collect([
             'ods' => $ordenesServicios,
             'ctf' => $certs
         ]);
+        //Agrega pocisiones al array de datos con index iguales a la orden de servicio
+        $index = 0;
+        foreach ($data["ods"] as $ods) {
+            $nextMonth = Carbon::parse($ods->fecha_inicio)->addMonth();
+            $data->push($nextMonth->month);
+            $index++;
+        }
         return view('print-layouts.certificados', compact('data'));
         // return $data;
     }

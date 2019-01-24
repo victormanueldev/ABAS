@@ -18,37 +18,6 @@ class MetaController extends Controller
     public function index(Request $request)
     {
         //
-        $data = collect( DB::table('users')
-                            ->join('clientes', 'users.id', 'clientes.user_id')
-                            ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
-                            ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
-                            ->join('facturas', 'servicios.id', 'facturas.servicio_id')
-                            ->join('cargos', 'users.cargo_id', 'cargos.id')
-                            ->join('areas', 'users.area_id', 'areas.id')
-                            ->select('cargos.descripcion', 'users.nombres' , DB::raw('SUM(facturas.valor) as total'), 'users.id', 'users.foto', 'users.apellidos')
-                            ->where('areas.id', '1')
-                            ->where('users.cargo_id', '1')
-                            ->where('servicios.fecha_inicio', '>=', '2018-12-01')
-                            ->where('servicios.fecha_inicio', '<=', '2019-31-12')
-                            ->groupBy('users.id')
-                            ->get());
-        $clientesNuevos = DB::table('users')
-                            ->join('clientes', 'users.id', 'clientes.user_id')
-                            ->join('cotizaciones', 'clientes.id', 'cotizaciones.cliente_id')
-                            ->select('users.id', DB::raw('SUM(cotizaciones.valor) as total'))
-                            ->where('users.cargo_id', '1')
-                            ->groupBy('users.id')
-                            ->get();
-        $metasUsers = DB::table('users')
-                            ->join('metas', 'users.id', 'metas.user_id')
-                            ->select('users.id', 'metas.*')
-                            ->where('users.cargo_id', '1')
-                            ->get();
-        $data->put('cotizaciones', $clientesNuevos);
-        $data->put('metas',  $metasUsers);
-        if($request->ajax()){
-            return $data;
-        }
         return view('contabilidad.progreso-inspectores-comerciales');
     }
 
@@ -57,14 +26,20 @@ class MetaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        $users = User::with('cargo:id,descripcion')
+        $users = User::with('cargo:id,descripcion','metas')
                         ->select('id','cedula', 'nombres', 'apellidos', 'area_id', 'cargo_id')
                         ->where('area_id', '1')
+                        ->orWhere('cargo_id', '4')
                         ->get();
-        return view("contabilidad.asignacion-metas", compact('users'));
+        if($request->ajax()){
+            return $users;
+        }else{
+            return view("contabilidad.asignacion-metas", compact('users'));
+        }
+
     }
 
     /**
@@ -82,6 +57,7 @@ class MetaController extends Controller
             try{
                 $meta = new Meta();
                 if($request->role == 1){
+                    $meta->tipo_meta = 'inspector';
                     $meta->meta_clientes_nuevos = $request->clientesNuevos;
                     $meta->meta_recompras = $request->recompras;
                     $meta->mes_vigencia = $request->mesVigencia;
@@ -89,9 +65,10 @@ class MetaController extends Controller
                     $meta->user_id = $request->idUser; 
                     $meta->save();
                 }else{
-                    $meta->meta_clientes_nuevos = $request->clientesNuevos; 
-                    $meta->meta_recompras = $request->recompras; 
-                    $meta->mes_vigencia = $request->mesVigencia; 
+                    $meta->tipo_meta = 'director';
+                    $meta->meta_clientes_nuevos = 0; 
+                    $meta->meta_recompras = 0; 
+                    $meta->mes_vigencia = 0; 
                     $meta->meta_equipo_clientes_nuevos = $request->metaEquipoClentesNuevos; 
                     $meta->meta_equipo_recompras = $request->metaEquipoRecompras; 
                     $meta->meta_anual_equipo = $request->metaAnualEquipo; 
@@ -161,12 +138,13 @@ class MetaController extends Controller
                         ->join('clientes', 'users.id', 'clientes.user_id')
                         ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
                         ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
-                        ->join('facturas', 'servicios.id', 'facturas.servicio_id')
+                        //->join('facturas', 'servicios.id', 'facturas.servicio_id')
+                        ->join('servicio_tipo_servicio', 'servicios.id', 'servicio_tipo_servicio.servicio_id')
                         ->join('areas', 'users.area_id', 'areas.id')
-                        ->select('facturas.valor as total_facturas', 'users.id as user_id', 'users.cargo_id as cargo', 'servicios.fecha_inicio')
-                        //->where('areas.id', '1')
-                        //->where('servicios.fecha_inicio', '>=', '2018-12-01')
-                        //->where('servicios.fecha_inicio', '<=', '2019-31-12')
+                        ->select('servicio_tipo_servicio.valor as total_facturas', 'users.id as user_id', 'users.cargo_id as cargo', 'servicios.fecha_inicio')
+                        // ->where('areas.id', '1')
+                        ->where('servicios.fecha_inicio', '>=', '2018-12-01')
+                        ->where('servicios.fecha_inicio', '<=', '2019-31-12')
                         ->where('users.area_id', '1')
                         //->groupBy('users.id')
                         ->get();
@@ -183,13 +161,59 @@ class MetaController extends Controller
                 ->join('metas', 'users.id', 'metas.user_id')
                 ->select('users.id', 'metas.*', 'users.nombres','users.apellidos', 'users.foto')
                 ->where('users.cargo_id', '4')
+                ->where('metas.tipo_meta' ,'director')
                 ->get();
+        $inspectores = DB::table('users')->select('id', 'nombres', 'apellidos', 'area_id', 'cargo_id')
+                                        ->where('users.area_id', '1')
+                                        ->where('users.cargo_id', '1')
+                                        ->get();
         $data->put('recompras', $totalRecompras);
+        $data->put('cotizaciones', $clientesNuevos);
+        $data->put('metas',  $metasUsers);
+        $data->put('users', $inspectores);
+        if($request->ajax()){
+        return $data;
+        }
+        return view('contabilidad.progreso-director-comercial');
+        // return $data;
+    }
+
+    public function progressInspect(Request $request)
+    {
+        $data = collect( DB::table('users')
+                ->join('clientes', 'users.id', 'clientes.user_id')
+                ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
+                ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
+                ->join('servicio_tipo_servicio', 'servicios.id', 'servicio_tipo_servicio.servicio_id')
+                ->join('cargos', 'users.cargo_id', 'cargos.id')
+                ->join('areas', 'users.area_id', 'areas.id')
+                ->select('cargos.descripcion', 'users.nombres' , DB::raw('SUM(servicio_tipo_servicio.valor) as total'), 'users.id', 'users.foto', 'users.apellidos', 'users.area_id')
+                // ->select('users.*')
+                ->where('users.area_id', '1')
+                ->orwhere('users.cargo_id', '1')
+                ->orWhere('users.cargo_id', '4')
+                ->where('servicios.fecha_inicio', '>=', $request->dateIni)
+                ->where('servicios.fecha_inicio', '<=', $request->dateEnd)
+                ->groupBy('users.id','cargos.descripcion','users.nombres','users.id','users.foto','users.apellidos')
+                ->get());
+        $clientesNuevos = DB::table('users')
+                ->join('clientes', 'users.id', 'clientes.user_id')
+                ->join('cotizaciones', 'clientes.id', 'cotizaciones.cliente_id')
+                ->select('users.id', DB::raw('SUM(cotizaciones.valor) as total'))
+                // ->where('users.cargo_id', '1')
+                ->groupBy('users.id')
+                ->get();
+        $metasUsers = DB::table('users')
+                ->join('metas', 'users.id', 'metas.user_id')
+                ->select('users.id', 'metas.*')
+                // ->where('users.cargo_id', '1')
+                ->where('metas.mes_vigencia', $request->monthValidity)
+                ->where('metas.tipo_meta', 'inspector')
+                ->get();
         $data->put('cotizaciones', $clientesNuevos);
         $data->put('metas',  $metasUsers);
         if($request->ajax()){
         return $data;
         }
-        return view('contabilidad.progreso-director-comercial');
     }
 }

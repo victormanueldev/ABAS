@@ -96,8 +96,11 @@ class CotizacionController extends Controller
      * @param  \ABAS\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cotizacion $cotizacion)
+    public function destroy($id)
     {
         //
+        $cotizacion = Cotizacion::findOrFail($id);
+        $cotizacion->delete();
+        return response()->json($id, 200);
     }
 }

@@ -50,6 +50,7 @@ Route::resource('clientes', 'ClientesController');
 Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('clientes.updateCliente');
 // Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
 // Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
+Route::put('estado/cliente', 'ClientesController@changeBillState');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [
@@ -69,9 +70,12 @@ Route::post('solicitud/show', 'SolicitudesController@show');
 
 //Servicios
 Route::resource('servicios', 'ServicioController', [
-    'except' => 'updateFrecuency'
+    'except' => 'updateFrecuency',
+    'except' => 'updateState'
 ]);
 Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
+Route::put('servicios/edit/state', 'ServicioController@updateState');
+Route::get('list/services','ServicioController@listServices');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -134,6 +138,7 @@ Route::resource('cotizaciones', 'CotizacionController');
 
 //Metas Comerciales
 Route::resource('metas/comerciales', 'MetaController');
+Route::get('inspectores/metas', 'MetaController@progressInspect');
 Route::get('metas/director', 'MetaController@progresoDirector');
 
 Route::get('clientes/servicios/test', function(){
@@ -154,3 +159,18 @@ Route::get('clientes/servicios/test', function(){
 });
 
 Route::resource('facturas', 'FacturaController');
+
+Route::put('tipo/bill', 'TipoServicioController@assignBill');
+Route::put('payment/register', 'TipoServicioController@registerPayment');
+Route::put('payment/update', 'TipoServicioController@updateBill');
+
+Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
+Route::get('contabilidad/facturacion', 'ClientesController@billingControl');
+Route::get('facturacion/cliente/{id}/{sede}', 'ClientesController@clientBills');
+
+Route::resource('temporales/novedad', 'NovedadTemporalController', [
+    'except' => 'show'
+]);
+Route::get('temporales/novedad/{idCliente}/{idSede}', 'NovedadTemporalController@show');
+
+Route::get('neutral/edit/{id}', 'ServicioController@editNeutralService');

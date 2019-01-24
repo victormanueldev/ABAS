@@ -105,5 +105,8 @@ class CertificadoController extends Controller
     public function destroy($id)
     {
         //
+        $certificado = Certificado::findOrFail($id);
+        $certificado->delete();
+        return response()->json("Delete success", 200);
     }
 }

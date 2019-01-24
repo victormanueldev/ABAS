@@ -14,7 +14,10 @@ class Novedad extends Model
         'estado',
         'user2_id',
         'user_id',
-        'area_id'
+        'area_id',
+        'cliente_id',
+        'sede_id',
+        'prioridad'
     ];
 
     protected $guarded = [];
@@ -46,5 +49,15 @@ class Novedad extends Model
     public function areas()
     {
         return $this->belongsToMany(Area::class);
+    }
+
+    public function cliente()
+    {
+        return $this->hasOne(Cliente::class);
+    }
+
+    public function sede()
+    {
+        return $this->hasOne(Sede::class);
     }
 }

@@ -21,6 +21,24 @@
     <div class="row animated fadeInDown " id="content-director">
 
     </div>
+    <div class="row animated fadeInDown">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="ibox">
+                <div class="ibox-content text-center">
+                    <h2>Inspectores<br>
+                        <small class="m-t-sm small">Progreso Individual</small>
+                    </h2>
+                    <div class="text-center">
+                        <div class="m-t-md font-bold">Meta Anual</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="row"  id="content-dir-inspect">
+            </div>
+        </div>
+    </div>
     @endsection
     @section('ini-scripts')
     <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
@@ -60,23 +78,35 @@
                             fecha_inicio: moment(value.fecha_inicio, "YYYY-MM-DD"),
                             total_facturas: value.total_facturas
                         }
-                        if (value.cargo == 4) {
-                            res.metas.forEach((val, index2) => {
-                                if (value.user_id == val.user_id) {
-                                    directorInfo.goalNewClients = val.meta_clientes_nuevos;
-                                    directorInfo.goalRepurchases = val.meta_recompras;
-                                    directorInfo.goalTeamNewClients = val.meta_equipo_clientes_nuevos;
-                                    directorInfo.goalTeamRepurchases = val.meta_equipo_recompras;
-                                    directorInfo.goalYearlyTeam = val.meta_anual_equipo;
-                                    directorInfo.goalYearlyInspect = val.meta_anual_inpector;
-                                    directorInfo.name = val.nombres;
-                                    directorInfo.lastName = val.apellidos;
-                                    directorInfo.avatar = val.foto;
+                        // if (value.cargo == 4) {
+                        //     res.metas.forEach((val, index2) => {
+                        //         if (value.user_id == val.user_id) {
+                        //             directorInfo.goalNewClients = val.meta_clientes_nuevos;
+                        //             directorInfo.goalRepurchases = val.meta_recompras;
+                        //             directorInfo.goalTeamNewClients = val.meta_equipo_clientes_nuevos;
+                        //             directorInfo.goalTeamRepurchases = val.meta_equipo_recompras;
+                        //             directorInfo.goalYearlyTeam = val.meta_anual_equipo;
+                        //             directorInfo.goalYearlyInspect = val.meta_anual_inpector;
+                        //             directorInfo.name = val.nombres;
+                        //             directorInfo.lastName = val.apellidos;
+                        //             directorInfo.avatar = val.foto;
 
-                                }
-                            })
-                        }
+                        //         }
+                        //     })
+                        // }
                     });
+
+                    res.metas.forEach((val, index2) => {
+                            directorInfo.goalNewClients = val.meta_clientes_nuevos;
+                            directorInfo.goalRepurchases = val.meta_recompras;
+                            directorInfo.goalTeamNewClients = val.meta_equipo_clientes_nuevos;
+                            directorInfo.goalTeamRepurchases = val.meta_equipo_recompras;
+                            directorInfo.goalYearlyTeam = val.meta_anual_equipo;
+                            directorInfo.goalYearlyInspect = val.meta_anual_inpector;
+                            directorInfo.name = val.nombres;
+                            directorInfo.lastName = val.apellidos;
+                            directorInfo.avatar = val.foto;
+                    })
 
                     res.cotizaciones.forEach((value, index) => {
                         cotizations[index] = {
@@ -95,18 +125,19 @@
                     let sumTeamNewClients = 0;
                     let sumYearlyTeam = 0;
                     let sumYearlyInspect = 0;
+                    let inspects = [];
 
                     repurchases.forEach((value, index) => {
-                        if (value.cargo == 4) {
-                            res.cotizaciones.forEach((elemt, ind) => {
-                                if (value.user_id == elemt.user_id) {
-                                    cotizationsDirector[ind] = elemt.total;
-                                    // directorInfo.personalNewClients = suma+=elemt.total;
+                        // if (value.cargo == 4) {
+                        //     res.cotizaciones.forEach((elemt, ind) => {
+                        //         if (value.user_id == elemt.user_id) {
+                        //             cotizationsDirector[ind] = elemt.total;
+                        //             // directorInfo.personalNewClients = suma+=elemt.total;
 
-                                }
-                            });
-                            repurchasesDirector[index] = value.total_facturas;
-                        }
+                        //         }
+                        //     });
+                        //     repurchasesDirector[index] = value.total_facturas;
+                        // }
                         if (value.fecha_inicio.month() == now.month()) {
                             sumTeamRepurchases += value.total_facturas
                         }
@@ -126,7 +157,8 @@
                     })
 
                     cotizations.forEach((value, index) => {
-                        if (value.created_at.year() == now.year()) {
+                        // console.log(value.created_at.year())
+                        if (value.created_at.year() +1 == now.year()) {
                             sumTeamNewClients += value.total_cotization;
                             sumYearlyTeam += value.total_cotization;
                         }
@@ -144,8 +176,7 @@
                                         <small class="m-t-sm small">${directorInfo.lastName}</small>
                                     </h2>
                                     <div class="text-center">
-                                        <img alt="image" style="margin: 24px auto 24px;" class="img-circle m-t-xs img-responsive"
-                                            src="{{asset('img/${directorInfo.avatar}')}}">
+                                        <img alt="image" style="margin: 24px auto 24px;" class="img-circle m-t-xs img-responsive" src="{{asset('img/${directorInfo.avatar}')}}">
                                         <div class="m-t-xs font-bold">${directorInfo.role}</div>
                                     </div>
                                 </div>
@@ -153,98 +184,102 @@
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="ibox">
                                         <div class="ibox-content">
-                                            <h5>Clientes Nuevos</h5>
-                                            <h2>${((directorInfo.personalNewClients/directorInfo.goalNewClients)*100).toFixed(0)}% <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.personalNewClients}</small></h2>
-                                            
-                                            <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.personalNewClients/directorInfo.goalNewClients)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
-                                            </div>
-
-                                            <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalNewClients}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="ibox">
-                                        <div class="ibox-content">
-                                            <h5>Clientes Nuevos Equipo</h5>
-                                            <h2>${((directorInfo.teamNewClientsMonthly/directorInfo.goalTeamNewClients)*100).toFixed(0)}%
-                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.teamNewClientsMonthly}</small>
+                                            <h5>Clientes Nuevos Equipo (M)</h5>
+                                            <h2>${((directorInfo.teamNewClientsMonthly / directorInfo.goalTeamNewClients) * 100).toFixed(0)}%
+                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $
+                                                    ${directorInfo.teamNewClientsMonthly}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.teamNewClientsMonthly/directorInfo.goalTeamNewClients)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.teamNewClientsMonthly / directorInfo.goalTeamNewClients) * 100).toFixed(0)}%;"
+                                                    class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalTeamNewClients}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="ibox">
                                         <div class="ibox-content">
-                                            <h5>Total Equipo Anual</h5>
-                                            <h2>${((directorInfo.yearlyByTeam/directorInfo.goalYearlyTeam)*100).toFixed(0)}%
-                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.yearlyByTeam}</small>
+                                            <h5>Recompras Equipo (M)</h5>
+                                            <h2>${((directorInfo.teamRepurcahsesMonthly / directorInfo.goalTeamRepurchases) * 100).toFixed(0)}%
+                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $
+                                                    ${directorInfo.teamRepurcahsesMonthly}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.yearlyByTeam/directorInfo.goalYearlyTeam)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
-                                            </div>
-
-                                            <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalYearlyTeam}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="ibox">
-                                        <div class="ibox-content">
-                                            <h5>Recompras</h5>
-                                            <h2>${((directorInfo.personalRepurchases/directorInfo.goalRepurchases)*100).toFixed(0)}%
-                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.personalRepurchases}</small>
-                                            </h2>
-                                            <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.personalRepurchases/directorInfo.goalRepurchases)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
-                                            </div>
-
-                                            <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalRepurchases}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="ibox">
-                                        <div class="ibox-content">
-                                            <h5>Recompras Equipo</h5>
-                                            <h2>${((directorInfo.teamRepurcahsesMonthly/directorInfo.goalTeamRepurchases)*100).toFixed(0)}%
-                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.teamRepurcahsesMonthly}</small>
-                                            </h2>
-                                            <div class="progress progress-mini">
-                                                <div style="width: ${((directorInfo.teamRepurcahsesMonthly/directorInfo.goalTeamRepurchases)*100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.teamRepurcahsesMonthly / directorInfo.goalTeamRepurchases) * 100).toFixed(0)}%;"
+                                                    class="progress-bar progress-bar-primary"></div>
                                             </div>
 
                                             <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalTeamRepurchases}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-12">
                                     <div class="ibox">
                                         <div class="ibox-content">
-                                            <h5>Total Inspector</h5>
-                                            <h2>14%
-                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ 3200000</small>
+                                            <h5>Total Equipo Anual</h5>
+                                            <h2>${((directorInfo.yearlyByTeam / directorInfo.goalYearlyTeam) * 100).toFixed(0)}%
+                                                <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${directorInfo.yearlyByTeam}</small>
                                             </h2>
                                             <div class="progress progress-mini">
-                                                <div style="width: 38%;" class="progress-bar progress-bar-primary"></div>
+                                                <div style="width: ${((directorInfo.yearlyByTeam / directorInfo.goalYearlyTeam) * 100).toFixed(0)}%;"
+                                                    class="progress-bar progress-bar-primary"></div>
                                             </div>
 
-                                            <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalYearlyInspect}</div>
+                                            <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalYearlyTeam}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     `)
+
+                    let sumAuxNewClients, sumAuxRepurchases;
+
+                    res.users.forEach((user, indexUser) => {
+                        sumAuxNewClients = 0;
+                        sumAuxRepurchases = 0;
+                        repurchases.forEach((repurchase, indexRep) => {
+                            if(user.id == repurchase.user_id){
+                                inspects[indexUser] = {
+                                    sumRepurchases: sumAuxRepurchases += repurchase.total_facturas,
+                                    name: user.nombres
+                                }
+                            }
+                        })
+
+                        cotizations.forEach((cotization, indexCotization) => {
+                            if(user.id == cotization.user_id){
+                                inspects[indexUser].sumNewClients = sumAuxNewClients += cotization.total_cotization
+                                
+                            }
+                        })
+
+                        inspects[indexUser].sumInspect = inspects[indexUser].sumRepurchases + inspects[indexUser].sumNewClients
+
+                        $("#content-dir-inspect").append(`                            
+                            <div class="col-lg-6">
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <h5>Total por inspector ${inspects[indexUser].name}</h5>
+                                        <h2>${((inspects[indexUser].sumInspect / directorInfo.goalYearlyInspect) * 100).toFixed(0)}%
+                                            <small style="float: right;margin-top: 10px;font-size: 11px;">Progreso: $ ${inspects[indexUser].sumInspect}</small>
+                                        </h2>
+                                        <div class="progress progress-mini">
+                                            <div style="width: ${((inspects[indexUser].sumInspect / directorInfo.goalYearlyInspect) * 100).toFixed(0)}%;" class="progress-bar progress-bar-primary"></div>
+                                        </div>
+
+                                        <div class="m-t-sm small">Meta Total: $ ${directorInfo.goalYearlyInspect}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    }) 
+                    
                     // console.log(cotizations)
 
                 })
