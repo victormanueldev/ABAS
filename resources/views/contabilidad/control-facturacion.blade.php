@@ -422,7 +422,7 @@
             $("#btn-edit-client").click(e => {
                 swal({
                     title: '¡Advertencia!',
-                    text: "¿Que acción desea realizar con esta factura?",
+                    text: "¿Esta seguro que desea cambiar el estado del cliente?",
                     icon: "info",
                     buttons: {
                         cancel: true,

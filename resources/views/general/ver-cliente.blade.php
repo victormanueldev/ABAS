@@ -52,7 +52,11 @@
                                 <div class="col-md-6">
                                     <dl class="dl-horizontal">
                                         <dt>Estado del Cliente:</dt>
-                                        <dd><span class="label label-danger">Prospecto</span></dd>
+                                        @if($cliente[0]->estado_negociacion == 'Prospecto')
+                                            <dd><span class="label label-danger">Prospecto</span></dd>
+                                        @else($cliente[0]->estado_negociacion == 'Cliente')
+                                            <dd><span class="label label-success">Cliente</span></dd>
+                                        @endif
                                     </dl>
                                 </div>
                             </div>
@@ -207,10 +211,11 @@
                                                                     </div>
                                                                 </div>
 
-                                                                {{-- <div class="m-t-sm">
-                                                                    <a href="#" class="text-muted"><i class="fa fa-edit"></i>
-                                                                        Editar información</a>
-                                                                </div> --}}
+                                                                <div class="m-t-sm">
+                                                                    <a href="#" id="btn-save-sedes" class="text-muted">
+                                                                        <i class="fa fa-edit"></i>Editar información</a>
+
+                                                                </div>
                                                             </td>
                                                             <td>
 
@@ -375,11 +380,37 @@
                                         @endif
                                     </select>
                                 </div>
+
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Estado de Cliente: </label>
+                                    <select class="form-control" id="estado_negociacion" name="estado_negociacion">
+                                        @if($cliente[0]->estado_negociacion == 'Prospecto')
+                                            <option value="Prospecto" selected>Prospecto</option>
+                                            <option value="Cliente">Cliente</option>
+                                        @else
+                                            <option value="Prospecto">Prospecto</option>
+                                            <option value="Cliente" selected>Cliente</option>
+                                        @endif
+                                    </select>
+                                </div>
+
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>NIT: </label>
                                     <input type="text" min="0" class="form-control" id="nit_cedula" name="nit_cedula"
                                         value="{{$cliente[0]->nit_cedula}}">
                                 </div>
+
+                                <div class="form-group col-sm-12 col-md-6">
+                                    <label>Sector Economico *</label>
+                                    <select class="form-control">
+                                        <option value="Residencial">Residencial</option>
+                                        <option value="Comercial">Comercial</option>
+                                        <option value="Servicio">Servicio</option>
+                                        <option value="Industrial">Industrial</option>
+                                    </select>
+                                    
+                                </div>
+
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Sector Económico: </label>
                                     <input type="text" class="form-control" id="sector_economico" name="sector_economico"
@@ -424,10 +455,6 @@
                                     <label>Celular: </label>
                                     <input type="text" class="form-control" id="celular" name="celular" value="{{$cliente[0]->celular}}">
                                 </div>
-                                {{-- <div class="form-group col-sm-12 col-md-6">
-                                    <label>Telefonos: </label>
-                                    <input type="text" class="form-control" id="telefonos-cliente">
-                                </div> --}}
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -445,7 +472,6 @@
             <div class="modal inmodal fade" id="modal-create-sede" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        {{-- {!! Form::open(['id' =>'form-sede']) !!} --}}
                         <div class="modal-header">
                             <button id="btn-close-cotization" type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
@@ -455,7 +481,6 @@
                         </div>
                         <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
                             <div class="row">
-
                                 <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
                                     <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..."
                                         class="form-control">
@@ -510,7 +535,6 @@
                                 data-dismiss="modal">Cerrar</button>
                             <button type="button" id="btn-save-sedes" class="btn btn-primary">Guardar</button>
                         </div>
-                        {{-- {!! Form::close() !!} --}}
                     </div>
                 </div>
             </div>

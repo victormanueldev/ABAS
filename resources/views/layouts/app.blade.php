@@ -122,10 +122,14 @@
                     @elseif(Auth::user()->area_id == '4')
 
                     <li id="m-clientes">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i> <span class="nav-label">Clientes </span></a>
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i> <span class="nav-label">Clientes </span></a>
                         <ul class="nav nav-second-level collapse" id="ml2-clientes">
                             <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver Clientes</a></li>
                         </ul>
+                    </li>
+
+                    <li id="m-cronograma">
+                        <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
                     </li>
                     @else
 

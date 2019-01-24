@@ -20,8 +20,7 @@ class ClientesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        
+    {            
         // $clientes = Cliente::all();
         // $data = collect();
         // foreach ($clientes as $cliente) {
@@ -92,6 +91,11 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate(request(), [
+            'nombre_cliente' => 'required'
+        ]);
+
         //Cliente
         $cliente = new Cliente();
 
@@ -101,6 +105,7 @@ class ClientesController extends Controller
         }
         $cliente->nit_cedula = $request->get('nit_cedula');
         $cliente->nombre_cliente = $request->get('nombre_cliente');
+        $cliente->nit_cedula = $request->get('nit_cedula');
         $cliente->sector_economico = $request->get('sector_economico');
         $cliente->municipio = $request->get('municipio');
         $cliente->direccion = $request->get('direccion');
@@ -233,6 +238,7 @@ class ClientesController extends Controller
         $cliente = Cliente::findOrFail($id);
         
         $cliente->tipo_cliente = $request->get('tipo_cliente');
+        $cliente->estado_negociacion = $request->get('estado_negociacion');
         $cliente->nit_cedula = $request->get('nit_cedula');
         $cliente->nombre_cliente = $request->get('nombre_cliente');
         $cliente->sector_economico = $request->get('sector_economico');

@@ -5,6 +5,9 @@ namespace ABAS\Http\Controllers;
 use Illuminate\Http\Request;
 use ABAS\Evento;
 use Auth;
+use Carbon\Carbon;
+use ABAS\Cliente;
+use ABAS\Sede;
 
 class EventosController extends Controller
 {
@@ -18,13 +21,24 @@ class EventosController extends Controller
         $eventos = Auth::user()->eventos;//Consulta todas las eventos de la BD
         $data = collect();//Crea una coleccion
         foreach ($eventos as $evento) {
+            $cliente = "";
+            $sede = "";
+            if(isset($evento->cliente_id)){
+                $cliente = Cliente::select('id', 'nombre_cliente')->where('id', $evento->cliente_id)->get();
+                if(isset($evento->sede_id)){
+                    $sede = Sede::select('id', 'nombre')->where('id', $evento->sede_id)->get();
+                }
+            }
             //Agrega todos los elementos a la coleccion
             $data->push([
                 'id' => $evento->id, 
-                'title' => $evento->asunto, 
-                'start' => $evento->fecha_inicio, 
+                'title' => $evento->tipo, 
+                'start' => $evento->fecha_inicio,
+                'end' =>$evento->fecha_fin, 
                 'backgroundColor' => $evento->color, 
-                'borderColor' => $evento->color
+                'borderColor' => $evento->color,
+                'cliente' => $cliente != "" ? $cliente[0]->nombre_cliente : "No definido",
+                'sede' => $sede != "" ? $sede[0]->nombre : "No definido"
                 ]);
         }
         $data->toJson();//Convierte la colecciona a formato JSON
@@ -54,13 +68,38 @@ class EventosController extends Controller
             if($request->ajax()){
                 $evento = new Evento();
                 $evento->asunto = $request->title;
+                $fecha_fin = Carbon::parse($request->start." ".$request->hora)->addHour();
                 $evento->fecha_inicio = $request->start." ".$request->hora;
+                $evento->fecha_fin = $fecha_fin->toDateTimeString();
                 $evento->dia_completo = $request->allDay;
                 $evento->tipo = $request->tipo;
-                if ($request->tipo == 'Llamada') {
-                    $evento->color = "rgb(219, 165, 37)";
-                }elseif($request->tipo == 'Seguimiento'){
-                    $evento->color = "rgb(69, 130, 29)";
+                $evento->cliente_id = $request->idCliente;
+                $evento->sede_id = $request->idSede;
+
+                switch ($request->tipo) {
+                    case 'Llamada':
+                        $evento->color = "rgb(219, 165, 37)";
+                        break;
+
+                    case 'Visita':
+                        $evento->color = 'rgb(69, 130, 29)';
+                        break;
+
+                    case 'Actualizacion':
+                        $evento->color = 'rgb(35,198,200)';
+                        break;
+                    
+                    case 'Capacitacion':
+                        $evento->color = 'rgb(255,130,0)';
+                        break;
+
+                    case 'Diagnostico':
+                        $evento->color = 'rgb(2,112,192)';
+                        break;
+
+                    default:
+                        $evento->color = 'rgb(143, 143, 143)';
+                        break;
                 }
                 $evento->user_id = Auth::user()->id;
                 $evento->save();
