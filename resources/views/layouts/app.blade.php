@@ -118,7 +118,15 @@
                         <li id="m-listado-servicios">
                             <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de servicios</span></a>
                         </li>
-                        
+
+                    @elseif(Auth::user()->area_id == '4')
+
+                    <li id="m-clientes">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i> <span class="nav-label">Clientes </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-clientes">
+                            <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver Clientes</a></li>
+                        </ul>
+                    </li>
                     @else
 
                         <li id="m-inicio" >

@@ -32,7 +32,7 @@ class NotificaUsuariosNovedadPublicada
      */
     public function handle(NovedadCreada $event)
     {
-        if($event->novedad->area_id != 3){
+        if($event->novedad->area_id != 0){
             $users = User::where('area_id', $event->novedad->area_id)
                         ->where('id','!=', Auth::user()->id)->get();
         }else{

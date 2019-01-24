@@ -96,6 +96,9 @@ class ClientesController extends Controller
         $cliente = new Cliente();
 
         $cliente->tipo_cliente = $request->get('tipo_cliente');
+        if($request->get('tipo_cliente') == 'Persona Natural'){
+            $cliente->razon_social = $request->get('nombre_cliente');
+        }
         $cliente->nit_cedula = $request->get('nit_cedula');
         $cliente->nombre_cliente = $request->get('nombre_cliente');
         $cliente->sector_economico = $request->get('sector_economico');
