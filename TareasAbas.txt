@@ -20,9 +20,6 @@ Otros Ajustes
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
             - Novedades urgentes
 
-    AREA PROGRAMACION (2 Dias)
-        - Revisar Consultas y detalles de interfaz
-
     AREA CALIDAD (2 Dias)
         - Cronograma de visitas, actualizaciones, diagnosticos y capacitaciones.
         - Reporte de documentos de clientes
@@ -43,8 +40,3 @@ Otros Ajustes
 
     SESIONES VIP (2 Dias)
         - Visualizar informacion
-
-
-BUGS
-- Ver clientes, count() del array
-- Mostrar telefonos

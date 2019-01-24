@@ -30908,7 +30908,9 @@ var render = function() {
     "div",
     _vm._l(_vm.novedadesOrdenadas, function(novedad) {
       return _c("div", { key: novedad.id, staticClass: "social-feed-box" }, [
-        novedad.area_auth == novedad.area_id || novedad.area_id == 0
+        novedad.area_auth == novedad.area_id ||
+        novedad.area_id == 0 ||
+        novedad.id_user1 == novedad.id_auth
           ? _c("div", [
               _c("div", { staticClass: "social-avatar" }, [
                 _c("a", { staticClass: "pull-left", attrs: { href: "#" } }, [

@@ -48,6 +48,7 @@ class NovedadesController extends Controller
                         'hora_creacion' => $novedad->created_at->toTimeString(),
                         'comentario' => $novedad->comentario,
                         'id_user1' => $novedad->user->id,
+                        'id_auth' => $id_auth,
                         'nombres_user1' => $novedad->user->nombres,
                         'apellidos_user1' => $novedad->user->apellidos,
                         'foto_user1' => $novedad->user->foto,
@@ -58,7 +59,9 @@ class NovedadesController extends Controller
                         'hora_resuelto' => $novedad->updated_at->toTimeString(),
                         'prioridad' => $novedad->prioridad,
                         'cliente' => $cliente != "" ? $cliente[0] : 0,
-                        'sede' => $sede != "" ? $sede[0] : 0
+                        'sede' => $sede != "" ? $sede[0] : 0,
+                        'area_id' => $novedad->area_id,
+                        'area_auth' => $area_auth,
                     ]);
                 } else {
                     //Agrega todas las novedades a la coleccion
@@ -159,7 +162,7 @@ class NovedadesController extends Controller
             ]);
         }
         
-        if(Auth::user()->area_id == 4){
+        if(Auth::user()->area_id == 4 && $request->origin == 'calidad'){
             return redirect('/novedades/create');
         }
         return redirect('/home');

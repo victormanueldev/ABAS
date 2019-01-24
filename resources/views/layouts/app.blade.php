@@ -131,6 +131,10 @@
                     <li id="m-cronograma">
                         <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
                     </li>
+
+                    <li id="m-registro-novedades">
+                        <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
+                    </li>
                     @else
 
                         <li id="m-inicio" >

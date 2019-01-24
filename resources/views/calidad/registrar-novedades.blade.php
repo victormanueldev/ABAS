@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <script>
-    document.getElementById('m-listado-servicios').setAttribute("class", "active");
-    document.getElementById('a-listado-servicios').removeAttribute("style");
+    document.getElementById('m-registro-novedades').setAttribute("class", "active");
+    document.getElementById('a-registro-novedades').removeAttribute("style");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -88,6 +88,8 @@
                                 <label class="control-label">Descripción *</label>
                                 <textarea  name="descripcion" id="description" cols="30" class="form-control" placeholder="Escriba aqui la novedad" style="width: 100%"></textarea>
                             </div>
+
+                            <input type="hidden" name="origin" value="calidad">
                         </div>
                     </div>
                 </div>

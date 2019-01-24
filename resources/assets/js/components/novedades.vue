@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="social-feed-box" v-for="novedad in novedadesOrdenadas" :key="novedad.id">
-      <div v-if="novedad.area_auth == novedad.area_id || novedad.area_id == 0">
+      <div v-if="novedad.area_auth == novedad.area_id || novedad.area_id == 0 || novedad.id_user1 == novedad.id_auth">
         <div class="social-avatar">
           <a href="#" class="pull-left">
             <img alt="image" :src="'/storage/'+novedad.foto_user1">
