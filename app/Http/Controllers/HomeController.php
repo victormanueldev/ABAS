@@ -7,6 +7,7 @@ use ABAS\User;
 use ABAS\Evento;
 use Auth;
 use Carbon\Carbon;
+use ABAS\Area;
 
 class HomeController extends Controller
 {
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $manana = $tomorrow->toDateString();//fecha mañana
         $eventos = Auth::user()->eventos;
         $data_eventos = collect();
+        $areas = Area::all();
         foreach ($eventos as $evento ) {
             $fecha_ini = Carbon::parse($evento->fecha_inicio);
             $fecha_ini_carbon = $fecha_ini->toDateString();//Fecha inicio de evento
@@ -50,6 +52,6 @@ class HomeController extends Controller
         }
         // dd($data_eventos);
         // return $user;
-        return view('general.index', compact('user', 'data_eventos', 'fecha_actual'));
+        return view('general.index', compact('user', 'data_eventos', 'fecha_actual','areas'));
     }
 }

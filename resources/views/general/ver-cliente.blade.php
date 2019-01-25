@@ -1513,6 +1513,7 @@
             })
     })
 
+<<<<<<< HEAD
     $("#btn-save-sedes").click(event => {
         event.preventDefault();
         let dataSedes = {
@@ -1527,6 +1528,9 @@
             email_sedes: $("#email_sedes").val(),
             cliente_id: parseInt({{$cliente[0]->id}})
 
+=======
+    function deleteCotization(id) {
+>>>>>>> f9f6efef34f34f047ac5cdb2116526d29d0946b5
         let crsfToken = document.getElementsByName("_token")[0].value;
         swal({
             title: "¡Advertencia!",

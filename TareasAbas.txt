@@ -20,14 +20,9 @@ Otros Ajustes
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
             - Novedades urgentes
 
-    AREA PROGRAMACION (2 Dias)
-        - Revisar Consultas y detalles de interfaz
-
     AREA CALIDAD (2 Dias)
-        - Generacion de Documentos (CRUD) (Copiar lo que esta en Comercial)
-        - Cronograma de visitas.
-        - Registro de novedades de clientes luego de los servicios.
-        - Relacionar el cliente y la sede con la novedad.
+        - Cronograma de visitas, actualizaciones, diagnosticos y capacitaciones.
+        - Reporte de documentos de clientes
         - Revisar Consultas y detalles de interfaz
 
     AREA DE CONTABILIDAD (4 Dias)
@@ -45,8 +40,3 @@ Otros Ajustes
 
     SESIONES VIP (2 Dias)
         - Visualizar informacion
-
-
-BUGS
-- Ver clientes, count() del array
-- Mostrar telefonos

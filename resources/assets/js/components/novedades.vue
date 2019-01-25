@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="social-feed-box" v-for="novedad in novedadesOrdenadas" :key="novedad.id">
-      <div v-if="novedad.area_auth == novedad.area_id || novedad.area_id == 3">
+      <div v-if="novedad.area_auth == novedad.area_id || novedad.area_id == 0 || novedad.id_user1 == novedad.id_auth">
         <div class="social-avatar">
           <a href="#" class="pull-left">
             <img alt="image" :src="'/storage/'+novedad.foto_user1">
@@ -17,6 +17,10 @@
 
         <div class="social-body">
           <p>{{novedad.descripcion}} </p>
+          <div v-if="novedad.cliente != 0">
+            <small class="label label-default">Cliente:</small><i>{{novedad.cliente.nombre_cliente}}</i>
+            <small v-if="novedad.sede != 0" class="label label-default">Sede:</small><i>{{novedad.sede.nombre}}</i>
+          </div>
         </div>
         <div v-if="novedad.estado == 'resuelta'" class="social-footer">
           <div class="social-comment">

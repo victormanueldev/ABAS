@@ -96,8 +96,12 @@
                                     <i class="fa fa-globe"></i> Visibilidad: 
                                     <select name="area" required>
                                             <option value="{{$user[0]->area->id}}" selected>{{$user[0]->area->descripcion}}</option>
-                                            <option value="2"> Area Contabilidad</option>
-                                            <option value="3"> Pública</option>
+                                            @foreach($areas as $area)
+                                                @if($area->id != $user[0]->area->id)
+                                                    <option value="{{$area->id}}" >{{$area->descripcion}}</option>
+                                                @endif
+                                            @endforeach
+                                                <option value="0" >Pública</option>
                                     </select>
                                 </small>
                                 <small class="text-muted">
