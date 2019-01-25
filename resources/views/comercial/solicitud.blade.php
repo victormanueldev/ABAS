@@ -154,7 +154,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         
-                                        <select class="form-control" id="select_sedes" name="id_sede" >
+                                        <select class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -262,9 +262,9 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-4"
-                                    ><label class="control-label">Frecuencia de Visitas *</label>
-                                        <input type="text" name="frecuencia_visitas" placeholder="Ej: Cada 10 días" class="form-control">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Frecuencia Día de Visitas *</label>
+                                        <input type="number" min=0 name="frecuencia_visitas" placeholder="Ej: Cada 10 días" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-2">
@@ -289,17 +289,17 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Total Horas</label>
-                                        <input type="text" name="total_horas_visita" id="total_horas_visita" disable="true" class="form-control" value=0>
+                                        <input type="text" name="total_horas_visita" id="total_horas_visita" class="form-control" value=0 disabled>
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor Hora</label>
-                                        <input type="text" name="valor_hora" placeholder="Ej: 60.000" class="form-control">
+                                        <input type="number" min="0" name="valor_hora" id="valor_hora" placeholder="Ej: 60.000" class="form-control visita">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor Facturar</label>
-                                        <input type="text" name="valor_facturar" placeholder="Ej: 127.600" class="form-control">
+                                        <input type="text" name="valor_facturar" id="valor_facturar" placeholder="Ej: 127.600" class="form-control" disabled>
                                     </div>
 
                                     <div class="form-group col-lg-12">
@@ -346,12 +346,12 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Número de Tapas</label>
-                                        <input type="text" name="numero_tapas" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 name="numero_tapas" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Número de Residencias</label>
-                                        <input type="text" name="numero_residencias" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 name="numero_residencias" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -363,42 +363,42 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Semanales</label>
-                                        <input type="text" name="horas_semanales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_semanales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Mensuales</label>
-                                        <input type="text" name="horas_mensuales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_mensuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Trimestrales</label>
-                                        <input type="text" name="horas_trimestrales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_trimestrales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Semestrales</label>
-                                        <input type="text" name="horas_semestrales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_semestrales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Quincenales</label>
-                                        <input type="text" name="horas_quincenales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_quincenales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Bimensuales</label>
-                                        <input type="text" name="horas_bimensuales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_bimensuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Cada 4 Meses</label>
-                                        <input type="text" name="horas_4meses" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_4meses" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Anuales</label>
-                                        <input type="text" name="horas_anuales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 name="horas_anuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -410,17 +410,17 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Total de Horas Cotizadas</label>
-                                        <input type="text" name="total_horas_cotizadas" placeholder="Total de horas" class="form-control">
+                                        <input type="number" min=0 name="total_horas_cotizadas" placeholder="Total de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor Hora Antes IVA</label>
-                                        <input type="text" name="valor_hora_antes" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 name="valor_hora_antes" placeholder="Valor" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor Inicial Antes IVA</label>
-                                        <input type="text" name="valor_inicia_antes" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 name="valor_inicia_antes" placeholder="Valor" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -443,7 +443,7 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Número de Contrato</label>
-                                        <input type="text" name="numero_contrato" placeholder="#" class="form-control">
+                                        <input type="number" min=0 name="numero_contrato" placeholder="#" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -458,25 +458,25 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
-                                        <select class="form-control" name="medio_contacto">
+                                        <select class="form-control" name="medio_contacto" id="medio_contacto">
                                             <option value="amigo">Un amigo</option>
                                             <option value="internet">Internet</option>
                                             <option value="contacto_asesor">Contacto Asesor Directamente</option>
                                             <option value="llamada_telefonica">Llamada Telefónica</option>
                                             <option value="directorio">Directorio Telefónico</option>
-                                            <option value="directorio">Otro</option>
+                                            <option value="otro">Otro</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Otro ¿Cúal?</label>
-                                        <input type="text" name="otro" placeholder="Otros medios" class="form-control">
+                                        <input type="text" name="otro" id="otro" placeholder="Otros medios" class="form-control" disabled>
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Diligenciado por:</label>
-                                        <input type="text" name="" placeholder="" class="form-control">
+                                        <input type="text" name="" id="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
                                         <br>
                                     </div>
 
@@ -508,24 +508,10 @@
     <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
     <script>
 
-        //Validación de campo fecha
-        // function validacion(){
-
             $(document).ready(function() {
                 var date = moment().format("YYYY-MM-DD");
                 $('#fecha_creacion').val(date);
             });
-
-
-            // var valor = document.getElementById("fecha").value;
-
-            //     if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
-                    
-            //         alert('¡Campo Fecha Vacio!');
-            //         return false;
-            // }
-            
-        // }
 
         //Inicializador del Select AUTOCOMPLETAR
         $('.chosen-select').chosen({width: "100%"});
@@ -649,6 +635,20 @@
 
             $('#total_horas_visita').val(suma);
         });
+
+        $(".visita").change(event => {
+            var val_hora = parseFloat(jQuery("#valor_hora").val());
+            var facturar_total = parseFloat(jQuery("#total_horas_visita").val());
+            $("#valor_facturar").val(val_hora*facturar_total);
+        });
+
+        $("#medio_contacto").change(event => {
+            if ($('#medio_contacto').val() === 'otro') {
+                $("#otro").prop('disabled', false);
+            } else {
+                $("#otro").prop('disabled', true);
+            }
+        });   
         
         //Realiza la peticion POST al servidor (AJAX)
         function guardarSolicitud(codigo, fecha, frecuencia, id_cliente, id_sede, observaciones, crsfToken) {
