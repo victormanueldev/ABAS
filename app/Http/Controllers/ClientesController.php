@@ -11,6 +11,7 @@ use ABAS\Novedad;
 use ABAS\Telefono;
 use Auth;
 use Carbon\Carbon;
+use ABAS\Solicitud;
 
 class ClientesController extends Controller
 {
@@ -295,6 +296,23 @@ class ClientesController extends Controller
             $user->save();
         }
         return response()->json($user->estado_facturacion, 200);
+    }
+
+    public function docsReport(Request $request)
+    {
+        if($request->ajax()){
+            $data = collect(['clientes' => Cliente::select('id','nombre_cliente','doc_rut','doc_identidad','doc_camara_comercio','tipo_cliente')->with('sedes')->get()]);
+            $data->put('solicitudes', Solicitud::with([
+                                                    'certificados' => function($query){
+                                                        $query->select('id', 'solicitud_id');
+                                                    }, 
+                                                    'rutas' => function($query){
+                                                        $query->select('id', 'tipo','solicitud_id');
+                                                    }
+                                                ])->get());
+            return response()->json($data, 200);
+        }
+        return view('calidad.reporte-documentos');
     }
 
 }

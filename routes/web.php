@@ -51,6 +51,7 @@ Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('client
 // Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
 // Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
 Route::put('estado/cliente', 'ClientesController@changeBillState');
+Route::get('documentos/cliente', 'ClientesController@docsReport');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [
