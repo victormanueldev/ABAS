@@ -3,6 +3,7 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Cliente;
+use ABAS\User;
 use ABAS\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,8 +22,9 @@ class SolicitudesController extends Controller
     {
         //
         $clientes = Cliente::select('nombre_cliente', 'id')->get();
+        $user = Auth::user();
         //return $clientes;
-        return view('comercial.solicitud', compact('clientes'));
+        return view('comercial.solicitud', compact('clientes', 'user'));
     }
 
     /**

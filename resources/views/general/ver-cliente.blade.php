@@ -211,18 +211,11 @@
                                                                     </div>
                                                                 </div>
 
-<<<<<<< HEAD
                                                                 <div class="m-t-sm">
                                                                     <a href="#" id="btn-save-sedes" class="text-muted">
                                                                         <i class="fa fa-edit"></i>Editar información</a>
 
                                                                 </div>
-=======
-                                                                {{-- <div class="m-t-sm">
-                                                                    <a href="#" class="text-muted"><i class="fa fa-edit"></i>
-                                                                        Editar información</a>
-                                                                </div> --}}
->>>>>>> 91311dd707cd7d63f0e94e7ca10fcff81793d03b
                                                             </td>
                                                             <td>
 
@@ -358,13 +351,8 @@
             <div class="modal inmodal fade" id="modal-update-cliente" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-<<<<<<< HEAD
-                        {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' => 'POST', 'autocomplete' => 'off')) !!}
-=======
-                        {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' =>
-                        'POST', 'autocomplete' => 'on')) !!}
+                        {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' => 'POST', 'autocomplete' => 'on')) !!}
                         {{-- {!! Form::open(['route' => ['clientes.updateCliente', $cliente[0] -> id]]) !!} --}}
->>>>>>> 91311dd707cd7d63f0e94e7ca10fcff81793d03b
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
@@ -492,10 +480,6 @@
                         </div>
                         <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
                             <div class="row">
-<<<<<<< HEAD
-=======
-
->>>>>>> 91311dd707cd7d63f0e94e7ca10fcff81793d03b
                                 <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
                                     <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..."
                                         class="form-control">
@@ -1529,7 +1513,6 @@
             })
     })
 
-<<<<<<< HEAD
     $("#btn-save-sedes").click(event => {
         event.preventDefault();
         let dataSedes = {
@@ -1543,10 +1526,7 @@
             celular_sedes: $("#celular_sedes").val(),
             email_sedes: $("#email_sedes").val(),
             cliente_id: parseInt({{$cliente[0]->id}})
-        };
-=======
-    function deleteCotization(id) {
->>>>>>> 91311dd707cd7d63f0e94e7ca10fcff81793d03b
+
         let crsfToken = document.getElementsByName("_token")[0].value;
         swal({
             title: "¡Advertencia!",

@@ -101,7 +101,7 @@ class ClientesController extends Controller
 
         $cliente->tipo_cliente = $request->get('tipo_cliente');
         $cliente->nombre_cliente = $request->get('nombre_cliente');
-        $cliente->nit_cedula = $request->get('nit_cedula');
+        $cliente->nit_cedula = $request->get('nit_cedula') + $request->get('nit_number');
         $cliente->sector_economico = $request->get('sector_economico');
         $cliente->municipio = $request->get('municipio');
         $cliente->direccion = $request->get('direccion');
