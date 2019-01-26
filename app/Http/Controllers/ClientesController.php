@@ -277,7 +277,7 @@ class ClientesController extends Controller
         $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
                                 $query->where('id',$idSede);
                             },'solicitudes.servicios' => function($query){
-                                $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str');
+                                $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str','tipo','color');
                             } , 'solicitudes.servicios.tipos'])
                             ->select('id','nombre_cliente')
                             ->where('id', $idCliente)

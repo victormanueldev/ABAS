@@ -21,13 +21,23 @@ Otros Ajustes
             - Novedades urgentes
 
     AREA CALIDAD (2 Dias)
-        - Cronograma de visitas, actualizaciones, diagnosticos y capacitaciones.
-        - Reporte de documentos de clientes
         - Revisar Consultas y detalles de interfaz
+
+    AREA DE PROGRAMACION
+        - No generar ningun doc por servicios que no sean normales.
+        - Ver en los horarios de tecnicos solo servicios Normales y de refuerzo (Diferenciarlos)
+        - Servicios Cancelados y realizados
+
+    AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
+        - Recepcion de ODS, registro de tiempo utilizado, productos utilizados, Observaciones...
+        - Cronograma de servicios de refuerzo (Guardar en tabla Servicios con tecnicos y tipo de servicio)
+        - 
+        - 
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Comisiones para inspectores
+        - Reporte de clientes cerrados en el mes (Cotizacion final aprobada)
         - Revisar Consultas y detalles de interfaz
 
     AREA DE INVENTARIOS (3 Dias)
@@ -37,6 +47,12 @@ Otros Ajustes
         - Inventario General por rango de fechas y Frecuencias
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
         - Revisar Consultas y detalles de interfaz
+
+    AREA DE ADMINISTRACION
+        - Creacion de productos
+        - Creacion de tecnicos
+        - Creacion de usuarios
+        - Reportes de Area de Servicio al Cliente y Contabilidad
 
     SESIONES VIP (2 Dias)
         - Visualizar informacion

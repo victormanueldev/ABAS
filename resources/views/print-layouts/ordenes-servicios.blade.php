@@ -2774,7 +2774,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
     <td class=xl1522905 width=8 style='width:6pt'></td>
     <td class=xl1522905 width=8 style='width:6pt'></td>
     <td class=xl1522905 width=8 style='width:6pt'></td>
-    <td colspan=77 rowspan=2 class=xl142422905 width=620 style='width:466pt'>ODEN
+    <td colspan=77 rowspan=2 class=xl142422905 width=620 style='width:466pt'>ORDEN
     DE SERVICIO</td>
     <td class=xl1522905 width=6 style='width:5pt'></td>
     <td class=xl1522905 width=0></td>

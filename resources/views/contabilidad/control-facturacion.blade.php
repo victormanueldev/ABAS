@@ -87,6 +87,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Desctipción</th>
+                                        <th>Fecha de realizacion</th>
+                                        <th>Tipo</th>
                                         <th>No. Factura</th>
                                         <th>Total COP</th>
                                         <th>Estado</th>
@@ -292,10 +294,22 @@
                     { extend: 'pdf', title: 'ListadoNovedadesSanicontrolSAS' }
                 ],
                 columns: [
-                    { data: 'pivot.id_servicio_tipo' },
-                    { data: 'nombre' },
+                    { data: 'tipo.pivot.id_servicio_tipo' },
+                    { data: 'tipo.nombre' },
                     {
-                        data: 'pivot.numero_factura',
+                        data: 'servicio',
+                        render: (servicio) => {
+                            return moment(`${servicio.fecha_inicio} ${servicio.hora_inicio}`, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD hh:mm A");
+                        }
+                    },
+                    {
+                        data: 'servicio',
+                        render: (servicio) => {
+                            return `<span class="label label-primary" style="background-color: ${servicio.color};">${servicio.tipo}</span>`
+                        }
+                    },
+                    {
+                        data: 'tipo.pivot.numero_factura',
                         render: (factura) => {
                             if (!factura) {
                                 return "No asignado &nbsp;<i class='fa fa-warning' style='color: red;float:right'></i>";
@@ -305,7 +319,7 @@
                         }
                     },
                     {
-                        data: 'pivot.valor',
+                        data: 'tipo.pivot.valor',
                         render: (total) => {
                             if (!total) {
                                 return "---";
@@ -315,7 +329,7 @@
                         }
                     },
                     {
-                        data: 'pivot.estado',
+                        data: 'tipo.pivot.estado',
                         render: (estado) => {
                             let estadoRendered;
                             switch (estado) {
@@ -333,7 +347,7 @@
                         }
                     },
                     {
-                        data: 'pivot.updated_at',
+                        data: 'tipo.pivot.updated_at',
                         render: (fechaPago) => {
                             if (!fechaPago) {
                                 return "---"
@@ -371,14 +385,14 @@
                     .then(value => {
                         if (value === "pay") {
                             //Peticion HTTP para guardar el evento
-                            if(!dataToSend.pivot.numero_factura || !dataToSend.pivot.valor){
+                            if(!dataToSend.tipo.pivot.numero_factura || !dataToSend.tipo.pivot.valor){
                                 swal('Información', 'El servicio seleccionado no tiene asignada una factura.', 'info');
                             }else{
                                 $.ajax({
                                     url: '/payment/register',//URL del servicio
                                     type: "PUT",//Método de envío
                                     data: {
-                                        id_servicio_tipo: dataToSend.pivot.id_servicio_tipo
+                                        id_servicio_tipo: dataToSend.tipo.pivot.id_servicio_tipo
                                     },
                                     headers: {
                                         "Content-Type": 'application/x-www-form-urlencoded',
@@ -400,8 +414,11 @@
                                     })
                             }
                         }else if(value === "edit"){
-                            fillModal(dataToSend);
+                            fillModal(dataToSend.tipo);
                         }
+                    })
+                    .catch(err => {
+                        console.log(err)
                     })
             });
 
@@ -469,33 +486,30 @@
                 $.get(`/facturacion/cliente/${idCliente}/${idSede}`)
                     .then(res => {
                         if (res[0].solicitudes != null) {
-                            if (res[0].solicitudes[0].sede != null) {
                                 if (res[0].solicitudes[0].servicios != null) {
                                     dataServer = res;
-                                    var facturas = res[0].solicitudes[0].servicios.map((servicio, index) => {
-                                        var tipos = [];
-                                        servicio.tipos.forEach((value, index) => {
-                                            tipos.push(value)
-                                        })
-                                        return tipos;
-                                    });
 
-                                    facturas.forEach((value, index) => {
-                                        value.forEach((servicio, index) => {
-                                            serviciosTabla.push(servicio);
+                                    var serviciosTipo = res[0].solicitudes[0].servicios.map((servicio, index) => {
+                                        var servicios = [];
+                                        servicio.tipos.forEach((tipo, ind) => {
+                                            if(servicio.id == tipo.pivot.servicio_id){
+                                                servicios.push({servicio: servicio, tipo: tipo})
+                                            }
                                         })
+                                        return servicios;
                                     })
 
-                                    console.log(serviciosTabla)
+                                    serviciosTipo.forEach(value => {
+                                        value.forEach( val => {
+                                            serviciosTabla.push(val)
+                                        })
+                                    })
+                                    
                                     table.rows.add(serviciosTabla).draw();
                                 } else {
                                     table.clear().draw();
                                     return;
                                 }
-                            } else {
-                                table.clear().draw();
-                                return;
-                            }
                         } else {
                             table.clear().draw();
                             return;
