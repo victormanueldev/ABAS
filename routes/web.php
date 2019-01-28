@@ -91,6 +91,7 @@ Route::get('tecnicos/imprimir-rl/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnic
 Route::get('tecnicos/imprimir-rri/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRI');
 Route::get('tecnicos/imprimir-rre/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRE');
 Route::get('tecnicos/imprimir-ctf/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printCertificates');
+Route::get('all/tecnicos', 'TecnicoController@getAll');
 
 //Tipos de Servicios
 Route::resource('tipos', 'TipoServicioController');
@@ -99,8 +100,13 @@ Route::resource('tipos', 'TipoServicioController');
 Route::resource('certificados', 'CertificadoController');
 
 //Rutas
-Route::resource('rutas', 'RutaController');
+Route::resource('rutas', 'RutaController', [
+    'except' => 'getRoute'
+]);
+Route::post('find/route', 'RutaController@getRoute');
+Route::post('save/route/product', 'RutaController@saveRouteProduct');
 
+Route::get('show/ruta', 'RutaController@show');
 //Impresiones
 Route::get('impresiones/fechas/{id}/{inicio}/{fin}', 'ImpresionController@imprimirTodo');
 
@@ -175,3 +181,10 @@ Route::resource('temporales/novedad', 'NovedadTemporalController', [
 Route::get('temporales/novedad/{idCliente}/{idSede}', 'NovedadTemporalController@show');
 
 Route::get('neutral/edit/{id}', 'ServicioController@editNeutralService');
+Route::get('find/service/{fecha}/{cliente}/{sede}', 'ServicioController@serviceByDate');
+Route::resource('ordenes', 'OrdenServicioController');
+
+Route::resource('productos', 'ProductoController');
+Route::get('recepcion/rutas', function(){
+    return view('servicio-clientes.registro-rutas');
+});

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdenServicioProducto extends Migration
+class CreateProductoRuta extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateOrdenServicioProducto extends Migration
      */
     public function up()
     {
-        Schema::create('orden_servicio_producto', function (Blueprint $table) {
+        Schema::create('producto_ruta', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('orden_servicio_id');
+            $table->integer('ruta_id');
             $table->integer('producto_id');
             $table->decimal('cantidad_aplicada', 5, 1);
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateOrdenServicioProducto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orden_servicio_producto');
+        Schema::dropIfExists('producto_ruta');
     }
 }

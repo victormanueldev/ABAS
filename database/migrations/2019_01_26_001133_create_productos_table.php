@@ -15,11 +15,12 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('nombre_comercial');
+            $table->string('tipo');
             $table->string('presentacion');
             $table->string('unidad_medida', 2); //Ej: gr, ml o un
             $table->decimal('total_unidades', 10, 1); // Ej: 1500 (Multiplicacion del sistema)
-            $table->integer('valor_unidad'); // Ej: 0.01 -> $ 2
+            $table->decimal('valor_unidad', 10, 2); // Ej: 0.01 -> $ 2
             $table->unsignedBigInteger('costo_total');
             $table->timestamps();
         });

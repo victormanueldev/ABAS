@@ -644,6 +644,11 @@ class TecnicoController extends Controller
         return view('print-layouts.certificados', compact('data'));
         // return $data;
     }
+
+    public function getAll()
+    {
+        return Tecnico::select('id', 'nombre')->get();
+    }
 }
 
 

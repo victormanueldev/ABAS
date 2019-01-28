@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdenServicioProducto extends Migration
+class CreateOrdenServicoTecnico extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateOrdenServicioProducto extends Migration
      */
     public function up()
     {
-        Schema::create('orden_servicio_producto', function (Blueprint $table) {
+        Schema::create('orden_servicio_tecnico', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('orden_servicio_id');
-            $table->integer('producto_id');
-            $table->decimal('cantidad_aplicada', 5, 1);
-            $table->timestamps();
+            $table->integer('tecnico_id');
+            $table->time('hora_entrada');
+            $table->time('hora_salida');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateOrdenServicioProducto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orden_servicio_producto');
+        Schema::dropIfExists('orden_servicio_tecnico');
     }
 }

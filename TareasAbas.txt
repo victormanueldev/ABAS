@@ -29,10 +29,8 @@ Otros Ajustes
         - Servicios Cancelados y realizados
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
-        - Recepcion de ODS, registro de tiempo utilizado, productos utilizados, Observaciones...
-        - Cronograma de servicios de refuerzo (Guardar en tabla Servicios con tecnicos y tipo de servicio)
-        - 
-        - 
+
+        - Generar novedad para mejorar frec y servicios de refuerz
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
@@ -49,7 +47,6 @@ Otros Ajustes
         - Revisar Consultas y detalles de interfaz
 
     AREA DE ADMINISTRACION
-        - Creacion de productos
         - Creacion de tecnicos
         - Creacion de usuarios
         - Reportes de Area de Servicio al Cliente y Contabilidad

@@ -24,7 +24,6 @@ class CreateServiciosTable extends Migration
             $table->date('fecha_fin')->nullable();
             $table->time('hora_fin')->nullable();
             $table->unsignedMediumInteger('duracion')->nullable();//Minutos
-            $table->integer('orden_servicio_id')->nullable();
             $table->boolean('confirmado')->default(false);
             $table->string('color', 25);
             $table->string('observaciones', 120);
