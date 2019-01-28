@@ -775,4 +775,15 @@ class ServicioController extends Controller
         return view("programacion.editar-servicio-neutro", compact('servicio','tipos','tecnicos'));
         // return $servicio;
     }
+
+    public function serviceByDate($fecha_inicio, $idCliente, $idSede)
+    {
+        return $servicio = Servicio::with('solicitud')
+                                    ->where('fecha_inicio', $fecha_inicio)
+                                    ->whereHas('solicitud', function($query) use($idCliente, $idSede){
+                                        $query->where('cliente_id', $idCliente);
+                                        $query->where('sede_id', $idSede);
+                                    })
+                                    ->firstOrFail();
+    }
 }

@@ -39,7 +39,7 @@
 
 <body class="md-skin" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
-        <nav class="navbar-default  navbar-static-side" role="navigation">
+        <nav class="navbar-default  navbar-static-side" role="navigation" >
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
@@ -135,6 +135,21 @@
                     <li id="m-registro-novedades">
                         <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
                     </li>
+
+                    <li id="m-reporte-documentos">
+                            <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
+                        </li>
+
+                    @elseif(Auth::user()->area_id == '5')
+
+                    <li id="m-recepcion">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-recepcion"><i class="fa fa-folder-open"></i> <span class="nav-label">Recepción documentos </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-recepcion">
+                            <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de servicio</a></li>
+                            <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
+                        </ul>
+                    </li>
+
                     @else
 
                         <li id="m-inicio" >

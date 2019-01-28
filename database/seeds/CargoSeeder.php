@@ -32,6 +32,14 @@ class CargoSeeder extends Seeder
             '4' => [
                 'nombre' => 'auditor',
                 'descripcion' => 'Auditor General'
+            ],
+            '5' => [
+                'nombre' => 'agentedeservicio',
+                'descripcion' => 'Representante de Servicio al Cliente'
+            ],
+            '6' => [
+                'nombre' => 'jefetecnico',
+                'descripcion' => 'Jefe Técnico'
             ]
         ];
         DB::table('cargos')->insert($cargos);

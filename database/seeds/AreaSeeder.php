@@ -28,6 +28,14 @@ class AreaSeeder extends Seeder
             '3' => [
                 'nombre' => 'calidad',
                 'descripcion' => 'Área de Calidad'
+            ],
+            '4' => [
+                'nombre' => 'serviciocliente',
+                'descripcion' => 'Área de Servicio al Cliente'
+            ],
+            '5' => [
+                'nombre' => 'operaciones',
+                'descripcion' => 'Área de Operaciones'
             ]
         ];
         DB::table('areas')->insert($areas);

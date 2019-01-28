@@ -5,6 +5,7 @@ namespace ABAS\Http\Controllers;
 use ABAS\Ruta;
 use Illuminate\Http\Request;
 use ABAS\Solicitud;
+use DB;
 
 class RutaController extends Controller
 {
@@ -98,7 +99,7 @@ class RutaController extends Controller
      * @param  \ABAS\Ruta  $ruta
      * @return \Illuminate\Http\Response
      */
-    public function show(Ruta $ruta)
+    public function show(Request $request)
     {
         //
     }
@@ -138,5 +139,35 @@ class RutaController extends Controller
         $ruta = Ruta::findOrFail($id);
         $ruta->delete();
         return response()->json("Delete success", 200);
+    }
+
+    public function getRoute(Request $request)
+    {   
+        $idCliente = $request->idCliente;
+        $idSede = $request->idSede;
+        return  Ruta::select('id','solicitud_id','tipo')
+                    ->with(['solicitud' => function($query) {
+                        $query->select('id','cliente_id', 'sede_id');
+                    }])
+                    ->where('tipo', $request->tipo)
+                    ->whereHas('solicitud', function($query) use($idCliente, $idSede){
+                        $query->where('cliente_id', $idCliente);                
+                        $query->where('sede_id', $idSede);
+                    })
+                    ->firstOrFail();
+    }
+
+    public function saveRouteProduct(Request $request)
+    {
+        if($request->ajax()){
+            foreach ($request->reporteProductos as $producto) {
+                DB::table('producto_ruta')->insert([
+                    'ruta_id' => $request->idRuta,
+                    'producto_id' => $producto['idProducto'],
+                    'cantidad_aplicada' => $producto['cantidadUtilizada']
+                ]);
+            }
+            return response()->json('Creation Success', 200);
+        }
     }
 }
