@@ -212,7 +212,7 @@
                                                                 </div>
 
                                                                 <div class="m-t-sm">
-                                                                    <a href="#" id="btn-save-sedes" class="text-muted">
+                                                                    <a href="#" id="btn-save-sedes" class="text-muted" data-toggle="modal" data-target="#modal-edit-sedes">
                                                                         <i class="fa fa-edit"></i>Editar información</a>
 
                                                                 </div>
@@ -518,6 +518,79 @@
 
                                 <div class="form-group col-lg-6"><label class="control-label">Email *</label>
                                     <input type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
+
+                                </div>
+
+                                <div class="form-group col-lg-12">
+                                    <br>
+                                    <strong>Nota: </strong>Diligencia el formulario de Sede si la empresa tiene mas
+                                    sedes además de la principal, en caso contrario no llenar este modal.
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button style="margin-bottom: 0;" type="button" id="btn-close-sedes" class="btn btn-white"
+                                data-dismiss="modal">Cerrar</button>
+                            <button type="button" id="btn-save-sedes" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--===================================================
+            /* Modal Editar Sede
+            ====================================================-->
+            <div class="modal inmodal fade" id="modal-edit-sedes" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button id="btn-close-cotization" type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title">Editar Sede</h4>
+                        </div>
+                        <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
+                            <div class="row">
+                                <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
+                                    <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..."
+                                class="form-control" value="{{$sede->nombre}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
+                                    <input type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control" value="{{$sede->direccion}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
+                                    <input type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control" value="{{$sede->ciudad}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
+                                    <input type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control" value="{{$sede->barrio}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
+                                    <input type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control" value="{{$sede->zona_ruta}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Nombre de Contacto *</label>
+                                    <input type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente"
+                                        class="form-control" value="{{$sede->nombre_contacto}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
+                                    <input type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente"
+                                        class="form-control" value="{{$sede->telefono_contacto}}">
+
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                    <input type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control" value="{{$sede->celular_contacto}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"><label class="control-label">Email *</label>
+                                    <input type="email" id="email_sedes" placeholder="Email de contacto" class="form-control" value="{{$sede->email}}">
 
                                 </div>
 
@@ -1513,7 +1586,6 @@
             })
     })
 
-<<<<<<< HEAD
     $("#btn-save-sedes").click(event => {
         event.preventDefault();
         let dataSedes = {
@@ -1528,9 +1600,7 @@
             email_sedes: $("#email_sedes").val(),
             cliente_id: parseInt({{$cliente[0]->id}})
 
-=======
     function deleteCotization(id) {
->>>>>>> f9f6efef34f34f047ac5cdb2116526d29d0946b5
         let crsfToken = document.getElementsByName("_token")[0].value;
         swal({
             title: "¡Advertencia!",
@@ -1572,7 +1642,6 @@
     }
 
     $("#btn-save-sedes").click(event => {
-        console.log("-------------------HOLA----------------------");
         event.preventDefault();
         let dataSedes = {
             nombre_sedes: $("#nombre_sedes").val(),

@@ -98,49 +98,49 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                        <input type="text"  id="input-nit"  placeholder="Nit ó Cedula" class="form-control">
+                                        <input type="text"  id="input-nit" name="input-nit" placeholder="Nit ó Cedula" class="form-control">
                                                     
                                     </div>
 
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text"  id="input-direccion"  placeholder="Dirección de cliente" class="form-control">
+                                        <input type="text"  id="input-direccion" name="input-direccion" placeholder="Dirección de cliente" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text"  id="input-ciudad"  placeholder="Ciudad del cliente" class="form-control">
+                                        <input type="text"  id="input-ciudad" name="input-ciudad" placeholder="Ciudad del cliente" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" id="input-barrio"  placeholder="Barrio del cliente" class="form-control">
+                                        <input type="text" id="input-barrio" name="input-barrio" placeholder="Barrio del cliente" class="form-control">
 
                                     </div>
 
                                     
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" id="input-contacto"  placeholder="Nombre de contacto del servicio" class="form-control">
+                                        <input type="text" id="input-contacto" name="input-contacto" placeholder="Nombre de contacto del servicio" class="form-control">
                                         
                                     </div>
                                     
                                     <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                        <input type="text" id="input-cargo"  placeholder="Zona del cliente" class="form-control">
+                                        <input type="text" id="input-cargo" name="input-cargo" placeholder="Zona del cliente" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" id="input-telefono"  placeholder="Teléfono del contacto a facturar" class="form-control">
+                                        <input type="text" id="input-telefono" name="input-telefono" placeholder="Teléfono del contacto a facturar" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" id="input-celular"  placeholder="Celular del contacto a facturar" class="form-control">
+                                        <input type="text" id="input-celular" name="input-celular" placeholder="Celular del contacto a facturar" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email"  id="input-email"  placeholder="Email del contacto a facturar" class="form-control">
+                                        <input type="email"  id="input-email" name="input-email" placeholder="Email del contacto a facturar" class="form-control">
                                         
                                     </div>
                                     
@@ -161,44 +161,44 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                        <input type="text" id="input-sede-nit"  placeholder="Nit ó Cedula" class="form-control">
+                                        <input type="text" id="input-sede-nit" name="input-sede-nit" placeholder="Nit ó Cedula" class="form-control">
                                                     
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text"  id="input-sede-direccion" placeholder="Dirección de donde se realizará el servicio" class="form-control">
+                                        <input type="text"  id="input-sede-direccion" name="input-sede-direccion"placeholder="Dirección de donde se realizará el servicio" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" id="input-sede-ciudad"  placeholder="Ciudad donde se realizará el servicio" class="form-control">
+                                        <input type="text" id="input-sede-ciudad" name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" id="input-sede-barrio"  placeholder="Barrio donde se realizará el servicio" class="form-control">
+                                        <input type="text" id="input-sede-barrio" name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                        <input type="text" id="input-sede-zona"  placeholder="Zona donde se realizará el servicio" class="form-control">
+                                        <input type="text" id="input-sede-zona" name="input-sede-zona" placeholder="Zona donde se realizará el servicio" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" id="input-sede-contacto"  placeholder="Nombre de contacto del lugar" class="form-control">
+                                        <input type="text" id="input-sede-contacto" name="input-sede-contacto" placeholder="Nombre de contacto del lugar" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" id="input-sede-telefono"  placeholder="Teléfono del contacto del servicio" class="form-control">
+                                        <input type="text" id="input-sede-telefono" name="input-sede-telefono" placeholder="Teléfono del contacto del servicio" class="form-control">
                                         
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" id="input-sede-celular"  placeholder="Celular del contacto del lugar" class="form-control">
+                                        <input type="text" id="input-sede-celular" name="input-sede-celular" placeholder="Celular del contacto del lugar" class="form-control">
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email" id="input-sede-email"   placeholder="Email del contacto del servicio" class="form-control">
+                                        <input type="email" id="input-sede-email" name="input-sede-email"  placeholder="Email del contacto del servicio" class="form-control">
                                         
                                     </div>
 
@@ -209,17 +209,17 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto Factura *</label>
-                                        <input type="text"  placeholder="Nombre del contacto a facturar" class="form-control" style="display: block;">
+                                        <input type="text"  placeholder="Nombre del contacto a facturar" name="contacto-name-factura" id="contacto_name_factura" class="form-control" style="display: block;">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                        <input type="text"  placeholder="Teléfono del contacto a facturar" class="form-control">
+                                        <input type="text"  placeholder="Teléfono del contacto a facturar" name="contacto-telefono-factura" id="contacto_telefono_factura" class="form-control">
                                         
                                     </div>
         
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text"  placeholder="Celular del contacto a facturar" class="form-control">
+                                        <input type="text"  placeholder="Celular del contacto a facturar" name="contacto-celular-factura" id="contacto_celular_factura" class="form-control">
                                     </div>
 
 					                <div class="form-group col-lg-12">
@@ -235,14 +235,14 @@
                                     </div>
 
                                     <div class="form-group col-lg-6 col-xs-12 checkbox">
-                                        <label style="display: block;"><input type="checkbox" name="diagnostico_inicial" value="1">Diagnostico Inicial</label>
-                                        <label style="display: block;"><input type="checkbox" name="cronograma_servicios" value="2">Cronograma de Servicios</label>
-                                        <label style="display: block;"><input type="checkbox" name="visita calidad" value="3">Visitas de Calidad</label>
+                                        <label style="display: block;"><input type="checkbox" name="diagnostico_inicial" id="diagnostico_inicial" value="1">Diagnostico Inicial</label>
+                                        <label style="display: block;"><input type="checkbox" name="cronograma_servicios" id="cronograma_servicios" value="2">Cronograma de Servicios</label>
+                                        <label style="display: block;"><input type="checkbox" name="visita-calidad" id="visita_calidad" value="3">Visitas de Calidad</label>
                                     </div> 
 
                                     <div class="form-group col-lg-6">
                                         <label>Frecuencia</label>
-                                        <select class="form-control" id="" name="frecuencia_calidad">
+                                        <select class="form-control" id="frecuencia_calidad" name="frecuencia_calidad">
                                             <option>Ocasionalmente</option>
                                             <option>Semanales</option>
                                             <option>Quincenales</option>
@@ -264,7 +264,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Frecuencia Día de Visitas *</label>
-                                        <input type="number" min=0 name="frecuencia_visitas" placeholder="Ej: Cada 10 días" class="form-control">
+                                        <input type="number" min=0 name="frecuencia_visitas" id="frecuencia_visitas" placeholder="Ej: Cada 10 días" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-2">
@@ -304,17 +304,17 @@
 
                                     <div class="form-group col-lg-12">
                                         <label>Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="instrucciones"></textarea>
+                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="instrucciones" id="instrucciones"></textarea>
                                     </div>
 
                                     <div class="form-group col-lg-12">
                                         <label class="control-label">Servicios Contratados</label>
-                                        <input type="text" name="servicios_contratados" placeholder="Servicios requeridos por el cliente" class="form-control">
+                                        <input type="text" name="servicios_contratados" id="servicios_contratados" placeholder="Servicios requeridos por el cliente" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Frecuencia del Servicio</label>
-                                        <select class="form-control" id="" name="frecuencia_plagas">
+                                        <select class="form-control" id="frecuencia_plagas" name="frecuencia_plagas">
                                             <option>Ocasionalmente</option>
                                             <option>Semanales</option>
                                             <option>Quincenales</option>
@@ -329,7 +329,7 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Tipo Cliente</label>
-                                        <select class="form-control" id="" name="tipo_cliente">
+                                        <select class="form-control" id="tipo_cliente" name="tipo_cliente">
                                             <option>Servicio</option>
                                             <option>Visita</option>
                                             <option>Ejemplo</option>
@@ -338,7 +338,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Tapa de Alcantarilla</label>
-                                        <select class="form-control" id="" name="tapa_alcantarilla">
+                                        <select class="form-control" id="tapa_alcantarilla" name="tapa_alcantarilla">
                                             <option value="Si">Si</option>
                                             <option value="No">No</option>
                                         </select>
@@ -346,12 +346,12 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Número de Tapas</label>
-                                        <input type="number" min=0 name="numero_tapas" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="numero_tapas" name="numero_tapas" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Número de Residencias</label>
-                                        <input type="number" min=0 name="numero_residencias" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="numero_residencias" name="numero_residencias" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -363,42 +363,42 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Semanales</label>
-                                        <input type="number" min=0 name="horas_semanales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_semanales" name="horas_semanales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Mensuales</label>
-                                        <input type="number" min=0 name="horas_mensuales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_mensuales" name="horas_mensuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Trimestrales</label>
-                                        <input type="number" min=0 name="horas_trimestrales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_trimestrales" name="horas_trimestrales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Semestrales</label>
-                                        <input type="number" min=0 name="horas_semestrales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_semestrales" name="horas_semestrales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Quincenales</label>
-                                        <input type="number" min=0 name="horas_quincenales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_quincenales" name="horas_quincenales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Bimensuales</label>
-                                        <input type="number" min=0 name="horas_bimensuales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_bimensuales" name="horas_bimensuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Cada 4 Meses</label>
-                                        <input type="number" min=0 name="horas_4meses" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_4meses" name="horas_4meses" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Horas Anuales</label>
-                                        <input type="number" min=0 name="horas_anuales" placeholder="Número de horas" class="form-control">
+                                        <input type="number" min=0 id="horas_anuales" name="horas_anuales" placeholder="Número de horas" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -410,32 +410,32 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Total de Horas Cotizadas</label>
-                                        <input type="number" min=0 name="total_horas_cotizadas" placeholder="Total de horas" class="form-control">
+                                        <input type="number" min=0 id="total_horas_cotizadas" name="total_horas_cotizadas" placeholder="Total de horas" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor Hora Antes IVA</label>
-                                        <input type="number" min=0 name="valor_hora_antes" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 id="valor_hora_antes" name="valor_hora_antes" placeholder="Valor" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor Inicial Antes IVA</label>
-                                        <input type="number" min=0 name="valor_inicia_antes" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 id="valor_inicia_antes" name="valor_inicia_antes" placeholder="Valor" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Forma de Pago</label>
-                                        <input type="text" name="forma_pago" placeholder="Ej: Contado, 3 Meses, etc." class="form-control">
+                                        <input type="text" id="forma_pago" name="forma_pago" placeholder="Ej: Contado, 3 Meses, etc." class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Facturación</label>
-                                        <input type="text" name="facturacion" placeholder="Ej: SC" class="form-control">
+                                        <input type="text" id="facturacion" name="facturacion" placeholder="Ej: SC" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">¿Tiene Contrato?</label>
-                                        <select class="form-control" name="contrato">
+                                        <select class="form-control" id="contrato" name="contrato">
                                             <option value="Si">Si</option>
                                             <option value="No">No</option>
                                         </select>
@@ -443,12 +443,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Número de Contrato</label>
-                                        <input type="number" min=0 name="numero_contrato" placeholder="#" class="form-control">
+                                        <input type="number" min=0 id="numero_contrato" name="numero_contrato" placeholder="#" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Actividad Económica</label>
-                                        <input type="text" name="actividad_economica" placeholder="Actividad Económica" class="form-control">
+                                        <input type="text" id="actividad_economica" name="actividad_economica" placeholder="Actividad Económica" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -470,19 +470,19 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Otro ¿Cúal?</label>
-                                        <input type="text" name="otro" id="otro" placeholder="Otros medios" class="form-control" disabled>
+                                        <input type="text" id="otro" name="otro" placeholder="Otros medios" class="form-control" disabled>
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Diligenciado por:</label>
-                                        <input type="text" name="" id="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
+                                        <input type="text" id="nombre_usuario" name="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Revisado por:</label>
-                                        <input type="text" name="" placeholder="" class="form-control">
+                                        <input type="text" id="nombre_usuario_revisado" name="nombre-usuario-revisado" placeholder="" class="form-control">
                                     </div>
 
                                     <div class="col-lg-12">
@@ -542,7 +542,6 @@
             //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
             $.get(`/sedes/cliente/${event.target.value}`,  function (res) {
                 $("#select_sedes").empty();//Limipia el select
-                $("#input-sede-direccion").val('');
                 $("#input-sede-direccion").val('');
                 $("#input-sede-ciudad").val('');
                 $("#input-sede-barrio").val('');
@@ -651,16 +650,163 @@
         });   
         
         //Realiza la peticion POST al servidor (AJAX)
-        function guardarSolicitud(codigo, fecha, frecuencia, id_cliente, id_sede, observaciones, crsfToken) {
+        function guardarSolicitud(
+                                    res, 
+                                    codigo_solicitud,
+                                    fecha,
+                                    frecuencia_servicio,
+                                    id_cliente,
+                                    id_sede,
+                                    observaciones,
+                                    contacto_telefono_factura,
+                                    contacto_name_factura,
+                                    contacto_celular_factura,
+                                    observaciones_tecnico,
+                                    diagnostico_inicial,
+                                    cronograma_servicios,
+                                    visita_calidad,
+                                    frecuencia_calidad,
+                                    frecuencia_visitas,
+                                    visita_1,
+                                    visita_2,
+                                    visita_3,
+                                    visita_4,
+                                    total_horas_visita,
+                                    valor_hora,
+                                    valor_facturar,
+                                    instrucciones,
+                                    servicios_contratados,
+                                    frecuencia_plagas,
+                                    tipo_cliente,
+                                    tapa_alcantarilla,
+                                    numero_tapas,
+                                    numero_residencias,
+                                    horas_semanales,
+                                    horas_mensuales,
+                                    horas_trimestrales,
+                                    horas_semestrales,
+                                    horas_quincenales,
+                                    horas_bimensuales,
+                                    horas_4meses,
+                                    horas_anuales,
+                                    total_horas_cotizadas,
+                                    valor_hora_antes,
+                                    valor_inicia_antes,
+                                    forma_pago,
+                                    facturacion,
+                                    contrato,
+                                    numero_contrato,
+                                    actividad_economica,
+                                    medio_contacto,
+                                    otro,
+                                    nombre_usuario,
+                                    nombre_usuario_revisado,
+                                    crsfToken
+                                ) {
+                                    console.log(
+                                    res, 
+                                    codigo_solicitud,
+                                    fecha,
+                                    frecuencia_servicio,
+                                    id_cliente,
+                                    id_sede,
+                                    observaciones,
+                                    contacto_telefono_factura,
+                                    contacto_name_factura,
+                                    contacto_celular_factura,
+                                    observaciones_tecnico,
+                                    diagnostico_inicial,
+                                    cronograma_servicios,
+                                    visita_calidad,
+                                    frecuencia_calidad,
+                                    frecuencia_visitas,
+                                    visita_1,
+                                    visita_2,
+                                    visita_3,
+                                    visita_4,
+                                    total_horas_visita,
+                                    valor_hora,
+                                    valor_facturar,
+                                    instrucciones,
+                                    servicios_contratados,
+                                    frecuencia_plagas,
+                                    tipo_cliente,
+                                    tapa_alcantarilla,
+                                    numero_tapas,
+                                    numero_residencias,
+                                    horas_semanales,
+                                    horas_mensuales,
+                                    horas_trimestrales,
+                                    horas_semestrales,
+                                    horas_quincenales,
+                                    horas_bimensuales,
+                                    horas_4meses,
+                                    horas_anuales,
+                                    total_horas_cotizadas,
+                                    valor_hora_antes,
+                                    valor_inicia_antes,
+                                    forma_pago,
+                                    facturacion,
+                                    contrato,
+                                    numero_contrato,
+                                    actividad_economica,
+                                    medio_contacto,
+                                    otro,
+                                    nombre_usuario,
+                                    nombre_usuario_revisado,
+                                    crsfToken
+                                    );
             $.ajax({
                 url: '/solicitud',
                 data: {
-                    'codigo_solicitud': codigo,
+                    'codigo_solicitud': codigo_solicitud,
                     'fecha_creacion': fecha,
-                    'frecuencia_servicio': frecuencia,
+                    'frecuencia_servicio': frecuencia_servicio,
                     'id_cliente': id_cliente,
                     'id_sede': id_sede,
-                    'observaciones': observaciones 
+                    'contacto_telefono_factura': contacto_telefono_factura,
+                    'contacto_name_factura': contacto_name_factura,
+                    'contacto_celular_factura': contacto_celular_factura,
+                    'observaciones_tecnico': observaciones_tecnico,
+                    'diagnostico_inicial': diagnostico_inicial,
+                    'cronograma_servicios': cronograma_servicios,
+                    'visita_calidad': visita_calidad,
+                    'frecuencia_calidad': frecuencia_calidad,
+                    'frecuencia_visitas': frecuencia_visitas,
+                    'visita_1': visita_1,
+                    'visita_2': visita_2,
+                    'visita_3': visita_3,
+                    'visita_4': visita_4,
+                    'total_horas_visita': total_horas_visita,
+                    'valor_hora': valor_hora,
+                    'valor_facturar': valor_facturar,
+                    'instrucciones': instrucciones,
+                    'servicios_contratados': servicios_contratados,
+                    'frecuencia_plagas': frecuencia_plagas,
+                    'tipo_cliente': tipo_cliente,
+                    'tapa_alcantarilla': tapa_alcantarilla,
+                    'numero_tapas': numero_tapas,
+                    'numero_residencias': numero_residencias,
+                    'horas_semanales': horas_semanales,
+                    'horas_mensuales': horas_mensuales,
+                    'horas_trimestrales': horas_trimestrales,
+                    'horas_semestrales': horas_semestrales,
+                    'horas_quincenales': horas_quincenales,
+                    'horas_bimensuales': horas_bimensuales,
+                    'horas_4meses': horas_4meses,
+                    'horas_anuales': horas_anuales,
+                    'total_horas_cotizadas': total_horas_cotizadas,
+                    'valor_hora_antes': valor_hora_antes,
+                    'valor_inicia_antes': valor_inicia_antes,
+                    'forma_pago': forma_pago,
+                    'facturacion': facturacion,
+                    'contrato': contrato,
+                    'numero_contrato': numero_contrato,
+                    'actividad_economica': actividad_economica,
+                    'medio_contacto': medio_contacto,
+                    'otro': otro,
+                    'nombre_usuario': nombre_usuario,
+                    'nombre_usuario_revisado': nombre_usuario_revisado
                 },
                 headers: {
                     "X-CSRF-TOKEN": crsfToken
@@ -685,7 +831,50 @@
             var frecuencia_servicio = $("#frecuencia_servicio").val();
             var id_cliente = $("#select_clientes").val();
             var id_sede = $("#select_sedes").val();
-            var observaciones = $("#observaciones_tecnico").val();
+            var contacto_telefono_factura = $('#contacto_telefono_factura').val();
+            var contacto_name_factura = $('#contacto_name_factura').val();
+            var contacto_celular_factura = $('#contacto_celular_factura').val();
+            var observaciones_tecnico = $('#observaciones_tecnico').val();
+            var diagnostico_inicial = $('#diagnostico_inicial').val();
+            var cronograma_servicios = $('#cronograma_servicios').val();
+            var visita_calidad = $('#visita_calidad').val();
+            var frecuencia_calidad = $('#frecuencia_calidad').val();
+            var frecuencia_visitas = $('#frecuencia_visitas').val();
+            var visita_1 = $('#visita_1').val();
+            var visita_2 = $('#visita_2').val();
+            var visita_3 = $('#visita_3').val();
+            var visita_4 = $('#visita_4').val();
+            var total_horas_visita = $('#total_horas_visita').val();
+            var valor_hora = $('#valor_hora').val();
+            var valor_facturar = $('#valor_facturar').val();
+            var instrucciones = $('#instrucciones').val();
+            var servicios_contratados = $('#servicios_contratados').val();
+            var frecuencia_plagas = $('#frecuencia_plagas').val();
+            var tipo_cliente = $('#tipo_cliente').val();
+            var tapa_alcantarilla = $('#tapa_alcantarilla').val();
+            var numero_tapas = $('#numero_tapas').val();
+            var numero_residencias = $('#numero_residencias').val();
+            var horas_semanales = $('#horas_semanales').val();
+            var horas_mensuales = $('#horas_mensuales').val();
+            var horas_trimestrales = $('#horas_trimestrales').val();
+            var horas_semestrales = $('#horas_semestrales').val();
+            var horas_quincenales = $('#horas_quincenales').val();
+            var horas_bimensuales = $('#horas_bimensuales').val();
+            var horas_4meses = $('#horas_4meses').val();
+            var horas_anuales = $('#horas_anuales').val();
+            var total_horas_cotizadas = $('#total_horas_cotizadas').val();
+            var valor_hora_antes = $('#valor_hora_antes').val();
+            var valor_inicia_antes = $('#valor_inicia_antes').val();
+            var forma_pago = $('#forma_pago').val();
+            var facturacion = $('#facturacion').val();
+            var contrato = $('#contrato').val();
+            var numero_contrato = $('#numero_contrato').val();
+            var actividad_economica = $('#actividad_economica').val();
+            var medio_contacto = $('#medio_contacto').val();
+            var otro = $('#otro').val();
+            var nombre_usuario = $('#nombre_usuario').val();
+            var nombre_usuario_revisado = $('#nombre_usuario_revisado').val();
+
             //Alert para cambiar el codigo generado por uno personalizado (opcional)
             swal({
                 title: "Código de Solicitud",
@@ -705,7 +894,58 @@
             .then((res) => {
                 if (res == '') {  //Valida que el usuario presione el boton guardar
                     //Llama a la funcion de guardar form
-                    guardarSolicitud(codigo_solicitud, fecha, frecuencia_servicio, id_cliente, id_sede, observaciones, crsfToken);
+                    guardarSolicitud(
+                                        res, 
+                                        codigo_solicitud,
+                                        fecha,
+                                        frecuencia_servicio,
+                                        id_cliente,
+                                        id_sede,
+                                        contacto_telefono_factura,
+                                        contacto_name_factura,
+                                        contacto_celular_factura,
+                                        observaciones_tecnico,
+                                        diagnostico_inicial,
+                                        cronograma_servicios,
+                                        visita_calidad,
+                                        frecuencia_calidad,
+                                        frecuencia_visitas,
+                                        visita_1,
+                                        visita_2,
+                                        visita_3,
+                                        visita_4,
+                                        total_horas_visita,
+                                        valor_hora,
+                                        valor_facturar,
+                                        instrucciones,
+                                        servicios_contratados,
+                                        frecuencia_plagas,
+                                        tipo_cliente,
+                                        tapa_alcantarilla,
+                                        numero_tapas,
+                                        numero_residencias,
+                                        horas_semanales,
+                                        horas_mensuales,
+                                        horas_trimestrales,
+                                        horas_semestrales,
+                                        horas_quincenales,
+                                        horas_bimensuales,
+                                        horas_4meses,
+                                        horas_anuales,
+                                        total_horas_cotizadas,
+                                        valor_hora_antes,
+                                        valor_inicia_antes,
+                                        forma_pago,
+                                        facturacion,
+                                        contrato,
+                                        numero_contrato,
+                                        actividad_economica,
+                                        medio_contacto,
+                                        otro,
+                                        nombre_usuario,
+                                        nombre_usuario_revisado,
+                                        crsfToken
+                                    );
                     //Alert de guardado con éxito
                     swal("¡Formato de solicitud guardado con éxito!", {
                         icon: "success",
@@ -715,7 +955,58 @@
                     return
                 }else{
                     //Cambio de atributos
-                    guardarSolicitud(res, fecha, frecuencia_servicio, id_cliente, id_sede, observaciones, crsfToken);
+                    guardarSolicitud(
+                                        res, 
+                                        codigo_solicitud,
+                                        fecha,
+                                        frecuencia_servicio,
+                                        id_cliente,
+                                        id_sede,
+                                        contacto_telefono_factura,
+                                        contacto_name_factura,
+                                        contacto_celular_factura,
+                                        observaciones_tecnico,
+                                        diagnostico_inicial,
+                                        cronograma_servicios,
+                                        visita_calidad,
+                                        frecuencia_calidad,
+                                        frecuencia_visitas,
+                                        visita_1,
+                                        visita_2,
+                                        visita_3,
+                                        visita_4,
+                                        total_horas_visita,
+                                        valor_hora,
+                                        valor_facturar,
+                                        instrucciones,
+                                        servicios_contratados,
+                                        frecuencia_plagas,
+                                        tipo_cliente,
+                                        tapa_alcantarilla,
+                                        numero_tapas,
+                                        numero_residencias,
+                                        horas_semanales,
+                                        horas_mensuales,
+                                        horas_trimestrales,
+                                        horas_semestrales,
+                                        horas_quincenales,
+                                        horas_bimensuales,
+                                        horas_4meses,
+                                        horas_anuales,
+                                        total_horas_cotizadas,
+                                        valor_hora_antes,
+                                        valor_inicia_antes,
+                                        forma_pago,
+                                        facturacion,
+                                        contrato,
+                                        numero_contrato,
+                                        actividad_economica,
+                                        medio_contacto,
+                                        otro,
+                                        nombre_usuario,
+                                        nombre_usuario_revisado,
+                                        crsfToken
+                                    );
                     swal("¡Formato de solicitud guardado con éxito!", {
                         icon: "success",
                     }); 

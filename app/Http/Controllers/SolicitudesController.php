@@ -54,6 +54,7 @@ class SolicitudesController extends Controller
                 $solicitud = new Solicitud();
                 $cliente = Cliente::find($request->id_cliente);
                 $sede = Sede::find($request->id_sede);
+                
                 // $user = Auth::user()->nombres." ".Auth::user()->apellidos;
         
                 // $data->push($cliente);
@@ -62,15 +63,71 @@ class SolicitudesController extends Controller
                 // return $data;
                 //$pdf = \PDF::loadView('comercial.pdf_solicitud', compact('data'));
                 //return $pdf->stream('Solicitud.pdf');
+                
                 $solicitud->codigo = $request->codigo_solicitud;
                 $solicitud->fecha = $request->fecha_creacion;
                 $solicitud->frecuencia = $request->frecuencia_servicio;
-                $solicitud->observaciones = $request->observaciones;
+                //Cliente
                 $solicitud->cliente_id = $request->id_cliente;
                 $solicitud->sede_id = $request->id_sede;
+
+                //Datos Contacto 
+                $solicitud->contacto_name_factura = $request->contacto_name_factura; 
+                $solicitud->contacto_telefono_factura = $request->contacto_telefono_factura; 
+                $solicitud->contacto_celular_factura = $request->contacto_celular_factura;
+                
+                //Calidad y servicio al cliente: Realizar los siguientes Procesos
+                $solicitud->observaciones_tecnico = $request->observaciones_tecnico;
+                $solicitud->diagnostico_inicial = $request->diagnostico_inicial;
+                $solicitud->cronograma_servicios = $request->cronograma_servicios;
+                $solicitud->visita_calidad = $request->visita_calidad;
+                $solicitud->frecuencia_calidad = $request->frecuencia_calidad;
+
+                //Diligenciar cuando requiera plan de saneamiento
+                $solicitud->frecuencia_visitas = $request->frecuencia_visitas;
+                $solicitud->visita_1 = $request->visita_1;
+                $solicitud->visita_2 = $request->visita_2;
+                $solicitud->visita_3 = $request->visita_3;
+                $solicitud->visita_4 = $request->visita_4;
+                $solicitud->total_horas_visita = $request->total_horas_visita;
+                $solicitud->valor_hora = $request->valor_hora;
+                $solicitud->valor_facturar = $request->valor_facturar;
+                $solicitud->instrucciones = $request->instrucciones;
+                $solicitud->servicios_contratados = $request->servicios_contratados;
+                $solicitud->frecuencia_plagas = $request->frecuencia_plagas;
+                $solicitud->tipo_cliente = $request->tipo_cliente;
+                $solicitud->tapa_alcantarilla = $request->tapa_alcantarilla;
+                $solicitud->numero_tapas = $request->numero_tapas;
+                $solicitud->numero_residencias = $request->numero_residencias;
+
+                //Detalle de horas cotizadas por frecuencia
+                $solicitud->horas_semanales = $request->horas_semanales;
+                $solicitud->horas_mensuales = $request->horas_mensuales;
+                $solicitud->horas_trimestrales = $request->horas_trimestrales;
+                $solicitud->horas_semestrales = $request->horas_semestrales;
+                $solicitud->horas_quincenales = $request->horas_quincenales;
+                $solicitud->horas_bimensuales = $request->horas_bimensuales;
+                $solicitud->horas_4meses = $request->horas_4meses;
+                $solicitud->horas_anuales = $request->horas_anuales;
+
+                //Detalle y valor del servicio
+                $solicitud->total_horas_cotizadas = $request->total_horas_cotizadas;
+                $solicitud->valor_hora_antes = $request->valor_hora_antes;
+                $solicitud->valor_inicia_antes = $request->valor_inicia_antes;
+                $solicitud->forma_pago = $request->forma_pago;
+                $solicitud->facturacion = $request->facturacion;
+                $solicitud->contrato = $request->contrato;
+                $solicitud->numero_contrato = $request->numero_contrato;
+                $solicitud->actividad_economica = $request->actividad_economica;
+
+                $solicitud->medio_contacto = $request->medio_contacto;
+                $solicitud->otro = $request->otro;
+                $solicitud->nombre_usuario = $request->nombre_usuario;
+                $solicitud->nombre_usuario_revisado = $request->nombre_usuario_revisado;
+
                 $solicitud->save();
                 return response()->json('Servicio guardado con exito', 200);
-                
+
             }else{
                 return response()->json('Datos enviados, no validos', 400);
             }
