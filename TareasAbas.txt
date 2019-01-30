@@ -3,30 +3,46 @@ Otros Ajustes
         - Crear Cliente 
             - Validar campos obligatorios
             - Razon social
+            - Atributo de Estado del cliente ACTIVO
+            - Atributo de Estado de comisiones CLIENTE NUEVO, PROSPECTO, RECOMPRA, NUEVO CON CONTRATO, REACTIVADO
+            - Cambiar de CLIENTE NUEVO a RECOMPRA despues de 1 mes
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
         - Editar Cliente
-            - Editar Sede - Eliminar
-            - Editar solicitud
-            - 
+            - Estado de cotizacion Aprobada, No Aprobada
 
         - Solicitudes
-            - Sumar horas de visitas (reactivo)
-            - Revisar HTML
-            - Cargo: (formato, asesor y numero consecutivo)
-            - Seleccion de sedes NO obligatiorias o sede unica (personas naturales)
-            - Guardar en DB
+            - Actualizar el formulario con el formato nuevo #Andres
+            - Hacer CRUD de todos los datos #Andres
+            - Asignar el tipo de facturacion del cliente (Tipo 1: factura maestra con frecuencia, Tipo 2: factura por sede o servicio)
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
-            - Novedades urgentes
+        - ROL DE DIRECCION COMERCIAL
+            - Asignar los permisos relacionados con metas
 
     AREA CALIDAD (2 Dias)
+        - Clasificar las novedades en (PQRS y sacar informe)
+        - Plagas creadas segun necesidad. 
+        - Quitar checklist
+        - Recepcion y asignacion de documentos con URL a Drive
+        - Inventario de documentos (Reporte de documentos) <- Cambiar nombre
+        - Inventario de Documentos con frecuencia y advertencia si el doc no esta creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...)
         - Revisar Consultas y detalles de interfaz
 
     AREA DE PROGRAMACION
         - No generar ningun doc por servicios que no sean normales.
         - Ver en los horarios de tecnicos solo servicios Normales y de refuerzo (Diferenciarlos)
+        - Solo se puede imprimir ODS y Rutas del dia selec. y el dia siguiente (Quitar filtro de fechas)
+        - Imprimir el cronograma de todos los tecnicos
+        - Formato de impresion para cronograma de tecnicos (horario HTML) 1 por tecnico
+        - Poner listado de tecnicos con su color en una zona visible (No mostrar si esta inactivo)
+        - Estado del tecnico (activo, inactivo)
         - Servicios Cancelados y realizados
+        - Permiso para modulo de facturacion (puede editar facturas y asignar sedes a facturas maestras)
+        - Verificar los eventos de DROP de servicios y cancelacion (Cambio de color)
+        - Asignacion de facturas a servicios dependiendo del tipo de facturacion del cliente teniendo en cuenta la frecuencia dependiendo del tipo de fac.(Quitar asignacion de facturas del modal de calendario)
+        - Filtro en facturacion con cliente y rango de fecha.
+        - Visualizar la frecuencia sugerida en la solicitud
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
 
@@ -35,8 +51,15 @@ Otros Ajustes
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Comisiones para inspectores
+        - Filtro de comisiones por facturacion pendiente, y por facturacion pagada <- ACTUAL
         - Reporte de clientes cerrados en el mes (Cotizacion final aprobada)
+        - Guardar las metas con un solo boton
+        - Puede editar las metas
+        - Mascaras para inputs de precios y metas #Andres
+        - Solo facturacion y comisiones
         - Revisar Consultas y detalles de interfaz
+        - Control de facturacion (solo puede registrar el pago y cambiar el estado de facturacion)
+        - Estado de factura Cancelada
 
     AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos
@@ -46,10 +69,41 @@ Otros Ajustes
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
         - Revisar Consultas y detalles de interfaz
 
-    AREA DE ADMINISTRACION
-        - Creacion de tecnicos
-        - Creacion de usuarios
-        - Reportes de Area de Servicio al Cliente y Contabilidad
+
+    AREA DE TECNICOS
+        - Realizar formulario del nuevo formato de inspeccion. #Andres
+        - Realizar el calculo de horas hombre, etc #Andres
+        - Visualizar el informe de estos formatos desde comercial y autocompletar la info el formato de Solicitud #Andres
+
+
+    AREA DE ADMINISTRACION 
+        - Creacion de tecnicos #Andres
+        - Creacion de usuarios y asignacion de roles #Andres
+        - Todos los modulos disponnibles #Andres
 
     SESIONES VIP (2 Dias)
-        - Visualizar informacion
+        - Visualizar informacion #Andres
+
+
+
+TAREAS ANDRES
+AREA COMERCIAL (3 Dias)
+    - Solicitudes
+        - Actualizar el formulario con el formato nuevo
+        - Hacer CRUD de todos los datos
+
+AREA DE CONTABILIDAD (2 Hrs)
+    - Mascaras para inputs de precios y metas 
+
+AREA DE TECNICOS (4 Dias)
+    - Realizar formulario del nuevo formato de inspeccion.
+    - Realizar el calculo de horas hombre, etc
+    - Visualizar el informe de estos formatos desde comercial y autocompletar la info el formato de Solicitud
+
+AREA DE ADMINISTRACION (1 Dia)
+    - Creacion de tecnicos
+    - Creacion de usuarios y asignacion de roles con un checkbox
+    - Todos los modulos disponnibles
+    
+SESIONES VIP (1 Dia)
+    - Adecuar la interfaz para la visualizacion de todos los documentos del cliente.

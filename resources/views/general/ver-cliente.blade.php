@@ -1586,20 +1586,6 @@
             })
     })
 
-    $("#btn-save-sedes").click(event => {
-        event.preventDefault();
-        let dataSedes = {
-            nombre_sedes: $("#nombre_sedes").val(),
-            direccion_sedes: $("#direccion_sedes").val(),
-            ciudad_sedes: $("#ciudad_sedes").val(),
-            barrio_sedes: $("#barrio_sedes").val(),
-            ruta_sedes: $("#ruta_sedes").val(),
-            nombre_contacto: $("#nombre_contacto").val(),
-            telefono_sedes: $("#telefono_sedes").val(),
-            celular_sedes: $("#celular_sedes").val(),
-            email_sedes: $("#email_sedes").val(),
-            cliente_id: parseInt({{$cliente[0]->id}})
-
     function deleteCotization(id) {
         let crsfToken = document.getElementsByName("_token")[0].value;
         swal({
