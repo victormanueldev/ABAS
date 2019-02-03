@@ -121,6 +121,7 @@ class ClientesController extends Controller
         $cliente->celular = $request->get('celular');
         $cliente->empresa_actual = $request->get('empresa_actual');
         $cliente->razon_cambio = $request->get('razon_cambio');
+        $cliente->estado_registro = $request->get('estado_registro');
         $cliente->user_id = Auth::user()->id;
 
         //Sedes
@@ -269,17 +270,26 @@ class ClientesController extends Controller
 
     public function billingControl(Request $request)
     {
-        return view('contabilidad.control-facturacion');
+        return view('general.control-facturacion');
     }
 
     public function clientBills(Request $request, $idCliente, $idSede)
     {
+        $dt_ini = Carbon::parse($request->fecha_inicio)->toDateString();
+        $dt_end = carbon::parse($request->fecha_fin)->toDateString();
         $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
                                 $query->where('id',$idSede);
                             },'solicitudes.servicios' => function($query){
                                 $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str','tipo','color');
                             } , 'solicitudes.servicios.tipos'])
                             ->select('id','nombre_cliente')
+                            ->whereHas('solicitudes', function($query) use($idSede){
+                                $query->where('sede_id', $idSede);
+                            })
+                            ->whereHas('solicitudes.servicios', function($query) use($dt_ini, $dt_end){
+                                $query->where('fecha_inicio', '>=', $dt_ini);
+                                $query->where('fecha_fin', '<=', $dt_end);
+                            })
                             ->where('id', $idCliente)
                             ->get();
         return $facturas;

@@ -244,11 +244,11 @@
                                         <div class="tab-pane" id="tab-3">
                                             <div class="row">
                                                 @if(isset($cliente[0]->cotizacion))
-                                                <div class="col-lg-6" style="padding: 0 30px">
-                                                    <h5>Cotización</h5>
+                                                <div class="col-lg-5" style="padding: 0 30px">
+                                                    <h5 style="width:30%;display:inline-block">Cotización</h5><span class="badge badge-default">{{$cliente[0]->cotizacion->estado}}</span>
                                                     <h1 class="no-margins">{{$cliente[0]->cotizacion->codigo}}</h1>
-                                                    <a href="javascript: deleteCotization({{$cliente[0]->cotizacion->id}})"
-                                                        class="stat-percent font-bold text-navy">Eliminar <i class="fa fa-edit"></i></a>
+                                                    <a href="javascript: optionCotization({{$cliente[0]->cotizacion->id}})"
+                                                        class="stat-percent font-bold text-navy">Marcar como aprobada <i class="fa fa-edit"></i></a>
                                                     <strong>Creación: </strong><small>{{$cliente[0]->cotizacion->created_at}}</small>
                                                 </div>
                                                 @else
@@ -1019,6 +1019,8 @@
 <!-- Sweet Alert -->
 <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <script>
+    var idCliente = window.location.pathname.split("/")[2]
+
     //Inicializacion de Contadores
     var contTratamientos = 1;
     var contProductos = 1;
@@ -1586,7 +1588,51 @@
             })
     })
 
-    function deleteCotization(id) {
+    function optionCotization(id) {
+        let crsfToken = document.getElementsByName("_token")[0].value;
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro que desea aprobar esta cotización?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                edit: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: 'approved',
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+        .then( option => {
+             if(option == 'approved'){
+                $.ajax({
+                    url:`/cotizaciones/${id}`,
+                    data: {
+                        estado: 'aprobada',
+                        cliente: idCliente
+                    },
+                    type: 'PUT',
+                    headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        }
+                })
+                .then(res => {
+                    if(res){
+                        swal('¡Cotizacion Aprobada!', 'La cotizacion ha cambiado su estado a aprobada.', 'success')
+                    }
+                })
+                .catch(err => {
+                    swal("¡Error!", err.statusText, "error")
+                        .then(value => { //Boton OK actualizado
+                            return
+                        })
+                })
+            }
+        })
+    }
+
+    function updateCotization(id) {
         let crsfToken = document.getElementsByName("_token")[0].value;
         swal({
             title: "¡Advertencia!",

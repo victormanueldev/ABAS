@@ -17,6 +17,7 @@ class CreateCotizacionesTable extends Migration
             $table->increments('id');
             $table->string('codigo', 10);
             $table->string('estado', 10)->default('inicial');
+            $table->string('estado_aprobacion')->default('no_aprobada');
             $table->unsignedBigInteger('valor');
             $table->integer('cliente_id');
             $table->timestamps();

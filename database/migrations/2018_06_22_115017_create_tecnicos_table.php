@@ -16,6 +16,7 @@ class CreateTecnicosTable extends Migration
         Schema::create('tecnicos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre', 100);
+            $table->string('estado',10)->default('activo');
             $table->string('color', 25);
             $table->timestamps();
         });

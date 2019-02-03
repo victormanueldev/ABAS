@@ -15,10 +15,13 @@ class TecnicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $tecnicos = Tecnico::all();
+        if($request->ajax()){
+            return $tecnicos;
+        }
         return view('programacion.calendario-tecnicos', compact('tecnicos'));
     }
 
@@ -107,33 +110,85 @@ class TecnicoController extends Controller
 
     public function getService($id)
     {
-        $servicios = Tecnico::with('servicios')->where('id', $id)->get();
         $data = collect();
-        foreach ($servicios[0]->servicios as $servicio) {
-            # code..
-            $data->push([
-                'id' => $servicio->id,
-                'title' => $servicios[0]->nombre,
-                'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
-                "end" => $servicio->fecha_fin." ".$servicio->hora_fin,
-                'backgroundColor' => $servicios[0]->color, 
-                'borderColor' => $servicios[0]->color
-            ]);
+        if($id == 'all'){   //Servicios de todos los tecnicos
+            $tecnicos = Tecnico::with('servicios')->get();
+            foreach ($tecnicos as $tecnico) {
+                if(count($tecnico->servicios) != 0){
+                    foreach ($tecnico->servicios as $servicio) {
+                        if($servicio->tipo == 'Normal'){
+                            $data->push([
+                                'id' => $servicio->id,
+                                'title' => $tecnico->nombre,
+                                'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                                "end" => $servicio->fecha_fin." ".$servicio->hora_fin,
+                                'backgroundColor' => $tecnico->color, 
+                                'borderColor' => $tecnico->color
+                            ]);
+                        }
+                    }
+                }
+            }
+        }else{
+            $servicios = Tecnico::with('servicios')->where('id', $id)->get();
+            foreach ($servicios[0]->servicios as $servicio) {
+                if($servicio->tipo == 'Normal'){
+                    $data->push([
+                        'id' => $servicio->id,
+                        'title' => $servicios[0]->nombre,
+                        'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                        "end" => $servicio->fecha_fin." ".$servicio->hora_fin,
+                        'backgroundColor' => $servicios[0]->color, 
+                        'borderColor' => $servicios[0]->color
+                    ]);
+                }
+            }
         }
+ 
         return $data;
     }
 
     public function getServicesByDate($id, $dateStart, $dateEnd)
     {
-        $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
-                            ->where('fecha_inicio', '>=', $dateStart)
-                            ->where('fecha_inicio', '<=', $dateEnd)
-                            //Filtro por ID de Tecnico
-                            ->whereHas('tecnicos', function($query) use($id){
-                                //Columna Id de la tabla tecnicos
-                                $query->where('id', $id);
-                            })
-                            ->get();
+        //Comparacion de parametros fecha
+        $dt_ini = Carbon::parse($dateStart);
+        $dt_end = Carbon::parse($dateEnd);
+
+        if($dt_end->diffInDays($dt_ini) != 1){
+            if ($id == 'all') {
+                # code...
+                $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
+                                    ->where('fecha_inicio', '>=', $dateStart)
+                                    ->where('fecha_inicio', '<=', $dateEnd)
+                                    ->get();
+            } else {
+                $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
+                                    ->where('fecha_inicio', '>=', $dateStart)
+                                    ->where('fecha_inicio', '<=', $dateEnd)
+                                    //Filtro por ID de Tecnico
+                                    ->whereHas('tecnicos', function($query) use($id){
+                                        //Columna Id de la tabla tecnicos
+                                        $query->where('id', $id);
+                                    })
+                                    ->get();
+            }
+        }else{
+            if ($id == 'all') {
+                $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
+                                    ->where('fecha_inicio', '==', $dateStart)
+                                    ->get();
+            } else {
+                $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
+                                    ->where('fecha_inicio', '==', $dateStart)
+                                    //Filtro por ID de Tecnico
+                                    ->whereHas('tecnicos', function($query) use($id){
+                                        //Columna Id de la tabla tecnicos
+                                        $query->where('id', $id);
+                                    })
+                                    ->get();
+            }
+        }
+        
         $data = collect();
 
         foreach ($servicios as $servicio) {
@@ -183,6 +238,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -191,6 +247,7 @@ class TecnicoController extends Controller
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -222,12 +279,14 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
             //Obtiene la informacion de las rutas de  un servicio especifico
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')//
                                 ->where('fecha_inicio', '>=', $fechaInicio)
                                 ->where('fecha_fin', '<=', $fechaFin)
+                                ->where('tipo','Normal')
                                 ->where('id', $idServicio)
                                 ->get();
 
@@ -275,9 +334,10 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos','solicitud.cliente.user','solicitud.cliente.telefonos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
-                                        ->whereHas('tecnicos', function($query) use($idTecnico){
-                                            $query->where('id', $idTecnico);  
-                                        })
+                                        ->where('tipo','Normal')
+                                        // ->whereHas('tecnicos', function($query) use($idTecnico){
+                                        //     $query->where('id', $idTecnico);  
+                                        // })
                                         ->get();
 
         //Valida que la opcion de imprimir sea de un servicio en especifico
@@ -286,6 +346,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos','solicitud.cliente.user','solicitud.cliente.telefonos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
 
@@ -309,6 +370,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -317,6 +379,7 @@ class TecnicoController extends Controller
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')
                             ->where('fecha_inicio', '>=', $fechaInicio)
                             ->where('fecha_fin', '<=', $fechaFin)
+                            ->where('tipo','Normal')
                             ->whereHas('tecnicos', function($query) use($idTecnico){
                                 $query->where('id', $idTecnico);  
                             })
@@ -339,12 +402,14 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
             //Obtiene la informacion de las rutas de  un servicio especifico
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')//
                                 ->where('fecha_inicio', '>=', $fechaInicio)
                                 ->where('fecha_fin', '<=', $fechaFin)
+                                ->where('tipo','Normal')
                                 ->where('id', $idServicio)
                                 ->get();
 
@@ -379,6 +444,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -387,6 +453,7 @@ class TecnicoController extends Controller
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')
                             ->where('fecha_inicio', '>=', $fechaInicio)
                             ->where('fecha_fin', '<=', $fechaFin)
+                            ->where('tipo','Normal')
                             ->whereHas('tecnicos', function($query) use($idTecnico){
                                 $query->where('id', $idTecnico);  
                             })
@@ -409,12 +476,14 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
             //Obtiene la informacion de las rutas de  un servicio especifico
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')//
                                 ->where('fecha_inicio', '>=', $fechaInicio)
                                 ->where('fecha_fin', '<=', $fechaFin)
+                                ->where('tipo','Normal')
                                 ->where('id', $idServicio)
                                 ->get();
 
@@ -449,6 +518,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -457,6 +527,7 @@ class TecnicoController extends Controller
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')
                             ->where('fecha_inicio', '>=', $fechaInicio)
                             ->where('fecha_fin', '<=', $fechaFin)
+                            ->where('tipo','Normal')
                             ->whereHas('tecnicos', function($query) use($idTecnico){
                                 $query->where('id', $idTecnico);  
                             })
@@ -479,12 +550,14 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
             //Obtiene la informacion de las rutas de  un servicio especifico
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')//
                                 ->where('fecha_inicio', '>=', $fechaInicio)
                                 ->where('fecha_fin', '<=', $fechaFin)
+                                ->where('tipo','Normal')
                                 ->where('id', $idServicio)
                                 ->get();
 
@@ -519,6 +592,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -527,6 +601,7 @@ class TecnicoController extends Controller
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')
                             ->where('fecha_inicio', '>=', $fechaInicio)
                             ->where('fecha_fin', '<=', $fechaFin)
+                            ->where('tipo','Normal')
                             ->whereHas('tecnicos', function($query) use($idTecnico){
                                 $query->where('id', $idTecnico);  
                             })
@@ -549,12 +624,14 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
             //Obtiene la informacion de las rutas de  un servicio especifico
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')//
                                 ->where('fecha_inicio', '>=', $fechaInicio)
                                 ->where('fecha_fin', '<=', $fechaFin)
+                                ->where('tipo','Normal')
                                 ->where('id', $idServicio)
                                 ->get();
 
@@ -588,6 +665,7 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->whereHas('tecnicos', function($query) use($idTecnico){
                                             $query->where('id', $idTecnico);  
                                         })
@@ -596,6 +674,7 @@ class TecnicoController extends Controller
             $certificados = Servicio::with('solicitud.certificados', 'tecnicos')
                                ->where('fecha_inicio', '>=', $fechaInicio)
                                ->where('fecha_fin', '<=', $fechaFin)
+                               ->where('tipo','Normal')
                                ->whereHas('tecnicos', function($query) use($idTecnico){
                                    $query->where('id', $idTecnico);  
                                })
@@ -612,12 +691,14 @@ class TecnicoController extends Controller
             $ordenesServicios = Servicio::with('solicitud.sede','solicitud.cliente', 'tecnicos', 'tipos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
+                                        ->where('tipo','Normal')
                                         ->where('id', $idServicio)
                                         ->get();
             //Obtiene la informacion de las rutas de  un servicio especifico
             $certificados = Servicio::with('solicitud.certificados', 'tecnicos')//
                                     ->where('fecha_inicio', '>=', $fechaInicio)
                                     ->where('fecha_fin', '<=', $fechaFin)
+                                    ->where('tipo','Normal')
                                     ->where('id', $idServicio)
                                     ->get();
 

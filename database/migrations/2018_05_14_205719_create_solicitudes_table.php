@@ -18,7 +18,7 @@ class CreateSolicitudesTable extends Migration
             $table->increments('id');
             $table->string('codigo', 20);
             $table->date('fecha');
-            $table->unsignedTinyInteger('frecuencia');
+            $table->string('frecuencia',15);
             // $table->string('contacto_factura', 50)->nullable();
             // $table->string('telefono', 10)->nullable();
             // $table->string('celular', 10)->nullable();

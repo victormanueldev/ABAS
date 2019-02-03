@@ -27,6 +27,8 @@ class CreateClientesTable extends Migration
             $table->string('zona', 100)->nullable();
             $table->string('estado_negociacion', 20)->default('Prospecto');
             $table->string('estado_facturacion', 10)->default('Normal');
+            $table->string('estado_agendamiento', 10)->default('Activo');
+            $table->string('estado_registro', 50);
             //Datos de Contacto
             $table->string('nombre_contacto', 100)->nullable();
             $table->string('contacto_tecnico', 100)->nullable();//Verificar

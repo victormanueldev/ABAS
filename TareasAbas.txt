@@ -1,15 +1,8 @@
 Otros Ajustes
     AREA COMERCIAL (1 Dia)
         - Crear Cliente 
-            - Validar campos obligatorios
-            - Razon social
-            - Atributo de Estado del cliente ACTIVO
-            - Atributo de Estado de comisiones CLIENTE NUEVO, PROSPECTO, RECOMPRA, NUEVO CON CONTRATO, REACTIVADO
-            - Cambiar de CLIENTE NUEVO a RECOMPRA despues de 1 mes
+            - Atributo de Estado de comisiones RECOMPRA, NUEVO CON CONTRATO, REACTIVADO (Editar en solicitudes)
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
-
-        - Editar Cliente
-            - Estado de cotizacion Aprobada, No Aprobada
 
         - Solicitudes
             - Actualizar el formulario con el formato nuevo #Andres
@@ -30,19 +23,10 @@ Otros Ajustes
         - Revisar Consultas y detalles de interfaz
 
     AREA DE PROGRAMACION
-        - No generar ningun doc por servicios que no sean normales.
-        - Ver en los horarios de tecnicos solo servicios Normales y de refuerzo (Diferenciarlos)
-        - Solo se puede imprimir ODS y Rutas del dia selec. y el dia siguiente (Quitar filtro de fechas)
         - Imprimir el cronograma de todos los tecnicos
         - Formato de impresion para cronograma de tecnicos (horario HTML) 1 por tecnico
-        - Poner listado de tecnicos con su color en una zona visible (No mostrar si esta inactivo)
-        - Estado del tecnico (activo, inactivo)
-        - Servicios Cancelados y realizados
-        - Permiso para modulo de facturacion (puede editar facturas y asignar sedes a facturas maestras)
-        - Verificar los eventos de DROP de servicios y cancelacion (Cambio de color)
+        - asignacion de sedes a facturas maestras dependiendo de las fechas de vigencia de la factura maestra
         - Asignacion de facturas a servicios dependiendo del tipo de facturacion del cliente teniendo en cuenta la frecuencia dependiendo del tipo de fac.(Quitar asignacion de facturas del modal de calendario)
-        - Filtro en facturacion con cliente y rango de fecha.
-        - Visualizar la frecuencia sugerida en la solicitud
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
 
@@ -82,28 +66,5 @@ Otros Ajustes
         - Todos los modulos disponnibles #Andres
 
     SESIONES VIP (2 Dias)
-        - Visualizar informacion #Andres
+        - Visualizar informacion #Andress
 
-
-
-TAREAS ANDRES
-AREA COMERCIAL (3 Dias)
-    - Solicitudes
-        - Actualizar el formulario con el formato nuevo
-        - Hacer CRUD de todos los datos
-
-AREA DE CONTABILIDAD (2 Hrs)
-    - Mascaras para inputs de precios y metas 
-
-AREA DE TECNICOS (4 Dias)
-    - Realizar formulario del nuevo formato de inspeccion.
-    - Realizar el calculo de horas hombre, etc
-    - Visualizar el informe de estos formatos desde comercial y autocompletar la info el formato de Solicitud
-
-AREA DE ADMINISTRACION (1 Dia)
-    - Creacion de tecnicos
-    - Creacion de usuarios y asignacion de roles con un checkbox
-    - Todos los modulos disponnibles
-    
-SESIONES VIP (1 Dia)
-    - Adecuar la interfaz para la visualizacion de todos los documentos del cliente.

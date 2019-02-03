@@ -25,6 +25,7 @@ class CreateServiciosTable extends Migration
             $table->time('hora_fin')->nullable();
             $table->unsignedMediumInteger('duracion')->nullable();//Minutos
             $table->boolean('confirmado')->default(false);
+            $table->string('estado')->default('Pendiente');
             $table->string('color', 25);
             $table->string('observaciones', 120);
             $table->integer('solicitud_id');

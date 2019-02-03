@@ -62,11 +62,30 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-8" style="margin-top: 15px">
+                            <div class="form-group col-md-3" style="margin-top: 15px">
                                 <label class="control-label">Sede *</label>
                                 <select class="form-control " id="select_sedes">
                                     <option value="" selected disabled>Selecciona una sede</option>
                                 </select>
+                            </div>
+
+                            <div class="col-md-4" style="margin-top: 15px">
+                                <div class="form-group" id="data_5">
+                                    <label class="control-label">Fechas de búsqeuda *</label>
+                                    <div class="input-daterange input-group" id="datepicker" style="width: 100%;">
+                                        <input type="text" id="date-start" class="form-control-sm form-control"
+                                            name="start" value="01/14/2018" />
+                                        <span class="input-group-addon">hasta</span>
+                                        <input type="text" id="date-end" class="form-control-sm form-control" name="end"
+                                            value="01/22/2018" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1"  style="margin-top: 37px">
+                                <button class="btn btn-success btn-bitbucket" id="btn-search">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
 
                             <div class="form-group col-md-2" style="margin-top: 15px" >
@@ -76,7 +95,7 @@
                                     </div>
                                 </div>
                             <div class="form-group col-md-2" style="margin-top: 37px">
-                                    <button type="button" id="btn-edit-client" class="btn btn-primary">Clasificar cliente</button>
+                                <button type="button" id="btn-edit-client" class="btn btn-primary" {{ Auth::user()->cargo_id == '3' ? 'style=display:none' : ''}}>Clasificar cliente</button>
                             </div>
                         </div>
                         <hr>
@@ -177,6 +196,7 @@
     <script src="{{asset('js/plugins/footable/footable.js')}}"></script> --}}
     <script src="{{asset('js/plugins/dataTables/datatables.min.js')}}"></script>
     <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+    <script src="{{asset('js/plugins/fullcalendar/moment-timezone.js')}}"></script>
     <script src="{{asset('js/plugins/typehead/bootstrap3-typeahead.min.js')}}"></script>
     <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
     <!-- Scripts de inicializacion -->
@@ -192,8 +212,22 @@
             var dataServer;
             var table;
             let clientes;
+            let url = window.location.pathname.split("/")
 
         $(document).ready(function () {
+
+        /** Asignacion de fechas por default a dateRange **/
+        $("#date-start").val(moment().tz("America/Bogota").format("MM/DD/YYYY"));
+        $("#date-end").val(moment().tz("America/Bogota").add(1, "month").format("MM/DD/YYYY"));
+
+        /** Inicializacion del Date Range **/
+        $('#data_5 .input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
+
+
 
             /* Estructuracion de la información del cliente para el autocompletado
             ------------------------------------------------------------------------*/
@@ -361,6 +395,7 @@
 
             $("#tabla_clientes_cont tbody").on('click', 'tr', function () {
                 let dataToSend = table.row(this).data();
+                console.log()
                 //Alert de confirmacion
                 swal({
                     title: "Información!",
@@ -370,13 +405,13 @@
                         cancel: true,
                         confirm: {
                             text: 'Registrar pago',
-                            visible: true,
+                            visible: url[1] == 'contabilidad' ? true : false,
                             value: 'pay',
                             closeModal: false, //Muestra el Loader
                         },
                         edit: {
                             text: 'Editar factura',
-                            visible: true,
+                            visible: url[1] == 'programacion' ? true : false,
                             value: 'edit',
                             closeModal: true, //Muestra el Loader
                         }
@@ -422,8 +457,8 @@
                     })
             });
 
-            //Evento change del select de Sedes
-            $("#select_sedes").change(event => {
+
+            $("#btn-search").click(() => {
                 fillTable(clienteSeleccionado, $("#select_sedes").val());
             })
 
@@ -483,7 +518,17 @@
             function fillTable(idCliente, idSede){
                 table.clear().draw();
                 let serviciosTabla = [];
-                $.get(`/facturacion/cliente/${idCliente}/${idSede}`)
+                $.get({
+                        url: `/facturacion/cliente/${idCliente}/${idSede}`,
+                        data: {
+                            fecha_inicio: $("#date-start").val(),
+                            fecha_fin: $("#date-end").val()
+                        },
+                        type: 'GET',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                        }
+                })
                     .then(res => {
                         if (res[0].solicitudes != null) {
                                 if (res[0].solicitudes[0].servicios != null) {

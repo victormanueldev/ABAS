@@ -72,11 +72,14 @@ Route::post('solicitud/show', 'SolicitudesController@show');
 //Servicios
 Route::resource('servicios', 'ServicioController', [
     'except' => 'updateFrecuency',
-    'except' => 'updateState'
+    'except' => 'updateState',
+    'except' => 'getServicesByTecnician'
 ]);
 Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
 Route::put('servicios/edit/state', 'ServicioController@updateState');
 Route::get('list/services','ServicioController@listServices');
+Route::get('servicios/show/{idTecnico}', 'ServicioController@getServicesByTecnician');
+Route::put('servicios/edit/dates','ServicioController@updateDatesHoursService');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -172,7 +175,8 @@ Route::put('payment/register', 'TipoServicioController@registerPayment');
 Route::put('payment/update', 'TipoServicioController@updateBill');
 
 Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
-Route::get('contabilidad/facturacion', 'ClientesController@billingControl');
+Route::get('contabilidad/facturacion', 'ClientesController@billingControl');    //Registro de Pagos
+Route::get('programacion/facturacion', 'ClientesController@billingControl');    //Facturacion
 Route::get('facturacion/cliente/{id}/{sede}', 'ClientesController@clientBills');
 
 Route::resource('temporales/novedad', 'NovedadTemporalController', [

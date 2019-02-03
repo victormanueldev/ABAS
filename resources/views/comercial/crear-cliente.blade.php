@@ -57,7 +57,7 @@
                                                         <div class="col-lg-3">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Natural*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;">
+                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;" selected>
                                                             </label>
                                                         </div>
                                                         
@@ -77,13 +77,13 @@
                                                         
                                                     </div>
                         
-                                                    <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
+                                                    <div class="form-group col-lg-6"><label class="control-label">Cargo </label>
                                                         <input type="text" name="cargo_contacto" placeholder="Cargo de contacto" class="form-control">
                                                         
                                                     </div>
                         
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" name="email" placeholder="Email del contacto" class="form-control">
+                                                        <input type="email" name="email" placeholder="Email del contacto" class="form-control" required>
                                                         
                                                     </div>
 
@@ -96,6 +96,8 @@
                                                         <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
                                                         
                                                     </div>
+
+                                                    <input type="hidden" value="prospecto" name="estado_registro">
 
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
@@ -123,11 +125,11 @@
                                                         <label class="control-label">Teléfono *</label>
                                                         
                                                         <div class="input-group">
-                                                            <span class="input-group-btn" required>
+                                                            <span class="input-group-btn" >
                                                                 <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]">
+                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
                                                             
                                                         </div>                                                        
                                                     </div>
@@ -265,7 +267,7 @@
                                                         <div class="col-lg-3">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Natural*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;">
+                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;" selected>
                                                             </label>
                                                         </div>
                                                         
@@ -277,6 +279,8 @@
                                                         </div>
                                                         
                                                     </div>
+
+                                                    <input type="hidden" value="cliente_nuevo" name="estado_registro">
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
                                                         <input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control" required>

@@ -2717,9 +2717,296 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	mso-pattern:auto;
 	white-space:nowrap;}
 </style>
+
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+
+  .body {
+      background: #f2f2f2;
+      font-family: "Roboto";
+      border-top: 30px solid #5CAE27;
+      border-bottom: 20px solid #5CAE27
+  }
+
+  .wrap {
+      width: 90%;
+      max-width: 1200px;
+      padding: 40px;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0px 0px 3px grey;
+      text-align: center;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+      font-weight: 300;
+  }
+
+  h1 {
+      font-size: 30px;
+  }
+
+  h2 {
+      font-size: 24px;
+  }
+
+  h3 {
+      font-size: 16px;
+  }
+
+  h4 {
+      font-size: 14px;
+  }
+
+  h5 {
+      font-size: 12px;
+  }
+
+  h6 {
+      font-size: 10px;
+  }
+
+  h3,
+  h4,
+  h5 {
+      margin-top: 5px;
+      font-weight: 600;
+  }
+
+  .contenedor-formulario {
+      width: 100%;
+      color: #303030;
+      padding: 50px;
+  }
+
+  .contenedor-formulario .formulario {
+      width: 100%;
+      margin: auto;
+  }
+
+  .contenedor-formulario .formulario .input-group {
+      position: relative;
+      margin-bottom: 32px;
+  }
+
+  .contenedor-formulario .formulario .input-group input[type="text"],
+  .contenedor-formulario .formulario .input-group input[type="email"],
+  .contenedor-formulario .formulario .input-group input[type="password"] {
+      font-family: "Helvetica";
+      font-size: 16px;
+      color: #303F9F;
+      width: 100%;
+      outline: none;
+      padding: 15px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid #BBDEFB;
+  }
+
+  /* TABLES */
+  .table {
+      border-collapse: collapse !important;
+      width: 100%;
+  }
+
+  .table td,
+  .table th {
+      background-color: #fff !important;
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+      border: 1px solid #ddd !important;
+  }
+
+  .table-bordered {
+      border: 1px solid #EBEBEB;
+  }
+
+  .table-bordered>thead>tr>th,
+  .table-bordered>thead>tr>td {
+      background-color: #F5F5F6;
+      border-bottom-width: 1px;
+  }
+
+  .table-bordered>thead>tr>th,
+  .table-bordered>tbody>tr>th,
+  .table-bordered>tfoot>tr>th,
+  .table-bordered>thead>tr>td,
+  .table-bordered>tbody>tr>td,
+  .table-bordered>tfoot>tr>td {
+      border: 1px solid #e7e7e7;
+  }
+
+  .table>thead>tr>th {
+      border-bottom: 1px solid #DDDDDD;
+      vertical-align: bottom;
+  }
+
+  .table>thead>tr>th,
+  .table>tbody>tr>th,
+  .table>tfoot>tr>th,
+  .table>thead>tr>td,
+  .table>tbody>tr>td,
+  .table>tfoot>tr>td {
+      border-top: 1px solid #e7eaec;
+      line-height: 1.42857;
+      padding: 8px;
+      vertical-align: top;
+  }
+
+  .tecnico {
+      width: 30%;
+      position: relative;
+      text-align: center;
+      margin-bottom: 25px;
+      display: inline-block;
+      margin-top: 20px
+  }
+</style>
 </head>
 
 <body>
+
+    <div class="body">
+
+        <div class="contenedor-formulario">
+            <div class="wrap">
+                <div style="position: relative;float: left;">
+                  <img src="{{asset('print-files/ods/22905_image002.png')}}" alt="" width="150" height="80">
+                </div>
+                <h1>Horario de Técnico</h1>
+                <div class="tecnico">
+                    <h4>Nombre: </h4><span> ANDRES STIVEN BEJARANO</span>
+                </div>
+                <div class="tecnico">
+                    <h4>Fecha Actual: </h4><span> 2019-02-03</span>
+                </div>
+                <form action="" class="formulario" name="formulario_registro" method="get">
+                    <div style="width: 100%">
+                        <table class="table table-bordered">
+                            <thead>
+                                <th style="width: 130px;">Hora de Inicio</th>
+                                <th style="width: 130px;">Hora de Fin</th>
+                                <th style="width: 270px;">Cliente</th>
+                                <th style="width: 270px;">Sede</th>
+                                <th>Direccion</th>
+                            </thead>
+                            <tbody>
+                                <!-- 13 SERVICIOS -->
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+                                <tr>
+                                    <td>08:00 AM</td>
+                                    <td>01:00 PM</td>
+                                    <td>FRUVER LOS PAISAS S.A.S.</td>
+                                    <td>FRUVER LA RIVERA</td>
+                                    <td>CRA 2D # 35 - 12</td>
+                                </tr>
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+
+
   @foreach ($data["ods"] as $ods)
   <div id="ODS V5 - CENDIS_22905" align=center x:publishsource="Excel" style="margin-bottom: 40px">
 
