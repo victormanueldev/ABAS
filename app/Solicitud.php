@@ -9,12 +9,12 @@ class Solicitud extends Model
     protected $table  = 'solicitudes';
     protected $fillable = [
     	'id',
-    	'codigo_solicitud',
-        'fecha_creacion',
+    	'codigo',
+        'fecha',
         'nombre_usuario',
-        'frecuencia_servicio',
-        'select_clientes',
-        'select_sedes',
+        'frecuencia',
+        'cliente_id',
+        'sede_id',
         'contacto_name_factura',
         'contacto_telefono_factura',
         'contacto_celular_factura',

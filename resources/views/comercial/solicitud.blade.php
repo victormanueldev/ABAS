@@ -92,7 +92,7 @@
                                         <label class="control-label">Razón Social/Nombre *</label>
 
                                         <!-- Select con Autocompletar-->
-                                        <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="select_clientes" name="id_cliente" required>
+                                        <select data-placeholder="Seleccione NIT" class="chosen-select"  tabindex="2" id="id_cliente" name="id_cliente" required>
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
                                                 <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
@@ -639,7 +639,7 @@
         $('.chosen-select').chosen({width: "100%"});
 
         //Evento change del select de clientes
-        $("#select_clientes").change(event => {
+        $("#id_cliente").change(event => {
             //Peticion GET al servidor a la ruta /clientes/{id} (Cliente con id = $id)
             $.get(`/clientes/${event.target.value}/edit`, function (res) {
                 //Asignacion de valores a Inputs Clientes
@@ -775,7 +775,7 @@
                                     fecha_creacion,
                                     nombre_usuario,
                                     frecuencia_servicio,
-                                    select_clientes,
+                                    id_cliente,
                                     select_sedes,
                                     contacto_name_factura,
                                     contacto_telefono_factura,
@@ -839,7 +839,7 @@
                                     fecha_creacion,
                                     nombre_usuario,
                                     frecuencia_servicio,
-                                    select_clientes,
+                                    id_cliente,
                                     select_sedes,
                                     contacto_name_factura,
                                     contacto_telefono_factura,
@@ -900,11 +900,11 @@
             $.ajax({
                 url: '/solicitud',
                 data: {
-                    'codigo_solicitud': res,
+                    'codigo_solicitud': codigo_solicitud,
                     'fecha_creacion': fecha_creacion,
                     'nombre_usuario': nombre_usuario,
                     'frecuencia_servicio': frecuencia_servicio,
-                    'select_clientes': select_clientes,
+                    'id_cliente': id_cliente,
                     'select_sedes': select_sedes,
                     'contacto_name_factura': contacto_name_factura,
                     'contacto_telefono_factura': contacto_telefono_factura,
@@ -977,13 +977,13 @@
         //Evento Submit del Formulario de Solicitud
         $("#form-solicitud").submit(event => {
             event.preventDefault();
-            crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
+            var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
             var codigo_solicitud = codigoAleatorio();   //Obtiene el valor del codigo generado automaticamente (String)
             //Captura la informacion de los inputs del formulario HTML
             var fecha_creacion = $('#fecha_creacion').val();
             var nombre_usuario = $('#nombre_usuario').val();
             var frecuencia_servicio = $('#frecuencia_servicio').val();
-            var select_clientes = $('#select_clientes').val();
+            var id_cliente = $('#id_cliente').val();
             var select_sedes = $('#select_sedes').val();
             var contacto_name_factura = $('#contacto_name_factura').val();
             var contacto_telefono_factura = $('#contacto_telefono_factura').val();
@@ -1064,7 +1064,7 @@
                                         fecha_creacion,
                                         nombre_usuario,
                                         frecuencia_servicio,
-                                        select_clientes,
+                                        id_cliente,
                                         select_sedes,
                                         contacto_name_factura,
                                         contacto_telefono_factura,
@@ -1136,7 +1136,7 @@
                                         fecha_creacion,
                                         nombre_usuario,
                                         frecuencia_servicio,
-                                        select_clientes,
+                                        id_cliente,
                                         select_sedes,
                                         contacto_name_factura,
                                         contacto_telefono_factura,

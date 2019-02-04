@@ -52,14 +52,14 @@ class SolicitudesController extends Controller
             if ($request->ajax()) {
                 // $data = collect();
                 $solicitud = new Solicitud();
-                $cliente = Cliente::find($request->select_clientes);
+                $cliente = Cliente::find($request->id_cliente);
                 $sede = Sede::find($request->select_sedes);
-                $solicitud->codigo_solicitud = $request->codigo_solicitud;
-                $solicitud->fecha_creacion = $request->fecha_creacion;
+                $solicitud->codigo = $request->codigo_solicitud;
+                $solicitud->fecha = $request->fecha_creacion;
                 $solicitud->nombre_usuario = $request->nombre_usuario;
-                $solicitud->frecuencia_servicio = $request->frecuencia_servicio;
-                $solicitud->select_clientes = $cliente;
-                $solicitud->select_sedes = $sede;
+                $solicitud->frecuencia = $request->frecuencia_servicio;
+                $solicitud->cliente_id = $cliente;
+                $solicitud->sede_id = $sede;
                 $solicitud->contacto_name_factura = $request->contacto_name_factura;
                 $solicitud->contacto_telefono_factura = $request->contacto_telefono_factura;
                 $solicitud->contacto_celular_factura = $request->contacto_celular_factura;
