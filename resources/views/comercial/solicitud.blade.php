@@ -354,7 +354,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor</label>
-                                        <input type="number" min=0 id="valor_servicios_1" name="valor_servicios_1" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 id="valor_servicios_1" name="valor_servicios_1" placeholder="Valor" value=0 class="form-control valor_servicio">
                                     </div>
 
                                     <div class="form-group col-lg-4">
@@ -379,7 +379,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor</label>
-                                        <input type="number" min=0 id="valor_servicios_2" name="valor_servicios_2" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 id="valor_servicios_2" name="valor_servicios_2" placeholder="Valor" value=0 class="form-control valor_servicio">
                                     </div>
 
                                     <div class="form-group col-lg-4">
@@ -404,7 +404,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor</label>
-                                        <input type="number" min=0 id="valor_servicios_3" name="valor_servicios_3" placeholder="Valor" class="form-control">
+                                        <input type="number" min=0 id="valor_servicios_3" name="valor_servicios_3" placeholder="Valor" value=0 class="form-control valor_servicio">
                                     </div>
 
                                     <div class="form-group col-lg-4">
@@ -426,12 +426,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_1" name="cantidad_dispositivos_1" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="cantidad_dispositivos_1" name="cantidad_dispositivos_1" placeholder="Cantidad" class="form-control valor_dispositivos">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_1" name="unidad_dispositivos_1" placeholder="Valor C/U" class="form-control">
+                                        <input type="number" min=0 id="unidad_dispositivos_1" name="unidad_dispositivos_1" placeholder="Valor C/U" class="form-control valor_dispositivos">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -446,12 +446,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_2" name="cantidad_dispositivos_2" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="cantidad_dispositivos_2" name="cantidad_dispositivos_2" placeholder="Cantidad" class="form-control valor_dispositivos">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_2" name="unidad_dispositivos_2" placeholder="Valor C/U" class="form-control">
+                                        <input type="number" min=0 id="unidad_dispositivos_2" name="unidad_dispositivos_2" placeholder="Valor C/U" class="form-control valor_dispositivos">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -471,12 +471,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_3" name="unidad_dispositivos_3" placeholder="Valor C/U" class="form-control">
+                                        <input type="number" min=0 id="unidad_dispositivos_3" name="unidad_dispositivos_3" placeholder="Valor C/U" class="form-control valor_dispositivos">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_3" name="total_dispositivos_3" placeholder="Valor Total" class="form-control" disabled>
+                                        <input type="number" min=0 id="total_dispositivos_3" name="total_dispositivos_3" placeholder="Valor Total" class="form-control valor_dispositivos" disabled>
                                     </div>
 
                                     <div class="form-group col-lg-12">
@@ -498,12 +498,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_1" name="cantidad_dispositivos_comodato_1" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_1" name="cantidad_dispositivos_comodato_1" placeholder="Cantidad" class="form-control valor_dispositivos_comodato">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_comodato_1" name="unidad_dispositivos_comodato_1" placeholder="Valor C/U" class="form-control">
+                                        <input type="number" min=0 id="unidad_dispositivos_comodato_1" name="unidad_dispositivos_comodato_1" placeholder="Valor C/U" class="form-control valor_dispositivos_comodato">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -518,12 +518,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_2" name="cantidad_dispositivos_comodato_2" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_2" name="cantidad_dispositivos_comodato_2" placeholder="Cantidad" class="form-control valor_dispositivos_comodato">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_comodato_2" name="unidad_dispositivos_comodato_2" placeholder="Valor C/U" class="form-control">
+                                        <input type="number" min=0 id="unidad_dispositivos_comodato_2" name="unidad_dispositivos_comodato_2" placeholder="Valor C/U" class="form-control valor_dispositivos_comodato">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -538,12 +538,12 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_3" name="cantidad_dispositivos_comodato_3" placeholder="Cantidad" class="form-control">
+                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_3" name="cantidad_dispositivos_comodato_3" placeholder="Cantidad" class="form-control valor_dispositivos_comodato">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_comodato_3" name="unidad_dispositivos_comodato_3" placeholder="Valor C/U" class="form-control">
+                                        <input type="number" min=0 id="unidad_dispositivos_comodato_3" name="unidad_dispositivos_comodato_3" placeholder="Valor C/U" class="form-control valor_dispositivos_comodato">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -743,21 +743,38 @@
             }
         }
 
-        $('.visita').change(event => {
-            var v1 = parseFloat(jQuery("#visita_1").val());
-            var v2 = parseFloat(jQuery("#visita_2").val());
-            var v3 = parseFloat(jQuery("#visita_3").val());
-            var v4 = parseFloat(jQuery("#visita_4").val());
-            
-            var suma = v1+v2+v3+v4;
+        $('.valor_dispositivos').change(event => {
+            var cantidad_1 = parseFloat(jQuery("#cantidad_dispositivos_1").val());
+            var unidad_1 = parseFloat(jQuery("#unidad_dispositivos_1").val());
+            var cantidad_2 = parseFloat(jQuery("#cantidad_dispositivos_2").val());
+            var unidad_2 = parseFloat(jQuery("#unidad_dispositivos_2").val());
+            var cantidad_3 = parseFloat(jQuery("#cantidad_dispositivos_3").val());
+            var unidad_3 = parseFloat(jQuery("#unidad_dispositivos_3").val());
 
-            $('#total_horas_visita').val(suma);
+            $('#total_dispositivos_1').val(cantidad_1*unidad_1);
+            $('#total_dispositivos_2').val(cantidad_2*unidad_2);
+            $('#total_dispositivos_3').val(cantidad_3*unidad_3);
         });
 
-        $(".visita").change(event => {
-            var val_hora = parseFloat(jQuery("#valor_hora").val());
-            var facturar_total = parseFloat(jQuery("#total_horas_visita").val());
-            $("#valor_facturar").val(val_hora*facturar_total);
+        $('.valor_dispositivos_comodato').change(event => {
+            var cantidad_1 = parseFloat(jQuery("#cantidad_dispositivos_comodato_1").val());
+            var unidad_1 = parseFloat(jQuery("#unidad_dispositivos_comodato_1").val());
+            var cantidad_2 = parseFloat(jQuery("#cantidad_dispositivos_comodato_2").val());
+            var unidad_2 = parseFloat(jQuery("#unidad_dispositivos_comodato_2").val());
+            var cantidad_3 = parseFloat(jQuery("#cantidad_dispositivos_comodato_3").val());
+            var unidad_3 = parseFloat(jQuery("#unidad_dispositivos_comodato_3").val());
+
+            $('#total_dispositivos_comodato_1').val(cantidad_1*unidad_1);
+            $('#total_dispositivos_comodato_2').val(cantidad_2*unidad_2);
+            $('#total_dispositivos_comodato_3').val(cantidad_3*unidad_3);
+        });
+
+        $(".valor_servicio").change(event => {
+            var val_servicio_1 = parseFloat(jQuery("#valor_servicios_1").val());
+            var val_servicio_2 = parseFloat(jQuery("#valor_servicios_2").val());
+            var val_servicio_3 = parseFloat(jQuery("#valor_servicios_3").val());
+
+            $("#total_servicios").val(val_servicio_1+val_servicio_2+val_servicio_3);
         });
 
         $("#medio_contacto").change(event => {
