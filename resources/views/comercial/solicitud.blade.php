@@ -52,14 +52,20 @@
                                         <br>                                                   
                                     </div>
     
-                                        <div class="form-group col-lg-6" id="data_1">
+                                        <div class="form-group col-lg-4" id="data_1">
                                             <label>Fecha *</label>
                                             <div class="input-group date">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="fecha_creacion" class="form-control" placeholder="" name="fecha_creacion" required>
                                             </div>
                                         </div>
+
+                                        <div class="form-group col-lg-4">
+                                            <label class="control-label">Inspector Comercial:</label>
+                                            <input type="text" id="nombre_usuario" name="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
+                                            <br>
+                                        </div>
     
-                                        <div class="form-group col-lg-6">
+                                        <div class="form-group col-lg-4">
                                             <label class="control-label">Frecuencia del Servicio</label>
                                             
                                             <select class="form-control" id="frecuencia_servicio" name="frecuencia_servicio" required>
@@ -78,7 +84,7 @@
 
 
                                     <div class="ibox-title col-lg-12">
-                                        <h3>Facturar a nombre de:</h3>
+                                        <h3>Facturar a Nombre de:</h3>
                                         <br>
                                     </div>
 
@@ -146,7 +152,7 @@
                                     
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Realizar servicio en:</h3>
+                                        <h3>Realizar Servicio en:</h3>
                                         <br>
                                     </div>
 												
@@ -229,211 +235,78 @@
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Calidad y servicio al cliente: Realizar los siguientes Procesos</h3>
+                                        <h3>Plan de Saneamiento</h3>
                                         <hr>
                                         <br>
                                     </div>
-
-                                    <div class="form-group col-lg-6 col-xs-12 checkbox">
-                                        <label style="display: block;"><input type="checkbox" name="diagnostico_inicial" id="diagnostico_inicial" value="1">Diagnostico Inicial</label>
-                                        <label style="display: block;"><input type="checkbox" name="cronograma_servicios" id="cronograma_servicios" value="2">Cronograma de Servicios</label>
-                                        <label style="display: block;"><input type="checkbox" name="visita-calidad" id="visita_calidad" value="3">Visitas de Calidad</label>
-                                    </div> 
+                                    
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Valor plan de saneamiento</label>
+                                        <input type="number" min=0 name="total_plan" id="total_plan" placeholder="Valor total" class="form-control">
+                                    </div>
 
                                     <div class="form-group col-lg-6">
-                                        <label>Frecuencia</label>
-                                        <select class="form-control" id="frecuencia_calidad" name="frecuencia_calidad">
-                                            <option>Ocasionalmente</option>
-                                            <option>Semanales</option>
-                                            <option>Quincenales</option>
-                                            <option>Mensuales</option>
-                                            <option>Bimestrales</option>
-                                            <option>Trimestrales</option>
-                                            <option>Cada 4 Meses</option>
-                                            <option>Semestrales</option>
-                                            <option>Anuales</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Diligenciar cuando requiera plan de saneamiento</h3>
-                                        <hr>
-                                        <br>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia Día de Visitas *</label>
-                                        <input type="number" min=0 name="frecuencia_visitas" id="frecuencia_visitas" placeholder="Ej: Cada 10 días" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-2">
-                                        <label class="control-label">Visita 1</label>
-                                        <input type="number" min="0" max="24" step=".5" name="visita_1" id="visita_1" placeholder="Ej: 1,77" class="form-control visita" value=0>
-                                    </div>
-
-                                    <div class="form-group col-lg-2">
-                                        <label class="control-label">Visita 2</label>
-                                        <input type="number" min="0" max="24" step=".5" name="visita_2" id="visita_2" placeholder="Ej: 1,77" class="form-control visita" value=0>
-                                    </div>
-
-                                    <div class="form-group col-lg-2">
-                                        <label class="control-label">Visita 3</label>
-                                        <input type="number" min="0" max="24" step=".5" name="visita_3" id="visita_3" placeholder="Ej: 1,77" class="form-control visita" value=0>
-                                    </div>
-
-                                    <div class="form-group col-lg-2">
-                                        <label class="control-label">Visita 4</label>
-                                        <input type="number" min="0" max="24" step=".5" name="visita_4" id="visita_4" placeholder="Ej: 1,77" class="form-control visita" value=0>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Total Horas</label>
-                                        <input type="text" name="total_horas_visita" id="total_horas_visita" class="form-control" value=0 disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Valor Hora</label>
-                                        <input type="number" min="0" name="valor_hora" id="valor_hora" placeholder="Ej: 60.000" class="form-control visita">
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Valor Facturar</label>
-                                        <input type="text" name="valor_facturar" id="valor_facturar" placeholder="Ej: 127.600" class="form-control" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-12">
                                         <label>Observaciones</label>
                                         <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="instrucciones" id="instrucciones"></textarea>
                                     </div>
 
-                                    <div class="form-group col-lg-12">
-                                        <label class="control-label">Servicios Contratados</label>
-                                        <input type="text" name="servicios_contratados" id="servicios_contratados" placeholder="Servicios requeridos por el cliente" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-                                        <select class="form-control" id="frecuencia_plagas" name="frecuencia_plagas">
-                                            <option>Ocasionalmente</option>
-                                            <option>Semanales</option>
-                                            <option>Quincenales</option>
-                                            <option>Mensuales</option>
-                                            <option>Bimestrales</option>
-                                            <option>Trimestrales</option>
-                                            <option>Cada 4 Meses</option>
-                                            <option>Semestrales</option>
-                                            <option>Anuales</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Tipo Cliente</label>
-                                        <select class="form-control" id="tipo_cliente" name="tipo_cliente">
-                                            <option>Servicio</option>
-                                            <option>Visita</option>
-                                            <option>Ejemplo</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Tapa de Alcantarilla</label>
-                                        <select class="form-control" id="tapa_alcantarilla" name="tapa_alcantarilla">
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Número de Tapas</label>
-                                        <input type="number" min=0 id="numero_tapas" name="numero_tapas" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Número de Residencias</label>
-                                        <input type="number" min=0 id="numero_residencias" name="numero_residencias" placeholder="Cantidad" class="form-control">
-                                    </div>
-
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Detalle de horas cotizadas por frecuencia</h3>
+                                        <h3>Inventario Inicial</h3>
                                         <hr>
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Semanales</label>
-                                        <input type="number" min=0 id="horas_semanales" name="horas_semanales" placeholder="Número de horas" class="form-control">
+                                        <label class="control-label">Estaciones de Roedor</label>
+                                        <input type="number" min=0 id="estaciones_roedor" name="estaciones_roedor" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Mensuales</label>
-                                        <input type="number" min=0 id="horas_mensuales" name="horas_mensuales" placeholder="Número de horas" class="form-control">
+                                        <label class="control-label">Lámparas 925 control voladores</label>
+                                        <input type="number" min=0 id="lamparas_control" name="lamparas_control" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Trimestrales</label>
-                                        <input type="number" min=0 id="horas_trimestrales" name="horas_trimestrales" placeholder="Número de horas" class="form-control">
+                                        <label class="control-label">Cajas de alcantarilla electricas</label>
+                                        <input type="number" min=0 id="cajas_alcantarilla" name="numero_tapas" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Semestrales</label>
-                                        <input type="number" min=0 id="horas_semestrales" name="horas_semestrales" placeholder="Número de horas" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Quincenales</label>
-                                        <input type="number" min=0 id="horas_quincenales" name="horas_quincenales" placeholder="Número de horas" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Bimensuales</label>
-                                        <input type="number" min=0 id="horas_bimensuales" name="horas_bimensuales" placeholder="Número de horas" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Cada 4 Meses</label>
-                                        <input type="number" min=0 id="horas_4meses" name="horas_4meses" placeholder="Número de horas" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Horas Anuales</label>
-                                        <input type="number" min=0 id="horas_anuales" name="horas_anuales" placeholder="Número de horas" class="form-control">
+                                        <label class="control-label">Trampas de impacto plásticas</label>
+                                        <input type="number" min=0 id="trampas_plasticas" name="trampas_plasticas" placeholder="Cantidad" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Detalle y valor del servicio</h3>
+                                        <h3>Número de Residencias</h3>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Total de Horas Cotizadas</label>
-                                        <input type="number" min=0 id="total_horas_cotizadas" name="total_horas_cotizadas" placeholder="Total de horas" class="form-control">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Casas</label>
+                                        <input type="number" min=0 id="numero_casas" name="numero_casas" placeholder="Cantidad" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor Hora Antes IVA</label>
-                                        <input type="number" min=0 id="valor_hora_antes" name="valor_hora_antes" placeholder="Valor" class="form-control">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Aptos</label>
+                                        <input type="number" min=0 id="numero_aptos" name="numero_aptos" placeholder="Cantidad" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor Inicial Antes IVA</label>
-                                        <input type="number" min=0 id="valor_inicia_antes" name="valor_inicia_antes" placeholder="Valor" class="form-control">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Bodegas</label>
+                                        <input type="number" min=0 id="numero_bodegas" name="numero_bodegas" placeholder="Cantidad" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Forma de Pago</label>
-                                        <input type="text" id="forma_pago" name="forma_pago" placeholder="Ej: Contado, 3 Meses, etc." class="form-control">
+                                    <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Forma de Pago de Servicios </h3>
+                                        <hr>
+                                        <br>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Facturación</label>
-                                        <input type="text" id="facturacion" name="facturacion" placeholder="Ej: SC" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
+                                    <div class="form-group col-lg-4">
                                         <label class="control-label">¿Tiene Contrato?</label>
                                         <select class="form-control" id="contrato" name="contrato">
                                             <option value="Si">Si</option>
@@ -441,18 +314,251 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Número de Contrato</label>
-                                        <input type="number" min=0 id="numero_contrato" name="numero_contrato" placeholder="#" class="form-control">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Forma de Pago</label>
+                                        <select class="form-control" id="forma_pago" name="forma_pago">
+                                            <option>Efectivo</option>
+                                            <option>Tarjeta Crédito</option>
+                                            <option>Tarjeta Dédito</option>
+                                        </select>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Actividad Económica</label>
-                                        <input type="text" id="actividad_economica" name="actividad_economica" placeholder="Actividad Económica" class="form-control">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Facturación</label>
+                                        <input type="text" id="facturacion" name="facturacion" placeholder="Ej: SC" class="form-control">
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
-                                        {{-- <h3>Detalle y valor del servicio</h3> --}}
+                                        <br>
+                                    </div>
+    
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Incluir los siguientes servicios</label>
+                                        <input type="text" id="servicios_1" name="servicios_1" placeholder="Ingrese servicio" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Frecuencia del Servicio</label>
+                                        <select class="form-control" id="frecuencia_servicios_1" name="frecuencia_servicios_1">
+                                            <option>Ocasionalmente</option>
+                                            <option>Semanales</option>
+                                            <option>Quincenales</option>
+                                            <option>Mensuales</option>
+                                            <option>Bimestrales</option>
+                                            <option>Trimestrales</option>
+                                            <option>Cada 4 Meses</option>
+                                            <option>Semestrales</option>
+                                            <option>Anuales</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Valor</label>
+                                        <input type="number" min=0 id="valor_servicios_1" name="valor_servicios_1" placeholder="Valor" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Incluir los siguientes servicios</label>
+                                        <input type="text" id="servicios_2" name="servicios_2" placeholder="Ingrese servicio" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Frecuencia del Servicio</label>
+                                        <select class="form-control" id="frecuencia_servicios_2" name="frecuencia_servicios_2">
+                                            <option>Ocasionalmente</option>
+                                            <option>Semanales</option>
+                                            <option>Quincenales</option>
+                                            <option>Mensuales</option>
+                                            <option>Bimestrales</option>
+                                            <option>Trimestrales</option>
+                                            <option>Cada 4 Meses</option>
+                                            <option>Semestrales</option>
+                                            <option>Anuales</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Valor</label>
+                                        <input type="number" min=0 id="valor_servicios_2" name="valor_servicios_2" placeholder="Valor" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Incluir los siguientes servicios</label>
+                                        <input type="text" id="servicios_3" name="servicios_3" placeholder="Ingrese servicio" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Frecuencia del Servicio</label>
+                                        <select class="form-control" id="frecuencia_servicios_3" name="frecuencia_servicios_3">
+                                            <option>Ocasionalmente</option>
+                                            <option>Semanales</option>
+                                            <option>Quincenales</option>
+                                            <option>Mensuales</option>
+                                            <option>Bimestrales</option>
+                                            <option>Trimestrales</option>
+                                            <option>Cada 4 Meses</option>
+                                            <option>Semestrales</option>
+                                            <option>Anuales</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Valor</label>
+                                        <input type="number" min=0 id="valor_servicios_3" name="valor_servicios_3" placeholder="Valor" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Total a facturar</label>
+                                        <input type="number" id="total_servicios" name="total_servicios" class="form-control" value=0 disabled>
+                                    </div>
+
+                                    <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Compra de Dispositivos</h3>
+                                        <hr>
+                                        <br>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">#1 Dispositivo</label>
+                                        <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="Nombre de dispositivo" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cantidad</label>
+                                        <input type="number" min=0 id="cantidad_dispositivos_1" name="cantidad_dispositivos_1" placeholder="Cantidad" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor por unidad</label>
+                                        <input type="number" min=0 id="unidad_dispositivos_1" name="unidad_dispositivos_1" placeholder="Valor C/U" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="number" min=0 id="total_dispositivos_1" name="total_dispositivos_1" placeholder="Valor Total" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">#2 Dispositivos</label>
+                                        <input type="text" id="dispositivos_2" name="dispositivos_2" placeholder="Nombre de dispositivo" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cantidad</label>
+                                        <input type="number" min=0 id="cantidad_dispositivos_2" name="cantidad_dispositivos_2" placeholder="Cantidad" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor por unidad</label>
+                                        <input type="number" min=0 id="unidad_dispositivos_2" name="unidad_dispositivos_2" placeholder="Valor C/U" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="number" min=0 id="total_dispositivos_2" name="total_dispositivos_2" placeholder="Valor Total" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">#3 Dispositivos</label>
+                                        <input type="text" id="dispositivos_3" name="dispositivos_3" placeholder="Nombre de dispositivo" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cantidad</label>
+                                        <input type="number" min=0 id="cantidad_dispositivos_3" name="cantidad_dispositivos_3" placeholder="Cantidad" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor por unidad</label>
+                                        <input type="number" min=0 id="unidad_dispositivos_3" name="unidad_dispositivos_3" placeholder="Valor C/U" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="number" min=0 id="total_dispositivos_3" name="total_dispositivos_3" placeholder="Valor Total" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group col-lg-12">
+                                        <label>Observaciones</label>
+                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="observaciones_dispositivos" id="observaciones_dispositivos"></textarea>
+                                    </div>
+
+                                    <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Dispositivos en Comodato para esta Propuesta</h3>
+                                        <hr>
+                                        <br>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">#1 Dispositivo</label>
+                                        <input type="text" id="dispositivos_comodato_1" name="dispositivos_comodato_1" placeholder="Nombre de dispositivo" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cantidad</label>
+                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_1" name="cantidad_dispositivos_comodato_1" placeholder="Cantidad" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor por unidad</label>
+                                        <input type="number" min=0 id="unidad_dispositivos_comodato_1" name="unidad_dispositivos_comodato_1" placeholder="Valor C/U" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="number" min=0 id="total_dispositivos_comodato_1" name="total_dispositivos_comodato_1" placeholder="Valor Total" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">#2 Dispositivos</label>
+                                        <input type="text" id="dispositivos_comodato_2" name="dispositivos_comodato_2" placeholder="Nombre de dispositivo" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cantidad</label>
+                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_2" name="cantidad_dispositivos_comodato_2" placeholder="Cantidad" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor por unidad</label>
+                                        <input type="number" min=0 id="unidad_dispositivos_comodato_2" name="unidad_dispositivos_comodato_2" placeholder="Valor C/U" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="number" min=0 id="total_dispositivos_comodato_2" name="total_dispositivos_comodato_2" placeholder="Valor Total" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">#3 Dispositivos</label>
+                                        <input type="text" id="dispositivos_comodato_3" name="dispositivos_comodato_3" placeholder="Nombre de dispositivo" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cantidad</label>
+                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_3" name="cantidad_dispositivos_comodato_3" placeholder="Cantidad" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor por unidad</label>
+                                        <input type="number" min=0 id="unidad_dispositivos_comodato_3" name="unidad_dispositivos_comodato_3" placeholder="Valor C/U" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="number" min=0 id="total_dispositivos_comodato_3" name="total_dispositivos_comodato_3" placeholder="Valor Total" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group col-lg-12">
+                                        <label>Observaciones</label>
+                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="observaciones_dispositivos_comodato" id="observaciones_dispositivos_comodato"></textarea>
+                                    </div>
+
+                                    <div class="ibox-title col-lg-12">
+                                        <h3>Detalle y Valor del Servicio</h3>
+                                        <hr>
                                         <br>
                                     </div>
 
@@ -474,15 +580,28 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Diligenciado por:</label>
-                                        <input type="text" id="nombre_usuario" name="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
+                                    <div class="ibox-title col-lg-12">
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-6">
-                                        <label class="control-label">Revisado por:</label>
-                                        <input type="text" id="nombre_usuario_revisado" name="nombre-usuario-revisado" placeholder="" class="form-control">
+                                        <label>Firma Inspector Comercial</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <label>Firma Gestión de Calidad</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Firma Programación</label>
+                                        <textarea class="form-control" rows="3"></textarea>                                        
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Firma Jefe Técnico:</label>
+                                        <textarea class="form-control" rows="3"></textarea>
                                     </div>
 
                                     <div class="col-lg-12">
@@ -651,162 +770,196 @@
         
         //Realiza la peticion POST al servidor (AJAX)
         function guardarSolicitud(
-                                    res, 
+                                    res,
                                     codigo_solicitud,
-                                    fecha,
+                                    fecha_creacion,
+                                    nombre_usuario,
                                     frecuencia_servicio,
-                                    id_cliente,
-                                    id_sede,
-                                    observaciones,
-                                    contacto_telefono_factura,
+                                    select_clientes,
+                                    select_sedes,
                                     contacto_name_factura,
+                                    contacto_telefono_factura,
                                     contacto_celular_factura,
                                     observaciones_tecnico,
-                                    diagnostico_inicial,
-                                    cronograma_servicios,
-                                    visita_calidad,
-                                    frecuencia_calidad,
-                                    frecuencia_visitas,
-                                    visita_1,
-                                    visita_2,
-                                    visita_3,
-                                    visita_4,
-                                    total_horas_visita,
-                                    valor_hora,
-                                    valor_facturar,
+                                    total_plan,
                                     instrucciones,
-                                    servicios_contratados,
-                                    frecuencia_plagas,
-                                    tipo_cliente,
-                                    tapa_alcantarilla,
-                                    numero_tapas,
-                                    numero_residencias,
-                                    horas_semanales,
-                                    horas_mensuales,
-                                    horas_trimestrales,
-                                    horas_semestrales,
-                                    horas_quincenales,
-                                    horas_bimensuales,
-                                    horas_4meses,
-                                    horas_anuales,
-                                    total_horas_cotizadas,
-                                    valor_hora_antes,
-                                    valor_inicia_antes,
+                                    estaciones_roedor,
+                                    lamparas_control,
+                                    cajas_alcantarilla,
+                                    trampas_plasticas,
+                                    numero_casas,
+                                    numero_aptos,
+                                    numero_bodegas,
+                                    contrato,
                                     forma_pago,
                                     facturacion,
-                                    contrato,
-                                    numero_contrato,
-                                    actividad_economica,
+                                    servicios_1,
+                                    frecuencia_servicios_1,
+                                    valor_servicios_1,
+                                    servicios_2,
+                                    frecuencia_servicios_2,
+                                    valor_servicios_2,
+                                    servicios_3,
+                                    frecuencia_servicios_3,
+                                    valor_servicios_3,
+                                    total_servicios,
+                                    dispositivos_1,
+                                    cantidad_dispositivos_1,
+                                    unidad_dispositivos_1,
+                                    total_dispositivos_1,
+                                    dispositivos_2,
+                                    cantidad_dispositivos_2,
+                                    unidad_dispositivos_2,
+                                    total_dispositivos_2,
+                                    dispositivos_3,
+                                    cantidad_dispositivos_3,
+                                    unidad_dispositivos_3,
+                                    total_dispositivos_3,
+                                    observaciones_dispositivos,
+                                    dispositivos_comodato_1,
+                                    cantidad_dispositivos_comodato_1,
+                                    unidad_dispositivos_comodato_1,
+                                    total_dispositivos_comodato_1,
+                                    dispositivos_comodato_2,
+                                    cantidad_dispositivos_comodato_2,
+                                    unidad_dispositivos_comodato_2,
+                                    total_dispositivos_comodato_2,
+                                    dispositivos_comodato_3,
+                                    cantidad_dispositivos_comodato_3,
+                                    unidad_dispositivos_comodato_3,
+                                    total_dispositivos_comodato_3,
+                                    observaciones_dispositivos_comodato,
                                     medio_contacto,
                                     otro,
-                                    nombre_usuario,
-                                    nombre_usuario_revisado,
                                     crsfToken
                                 ) {
                                     console.log(
                                     res, 
                                     codigo_solicitud,
-                                    fecha,
+                                    fecha_creacion,
+                                    nombre_usuario,
                                     frecuencia_servicio,
-                                    id_cliente,
-                                    id_sede,
-                                    observaciones,
-                                    contacto_telefono_factura,
+                                    select_clientes,
+                                    select_sedes,
                                     contacto_name_factura,
+                                    contacto_telefono_factura,
                                     contacto_celular_factura,
                                     observaciones_tecnico,
-                                    diagnostico_inicial,
-                                    cronograma_servicios,
-                                    visita_calidad,
-                                    frecuencia_calidad,
-                                    frecuencia_visitas,
-                                    visita_1,
-                                    visita_2,
-                                    visita_3,
-                                    visita_4,
-                                    total_horas_visita,
-                                    valor_hora,
-                                    valor_facturar,
+                                    total_plan,
                                     instrucciones,
-                                    servicios_contratados,
-                                    frecuencia_plagas,
-                                    tipo_cliente,
-                                    tapa_alcantarilla,
-                                    numero_tapas,
-                                    numero_residencias,
-                                    horas_semanales,
-                                    horas_mensuales,
-                                    horas_trimestrales,
-                                    horas_semestrales,
-                                    horas_quincenales,
-                                    horas_bimensuales,
-                                    horas_4meses,
-                                    horas_anuales,
-                                    total_horas_cotizadas,
-                                    valor_hora_antes,
-                                    valor_inicia_antes,
+                                    estaciones_roedor,
+                                    lamparas_control,
+                                    cajas_alcantarilla,
+                                    trampas_plasticas,
+                                    numero_casas,
+                                    numero_aptos,
+                                    numero_bodegas,
+                                    contrato,
                                     forma_pago,
                                     facturacion,
-                                    contrato,
-                                    numero_contrato,
-                                    actividad_economica,
+                                    servicios_1,
+                                    frecuencia_servicios_1,
+                                    valor_servicios_1,
+                                    servicios_2,
+                                    frecuencia_servicios_2,
+                                    valor_servicios_2,
+                                    servicios_3,
+                                    frecuencia_servicios_3,
+                                    valor_servicios_3,
+                                    total_servicios,
+                                    dispositivos_1,
+                                    cantidad_dispositivos_1,
+                                    unidad_dispositivos_1,
+                                    total_dispositivos_1,
+                                    dispositivos_2,
+                                    cantidad_dispositivos_2,
+                                    unidad_dispositivos_2,
+                                    total_dispositivos_2,
+                                    dispositivos_3,
+                                    cantidad_dispositivos_3,
+                                    unidad_dispositivos_3,
+                                    total_dispositivos_3,
+                                    observaciones_dispositivos,
+                                    dispositivos_comodato_1,
+                                    cantidad_dispositivos_comodato_1,
+                                    unidad_dispositivos_comodato_1,
+                                    total_dispositivos_comodato_1,
+                                    dispositivos_comodato_2,
+                                    cantidad_dispositivos_comodato_2,
+                                    unidad_dispositivos_comodato_2,
+                                    total_dispositivos_comodato_2,
+                                    dispositivos_comodato_3,
+                                    cantidad_dispositivos_comodato_3,
+                                    unidad_dispositivos_comodato_3,
+                                    total_dispositivos_comodato_3,
+                                    observaciones_dispositivos_comodato,
                                     medio_contacto,
                                     otro,
-                                    nombre_usuario,
-                                    nombre_usuario_revisado,
                                     crsfToken
                                     );
             $.ajax({
                 url: '/solicitud',
                 data: {
-                    'codigo_solicitud': codigo_solicitud,
-                    'fecha_creacion': fecha,
+                    'codigo_solicitud': res,
+                    'fecha_creacion': fecha_creacion,
+                    'nombre_usuario': nombre_usuario,
                     'frecuencia_servicio': frecuencia_servicio,
-                    'id_cliente': id_cliente,
-                    'id_sede': id_sede,
-                    'contacto_telefono_factura': contacto_telefono_factura,
+                    'select_clientes': select_clientes,
+                    'select_sedes': select_sedes,
                     'contacto_name_factura': contacto_name_factura,
+                    'contacto_telefono_factura': contacto_telefono_factura,
                     'contacto_celular_factura': contacto_celular_factura,
                     'observaciones_tecnico': observaciones_tecnico,
-                    'diagnostico_inicial': diagnostico_inicial,
-                    'cronograma_servicios': cronograma_servicios,
-                    'visita_calidad': visita_calidad,
-                    'frecuencia_calidad': frecuencia_calidad,
-                    'frecuencia_visitas': frecuencia_visitas,
-                    'visita_1': visita_1,
-                    'visita_2': visita_2,
-                    'visita_3': visita_3,
-                    'visita_4': visita_4,
-                    'total_horas_visita': total_horas_visita,
-                    'valor_hora': valor_hora,
-                    'valor_facturar': valor_facturar,
+                    'total_plan': total_plan,
                     'instrucciones': instrucciones,
-                    'servicios_contratados': servicios_contratados,
-                    'frecuencia_plagas': frecuencia_plagas,
-                    'tipo_cliente': tipo_cliente,
-                    'tapa_alcantarilla': tapa_alcantarilla,
-                    'numero_tapas': numero_tapas,
-                    'numero_residencias': numero_residencias,
-                    'horas_semanales': horas_semanales,
-                    'horas_mensuales': horas_mensuales,
-                    'horas_trimestrales': horas_trimestrales,
-                    'horas_semestrales': horas_semestrales,
-                    'horas_quincenales': horas_quincenales,
-                    'horas_bimensuales': horas_bimensuales,
-                    'horas_4meses': horas_4meses,
-                    'horas_anuales': horas_anuales,
-                    'total_horas_cotizadas': total_horas_cotizadas,
-                    'valor_hora_antes': valor_hora_antes,
-                    'valor_inicia_antes': valor_inicia_antes,
+                    'estaciones_roedor': estaciones_roedor,
+                    'lamparas_control': lamparas_control,
+                    'cajas_alcantarilla': cajas_alcantarilla,
+                    'trampas_plasticas': trampas_plasticas,
+                    'numero_casas': numero_casas,
+                    'numero_aptos': numero_aptos,
+                    'numero_bodegas': numero_bodegas,
+                    'contrato': contrato,
                     'forma_pago': forma_pago,
                     'facturacion': facturacion,
-                    'contrato': contrato,
-                    'numero_contrato': numero_contrato,
-                    'actividad_economica': actividad_economica,
+                    'servicios_1': servicios_1,
+                    'frecuencia_servicios_1': frecuencia_servicios_1,
+                    'valor_servicios_1': valor_servicios_1,
+                    'servicios_2': servicios_2,
+                    'frecuencia_servicios_2': frecuencia_servicios_2,
+                    'valor_servicios_2': valor_servicios_2,
+                    'servicios_3': servicios_3,
+                    'frecuencia_servicios_3': frecuencia_servicios_3,
+                    'valor_servicios_3': valor_servicios_3,
+                    'total_servicios': total_servicios,
+                    'dispositivos_1': dispositivos_1,
+                    'cantidad_dispositivos_1': cantidad_dispositivos_1,
+                    'unidad_dispositivos_1': unidad_dispositivos_1,
+                    'total_dispositivos_1': total_dispositivos_1,
+                    'dispositivos_2': dispositivos_2,
+                    'cantidad_dispositivos_2': cantidad_dispositivos_2,
+                    'unidad_dispositivos_2': unidad_dispositivos_2,
+                    'total_dispositivos_2': total_dispositivos_2,
+                    'dispositivos_3': dispositivos_3,
+                    'cantidad_dispositivos_3': cantidad_dispositivos_3,
+                    'unidad_dispositivos_3': unidad_dispositivos_3,
+                    'total_dispositivos_3': total_dispositivos_3,
+                    'observaciones_dispositivos': observaciones_dispositivos,
+                    'dispositivos_comodato_1': dispositivos_comodato_1,
+                    'cantidad_dispositivos_comodato_1': cantidad_dispositivos_comodato_1,
+                    'unidad_dispositivos_comodato_1': unidad_dispositivos_comodato_1,
+                    'total_dispositivos_comodato_1': total_dispositivos_comodato_1,
+                    'dispositivos_comodato_2': dispositivos_comodato_2,
+                    'cantidad_dispositivos_comodato_2': cantidad_dispositivos_comodato_2,
+                    'unidad_dispositivos_comodato_2': unidad_dispositivos_comodato_2,
+                    'total_dispositivos_comodato_2': total_dispositivos_comodato_2,
+                    'dispositivos_comodato_3': dispositivos_comodato_3,
+                    'cantidad_dispositivos_comodato_3': cantidad_dispositivos_comodato_3,
+                    'unidad_dispositivos_comodato_3': unidad_dispositivos_comodato_3,
+                    'total_dispositivos_comodato_3': total_dispositivos_comodato_3,
+                    'observaciones_dispositivos_comodato': observaciones_dispositivos_comodato,
                     'medio_contacto': medio_contacto,
                     'otro': otro,
-                    'nombre_usuario': nombre_usuario,
-                    'nombre_usuario_revisado': nombre_usuario_revisado
                 },
                 headers: {
                     "X-CSRF-TOKEN": crsfToken
@@ -827,53 +980,65 @@
             crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
             var codigo_solicitud = codigoAleatorio();   //Obtiene el valor del codigo generado automaticamente (String)
             //Captura la informacion de los inputs del formulario HTML
-            var fecha = $("#fecha_creacion").val();
-            var frecuencia_servicio = $("#frecuencia_servicio").val();
-            var id_cliente = $("#select_clientes").val();
-            var id_sede = $("#select_sedes").val();
-            var contacto_telefono_factura = $('#contacto_telefono_factura').val();
+            var fecha_creacion = $('#fecha_creacion').val();
+            var nombre_usuario = $('#nombre_usuario').val();
+            var frecuencia_servicio = $('#frecuencia_servicio').val();
+            var select_clientes = $('#select_clientes').val();
+            var select_sedes = $('#select_sedes').val();
             var contacto_name_factura = $('#contacto_name_factura').val();
+            var contacto_telefono_factura = $('#contacto_telefono_factura').val();
             var contacto_celular_factura = $('#contacto_celular_factura').val();
             var observaciones_tecnico = $('#observaciones_tecnico').val();
-            var diagnostico_inicial = $('#diagnostico_inicial').val();
-            var cronograma_servicios = $('#cronograma_servicios').val();
-            var visita_calidad = $('#visita_calidad').val();
-            var frecuencia_calidad = $('#frecuencia_calidad').val();
-            var frecuencia_visitas = $('#frecuencia_visitas').val();
-            var visita_1 = $('#visita_1').val();
-            var visita_2 = $('#visita_2').val();
-            var visita_3 = $('#visita_3').val();
-            var visita_4 = $('#visita_4').val();
-            var total_horas_visita = $('#total_horas_visita').val();
-            var valor_hora = $('#valor_hora').val();
-            var valor_facturar = $('#valor_facturar').val();
+            var total_plan = $('#total_plan').val();
             var instrucciones = $('#instrucciones').val();
-            var servicios_contratados = $('#servicios_contratados').val();
-            var frecuencia_plagas = $('#frecuencia_plagas').val();
-            var tipo_cliente = $('#tipo_cliente').val();
-            var tapa_alcantarilla = $('#tapa_alcantarilla').val();
-            var numero_tapas = $('#numero_tapas').val();
-            var numero_residencias = $('#numero_residencias').val();
-            var horas_semanales = $('#horas_semanales').val();
-            var horas_mensuales = $('#horas_mensuales').val();
-            var horas_trimestrales = $('#horas_trimestrales').val();
-            var horas_semestrales = $('#horas_semestrales').val();
-            var horas_quincenales = $('#horas_quincenales').val();
-            var horas_bimensuales = $('#horas_bimensuales').val();
-            var horas_4meses = $('#horas_4meses').val();
-            var horas_anuales = $('#horas_anuales').val();
-            var total_horas_cotizadas = $('#total_horas_cotizadas').val();
-            var valor_hora_antes = $('#valor_hora_antes').val();
-            var valor_inicia_antes = $('#valor_inicia_antes').val();
+            var estaciones_roedor = $('#estaciones_roedor').val();
+            var lamparas_control = $('#lamparas_control').val();
+            var cajas_alcantarilla = $('#cajas_alcantarilla').val();
+            var trampas_plasticas = $('#trampas_plasticas').val();
+            var numero_casas = $('#numero_casas').val();
+            var numero_aptos = $('#numero_aptos').val();
+            var numero_bodegas = $('#numero_bodegas').val();
+            var contrato = $('#contrato').val();
             var forma_pago = $('#forma_pago').val();
             var facturacion = $('#facturacion').val();
-            var contrato = $('#contrato').val();
-            var numero_contrato = $('#numero_contrato').val();
-            var actividad_economica = $('#actividad_economica').val();
+            var servicios_1 = $('#servicios_1').val();
+            var frecuencia_servicios_1 = $('#frecuencia_servicios_1').val();
+            var valor_servicios_1 = $('#valor_servicios_1').val();
+            var servicios_2 = $('#servicios_2').val();
+            var frecuencia_servicios_2 = $('#frecuencia_servicios_2').val();
+            var valor_servicios_2 = $('#valor_servicios_2').val();
+            var servicios_3 = $('#servicios_3').val();
+            var frecuencia_servicios_3 = $('#frecuencia_servicios_3').val();
+            var valor_servicios_3 = $('#valor_servicios_3').val();
+            var total_servicios = $('#total_servicios').val();
+            var dispositivos_1 = $('#dispositivos_1').val();
+            var cantidad_dispositivos_1 = $('#cantidad_dispositivos_1').val();
+            var unidad_dispositivos_1 = $('#unidad_dispositivos_1').val();
+            var total_dispositivos_1 = $('#total_dispositivos_1').val();
+            var dispositivos_2 = $('#dispositivos_2').val();
+            var cantidad_dispositivos_2 = $('#cantidad_dispositivos_2').val();
+            var unidad_dispositivos_2 = $('#unidad_dispositivos_2').val();
+            var total_dispositivos_2 = $('#total_dispositivos_2').val();
+            var dispositivos_3 = $('#dispositivos_3').val();
+            var cantidad_dispositivos_3 = $('#cantidad_dispositivos_3').val();
+            var unidad_dispositivos_3 = $('#unidad_dispositivos_3').val();
+            var total_dispositivos_3 = $('#total_dispositivos_3').val();
+            var observaciones_dispositivos = $('#observaciones_dispositivos').val();
+            var dispositivos_comodato_1 = $('#dispositivos_comodato_1').val();
+            var cantidad_dispositivos_comodato_1 = $('#cantidad_dispositivos_comodato_1').val();
+            var unidad_dispositivos_comodato_1 = $('#unidad_dispositivos_comodato_1').val();
+            var total_dispositivos_comodato_1 = $('#total_dispositivos_comodato_1').val();
+            var dispositivos_comodato_2 = $('#dispositivos_comodato_2').val();
+            var cantidad_dispositivos_comodato_2 = $('#cantidad_dispositivos_comodato_2').val();
+            var unidad_dispositivos_comodato_2 = $('#unidad_dispositivos_comodato_2').val();
+            var total_dispositivos_comodato_2 = $('#total_dispositivos_comodato_2').val();
+            var dispositivos_comodato_3 = $('#dispositivos_comodato_3').val();
+            var cantidad_dispositivos_comodato_3 = $('#cantidad_dispositivos_comodato_3').val();
+            var unidad_dispositivos_comodato_3 = $('#unidad_dispositivos_comodato_3').val();
+            var total_dispositivos_comodato_3 = $('#total_dispositivos_comodato_3').val();
+            var observaciones_dispositivos_comodato = $('#observaciones_dispositivos_comodato').val();
             var medio_contacto = $('#medio_contacto').val();
             var otro = $('#otro').val();
-            var nombre_usuario = $('#nombre_usuario').val();
-            var nombre_usuario_revisado = $('#nombre_usuario_revisado').val();
 
             //Alert para cambiar el codigo generado por uno personalizado (opcional)
             swal({
@@ -895,55 +1060,66 @@
                 if (res == '') {  //Valida que el usuario presione el boton guardar
                     //Llama a la funcion de guardar form
                     guardarSolicitud(
-                                        res, 
-                                        codigo_solicitud,
-                                        fecha,
+                                        res,
+                                        fecha_creacion,
+                                        nombre_usuario,
                                         frecuencia_servicio,
-                                        id_cliente,
-                                        id_sede,
-                                        contacto_telefono_factura,
+                                        select_clientes,
+                                        select_sedes,
                                         contacto_name_factura,
+                                        contacto_telefono_factura,
                                         contacto_celular_factura,
                                         observaciones_tecnico,
-                                        diagnostico_inicial,
-                                        cronograma_servicios,
-                                        visita_calidad,
-                                        frecuencia_calidad,
-                                        frecuencia_visitas,
-                                        visita_1,
-                                        visita_2,
-                                        visita_3,
-                                        visita_4,
-                                        total_horas_visita,
-                                        valor_hora,
-                                        valor_facturar,
+                                        total_plan,
                                         instrucciones,
-                                        servicios_contratados,
-                                        frecuencia_plagas,
-                                        tipo_cliente,
-                                        tapa_alcantarilla,
-                                        numero_tapas,
-                                        numero_residencias,
-                                        horas_semanales,
-                                        horas_mensuales,
-                                        horas_trimestrales,
-                                        horas_semestrales,
-                                        horas_quincenales,
-                                        horas_bimensuales,
-                                        horas_4meses,
-                                        horas_anuales,
-                                        total_horas_cotizadas,
-                                        valor_hora_antes,
-                                        valor_inicia_antes,
+                                        estaciones_roedor,
+                                        lamparas_control,
+                                        cajas_alcantarilla,
+                                        trampas_plasticas,
+                                        numero_casas,
+                                        numero_aptos,
+                                        numero_bodegas,
+                                        contrato,
                                         forma_pago,
                                         facturacion,
-                                        contrato,
-                                        numero_contrato,
-                                        actividad_economica,
+                                        servicios_1,
+                                        frecuencia_servicios_1,
+                                        valor_servicios_1,
+                                        servicios_2,
+                                        frecuencia_servicios_2,
+                                        valor_servicios_2,
+                                        servicios_3,
+                                        frecuencia_servicios_3,
+                                        valor_servicios_3,
+                                        total_servicios,
+                                        dispositivos_1,
+                                        cantidad_dispositivos_1,
+                                        unidad_dispositivos_1,
+                                        total_dispositivos_1,
+                                        dispositivos_2,
+                                        cantidad_dispositivos_2,
+                                        unidad_dispositivos_2,
+                                        total_dispositivos_2,
+                                        dispositivos_3,
+                                        cantidad_dispositivos_3,
+                                        unidad_dispositivos_3,
+                                        total_dispositivos_3,
+                                        observaciones_dispositivos,
+                                        dispositivos_comodato_1,
+                                        cantidad_dispositivos_comodato_1,
+                                        unidad_dispositivos_comodato_1,
+                                        total_dispositivos_comodato_1,
+                                        dispositivos_comodato_2,
+                                        cantidad_dispositivos_comodato_2,
+                                        unidad_dispositivos_comodato_2,
+                                        total_dispositivos_comodato_2,
+                                        dispositivos_comodato_3,
+                                        cantidad_dispositivos_comodato_3,
+                                        unidad_dispositivos_comodato_3,
+                                        total_dispositivos_comodato_3,
+                                        observaciones_dispositivos_comodato,
                                         medio_contacto,
                                         otro,
-                                        nombre_usuario,
-                                        nombre_usuario_revisado,
                                         crsfToken
                                     );
                     //Alert de guardado con éxito
@@ -957,54 +1133,65 @@
                     //Cambio de atributos
                     guardarSolicitud(
                                         res, 
-                                        codigo_solicitud,
-                                        fecha,
+                                        fecha_creacion,
+                                        nombre_usuario,
                                         frecuencia_servicio,
-                                        id_cliente,
-                                        id_sede,
-                                        contacto_telefono_factura,
+                                        select_clientes,
+                                        select_sedes,
                                         contacto_name_factura,
+                                        contacto_telefono_factura,
                                         contacto_celular_factura,
                                         observaciones_tecnico,
-                                        diagnostico_inicial,
-                                        cronograma_servicios,
-                                        visita_calidad,
-                                        frecuencia_calidad,
-                                        frecuencia_visitas,
-                                        visita_1,
-                                        visita_2,
-                                        visita_3,
-                                        visita_4,
-                                        total_horas_visita,
-                                        valor_hora,
-                                        valor_facturar,
+                                        total_plan,
                                         instrucciones,
-                                        servicios_contratados,
-                                        frecuencia_plagas,
-                                        tipo_cliente,
-                                        tapa_alcantarilla,
-                                        numero_tapas,
-                                        numero_residencias,
-                                        horas_semanales,
-                                        horas_mensuales,
-                                        horas_trimestrales,
-                                        horas_semestrales,
-                                        horas_quincenales,
-                                        horas_bimensuales,
-                                        horas_4meses,
-                                        horas_anuales,
-                                        total_horas_cotizadas,
-                                        valor_hora_antes,
-                                        valor_inicia_antes,
+                                        estaciones_roedor,
+                                        lamparas_control,
+                                        cajas_alcantarilla,
+                                        trampas_plasticas,
+                                        numero_casas,
+                                        numero_aptos,
+                                        numero_bodegas,
+                                        contrato,
                                         forma_pago,
                                         facturacion,
-                                        contrato,
-                                        numero_contrato,
-                                        actividad_economica,
+                                        servicios_1,
+                                        frecuencia_servicios_1,
+                                        valor_servicios_1,
+                                        servicios_2,
+                                        frecuencia_servicios_2,
+                                        valor_servicios_2,
+                                        servicios_3,
+                                        frecuencia_servicios_3,
+                                        valor_servicios_3,
+                                        total_servicios,
+                                        dispositivos_1,
+                                        cantidad_dispositivos_1,
+                                        unidad_dispositivos_1,
+                                        total_dispositivos_1,
+                                        dispositivos_2,
+                                        cantidad_dispositivos_2,
+                                        unidad_dispositivos_2,
+                                        total_dispositivos_2,
+                                        dispositivos_3,
+                                        cantidad_dispositivos_3,
+                                        unidad_dispositivos_3,
+                                        total_dispositivos_3,
+                                        observaciones_dispositivos,
+                                        dispositivos_comodato_1,
+                                        cantidad_dispositivos_comodato_1,
+                                        unidad_dispositivos_comodato_1,
+                                        total_dispositivos_comodato_1,
+                                        dispositivos_comodato_2,
+                                        cantidad_dispositivos_comodato_2,
+                                        unidad_dispositivos_comodato_2,
+                                        total_dispositivos_comodato_2,
+                                        dispositivos_comodato_3,
+                                        cantidad_dispositivos_comodato_3,
+                                        unidad_dispositivos_comodato_3,
+                                        total_dispositivos_comodato_3,
+                                        observaciones_dispositivos_comodato,
                                         medio_contacto,
                                         otro,
-                                        nombre_usuario,
-                                        nombre_usuario_revisado,
                                         crsfToken
                                     );
                     swal("¡Formato de solicitud guardado con éxito!", {
