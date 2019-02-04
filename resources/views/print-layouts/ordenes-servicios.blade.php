@@ -2735,10 +2735,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
   }
 
   .wrap {
-      width: 90%;
-      max-width: 1200px;
+      width: 100%;
+      /* max-width: 1200px; */
       padding: 40px;
-      margin: auto;
+      /* margin: auto; */
       background: #fff;
       box-shadow: 0px 0px 3px grey;
       text-align: center;
@@ -2787,12 +2787,12 @@ xmlns="http://www.w3.org/TR/REC-html40">
   .contenedor-formulario {
       width: 100%;
       color: #303030;
-      padding: 50px;
+      /* padding: 50px; */
   }
 
   .contenedor-formulario .formulario {
       width: 100%;
-      margin: auto;
+      /* margin: auto; */
   }
 
   .contenedor-formulario .formulario .input-group {
@@ -2878,7 +2878,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </head>
 
 <body>
-
+  @foreach ($data['tecnicos'] as $tecnico)
+    @if(isset($tecnico->servicios) || $tecnico->servicios->count() > 0)
     <div class="body">
 
         <div class="contenedor-formulario">
@@ -2888,114 +2889,52 @@ xmlns="http://www.w3.org/TR/REC-html40">
                 </div>
                 <h1>Horario de Técnico</h1>
                 <div class="tecnico">
-                    <h4>Nombre: </h4><span> ANDRES STIVEN BEJARANO</span>
+                    <h4>Nombre: </h4><span style="text-transform: uppercase"> {{$tecnico->nombre}}</span>
                 </div>
                 <div class="tecnico">
-                    <h4>Fecha Actual: </h4><span> 2019-02-03</span>
+                    <h4>Fecha Actual: </h4><span> {{$data[0]['now']}}</span>
                 </div>
                 <form action="" class="formulario" name="formulario_registro" method="get">
                     <div style="width: 100%">
                         <table class="table table-bordered">
                             <thead>
-                                <th style="width: 130px;">Hora de Inicio</th>
-                                <th style="width: 130px;">Hora de Fin</th>
+                                <th style="width: 130px;text-align: center">Hora de Inicio</th>
+                                <th style="width: 130px;text-align: center">Hora de Fin</th>
                                 <th style="width: 270px;">Cliente</th>
                                 <th style="width: 270px;">Sede</th>
                                 <th>Direccion</th>
                             </thead>
                             <tbody>
                                 <!-- 13 SERVICIOS -->
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
-                                <tr>
-                                    <td>08:00 AM</td>
-                                    <td>01:00 PM</td>
-                                    <td>FRUVER LOS PAISAS S.A.S.</td>
-                                    <td>FRUVER LA RIVERA</td>
-                                    <td>CRA 2D # 35 - 12</td>
-                                </tr>
+                                @for ($i = 0; $i < 14; $i++)                                    
+                                  <tr style="height: 56px;">
+                                      <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  date('h:i A', strtotime($tecnico->servicios[$i]->hora_inicio)) : ""}}</td>
+                                      <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  date('h:i A', strtotime($tecnico->servicios[$i]->hora_inicio)) : ""}}</td>
+                                      <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  $tecnico->servicios[$i]->solicitud->cliente->nombre_cliente : ""}}</td>
+                                      <td style="text-align: center">
+                                        @php
+                                            if(isset($tecnico->servicios[$i])){
+                                              if(isset($tecnico->servicios[$i]->solicitud->sede)){
+                                                echo $tecnico->servicios[$i]->solicitud->sede->nombre;
+                                              }else{
+                                                echo "SEDE ÚNICA";
+                                              }
+                                            }
+                                        @endphp
+                                      </td>
+                                      <td style="text-align: center">
+                                          @php
+                                            if(isset($tecnico->servicios[$i])){
+                                              if(isset($tecnico->servicios[$i]->solicitud->sede)){
+                                                echo $tecnico->servicios[$i]->solicitud->sede->direccion;
+                                              }else{
+                                                echo $tecnico->servicios[$i]->solicitud->cliente->direccion;
+                                              }
+                                            }
+                                        @endphp
+                                      </td>
+                                  </tr>
+                                @endfor
     
                             </tbody>
                         </table>
@@ -3005,7 +2944,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
         </div>
     
     </div>
+    @endif
 
+  @endforeach
 
   @foreach ($data["ods"] as $ods)
   <div id="ODS V5 - CENDIS_22905" align=center x:publishsource="Excel" style="margin-bottom: 40px">

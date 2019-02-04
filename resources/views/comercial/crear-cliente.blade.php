@@ -52,48 +52,44 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
 
-                                                    <div class="radio">
-                                                        
-                                                        <div class="col-lg-3">
-                                                            <label class="control-label" style="text-align: center;">
-                                                                <strong>Persona Natural*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;" selected>
-                                                            </label>
+                                                    <div class="col-lg-6" style="margin-bottom: 15px">
+                                                        <div class="radio radio-primary" >
+                                                            <input id="checkbox-a" type="radio"   name="tipo_cliente" value="Persona Natural">
+                                                            <label for="checkbox-a" style="font-weight: bold;padding-top: 0px;">Persona Natural</label>
                                                         </div>
-                                                        
-                                                        <div class="form-group col-lg-3">
-                                                            <label class="control-label" style="text-align: center;">
-                                                                <strong>Persona Juridica*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA JURIDICA" style="text-align: center;">
-                                                            </label>
-                                                        </div>
-                                                        
                                                     </div>
-                    
-                                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label><input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control" required></div>
+                                                    
+                                                    <div class="col-lg-6" style="margin-bottom: 15px">
+                                                        <div class="radio radio-primary" >
+                                                            <input id="checkbox-d" type="radio"  name="tipo_cliente" value="Persona Juridica">
+                                                            <label for="checkbox-d" style="font-weight: bold;padding-top: 0px;">Persona Jurídica</label>
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label><input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" style="text-transform: uppercase" class="form-control" required></div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                                        <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control" required>
                                                         
                                                     </div>
                         
                                                     <div class="form-group col-lg-6"><label class="control-label">Cargo </label>
-                                                        <input type="text" name="cargo_contacto" placeholder="Cargo de contacto" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" name="cargo_contacto" placeholder="Cargo de contacto" class="form-control">
                                                         
                                                     </div>
                         
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" name="email" placeholder="Email del contacto" class="form-control" required>
+                                                        <input  style="text-transform: uppercase" type="email" name="email" placeholder="Email del contacto" class="form-control" required>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" name="direccion" placeholder="Dirección del contacto o cliente" class="form-control" required>
+                                                        <input  style="text-transform: uppercase" type="text" name="direccion" placeholder="Dirección del contacto o cliente" class="form-control" required>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
                                                         
                                                     </div>
 
@@ -101,22 +97,22 @@
 
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
-                                                        <select class="form-control" name="medio_contacto">
-                                                            <option value="AMIGO">Un amigo</option>
-                                                            <option value="REFERIDO">Referido</option>
-                                                            <option value="INTERNET">Internet</option>
-                                                            <option value="CONTACTO_ASESOR">Contacto Asesor Directamente</option>
-                                                            <option value="LLAMADA_TELEFONICA">Llamada Telefónica</option>
-                                                            <option value="DIRECTORIO">Directorio Telefónico</option>
-                                                            <option value="PUBLICIDAD">Publicidad en Vehículo</option>
-                                                            <option value="REDES_SOCIALES">Redes Sociales</option>
-                                                            <option value="OTRO">Otro</option>
+                                                        <select  style="text-transform: uppercase" class="form-control" name="medio_contacto">
+                                                            <option value="AMIGO">UN AMIGO</option>
+                                                            <option value="REFERIDO">REFERIDO</option>
+                                                            <option value="INTERNET">INTERNET</option>
+                                                            <option value="CONTACTO_ASESOR">CONTACTO ASESOR DIRECTAMENTE </option>
+                                                            <option value="LLAMADA_TELEFONICA">LLAMADA TELEFONICA</option>
+                                                            <option value="DIRECTORIO">DIRECTORIO TELEFONICO</option>
+                                                            <option value="PUBLICIDAD">PUBLICIDAD</option>
+                                                            <option value="REDES_SOCIALES">REDES_SOCIALES</option>
+                                                            <option value="OTRO">OTRO</option>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Otro ¿Cúal?</label>
-                                                        <input type="text" name="otro" placeholder="Otros medios" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" name="otro" placeholder="Otros medios" class="form-control">
                                                         <br>
                                                     </div>
 
@@ -129,7 +125,7 @@
                                                                 <button id="btn-add2" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
                                                                 
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
+                                                            <input  style="text-transform: uppercase" type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
                                                             
                                                         </div>                                                        
                                                     </div>
@@ -155,40 +151,40 @@
                                                 <div class="col-lg-12">
                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
-                                                        <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                                        <input type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
-                                                        <input type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
                                                     </div>
                                 
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre de Contacto *</label>
-                                                        <input type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" id="telefono_sedes" placeholder="Celular del contacto" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="telefono_sedes" placeholder="Celular del contacto" class="form-control">
                                                     </div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" id="celular_sedes" placeholder="Email de contacto" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="email" id="celular_sedes" placeholder="Email de contacto" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                                        <input type="text" id="email_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                                        <input  style="text-transform: uppercase" type="text" id="email_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
                                                         
                                                     </div>
 
@@ -214,9 +210,9 @@
                                                     <div class="form-group col-lg-12">
                                                         <label>Tipo</label>
                                                         <select class="form-control" name="tipo_evento">
-                                                            <option value="LLAMADA">LLamada</option>
-                                                            <option value="VISITA">Cotización</option>
-                                                            <option value="SEGUIMIENTO">Visita</option>
+                                                            <option value="Llamada">LLAMADA</option>
+                                                            <option value="Cotización">COTIAZCION</option>
+                                                            <option value="Visita">VISITA</option>
                                                         </select>
                                                     </div>
                                     
@@ -240,7 +236,7 @@
 
                                                     <div class="form-group col-lg-12">
                                                         <label>Observaciones</label>
-                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
+                                                        <textarea  style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
                                                     </div>
 
                                                 </div>                                     
@@ -261,29 +257,31 @@
 
                                             <div class="row">
                                                 <div class="col-lg-12">
-
-                                                    <div class="radio" required>
-                                                        
-                                                        <div class="col-lg-3">
-                                                            <label class="control-label" style="text-align: center;">
-                                                                <strong>Persona Natural*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA NATURAL" style="align-content: center;" selected>
-                                                            </label>
+                                                        <div class="col-lg-6" style="margin-bottom: 15px">
+                                                            <div class="radio radio-primary" >
+                                                                <input id="checkbox-c" type="radio"   name="tipo_cliente" value="PERSONA NATURAL">
+                                                                <label for="checkbox-c" style="font-weight: bold;padding-top: 0px;">Persona Natural</label>
+                                                            </div>
                                                         </div>
                                                         
-                                                        <div class="form-group col-lg-3">
+                                                        <div class="col-lg-6" style="margin-bottom: 15px">
+                                                                <div class="radio radio-primary" >
+                                                                    <input id="checkbox-b" type="radio"  name="tipo_cliente" value="PERSONA JURIDICA">
+                                                                    <label for="checkbox-b" style="font-weight: bold;padding-top: 0px;">Persona Jurídica</label>
+                                                                </div>
+                                                            </div>
+
+                                                        {{-- <div class="form-group col-lg-6">
                                                             <label class="control-label" style="text-align: center;">
                                                                 <strong>Persona Juridica*</strong>
                                                                 <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA JURIDICA" style="text-align: center;">
                                                             </label>
-                                                        </div>
-                                                        
-                                                    </div>
+                                                        </div> --}}
 
                                                     <input type="hidden" value="cliente_nuevo" name="estado_registro">
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
-                                                        <input type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="nombre_cliente" placeholder="Nombre de la Empresa" class="form-control" required>
                                                         
                                                     </div>
 
@@ -292,67 +290,67 @@
                                                         <input type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-lg-1">
-                                                    <label class="control-label" style="visibility: hidden;">D</label>
+                                                        <label class="control-label">D.V.</label>
                                                         <input type="text" name="nit_number" id="nit_number" class="form-control" required>
                                                     </div>
 
                                                      <div class="form-group col-lg-6"><label class="control-label">Sector Economico *</label>
                                                         <select class="form-control">
-                                                            <option value="RESIDENCIAL">Residencial</option>
-                                                            <option value="COMERCIAL">Comercial</option>
-                                                            <option value="SERVICIO">Servicio</option>
-                                                            <option value="INDUSTRIAL">Industrial</option>
+                                                            <option value="RESIDENCIAL">RESIDENCIAL</option>
+                                                            <option value="COMERCIAL">COMERCIAL</option>
+                                                            <option value="SERVICIO">SERVICIO</option>
+                                                            <option value="INDUSTRIAL">INDUSTRIAL</option>
                                                         </select>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Municipio *</label>
-                                                        <input type="text" name="municipio" placeholder="Municipio" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="municipio" placeholder="Municipio" class="form-control" required>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control" required>
                                                         
                                                     </div>
                                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input type="text" name="barrio" placeholder="Barrio" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="barrio" placeholder="Barrio" class="form-control" required>
 
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                                        <input type="text" name="zona" placeholder="Zona" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="zona" placeholder="Zona" class="form-control">
 
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                                        <input type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="nombre_contacto" placeholder="Nombre de contacto" class="form-control" required>
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                                        <input type="text" name="cargo_contacto" placeholder="Cargo de contacto" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto" placeholder="Cargo de contacto" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Contacto Técnico *</label>
-                                                        <input type="text" name="contacto_tecnico" placeholder="Nombre de contacto técnico" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="contacto_tecnico" placeholder="Nombre de contacto técnico" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Cargo Técnico *</label>
-                                                        <input type="text" name="cargo_contacto_tecnico" placeholder="Cargo del técnico" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_tecnico" placeholder="Cargo del técnico" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" name="email" placeholder="Email del contacto" class="form-control">
+                                                        <input style="text-transform: uppercase" type="email" name="email" placeholder="Email del contacto" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
                                                         
                                                     </div>
                                                     
@@ -363,33 +361,33 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-12"><label class="control-label">Empresa de fumigación actualmente *</label>
-                                                        <input type="text" name="empresa_actual" placeholder="Empresa que le presta los servicios de fumigación" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="empresa_actual" placeholder="Empresa que le presta los servicios de fumigación" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-12">
                                                         <label>Razón del cambio</label>
-                                                        <textarea class="form-control" placeholder="Escriba aquí las razones por la cual escogio el cliente a Sanicontrol como su empresa para prestar los servicios de fumigación." rows="1" name="razon_cambio" ></textarea>
+                                                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las razones por la cual escogio el cliente a Sanicontrol como su empresa para prestar los servicios de fumigación." rows="1" name="razon_cambio" ></textarea>
                                                     </div>
 
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
                                                         <select class="form-control" name="medio_contacto">
-                                                            <option value="AMIGO">Un amigo</option>
-                                                            <option value="DIRECTORIO">Referido</option>
-                                                            <option value="INTERNET">Internet</option>
-                                                            <option value="CONTACTO_ASESOR">Contacto Asesor Directamente</option>
-                                                            <option value="LLAMADA_TELEFONICA">Llamada Telefónica</option>
-                                                            <option value="DIRECTORIO">Directorio Telefónico</option>
-                                                            <option value="PUBLICIDAD">Publicidad en Vehículo</option>
-                                                            <option value="REDES_SOCIALES">Redes Sociales</option>
-                                                            <option value="OTRO">Otro</option>
+                                                                <option value="AMIGO">UN AMIGO</option>
+                                                                <option value="REFERIDO">REFERIDO</option>
+                                                                <option value="INTERNET">INTERNET</option>
+                                                                <option value="CONTACTO_ASESOR">CONTACTO ASESOR DIRECTAMENTE </option>
+                                                                <option value="LLAMADA_TELEFONICA">LLAMADA TELEFONICA</option>
+                                                                <option value="DIRECTORIO">DIRECTORIO TELEFONICO</option>
+                                                                <option value="PUBLICIDAD">PUBLICIDAD</option>
+                                                                <option value="REDES_SOCIALES">REDES_SOCIALES</option>
+                                                                <option value="OTRO">OTRO</option>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Otro ¿Cúal?</label>
-                                                        <input type="text" name="otro" placeholder="Otros medios" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="otro" placeholder="Otros medios" class="form-control">
                                                         <br>
                                                     </div>
 
@@ -399,7 +397,7 @@
                                                             <span class="input-group-btn">
                                                                 <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
-                                                            <input type="text" class="form-control" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
+                                                            <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
                                                         </div>                                                        
                                                     </div>
 
@@ -418,36 +416,36 @@
                                                 <div class="col-lg-12">
                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
-                                                        <input type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                                        <input type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
-                                                        <input type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
                                                     </div>
                                 
                                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                                        <input type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
                                                         
                                                     </div>
                         
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
+                                                        <input style="text-transform: uppercase" type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
                                                         
                                                     </div>
 
@@ -473,9 +471,9 @@
                                                     <div class="form-group col-lg-12">
                                                         <label>Tipo</label>
                                                         <select class="form-control" name="tipo_evento">
-                                                                <option value="LLAMADA">LLamada</option>
-                                                                <option value="VISITA">Cotización</option>
-                                                                <option value="SEGUIMIENTO">Visita</option>
+                                                                <option value="Llamada">LLAMADA</option>
+                                                                <option value="visita">VISITA</option>
+                                                                <option value="seguimiento">SEGUIMIENTO</option>
                                                         </select>
                                                     </div>
                                     
@@ -499,7 +497,7 @@
 
                                                     <div class="form-group col-lg-12">
                                                         <label>Observaciones</label>
-                                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
+                                                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones" rows="3" name="asunto"></textarea>
                                                     </div>
 
                                                 </div>                                     
@@ -511,7 +509,7 @@
                                             </div>   
 
                                             {{Form::close()}}                               
-                                                <button type="submit" id="clientes" class="btn btn-w-m btn-primary">Pruebas</button>
+                                                {{-- <button type="submit" id="clientes" class="btn btn-w-m btn-primary">Pruebas</button> --}}
                                         </div>
                                     </div>
                                 </div>

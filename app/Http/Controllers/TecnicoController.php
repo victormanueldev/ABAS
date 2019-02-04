@@ -154,7 +154,7 @@ class TecnicoController extends Controller
         $dt_ini = Carbon::parse($dateStart);
         $dt_end = Carbon::parse($dateEnd);
 
-        if($dt_end->diffInDays($dt_ini) != 1){
+        if($dt_end->diffInDays($dt_ini) == 1){
             if ($id == 'all') {
                 # code...
                 $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
@@ -213,6 +213,7 @@ class TecnicoController extends Controller
                 
         }
         return $data;
+        // return $dt_end->diffInDays($dt_ini);
     }
 
     public function getDatesServices($solicitud, $tecnico)
@@ -351,10 +352,41 @@ class TecnicoController extends Controller
                                         ->get();
 
         }
+
+        if($idTecnico == 'all'){
+            $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                        $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                        $query->where('fecha_inicio', '>=', $fechaInicio);
+                                        $query->where('fecha_fin', '<=', $fechaFin);
+                                    }, 'servicios.solicitud' => function($query){ 
+                                        $query->select('id', 'cliente_id', 'sede_id');
+                                    }, 'servicios.solicitud.cliente' => function($query){
+                                        $query->select('nombre_cliente', 'direccion', 'id');
+                                    }, 'servicios.solicitud.sede' => function($query){
+                                        $query->select('nombre', 'direccion', 'id');
+                                    }])
+                                    ->get();
+        }else{
+            $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                        $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                        $query->where('fecha_inicio', '>=', $fechaInicio);
+                                        $query->where('fecha_fin', '<=', $fechaFin);
+                                    }, 'servicios.solicitud' => function($query){ 
+                                        $query->select('id', 'cliente_id', 'sede_id');
+                                    }, 'servicios.solicitud.cliente' => function($query){
+                                        $query->select('nombre_cliente', 'direccion', 'id');
+                                    }, 'servicios.solicitud.sede' => function($query){
+                                        $query->select('nombre', 'direccion', 'id');
+                                    }])
+                                    ->where('id', $idTecnico)
+                                    ->get();
+        }
         //Organiza la informacion para mayor facilidad de acceso a sus propiedades
         $data = collect([
-            'ods' => $ordenesServicios
+            'ods' => $ordenesServicios,
+            'tecnicos' => $tecnicos
         ]);
+
         $fechaActual = Carbon::now()->toDateString();
         $data->push(['now' => $fechaActual]);
         // return $data;

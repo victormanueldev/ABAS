@@ -42,8 +42,8 @@ class CotizacionController extends Controller
             try{
                 $user = Auth::user();
                 $cotizacion = new Cotizacion();
-                $codigo = "CT-".$user->iniciales."-".$request->idCliente;
-                $cotizacion->codigo = $codigo;
+                //$codigo = "CT-".$user->iniciales."-".$request->idCliente;
+                $cotizacion->codigo = strtoupper($request->codigo);
                 $cotizacion->estado = $request->estado;
                 $cotizacion->valor =$request->valor;
                 $cotizacion->cliente_id = $request->idCliente;
