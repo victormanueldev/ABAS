@@ -33,7 +33,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' => 'form-solicitud')) !!}
-    {{Form::token()}}
+    {!! Form::token() !!}
 
    	<div class="row">
         <div class="col-lg-12">
@@ -70,14 +70,13 @@
                                             
                                             <select class="form-control" id="frecuencia_servicio" name="frecuencia_servicio" required>
                                                 <option value="" selected>Seleccione una frecuencia</option>
-                                                <option value="7">Semanales</option>
-                                                <option value="15">Quincenales</option>
-                                                <option value="30">Mensuales</option>
-                                                <option value="60">Bimestrales</option>
-                                                <option value="90">Trimestrales</option>
-                                                <option value="120">Cada 4 Meses</option>
-                                                <option value="180">Semestrales</option>
-                                                <option value="360">Anuales</option>
+                                                <option value="Semanal">Semanales</option>
+                                                <option value="Quincenal">Quincenales</option>
+                                                <option value="Mensual">Mensuales</option>
+                                                <option value="Bimestral">Bimestrales</option>
+                                                <option value="Trimestral">Trimestrales</option>
+                                                <option value="Semestral">Semestrales</option>
+                                                <option value="Anual">Anuales</option>
                                             </select>
     
                                         </div>
@@ -584,26 +583,6 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-6">
-                                        <label>Firma Inspector Comercial</label>
-                                        <textarea class="form-control" rows="3"></textarea>
-                                    </div>
-
-                                    <div class="form-group col-lg-6">
-                                        <label>Firma Gestión de Calidad</label>
-                                        <textarea class="form-control" rows="3"></textarea>
-                                    </div>
-
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Firma Programación</label>
-                                        <textarea class="form-control" rows="3"></textarea>                                        
-                                    </div>
-
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Firma Jefe Técnico:</label>
-                                        <textarea class="form-control" rows="3"></textarea>
-                                    </div>
-
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
                                                 <button type="submit" class="btn btn-primary" id="btn-submit">Guardar</button>
@@ -1078,6 +1057,7 @@
                     //Llama a la funcion de guardar form
                     guardarSolicitud(
                                         res,
+                                        codigo_solicitud,
                                         fecha_creacion,
                                         nombre_usuario,
                                         frecuencia_servicio,

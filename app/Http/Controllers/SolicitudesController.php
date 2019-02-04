@@ -58,8 +58,8 @@ class SolicitudesController extends Controller
                 $solicitud->fecha = $request->fecha_creacion;
                 $solicitud->nombre_usuario = $request->nombre_usuario;
                 $solicitud->frecuencia = $request->frecuencia_servicio;
-                $solicitud->cliente_id = $cliente;
-                $solicitud->sede_id = $sede;
+                $solicitud->cliente_id = $cliente->id;
+                $solicitud->sede_id = isset($sede->id) ? $sede->id : 0;
                 $solicitud->contacto_name_factura = $request->contacto_name_factura;
                 $solicitud->contacto_telefono_factura = $request->contacto_telefono_factura;
                 $solicitud->contacto_celular_factura = $request->contacto_celular_factura;

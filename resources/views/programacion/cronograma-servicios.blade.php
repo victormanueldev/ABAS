@@ -165,7 +165,7 @@
                                             </div>
                                             <div class="form-group col-lg-6">
                                                     <label>Frecuencia sugerida</label>
-                                                    <input class="form-control" id="sug_frecuency" readonly>
+                                                    <input class="form-control" id="sug_frecuency" readonly style="margin-top: 10px;">
                                                 </div>
                                             <div class="form-group col-md-12">
                                                 <label>Repetir cada:</label>
