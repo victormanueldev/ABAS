@@ -63,7 +63,7 @@ class SolicitudesController extends Controller
                 $solicitud->contacto_name_factura = $request->contacto_name_factura;
                 $solicitud->contacto_telefono_factura = $request->contacto_telefono_factura;
                 $solicitud->contacto_celular_factura = $request->contacto_celular_factura;
-                $solicitud->observaciones_tecnico = $request->observaciones_tecnico;
+                $solicitud->observaciones = $request->observaciones_tecnico;
                 $solicitud->total_plan = $request->total_plan;
                 $solicitud->instrucciones = $request->instrucciones;
                 $solicitud->estaciones_roedor = $request->estaciones_roedor;

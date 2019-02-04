@@ -23,7 +23,7 @@ class CreateSolicitudesTable extends Migration
             $table->string('contacto_name_factura', 20)->nullable();
             $table->string('contacto_telefono_factura', 20)->nullable();
             $table->string('contacto_celular_factura', 20)->nullable();
-            $table->string('observaciones_tecnico', 20)->nullable();
+            $table->string('observaciones')->nullable();
             $table->string('total_plan', 20)->nullable();
             $table->string('instrucciones', 20)->nullable();
             $table->string('estaciones_roedor', 20)->nullable();

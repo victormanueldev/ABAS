@@ -102,25 +102,25 @@ class ClientesController extends Controller
 
         $cliente->tipo_cliente = $request->get('tipo_cliente');
         if($request->get('tipo_cliente') == 'Persona Natural'){
-            $cliente->razon_social = $request->get('nombre_cliente');
+            $cliente->razon_social = strtoupper($request->get('nombre_cliente'));
         }
-        $cliente->nit_cedula = $request->get('nit_cedula');
-        $cliente->nombre_cliente = $request->get('nombre_cliente');
+        $cliente->nit_cedula = strtoupper($request->get('nit_cedula'));
+        $cliente->nombre_cliente = strtoupper($request->get('nombre_cliente'));
         $cliente->nit_cedula = $request->get('nit_cedula') + $request->get('nit_number');
-        $cliente->sector_economico = $request->get('sector_economico');
-        $cliente->municipio = $request->get('municipio');
-        $cliente->direccion = $request->get('direccion');
-        $cliente->barrio = $request->get('barrio');
-        $cliente->zona = $request->get('zona');
-        $cliente->nombre_contacto = $request->get('nombre_contacto');
-        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
-        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
-        $cliente->cargo_contacto = $request->get('cargo_contacto');
-        $cliente->email = $request->get('email');
-        $cliente->extension = $request->get('extension');
-        $cliente->celular = $request->get('celular');
-        $cliente->empresa_actual = $request->get('empresa_actual');
-        $cliente->razon_cambio = $request->get('razon_cambio');
+        $cliente->sector_economico = strtoupper($request->get('sector_economico'));
+        $cliente->municipio = strtoupper($request->get('municipio'));
+        $cliente->direccion = strtoupper($request->get('direccion'));
+        $cliente->barrio = strtoupper($request->get('barrio'));
+        $cliente->zona = strtoupper($request->get('zona'));
+        $cliente->nombre_contacto = strtoupper($request->get('nombre_contacto'));
+        $cliente->contacto_tecnico = strtoupper($request->get('contacto_tecnico'));
+        $cliente->cargo_contacto_tecnico = strtoupper($request->get('cargo_contacto_tecnico'));
+        $cliente->cargo_contacto = strtoupper($request->get('cargo_contacto'));
+        $cliente->email = strtoupper($request->get('email'));
+        $cliente->extension = strtoupper($request->get('extension'));
+        $cliente->celular = strtoupper($request->get('celular'));
+        $cliente->empresa_actual = strtoupper($request->get('empresa_actual'));
+        $cliente->razon_cambio = strtoupper($request->get('razon_cambio'));
         $cliente->estado_registro = $request->get('estado_registro');
         $cliente->user_id = Auth::user()->id;
 
@@ -154,7 +154,7 @@ class ClientesController extends Controller
 
         //return $request->all();
 
-        return Redirect::to('home');
+        return Redirect::to('/clientes/create');
     }
 
     /**
@@ -242,21 +242,21 @@ class ClientesController extends Controller
         $cliente->tipo_cliente = $request->get('tipo_cliente');
         $cliente->estado_negociacion = $request->get('estado_negociacion');
         $cliente->nit_cedula = $request->get('nit_cedula');
-        $cliente->nombre_cliente = $request->get('nombre_cliente');
-        $cliente->sector_economico = $request->get('sector_economico');
-        $cliente->municipio = $request->get('municipio');
-        $cliente->direccion = $request->get('direccion');
-        $cliente->barrio = $request->get('barrio');
-        $cliente->zona = $request->get('zona');
-        $cliente->nombre_contacto = $request->get('nombre_contacto');
-        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
-        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
-        $cliente->cargo_contacto = $request->get('cargo_contacto');
-        $cliente->email = $request->get('email');
+        $cliente->nombre_cliente = strtoupper($request->get('nombre_cliente'));
+        $cliente->sector_economico = strtoupper($request->get('sector_economico'));
+        $cliente->municipio = strtoupper($request->get('municipio'));
+        $cliente->direccion = strtoupper($request->get('direccion'));
+        $cliente->barrio = strtoupper($request->get('barrio'));
+        $cliente->zona = strtoupper($request->get('zona'));
+        $cliente->nombre_contacto = strtoupper($request->get('nombre_contacto'));
+        $cliente->contacto_tecnico = strtoupper($request->get('contacto_tecnico'));
+        $cliente->cargo_contacto_tecnico = strtoupper($request->get('cargo_contacto_tecnico'));
+        $cliente->cargo_contacto = strtoupper($request->get('cargo_contacto'));
+        $cliente->email = strtoupper($request->get('email'));
         $cliente->celular = $request->get('celular');
         $cliente->save();
 
-        return Redirect::to('home');
+        return Redirect::to('/clientes/'.$id);
     }
 
     public function indexContablilidad(Request $request)

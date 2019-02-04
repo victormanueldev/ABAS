@@ -18,7 +18,7 @@ class Solicitud extends Model
         'contacto_name_factura',
         'contacto_telefono_factura',
         'contacto_celular_factura',
-        'observaciones_tecnico',
+        'observaciones',
         'total_plan',
         'instrucciones',
         'estaciones_roedor',
