@@ -72,7 +72,7 @@
                                                     </div>
                                                     <div class="form-group col-lg-1">
                                                         <label class="control-label">D.V.</label>
-                                                        <input type="text" name="nit_number" id="nit_number" class="form-control" required>
+                                                        <input type="text" name="nit_number" id="nit_number" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
@@ -143,7 +143,7 @@
                                                     </div> --}}
                                                     
                                                     <div class="row">
-                                                        <div class="col-lg-12" id="columna_principal3">
+                                                        <div class="col-lg-12" >
 
                                                         </div>
                                                     </div>
@@ -179,7 +179,7 @@
                                                         <br>
                                                     </div>
 
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6" id="columna_principal3">
                                                         <label class="control-label">Teléfono *</label>
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
@@ -327,7 +327,7 @@
     $("#btn-add").click(event => {
         cont++;
         //Añade una serie de nodos dentro del componente con ID columna_principal
-        $("#columna_principal").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont }*</label><input type="text" name="telefono[${cont -1 }]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
+        $("#columna_clonada2").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont }*</label><input type="text" name="telefono[${cont -1 }]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
     });
     //Evento click del btn con ID 2
     $("#btn-add2").click(event => {

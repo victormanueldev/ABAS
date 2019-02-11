@@ -17,7 +17,7 @@ class CreateSolicitudesTable extends Migration
             
             $table->increments('id');
             $table->string('codigo', 20);
-            $table ->string('nombre_usuario', 20);
+            $table ->string('nombre_usuario')->nullable();
             $table->date('fecha');
             $table->string('frecuencia',15);
             $table->string('contacto_name_factura', 20)->nullable();

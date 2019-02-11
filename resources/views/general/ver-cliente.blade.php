@@ -290,7 +290,7 @@
 
                                                         </tr>
                                                         @endforeach
-                                                    </tbody>
+                                                    </tbody> 
                                                 </table>
                                             </div>
 
@@ -419,7 +419,6 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         {!! Form::open(array('route' => ['clientes.updateCliente', $cliente[0] -> id], 'method' => 'POST', 'autocomplete' => 'on')) !!}
-                        {{-- {!! Form::open(['route' => ['clientes.updateCliente', $cliente[0] -> id]]) !!} --}}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
