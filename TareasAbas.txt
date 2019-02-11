@@ -2,12 +2,44 @@ Otros Ajustes
     AREA COMERCIAL (1 Dia)
         - Crear Cliente 
             - Atributo de Estado de comisiones RECOMPRA, NUEVO CON CONTRATO, REACTIVADO (Editar en solicitudes)
+            - Persona juridica y natural en un select
+            - Sector economico (select)
+            - Unificar Prospecto Cliente, campos basicos obligatorios
+            - Enviar Ids de Cliente y sede para calendario (observaciones)
+            - Creacion de sedes de forma cómoda para el usuario
+
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
         - Solicitudes
-            - Actualizar el formulario con el formato nuevo #Andres
             - Hacer CRUD de todos los datos #Andres
             - Asignar el tipo de facturacion del cliente (Tipo 1: factura maestra con frecuencia, Tipo 2: factura por sede o servicio)
+            - Frecuencias (select)
+            - Que el inspector se traiga con cuando se selecciona el cliente
+            - Plan de saneamiento
+                - Frecuencias
+                - # de visistas y tiempo estimado (Campos dinámicos)
+                - Actualizar tabla de Tipos de Serivicio
+            - Servicios preventivos o correctivos
+                - Tipo de servicio, frecuencia, valor y observaciones (Campos dinamicos 1 fila)
+                - Total a facturar realtime
+            - Forma de pago de servicios
+                - Opciones de Tipo de Fac (SC, Green)
+                - Formas de pago select() 
+                - 
+            - Numero de residencias
+                - Tipo de residencia, Valor,observaciones  (Campos dinamicos 1 fila)
+            - Inventario inicial cliente
+                - Campos de cantidad predefinidos
+            - Compra de dispositivos
+                - Tipo de dispositivo (select), Cantidad, Valor sin IVA, Total, Observaciones (Campos dinamicos 1 fila)
+            - Dispositivos en comodato  propuesta
+                - Tipo de dispositivo (select), Cantidad, Valor sin IVA, Total, Observaciones (Campos dinamicos 1 fila)
+            - Gestion de calidad
+                - Tipo de doc (select), frecuencia, observaciones (Campos dinámicos 1 fila)
+
+        - Inspecciones
+            - 
+
         - Novedades
             - Ver listado de novedades solo del area a la que pertenezca el usuario.
         - ROL DE DIRECCION COMERCIAL
