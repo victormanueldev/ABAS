@@ -11,6 +11,8 @@ use ABAS\Novedad;
 use ABAS\Telefono;
 use Auth;
 use Carbon\Carbon;
+use ABAS\Solicitud;
+use DB;
 
 class ClientesController extends Controller
 {
@@ -20,51 +22,7 @@ class ClientesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        
-        // $clientes = Cliente::all();
-        // $data = collect();
-        // foreach ($clientes as $cliente) {
-        //     if($cliente->razon_social == 'indefinido'){
-        //         $data->push([
-                   
-        //                 'id'=> $cliente->id,
-        //                 'nombre_cliente' => $cliente->nombre_cliente,
-        //                 'cedula' => $cliente->nit_cedula,
-        //                 'direccion' => $cliente->direccion,
-        //                 'nombre_contacto' => $cliente->nombre_contacto,
-        //                 'cargo_contacto' => $cliente->cargo_contacto,
-        //                 'email' => $cliente->email,
-        //                 'celular' => $cliente->celular
-                    
-        //         ]);
-
-        //     }else{
-        //         $data->push([
-        //                 'id' => $cliente->id,
-        //                 'nombre_cliente' => $cliente->nombre_cliente,
-        //                 'razon_social' => $cliente->razon_social,
-        //                 'nit' => $cliente->nit_cedula,
-        //                 'sector_economico' => $cliente->sector_economico,
-        //                 'municipio' => $cliente->municipio,
-        //                 'direccion' => $cliente->direccion,
-        //                 'barrio' => $cliente->barrio,
-        //                 'nombre_contacto' => $cliente->nombre_contacto,
-        //                 'contacto_tecnico' => $cliente->contacto_tecnico,
-        //                 'cargo_contacto_tecnico' => $cliente->cargo_contacto_tecnico,
-        //                 'cargo_contacto' => $cliente->cargo_contacto,
-        //                 'email' => $cliente->email,
-        //                 'telefono' => $cliente->telefono,
-        //                 'telefono2' => $cliente->telefono2,
-        //                 'extension' => $cliente->extension,
-        //                 'celular' => $cliente->celular,
-        //                 'empresa_actual' => $cliente->empresa_actual,
-        //                 'razon_cambio' => $cliente->razon_cambio
-                    
-        //         ]);
-        //     }
-        // }
-        // return $data;
+    {            
         $clientes = Cliente::all();
         if($request->ajax()){
             return $clientes;
@@ -92,59 +50,88 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //Cliente
-        $cliente = new Cliente();
+        $this->validate(request(), [
+            'nombre_cliente' => 'required'
+        ]);
 
-        $cliente->tipo_cliente = $request->get('tipo_cliente');
-        $cliente->nit_cedula = $request->get('nit_cedula');
-        $cliente->nombre_cliente = $request->get('nombre_cliente');
-        $cliente->sector_economico = $request->get('sector_economico');
-        $cliente->municipio = $request->get('municipio');
-        $cliente->direccion = $request->get('direccion');
-        $cliente->barrio = $request->get('barrio');
-        $cliente->zona = $request->get('zona');
-        $cliente->nombre_contacto = $request->get('nombre_contacto');
-        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
-        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
-        $cliente->cargo_contacto = $request->get('cargo_contacto');
-        $cliente->email = $request->get('email');
-        $cliente->extension = $request->get('extension');
-        $cliente->celular = $request->get('celular');
-        $cliente->empresa_actual = $request->get('empresa_actual');
-        $cliente->razon_cambio = $request->get('razon_cambio');
-        $cliente->user_id = Auth::user()->id;
+        //Cliente
+        $now = Carbon::now();
+
+        $idCliente = DB::table('clientes')->insertGetId([
+            'tipo_cliente' => $request->get('tipo_cliente'),
+            'estado_registro' => $request->get('estado_registro'),
+            'nit_cedula' => !empty($request->get('nit_number'))  ? strtoupper($request->get('nit_cedula'))."-".$request->get('nit_number') : strtoupper($request->get('nit_cedula')),
+            'nombre_cliente' => strtoupper($request->get('nombre_cliente')),
+            'razon_social' => !empty($request->get('razon_social')) ? strtoupper($request->get('razon_social')) : strtoupper($request->get('nombre_cliente')),
+            'sector_economico' => $request->get('sector_economico'),
+            'municipio' => strtoupper($request->get('municipio')),
+            'direccion' => strtoupper($request->get('barrio')),
+            'barrio' => strtoupper($request->get('direccion')),
+            'zona' => strtoupper($request->get('zona')),
+            'nombre_contacto_inicial' => strtoupper($request->get('contacto_inicial')),
+            'cargo_contacto_inicial' => strtoupper($request->get('cargo_contacto_inicial')),
+            'celular_contacto_inicial' => strtoupper($request->get('celular_contacto_inicial')),
+            'email_contacto_inicial' => strtoupper($request->get('email_contacto_inicial')),
+            'nombre_contacto_tecnico' => strtoupper($request->get('contacto_tecnico')),
+            'cargo_contacto_tecnico' => strtoupper($request->get('cargo_contacto_tecnico')),
+            'celular_contacto_tecnico' => strtoupper($request->get('celular_contacto_tecnico')),
+            'email_contacto_tecnico' => strtoupper($request->get('email_contacto_tecnico')),
+            'nombre_contacto_facturacion' => strtoupper($request->get('contacto_facturacion')),
+            'cargo_contacto_facturacion' => strtoupper($request->get('cargo_contacto_facturacion')),
+            'celular_contacto_facturacion' => strtoupper($request->get('celular_contacto_facturacion')),
+            'email_contacto_facturacion' => strtoupper($request->get('email_contacto_facturacion')),
+            'empresa_actual' => strtoupper($request->get('empresa_actual')),
+            'razon_cambio' => strtoupper($request->get('razon_cambio')),
+            'medio_contacto' => strtoupper($request->get('medio_contacto')),
+            'otro_medio' => strtoupper($request->get('otro_medio')),
+            'user_id' => Auth::user()->id,
+            'created_at' => $now,
+            'updated_at' => $now
+        ]);
 
         //Sedes
-        // if (nombre_sedes != '' || nombre_sedes != null) {
-        //     # code...
-        // }
-
-
-        $cliente->save();   
+        if(!empty($request->get('nombre_sedes'))){
+            $idSede = DB::table('sedes')->insertGetId([
+                'nombre' => strtoupper($request->get('nombre_sedes')),
+                'direccion' => strtoupper($request->get('direccion_sedes')),
+                'ciudad' => strtoupper($request->get('ciudad_sedes')),
+                'barrio' => strtoupper($request->get('barrio_sedes')),
+                'zona_ruta' => strtoupper($request->get('zona_ruta')),
+                'nombre_contacto' => strtoupper($request->get('nombre_contacto')),
+                'telefono_contacto' => strtoupper($request->get('telefono_sedes')),
+                'celular_contacto' => strtoupper($request->get('celular_sedes')),
+                'email_contacto' => strtoupper($request->get('email_sedes')),
+                'cliente_id' => $idCliente,
+                'created_at' => $now,
+                'updated_at' => $now
+            ]);
+        }
 
         if($request->fecha_inicio != '' || $request->fecha_inicio != null){
             $evento = new Evento();
             $dt = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);
             $evento->tipo  = $request->tipo_evento;
             $evento->fecha_inicio = $dt->toDateString()." ".$dt->toTimeString();
+            $evento->fecha_fin = $dt->addHour()->toDateTimeString();
             $evento->asunto = $request->asunto;
+            $evento->cliente_id = $idCliente;
+            $evento->sede_id = !empty($idSede) ? $idSede : null;
             $evento->user_id = Auth::user()->id;
             $evento->save();
         }
 
         if ($request->telefono[0] != '' || $request->telefono[0] != null) {               
-            $id_cliente = Cliente::select('id')->where('nombre_cliente', $request->nombre_cliente)->get();
+
             for ($i=0; $i < count($request->telefono) ; $i++) { 
                 Telefono::create([
                     'numero' => $request->telefono[$i],
-                    'cliente_id' => $id_cliente[0]['id']
+                    'cliente_id' => $idCliente
                 ]);
             }
         }
-
-        //return $request->all();
-
-        return Redirect::to('home');
+        \Flash::success('Cliente creado correctamente.')->important();
+         return Redirect::to('/clientes/create');
+        
     }
 
     /**
@@ -230,22 +217,34 @@ class ClientesController extends Controller
         $cliente = Cliente::findOrFail($id);
         
         $cliente->tipo_cliente = $request->get('tipo_cliente');
+        $cliente->estado_negociacion = $request->get('estado_negociacion');
         $cliente->nit_cedula = $request->get('nit_cedula');
-        $cliente->nombre_cliente = $request->get('nombre_cliente');
-        $cliente->sector_economico = $request->get('sector_economico');
-        $cliente->municipio = $request->get('municipio');
-        $cliente->direccion = $request->get('direccion');
-        $cliente->barrio = $request->get('barrio');
-        $cliente->zona = $request->get('zona');
-        $cliente->nombre_contacto = $request->get('nombre_contacto');
-        $cliente->contacto_tecnico = $request->get('contacto_tecnico');
-        $cliente->cargo_contacto_tecnico = $request->get('cargo_contacto_tecnico');
-        $cliente->cargo_contacto = $request->get('cargo_contacto');
-        $cliente->email = $request->get('email');
-        $cliente->celular = $request->get('celular');
+        $cliente->nombre_cliente = strtoupper($request->get('nombre_cliente'));
+        $cliente->sector_economico = strtoupper($request->get('sector_economico'));
+        $cliente->municipio = strtoupper($request->get('municipio'));
+        $cliente->direccion = strtoupper($request->get('direccion'));
+        $cliente->barrio = strtoupper($request->get('barrio'));
+        $cliente->zona = strtoupper($request->get('zona'));
+        $cliente->nombre_contacto_inicial = strtoupper($request->get('nombre_contacto_inicial'));
+        $cliente->cargo_contacto_inicial = strtoupper($request->get('cargo_contacto_inicial'));
+        $cliente->celular_contacto_inicial = strtoupper($request->get('celular_contacto_inicial'));
+        $cliente->email_contacto_inicial = strtoupper($request->get('email_contacto_inicial'));
+        $cliente->nombre_contacto_tecnico = strtoupper($request->get('nombre_contacto_tecnico'));
+        $cliente->cargo_contacto_tecnico = strtoupper($request->get('cargo_contacto_tecnico'));
+        $cliente->celular_contacto_tecnico = strtoupper($request->get('celular_contacto_tecnico'));
+        $cliente->email_contacto_tecnico = strtoupper($request->get('email_contacto_tecnico'));
+        $cliente->nombre_contacto_facturacion = strtoupper($request->get('nombre_contacto_facturacion'));
+        $cliente->cargo_contacto_facturacion = strtoupper($request->get('cargo_contacto_facturacion'));
+        $cliente->celular_contacto_facturacion = strtoupper($request->get('celular_contacto_facturacion'));
+        $cliente->email_contacto_facturacion = strtoupper($request->get('email_contacto_facturacion'));
+        $cliente->empresa_actual = strtoupper($request->get('empresa_actual'));
+        $cliente->razon_cambio = strtoupper($request->get('razon_cambio'));
+        $cliente->medio_contacto = strtoupper($request->get('medio_contacto'));
+        $cliente->otro_medio = strtoupper($request->get('otro_medio'));
+
         $cliente->save();
 
-        return Redirect::to('home');
+        return Redirect::to('/clientes/'.$id);
     }
 
     public function indexContablilidad(Request $request)
@@ -259,17 +258,26 @@ class ClientesController extends Controller
 
     public function billingControl(Request $request)
     {
-        return view('contabilidad.control-facturacion');
+        return view('general.control-facturacion');
     }
 
     public function clientBills(Request $request, $idCliente, $idSede)
     {
+        $dt_ini = Carbon::parse($request->fecha_inicio)->toDateString();
+        $dt_end = carbon::parse($request->fecha_fin)->toDateString();
         $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
                                 $query->where('id',$idSede);
                             },'solicitudes.servicios' => function($query){
-                                $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str');
+                                $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str','tipo','color');
                             } , 'solicitudes.servicios.tipos'])
                             ->select('id','nombre_cliente')
+                            ->whereHas('solicitudes', function($query) use($idSede){
+                                $query->where('sede_id', $idSede);
+                            })
+                            ->whereHas('solicitudes.servicios', function($query) use($dt_ini, $dt_end){
+                                $query->where('fecha_inicio', '>=', $dt_ini);
+                                $query->where('fecha_fin', '<=', $dt_end);
+                            })
                             ->where('id', $idCliente)
                             ->get();
         return $facturas;
@@ -286,6 +294,23 @@ class ClientesController extends Controller
             $user->save();
         }
         return response()->json($user->estado_facturacion, 200);
+    }
+
+    public function docsReport(Request $request)
+    {
+        if($request->ajax()){
+            $data = collect(['clientes' => Cliente::select('id','nombre_cliente','doc_rut','doc_identidad','doc_camara_comercio','tipo_cliente')->with('sedes')->get()]);
+            $data->put('solicitudes', Solicitud::with([
+                                                    'certificados' => function($query){
+                                                        $query->select('id', 'solicitud_id');
+                                                    }, 
+                                                    'rutas' => function($query){
+                                                        $query->select('id', 'tipo','solicitud_id');
+                                                    }
+                                                ])->get());
+            return response()->json($data, 200);
+        }
+        return view('calidad.reporte-documentos');
     }
 
 }

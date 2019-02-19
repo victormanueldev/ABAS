@@ -5,6 +5,7 @@ namespace ABAS\Http\Controllers;
 use ABAS\Cotizacion;
 use Illuminate\Http\Request;
 use Auth;
+use ABAS\Cliente;
 
 class CotizacionController extends Controller
 {
@@ -41,10 +42,10 @@ class CotizacionController extends Controller
             try{
                 $user = Auth::user();
                 $cotizacion = new Cotizacion();
-                $codigo = "CT-".$user->iniciales."-".$request->idCliente;
-                $cotizacion->codigo = $codigo;
+                //$codigo = "CT-".$user->iniciales."-".$request->idCliente;
+                $cotizacion->codigo = strtoupper($request->codigo);
                 $cotizacion->estado = $request->estado;
-                $cotizacion->valor =$request->valor;
+                $cotizacion->valor = $request->valor;
                 $cotizacion->cliente_id = $request->idCliente;
                 $cotizacion->save();
                 return response()->json('Creation Successfully', 201);
@@ -85,9 +86,23 @@ class CotizacionController extends Controller
      * @param  \ABAS\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cotizacion $cotizacion)
+    public function update(Request $request, $id)
     {
         //
+        if($request->ajax()){
+            //Cotizacion aprobada
+            $cotizacion = Cotizacion::findOrFail($id);
+            $cotizacion->estado_aprobacion = $request->estado;
+            $cotizacion->save();
+            //Estado actualizado a cliente nuevo
+            $cliente = Cliente::findOrFail($request->cliente);
+            $cliente->estado_registro = 'cliente_nuevo';
+            $cliente->save();
+
+            return response()->json('Update Success', 200);
+        }else{
+            return response()->json(401);
+        }
     }
 
     /**

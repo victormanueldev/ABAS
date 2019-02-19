@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use ABAS\Novedad;
+use ABAS\Cliente;
 use ABAS\User;
 use ABAS\Area;
 use Carbon\Carbon;
+use ABAS\Sede;
 
 class NovedadesController extends Controller
 {
@@ -27,7 +29,15 @@ class NovedadesController extends Controller
         $fecha_actual = $now->toDateString();
         $data = collect();//Instancia de Coleccion
         foreach ($novedades as $novedad) {
+            $cliente = "";
+            $sede = "";
             if ($novedad->created_at->toDateString() == $fecha_actual || $novedad->estado == 'publicada') {//Muestra solo las novedades creadas en la fecha actual
+                if(isset($novedad->cliente_id)){
+                    $cliente = Cliente::select('id', 'nombre_cliente')->where('id', $novedad->cliente_id)->get();
+                    if(isset($novedad->sede_id)){
+                        $sede = Sede::select('id', 'nombre')->where('id', $novedad->sede_id)->get();
+                    }
+                }
                 if (!empty($novedad->user2->nombres)) {//valida si la novedad está resuelta
                     //Agrega un elemento a la lista solo si el user2 existe
                     $data->push([
@@ -38,6 +48,7 @@ class NovedadesController extends Controller
                         'hora_creacion' => $novedad->created_at->toTimeString(),
                         'comentario' => $novedad->comentario,
                         'id_user1' => $novedad->user->id,
+                        'id_auth' => $id_auth,
                         'nombres_user1' => $novedad->user->nombres,
                         'apellidos_user1' => $novedad->user->apellidos,
                         'foto_user1' => $novedad->user->foto,
@@ -46,7 +57,11 @@ class NovedadesController extends Controller
                         'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
                         'fecha_resuelto' => $novedad->updated_at->toDateString(),
                         'hora_resuelto' => $novedad->updated_at->toTimeString(),
-                        'prioridad' => $novedad->prioridad
+                        'prioridad' => $novedad->prioridad,
+                        'cliente' => $cliente != "" ? $cliente[0] : 0,
+                        'sede' => $sede != "" ? $sede[0] : 0,
+                        'area_id' => $novedad->area_id,
+                        'area_auth' => $area_auth,
                     ]);
                 } else {
                     //Agrega todas las novedades a la coleccion
@@ -67,7 +82,9 @@ class NovedadesController extends Controller
                         'id_auth' => $id_auth,
                         'area_auth' => $area_auth,
                         'area_id' => $novedad->area_id,
-                        'prioridad' => $novedad->prioridad
+                        'prioridad' => $novedad->prioridad,
+                        'cliente' => $cliente != "" ? $cliente[0] : 0,
+                        'sede' => $sede != "" ? $sede[0] : 0
                     ]);
                 }
             }
@@ -86,7 +103,8 @@ class NovedadesController extends Controller
     public function create()
     {
         //
-        return view('calidad.registrar-novedades');
+        $areas = Area::all();
+        return view('calidad.registrar-novedades', compact('areas'));
     }
 
     /**
@@ -104,25 +122,29 @@ class NovedadesController extends Controller
         $novedad->prioridad = $request->prioridad;
         $novedad->user_id = Auth::user()->id;//Obtiene el ID del usuario autenticado
         $novedad->area_id = $request->area;
+        if(isset($request->id_cliente)){
+            $cliente;
+            switch ($request->optionsRadios) {
+                case "1":
+                    $cliente = Cliente::where('nombre_cliente', $request->id_cliente)->get();
+                    break;
+                case "2":
+                    $cliente = Cliente::where('razon_social', $request->id_cliente)->get();
+                    break;
+                default:
+                    $cliente = Cliente::where('nit_cedula', $request->id_cliente)->get();
+                    break;
+            }
+            $novedad->cliente_id = $cliente[0]->id;
+            if(isset($request->select_sedes)){
+                $novedad->sede_id = $request->select_sedes;
+            }
+        }
         $novedad->save();//Guarda los datos en la tabla novedades
 
         
-        //Valida la visibilidad de la novedad
-        if($request->area == '1'){
-            $area_id = 1;
-            //Inserta un solo dato en la tabla area_novedad
-            DB::table('area_novedad')->insert([
-                'area_id' => $area_id,
-                'novedad_id' => $max_id+1
-            ]);
-        }elseif($request->area == '2'){
-            $area_id = 2;
-            //Inserta un solo dato en la tabla area_novedad
-            DB::table('area_novedad')->insert([
-                'area_id' => $area_id,
-                'novedad_id' => $max_id+1
-            ]);
-        }else{
+        // //Valida la visibilidad de la novedad
+        if($request->area == '0'){
             $areas = Area::all();//Obtiene todas las areas registradas en la BD
             foreach ($areas as $area) {
                 //Inserta registros en la tabla area_novedad dependiendo de la cantidad de areas registradas
@@ -131,9 +153,18 @@ class NovedadesController extends Controller
                     'novedad_id' => $max_id+1//Inserta el ID de la nueva novedad, el mismo en cada iteración
                 ]);
             }
+        }else{
+            $area_id = $request->area;
+            //Inserta un solo dato en la tabla area_novedad
+            DB::table('area_novedad')->insert([
+                'area_id' => $area_id,
+                'novedad_id' => $max_id+1
+            ]);
         }
         
-        
+        if(Auth::user()->area_id == 4 && $request->origin == 'calidad'){
+            return redirect('/novedades/create');
+        }
         return redirect('/home');
     }
 

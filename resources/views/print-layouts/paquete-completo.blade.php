@@ -6,6 +6,11 @@
   <meta name=ProgId content=Excel.Sheet>
   <meta name=Generator content="Microsoft Excel 15">
   <link rel=File-List href="ods/filelist.xml">
+  <!--CSS RUTERO-->
+  <style>
+  
+  </style>
+
 
   <style id="ODS V5 - CENDIS_22905_Styles">
     table {
@@ -13726,6 +13731,8 @@
 </head>
 
 <body>
+
+
   <!-------------------------------------------------
   ORDENES DE SERVICIO
   -------------------------------------------------->
@@ -20881,9 +20888,7 @@
       </tr>
       <tr class=xl13398101 height=10 style='mso-height-source:userset;height:7.9pt'>
         <td height=10 class=xl13498101 style='height:7.9pt'></td>
-        <td align=left valign=top><span style='mso-ignore:vglayout;
-  position:absolute;z-index:1;margin-left:16px;margin-top:0px;width:189px;
-  height:110px'><img
+        <td align=left valign=top><span style='mso-ignore:vglayout;position:absolute;z-index:1;margin-left:16px;margin-top:0px;width:189px;height:110px'><img
               width=189 height=110 src="{{asset('print-files/rl/8101_image002.png')}}" v:shapes="_x0031__x0020_Imagen"></span><span
             style='mso-ignore:vglayout2'>
             <table cellpadding=0 cellspacing=0>
@@ -21539,10 +21544,8 @@
         <td class=xl13528101></td>
       </tr>
       <tr class=xl13528101 height=22 style='mso-height-source:userset;height:16.5pt'>
-        <td rowspan=7 height=141 class=xl14288101 width=30 style='border-bottom:1.0pt solid gray;
-  height:106.75pt;width:23pt'>No.</td>
-        <td rowspan=7 class=xl14318101 width=241 style='border-bottom:1.0pt solid gray;
-  width:181pt'>AREAS DE
+        <td rowspan=7 height=141 class=xl14288101 width=30 style='border-bottom:1.0pt solid gray;height:106.75pt;width:23pt'>No.</td>
+        <td rowspan=7 class=xl14318101 width=241 style='border-bottom:1.0pt solid gray;width:181pt'>AREAS DE
           UBICACION<br>DE
           LAMPARAS</td>
         <td rowspan=7 class=xl14348101 width=28 style='border-bottom:1.0pt solid gray;

@@ -48,10 +48,11 @@
                 <div class="ibox-content">
                     <div class="row">
                         <form class="form-inline">
-                            <div class="form-group col-sm-9 col-lg-9">
+                            <div class="form-group col-sm-7 col-lg-9">
                                 <label>Frecuencia: </label>
                                 <select class="form-control" style="width: 85%" id="select_tecnicos">
                                     <option value="" selected>Seleccione un técnico</option>
+                                    <option value="all" selected>Todos los Tecnicos</option>
                                     @foreach($tecnicos as $tecnico)
                                     <option value="{{$tecnico->id}}">{{$tecnico->nombre}}</option>
                                     @endforeach
@@ -88,33 +89,20 @@
                                 <div class="row">
                                     <div class="col-lg12 col-sm-12">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <h3>Filtrar por fechas</h3>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="form-group" id="data_5">
-                                                    <div class="input-daterange input-group" id="datepicker" style="width: 100%;">
-                                                        <input type="text" id="date-start" class="form-control-sm form-control"
-                                                            name="start" value="01/14/2018" />
-                                                        <span class="input-group-addon">hasta</span>
-                                                        <input type="text" id="date-end" class="form-control-sm form-control"
-                                                            name="end" value="01/22/2018" />
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-2">
+                                                <h4>Filtrar por fechas</h4>
                                             </div>
                                             <div class="col-md-2">
-                                                {{-- <button type="button" class="btn btn-outline btn-primary" id="filter-day-selected">Quitar
-                                                    filtro</button> --}}
-                                                <h3 style="width: 40px;display: inline-block;position: relative;top: -15px;margin-right: 10px;">Filtro</h3>
-                                                <div id="filter" class="switch" style="width: 60px;display: inline-block;position: relative;">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" class="onoffswitch-checkbox" id="filter-check">
-                                                        <label class="onoffswitch-label" for="filter-check">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                                <input type="radio" value="1"  name="option-filter" class="i-checks"/>
+                                                <span class="m-l-xs">Fecha Actual</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="radio" value="2"  name="option-filter" class="i-checks" />
+                                                <span class="m-l-xs">Fecha de Mañana</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="radio" value="3"  name="option-filter" class="i-checks"/>
+                                                <span class="m-l-xs">Fecha Seleccionada</span>
                                             </div>
                                             <div class="col-md-2">
                                                 <button type="button" class="btn btn-outline btn-primary" id="filter-dates">Aplicar</button>
@@ -455,10 +443,34 @@
     }
 
     /** Retorna las fechas seleccionadas **/
-    function selectedDates() {
-        var selectedDates = {
-            start: moment($("#date-start").val(), 'MM/DD/YYYY').format("YYYY-MM-DD"),
-            end: moment($("#date-end").val(), 'MM/DD/YYYY').format("YYYY-MM-DD")
+    function selectedDates(option) {
+        var selectedDates;
+        switch (option) {
+            case '1':
+                selectedDates = {
+                    start: moment().tz("America/Bogota").format('YYYY-MM-DD'),
+                    end: moment().tz("America/Bogota").format('YYYY-MM-DD')
+                }
+                break;
+            case '2':
+                selectedDates = {
+                        start: moment().tz("America/Bogota").format('YYYY-MM-DD'),
+                        end: moment().tz("America/Bogota").add(1,'days').format('YYYY-MM-DD')
+                    }
+                break;
+
+            case '3':
+                selectedDates = {
+                        start: daySelected,
+                        end: daySelected
+                    }
+                break;
+            default:
+            selectedDates = {
+                        start: '',
+                        end: ''
+                    }
+                break;
         }
         return selectedDates;
     }
@@ -467,15 +479,26 @@
     $("#filter-dates").click(event => {
         $("#lista-servicios").empty();
         $("#filter-state").empty();
-        if ($("#filter-check:checked").length == 1) {
-            let dates = selectedDates();
-            getServicesByDates($("#select_tecnicos").val(), dates.start, dates.end);
-            $("#filter-state").append("(Filtro aplicado)");
-            filterState = true;
-        } else {
-            getServicesByDates($("#select_tecnicos").val(), daySelected, daySelected);
-            $("#filter-state").append("(Filtro no aplicado)");
-            filterState = false;
+        //Valida la opcion de filtro de servicios
+        switch ($("input[name='option-filter']:checked").val()) {
+            case '1':   //Fecha Actual
+                getServicesByDates($("#select_tecnicos").val(), moment().tz("America/Bogota").format('YYYY-MM-DD'), moment().tz("America/Bogota").format('YYYY-MM-DD'));
+                $("#filter-state").append("(Filtro aplicado)");
+                filterState = true;
+                break;
+            case '2':   //Fecha Mañana
+                getServicesByDates($("#select_tecnicos").val(), moment().tz("America/Bogota").format('YYYY-MM-DD'), moment().tz("America/Bogota").add(1,'days').format('YYYY-MM-DD'));
+                $("#filter-state").append("(Filtro aplicado)");
+                filterState = true;
+                break;
+            case '3':   //Fecha Seleccionada
+                getServicesByDates($("#select_tecnicos").val(), daySelected, daySelected);
+                $("#filter-state").append("(Filtro no aplicado)");
+                filterState = false;
+                break;
+            default:
+                console.log("Uknown option")
+                break;
         }
     })
 
@@ -486,11 +509,10 @@
     * @param idService: ID  del servicio seleccionado
     **/
     function printOptions(option) {
-        let dates = selectedDates();
+        let dates = selectedDates($("input[name='option-filter']:checked").val());
         let verifySelected = verifySelectedAll();
         if (verifySelected === true) {
             //Valida que el filtro por fechas esté aplicado
-            console.log(filterState)
             if (filterState === true) {
                 //Envia el rango de fechas seleccionadas
                 window.open(`tecnicos/imprimir-${option}/${$("#select_tecnicos").val()}/${dates.start}/${dates.end}/all`);
@@ -508,6 +530,11 @@
             swal("Información", "Selecciona al menos un servicio antes de imprimir", "info")
         }
     }
+
+    $("#btn-imprimir").click(() => {
+        $("#lista-servicios").empty();
+        $("#btn-modal-p-o").click();
+    })
 
     //Evento Click del boton de imprimir paquete completo
     $("#print-all").click(event => {
@@ -547,10 +574,10 @@
     $("#select-all").click(event => {
         if ($("#select-all:checked").length == 1) {
             //Deshabilita los Radio Buttons
-            $("input[type=radio]").attr("disabled", "disabled");
+            $("input[name=selected-service]").attr("disabled", "disabled");
         } else {
             //Habilita los Radio Buttons
-            $("input[type=radio]").removeAttr("disabled");
+            $("input[name=selected-service]").removeAttr("disabled");
         }
     })
 

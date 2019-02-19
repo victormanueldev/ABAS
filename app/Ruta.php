@@ -18,4 +18,7 @@ class Ruta extends Model
         'solicitud_id',
     ];
 
+    public function solicitud(){
+        return $this->belongsTo(Solicitud::class);
+    }
 }

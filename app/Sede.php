@@ -34,6 +34,6 @@ class Sede extends Model
      */
     public function solicitud()
     {
-        return $this->hasOne(solicitud::class);
+        return $this->hasOne(Solicitud::class);
     }
 }

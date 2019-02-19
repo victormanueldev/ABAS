@@ -3373,16 +3373,18 @@ output {
 }
 
 .form-control::-moz-placeholder {
-  color: #b1b7ba;
-  opacity: 1;
+  color: #bababa !important;
+  opacity: 1 !important;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #b1b7ba;
+  color: #bababa !important;
+  opacity: 1 !important;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #b1b7ba;
+  color: #bababa !important;
+  opacity: 1 !important;
 }
 
 .form-control::-ms-expand {

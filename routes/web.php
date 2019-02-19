@@ -51,6 +51,7 @@ Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('client
 // Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
 // Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
 Route::put('estado/cliente', 'ClientesController@changeBillState');
+Route::get('documentos/cliente', 'ClientesController@docsReport');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [
@@ -71,11 +72,14 @@ Route::post('solicitud/show', 'SolicitudesController@show');
 //Servicios
 Route::resource('servicios', 'ServicioController', [
     'except' => 'updateFrecuency',
-    'except' => 'updateState'
+    'except' => 'updateState',
+    'except' => 'getServicesByTecnician'
 ]);
 Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
 Route::put('servicios/edit/state', 'ServicioController@updateState');
 Route::get('list/services','ServicioController@listServices');
+Route::get('servicios/show/{idTecnico}', 'ServicioController@getServicesByTecnician');
+Route::put('servicios/edit/dates','ServicioController@updateDatesHoursService');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
@@ -90,6 +94,7 @@ Route::get('tecnicos/imprimir-rl/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnic
 Route::get('tecnicos/imprimir-rri/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRI');
 Route::get('tecnicos/imprimir-rre/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRE');
 Route::get('tecnicos/imprimir-ctf/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printCertificates');
+Route::get('all/tecnicos', 'TecnicoController@getAll');
 
 //Tipos de Servicios
 Route::resource('tipos', 'TipoServicioController');
@@ -98,8 +103,13 @@ Route::resource('tipos', 'TipoServicioController');
 Route::resource('certificados', 'CertificadoController');
 
 //Rutas
-Route::resource('rutas', 'RutaController');
+Route::resource('rutas', 'RutaController', [
+    'except' => 'getRoute'
+]);
+Route::post('find/route', 'RutaController@getRoute');
+Route::post('save/route/product', 'RutaController@saveRouteProduct');
 
+Route::get('show/ruta', 'RutaController@show');
 //Impresiones
 Route::get('impresiones/fechas/{id}/{inicio}/{fin}', 'ImpresionController@imprimirTodo');
 
@@ -165,7 +175,8 @@ Route::put('payment/register', 'TipoServicioController@registerPayment');
 Route::put('payment/update', 'TipoServicioController@updateBill');
 
 Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
-Route::get('contabilidad/facturacion', 'ClientesController@billingControl');
+Route::get('contabilidad/facturacion', 'ClientesController@billingControl');    //Registro de Pagos
+Route::get('programacion/facturacion', 'ClientesController@billingControl');    //Facturacion
 Route::get('facturacion/cliente/{id}/{sede}', 'ClientesController@clientBills');
 
 Route::resource('temporales/novedad', 'NovedadTemporalController', [
@@ -174,3 +185,10 @@ Route::resource('temporales/novedad', 'NovedadTemporalController', [
 Route::get('temporales/novedad/{idCliente}/{idSede}', 'NovedadTemporalController@show');
 
 Route::get('neutral/edit/{id}', 'ServicioController@editNeutralService');
+Route::get('find/service/{fecha}/{cliente}/{sede}', 'ServicioController@serviceByDate');
+Route::resource('ordenes', 'OrdenServicioController');
+
+Route::resource('productos', 'ProductoController');
+Route::get('recepcion/rutas', function(){
+    return view('servicio-clientes.registro-rutas');
+});

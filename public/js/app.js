@@ -13692,6 +13692,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 //Importacion del Loadash
 
@@ -30904,7 +30908,9 @@ var render = function() {
     "div",
     _vm._l(_vm.novedadesOrdenadas, function(novedad) {
       return _c("div", { key: novedad.id, staticClass: "social-feed-box" }, [
-        novedad.area_auth == novedad.area_id || novedad.area_id == 3
+        novedad.area_auth == novedad.area_id ||
+        novedad.area_id == 0 ||
+        novedad.id_user1 == novedad.id_auth
           ? _c("div", [
               _c("div", { staticClass: "social-avatar" }, [
                 _c("a", { staticClass: "pull-left", attrs: { href: "#" } }, [
@@ -30954,7 +30960,23 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "social-body" }, [
-                _c("p", [_vm._v(_vm._s(novedad.descripcion) + " ")])
+                _c("p", [_vm._v(_vm._s(novedad.descripcion) + " ")]),
+                _vm._v(" "),
+                novedad.cliente != 0
+                  ? _c("div", [
+                      _c("small", { staticClass: "label label-default" }, [
+                        _vm._v("Cliente:")
+                      ]),
+                      _c("i", [_vm._v(_vm._s(novedad.cliente.nombre_cliente))]),
+                      _vm._v(" "),
+                      novedad.sede != 0
+                        ? _c("small", { staticClass: "label label-default" }, [
+                            _vm._v("Sede:")
+                          ])
+                        : _vm._e(),
+                      _c("i", [_vm._v(_vm._s(novedad.sede.nombre))])
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               novedad.estado == "resuelta"

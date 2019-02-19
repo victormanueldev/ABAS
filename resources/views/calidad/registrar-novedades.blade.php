@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <script>
-    document.getElementById('m-listado-servicios').setAttribute("class", "active");
-    document.getElementById('a-listado-servicios').removeAttribute("style");
+    document.getElementById('m-registro-novedades').setAttribute("class", "active");
+    document.getElementById('a-registro-novedades').removeAttribute("style");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -21,8 +21,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
+                {!! Form::open(['route' => ['novedades.store'], 'method' => 'POST']) !!}
+                {!! Form::token() !!}
                 <div class="ibox-title">
-                        <h4>Filtro por clientes</h4>             
+                    <h4>Formulario para registrar novedades</h4>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -34,6 +36,7 @@
                 </div>
                 <div class="ibox-content">
                     <div>
+                            
                         <p>Indique los datos del cliente para realizar el filtro.</p>
                         <div class="row">
                             <div class="form-group ">
@@ -51,48 +54,55 @@
                                 </div>
                                 <div class="col-sm-12 col-md-12" style="margin-top: 10px;">
                                     <input type="text" placeholder="Cliente..." class="typeahead_1 form-control" id="input_autocomplete"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-8" style="margin-top: 15px">
-                                <label class="control-label">Sede *</label>
-                                <select class="form-control " id="select_sedes">
-                                    <option value="" selected disabled>Selecciona una sede</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-2" style="margin-top: 15px" >
-                                    <label class="control-label" style="margin-bottom: 13px;">Estado de facturación *</label>
-                                    <div id="fac-state">
-                                        
-                                    </div>
+                                        autocomplete="off" name="id_cliente"/>
                                 </div>
                             <div class="form-group col-md-2" style="margin-top: 37px">
                                     <button type="button" id="btn-edit-client" class="btn btn-primary">Clasificar cliente</button>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="table-responsive">
-                            <table id="tabla_clientes_cont" class="table table-hover dataTables-example" data-filter=#filter
-                                style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Desctipción</th>
-                                        <th>No. Factura</th>
-                                        <th>Total COP</th>
-                                        <th>Estado</th>
-                                        <th>Fecha de pago</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="cursor: pointer">
-                                </tbody>
-                            </table>
-                            {{Form::token()}}
+
+                            <div class="form-group col-md-4" style="margin-top: 15px">
+                                <label class="control-label">Sede </label>
+                                <select class="form-control " id="select_sedes" name="select_sedes">
+                                    <option value="" selected disabled>Selecciona una sede</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4" style="margin-top: 15px">
+                                <label class="control-label">Visibilidad *</label>
+                                <select class="form-control " id="visibilidad" name="area">
+                                    <option value="0" selected>Publica</option>
+                                    @foreach($areas as $area)
+                                        <option value="{{$area->id}}" >{{$area->descripcion}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4" style="margin-top: 15px">
+                                <label class="control-label">Prioridad *</label>
+                                <select class="form-control " id="prioridad" name="prioridad">
+                                    <option value="" selected disabled>Selecciona una prioridad</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Urgente">Urgente</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-12" style="margin-top: 15px">
+                                <label class="control-label">Descripción *</label>
+                                <textarea  name="descripcion" id="description" cols="30" class="form-control" placeholder="Escriba aqui la novedad" style="width: 100%"></textarea>
+                            </div>
+
+                            <input type="hidden" name="origin" value="calidad">
                         </div>
                     </div>
                 </div>
+                <div class="ibox-footer">
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <button type="submit" class="btn btn-primary" style="margin-left: 35px;"><i class="fa fa-share"></i> Publicar</button>
+                        </div>
+                    </div>
+                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -109,10 +119,10 @@
     var data;
     var clienteSeleccionado;
     var crsfToken = document.getElementsByName("_token")[0].value;
-    $(document).ready(function () {
 
-        //Peticion al servidor para obtener los clientes de la DB
-        $.get('/clientes')
+    $(document).ready(function () { 
+         //Peticion al servidor para obtener los clientes de la DB
+         $.get('/clientes')
                 .then((res) => {
                     clientes = res;
                     //Recorre la respueta
@@ -172,11 +182,6 @@
                 $("#fac-state").empty();
                 var current = $input.typeahead("getActive");
                 clienteSeleccionado = current.id;
-                clientes.forEach((value, index) => {
-                    if(clienteSeleccionado == value.id){
-                        $("#fac-state").append(`<label class="label label-${value.estado_facturacion == 'Normal' ? 'primary' : 'danger'}" style="padding: 4px 18px;font-size: 12px">${value.estado_facturacion}</label>`)
-                    }
-                })
                 //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
                 $.get(`/sedes/cliente/${current.id}`, function (res) {
                     $("#select_sedes").empty();//Limipia el select
@@ -196,7 +201,10 @@
                     console.log(err);
                 });
             });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 758ec197e040f3639c1577dac55f10254b6cc78b
     })
 </script>
 @endsection

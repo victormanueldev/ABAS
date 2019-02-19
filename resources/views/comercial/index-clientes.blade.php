@@ -43,20 +43,6 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    {{-- <div class="row">
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                    placeholder="Buscar en todas las novedades">
-                        </div>
-                        <div class="col-sm-3">
-                            <select id="entries" class="form-control input-sm m-b-xs">
-                                <option selected class="text-muted">Cantidad de entradas</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div> --}}
                     
                     <div class="table-responsive">
                         <table id="tabla_clientes" class="table table-striped table-hover dataTables-example" data-filter=#filter>
@@ -82,9 +68,9 @@
                                     <td>{{$cliente->nombre_cliente}}</td>
                                     <td>{{$cliente->municipio}}</td>
                                     <td>{{$cliente->direccion}}</td>
-                                    <td>{{$cliente->nombre_contacto}}</td>
-                                    <td>{{$cliente->email}}</td>
-                                    <td>{{$cliente->celular}}</td>
+                                    <td>{{$cliente->nombre_contacto_inicial}}</td>
+                                    <td>{{$cliente->email_contacto_inicial}}</td>
+                                    <td>{{$cliente->celular_contacto_inicial}}</td>
                                     <td class="text-center"> <a class="btn btn-white" href="{{route('clientes.show', $cliente->id)}}"><i class="fa fa-edit text-navy"></i></a></td>
                                 </tr>
                             @endforeach
@@ -102,7 +88,6 @@
             </div>
         </div>
     </div>
-    {{-- <ver-clientes></ver-clientes> --}}
 </div>
 @endsection
 @section('ini-scripts')

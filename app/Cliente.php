@@ -6,30 +6,44 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
     //Atributos
-    /*protected $fillable = [
-        'id',
+    protected $fillable = [
         'tipo_cliente',
         'nit_cedula',
         'nombre_cliente',
+        'nombre_comercial',
         'sector_economico',
         'municipio',
         'direccion',
         'barrio',
         'zona',
-        'nombre_contacto',
-        'contacto_tecnico',
+        'estado_negociacion',
+        'estado_facturacion',
+        'estado_agendamiento',
+        'estado_registro',
+        'nombre_contacto_inicial',
+        'cargo_contacto_inicial',
+        'celular_contacto_inicial',
+        'email_contacto_inicial',
+        'nombre_contacto_tecnico',
         'cargo_contacto_tecnico',
-        'cargo_contacto',
-        'email',
-        'telefono',
-        'telefono2',
-        'extension',
-        'celular',
+        'celular_contacto_tecnico',
+        'email_contacto_tecnico',
+        'nombre_contacto_facturacion',
+        'cargo_contacto_facturacion',
+        'celular_contacto_facturacion',
+        'email_contacto_facturacion',
         'empresa_actual',
         'razon_cambio',
-        'user_id'
-    ];*/
+        'doc_rut',
+        'doc_identidad',
+        'doc_camara_comercio',
+        'user_id',
+    ];
 
     /**
      * Relacion Cliente-Empleado(User)
@@ -73,6 +87,6 @@ class Cliente extends Model
 
     public function cotizacion()
     {
-        return $this->hasOne(Cotizacion::class);
+        return $this->hasMany(Cotizacion::class);
     }
 }

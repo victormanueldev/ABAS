@@ -109,7 +109,8 @@ class ServicioController extends Controller
                         $color_servicio = $color_tecnico[0]['color'];
                         break;
                     case 'Refuerzo':
-                        $color_servicio = 'rgb(143, 143, 143)';
+                        $color_tecnico = Tecnico::select('color')->where('id', $request->id_tecnicos[0])->get();
+                        $color_servicio = $color_tecnico[0]['color'];
                         break;
                     case 'Mensajeria':
                         $color_servicio = 'rgb(35,198,200)';
@@ -128,6 +129,39 @@ class ServicioController extends Controller
                 if($request->tipo_servicio == 'Neutro' || $request->tipo_servicio == 'Mensajeria'){
                     $servicio->hora_inicio = "00:00:00";
                     $servicio->save();
+                    return response()->json(["Servicio Guardado con Exito"], 200);
+                }else if($request->tipo_servicio == 'Refuerzo'){
+                    $servicio->frecuencia = 0;
+                    $servicio->frecuencia_str = 'unica';
+                    $servicio->hora_inicio = $request->hora_inicio;
+                    $servicio->duracion = $request->duracion;
+                    $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
+                    $servicio->fecha_fin = $dt_fin->toDateString();
+                    $servicio->hora_fin = $request->hora_fin; 
+                    $servicio->save();
+
+                     //Obtiene el ultimo servicio agendado
+                    $max_id = DB::table('servicios')->max('id');
+                    $serie = "S".$max_id;
+                    //Actualizar el registro creado con el numero de serie S+$max_id
+                    DB::table('servicios')->where('id', $max_id)->update(['serie' => $serie]);
+                    //Crea el registro en la table pivot (servicio_tecnico) del actual servicio agendado
+                    foreach ($request->id_tecnicos as $index => $value) {
+                        DB::table('servicio_tecnico')->insert([
+                            'servicio_id' => $max_id,
+                            'tecnico_id' => $value
+                        ]);
+                    }
+                    //Crea el registro en la table pivot (servicio_tipo) del actual servicio agendado
+                    $now = Carbon::now();
+                    foreach ($request->tipos as $index => $value) {
+                        DB::table('servicio_tipo_servicio')->insert([
+                            'servicio_id' => $max_id,
+                            'tipo_servicio_id' => $value,
+                            'created_at' => $now
+                        ]);
+                    }
+
                     return response()->json(["Servicio Guardado con Exito"], 200);
                 }
                 $servicio->frecuencia = $request->frecuencia;
@@ -502,7 +536,10 @@ class ServicioController extends Controller
                     break;
                 
                 default:
-                    # code...
+                    $servicio = Servicio::findOrFail($idServicio);
+                    $servicio->estado = 'Cancelado';
+                    $servicio->color = 'rgb(126, 126, 126)';
+                    $servicio->save();
                     break;
             }
             return response()->json('Delete Successfully' ,200);
@@ -774,5 +811,88 @@ class ServicioController extends Controller
             $tecnicos = Tecnico::all();
         return view("programacion.editar-servicio-neutro", compact('servicio','tipos','tecnicos'));
         // return $servicio;
+    }
+
+    public function serviceByDate($fecha_inicio, $idCliente, $idSede)
+    {
+        return $servicio = Servicio::with('solicitud')
+                                    ->where('fecha_inicio', $fecha_inicio)
+                                    ->whereHas('solicitud', function($query) use($idCliente, $idSede){
+                                        $query->where('cliente_id', $idCliente);
+                                        $query->where('sede_id', $idSede);
+                                    })
+                                    ->firstOrFail();
+    }
+
+    public function getServicesByTecnician($idTecnico)
+    {
+        $servicios = Servicio::with('solicitud','tecnicos')
+                                ->whereHas('tecnicos', function($query) use($idTecnico){
+                                    $query->where('id', $idTecnico);
+                                })
+                                ->get();
+        $data = collect();
+        foreach ($servicios as $servicio) {
+            //Valida que el cliente sea persona natural o juridica (Si tiene sedes)
+            if($servicio->solicitud->sede != ''){
+                $titleService = $servicio->solicitud->sede["nombre"];
+                $dirClient = $servicio->solicitud->sede["direccion"];
+                $telClient = $servicio->solicitud->sede["telefono_contacto"];
+                $nameContact = $servicio->solicitud->sede["nombre_contacto"];
+            }else{
+                $titleService = $servicio->solicitud->cliente["nombre_cliente"];
+                $dirClient = $servicio->solicitud->cliente["direccion"];
+                $telClient = $servicio->solicitud->cliente["celular"];
+                $nameContact = $servicio->solicitud->cliente["nombre_contacto"];
+            }
+
+            if($servicio->confirmado == 1){
+                $editableEvent = false;
+            }else{
+                $editableEvent = true;
+            }
+
+            $data->push([
+                'id' => $servicio->id, 
+                'title' => $titleService, 
+                'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                'end' => $servicio->fecha_fin." ".$servicio->hora_fin, 
+                'backgroundColor' => $servicio->color, 
+                'borderColor' => $servicio->color,
+                'lock' => $servicio->confirmado,
+                'dirClient' => $dirClient,
+                "contactClient" => $nameContact,
+                "telClient" => $telClient,
+                "editable" => $editableEvent,
+                'duration' => $servicio->duracion
+                ]);
+        }
+        //$data->toJson();//Convierte la colecciona a formato JSON
+        return $data;
+    }
+
+    public function updateDatesHoursService(Request $request)
+    {
+        $servicio = Servicio::findOrFail($request->idServicio);
+        switch ($request->option) {
+            case 'drop':
+                if($servicio->confirmado == 0){
+                    $servicio->fecha_inicio = Carbon::parse($request->start)->toDateString();
+                    $servicio->fecha_fin = Carbon::parse($request->end)->toDateString();
+                    $servicio->save();
+                }
+                break;
+            case 'resize':
+                if($servicio->confirmado == 0){
+                    $servicio->hora_inicio = Carbon::parse($request->start)->toTimeString();
+                    $servicio->hora_fin = Carbon::parse($request->end)->toTimeString();
+                    $servicio->save();
+                }
+                break;
+            default:
+                return response()->json("Update Failed", 500);
+                break;
+        }
+        return response()->json("Update Sucess", 200);
     }
 }

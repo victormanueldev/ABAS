@@ -3,6 +3,7 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Cliente;
+use ABAS\User;
 use ABAS\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,8 +22,9 @@ class SolicitudesController extends Controller
     {
         //
         $clientes = Cliente::select('nombre_cliente', 'id')->get();
+        $user = Auth::user();
         //return $clientes;
-        return view('comercial.solicitud', compact('clientes'));
+        return view('comercial.inspeccion', compact('clientes', 'user'));
     }
 
     /**
@@ -51,24 +53,72 @@ class SolicitudesController extends Controller
                 // $data = collect();
                 $solicitud = new Solicitud();
                 $cliente = Cliente::find($request->id_cliente);
-                $sede = Sede::find($request->id_sede);
-                // $user = Auth::user()->nombres." ".Auth::user()->apellidos;
-        
-                // $data->push($cliente);
-                // $data->push($sede);
-                // $data->push(['user' => $user]);
-                // return $data;
-                //$pdf = \PDF::loadView('comercial.pdf_solicitud', compact('data'));
-                //return $pdf->stream('Solicitud.pdf');
+                $sede = Sede::find($request->select_sedes);
                 $solicitud->codigo = $request->codigo_solicitud;
                 $solicitud->fecha = $request->fecha_creacion;
+                $solicitud->nombre_usuario = $request->nombre_usuario;
                 $solicitud->frecuencia = $request->frecuencia_servicio;
-                $solicitud->observaciones = $request->observaciones;
-                $solicitud->cliente_id = $request->id_cliente;
-                $solicitud->sede_id = $request->id_sede;
+                $solicitud->cliente_id = $cliente->id;
+                $solicitud->sede_id = isset($sede->id) ? $sede->id : 0;
+                $solicitud->contacto_name_factura = $request->contacto_name_factura;
+                $solicitud->contacto_telefono_factura = $request->contacto_telefono_factura;
+                $solicitud->contacto_celular_factura = $request->contacto_celular_factura;
+                $solicitud->observaciones = $request->observaciones_tecnico;
+                $solicitud->total_plan = $request->total_plan;
+                $solicitud->instrucciones = $request->instrucciones;
+                $solicitud->estaciones_roedor = $request->estaciones_roedor;
+                $solicitud->lamparas_control = $request->lamparas_control;
+                $solicitud->cajas_alcantarilla = $request->cajas_alcantarilla;
+                $solicitud->trampas_plasticas = $request->trampas_plasticas;
+                $solicitud->numero_casas = $request->numero_casas;
+                $solicitud->numero_aptos = $request->numero_aptos;
+                $solicitud->numero_bodegas = $request->numero_bodegas;
+                $solicitud->contrato = $request->contrato;
+                $solicitud->forma_pago = $request->forma_pago;
+                $solicitud->facturacion = $request->facturacion;
+                $solicitud->servicios_1 = $request->servicios_1;
+                $solicitud->frecuencia_servicios_1 = $request->frecuencia_servicios_1;
+                $solicitud->valor_servicios_1 = $request->valor_servicios_1;
+                $solicitud->servicios_2 = $request->servicios_2;
+                $solicitud->frecuencia_servicios_2 = $request->frecuencia_servicios_2;
+                $solicitud->valor_servicios_2 = $request->valor_servicios_2;
+                $solicitud->servicios_3 = $request->servicios_3;
+                $solicitud->frecuencia_servicios_3 = $request->frecuencia_servicios_3;
+                $solicitud->valor_servicios_3 = $request->valor_servicios_3;
+                $solicitud->total_servicios = $request->total_servicios;
+                $solicitud->dispositivos_1 = $request->dispositivos_1;
+                $solicitud->cantidad_dispositivos_1 = $request->cantidad_dispositivos_1;
+                $solicitud->unidad_dispositivos_1 = $request->unidad_dispositivos_1;
+                $solicitud->total_dispositivos_1 = $request->total_dispositivos_1;
+                $solicitud->dispositivos_2 = $request->dispositivos_2;
+                $solicitud->cantidad_dispositivos_2 = $request->cantidad_dispositivos_2;
+                $solicitud->unidad_dispositivos_2 = $request->unidad_dispositivos_2;
+                $solicitud->total_dispositivos_2 = $request->total_dispositivos_2;
+                $solicitud->dispositivos_3 = $request->dispositivos_3;
+                $solicitud->cantidad_dispositivos_3 = $request->cantidad_dispositivos_3;
+                $solicitud->unidad_dispositivos_3 = $request->unidad_dispositivos_3;
+                $solicitud->total_dispositivos_3 = $request->total_dispositivos_3;
+                $solicitud->observaciones_dispositivos = $request->observaciones_dispositivos;
+                $solicitud->dispositivos_comodato_1 = $request->dispositivos_comodato_1;
+                $solicitud->cantidad_dispositivos_comodato_1 = $request->cantidad_dispositivos_comodato_1;
+                $solicitud->unidad_dispositivos_comodato_1 = $request->unidad_dispositivos_comodato_1;
+                $solicitud->total_dispositivos_comodato_1 = $request->total_dispositivos_comodato_1;
+                $solicitud->dispositivos_comodato_2 = $request->dispositivos_comodato_2;
+                $solicitud->cantidad_dispositivos_comodato_2 = $request->cantidad_dispositivos_comodato_2;
+                $solicitud->unidad_dispositivos_comodato_2 = $request->unidad_dispositivos_comodato_2;
+                $solicitud->total_dispositivos_comodato_2 = $request->total_dispositivos_comodato_2;
+                $solicitud->dispositivos_comodato_3 = $request->dispositivos_comodato_3;
+                $solicitud->cantidad_dispositivos_comodato_3 = $request->cantidad_dispositivos_comodato_3;
+                $solicitud->unidad_dispositivos_comodato_3 = $request->unidad_dispositivos_comodato_3;
+                $solicitud->total_dispositivos_comodato_3 = $request->total_dispositivos_comodato_3;
+                $solicitud->observaciones_dispositivos_comodato = $request->observaciones_dispositivos_comodato;
+                $solicitud->medio_contacto = $request->medio_contacto;
+                $solicitud->otro = $request->otro;
+                
+
                 $solicitud->save();
                 return response()->json('Servicio guardado con exito', 200);
-                
+
             }else{
                 return response()->json('Datos enviados, no validos', 400);
             }

@@ -153,16 +153,20 @@
                                         <h3 class="m-t-none m-b">Información del servicio</h3>
                                         <p>Diligencie todos los campos del referentes al servicio</p>
                                         <div class="row">
-                                            <div class="form-group col-lg-12">
+                                            <div class="form-group col-lg-6">
                                                 <label>Tipo de Servicio: </label>
                                                 <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio">
-                                                    <option value="">Seleccione una tipo.</option>
+                                                    <option value="0">Seleccione una tipo.</option>
                                                     <option value="Normal">Normal</option>
                                                     <option value="Refuerzo">Refuerzo</option>
                                                     <option value="Neutro">Neutro</option>
                                                     <option value="Mensajeria">Mensajeria</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group col-lg-6">
+                                                    <label>Frecuencia sugerida</label>
+                                                    <input class="form-control" id="sug_frecuency" readonly style="margin-top: 10px;">
+                                                </div>
                                             <div class="form-group col-md-12">
                                                 <label>Repetir cada:</label>
                                                 <div class="input-group">
@@ -347,7 +351,7 @@
                                 </div>
                                 <hr style="margin-top: 10px;">
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-6">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -355,7 +359,6 @@
                                                     <th>Tipo de Servicio</th>
                                                     <th>Numero de Factura</th>
                                                     <th>Valor Total</th>
-                                                    <th>Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody-tipos">
@@ -363,7 +366,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -381,7 +384,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal" id="btn-close3">Cerrar</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-danger" data-dismiss="modal" id="btn-cancelar-servicio">Cancelar servicio</button>
                             </div>
                         </div>
                     </div>
@@ -824,9 +828,9 @@
                 day: 'Día'
             },
             //Muestra todas las eventos de la BD
-            events: {
-                url: "/servicios"
-            },
+            // events: {
+            //     url: "/servicios"
+            // },
             eventLimit: true,
             editable: true,
             eventLimit: true,
@@ -877,6 +881,7 @@
                 $("#text-instrucciones").val("")
                 $("#create-services").prop('disabled', false);
                 $("#lista-servicios").empty();
+                $("#select_tipo_servicio").val('0').change();
             },
 
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -884,6 +889,22 @@
                 var start = event.start.format("YYYY-MM-DD HH:mm");
                 var backgroundC = event.backgroundColor;
                 var allDay = event.allDay;
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "preventDuplicates": false,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "2000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
                 if (event.end) {//valida si hay una fecha de terminación de la evento
                     var end = event.end.format("YYYY-MM-DD HH:mm");
                 } else {
@@ -891,14 +912,19 @@
                 }
                 crsfToken = document.getElementsByName("_token")[0].value;
                 $.ajax({
-                    url: '/eventos/editar-evento',
-                    data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id_evento=' + event.id + '&background=' + backgroundC + '&allday=' + allDay,
-                    type: "POST",
+                    url: '/servicios/edit/dates',
+                    data: {
+                        idServicio: event.id,
+                        start: start,
+                        end: end,
+                        option: 'resize'
+                    },
+                    type: "PUT",
                     headers: {
                         "X-CSRF-TOKEN": crsfToken
                     },
                     success: function (json) {
-                        console.log("Updated Successfully");
+                        toastr.success('La hora de finalización ha cambiado.','Actualizacion exitosa');
                     },
                     error: function (json) {
                         console.log("Error al actualizar evento");
@@ -908,9 +934,25 @@
 
             //Evento de cambiar de dia la evento dentro del calendario
             eventDrop: function (event, delta) {
-                var start = event.start.format("YYYY-MM-DD HH:mm");
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "preventDuplicates": false,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "2000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                var start = event.start.format("YYYY-MM-DD");
                 if (event.end) {
-                    var end = event.end.format("YYYY-MM-DD HH:mm");
+                    var end = event.end.format("YYYY-MM-DD");
                 } else {
                     var end = "NULL";
                 }
@@ -918,17 +960,23 @@
                 var allDay = event.allDay;
                 crsfToken = document.getElementsByName("_token")[0].value;
                 $.ajax({
-                    url: '/eventos/editar-evento',
-                    data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id_evento=' + event.id + '&background=' + back + '&allday=' + allDay,
-                    type: "POST",
+                    url: '/servicios/edit/dates',
+                    data: {
+                        idServicio: event.id,
+                        start: start,
+                        end: end,
+                        option: 'drop'
+                    },
+                    type: "PUT",
                     headers: {
                         "X-CSRF-TOKEN": crsfToken
                     },
                     success: function (json) {
-                        console.log("Updated Successfully eventdrop");
+                        toastr.success('Las fechas han sido actualizadas.','Actualizacion exitosa');
+                        $("#calendar").fullCalendar('refetchEvents');
                     },
                     error: function (json) {
-                        console.log("Error al actualizar eventdrop");
+                        console.log("Error al actualizar evento");
                     }
                 });
             },
@@ -1078,7 +1126,7 @@
                                 <td>${value.nombre}</td>
                                 <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
                                 <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.valor)}"/></td>
-                                <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>
+                                <!--<td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>-->
 
                             </tr>`);
                         });
@@ -1090,13 +1138,10 @@
                             </tr>`);
                         });
                         if(res[0].factura){
-                            $("#ind-fac").addClass('hidden')
-                            $("#save-fac").prop('disabled', true);
+                            
                             $("#num-fac").val(res[0].factura.numero_factura);
                             $("#val-fac").val(res[0].factura.valor);
                         }else{
-                            $("#ind-fac").removeClass('hidden')
-                            $("#save-fac").prop('disabled', false);
                             $("#num-fac").val('');
                             $("#val-fac").val('');
                         }
@@ -1137,6 +1182,24 @@
 
             }
         });
+
+        $.get('/tecnicos')
+            .then(res => {
+                res.forEach(tecnico => {
+                    $('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` );    //Añade el source servicios de cada tecnico
+                    $(`#tecnico-${tecnico.id}`).click(e => {
+                        if($(`#tecnico-${tecnico.id}`).is(':checked')){ //Valida si el checkbox esta activo
+                            $('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` )
+                        }else{
+                            $('#calendar').fullCalendar('removeEventSource', `/servicios/show/${tecnico.id}` ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
+                        }
+                    })
+                });
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
 
         //Change del input de autocompletado
         $input.change(function () {
@@ -1205,6 +1268,7 @@
                         $('#select_servicios').select2("val", "");
                         $('#select_tecnicos2').select2("val", "");
                         $("#text-instrucciones").val('');
+                        $("#sug_frecuency").val('');
                         id_solicitud = '';
                     } else {
                         $("#text-instrucciones").val(res[0]['observaciones']);
@@ -1212,6 +1276,7 @@
                         $("#barrio_sede").val(res[0].barrio);
                         $("#contacto_sede").val(res[0].nombre_contacto);
                         $("#tel_sede").val(res[0].telefono_contacto);
+                        $("#sug_frecuency").val(res[0]['frecuencia'])
                         //Inicializacion del Popover
                         $('#historial_tecnicos').popover({
                             title: "Historial de Tecnicos",
@@ -1354,7 +1419,6 @@
             } else {
                 dataToSend.opcionFrecuencia = "anios";
             }
-            console.log(dataToSend)
             //Alert de confirmacion
             swal({
                 title: "¡Advertencia!",
@@ -1889,8 +1953,10 @@
                 $("#btn-lock").empty();
                 if(!res){
                     $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`).removeClass('active');
+                    $("#calendar").fullCalendar('refetchEvents');
                 }else{
                     $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`).addClass('active');
+                    $("#calendar").fullCalendar('refetchEvents');
                 }
             },
             error: (err) => {
@@ -1933,7 +1999,7 @@
                 $("#select_servicios").attr("disabled", "disabled");
                 $("#select_tecnicos2").attr("disabled", "disabled");
                 //$("#text-instrucciones").attr("disabled", "disabled");
-        }else{
+        }else if(type == 0){
                 $("#indice-frecuencia").prop("disabled", false);
                 $("#opcion-frecuencia").prop("disabled", false);
                 $("#opcion-personalizada").prop("disabled", false);
@@ -1943,6 +2009,10 @@
                 $("#select_servicios").prop("disabled", false);
                 $("#select_tecnicos2").prop("disabled", false);
                 //$("#text-instrucciones").prop("disabled", false);
+        }else{
+            $("#indice-frecuencia").attr("disabled", "disabled");
+            $("#opcion-frecuencia").attr("disabled", "disabled");
+            $("#opcion-personalizada").attr("disabled", "disabled");
         }
     }
 
@@ -1954,6 +2024,9 @@
             case "Mensajeria":
                 disableInputs(1);
                 break;
+            case "Refuerzo":
+                disableInputs(2);
+                break;
             default:
                 disableInputs(0);
                 break;
@@ -1962,6 +2035,49 @@
 
     $("#edit-neutral-service").click(e => {
         window.location.href = `/neutral/edit/${infoServiceSelected.id}`;
+    })
+
+    //Metodo para cancelar un servicio
+    $("#btn-cancelar-servicio").click(e => {
+        swal({
+            title: "¡Advertencia!",
+                text: "¿Estás seguro de cancelar este servicio?",
+                icon: "warning",
+                buttons: {
+                    cancel: true,
+                    confirm: {
+                        text: 'Aceptar',
+                        visible: true,
+                        value: true,
+                        closeModal: false, //Muestra el Loader
+                    }
+                }
+        })
+        .then(isConfirm => {
+            if(isConfirm){
+                $.ajax({
+                    url: `/servicios/${infoServiceSelected.id}`,
+                    data:{
+                        option: '4',
+                    },
+                    type: 'DELETE',
+                    headers: {
+                        "X-CSRF-TOKEN": crsfToken
+                    }
+                })
+                .then(res => {
+                    swal('¡Servivio Cancelado', 'El servicio seleccionado fue cancelado', 'success')
+                    .then(value => {
+                        if(value){
+                            $('#calendar').fullCalendar('refetchEvents');
+                        }
+                    })
+                })
+                .catch(err => {
+                    swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios', "error")
+                })
+            }
+        })
     })
 </script>
 @endsection

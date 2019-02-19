@@ -22,7 +22,7 @@ class SedeSeeder extends Seeder
                 'nombre_contacto' => 'Ricardo',
                 'telefono_contacto' => '126456',
                 'celular_contacto' => '31321898',
-                'email' => 'ricardo@gmail.com',
+                'email_contacto' => 'ricardo@gmail.com',
                 'cliente_id'=> '1'
             ],
             '1' => [
@@ -34,7 +34,7 @@ class SedeSeeder extends Seeder
                 'nombre_contacto' => 'Francisco',
                 'telefono_contacto' => '126456',
                 'celular_contacto' => '31321898',
-                'email' => 'francisco@gmail.com',
+                'email_contacto' => 'francisco@gmail.com',
                 'cliente_id'=> '1'
             ],
             '2' => [
@@ -46,7 +46,7 @@ class SedeSeeder extends Seeder
                 'nombre_contacto' => 'juan',
                 'telefono_contacto' => '126456',
                 'celular_contacto' => '31321898',
-                'email' => 'juan@gmail.com',
+                'email_contacto' => 'juan@gmail.com',
                 'cliente_id'=> '4'
             ],
             '3' => [
@@ -58,7 +58,7 @@ class SedeSeeder extends Seeder
                 'nombre_contacto' => 'Jorge',
                 'telefono_contacto' => '126456',
                 'celular_contacto' => '31321898',
-                'email' => 'Jorge@gmail.com',
+                'email_contacto' => 'Jorge@gmail.com',
                 'cliente_id'=> '4'
             ],
             '5' => [
@@ -70,7 +70,7 @@ class SedeSeeder extends Seeder
                 'nombre_contacto' => 'Alfredo',
                 'telefono_contacto' => '9516546',
                 'celular_contacto' => '31321800',
-                'email' => 'alfredo@gmail.com',
+                'email_contacto' => 'alfredo@gmail.com',
                 'cliente_id'=> '5'
             ]
         ];

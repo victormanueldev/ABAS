@@ -23,8 +23,10 @@
     <link href="{{asset('css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/clockpicker/clockpicker.css')}}" rel="stylesheet">
+    <link href="{{asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
     <!-- Gritter -->
     <link href="{{asset('js/plugins/gritter/jquery.gritter.css')}}" rel="stylesheet">
+
     <!-- Custom page css -->
     @yield('custom-css')
     <!-- Basic CSS -->
@@ -39,7 +41,7 @@
 
 <body class="md-skin" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
-        <nav class="navbar-default  navbar-static-side" role="navigation">
+        <nav class="navbar-default  navbar-static-side" role="navigation" style="position: fixed">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
@@ -85,6 +87,8 @@
                                 {{-- <li id="ml2-cotizacion"><a href="{{route('home')}}" style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label">Cotización</span></a></li> --}}
                             </ul>
                         </li>
+
+                        
                     @elseif(Auth::user()->area_id == '2')
 
                         <li id="m-metas-comerciales">
@@ -107,18 +111,68 @@
                     @elseif(Auth::user()->area_id == '3')
 
                         <li id="m-cronograma">
-                            <a href="{{route('servicios.create')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
+                            <a href="{{route('servicios.create')}}" onclick="window.location.href='/servicios/create'" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
+                                <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;">
+                                    @foreach (ABAS\Tecnico::all() as $tecnico)
+                                        @if($tecnico->estado == 'activo')
+                                            <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                                <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked" value="{{$tecnico->id}}">
+                                                <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </li>
+                                <li id="ml2-progreso-directores">
+
+                                </li>
+                            </ul>
                         </li>
 
                         <li id="m-calendario-tecnicos">
                             <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios de técnicos</span></a>
                         </li>
 
+                        {{-- <li id="m-control-facturacion">
+                                <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                            </li> --}}
+
 
                         <li id="m-listado-servicios">
                             <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de servicios</span></a>
                         </li>
-                        
+
+                    @elseif(Auth::user()->area_id == '4')
+
+                    <li id="m-clientes">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i> <span class="nav-label">Clientes </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-clientes">
+                            <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver Clientes</a></li>
+                        </ul>
+                    </li>
+
+                    <li id="m-cronograma">
+                        <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
+                    </li>
+
+                    <li id="m-registro-novedades">
+                        <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
+                    </li>
+
+                    <li id="m-reporte-documentos">
+                            <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
+                        </li>
+
+                    @elseif(Auth::user()->area_id == '5')
+
+                    <li id="m-recepcion">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-recepcion"><i class="fa fa-folder-open"></i> <span class="nav-label">Recepción documentos </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-recepcion">
+                            <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de servicio</a></li>
+                            <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
+                        </ul>
+                    </li>
+
                     @else
 
                         <li id="m-inicio" >
@@ -205,6 +259,9 @@
 
     <!-- Data picker -->
    <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+   
+   <!-- Input Mask-->
+   <script src="{{asset('js/plugins/jasny/jasny-bootstrap.min.js')}}"></script>
 
 
    @yield('ini-scripts');

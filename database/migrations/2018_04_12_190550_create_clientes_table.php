@@ -27,17 +27,28 @@ class CreateClientesTable extends Migration
             $table->string('zona', 100)->nullable();
             $table->string('estado_negociacion', 20)->default('Prospecto');
             $table->string('estado_facturacion', 10)->default('Normal');
-            //Datos de Contacto
-            $table->string('nombre_contacto', 100)->nullable();
-            $table->string('contacto_tecnico', 100)->nullable();//Verificar
-            $table->string('cargo_contacto_tecnico', 100)->nullable();//Verificar
-            $table->string('cargo_contacto', 100)->nullable();
-            $table->string('email')->nullable();
-            $table->string('extension',15)->nullable();
-            $table->string('celular', 20)->nullable();
+            $table->string('estado_agendamiento', 10)->default('Activo');
+            $table->string('estado_registro', 50);
+            //Datos de Contacto Inicial
+            $table->string('nombre_contacto_inicial', 100)->nullable();
+            $table->string('cargo_contacto_inicial', 100)->nullable();
+            $table->string('celular_contacto_inicial', 100)->nullable();
+            $table->string('email_contacto_inicial', 100)->nullable();
+            //Datos de Contacto Tecnico
+            $table->string('nombre_contacto_tecnico', 100)->nullable();
+            $table->string('cargo_contacto_tecnico', 100)->nullable();
+            $table->string('celular_contacto_tecnico', 100)->nullable();
+            $table->string('email_contacto_tecnico', 100)->nullable();
+            //Datos de Contacto Facturacion
+            $table->string('nombre_contacto_facturacion', 100)->nullable();
+            $table->string('cargo_contacto_facturacion', 100)->nullable();
+            $table->string('celular_contacto_facturacion', 100)->nullable();
+            $table->string('email_contacto_facturacion', 100)->nullable();
             //Informacion de otros servicios
             $table->string('empresa_actual', 100)->nullable();//Empresa que le prestaba al cliente el servicio (fumigacion)
             $table->string('razon_cambio', 100)->nullable();//Porqué quiere empezar con Sanicontrol
+            $table->string('medio_contacto', 100)->nullable();//Medio por el cual se entero de Sanicontrol
+            $table->string('otro_medio', 100)->nullable();
             //Documentos entregados
             $table->boolean('doc_rut')->default(false);
             $table->boolean('doc_identidad')->default(false);
