@@ -25,6 +25,15 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+            @if(count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-success" style="margin: 10px 15px;">{{$error}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    </div>
+                @endforeach
+            @else
+                @include('flash::message')
+            @endif
         <div class="col-lg-12">
                 <div class="ibox float-e-margins">
 
@@ -57,34 +66,27 @@
                                                         </select>
                                                     </div>
 
-                                                        {{-- <div class="form-group col-lg-6">
-                                                            <label class="control-label" style="text-align: center;">
-                                                                <strong>Persona Juridica*</strong>
-                                                                <input type="radio" name="tipo_cliente" class="form-control" value="PERSONA JURIDICA" style="text-align: center;">
-                                                            </label>
-                                                        </div> --}}
-
-                                                    <input type="hidden" value="cliente_nuevo" name="estado_registro">
+                                                    <input type="hidden" value="prospecto" name="estado_registro">
 
                                                     <div class="form-group col-lg-5">
                                                     <label class="control-label">Nit/Cedula *</label>
-                                                        <input type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-lg-1">
                                                         <label class="control-label">D.V.</label>
-                                                        <input type="text" name="nit_number" id="nit_number" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="nit_number" id="nit_number" class="form-control" placeholder="ej: 7">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Razón Social/Nombre *</label>
                                                         <input style="text-transform: uppercase" type="text" name="nombre_cliente" placeholder="Nombre del cliente/empresa" class="form-control" required>
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Nombre comercial *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="nombre_comercial" placeholder="Nombre comercial del cliente/empresa" class="form-control" >
+                                                    <div class="form-group col-lg-6"><label class="control-label">Nombre comercial </label>
+                                                        <input style="text-transform: uppercase" type="text" name="razon_social" placeholder="Nombre comercial del cliente/empresa" class="form-control" >
                                                     </div>
 
                                                      <div class="form-group col-lg-6"><label class="control-label">Sector Economico *</label>
-                                                        <select class="form-control">
+                                                        <select class="form-control" name="sector_economico">
                                                             <option value="RESIDENCIAL">RESIDENCIAL</option>
                                                             <option value="COMERCIAL">COMERCIAL</option>
                                                             <option value="SERVICIO">SERVICIO</option>
@@ -114,38 +116,69 @@
 
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
+                                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono principal*</label>
                                                         <input style="text-transform: uppercase" type="text" name="telefono[0]" placeholder="Nombre de contacto" class="form-control" required>
                                                     </div>
 
-                                                    {{-- <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto" placeholder="Cargo de contacto" class="form-control">                           
-                                                    </div>
-
-                                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Técnico *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="contacto_tecnico" placeholder="Nombre de contacto técnico" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Inicial *</label>
+                                                        <input style="text-transform: uppercase" type="text" name="contacto_inicial" placeholder="Nombre del contacto inicial" class="form-control">
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Cargo Técnico *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_tecnico" placeholder="Cargo del técnico" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_inicial" placeholder="Cargo del contacto inicial" class="form-control">
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input style="text-transform: uppercase" type="email" name="email" placeholder="Email del contacto" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Celular </label>
+                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_inicial" placeholder="celular del contacto inicial" class="form-control">
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="celular" placeholder="Celular del contacto o cliente" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_inicial" placeholder="email del contacto inicial" class="form-control">
                                                         
-                                                    </div> --}}
-                                                    
-                                                    <div class="row">
-                                                        <div class="col-lg-12" >
+                                                    </div>
 
-                                                        </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Técnico *</label>
+                                                        <input style="text-transform: uppercase" type="text" name="contacto_tecnico" placeholder="nombre del contacto técnico" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_tecnico" placeholder="cargo del contacto técnico" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Celular </label>
+                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_tecnico" placeholder="celular del contacto técnico" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_tecnico" placeholder="email del contacto técnico" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Facturacion electrónica *</label>
+                                                        <input style="text-transform: uppercase" type="text" name="contacto_facturacion" placeholder="Nombre del contacto de facturación" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_facturacion" placeholder="cargo del contacto de facturación" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Celular </label>
+                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_facturacion" placeholder="celular del contacto de facturación" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_facturacion" placeholder="email del contacto de facturación" class="form-control">
+                                                        
                                                     </div>
 
                                                     <div class="form-group col-lg-12"><label class="control-label">Empresa de fumigación actualmente *</label>
@@ -175,19 +208,22 @@
 
                                                     <div class="form-group col-lg-6">
                                                         <label class="control-label">Otro ¿Cúal?</label>
-                                                        <input style="text-transform: uppercase" type="text" name="otro" placeholder="Otros medios" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="otro_medio" placeholder="Otros medios" class="form-control">
                                                         <br>
                                                     </div>
 
-                                                    <div class="col-lg-6" id="columna_principal3">
-                                                        <label class="control-label">Teléfono *</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                                            </span>
-                                                            <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
-                                                        </div>                                                        
+                                                    <div class="row" id="columna_principal3" style="padding: 0px 15px;">
+                                                        <div class="col-lg-6" >
+                                                            <label class="control-label">Teléfono 2*</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-btn">
+                                                                    <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                                </span>
+                                                                <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[1]" required>
+                                                            </div>                                                        
+                                                        </div>
                                                     </div>
+                                                    
 
                                                 </div>
                                             </div>
@@ -204,36 +240,41 @@
                                                 <div class="col-lg-12">
                                     
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre *</label>
-                                                        <input style="text-transform: uppercase" type="text" id="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="nombre_sedes" placeholder="Ej: Norte, C.C. Unicentro, Salomia..." class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                                        <input style="text-transform: uppercase" type="text" id="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="direccion_sedes" placeholder="Escriba la dirección" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                                        <input style="text-transform: uppercase" type="text" id="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="ciudad_sedes" placeholder="Escriba la ciudad" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                                        <input style="text-transform: uppercase" type="text" id="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="barrio_sedes" placeholder="Escriba el Barrio" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
-                                                        <input style="text-transform: uppercase" type="text" id="ruta_sedes" placeholder="Zona Ruta" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="zona_ruta" placeholder="Zona Ruta" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group col-lg-6"><label class="control-label">Nombre de contacto </label>
+                                                        <input style="text-transform: uppercase" type="text" name="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
+                                                        
                                                     </div>
                                 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                                        <input style="text-transform: uppercase" type="text" id="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
+                                                        <input style="text-transform: uppercase" type="text" name="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
                                                         
                                                     </div>
                         
-                                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                                        <input style="text-transform: uppercase" type="text" id="celular_sedes" placeholder="Celular del contacto" class="form-control">
+                                                    <div class="form-group col-lg-6"><label class="control-label">Celular </label>
+                                                        <input style="text-transform: uppercase" type="text" name="celular_sedes" placeholder="Celular del contacto" class="form-control">
                                                     </div>
 
-                                                    <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                                        <input style="text-transform: uppercase" type="email" id="email_sedes" placeholder="Email de contacto" class="form-control">
+                                                    <div class="form-group col-lg-6"><label class="control-label">Email </label>
+                                                        <input style="text-transform: uppercase" type="email" name="email_sedes" placeholder="Email de contacto" class="form-control">
                                                         
                                                     </div>
 
@@ -320,20 +361,8 @@
 @section('ini-scripts')
 <script>
     //Inicializacion de Contadores
-    var cont = 1;
-    var cont2 = 1;
-    var cont3 = 1;
-    //Evento click del btn con ID
-    $("#btn-add").click(event => {
-        cont++;
-        //Añade una serie de nodos dentro del componente con ID columna_principal
-        $("#columna_clonada2").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont }*</label><input type="text" name="telefono[${cont -1 }]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    });
-    //Evento click del btn con ID 2
-    $("#btn-add2").click(event => {
-        cont2 = cont2 + 1;
-        $("#columna_principal2").append(`<div class=" form-group col-lg-6"><label class="control-label">Teléfono  ${cont2 }*</label><input type="text" name="telefono[${cont2 -1}]" placeholder="Teléfono del contacto o cliente" class="form-control"></div>`);
-    });
+    var cont3 = 2;
+
     //Evento click del btn con ID 3
     $("#btn-add3").click(event => {
         cont3 = cont3 + 1;

@@ -25,7 +25,7 @@ class CreateSedesTable extends Migration
             $table->string('nombre_contacto', 100);
             $table->string('telefono_contacto', 15);
             $table->string('celular_contacto', 20);
-            $table->string('email', 100);
+            $table->string('email_contacto', 100);
             //Informacion del Cliente
             $table->integer('cliente_id');
             $table->timestamps();

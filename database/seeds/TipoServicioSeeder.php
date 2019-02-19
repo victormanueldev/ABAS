@@ -19,82 +19,73 @@ class TipoServicioSeeder extends Seeder
             '1' => [
                 'nombre' => 'CONTROL DE PLAGAS BASICO Y ROEDORES'
             ],
-            '2' =>[
-                'nombre' => 'CONTROL DE PLAGAS BASICO EN OFICINA'
-            ],
-            '3' => [
-                'nombre' => 'CONTROL DE PLAGAS BASICO VEHICULOS'
-            ],
-            '4' => [
-                'nombre' => 'CONTROL DE PLAGAS BASICO CONTAINER'
-            ],
-            '5' => [
+            '2' => [
                 'nombre' => 'CONTROL SOLO ROEDORES' 
             ],
-            '6' => [
+            '3' => [
                 'nombre' => 'CONTROL INSECTOS RASTREROS'
             ],
-            '7' => [
+            '4' => [
                 'nombre' => 'CONTROL INSECTOS VOLADORES'
             ],
-            '8' => [
+            '5' => [
                 'nombre' => 'CONTROL CHINCHES'
             ],
-            '9' => [
+            '6' => [
                 'nombre' => 'CONTROL GARRAPATAS'
             ],
-            '10' => [
+            '7' => [
                 'nombre' => 'CONTROL PULGAS'
             ],
-            '11' => [
+            '8' => [
                 'nombre' => 'CONTROL TERMITAS'
             ],
-            '12' => [
+            '9' => [
                 'nombre' => 'CONTROL ABEJAS'
             ],
-            '13' => [
+            '10' => [
                 'nombre' => 'CONTROL AVISPAS'
             ],
-            '14' => [
+            '11' => [
                 'nombre' => 'DESINFECCION'
             ],
-            '15' => [
+            '12' => [
                 'nombre' => 'ESPOLVOREO ELECTRICO'
             ],
-            '16' => [
+            '13' => [
                 'nombre' => 'NEBULIZACION'
             ],
-            '17' => [
+            '14' => [
                 'nombre' => 'TERMONEBULIZACION'
             ],
-            '18'  => [
+            '15'  => [
                 'nombre' => 'GASIFICACION'
             ],
-            '19' => [
+            '16' => [
                 'nombre' => 'RETIRO DE RESIDUOS / DESCARPADO'
             ],
-            '20' => [
+            '17' => [
                 'nombre' => 'INSTALACION ESTACIONES ROEDOR'
             ],
-            '21' => [
+            '18' => [
                 'nombre' => 'CONTROL DE PLAGAS EN ZONAS COMUNES'
             ],
-            '22' => [
+            '19' => [
                 'nombre' => 'CONTROL EN CASAS Y/O APARTAMENTOS'
             ],
-            '23' => [
+            '20' => [
                 'nombre' => 'CONTROL EN CAJAS DE ALCANTARILLA'
             ],
-            '24' => [
+            '21' => [
                 'nombre' => 'RUTA LAMPARAS CONTROL INSECTOS VOLADORES'
             ],
-            '25' => [
+            '22' => [
                 'nombre' => 'RUTA ESTACIONES CONTROL ROEDORES'
             ],
-            '26' => [
+            '22' => [
                 'nombre' => 'CONTROL CARACOLES'
             ],
-            '27' => [
+            '23' => [
                 'nombre' => 'CONTROL DE PLAGAS BASICO RESIDENCIAL'
             ]
         ];

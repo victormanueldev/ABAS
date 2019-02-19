@@ -61,22 +61,24 @@
 
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Inspector Comercial:</label>
-                                            <input type="text" id="nombre_usuario" name="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
+                                            <input style="text-transform: uppercase" type="text" id="nombre_usuario" name="nombre-usuario" placeholder="" class="form-control" value="{{$user->nombres}} {{$user->apellidos}}">
                                             <br>
                                         </div>
     
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Frecuencia del Servicio</label>
                                             
-                                            <select class="form-control" id="frecuencia_servicio" name="frecuencia_servicio" required>
+                                            <select style="text-transform: uppercase" class="form-control" id="frecuencia_servicio" name="frecuencia_servicio" required>
                                                 <option value="" selected>Seleccione una frecuencia</option>
-                                                <option value="Semanal">Semanales</option>
-                                                <option value="Quincenal">Quincenales</option>
-                                                <option value="Mensual">Mensuales</option>
-                                                <option value="Bimestral">Bimestrales</option>
-                                                <option value="Trimestral">Trimestrales</option>
-                                                <option value="Semestral">Semestrales</option>
-                                                <option value="Anual">Anuales</option>
+                                                <option value="Semanal">SEMANAL</option>
+                                                <option value="Quincenal">QUINCENAL</option>
+                                                <option value="Mensual">MENSUAL</option>
+                                                <option value="Bimestral">BIMESTRAL</option>
+                                                <option value="Trimestral">TRIMESTRAL</option>
+                                                <option value="Cuatrimestral">CUATRIMESTRAL</option>
+                                                <option value="Semestral">SEMESTRAL</option>
+                                                <option value="Anual">ANUAL</option>
+                                                <option value="Ocasional">OCASIONAL</option>
                                             </select>
     
                                         </div>
@@ -235,67 +237,99 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Plan de Saneamiento</h3>
+                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar visitas</button>
                                         <hr>
                                         <br>
                                     </div>
+
+                                    <div class="row" style="padding: 15px 15px" id="plan-saneamiento">
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label"># Visita</label>
+                                            <input type="number" min=0 name="num_visita" id="num_visita" placeholder="Ej: 1" class="form-control">
+                                        </div>
+                                        <div class="form-group col-lg-4 b-r">
+                                            <label>Duración del servicio</label>
+                                            <div class="input-group">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
+                                                    max="11" class="form-control" id="num_horas" placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
+                                                    max="60" class="form-control" id="num_minutos" placeholder="Minutos">
+                                            </div>
+                                        </div>
+                                    </div>
                                     
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-4">
                                         <label class="control-label">Valor plan de saneamiento</label>
                                         <input type="number" min=0 name="total_plan" id="total_plan" placeholder="Valor total" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Frecuencia de visitas</label>
+                                        <select id="frecuencia_visitas_plan" class="form-control">
+                                            <option value="8">Cada 8 días</option>
+                                            <option value="10">Cada 10 días</option>
+                                            <option value="12">Cada 12 días</option>
+                                            <option value="15">Cada 15 días</option>
+                                            <option value="20">Cada 20 días</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
                                         <label>Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="instrucciones" id="instrucciones"></textarea>
+                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="1" name="instrucciones" id="instrucciones"></textarea>
                                     </div>
+
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Inventario Inicial</h3>
+                                        <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
+                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar servicio</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Estaciones de Roedor</label>
-                                        <input type="number" min=0 id="estaciones_roedor" name="estaciones_roedor" placeholder="Cantidad" class="form-control">
+                                    <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
+                                        <div class="form-group col-lg-4">
+                                            <label class="control-label">Servicio a incluir</label>
+                                            <select id="servicio_detalle" class="form-control">
+                                                <option value="8">Cada 8 días</option>
+                                                <option value="10">Cada 10 días</option>
+                                                <option value="12">Cada 12 días</option>
+                                                <option value="15">Cada 15 días</option>
+                                                <option value="20">Cada 20 días</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Valor </label>
+                                            <input type="number" min=0 name="valor_servicio_detalle" id="total_plan" placeholder="Valor total" class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Frecuencia</label>
+                                            <select id="frecuencia_servicio_detalle" class="form-control">
+                                                <option value="" selected>Seleccione una frecuencia</option>
+                                                <option value="Semanal">SEMANAL</option>
+                                                <option value="Quincenal">QUINCENAL</option>
+                                                <option value="Mensual">MENSUAL</option>
+                                                <option value="Bimestral">BIMESTRAL</option>
+                                                <option value="Trimestral">TRIMESTRAL</option>
+                                                <option value="Cuatrimestral">CUATRIMESTRAL</option>
+                                                <option value="Semestral">SEMESTRAL</option>
+                                                <option value="Anual">ANUAL</option>
+                                                <option value="Ocasional">OCASIONAL</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Observaciones</label>
+                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="1" name="observacion_servicio_detalle" id="observacion_servicio_detalle"></textarea>
+                                        </div>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Lámparas 925 control voladores</label>
-                                        <input type="number" min=0 id="lamparas_control" name="lamparas_control" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cajas de alcantarilla electricas</label>
-                                        <input type="number" min=0 id="cajas_alcantarilla" name="numero_tapas" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Trampas de impacto plásticas</label>
-                                        <input type="number" min=0 id="trampas_plasticas" name="trampas_plasticas" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Número de Residencias</h3>
-                                        <hr>
-                                        <br>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Casas</label>
-                                        <input type="number" min=0 id="numero_casas" name="numero_casas" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Aptos</label>
-                                        <input type="number" min=0 id="numero_aptos" name="numero_aptos" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Bodegas</label>
-                                        <input type="number" min=0 id="numero_bodegas" name="numero_bodegas" placeholder="Cantidad" class="form-control">
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Total a facturar</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control" readonly>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -306,260 +340,282 @@
                                     </div>
 
                                     <div class="form-group col-lg-4">
-                                        <label class="control-label">¿Tiene Contrato?</label>
-                                        <select class="form-control" id="contrato" name="contrato">
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Forma de Pago</label>
-                                        <select class="form-control" id="forma_pago" name="forma_pago">
-                                            <option>Efectivo</option>
-                                            <option>Tarjeta Crédito</option>
-                                            <option>Tarjeta Dédito</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
                                         <label class="control-label">Facturación</label>
-                                        <input type="text" id="facturacion" name="facturacion" placeholder="Ej: SC" class="form-control">
+                                        <select id="frecuencia_servicio_detalle" class="form-control">
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="sc">SC</option>
+                                            <option value="green">GREEN</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Forma de pago</label>
+                                        <select id="frecuencia_servicio_detalle" class="form-control">
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="contado">CONTADO</option>
+                                            <option value="8_dias">8 Dias</option>
+                                            <option value="10_dias">10 Dias</option>
+                                            <option value="15_dias">15 Dias</option>
+                                            <option value="20_dias">20 Dias</option>
+                                            <option value="30_dias">30 Dias</option>
+                                            <option value="60_dias">60 Dias</option>
+                                            <option value="90_dias">90 Dias</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">¿Tiene contrato?</label>
+                                        <select id="frecuencia_servicio_detalle" class="form-control">
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="si">SI</option>
+                                            <option value="no">NO</option>
+                                        </select>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
+                                        <h3>Número de Residencias</h3>
+                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar residencia</button>
+                                        <hr>
+                                        <br>
                                     </div>
+
+                                    <div class="row" id="num-residencias" style="padding: 15px 15px">
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Tipo de residencia</label>
+                                            <select id="frecuencia_servicio_detalle" class="form-control">
+                                                <option value="" selected>Seleccione una opción</option>
+                                                <option value="casa">casa</option>
+                                                <option value="apto">apto</option>
+                                                <option value="bodega">bodega</option>
+                                                <option value="local">local</option>
+                                                <option value="oficina">oficina</option>
+                                            </select>
+                                        </div>
     
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Incluir los siguientes servicios</label>
-                                        <input type="text" id="servicios_1" name="servicios_1" placeholder="Ingrese servicio" class="form-control">
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Valor</label>
+                                            <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
+                                        </div>
+    
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Total a facturar</label>
+                                            <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
+                                        </div>
+    
+                                        <div class="form-group col-lg-3 ">
+                                            <label>Duración del servicio</label>
+                                            <div class="input-group">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
+                                                    max="11" class="form-control" id="num_horas" placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
+                                                    max="60" class="form-control" id="num_minutos" placeholder="Minutos">
+                                            </div>
+                                        </div>
+    
+    
+                                        <div class="form-group col-lg-3 ">
+                                            <label>Observaciones</label>
+                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="1" name="instrucciones" id="instrucciones"></textarea>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Inventario Inicial del Cliente</h3>
+                                        <hr>
+                                        <br>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-                                        <select class="form-control" id="frecuencia_servicios_1" name="frecuencia_servicios_1">
-                                            <option>Ocasionalmente</option>
-                                            <option>Semanales</option>
-                                            <option>Quincenales</option>
-                                            <option>Mensuales</option>
-                                            <option>Bimestrales</option>
-                                            <option>Trimestrales</option>
-                                            <option>Cada 4 Meses</option>
-                                            <option>Semestrales</option>
-                                            <option>Anuales</option>
-                                        </select>
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Lámpara con lámina</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Valor</label>
-                                        <input type="number" min=0 id="valor_servicios_1" name="valor_servicios_1" placeholder="Valor" value=0 class="form-control valor_servicio">
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Lámpara insectocutora</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Incluir los siguientes servicios</label>
-                                        <input type="text" id="servicios_2" name="servicios_2" placeholder="Ingrese servicio" class="form-control">
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Trampas de impacto</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-                                        <select class="form-control" id="frecuencia_servicios_2" name="frecuencia_servicios_2">
-                                            <option>Ocasionalmente</option>
-                                            <option>Semanales</option>
-                                            <option>Quincenales</option>
-                                            <option>Mensuales</option>
-                                            <option>Bimestrales</option>
-                                            <option>Trimestrales</option>
-                                            <option>Cada 4 Meses</option>
-                                            <option>Semestrales</option>
-                                            <option>Anuales</option>
-                                        </select>
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Jaulas</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
+                                    </div>
+                                    
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Estaciones de roedor</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Valor</label>
-                                        <input type="number" min=0 id="valor_servicios_2" name="valor_servicios_2" placeholder="Valor" value=0 class="form-control valor_servicio">
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Observaciones</label>
+                                        <textarea  name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Escriba aquí las observaciones" rows="1" class="form-control"></textarea>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Incluir los siguientes servicios</label>
-                                        <input type="text" id="servicios_3" name="servicios_3" placeholder="Ingrese servicio" class="form-control">
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Cajas de alcantarilla y eléctricas</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-                                        <select class="form-control" id="frecuencia_servicios_3" name="frecuencia_servicios_3">
-                                            <option>Ocasionalmente</option>
-                                            <option>Semanales</option>
-                                            <option>Quincenales</option>
-                                            <option>Mensuales</option>
-                                            <option>Bimestrales</option>
-                                            <option>Trimestrales</option>
-                                            <option>Cada 4 Meses</option>
-                                            <option>Semestrales</option>
-                                            <option>Anuales</option>
-                                        </select>
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Sumideros</label>
+                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle" placeholder="Valor total" class="form-control">
                                     </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Valor</label>
-                                        <input type="number" min=0 id="valor_servicios_3" name="valor_servicios_3" placeholder="Valor" value=0 class="form-control valor_servicio">
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Total a facturar</label>
-                                        <input type="number" id="total_servicios" name="total_servicios" class="form-control" value=0 disabled>
-                                    </div>
+                                    
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Compra de Dispositivos</h3>
+                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">#1 Dispositivo</label>
-                                        <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="Nombre de dispositivo" class="form-control">
-                                    </div>
+                                    <div class="row" id="compra-dispositivos" style="padding: 15px 15px">
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_1" name="cantidad_dispositivos_1" placeholder="Cantidad" class="form-control valor_dispositivos">
-                                    </div>
+                                        <div class="form-group col-lg-3">
+                                            <label class="control-label">Tipo de dispositivo</label>
+                                            <select id="frecuencia_servicio_detalle" class="form-control">
+                                                <option value="" selected>Seleccione una opción</option>
+                                                <option value="estaciones_de_roedor">estaciones de roedor</option>
+                                                <option value="identificadores_estaciones">identificadores de estaciones</option>
+                                                <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
+                                                <option value="lamparas de lamina_adhesiva_p">lamparas de lamina adhesiva p.</option>
+                                                <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
+                                                <option value="identificadores_lamparas">identificadores de lamparas</option>
+                                                <option value="jaula_pequena">jaula pequeña</option> 
+                                                <option value="jaula_grande">jaula grande</option>
+                                                <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
+                                                <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
+                                                <option value="cebadero_moscas">cebadero moscas</option>
+                                            </select>
+                                        </div>
+    
+                                        <div class="form-group col-lg-1">
+                                            <label class="control-label">Cant.</label>
+                                            <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="" class="form-control">
+                                        </div>
+    
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Valor unitario sin IVA</label>
+                                            <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="Nombre de dispositivo" class="form-control">
+                                        </div>
+    
+                                        <div class="form-group col-lg-3">
+                                            <label class="control-label">Valor total.</label>
+                                            <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="Nombre de dispositivo" class="form-control">
+                                        </div>
+    
+                                        <div class="form-group col-lg-3 ">
+                                                <label>Observaciones</label>
+                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="1" name="instrucciones" id="instrucciones"></textarea>
+                                            </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_1" name="unidad_dispositivos_1" placeholder="Valor C/U" class="form-control valor_dispositivos">
-                                    </div>
+                                    </div>    
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_1" name="total_dispositivos_1" placeholder="Valor Total" class="form-control" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">#2 Dispositivos</label>
-                                        <input type="text" id="dispositivos_2" name="dispositivos_2" placeholder="Nombre de dispositivo" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_2" name="cantidad_dispositivos_2" placeholder="Cantidad" class="form-control valor_dispositivos">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_2" name="unidad_dispositivos_2" placeholder="Valor C/U" class="form-control valor_dispositivos">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_2" name="total_dispositivos_2" placeholder="Valor Total" class="form-control" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">#3 Dispositivos</label>
-                                        <input type="text" id="dispositivos_3" name="dispositivos_3" placeholder="Nombre de dispositivo" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_3" name="cantidad_dispositivos_3" placeholder="Cantidad" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_3" name="unidad_dispositivos_3" placeholder="Valor C/U" class="form-control valor_dispositivos">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_3" name="total_dispositivos_3" placeholder="Valor Total" class="form-control valor_dispositivos" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-12">
-                                        <label>Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="observaciones_dispositivos" id="observaciones_dispositivos"></textarea>
-                                    </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Dispositivos en Comodato para esta Propuesta</h3>
+                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">#1 Dispositivo</label>
-                                        <input type="text" id="dispositivos_comodato_1" name="dispositivos_comodato_1" placeholder="Nombre de dispositivo" class="form-control">
-                                    </div>
+                                    <div class="row" id="compra-dispositivos-comodato" style="padding: 15px 15px">
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_1" name="cantidad_dispositivos_comodato_1" placeholder="Cantidad" class="form-control valor_dispositivos_comodato">
-                                    </div>
+                                            <div class="form-group col-lg-3">
+                                                    <label class="control-label">Tipo de dispositivo</label>
+                                                    <select id="frecuencia_servicio_detalle" class="form-control">
+                                                        <option value="" selected>Seleccione una opción</option>
+                                                        <option value="estaciones_de_roedor">estaciones de roedor</option>
+                                                        <option value="identificadores_estaciones">identificadores de estaciones</option>
+                                                        <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
+                                                        <option value="lamparas de lamina_adhesiva_p">lamparas de lamina adhesiva p.</option>
+                                                        <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
+                                                        <option value="identificadores_lamparas">identificadores de lamparas</option>
+                                                        <option value="jaula_pequena">jaula pequeña</option> 
+                                                        <option value="jaula_grande">jaula grande</option>
+                                                        <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
+                                                        <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
+                                                        <option value="cebadero_moscas">cebadero moscas</option>
+                                                    </select>
+                                                </div>
+        
+                                            <div class="form-group col-lg-1">
+                                                <label class="control-label">Cant.</label>
+                                                <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="" class="form-control">
+                                            </div>
+        
+                                            <div class="form-group col-lg-2">
+                                                <label class="control-label">Valor unitario sin IVA</label>
+                                                <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="Nombre de dispositivo" class="form-control">
+                                            </div>
+        
+                                            <div class="form-group col-lg-3">
+                                                <label class="control-label">Valor total.</label>
+                                                <input type="text" id="dispositivos_1" name="dispositivos_1" placeholder="Nombre de dispositivo" class="form-control">
+                                            </div>
+        
+                                            <div class="form-group col-lg-3 ">
+                                                    <label>Observaciones</label>
+                                                    <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="1" name="instrucciones" id="instrucciones"></textarea>
+                                                </div>
+    
+                                        </div>  
+                                        
+                                    
+                                        <div class="ibox-title col-lg-12">
+                                            <br>
+                                            <h3>Gestion de calidad</h3>
+                                            <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar documento</button>
+                                            <hr>
+                                            <br>
+                                        </div>
+    
+                                        <div class="row" id="gestion-calidad" style="padding: 15px 15px">
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">Tipo de documento</label>
+                                                <select id="frecuencia_servicio_detalle" class="form-control">
+                                                    <option value="" selected>Seleccione una opción</option>
+                                                    <option value="diagnostico_inicial">diagnostico inicial</option>
+                                                    <option value="cronograma_servicios">cronograma de servicios</option>
+                                                    <option value="mapas_estaciones_lamparas">mapas de estaciones/lamparas</option>
+                                                    <option value="visitas_calidad">visitas_calidad</option>
+                                                </select>
+                                            </div>
+        
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">Frecuencia.</label>
+                                                <select id="frecuencia_servicio_detalle" class="form-control">
+                                                        <option value="" selected>Seleccione una opción</option>
+                                                        <option value="mensual">mensual</option>
+                                                        <option value="semanal">semanal</option>
+                                                        <option value="quincenal">quincenal</option>
+                                                        <option value="bimestral">bimestral</option>
+                                                        <option value="trimestral">trimestral</option>
+                                                        <option value="cuatrimestral">cuatrimestral</option>
+                                                        <option value="semestral">semestral</option>
+                                                        <option value="anual">anual</option>
+                                                        <option value="ocasional">ocasional</option>
+                                                    </select>
+                                            </div>
+    
+                                            <div class="form-group col-lg-4">
+                                                    <label>Observaciones</label>
+                                                    <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="1" name="instrucciones" id="instrucciones"></textarea>
+                                                </div>
+                                        </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_comodato_1" name="unidad_dispositivos_comodato_1" placeholder="Valor C/U" class="form-control valor_dispositivos_comodato">
-                                    </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_comodato_1" name="total_dispositivos_comodato_1" placeholder="Valor Total" class="form-control" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">#2 Dispositivos</label>
-                                        <input type="text" id="dispositivos_comodato_2" name="dispositivos_comodato_2" placeholder="Nombre de dispositivo" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_2" name="cantidad_dispositivos_comodato_2" placeholder="Cantidad" class="form-control valor_dispositivos_comodato">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_comodato_2" name="unidad_dispositivos_comodato_2" placeholder="Valor C/U" class="form-control valor_dispositivos_comodato">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_comodato_2" name="total_dispositivos_comodato_2" placeholder="Valor Total" class="form-control" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">#3 Dispositivos</label>
-                                        <input type="text" id="dispositivos_comodato_3" name="dispositivos_comodato_3" placeholder="Nombre de dispositivo" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Cantidad</label>
-                                        <input type="number" min=0 id="cantidad_dispositivos_comodato_3" name="cantidad_dispositivos_comodato_3" placeholder="Cantidad" class="form-control valor_dispositivos_comodato">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor por unidad</label>
-                                        <input type="number" min=0 id="unidad_dispositivos_comodato_3" name="unidad_dispositivos_comodato_3" placeholder="Valor C/U" class="form-control valor_dispositivos_comodato">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Valor total</label>
-                                        <input type="number" min=0 id="total_dispositivos_comodato_3" name="total_dispositivos_comodato_3" placeholder="Valor Total" class="form-control" disabled>
-                                    </div>
-
-                                    <div class="form-group col-lg-12">
-                                        <label>Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee." rows="3" name="observaciones_dispositivos_comodato" id="observaciones_dispositivos_comodato"></textarea>
-                                    </div>
-
-                                    <div class="ibox-title col-lg-12">
-                                        <h3>Detalle y Valor del Servicio</h3>
                                         <hr>
                                         <br>
-                                    </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Medio por el cual se entero de nuestro servicio</label>

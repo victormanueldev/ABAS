@@ -259,6 +259,9 @@
 
     <!-- Data picker -->
    <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+   
+   <!-- Input Mask-->
+   <script src="{{asset('js/plugins/jasny/jasny-bootstrap.min.js')}}"></script>
 
 
    @yield('ini-scripts');

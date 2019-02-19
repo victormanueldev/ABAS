@@ -45,7 +45,7 @@ class CotizacionController extends Controller
                 //$codigo = "CT-".$user->iniciales."-".$request->idCliente;
                 $cotizacion->codigo = strtoupper($request->codigo);
                 $cotizacion->estado = $request->estado;
-                $cotizacion->valor =$request->valor;
+                $cotizacion->valor = $request->valor;
                 $cotizacion->cliente_id = $request->idCliente;
                 $cotizacion->save();
                 return response()->json('Creation Successfully', 201);

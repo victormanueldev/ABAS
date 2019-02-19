@@ -68,9 +68,9 @@
                                     <td>{{$cliente->nombre_cliente}}</td>
                                     <td>{{$cliente->municipio}}</td>
                                     <td>{{$cliente->direccion}}</td>
-                                    <td>{{$cliente->nombre_contacto}}</td>
-                                    <td>{{$cliente->email}}</td>
-                                    <td>{{$cliente->celular}}</td>
+                                    <td>{{$cliente->nombre_contacto_inicial}}</td>
+                                    <td>{{$cliente->email_contacto_inicial}}</td>
+                                    <td>{{$cliente->celular_contacto_inicial}}</td>
                                     <td class="text-center"> <a class="btn btn-white" href="{{route('clientes.show', $cliente->id)}}"><i class="fa fa-edit text-navy"></i></a></td>
                                 </tr>
                             @endforeach

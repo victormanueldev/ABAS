@@ -1,6 +1,6 @@
 Otros Ajustes
     AREA COMERCIAL (1 Dia)
-        - Crear Cliente 
+        - Crear Cliente         
             - Atributo de Estado de comisiones RECOMPRA, NUEVO CON CONTRATO, REACTIVADO (Editar en solicitudes)
             - Persona juridica y natural en un select
             - Sector economico (select)
