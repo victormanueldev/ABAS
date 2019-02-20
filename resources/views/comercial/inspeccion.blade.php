@@ -33,7 +33,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' =>
-    'form-solicitud')) !!}
+    'form-inspeccion')) !!}
     {!! Form::token() !!}
 
     <div class="row">
@@ -116,44 +116,44 @@
 
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" id="input-direccion" name="input-direccion" placeholder="Dirección de cliente"
+                                        <input type="text" style="text-transform: uppercase" id="input-direccion" name="input-direccion" placeholder="Dirección de cliente"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" id="input-ciudad" name="input-ciudad" placeholder="Ciudad del cliente"
+                                        <input type="text" style="text-transform: uppercase" id="input-ciudad" name="input-ciudad" placeholder="Ciudad del cliente"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" id="input-barrio" name="input-barrio" placeholder="Barrio del cliente"
+                                        <input type="text" style="text-transform: uppercase" id="input-barrio" name="input-barrio" placeholder="Barrio del cliente"
                                             class="form-control">
 
                                     </div>
 
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" id="input-contacto" name="input-contacto" placeholder="Nombre de contacto del servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-contacto" name="input-contacto" placeholder="Nombre de contacto del servicio"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                        <input type="text" id="input-cargo" name="input-cargo" placeholder="Zona del cliente"
+                                        <input type="text" style="text-transform: uppercase" id="input-cargo" name="input-cargo" placeholder="Zona del cliente"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" id="input-telefono" name="input-telefono" placeholder="Teléfono del contacto a facturar"
+                                        <input type="text" style="text-transform: uppercase" id="input-telefono" name="input-telefono" placeholder="Teléfono del contacto a facturar"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" id="input-celular" name="input-celular" placeholder="Celular del contacto a facturar"
+                                        <input type="text" style="text-transform: uppercase" id="input-celular" name="input-celular" placeholder="Celular del contacto a facturar"
                                             class="form-control">
 
                                     </div>
@@ -174,7 +174,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
 
-                                        <select class="form-control" id="select_sedes" name="id_sede">
+                                        <select style="text-transform: uppercase" class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -187,41 +187,41 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" id="input-sede-direccion" name="input-sede-direccion"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-direccion" name="input-sede-direccion"
                                             placeholder="Dirección de donde se realizará el servicio" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" id="input-sede-ciudad" name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-ciudad" name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" id="input-sede-barrio" name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-barrio" name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                        <input type="text" id="input-sede-zona" name="input-sede-zona" placeholder="Zona donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-zona" name="input-sede-zona" placeholder="Zona donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" id="input-sede-contacto" name="input-sede-contacto"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-contacto" name="input-sede-contacto"
                                             placeholder="Nombre de contacto del lugar" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" id="input-sede-telefono" name="input-sede-telefono"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-telefono" name="input-sede-telefono"
                                             placeholder="Teléfono del contacto del servicio" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" id="input-sede-celular" name="input-sede-celular"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-celular" name="input-sede-celular"
                                             placeholder="Celular del contacto del lugar" class="form-control">
                                     </div>
 
@@ -238,38 +238,38 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto Factura *</label>
-                                        <input type="text" placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
+                                        <input type="text" style="text-transform: uppercase" placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
                                             id="contacto_name_factura" class="form-control" style="display: block;">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                        <input type="text" placeholder="Teléfono del contacto a facturar" name="contacto-telefono-factura"
+                                        <input type="text" style="text-transform: uppercase" placeholder="Teléfono del contacto a facturar" name="contacto-telefono-factura"
                                             id="contacto_telefono_factura" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" placeholder="Celular del contacto a facturar" name="contacto-celular-factura"
+                                        <input type="text" style="text-transform: uppercase" placeholder="Celular del contacto a facturar" name="contacto-celular-factura"
                                             id="contacto_celular_factura" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-12">
                                         <label>Instrucciones y Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
                                             rows="3" name="instrucciones" id="observaciones_tecnico" required></textarea>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Plan de Saneamiento</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i
                                                 class="fa fa-plus"></i> Agregar visitas</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="row" style="padding: 15px 15px" id="plan-saneamiento">
+                                    <div class="row" style="padding: 15px 15px" id="visitas">
                                         <div class="form-group col-lg-2">
                                             <label class="control-label"># Visita</label>
                                             <input type="number" min=0 name="num_visita[0]" id="num_visita[0]" placeholder="Ej: 1"
@@ -279,9 +279,9 @@
                                             <label>Duración del servicio</label>
                                             <div class="input-group">
                                                 <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_plan[0]" placeholder="Horas">
+                                                    class="form-control" id="num_horas_visita[0]" placeholder="Horas">
                                                 <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_plan[0]" placeholder="Minutos">
+                                                    class="form-control" id="num_minutos_visita[0]" placeholder="Minutos">
                                             </div>
                                         </div>
                                     </div>
@@ -294,7 +294,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Frecuencia de visitas</label>
-                                        <select id="frecuencia_visitas_plan" class="form-control">
+                                        <select style="text-transform: uppercase" id="frecuencia_visitas_plan" class="form-control">
                                             <option value="8">Cada 8 días</option>
                                             <option value="10">Cada 10 días</option>
                                             <option value="12">Cada 12 días</option>
@@ -305,7 +305,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label>Observaciones</label>
-                                        <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                             rows="1" name="observaciones_plan" id="observaciones_plan"></textarea>
                                     </div>
 
@@ -313,7 +313,7 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-servicio"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-servicio"><i
                                                 class="fa fa-plus"></i> Agregar servicio</button>
                                         <hr>
                                         <br>
@@ -322,7 +322,7 @@
                                     <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Servicio a incluir</label>
-                                            <select id="servicio_detalle[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="servicio_detalle[0]" class="form-control">
                                                 <option value="8">Cada 8 días</option>
                                                 <option value="10">Cada 10 días</option>
                                                 <option value="12">Cada 12 días</option>
@@ -339,7 +339,7 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Frecuencia</label>
-                                            <select id="frecuencia_servicio_detalle[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle[0]" class="form-control">
                                                 <option value="" selected>Seleccione una frecuencia</option>
                                                 <option value="Semanal">SEMANAL</option>
                                                 <option value="Quincenal">QUINCENAL</option>
@@ -355,7 +355,7 @@
 
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
-                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacion_servicio_detalle[0]" id="observacion_servicio_detalle[0]"></textarea>
                                         </div>
                                     </div>
@@ -375,7 +375,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Facturación</label>
-                                        <select id="tipo_facturacion" class="form-control">
+                                        <select style="text-transform: uppercase" id="tipo_facturacion" class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="sc">SC</option>
                                             <option value="green">GREEN</option>
@@ -384,7 +384,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Forma de pago</label>
-                                        <select id="forma_pago" class="form-control">
+                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="contado">CONTADO</option>
                                             <option value="8_dias">8 Dias</option>
@@ -399,7 +399,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">¿Tiene contrato?</label>
-                                        <select id="contrato" class="form-control">
+                                        <select style="text-transform: uppercase" id="contrato" class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="si">SI</option>
                                             <option value="no">NO</option>
@@ -409,16 +409,16 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Número de Residencias</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-residencia"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-residencia"><i
                                                 class="fa fa-plus"></i> Agregar residencia</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="row" id="num-residencias" style="padding: 15px 15px">
+                                    <div class="row" id="residencias" style="padding: 15px 15px">
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de residencia</label>
-                                            <select id="tipo_residencia[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_residencia[0]" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="casa">casa</option>
                                                 <option value="apto">apto</option>
@@ -447,8 +447,8 @@
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observaciones_residenc   ia[0]" id="observaciones_residencia[0]"></textarea>
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                                rows="1" name="observaciones_residencia[0]" id="observaciones_residencia[0]"></textarea>
                                         </div>
                                     </div>
 
@@ -492,7 +492,7 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Observaciones</label>
-                                        <textarea name="observaciones_estaciones" id="observaciones_estaciones" placeholder="Escriba aquí las observaciones"
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" name="observaciones_estaciones" id="observaciones_estaciones" placeholder="Escriba aquí las observaciones"
                                             rows="1" class="form-control"></textarea>
                                     </div>
 
@@ -512,17 +512,17 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Compra de Dispositivos</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo"><i
                                                 class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="row" id="compra-dispositivos" style="padding: 15px 15px">
+                                    <div class="row" id="dispositivos" style="padding: 15px 15px">
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select id="tipo_dispositivo[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo[0]" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="estaciones_de_roedor">estaciones de roedor</option>
                                                 <option value="identificadores_estaciones">identificadores de
@@ -548,7 +548,7 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_iva_dispositivo[0]" name="valor_iva_dispositivo[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="valor_sin_iva_dispositivo[0]" name="valor_sin_iva_dispositivo[0]" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
 
@@ -560,7 +560,7 @@
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacion_dispositivo[0]" id="observacion_dispositivo[0]"></textarea>
                                         </div>
 
@@ -570,17 +570,17 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Dispositivos en Comodato para esta Propuesta</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo-comodato"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo-comodato"><i
                                                 class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="row" id="compra-dispositivos-comodato" style="padding: 15px 15px">
+                                    <div class="row" id="dispositivos-comodato" style="padding: 15px 15px">
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select id="tipo_dispositivo_comodato" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato[0]" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="estaciones_de_roedor">estaciones de roedor</option>
                                                 <option value="identificadores_estaciones">identificadores de
@@ -606,7 +606,7 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_iva_dispositivo_comodato[0]" name="valor_iva_dispositivo_comodato[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="valor_sin_iva_dispositivo_comodato[0]" name="valor_sin_iva_dispositivo_comodato[0]" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
 
@@ -618,7 +618,7 @@
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacione_dispositivo_comodato[0]" id="observacione_dispositivo_comodato[0]"></textarea>
                                         </div>
 
@@ -637,7 +637,7 @@
                                     <div class="row" id="gestion-calidad" style="padding: 15px 15px">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Tipo de documento</label>
-                                            <select id="tipo_doc[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_doc[0]" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="diagnostico_inicial">diagnostico inicial</option>
                                                 <option value="cronograma_servicios">cronograma de servicios</option>
@@ -648,7 +648,7 @@
 
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Frecuencia.</label>
-                                            <select id="frecuencia_doc[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="frecuencia_doc[0]" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="mensual">mensual</option>
                                                 <option value="semanal">semanal</option>
@@ -664,7 +664,7 @@
 
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
-                                            <textarea class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacion_doc[0]" id="observacion_doc[0]"></textarea>
                                         </div>
                                     </div>
@@ -677,29 +677,54 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Áreas</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-doc"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-area"><i
                                                 class="fa fa-plus"></i> Agregar área</button>
                                         <hr>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Nombre y/o descripción del área</label>
-                                        <input type="text" id="total_dispositivo_comodato[0]" name="total_dispositivo_comodato[0]" placeholder="Nombre de dispositivo"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3 ">
-                                        <label>Tiempo estimado</label>
-                                        <div class="input-group">
-                                            <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                class="form-control" id="num_horas_residencia[0]" placeholder="Horas">
-                                            <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                class="form-control" id="num_minutos_residencia[0]" placeholder="Minutos">
+                                    <div class="row" id="areas" style="padding: 15px 15px">
+                                        <div class="form-group col-lg-3">
+                                            <label class="control-label">Nombre y/o descripción del área</label>
+                                            <input type="text" style="text-transform: uppercase" id="area[0]" name="area[0]" placeholder="Nombre de dispositivo"
+                                                class="form-control">
+                                        </div>
+    
+                                        <div class="form-group col-lg-3 ">
+                                            <label>Tiempo estimado</label>
+                                            <div class="input-group">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
+                                                    class="form-control" id="num_horas_area[0]" placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
+                                                    class="form-control" id="num_minutos_area[0]" placeholder="Minutos">
+                                            </div>
+                                        </div>
+    
+                                        <div class="form-group col-lg-4">
+                                            <label class="control-label">Evidencia y/o plaga observada</label>
+                                            <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area[0]">
+                                                <option value="cucarachas">CUCARACHAS</option>
+                                                <option value="moscas">MOSCAS</option>
+                                                <option value="pulgas">PULGAS</option>
+                                                <option value="hormigas">HORMIGAS</option>
+                                                <option value="mosquitos">MOSQUITOS</option>
+                                                <option value="garrapatas">GARRAPATAS</option>
+                                                <option value="roedores">ROEDORES</option>
+                                                <option value="aranas">ARAÑAS</option>
+                                                <option value="chinches">CHINCHES</option>
+                                            </select>
+                                        </div>
+    
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Nivel act.</label>
+                                            <select style="text-transform: uppercase" name="nivel_area[0]" id="nivel_area[0]" class="form-control">
+                                                <option value="alto">alto</option>
+                                                <option value="medio">medio</option>
+                                                <option value="bajo">bajo</option>
+                                                <option value="no">no</option>
+                                            </select>
                                         </div>
                                     </div>
-
-                                    
 
 
                                     <div class="col-lg-12">
@@ -729,9 +754,6 @@
         var date = moment().format("YYYY-MM-DD");
         $('#fecha_creacion').val(date);
     });
-
-    //Inicializador del Select AUTOCOMPLETAR
-    $('.chosen-select').chosen({ width: "100%" });
 
     //Inicializador del Select AUTOCOMPLETAR
     $('.chosen-select').chosen({ width: "100%" });
@@ -829,17 +851,450 @@
         });
     });
 
+    /* Estructuras de repecticion de inputs del formulario
+    -------------------------------------------------------*/
+    var contVisitas = 1;
+    var contServicio = 1;
+    var contResidencias = 1;
+    var contDispositivos = 1;
+    var contComodatos = 1;
+    var contDocs = 1;
+    var contAreas = 1;
+
+    //Plan de sanemaiento
+    $("#btn-add-visitas").click(function(){
+        $("#visitas").append(`
+            <div class="form-group col-lg-2">
+                <label class="control-label"># Visita</label>
+                <input type="number" min=0 name="num_visita[${contVisitas}]" id="num_visita[${contVisitas}]" placeholder="Ej: 1"
+                    class="form-control">
+            </div>
+            <div class="form-group col-lg-4 b-r">
+                <label>Duración del servicio</label>
+                <div class="input-group">
+                    <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
+                        class="form-control" id="num_horas_visita[${contVisitas}]" placeholder="Horas">
+                    <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
+                        class="form-control" id="num_minutos_visita[${contVisitas}]" placeholder="Minutos">
+                </div>
+            </div>
+        `)
+        contVisitas++;
+    })
+
+    //Detalle del servicio correctivo y/o preventivo
+    $("#btn-add-servicio").click(function(){
+        $("#detalle-servicios").append(`
+            <div class="form-group col-lg-4">
+                <label class="control-label">Servicio a incluir</label>
+                <select style="text-transform: uppercase" id="servicio_detalle[${contServicio}]" class="form-control">
+                    <option value="8">Cada 8 días</option>
+                    <option value="10">Cada 10 días</option>
+                    <option value="12">Cada 12 días</option>
+                    <option value="15">Cada 15 días</option>
+                    <option value="20">Cada 20 días</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label class="control-label">Valor </label>
+                <input type="number" min=0 name="valor_servicio_detalle[${contServicio}]" id="valor_servicio_detalle[${contServicio}]"
+                    placeholder="Valor total" class="form-control">
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label class="control-label">Frecuencia</label>
+                <select style="text-transform: uppercase" id="frecuencia_servicio_detalle[${contServicio}]" class="form-control">
+                    <option value="" selected>Seleccione una frecuencia</option>
+                    <option value="Semanal">SEMANAL</option>
+                    <option value="Quincenal">QUINCENAL</option>
+                    <option value="Mensual">MENSUAL</option>
+                    <option value="Bimestral">BIMESTRAL</option>
+                    <option value="Trimestral">TRIMESTRAL</option>
+                    <option value="Cuatrimestral">CUATRIMESTRAL</option>
+                    <option value="Semestral">SEMESTRAL</option>
+                    <option value="Anual">ANUAL</option>
+                    <option value="Ocasional">OCASIONAL</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label>Observaciones</label>
+                <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                    rows="1" name="observacion_servicio_detalle[${contServicio}]" id="observacion_servicio_detalle[${contServicio}]"></textarea>
+            </div>
+        `)
+        contServicio++;
+    })
+
+    //Numero de residencias
+    $("#btn-add-residencia").click(function(){
+        $("#residencias").append(`
+            <div class="form-group col-lg-3">
+                <label class="control-label">Tipo de residencia</label>
+                <select style="text-transform: uppercase" id="tipo_residencia[${contResidencias}]" class="form-control">
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="casa">casa</option>
+                    <option value="apto">apto</option>
+                    <option value="bodega">bodega</option>
+                    <option value="local">local</option>
+                    <option value="oficina">oficina</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-3">
+                <label class="control-label">Valor</label>
+                <input type="number" min=0 name="valor_residencia[${contResidencias}]" id="valor_residencia[${contResidencias}]"
+                    placeholder="Valor total" class="form-control">
+            </div>
+
+            <div class="form-group col-lg-3 ">
+                <label>Duración del servicio</label>
+                <div class="input-group">
+                    <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
+                        class="form-control" id="num_horas_residencia[${contResidencias}]" placeholder="Horas">
+                    <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
+                        class="form-control" id="num_minutos_residencia[${contResidencias}]" placeholder="Minutos">
+                </div>
+            </div>
+
+
+            <div class="form-group col-lg-3 ">
+                <label>Observaciones</label>
+                <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                    rows="1" name="observaciones_residencia[${contResidencias}]" id="observaciones_residencia[${contResidencias}]"></textarea>
+            </div>
+        `)
+        contResidencias++;
+    })
+
+    //Compra de dispositivos
+    $("#btn-add-dispositivo").click(function(){
+        $("#dispositivos").append(`
+            <div class="form-group col-lg-3">
+                <label class="control-label">Tipo de dispositivo</label>
+                <select style="text-transform: uppercase" id="tipo_dispositivo[${contDispositivos}]" class="form-control">
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="estaciones_de_roedor">estaciones de roedor</option>
+                    <option value="identificadores_estaciones">identificadores de
+                        estaciones</option>
+                    <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
+                    <option value="lamparas de lamina_adhesiva_p">lamparas de lamina
+                        adhesiva p.</option>
+                    <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
+                    <option value="identificadores_lamparas">identificadores de lamparas</option>
+                    <option value="jaula_pequena">jaula pequeña</option>
+                    <option value="jaula_grande">jaula grande</option>
+                    <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
+                    <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
+                    <option value="cebadero_moscas">cebadero moscas</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-1">
+                <label class="control-label">Cant.</label>
+                <input type="text" id="cant_dispositivo[${contDispositivos}]" name="cant_dispositivo[${contDispositivos}]" placeholder=""
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label class="control-label">Valor unitario sin IVA</label>
+                <input type="text" id="valor_sin_iva_dispositivo[${contDispositivos}]" name="valor_sin_iva_dispositivo[${contDispositivos}]" placeholder="Nombre de dispositivo"
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-3">
+                <label class="control-label">Valor total.</label>
+                <input type="text" id="total_dispositivo[${contDispositivos}]" name="total_dispositivo[${contDispositivos}]" placeholder="Nombre de dispositivo"
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-3 ">
+                <label>Observaciones</label>
+                <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                    rows="1" name="observacion_dispositivo[${contDispositivos}]" id="observacion_dispositivo[${contDispositivos}]"></textarea>
+            </div>
+        `)
+        contDispositivos++;
+    })
+
+    //Dispositivos en comodato
+    $("#btn-add-dispositivo-comodato").click(function(){
+        $("#dispositivos-comodato").append(`
+            <div class="form-group col-lg-3">
+                <label class="control-label">Tipo de dispositivo</label>
+                <select style="text-transform: uppercase" id="tipo_dispositivo_comodato[${contComodatos}]" class="form-control">
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="estaciones_de_roedor">estaciones de roedor</option>
+                    <option value="identificadores_estaciones">identificadores de
+                        estaciones</option>
+                    <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
+                    <option value="lamparas de lamina_adhesiva_p">lamparas de lamina
+                        adhesiva p.</option>
+                    <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
+                    <option value="identificadores_lamparas">identificadores de lamparas</option>
+                    <option value="jaula_pequena">jaula pequeña</option>
+                    <option value="jaula_grande">jaula grande</option>
+                    <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
+                    <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
+                    <option value="cebadero_moscas">cebadero moscas</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-1">
+                <label class="control-label">Cant.</label>
+                <input type="text" id="cant_dispositivo_comodato[${contComodatos}]" name="cant_dispositivo_comodato[0${contComodatos}]" placeholder=""
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label class="control-label">Valor unitario sin IVA</label>
+                <input type="text" id="valor_sin_iva_dispositivo_comodato[${contComodatos}]" name="valor_sin_iva_dispositivo_comodato[${contComodatos}]" placeholder="Nombre de dispositivo"
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-3">
+                <label class="control-label">Valor total.</label>
+                <input type="text" id="total_dispositivo_comodato[${contComodatos}]" name="total_dispositivo_comodato[${contComodatos}]" placeholder="Nombre de dispositivo"
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-3 ">
+                <label>Observaciones</label>
+                <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                    rows="1" name="observacione_dispositivo_comodato[${contComodatos}]" id="observacione_dispositivo_comodato[${contComodatos}]"></textarea>
+            </div>
+        `)
+        contComodatos++;
+    })
+
+    //Gestion de calidad
+    $("#btn-add-doc").click(function(){
+        $('#gestion-calidad').append(`
+            <div class="form-group col-lg-4">
+                <label class="control-label">Tipo de documento</label>
+                <select style="text-transform: uppercase" id="tipo_doc[${contDocs}]" class="form-control">
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="diagnostico_inicial">diagnostico inicial</option>
+                    <option value="cronograma_servicios">cronograma de servicios</option>
+                    <option value="mapas_estaciones_lamparas">mapas de estaciones/lamparas</option>
+                    <option value="visitas_calidad">visitas_calidad</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label class="control-label">Frecuencia.</label>
+                <select style="text-transform: uppercase" id="frecuencia_doc[${contDocs}]" class="form-control">
+                    <option value="" selected>Seleccione una opción</option>
+                    <option value="mensual">mensual</option>
+                    <option value="semanal">semanal</option>
+                    <option value="quincenal">quincenal</option>
+                    <option value="bimestral">bimestral</option>
+                    <option value="trimestral">trimestral</option>
+                    <option value="cuatrimestral">cuatrimestral</option>
+                    <option value="semestral">semestral</option>
+                    <option value="anual">anual</option>
+                    <option value="ocasional">ocasional</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label>Observaciones</label>
+                <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                    rows="1" name="observacion_doc[${contDocs}]" id="observacion_doc[${contDocs}]"></textarea>
+            </div>
+        `)
+        contDocs++;
+    })
+
+    //Descripcion de areas
+    $("#btn-add-area").click(function(){
+        $("#areas").append(`
+            <div class="form-group col-lg-3">
+                <label class="control-label">Nombre y/o descripción del área</label>
+                <input type="text" style="text-transform: uppercase" id="area[${contAreas}]" name="area[${contAreas}]" placeholder="Nombre de dispositivo"
+                    class="form-control">
+            </div>
+
+            <div class="form-group col-lg-3 ">
+                <label>Tiempo estimado</label>
+                <div class="input-group">
+                    <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
+                        class="form-control" id="num_horas_area[${contAreas}]" placeholder="Horas">
+                    <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
+                        class="form-control" id="num_minutos_area[${contAreas}]" placeholder="Minutos">
+                </div>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label class="control-label">Evidencia y/o plaga observada</label>
+                <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area[${contAreas}]">
+                    <option value="cucarachas">CUCARACHAS</option>
+                    <option value="moscas">MOSCAS</option>
+                    <option value="pulgas">PULGAS</option>
+                    <option value="hormigas">HORMIGAS</option>
+                    <option value="mosquitos">MOSQUITOS</option>
+                    <option value="garrapatas">GARRAPATAS</option>
+                    <option value="roedores">ROEDORES</option>
+                    <option value="aranas">ARAÑAS</option>
+                    <option value="chinches">CHINCHES</option>
+                </select>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label class="control-label">Nivel act.</label>
+                <select style="text-transform: uppercase" name="nivel_area[${contAreas}]" id="nivel_area[${contAreas}]" class="form-control">
+                    <option value="alto">alto</option>
+                    <option value="medio">medio</option>
+                    <option value="bajo">bajo</option>
+                    <option value="no">no</option>
+                </select>
+            </div>
+        `)
+        contAreas++;
+    })
+
+
     //Generar numero aleatorio
     function codigoAleatorio() {
-        var randomCode = Math.round(Math.random() * (999 - 0));
+        var randomCode = Math.round(Math.random() * (9999 - 0));
         if (randomCode <= 9) {
-            return "FS00" + randomCode.toString();
+            return "INSP00" + randomCode.toString();
         } else if (randomCode >= 9 && randomCode <= 99) {
-            return "FS0" + randomCode.toString();
+            return "INSP0" + randomCode.toString();
         } else {
-            return "FS" + randomCode.toString();
+            return "INSP" + randomCode.toString();
         }
     }
+
+    /* Estructura de datos para envio del formulario
+    -----------------------------------------------------*/
+    $('#form-inspeccion').submit(e => {
+        e.preventDefault()
+        var dataToSend = {
+            codigo: '',
+            nombre_usuario: '',
+            fecha: '',
+            frecuencia: '',
+            observaciones: '',
+            valor_plan_saneamiento: '',
+            frecuencia_visitas: '',
+            observaciones_visitas: '',
+            total_detalle_servicios: '',
+            tipo_facturacion: '',
+            forma_pago: '',
+            contrato: '',
+            cant_lampara_lamina: '',
+            cant_lampara_insectocutora: '',
+            cant_trampas: '',
+            cant_jaulas: '',
+            cant_estaciones_roedor: '',
+            observaciones_estaciones: '',
+            cant_cajas_alca_elec: '',
+            sumideros: '',
+            cliente_id: '',
+            sede_id: '',
+            visitas: [],
+            detalle_servicios: [],
+            residencias: [],
+            compra_dispositivos: [],
+            dispositivos_comodato: [],
+            gestion_calidad: [],
+            areas: [],
+        }
+
+        //Plan de saneamiento
+        for (let index = 0; index < contVisitas; index++) {
+            dataToSend.visitas[index] = {
+                num_visita: $(`#num_visita[${contVisitas}]`).val(),
+                duracion: (parseInt($(`#num_horas_visita[${contVisitas}]`).val()) * 60) + parseInt($(`#num_minutos_visita[${contVisitas}]`).val())
+            }
+        }
+
+        //Detalle del servicio correctivo y/o preventivo
+        for (let index = 0; index < contServicio; index++) {
+            dataToSend.detalle_servicios[index] = {
+                tipo_servicio: $(`servicio_detalle[${index}]`).val(),
+                valor_servicio: $(`valor_servicio_detalle[${index}]`).val(),
+                frecuencia_servicio: $(`frecuencia_servicio_detalle[${index}]`).val(),
+                observacion_servicio: $(`observacion_servicio_detalle[${index}]`).val()
+            }
+            
+        }
+
+        //Numero de residencias
+        for (let index = 0; index < contResidencias; index++) {
+            dataToSend.residencias[index] = {
+                tipo_residencia: $(`tipo_residencia[${index}]`).val(),
+                valor_residencia: $(`valor_residencia[${index}]`).val(),
+                tiempo_estimado: (parseInt($(`#num_horas_residencia[${index}]`).val()) * 60) + parseInt((`#num_minutos_residencia[${index}]`).val()),
+                observaciones_residencia: $(`observaciones_residencia[${index}]`)
+            }
+        }
+
+        //Compra de dispositivos
+        for (let index = 0; index < contDispositivos; index++) {
+            dataToSend.compra_dispositivos[index] = {
+                tipo_dispositivo: $(`#tipo_dispositivo[${contDispositivos}]`).val(),
+                cant_dispositivo: $(`#cant_dispositivo[${contDispositivos}]`).val(),
+                valor_sin_iva: $(`#valor_sin_iva_dispositivo[${contDispositivos}]`).val(),
+                total_dispositivo: $(`#total_dispositivo[${contDispositivos}]`).val(),
+                observacion_dispositivo: $(`#observacion_dispositivo[${contDispositivos}]`).val()
+            }   
+        }
+        
+        //Dispositivos en comodato
+        for (let index = 0; index < contComodatos; index++) {
+            dataToSend.dispositivos_comodato[index] = {
+                tipo_dispositivo: $(`#tipo_dispositivo_comodato[${contComodatos}]`).val(),
+                cant_dispositivo: $(`#cant_dispositivo_comodato[${contComodatos}]`).val(),
+                valor_sin_iva: $(`#valor_sin_iva_dispositivo_comodato[${contComodatos}]`).val(),
+                total_dispositivo: $(`#total_dispositivo_comodato[${contComodatos}]`).val(),
+                observacion_dispositivo: $(`#observacione_dispositivo_comodato[${contComodatos}]`).val(),
+            }
+        }
+
+        //Gestion de calidad
+        for (let index = 0; index < contDocs; index++) {
+            dataToSend.gestion_calidad[index] = {
+                tipo_documento: $(`#tipo_doc[${contDocs}]`).val(),
+                frecuencia_documento: $(`#frecuencia_doc[${contDocs}]`).val(),
+                observacion_documento: $(`#observacion_doc[${contDocs}]`).val(),
+            }
+        }
+
+        //Areas de inspeccion
+        for (let index = 0; index < contAreas; index++) {
+            dataToSend.areas[index] = {
+                area: $(`#area[${contAreas}]`).val(),
+                tiempo_estimado: (parseInt($(`#num_horas_area[${contAreas}]`).val()) * 60) + parseInt($(`#num_minutos_area[${contAreas}]`).val()),
+                plagas_area: $(`#plagas_area[${contAreas}]`).val(),
+                nivel_actividad_area: $(`#nivel_area[${contAreas}]`).val()
+            }
+            
+        }
+
+
+
+        var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
+        dataToSend.codigo = codigoAleatorio(); 
+
+        //Alert para cambiar el codigo generado por uno personalizado (opcional)
+        swal({
+            title: "Código de Inspección",
+            text: "Código generado: "+codigo_inspeccion+", escribe otro código aquí: ",
+            icon: "warning",
+            content: {
+                element: "input",
+                attributes: {
+                placeholder: "Ingresa el código personalizado para el formulario de inspeccion",
+                type: "text"
+                },
+            },
+            buttons: true,
+            dangerMode: false,
+        })
+    })
 
 </script>
 @endsection
