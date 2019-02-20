@@ -103,9 +103,6 @@
                                             <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
                                             @endforeach
                                         </select>
-
-
-
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
@@ -272,16 +269,16 @@
                                     <div class="row" style="padding: 15px 15px" id="visitas">
                                         <div class="form-group col-lg-2">
                                             <label class="control-label"># Visita</label>
-                                            <input type="number" min=0 name="num_visita[0]" id="num_visita[0]" placeholder="Ej: 1"
+                                            <input type="number" min=0 name="num_visita-0" id="num_visita-0" placeholder="Ej: 1"
                                                 class="form-control">
                                         </div>
                                         <div class="form-group col-lg-4 b-r">
                                             <label>Duración del servicio</label>
                                             <div class="input-group">
                                                 <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_visita[0]" placeholder="Horas">
+                                                    class="form-control" id="num_horas_visita-0" placeholder="Horas">
                                                 <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_visita[0]" placeholder="Minutos">
+                                                    class="form-control" id="num_minutos_visita-0" placeholder="Minutos">
                                             </div>
                                         </div>
                                     </div>
@@ -322,7 +319,7 @@
                                     <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Servicio a incluir</label>
-                                            <select style="text-transform: uppercase" id="servicio_detalle[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="servicio_detalle-0" class="form-control">
                                                 <option value="8">Cada 8 días</option>
                                                 <option value="10">Cada 10 días</option>
                                                 <option value="12">Cada 12 días</option>
@@ -333,13 +330,13 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor </label>
-                                            <input type="number" min=0 name="valor_servicio_detalle[0]" id="valor_servicio_detalle[0]"
+                                            <input type="number" min=0 name="valor_servicio_detalle-0" id="valor_servicio_detalle-0"
                                                 placeholder="Valor total" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Frecuencia</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0" class="form-control">
                                                 <option value="" selected>Seleccione una frecuencia</option>
                                                 <option value="Semanal">SEMANAL</option>
                                                 <option value="Quincenal">QUINCENAL</option>
@@ -356,7 +353,7 @@
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
                                             <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_servicio_detalle[0]" id="observacion_servicio_detalle[0]"></textarea>
+                                                rows="1" name="observacion_servicio_detalle-0" id="observacion_servicio_detalle-0"></textarea>
                                         </div>
                                     </div>
 
@@ -418,7 +415,7 @@
                                     <div class="row" id="residencias" style="padding: 15px 15px">
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de residencia</label>
-                                            <select style="text-transform: uppercase" id="tipo_residencia[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_residencia-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="casa">casa</option>
                                                 <option value="apto">apto</option>
@@ -430,7 +427,7 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor</label>
-                                            <input type="number" min=0 name="valor_residencia[0]" id="valor_residencia[0]"
+                                            <input type="number" min=0 name="valor_residencia-0" id="valor_residencia-0"
                                                 placeholder="Valor total" class="form-control">
                                         </div>
 
@@ -438,9 +435,9 @@
                                             <label>Duración del servicio</label>
                                             <div class="input-group">
                                                 <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_residencia[0]" placeholder="Horas">
+                                                    class="form-control" id="num_horas_residencia-0" placeholder="Horas">
                                                 <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_residencia[0]" placeholder="Minutos">
+                                                    class="form-control" id="num_minutos_residencia-0" placeholder="Minutos">
                                             </div>
                                         </div>
 
@@ -448,7 +445,7 @@
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
                                             <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observaciones_residencia[0]" id="observaciones_residencia[0]"></textarea>
+                                                rows="1" name="observaciones_residencia-0" id="observaciones_residencia-0"></textarea>
                                         </div>
                                     </div>
 
@@ -522,7 +519,7 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select style="text-transform: uppercase" id="tipo_dispositivo[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="estaciones_de_roedor">estaciones de roedor</option>
                                                 <option value="identificadores_estaciones">identificadores de
@@ -542,26 +539,26 @@
 
                                         <div class="form-group col-lg-1">
                                             <label class="control-label">Cant.</label>
-                                            <input type="text" id="cant_dispositivo[0]" name="cant_dispositivo[0]" placeholder=""
+                                            <input type="text" id="cant_dispositivo-0" name="cant_dispositivo-0" placeholder=""
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo[0]" name="valor_sin_iva_dispositivo[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="valor_sin_iva_dispositivo-0" name="valor_sin_iva_dispositivo-0" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo[0]" name="total_dispositivo[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="total_dispositivo-0" name="total_dispositivo-0" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
                                             <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_dispositivo[0]" id="observacion_dispositivo[0]"></textarea>
+                                                rows="1" name="observacion_dispositivo-0" id="observacion_dispositivo-0"></textarea>
                                         </div>
 
                                     </div>
@@ -580,7 +577,7 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="estaciones_de_roedor">estaciones de roedor</option>
                                                 <option value="identificadores_estaciones">identificadores de
@@ -600,26 +597,26 @@
 
                                         <div class="form-group col-lg-1">
                                             <label class="control-label">Cant.</label>
-                                            <input type="text" id="cant_dispositivo_comodato[0]" name="cant_dispositivo_comodato[0]" placeholder=""
+                                            <input type="text" id="cant_dispositivo_comodato-0" name="cant_dispositivo_comodato-0" placeholder=""
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo_comodato[0]" name="valor_sin_iva_dispositivo_comodato[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0" name="valor_sin_iva_dispositivo_comodato-0" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo_comodato[0]" name="total_dispositivo_comodato[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="total_dispositivo_comodato-0" name="total_dispositivo_comodato-0" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
                                             <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacione_dispositivo_comodato[0]" id="observacione_dispositivo_comodato[0]"></textarea>
+                                                rows="1" name="observacione_dispositivo_comodato-0" id="observacione_dispositivo_comodato-0"></textarea>
                                         </div>
 
                                     </div>
@@ -628,7 +625,7 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Gestion de calidad</h3>
-                                        <button style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-doc"><i
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-doc"><i
                                                 class="fa fa-plus"></i> Agregar documento</button>
                                         <hr>
                                         <br>
@@ -637,7 +634,7 @@
                                     <div class="row" id="gestion-calidad" style="padding: 15px 15px">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Tipo de documento</label>
-                                            <select style="text-transform: uppercase" id="tipo_doc[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_doc-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="diagnostico_inicial">diagnostico inicial</option>
                                                 <option value="cronograma_servicios">cronograma de servicios</option>
@@ -648,7 +645,7 @@
 
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Frecuencia.</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_doc[0]" class="form-control">
+                                            <select style="text-transform: uppercase" id="frecuencia_doc-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="mensual">mensual</option>
                                                 <option value="semanal">semanal</option>
@@ -665,7 +662,7 @@
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
                                             <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_doc[0]" id="observacion_doc[0]"></textarea>
+                                                rows="1" name="observacion_doc-0" id="observacion_doc-0"></textarea>
                                         </div>
                                     </div>
 
@@ -686,7 +683,7 @@
                                     <div class="row" id="areas" style="padding: 15px 15px">
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Nombre y/o descripción del área</label>
-                                            <input type="text" style="text-transform: uppercase" id="area[0]" name="area[0]" placeholder="Nombre de dispositivo"
+                                            <input type="text" style="text-transform: uppercase" id="area-0" name="area-0" placeholder="Nombre de dispositivo"
                                                 class="form-control">
                                         </div>
     
@@ -694,15 +691,15 @@
                                             <label>Tiempo estimado</label>
                                             <div class="input-group">
                                                 <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_area[0]" placeholder="Horas">
+                                                    class="form-control" id="num_horas_area-0" placeholder="Horas">
                                                 <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_area[0]" placeholder="Minutos">
+                                                    class="form-control" id="num_minutos_area-0" placeholder="Minutos">
                                             </div>
                                         </div>
     
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Evidencia y/o plaga observada</label>
-                                            <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area[0]">
+                                            <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area-0">
                                                 <option value="cucarachas">CUCARACHAS</option>
                                                 <option value="moscas">MOSCAS</option>
                                                 <option value="pulgas">PULGAS</option>
@@ -717,7 +714,7 @@
     
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Nivel act.</label>
-                                            <select style="text-transform: uppercase" name="nivel_area[0]" id="nivel_area[0]" class="form-control">
+                                            <select style="text-transform: uppercase" name="nivel_area-0" id="nivel_area-0" class="form-control">
                                                 <option value="alto">alto</option>
                                                 <option value="medio">medio</option>
                                                 <option value="bajo">bajo</option>
@@ -866,16 +863,16 @@
         $("#visitas").append(`
             <div class="form-group col-lg-2">
                 <label class="control-label"># Visita</label>
-                <input type="number" min=0 name="num_visita[${contVisitas}]" id="num_visita[${contVisitas}]" placeholder="Ej: 1"
+                <input type="number" min=0 name="num_visita-${contVisitas}" id="num_visita-${contVisitas}" placeholder="Ej: 1"
                     class="form-control">
             </div>
             <div class="form-group col-lg-4 b-r">
                 <label>Duración del servicio</label>
                 <div class="input-group">
                     <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                        class="form-control" id="num_horas_visita[${contVisitas}]" placeholder="Horas">
+                        class="form-control" id="num_horas_visita-${contVisitas}" placeholder="Horas">
                     <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                        class="form-control" id="num_minutos_visita[${contVisitas}]" placeholder="Minutos">
+                        class="form-control" id="num_minutos_visita-${contVisitas}" placeholder="Minutos">
                 </div>
             </div>
         `)
@@ -887,7 +884,7 @@
         $("#detalle-servicios").append(`
             <div class="form-group col-lg-4">
                 <label class="control-label">Servicio a incluir</label>
-                <select style="text-transform: uppercase" id="servicio_detalle[${contServicio}]" class="form-control">
+                <select style="text-transform: uppercase" id="servicio_detalle-${contServicio}" class="form-control">
                     <option value="8">Cada 8 días</option>
                     <option value="10">Cada 10 días</option>
                     <option value="12">Cada 12 días</option>
@@ -898,13 +895,13 @@
 
             <div class="form-group col-lg-2">
                 <label class="control-label">Valor </label>
-                <input type="number" min=0 name="valor_servicio_detalle[${contServicio}]" id="valor_servicio_detalle[${contServicio}]"
+                <input type="number" min=0 name="valor_servicio_detalle-${contServicio}" id="valor_servicio_detalle-${contServicio}"
                     placeholder="Valor total" class="form-control">
             </div>
 
             <div class="form-group col-lg-2">
                 <label class="control-label">Frecuencia</label>
-                <select style="text-transform: uppercase" id="frecuencia_servicio_detalle[${contServicio}]" class="form-control">
+                <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-${contServicio}" class="form-control">
                     <option value="" selected>Seleccione una frecuencia</option>
                     <option value="Semanal">SEMANAL</option>
                     <option value="Quincenal">QUINCENAL</option>
@@ -921,7 +918,7 @@
             <div class="form-group col-lg-4">
                 <label>Observaciones</label>
                 <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                    rows="1" name="observacion_servicio_detalle[${contServicio}]" id="observacion_servicio_detalle[${contServicio}]"></textarea>
+                    rows="1" name="observacion_servicio_detalle-${contServicio}" id="observacion_servicio_detalle-${contServicio}"></textarea>
             </div>
         `)
         contServicio++;
@@ -932,7 +929,7 @@
         $("#residencias").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de residencia</label>
-                <select style="text-transform: uppercase" id="tipo_residencia[${contResidencias}]" class="form-control">
+                <select style="text-transform: uppercase" id="tipo_residencia-${contResidencias}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
                     <option value="casa">casa</option>
                     <option value="apto">apto</option>
@@ -944,7 +941,7 @@
 
             <div class="form-group col-lg-3">
                 <label class="control-label">Valor</label>
-                <input type="number" min=0 name="valor_residencia[${contResidencias}]" id="valor_residencia[${contResidencias}]"
+                <input type="number" min=0 name="valor_residencia-${contResidencias}" id="valor_residencia-${contResidencias}"
                     placeholder="Valor total" class="form-control">
             </div>
 
@@ -952,9 +949,9 @@
                 <label>Duración del servicio</label>
                 <div class="input-group">
                     <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                        class="form-control" id="num_horas_residencia[${contResidencias}]" placeholder="Horas">
+                        class="form-control" id="num_horas_residencia-${contResidencias}" placeholder="Horas">
                     <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                        class="form-control" id="num_minutos_residencia[${contResidencias}]" placeholder="Minutos">
+                        class="form-control" id="num_minutos_residencia-${contResidencias}" placeholder="Minutos">
                 </div>
             </div>
 
@@ -962,7 +959,7 @@
             <div class="form-group col-lg-3 ">
                 <label>Observaciones</label>
                 <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                    rows="1" name="observaciones_residencia[${contResidencias}]" id="observaciones_residencia[${contResidencias}]"></textarea>
+                    rows="1" name="observaciones_residencia-${contResidencias}" id="observaciones_residencia-${contResidencias}"></textarea>
             </div>
         `)
         contResidencias++;
@@ -973,7 +970,7 @@
         $("#dispositivos").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de dispositivo</label>
-                <select style="text-transform: uppercase" id="tipo_dispositivo[${contDispositivos}]" class="form-control">
+                <select style="text-transform: uppercase" id="tipo_dispositivo-${contDispositivos}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
                     <option value="estaciones_de_roedor">estaciones de roedor</option>
                     <option value="identificadores_estaciones">identificadores de
@@ -993,26 +990,26 @@
 
             <div class="form-group col-lg-1">
                 <label class="control-label">Cant.</label>
-                <input type="text" id="cant_dispositivo[${contDispositivos}]" name="cant_dispositivo[${contDispositivos}]" placeholder=""
+                <input type="text" id="cant_dispositivo-${contDispositivos}" name="cant_dispositivo-${contDispositivos}" placeholder=""
                     class="form-control">
             </div>
 
             <div class="form-group col-lg-2">
                 <label class="control-label">Valor unitario sin IVA</label>
-                <input type="text" id="valor_sin_iva_dispositivo[${contDispositivos}]" name="valor_sin_iva_dispositivo[${contDispositivos}]" placeholder="Nombre de dispositivo"
+                <input type="text" id="valor_sin_iva_dispositivo-${contDispositivos}" name="valor_sin_iva_dispositivo-${contDispositivos}" placeholder="Nombre de dispositivo"
                     class="form-control">
             </div>
 
             <div class="form-group col-lg-3">
                 <label class="control-label">Valor total.</label>
-                <input type="text" id="total_dispositivo[${contDispositivos}]" name="total_dispositivo[${contDispositivos}]" placeholder="Nombre de dispositivo"
+                <input type="text" id="total_dispositivo-${contDispositivos}" name="total_dispositivo-${contDispositivos}" placeholder="Nombre de dispositivo"
                     class="form-control">
             </div>
 
             <div class="form-group col-lg-3 ">
                 <label>Observaciones</label>
                 <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                    rows="1" name="observacion_dispositivo[${contDispositivos}]" id="observacion_dispositivo[${contDispositivos}]"></textarea>
+                    rows="1" name="observacion_dispositivo-${contDispositivos}" id="observacion_dispositivo-${contDispositivos}"></textarea>
             </div>
         `)
         contDispositivos++;
@@ -1023,7 +1020,7 @@
         $("#dispositivos-comodato").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de dispositivo</label>
-                <select style="text-transform: uppercase" id="tipo_dispositivo_comodato[${contComodatos}]" class="form-control">
+                <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-${contComodatos}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
                     <option value="estaciones_de_roedor">estaciones de roedor</option>
                     <option value="identificadores_estaciones">identificadores de
@@ -1043,26 +1040,26 @@
 
             <div class="form-group col-lg-1">
                 <label class="control-label">Cant.</label>
-                <input type="text" id="cant_dispositivo_comodato[${contComodatos}]" name="cant_dispositivo_comodato[0${contComodatos}]" placeholder=""
+                <input type="text" id="cant_dispositivo_comodato-${contComodatos}" name="cant_dispositivo_comodato-${contComodatos}" placeholder=""
                     class="form-control">
             </div>
 
             <div class="form-group col-lg-2">
                 <label class="control-label">Valor unitario sin IVA</label>
-                <input type="text" id="valor_sin_iva_dispositivo_comodato[${contComodatos}]" name="valor_sin_iva_dispositivo_comodato[${contComodatos}]" placeholder="Nombre de dispositivo"
+                <input type="text" id="valor_sin_iva_dispositivo_comodato-${contComodatos}" name="valor_sin_iva_dispositivo_comodato-${contComodatos}" placeholder="Nombre de dispositivo"
                     class="form-control">
             </div>
 
             <div class="form-group col-lg-3">
                 <label class="control-label">Valor total.</label>
-                <input type="text" id="total_dispositivo_comodato[${contComodatos}]" name="total_dispositivo_comodato[${contComodatos}]" placeholder="Nombre de dispositivo"
+                <input type="text" id="total_dispositivo_comodato-${contComodatos}" name="total_dispositivo_comodato-${contComodatos}" placeholder="Nombre de dispositivo"
                     class="form-control">
             </div>
 
             <div class="form-group col-lg-3 ">
                 <label>Observaciones</label>
                 <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                    rows="1" name="observacione_dispositivo_comodato[${contComodatos}]" id="observacione_dispositivo_comodato[${contComodatos}]"></textarea>
+                    rows="1" name="observacione_dispositivo_comodato-${contComodatos}" id="observacione_dispositivo_comodato-${contComodatos}"></textarea>
             </div>
         `)
         contComodatos++;
@@ -1073,7 +1070,7 @@
         $('#gestion-calidad').append(`
             <div class="form-group col-lg-4">
                 <label class="control-label">Tipo de documento</label>
-                <select style="text-transform: uppercase" id="tipo_doc[${contDocs}]" class="form-control">
+                <select style="text-transform: uppercase" id="tipo_doc-${contDocs}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
                     <option value="diagnostico_inicial">diagnostico inicial</option>
                     <option value="cronograma_servicios">cronograma de servicios</option>
@@ -1084,7 +1081,7 @@
 
             <div class="form-group col-lg-4">
                 <label class="control-label">Frecuencia.</label>
-                <select style="text-transform: uppercase" id="frecuencia_doc[${contDocs}]" class="form-control">
+                <select style="text-transform: uppercase" id="frecuencia_doc-${contDocs}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
                     <option value="mensual">mensual</option>
                     <option value="semanal">semanal</option>
@@ -1101,7 +1098,7 @@
             <div class="form-group col-lg-4">
                 <label>Observaciones</label>
                 <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                    rows="1" name="observacion_doc[${contDocs}]" id="observacion_doc[${contDocs}]"></textarea>
+                    rows="1" name="observacion_doc-${contDocs}" id="observacion_doc-${contDocs}"></textarea>
             </div>
         `)
         contDocs++;
@@ -1112,7 +1109,7 @@
         $("#areas").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Nombre y/o descripción del área</label>
-                <input type="text" style="text-transform: uppercase" id="area[${contAreas}]" name="area[${contAreas}]" placeholder="Nombre de dispositivo"
+                <input type="text" style="text-transform: uppercase" id="area-${contAreas}" name="area-${contAreas}" placeholder="Nombre de dispositivo"
                     class="form-control">
             </div>
 
@@ -1120,15 +1117,15 @@
                 <label>Tiempo estimado</label>
                 <div class="input-group">
                     <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                        class="form-control" id="num_horas_area[${contAreas}]" placeholder="Horas">
+                        class="form-control" id="num_horas_area-${contAreas}" placeholder="Horas">
                     <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                        class="form-control" id="num_minutos_area[${contAreas}]" placeholder="Minutos">
+                        class="form-control" id="num_minutos_area-${contAreas}" placeholder="Minutos">
                 </div>
             </div>
 
             <div class="form-group col-lg-4">
                 <label class="control-label">Evidencia y/o plaga observada</label>
-                <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area[${contAreas}]">
+                <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area-${contAreas}">
                     <option value="cucarachas">CUCARACHAS</option>
                     <option value="moscas">MOSCAS</option>
                     <option value="pulgas">PULGAS</option>
@@ -1143,7 +1140,7 @@
 
             <div class="form-group col-lg-2">
                 <label class="control-label">Nivel act.</label>
-                <select style="text-transform: uppercase" name="nivel_area[${contAreas}]" id="nivel_area[${contAreas}]" class="form-control">
+                <select style="text-transform: uppercase" name="nivel_area-${contAreas}" id="nivel_area-${contAreas}" class="form-control">
                     <option value="alto">alto</option>
                     <option value="medio">medio</option>
                     <option value="bajo">bajo</option>
@@ -1151,6 +1148,7 @@
                 </select>
             </div>
         `)
+        $('.chosen-select').chosen({ width: "100%" });
         contAreas++;
     })
 
@@ -1170,7 +1168,8 @@
     /* Estructura de datos para envio del formulario
     -----------------------------------------------------*/
     $('#form-inspeccion').submit(e => {
-        e.preventDefault()
+        e.preventDefault();
+        var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
         var dataToSend = {
             codigo: '',
             nombre_usuario: '',
@@ -1206,18 +1205,18 @@
         //Plan de saneamiento
         for (let index = 0; index < contVisitas; index++) {
             dataToSend.visitas[index] = {
-                num_visita: $(`#num_visita[${contVisitas}]`).val(),
-                duracion: (parseInt($(`#num_horas_visita[${contVisitas}]`).val()) * 60) + parseInt($(`#num_minutos_visita[${contVisitas}]`).val())
+                num_visita: $(`#num_visita-${index}`).val(),
+                duracion: (parseInt($(`#num_horas_visita-${index}`).val()) * 60) + parseInt($(`#num_minutos_visita-${index}`).val())
             }
         }
 
         //Detalle del servicio correctivo y/o preventivo
         for (let index = 0; index < contServicio; index++) {
             dataToSend.detalle_servicios[index] = {
-                tipo_servicio: $(`servicio_detalle[${index}]`).val(),
-                valor_servicio: $(`valor_servicio_detalle[${index}]`).val(),
-                frecuencia_servicio: $(`frecuencia_servicio_detalle[${index}]`).val(),
-                observacion_servicio: $(`observacion_servicio_detalle[${index}]`).val()
+                tipo_servicio: $(`#servicio_detalle-${index}`).val(),
+                valor_servicio: $(`#valor_servicio_detalle-${index}`).val(),
+                frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
+                observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
             }
             
         }
@@ -1225,64 +1224,83 @@
         //Numero de residencias
         for (let index = 0; index < contResidencias; index++) {
             dataToSend.residencias[index] = {
-                tipo_residencia: $(`tipo_residencia[${index}]`).val(),
-                valor_residencia: $(`valor_residencia[${index}]`).val(),
-                tiempo_estimado: (parseInt($(`#num_horas_residencia[${index}]`).val()) * 60) + parseInt((`#num_minutos_residencia[${index}]`).val()),
-                observaciones_residencia: $(`observaciones_residencia[${index}]`)
+                tipo_residencia: $(`#tipo_residencia-${index}`).val(),
+                valor_residencia: $(`#valor_residencia-${index}`).val(),
+                tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(`#num_minutos_residencia-${index}`).val()),
+                observaciones_residencia: $(`#observaciones_residencia-${index}`).val()
             }
         }
 
         //Compra de dispositivos
         for (let index = 0; index < contDispositivos; index++) {
             dataToSend.compra_dispositivos[index] = {
-                tipo_dispositivo: $(`#tipo_dispositivo[${contDispositivos}]`).val(),
-                cant_dispositivo: $(`#cant_dispositivo[${contDispositivos}]`).val(),
-                valor_sin_iva: $(`#valor_sin_iva_dispositivo[${contDispositivos}]`).val(),
-                total_dispositivo: $(`#total_dispositivo[${contDispositivos}]`).val(),
-                observacion_dispositivo: $(`#observacion_dispositivo[${contDispositivos}]`).val()
+                tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
+                cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
+                valor_sin_iva: $(`#valor_sin_iva_dispositivo-${index}`).val(),
+                total_dispositivo: $(`#total_dispositivo-${index}`).val(),
+                observacion_dispositivo: $(`#observacion_dispositivo-${index}`).val()
             }   
         }
         
         //Dispositivos en comodato
         for (let index = 0; index < contComodatos; index++) {
             dataToSend.dispositivos_comodato[index] = {
-                tipo_dispositivo: $(`#tipo_dispositivo_comodato[${contComodatos}]`).val(),
-                cant_dispositivo: $(`#cant_dispositivo_comodato[${contComodatos}]`).val(),
-                valor_sin_iva: $(`#valor_sin_iva_dispositivo_comodato[${contComodatos}]`).val(),
-                total_dispositivo: $(`#total_dispositivo_comodato[${contComodatos}]`).val(),
-                observacion_dispositivo: $(`#observacione_dispositivo_comodato[${contComodatos}]`).val(),
+                tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
+                cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
+                valor_sin_iva: $(`#valor_sin_iva_dispositivo_comodato-${index}`).val(),
+                total_dispositivo: $(`#total_dispositivo_comodato-${index}`).val(),
+                observacion_dispositivo: $(`#observacione_dispositivo_comodato-${index}`).val(),
             }
         }
 
         //Gestion de calidad
         for (let index = 0; index < contDocs; index++) {
             dataToSend.gestion_calidad[index] = {
-                tipo_documento: $(`#tipo_doc[${contDocs}]`).val(),
-                frecuencia_documento: $(`#frecuencia_doc[${contDocs}]`).val(),
-                observacion_documento: $(`#observacion_doc[${contDocs}]`).val(),
+                tipo_documento: $(`#tipo_doc-${index}`).val(),
+                frecuencia_documento: $(`#frecuencia_doc-${index}`).val(),
+                observacion_documento: $(`#observacion_doc-${index}`).val(),
             }
         }
 
         //Areas de inspeccion
         for (let index = 0; index < contAreas; index++) {
             dataToSend.areas[index] = {
-                area: $(`#area[${contAreas}]`).val(),
-                tiempo_estimado: (parseInt($(`#num_horas_area[${contAreas}]`).val()) * 60) + parseInt($(`#num_minutos_area[${contAreas}]`).val()),
-                plagas_area: $(`#plagas_area[${contAreas}]`).val(),
-                nivel_actividad_area: $(`#nivel_area[${contAreas}]`).val()
+                area: $(`#area-${index}`).val(),
+                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) * 60) + parseInt($(`#num_minutos_area-${index}`).val()),
+                plagas_area: $(`#plagas_area-${index}`).val(),
+                nivel_actividad_area: $(`#nivel_area-${index}`).val()
             }
             
         }
+        
+        dataToSend.codigo = codigoAleatorio();
+        dataToSend.nombre_usuario = $("#nombre_usuario").val();
+        dataToSend.fecha  = $("#fecha_creacion").val();
+        dataToSend.frecuencia = $("#frecuencia_servicio").val();
+        dataToSend.observaciones = $("#observaciones_tecnico").val();
+        dataToSend.valor_plan_saneamiento = $("#total_plan").val();
+        dataToSend.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
+        dataToSend.observaciones_visitas = $("#observaciones_plan").val();
+        dataToSend.total_detalle_servicios = $("#total_servicio_detalle").val();
+        dataToSend.tipo_facturacion = $("#tipo_facturacion").val();
+        dataToSend.forma_pago = $("#forma_pago").val();
+        dataToSend.contrato = $("#contrato").val();
+        dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
+        dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
+        dataToSend.cant_trampas = $("#cant_trampas_impacto").val();
+        dataToSend.cant_jaulas = $("#cant_jaulas").val();
+        dataToSend.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
+        dataToSend.observaciones_estaciones = $("#observaciones_estaciones").val();
+        dataToSend.cant_cajas_alca_elec = $("#cant_cajas").val();
+        dataToSend.sumideros = $("#cant_sumideros").val();
+        dataToSend.cliente_id = $("#id_cliente").val();
+        dataToSend.sede_id = $("#select_sedes").val();
 
-
-
-        var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
-        dataToSend.codigo = codigoAleatorio(); 
-
+        console.log(dataToSend)
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
             title: "Código de Inspección",
-            text: "Código generado: "+codigo_inspeccion+", escribe otro código aquí: ",
+            text: "Código generado: "+dataToSend.codigo+", escribe otro código aquí: ",
             icon: "warning",
             content: {
                 element: "input",
@@ -1293,6 +1311,16 @@
             },
             buttons: true,
             dangerMode: false,
+        })
+        .then(isConfirm => {
+            if(isConfirm){
+                console.log(isConfirm)
+            }else{
+                console.log(dataToSend.codigo)
+            }
+        })
+        .catch(err => {
+            console.log()
         })
     })
 
