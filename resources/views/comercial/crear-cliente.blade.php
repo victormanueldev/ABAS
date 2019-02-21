@@ -117,7 +117,12 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono principal*</label>
-                                                        <input style="text-transform: uppercase" type="text" name="telefono[0]" placeholder="Nombre de contacto" class="form-control" required>
+                                                        <div class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                                            </span>
+                                                            <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" >
+                                                        </div>               
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Contacto Inicial *</label>
@@ -213,15 +218,7 @@
                                                     </div>
 
                                                     <div class="row" id="columna_principal3" style="padding: 0px 15px;">
-                                                        <div class="col-lg-6" >
-                                                            <label class="control-label">Teléfono 2*</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-btn">
-                                                                    <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                                                </span>
-                                                                <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[1]" required>
-                                                            </div>                                                        
-                                                        </div>
+                                                        
                                                     </div>
                                                     
 
@@ -361,7 +358,7 @@
 @section('ini-scripts')
 <script>
     //Inicializacion de Contadores
-    var cont3 = 2;
+    var cont3 = 1;
 
     //Evento click del btn con ID 3
     $("#btn-add3").click(event => {

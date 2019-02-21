@@ -4,6 +4,7 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\Inspeccion;
 use Illuminate\Http\Request;
+use ABAS\Cliente;
 
 class InspeccionController extends Controller
 {
@@ -25,6 +26,8 @@ class InspeccionController extends Controller
     public function create()
     {
         //
+        $clientes = Cliente::select('nombre_cliente', 'id', 'razon_social')->get();
+        return view('comercial.inspeccion', compact('clientes'));
     }
 
     /**
@@ -45,11 +48,11 @@ class InspeccionController extends Controller
             $inspeccion->observaciones = $request->observaciones;
             $inspeccion->valor_plan_saneamiento = $request->valor_plan_saneamiento;
             $inspeccion->frecuencia_visitas = $request->frecuencia_visitas;
-            $inspeccion->observaciones_visistas = $request->observaciones_visitas;
+            $inspeccion->observaciones_visitas = $request->observaciones_visitas;
             $inspeccion->total_detalle_servicios = $request->total_detalle_servicios;
             $inspeccion->tipo_facturacion = $request->tipo_facturacion;
             $inspeccion->forma_pago = $request->forma_pago;
-            $inspeccion->contrato = $request->contrato;
+            $inspeccion->contrato = $request->contrato == 'true' ? true : false ;
             $inspeccion->cant_lampara_lamina = $request->cant_lampara_lamina;
             $inspeccion->cant_lampara_insectocutora = $request->cant_lampara_insectocutora;
             $inspeccion->cant_trampas = $request->cant_trampas;
@@ -59,7 +62,7 @@ class InspeccionController extends Controller
             $inspeccion->cant_cajas_alca_elec = $request->cant_cajas_alca_elec;
             $inspeccion->sumideros = $request->sumideros;
             $inspeccion->cliente_id = $request->cliente_id;
-            $inspeccion->sede_id = $request->sede_id;
+            $inspeccion->sede_id = $request->sede_id == '' ? 0 : $request->sede_id;
             $inspeccion->visitas= $request->visitas;
             $inspeccion->detalle_servicios= $request->detalle_servicios;
             $inspeccion->residencias= $request->residencias;

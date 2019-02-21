@@ -92,11 +92,15 @@ class CotizacionController extends Controller
         if($request->ajax()){
             //Cotizacion aprobada
             $cotizacion = Cotizacion::findOrFail($id);
+            if($cotizacion->estado == 'Inicial'){
+                $cotizacion->estado = 'Final';
+            }
             $cotizacion->estado_aprobacion = $request->estado;
             $cotizacion->save();
             //Estado actualizado a cliente nuevo
             $cliente = Cliente::findOrFail($request->cliente);
             $cliente->estado_registro = 'cliente_nuevo';
+            $cliente->estado_negociacion = 'Cliente';
             $cliente->save();
 
             return response()->json('Update Success', 200);

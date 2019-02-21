@@ -7,10 +7,10 @@
 
 @section('content')
 <script>
-    document.getElementById('m-solicitud').setAttribute("class", "active");
-    document.getElementById('a-solicitudes').removeAttribute("style");
-    document.getElementById('ml2-doc-solicitud').setAttribute("class", "nav nav-second-level collapse in");
-    document.getElementById('ml2-crearEmpresa').setAttribute("class", "active");
+    document.getElementById('m-documentacion').setAttribute("class", "active");
+    document.getElementById('a-documentacion').removeAttribute("style");
+    document.getElementById('ml2-documentacion').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-formato-inspeccion').setAttribute("class", "active");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -100,7 +100,7 @@
                                             name="id_cliente" required>
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->id}}">{{$cliente->nombre_cliente}}</option>
+                                        <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -111,6 +111,12 @@
 
                                     </div>
 
+
+                                    <div class="form-group col-lg-6"><label class="control-label">Sector Ecónomico *</label>
+                                        <input type="text" style="text-transform: uppercase" id="input-sector" name="input-sector" placeholder="Sector economico de cliente"
+                                            class="form-control">
+
+                                    </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
                                         <input type="text" style="text-transform: uppercase" id="input-direccion" name="input-direccion" placeholder="Dirección de cliente"
@@ -139,12 +145,6 @@
 
                                     <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
                                         <input type="text" style="text-transform: uppercase" id="input-cargo" name="input-cargo" placeholder="Zona del cliente"
-                                            class="form-control">
-
-                                    </div>
-
-                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-telefono" name="input-telefono" placeholder="Teléfono del contacto a facturar"
                                             class="form-control">
 
                                     </div>
@@ -285,7 +285,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor plan de saneamiento</label>
-                                        <input type="number" min=0 name="total_plan" id="total_plan" placeholder="Valor total"
+                                        <input type="text" min=0 name="total_plan" id="total_plan" placeholder="Valor total"
                                             class="form-control">
                                     </div>
 
@@ -320,17 +320,13 @@
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Servicio a incluir</label>
                                             <select style="text-transform: uppercase" id="servicio_detalle-0" class="form-control">
-                                                <option value="8">Cada 8 días</option>
-                                                <option value="10">Cada 10 días</option>
-                                                <option value="12">Cada 12 días</option>
-                                                <option value="15">Cada 15 días</option>
-                                                <option value="20">Cada 20 días</option>
+
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor </label>
-                                            <input type="number" min=0 name="valor_servicio_detalle-0" id="valor_servicio_detalle-0"
+                                            <input type="text" min=0 name="valor_servicio_detalle-0" id="valor_servicio_detalle-0"
                                                 placeholder="Valor total" class="form-control">
                                         </div>
 
@@ -417,17 +413,17 @@
                                             <label class="control-label">Tipo de residencia</label>
                                             <select style="text-transform: uppercase" id="tipo_residencia-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
-                                                <option value="casa">casa</option>
-                                                <option value="apto">apto</option>
-                                                <option value="bodega">bodega</option>
-                                                <option value="local">local</option>
-                                                <option value="oficina">oficina</option>
+                                                <option value="casa">CASA</option>
+                                                <option value="apto">APTO</option>
+                                                <option value="bodega">BODEGA</option>
+                                                <option value="local">LOCAL</option>
+                                                <option value="oficina">OFICINA</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor</label>
-                                            <input type="number" min=0 name="valor_residencia-0" id="valor_residencia-0"
+                                            <input type="text" min=0 name="valor_residencia-0" id="valor_residencia-0"
                                                 placeholder="Valor total" class="form-control">
                                         </div>
 
@@ -520,20 +516,18 @@
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
                                             <select style="text-transform: uppercase" id="tipo_dispositivo-0" class="form-control">
-                                                <option value="" selected>Seleccione una opción</option>
-                                                <option value="estaciones_de_roedor">estaciones de roedor</option>
-                                                <option value="identificadores_estaciones">identificadores de
-                                                    estaciones</option>
-                                                <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
-                                                <option value="lamparas de lamina_adhesiva_p">lamparas de lamina
-                                                    adhesiva p.</option>
-                                                <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
-                                                <option value="identificadores_lamparas">identificadores de lamparas</option>
-                                                <option value="jaula_pequena">jaula pequeña</option>
-                                                <option value="jaula_grande">jaula grande</option>
-                                                <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
-                                                <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
-                                                <option value="cebadero_moscas">cebadero moscas</option>
+                                                <option style="text-transform: uppercase" value="" selected>Seleccione una opción</option>
+                                                <option style="text-transform: uppercase" value="estaciones_de_roedor">ESTACIONES DE ROEDOR</option>
+                                                <option style="text-transform: uppercase" value="identificadores_estaciones">IDENTIFICADORES DE ESTACIONES</option>
+                                                <option style="text-transform: uppercase" value="lamparas_de_lamina_adhesiva">LAMPARAS DE LAMINA ADHESIVA</option>
+                                                <option style="text-transform: uppercase" value="lamparas de lamina_adhesiva_p">LAMPARAS DE LAMINA ADHESIVA PLA.</option>
+                                                <option style="text-transform: uppercase" value="lamparas_insetocutoras">LAMPARAS INSECTOCUTORA</option>
+                                                <option style="text-transform: uppercase" value="identificadores_lamparas">IDENTIFICADORES DE LAMPARAS</option>
+                                                <option style="text-transform: uppercase" value="jaula_pequena">JAULA PEQUEÑA</option>
+                                                <option style="text-transform: uppercase" value="jaula_grande">JAULA GRANDE</option>
+                                                <option style="text-transform: uppercase" value="trampa_de_impacto_plastica">TRAMPA DE IMPACTO PLASTICA</option>
+                                                <option style="text-transform: uppercase" value="trampa_de_impacto_madera">TRAMPA DE PLASTICO MADERA</option>
+                                                <option style="text-transform: uppercase" value="cebadero_moscas">CEBADERO DE MOSCAS</option>
                                             </select>
                                         </div>
 
@@ -745,11 +739,92 @@
 @section('ini-scripts')
 <script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
 <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
+<script src="{{asset('js/plugins/autonumeric/autonumeric.js')}}"></script>
 <script>
+    //Declaracion de variables globales
+    var servicios;
+    var valoresServicios = [];
+    var valoresResidencias = [];
+    var valoresSinIvaDispositivos = [];
+    var valorTotalDispositivos = [];
+    var valoresSinIvaComodato = [];
+    var valorTotalComodato = [];
+    var totalPlanSaneamiento;
 
     $(document).ready(function () {
         var date = moment().format("YYYY-MM-DD");
         $('#fecha_creacion').val(date);
+        $.get('/tipos')
+        .then(res => {
+            servicios = res;
+            servicios.forEach((value,index) => {
+                $("#servicio_detalle-0").append(`
+                    <option value="${value.nombre}">${value.nombre}</option>
+                `)
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        $("#total_servicio_detalle").val(0)
+
+        //Inicializacion del input Autonumeric
+        valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+        
+        valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo_comodato-0'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
     });
 
     //Inicializador del Select AUTOCOMPLETAR
@@ -764,12 +839,13 @@
             $("#input-direccion").val(res[0]['direccion']);
             $("#input-ciudad").val(res[0]['municipio']);
             $("#input-barrio").val(res[0]['barrio']);
-            $("#input-contacto").val(res[0]['nombre_contacto']);
-            $("#input-cargo").val(res[0]['cargo_contacto']);
-            $("#input-telefono").val(res[0]['telefono']);
-            $("#input-celular").val(res[0]['celular']);
-            $("#input-email").val(res[0]['email']);
+            $("#input-contacto").val(res[0]['nombre_contacto_inicial']);
+            $("#input-cargo").val(res[0]['cargo_contacto_inicial']);
+            $("#input-sector").val(res[0]['sector_economico']);
+            $("#input-celular").val(res[0]['celular_contacto_inicial']);
+            $("#input-email").val(res[0]['email_contacto_inicial']);
             $("#input-sede-nit").val(res[0]['nit_cedula']);
+            $("#nombre_usuario").val(res[0].user.nombres+" "+res[0].user.apellidos)
         }).then((res) => {//Peticion exitosa => status: 200
             console.log('Petición Exitosa');
         }).catch((err) => {//Peticion fallida => status: > 400
@@ -840,7 +916,7 @@
             $("#input-sede-contacto").val(res['nombre_contacto']);
             $("#input-sede-telefono").val(res['telefono_contacto']);
             $("#input-sede-celular").val(res['celular_contacto']);
-            $("#input-sede-email").val(res['email']);
+            $("#input-sede-email").val(res['email_contacto']);
         }).then((res) => {
             console.log('Petición Exitosa');
         }).catch((err) => {
@@ -885,17 +961,13 @@
             <div class="form-group col-lg-4">
                 <label class="control-label">Servicio a incluir</label>
                 <select style="text-transform: uppercase" id="servicio_detalle-${contServicio}" class="form-control">
-                    <option value="8">Cada 8 días</option>
-                    <option value="10">Cada 10 días</option>
-                    <option value="12">Cada 12 días</option>
-                    <option value="15">Cada 15 días</option>
-                    <option value="20">Cada 20 días</option>
+
                 </select>
             </div>
 
             <div class="form-group col-lg-2">
                 <label class="control-label">Valor </label>
-                <input type="number" min=0 name="valor_servicio_detalle-${contServicio}" id="valor_servicio_detalle-${contServicio}"
+                <input type="text" min=0 name="valor_servicio_detalle-${contServicio}" id="valor_servicio_detalle-${contServicio}"
                     placeholder="Valor total" class="form-control">
             </div>
 
@@ -921,8 +993,48 @@
                     rows="1" name="observacion_servicio_detalle-${contServicio}" id="observacion_servicio_detalle-${contServicio}"></textarea>
             </div>
         `)
+            
+        valoresServicios[contServicio] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${contServicio}`),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        //Añade el listener al evento especificado de cada input creado
+        $(`#valor_servicio_detalle-${contServicio}`).on('keyup', e => {
+            autosumaTotalServicio()
+        })
+
+        anadirServiciosSelect(contServicio)
         contServicio++;
     })
+
+    $("#valor_servicio_detalle-0").on('keyup', e => {
+        autosumaTotalServicio()
+
+    })
+
+    /**
+    * Suma automaticamente los valores de los inputs con el id existente
+    * @return void
+    */
+    function autosumaTotalServicio(){
+        var sum = 0;
+        for (let index = 0; index < contServicio; index++) {
+            sum += parseInt(valoresServicios[index].rawValue);
+        }
+        $("#total_servicio_detalle").val(sum)
+    }
+
+    function anadirServiciosSelect(idSelect){
+        servicios.forEach((value,index)=> {
+            $(`#servicio_detalle-${idSelect}`).append(`
+                <option value="${value.nombre}">${value.nombre}</option>
+            `)
+        })
+    }
 
     //Numero de residencias
     $("#btn-add-residencia").click(function(){
@@ -931,17 +1043,17 @@
                 <label class="control-label">Tipo de residencia</label>
                 <select style="text-transform: uppercase" id="tipo_residencia-${contResidencias}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
-                    <option value="casa">casa</option>
-                    <option value="apto">apto</option>
-                    <option value="bodega">bodega</option>
-                    <option value="local">local</option>
-                    <option value="oficina">oficina</option>
+                    <option value="casa">CASA</option>
+                    <option value="apto">APTO</option>
+                    <option value="bodega">BODEGA</option>
+                    <option value="local">LOCAL</option>
+                    <option value="oficina">OFICINA</option>
                 </select>
             </div>
 
             <div class="form-group col-lg-3">
                 <label class="control-label">Valor</label>
-                <input type="number" min=0 name="valor_residencia-${contResidencias}" id="valor_residencia-${contResidencias}"
+                <input type="text" min=0 name="valor_residencia-${contResidencias}" id="valor_residencia-${contResidencias}"
                     placeholder="Valor total" class="form-control">
             </div>
 
@@ -962,6 +1074,14 @@
                     rows="1" name="observaciones_residencia-${contResidencias}" id="observaciones_residencia-${contResidencias}"></textarea>
             </div>
         `)
+
+        valoresResidencias[contResidencias] = new AutoNumeric(document.getElementById(`valor_residencia-${contResidencias}`),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
         contResidencias++;
     })
 
@@ -1012,6 +1132,22 @@
                     rows="1" name="observacion_dispositivo-${contDispositivos}" id="observacion_dispositivo-${contDispositivos}"></textarea>
             </div>
         `)
+
+        valoresSinIvaDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo-${contDispositivos}`),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        valorTotalDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`total_dispositivo-${contDispositivos}`),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
         contDispositivos++;
     })
 
@@ -1022,19 +1158,17 @@
                 <label class="control-label">Tipo de dispositivo</label>
                 <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-${contComodatos}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
-                    <option value="estaciones_de_roedor">estaciones de roedor</option>
-                    <option value="identificadores_estaciones">identificadores de
-                        estaciones</option>
-                    <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
-                    <option value="lamparas de lamina_adhesiva_p">lamparas de lamina
-                        adhesiva p.</option>
-                    <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
-                    <option value="identificadores_lamparas">identificadores de lamparas</option>
-                    <option value="jaula_pequena">jaula pequeña</option>
-                    <option value="jaula_grande">jaula grande</option>
-                    <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
-                    <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
-                    <option value="cebadero_moscas">cebadero moscas</option>
+                    <option value="estaciones_de_roedor">ESTACIONES DE ROEDOR</option>
+                    <option value="identificadores_estaciones">IDENTIFICADORES DE ESTACIONES</option>
+                    <option value="lamparas_de_lamina_adhesiva">LAMPARAS DE LAMINA ADHESIVA</option>
+                    <option value="lamparas de lamina_adhesiva_p">LAMPARAS DE LAMINA ADHESIVA PLA.</option>
+                    <option value="lamparas_insetocutoras">LAMPARAS INSECTOCUTORA</option>
+                    <option value="identificadores_lamparas">IDENTIFICADORES DE LAMPARAS</option>
+                    <option value="jaula_pequena">JAULA PEQUEÑA</option>
+                    <option value="jaula_grande">JAULA GRANDE</option>
+                    <option value="trampa_de_impacto_plastica">TRAMPA DE IMPACTO PLASTICA</option>
+                    <option value="trampa_de_impacto_madera">TRAMPA DE PLASTICO MADERA</option>
+                    <option value="cebadero_moscas">CEBADERO DE MOSCAS</option>
                 </select>
             </div>
 
@@ -1062,6 +1196,22 @@
                     rows="1" name="observacione_dispositivo_comodato-${contComodatos}" id="observacione_dispositivo_comodato-${contComodatos}"></textarea>
             </div>
         `)
+
+        valoresSinIvaComodato[contComodatos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo_comodato-${contComodatos}`),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        valorTotalComodato[contComodatos] = new AutoNumeric(document.getElementById(`total_dispositivo_comodato-${contComodatos}`),{
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
         contComodatos++;
     })
 
@@ -1165,11 +1315,34 @@
         }
     }
 
+    //Peticion HTTP POST para guardar el formato
+    function guardarInspeccion(dataSend){
+        console.log("G")
+        $.ajax({
+            url: '/inspeccion',
+            data: dataSend,
+            type: 'POST',
+            headers:{
+                "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
+            }
+        })
+        .then(res => {
+            swal("¡Formato Guardado!", 'El formato de inspeccion fue guardado correctamente.', 'success')
+            .then(val => {
+                if(val){
+                    window.location.href = '/inspeccion/create'
+                }
+            })
+        })
+        .catch(err => {
+            swal('¡Error!', err.statusText, "error")
+        })
+    }
+    // var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
     /* Estructura de datos para envio del formulario
     -----------------------------------------------------*/
     $('#form-inspeccion').submit(e => {
         e.preventDefault();
-        var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
         var dataToSend = {
             codigo: '',
             nombre_usuario: '',
@@ -1214,7 +1387,7 @@
         for (let index = 0; index < contServicio; index++) {
             dataToSend.detalle_servicios[index] = {
                 tipo_servicio: $(`#servicio_detalle-${index}`).val(),
-                valor_servicio: $(`#valor_servicio_detalle-${index}`).val(),
+                valor_servicio: valoresServicios[index].rawValue,
                 frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
                 observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
             }
@@ -1225,7 +1398,7 @@
         for (let index = 0; index < contResidencias; index++) {
             dataToSend.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
-                valor_residencia: $(`#valor_residencia-${index}`).val(),
+                valor_residencia: valoresResidencias[index].rawValue,
                 tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(`#num_minutos_residencia-${index}`).val()),
                 observaciones_residencia: $(`#observaciones_residencia-${index}`).val()
             }
@@ -1236,8 +1409,8 @@
             dataToSend.compra_dispositivos[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
-                valor_sin_iva: $(`#valor_sin_iva_dispositivo-${index}`).val(),
-                total_dispositivo: $(`#total_dispositivo-${index}`).val(),
+                valor_sin_iva: valoresSinIvaDispositivos.rawValue,
+                total_dispositivo: valorTotalDispositivos.rawValue,
                 observacion_dispositivo: $(`#observacion_dispositivo-${index}`).val()
             }   
         }
@@ -1247,8 +1420,8 @@
             dataToSend.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
-                valor_sin_iva: $(`#valor_sin_iva_dispositivo_comodato-${index}`).val(),
-                total_dispositivo: $(`#total_dispositivo_comodato-${index}`).val(),
+                valor_sin_iva: valoresSinIvaComodato.rawValue,
+                total_dispositivo: valorTotalComodato.rawValue,
                 observacion_dispositivo: $(`#observacione_dispositivo_comodato-${index}`).val(),
             }
         }
@@ -1278,13 +1451,13 @@
         dataToSend.fecha  = $("#fecha_creacion").val();
         dataToSend.frecuencia = $("#frecuencia_servicio").val();
         dataToSend.observaciones = $("#observaciones_tecnico").val();
-        dataToSend.valor_plan_saneamiento = $("#total_plan").val();
+        dataToSend.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
         dataToSend.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
         dataToSend.observaciones_visitas = $("#observaciones_plan").val();
         dataToSend.total_detalle_servicios = $("#total_servicio_detalle").val();
         dataToSend.tipo_facturacion = $("#tipo_facturacion").val();
         dataToSend.forma_pago = $("#forma_pago").val();
-        dataToSend.contrato = $("#contrato").val();
+        dataToSend.contrato = $("#contrato").val() == 'si' ? true : false;
         dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
         dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
         dataToSend.cant_trampas = $("#cant_trampas_impacto").val();
@@ -1309,20 +1482,30 @@
                 type: "text"
                 },
             },
-            buttons: true,
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            },
             dangerMode: false,
         })
         .then(isConfirm => {
+            console.log(isConfirm)
             if(isConfirm){
-                console.log(isConfirm)
+                dataToSend.codigo =  isConfirm;
+                guardarInspeccion(dataToSend);
+            }else if(isConfirm == ''){
+                guardarInspeccion(dataToSend);
+                
             }else{
-                console.log(dataToSend.codigo)
+             return    
             }
         })
-        .catch(err => {
-            console.log()
-        })
     })
+
 
 </script>
 @endsection

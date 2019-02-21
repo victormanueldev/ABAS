@@ -192,3 +192,5 @@ Route::resource('productos', 'ProductoController');
 Route::get('recepcion/rutas', function(){
     return view('servicio-clientes.registro-rutas');
 });
+
+Route::resource('inspeccion', 'InspeccionController');

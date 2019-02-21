@@ -35,7 +35,7 @@ class CreateInspeccionsTable extends Migration
             //Numero de residencias
             $table->text('residencias');
             //Inventario inicial del cliente
-            $table->integet('cant_lampara_lamina');
+            $table->integer('cant_lampara_lamina');
             $table->integer('cant_lampara_insectocutora');
             $table->integer('cant_trampas');
             $table->integer('cant_jaulas');

@@ -177,11 +177,12 @@
                                     <div class="panel-options">
                                         <ul class="nav nav-tabs">
                                             <li class="active"><a href="#tab-1" data-toggle="tab">Sedes</a></li>
-                                            <li class=""><a href="#tab-2" data-toggle="tab">Solicitudes</a></li>
-                                            <li class=""><a href="#tab-3" data-toggle="tab">Cotizaciones</a></li>
-                                            <li class=""><a href="#tab-4" data-toggle="tab">Certificados</a></li>
-                                            <li class=""><a href="#tab-5" data-toggle="tab">Rutas</a></li>
-                                            <li class=""><a href="#tab-6" data-toggle="tab">Novedades Temporales</a></li>
+                                            <li class=""><a href="#tab-2" data-toggle="tab">Ispecciones</a></li>
+                                            <li class=""><a href="#tab-3" data-toggle="tab">Solicitudes</a></li>
+                                            <li class=""><a href="#tab-4" data-toggle="tab">Cotizaciones</a></li>
+                                            <li class=""><a href="#tab-5" data-toggle="tab">Certificados</a></li>
+                                            <li class=""><a href="#tab-6" data-toggle="tab">Rutas</a></li>
+                                            <li class=""><a href="#tab-7" data-toggle="tab">Novedades Temporales</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -390,6 +391,17 @@
                                         </div>
                                         <div class="tab-pane" id="tab-2">
                                             <div class="row">
+                                                @foreach($cliente[0]->inspecciones as $inspeccion)
+                                                <div class="col-lg-6" style="padding: 0 30px">
+                                                    <h5>Solicitud</h5>
+                                                    <h1 class="no-margins">{{$inspeccion->codigo}}</h1>
+                                                    <strong>Creación: </strong><small>{{$inspeccion->created_at}}</small>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-3">
+                                            <div class="row">
                                                 @foreach($cliente[0]->solicitudes as $solicitud)
                                                 <div class="col-lg-6" style="padding: 0 30px">
                                                     <h5>Solicitud</h5>
@@ -399,7 +411,7 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="tab-3">
+                                        <div class="tab-pane" id="tab-4">
                                             <div class="row">
                                                 @if(isset($cliente[0]->cotizacion))
                                                 @foreach($cliente[0]->cotizacion as $cotizacion)
@@ -417,7 +429,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="tab-4">
+                                        <div class="tab-pane" id="tab-5">
                                             <div class="row">
                                                 @if(!isset($cliente[0]->solicitudes))
                                                 @if($cliente[0]->solicitudes[0]->certificados->count() == 0)
@@ -450,28 +462,28 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        {{-- <div class="tab-pane" id="tab-5">
+                                        <div class="tab-pane" id="tab-6">
                                             <div class="row">
-                                                @if(isset($cliente[0]->solicitudes))
-                                                @if($cliente[0]->solicitudes[0]->rutas->count() != 0)
-                                                @foreach ($cliente[0]->solicitudes[0]->rutas as $ruta)
-                                                <div class="col-lg-6 " style="padding: 0 30px;margin-bottom: 15px;">
-                                                    <h5>{{$ruta->tipo}}</h5>
-                                                    <b>R<b style="text-transform: lowercase">{{ substr($ruta->tipo,
-                                                            1)}}</b> </b>
-                                                    <h1 class="no-margins">{{$ruta->codigo}}</h1>
-                                                    <strong>Creación: </strong><small>{{$ruta->created_at}}</small>
-                                                    <a href="javascript: deleteRoute({{$ruta->id}})" class="stat-percent font-bold text-navy">Eliminar
-                                                        <i class="fa fa-edit"></i></a>
-                                                </div>
-                                                @endforeach
-                                                @else
-                                                <div></div>
-                                                @endif
+                                                @if($cliente[0]->solicitudes->count() != 0)
+                                                    @if($cliente[0]->solicitudes[0]->rutas->count() != 0)
+                                                        @foreach ($cliente[0]->solicitudes[0]->rutas as $ruta)
+                                                        <div class="col-lg-6 " style="padding: 0 30px;margin-bottom: 15px;">
+                                                            <h5>{{$ruta->tipo}}</h5>
+                                                            <b>R<b style="text-transform: lowercase">{{ substr($ruta->tipo,
+                                                                    1)}}</b> </b>
+                                                            <h1 class="no-margins">{{$ruta->codigo}}</h1>
+                                                            <strong>Creación: </strong><small>{{$ruta->created_at}}</small>
+                                                            <a href="javascript: deleteRoute({{$ruta->id}})" class="stat-percent font-bold text-navy">Eliminar
+                                                                <i class="fa fa-edit"></i></a>
+                                                        </div>
+                                                        @endforeach
+                                                    @else
+                                                    <div></div>
+                                                    @endif
                                                 @endif
                                             </div>
-                                        </div> --}}
-                                        <div class="tab-pane" id="tab-6">
+                                        </div>
+                                        <div class="tab-pane" id="tab-7">
                                             <div id="temporales">
                                                 <novedades-temporales></novedades-temporales>
                                             </div>
@@ -1286,6 +1298,7 @@
                         swal("¡Creación Correcta!", "Sede guardada con éxito.", "success")
                             .then(value => { //Boton OK actualizado
                                 if (value) {
+                                    window.location.reload();
                                     $("#btn-close-sedes").click();
                                 }
                             })
@@ -1352,7 +1365,7 @@
                             .then(value => { //Boton OK actualizado
                                 if (value) {
                                     $("#btn-close-sedes").click();
-                                    window.reload();
+                                    window.location.reload();
                                 }
                             })
                     })
@@ -1555,6 +1568,7 @@
                             swal("¡Creación Correcta!", "Certificado guardada con éxito.", "success")
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
+                                        window.location.reload();
                                         $("#btn-close-certificate").click();
                                     }
                                 })
@@ -1688,6 +1702,7 @@
                             swal("¡Creación Correcta!", "Ruta guardada con éxito.", "success")
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
+                                        window.location.reload()
                                         $("#btn-close-rs").click();
                                     }
                                 })
@@ -1744,6 +1759,7 @@
                             swal("¡Creación Correcta!", "Ruta guardada con éxito.", "success")
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
+                                        window.location.reload()
                                         $("#btn-close-rl").click();
                                     }
                                 })
@@ -1809,6 +1825,7 @@
                             swal("¡Creación Correcta!", "Ruta guardada con éxito.", "success")
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
+                                        window.location.reload()
                                         $("#btn-close-rr").click();
                                     }
                                 })
@@ -1909,6 +1926,7 @@
                             swal("¡Creación Correcta!", "Cotización guardada con éxito.", "success")
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
+                                        window.location.reload()
                                         $("#btn-close-cotization").click();
                                     }
                                 })
@@ -1938,28 +1956,33 @@
         })
             .then(option => {
                 if (option == 'approved') {
-                    $.ajax({
-                        url: `/cotizaciones/${id}`,
-                        data: {
-                            estado: 'aprobada',
-                            cliente: idCliente
-                        },
-                        type: 'PUT',
-                        headers: {
-                            "X-CSRF-TOKEN": crsfToken
-                        }
-                    })
-                        .then(res => {
-                            if (res) {
-                                swal('¡Cotizacion Aprobada!', 'La cotizacion ha cambiado su estado a aprobada.', 'success')
+                        $.ajax({
+                            url: `/cotizaciones/${id}`,
+                            data: {
+                                estado: 'aprobada',
+                                cliente: idCliente
+                            },
+                            type: 'PUT',
+                            headers: {
+                                "X-CSRF-TOKEN": crsfToken
                             }
                         })
-                        .catch(err => {
-                            swal("¡Error!", err.statusText, "error")
-                                .then(value => { //Boton OK actualizado
-                                    return
-                                })
-                        })
+                            .then(res => {
+                                if (res) {
+                                    swal('¡Cotizacion Aprobada!', 'La cotizacion ha cambiado su estado a aprobada.', 'success')
+                                    .then(val => {
+                                        if(val){
+                                            window.location.reload()
+                                        }
+                                    })
+                                }
+                            })
+                            .catch(err => {
+                                swal("¡Error!", err.statusText, "error")
+                                    .then(value => { //Boton OK actualizado
+                                        return
+                                    })
+                            })
                 }
             })
     }
