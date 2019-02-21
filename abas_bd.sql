@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 04, 2019 at 10:18 AM
--- Server version: 5.7.24-0ubuntu0.18.04.1
--- PHP Version: 7.2.10-0ubuntu0.18.04.1
+-- Servidor: localhost:3306
+-- Tiempo de generación: 21-02-2019 a las 08:41:31
+-- Versión del servidor: 5.7.25-0ubuntu0.18.04.2
+-- Versión de PHP: 7.2.15-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `abas_bd`
+-- Base de datos: `abas_bd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `areas`
+-- Estructura de tabla para la tabla `areas`
 --
 
 CREATE TABLE `areas` (
@@ -37,7 +35,7 @@ CREATE TABLE `areas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `areas`
+-- Volcado de datos para la tabla `areas`
 --
 
 INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`) VALUES
@@ -51,7 +49,7 @@ INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `area_novedad`
+-- Estructura de tabla para la tabla `area_novedad`
 --
 
 CREATE TABLE `area_novedad` (
@@ -64,7 +62,7 @@ CREATE TABLE `area_novedad` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cargos`
+-- Estructura de tabla para la tabla `cargos`
 --
 
 CREATE TABLE `cargos` (
@@ -76,7 +74,7 @@ CREATE TABLE `cargos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `cargos`
+-- Volcado de datos para la tabla `cargos`
 --
 
 INSERT INTO `cargos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`) VALUES
@@ -91,7 +89,7 @@ INSERT INTO `cargos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `certificados`
+-- Estructura de tabla para la tabla `certificados`
 --
 
 CREATE TABLE `certificados` (
@@ -108,7 +106,7 @@ CREATE TABLE `certificados` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clientes`
+-- Estructura de tabla para la tabla `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -126,15 +124,22 @@ CREATE TABLE `clientes` (
   `estado_facturacion` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Normal',
   `estado_agendamiento` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Activo',
   `estado_registro` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `nombre_contacto` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contacto_tecnico` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre_contacto_inicial` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cargo_contacto_inicial` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `celular_contacto_inicial` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_contacto_inicial` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre_contacto_tecnico` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cargo_contacto_tecnico` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cargo_contacto` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `extension` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `celular` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `celular_contacto_tecnico` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_contacto_tecnico` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre_contacto_facturacion` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cargo_contacto_facturacion` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `celular_contacto_facturacion` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_contacto_facturacion` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `empresa_actual` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `razon_cambio` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `medio_contacto` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `otro_medio` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `doc_rut` tinyint(1) NOT NULL DEFAULT '0',
   `doc_identidad` tinyint(1) NOT NULL DEFAULT '0',
   `doc_camara_comercio` tinyint(1) NOT NULL DEFAULT '0',
@@ -143,22 +148,10 @@ CREATE TABLE `clientes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `clientes`
---
-
-INSERT INTO `clientes` (`id`, `tipo_cliente`, `nit_cedula`, `nombre_cliente`, `razon_social`, `sector_economico`, `municipio`, `direccion`, `barrio`, `zona`, `estado_negociacion`, `estado_facturacion`, `estado_agendamiento`, `estado_registro`, `nombre_contacto`, `contacto_tecnico`, `cargo_contacto_tecnico`, `cargo_contacto`, `email`, `extension`, `celular`, `empresa_actual`, `razon_cambio`, `doc_rut`, `doc_identidad`, `doc_camara_comercio`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Persona Juridica', '135246849-7', 'Fruver los Paisas', 'Fruver Colombia S.A.S.', 'Comercial', 'Santiago de Cali', 'CRA 2D # 62 - 39', 'Guayacanes', 'Suroriente', 'Prospecto', 'Normal', 'Activo', 'prospecto', 'Jenny Molina', 'indefinido', 'indefinido', 'Gerente General', 'jenny@gmail.com', 'indefinido', '3154874545', 'Plagas S.A.S.', 'Mal servicio', 1, 1, 1, 1, '2018-05-07 13:50:00', '2018-05-08 15:31:00'),
-(2, 'Persona Natural', '32135686', 'Luis Felipe Cortéz', NULL, 'indefinido', 'Santiago de Cali', 'CRA 4 # 12A - 399', 'Caldas', 'Suroccidente', 'Prospecto', 'Normal', 'Activo', 'prospecto', 'Luis Felipe Cortéz', 'indefinido', 'indefinido', 'Independiente', 'luis@gmail.com', 'indefinido', '311565468', 'indefinido', 'indefinido', 0, 1, 0, 3, '2018-05-07 13:50:00', '2018-05-08 15:31:00'),
-(3, 'Persona Natural', '987656546', 'Lina Maria Chavez', NULL, 'indefinido', 'indefinido', 'CRA 4A # 45A - 34', 'La Campiña', 'Norte', 'Prospecto', 'Normal', 'Activo', 'prospecto', 'Lina Maria Chavez', 'indefinido', 'indefinido', 'Independiente', 'lian@gmail.com', 'indefinido', '318546813', 'indefinido', 'indefinido', 1, 1, 0, 3, '2018-05-07 13:50:00', '2018-05-08 15:31:00'),
-(4, 'Persona Juridica', '654984651-7', 'Supermercado Super Inter', 'Exito S.A.', 'Comercial', 'Santiago de Cali', 'CRA 2D # 62 - 39', 'Guayacanes', 'Suroriente', 'Prospecto', 'Normal', 'Activo', 'prospecto', 'Jenny Molina', 'indefinido', 'indefinido', 'Gerente General', 'jenny@gmail.com', 'indefinido', '3154874545', 'Plagas S.A.S.', 'Mal servicio', 0, 0, 0, 1, '2018-05-07 13:50:00', '2018-05-08 15:31:00'),
-(5, 'Persona Juridica', '00161654758-7', 'La California', 'California S.A.', 'Comercial', 'Santiago de Cali', 'CRA 32 # 10 - 39', 'Departamental', 'Sur', 'Prospecto', 'Normal', 'Activo', 'prospecto', 'Pepito Perez', 'Andres Lopez', 'Recursos Humanos', 'Gerente General', 'pepe@gmail.com', 'indefinido', '3106546567', 'indefinido', 'ninguna', 0, 0, 1, 5, '2018-05-07 13:50:00', '2018-05-08 15:31:00'),
-(6, 'Persona Natural', '65465465', 'Felipe López', NULL, 'indefinido', 'indefinido', 'AV 6 # 60AN - 34', 'Santa Mónica', 'Norte', 'Prospecto', 'Normal', 'Activo', 'prospecto', 'Felipe Lopez', 'indefinido', 'indefinido', 'Independiente', 'felipe@gmail.com', 'indefinido', '3195191511', 'indefinido', 'indefinido', 1, 0, 0, 5, '2018-05-07 13:50:00', '2018-05-08 15:31:00');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cotizaciones`
+-- Estructura de tabla para la tabla `cotizaciones`
 --
 
 CREATE TABLE `cotizaciones` (
@@ -173,7 +166,7 @@ CREATE TABLE `cotizaciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `cotizaciones`
+-- Volcado de datos para la tabla `cotizaciones`
 --
 
 INSERT INTO `cotizaciones` (`id`, `codigo`, `estado`, `estado_aprobacion`, `valor`, `cliente_id`, `created_at`, `updated_at`) VALUES
@@ -187,7 +180,7 @@ INSERT INTO `cotizaciones` (`id`, `codigo`, `estado`, `estado_aprobacion`, `valo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventos`
+-- Estructura de tabla para la tabla `eventos`
 --
 
 CREATE TABLE `eventos` (
@@ -205,20 +198,10 @@ CREATE TABLE `eventos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `eventos`
---
-
-INSERT INTO `eventos` (`id`, `fecha_inicio`, `fecha_fin`, `dia_completo`, `color`, `asunto`, `tipo`, `cliente_id`, `sede_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, '2018-04-15 14:00:00', '2018-04-15 15:00:00', 0, 'rgb(219, 165, 37)', 'Llamar al cliente 03219689', 'Llamada', NULL, NULL, 1, NULL, NULL),
-(2, '2018-04-14 14:00:00', '2018-04-14 17:00:00', 0, 'rgb(92, 174, 39)', 'Visita al cliente 03219689', 'Visita', NULL, NULL, 1, NULL, NULL),
-(3, '2018-04-03 14:00:00', '2018-04-03 17:00:00', 0, 'rgb(219, 165, 37)', 'Llamar al cliente 9865465', 'Llamada', NULL, NULL, 2, NULL, NULL),
-(4, '2018-04-14 14:00:00', '2018-04-18 17:00:00', 0, 'rgb(92, 174, 39)', 'Visita al cliente 96546ASD', 'Visita', NULL, NULL, 2, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `facturas`
+-- Estructura de tabla para la tabla `facturas`
 --
 
 CREATE TABLE `facturas` (
@@ -233,7 +216,48 @@ CREATE TABLE `facturas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `metas`
+-- Estructura de tabla para la tabla `inspeccions`
+--
+
+CREATE TABLE `inspeccions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `codigo` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `nombre_usuario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `frecuencia` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `observaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `visitas` text COLLATE utf8_unicode_ci NOT NULL,
+  `valor_plan_saneamiento` int(11) NOT NULL,
+  `frecuencia_visitas` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `observaciones_visitas` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `detalle_servicios` text COLLATE utf8_unicode_ci NOT NULL,
+  `total_detalle_servicios` int(11) NOT NULL,
+  `tipo_facturacion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `forma_pago` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `contrato` tinyint(1) NOT NULL,
+  `residencias` text COLLATE utf8_unicode_ci NOT NULL,
+  `cant_lampara_lamina` int(11) NOT NULL,
+  `cant_lampara_insectocutora` int(11) NOT NULL,
+  `cant_trampas` int(11) NOT NULL,
+  `cant_jaulas` int(11) NOT NULL,
+  `cant_estaciones_roedor` int(11) NOT NULL,
+  `observaciones_estaciones` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cant_cajas_alca_elec` int(11) NOT NULL,
+  `sumideros` int(11) NOT NULL,
+  `compra_dispositivos` text COLLATE utf8_unicode_ci NOT NULL,
+  `dispositivos_comodato` text COLLATE utf8_unicode_ci NOT NULL,
+  `gestion_calidad` text COLLATE utf8_unicode_ci NOT NULL,
+  `areas` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_id` int(11) NOT NULL,
+  `sede_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `metas`
 --
 
 CREATE TABLE `metas` (
@@ -255,7 +279,7 @@ CREATE TABLE `metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Estructura de tabla para la tabla `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -265,44 +289,45 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Volcado de datos para la tabla `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(391, '2014_10_12_000000_create_users_table', 1),
-(392, '2014_10_12_100000_create_password_resets_table', 1),
-(393, '2018_04_12_022651_create_areas_table', 1),
-(394, '2018_04_12_023001_create_cargos_table', 1),
-(395, '2018_04_12_190550_create_clientes_table', 1),
-(396, '2018_04_12_193958_create_sedes_table', 1),
-(397, '2018_04_12_195156_create_tareas_table', 1),
-(398, '2018_04_12_235243_create_novedads_table', 1),
-(399, '2018_04_13_011115_create_area_novedad_table', 1),
-(400, '2018_04_15_175902_create_eventos_table', 1),
-(401, '2018_05_10_203827_create_notifications_table', 1),
-(402, '2018_05_14_205719_create_solicitudes_table', 1),
-(403, '2018_05_30_215131_create_telefonos_table', 1),
-(404, '2018_06_22_111550_create_servicios_table', 1),
-(405, '2018_06_22_115017_create_tecnicos_table', 1),
-(406, '2018_07_27_215505_create_tipo_servicios_table', 1),
-(407, '2018_07_27_220255_create_servicio_tecnico', 1),
-(408, '2018_08_01_220413_create_servicio_tipo_servicio_table', 1),
-(409, '2018_11_08_185829_create_certificados_table', 1),
-(410, '2018_11_11_100214_create_rutas_table', 1),
-(411, '2018_11_27_214335_create_cotizaciones_table', 1),
-(412, '2018_11_29_200551_create_metas_table', 1),
-(413, '2018_11_30_195752_create_facturas_table', 1),
-(414, '2019_01_10_190005_create_novedad_temporals_table', 1),
-(415, '2019_01_25_233108_create_orden_servicios_table', 1),
-(416, '2019_01_26_001133_create_productos_table', 1),
-(417, '2019_01_26_003818_create_orden_servicio_producto', 1),
-(418, '2019_01_27_175935_create_orden_servico_tecnico', 1),
-(419, '2019_01_27_221128_create_producto_ruta', 1);
+(147, '2014_10_12_000000_create_users_table', 1),
+(148, '2014_10_12_100000_create_password_resets_table', 1),
+(149, '2018_04_12_022651_create_areas_table', 1),
+(150, '2018_04_12_023001_create_cargos_table', 1),
+(151, '2018_04_12_190550_create_clientes_table', 1),
+(152, '2018_04_12_193958_create_sedes_table', 1),
+(153, '2018_04_12_195156_create_tareas_table', 1),
+(154, '2018_04_12_235243_create_novedads_table', 1),
+(155, '2018_04_13_011115_create_area_novedad_table', 1),
+(156, '2018_04_15_175902_create_eventos_table', 1),
+(157, '2018_05_10_203827_create_notifications_table', 1),
+(158, '2018_05_14_205719_create_solicitudes_table', 1),
+(159, '2018_05_30_215131_create_telefonos_table', 1),
+(160, '2018_06_22_111550_create_servicios_table', 1),
+(161, '2018_06_22_115017_create_tecnicos_table', 1),
+(162, '2018_07_27_215505_create_tipo_servicios_table', 1),
+(163, '2018_07_27_220255_create_servicio_tecnico', 1),
+(164, '2018_08_01_220413_create_servicio_tipo_servicio_table', 1),
+(165, '2018_11_08_185829_create_certificados_table', 1),
+(166, '2018_11_11_100214_create_rutas_table', 1),
+(167, '2018_11_27_214335_create_cotizaciones_table', 1),
+(168, '2018_11_29_200551_create_metas_table', 1),
+(169, '2018_11_30_195752_create_facturas_table', 1),
+(170, '2019_01_10_190005_create_novedad_temporals_table', 1),
+(171, '2019_01_25_233108_create_orden_servicios_table', 1),
+(172, '2019_01_26_001133_create_productos_table', 1),
+(173, '2019_01_26_003818_create_orden_servicio_producto', 1),
+(174, '2019_01_27_175935_create_orden_servico_tecnico', 1),
+(175, '2019_01_27_221128_create_producto_ruta', 1),
+(176, '2019_02_19_225749_create_inspeccions_table', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- Estructura de tabla para la tabla `notifications`
 --
 
 CREATE TABLE `notifications` (
@@ -319,7 +344,7 @@ CREATE TABLE `notifications` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `novedads`
+-- Estructura de tabla para la tabla `novedads`
 --
 
 CREATE TABLE `novedads` (
@@ -337,19 +362,10 @@ CREATE TABLE `novedads` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `novedads`
---
-
-INSERT INTO `novedads` (`id`, `descripcion`, `estado`, `user2_id`, `prioridad`, `user_id`, `area_id`, `cliente_id`, `sede_id`, `comentario`, `created_at`, `updated_at`) VALUES
-(1, 'Cliente 04456 presenta plaga de ratas en la sede principal', 'publicada', NULL, 'Normal', 1, 3, NULL, NULL, 'Novedad resuleta con éxito', '2018-04-18 21:58:00', NULL),
-(2, 'La factura 00565468 no ha sido pagada', 'publicada', NULL, 'Normal', 2, 2, NULL, NULL, NULL, '2018-04-17 20:58:00', NULL),
-(3, 'Cliente No. 20316 no ha pagado el servicio', 'publicada', NULL, 'Normal', 1, 1, NULL, NULL, NULL, '2018-04-19 20:21:00', NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `novedad_temporals`
+-- Estructura de tabla para la tabla `novedad_temporals`
 --
 
 CREATE TABLE `novedad_temporals` (
@@ -365,7 +381,7 @@ CREATE TABLE `novedad_temporals` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orden_servicios`
+-- Estructura de tabla para la tabla `orden_servicios`
 --
 
 CREATE TABLE `orden_servicios` (
@@ -386,7 +402,7 @@ CREATE TABLE `orden_servicios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orden_servicio_producto`
+-- Estructura de tabla para la tabla `orden_servicio_producto`
 --
 
 CREATE TABLE `orden_servicio_producto` (
@@ -401,7 +417,7 @@ CREATE TABLE `orden_servicio_producto` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orden_servicio_tecnico`
+-- Estructura de tabla para la tabla `orden_servicio_tecnico`
 --
 
 CREATE TABLE `orden_servicio_tecnico` (
@@ -415,7 +431,7 @@ CREATE TABLE `orden_servicio_tecnico` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Estructura de tabla para la tabla `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -427,7 +443,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
@@ -444,7 +460,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre_comercial`, `tipo`, `presentacion`, `unidad_medida`, `total_unidades`, `valor_unidad`, `costo_total`, `created_at`, `updated_at`) VALUES
@@ -474,7 +490,7 @@ INSERT INTO `productos` (`id`, `nombre_comercial`, `tipo`, `presentacion`, `unid
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto_ruta`
+-- Estructura de tabla para la tabla `producto_ruta`
 --
 
 CREATE TABLE `producto_ruta` (
@@ -489,7 +505,7 @@ CREATE TABLE `producto_ruta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutas`
+-- Estructura de tabla para la tabla `rutas`
 --
 
 CREATE TABLE `rutas` (
@@ -505,7 +521,7 @@ CREATE TABLE `rutas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sedes`
+-- Estructura de tabla para la tabla `sedes`
 --
 
 CREATE TABLE `sedes` (
@@ -518,27 +534,16 @@ CREATE TABLE `sedes` (
   `nombre_contacto` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `telefono_contacto` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `celular_contacto` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email_contacto` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `cliente_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `sedes`
---
-
-INSERT INTO `sedes` (`id`, `nombre`, `direccion`, `ciudad`, `barrio`, `zona_ruta`, `nombre_contacto`, `telefono_contacto`, `celular_contacto`, `email`, `cliente_id`, `created_at`, `updated_at`) VALUES
-(1, 'Fruver Santa Librada', 'CRA 46 #54 - 44', 'Cali', 'Santa Librada', 'Centro', 'Ricardo', '126456', '31321898', 'ricardo@gmail.com', 1, NULL, NULL),
-(2, 'Fruver Chipichape', 'CRA 6 #51 - 44', 'Cali', 'Chipichape', 'Norte', 'Francisco', '126456', '31321898', 'francisco@gmail.com', 1, NULL, NULL),
-(3, 'Super Inter La  Flora', 'CRA 5 #65 - 44', 'Cali', 'La Flora', 'Norte', 'juan', '126456', '31321898', 'juan@gmail.com', 4, NULL, NULL),
-(4, 'Super Inter San Fernando', 'CRA 46 #54 - 44', 'Cali', 'San Fernando', 'Centro', 'Jorge', '126456', '31321898', 'Jorge@gmail.com', 4, NULL, NULL),
-(5, 'California La Rivera', 'CLL 70 #35 - 44', 'Cali', 'La Rivera', 'Norte', 'Alfredo', '9516546', '31321800', 'alfredo@gmail.com', 5, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `servicios`
+-- Estructura de tabla para la tabla `servicios`
 --
 
 CREATE TABLE `servicios` (
@@ -564,7 +569,7 @@ CREATE TABLE `servicios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `servicio_tecnico`
+-- Estructura de tabla para la tabla `servicio_tecnico`
 --
 
 CREATE TABLE `servicio_tecnico` (
@@ -577,7 +582,7 @@ CREATE TABLE `servicio_tecnico` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `servicio_tipo_servicio`
+-- Estructura de tabla para la tabla `servicio_tipo_servicio`
 --
 
 CREATE TABLE `servicio_tipo_servicio` (
@@ -594,7 +599,7 @@ CREATE TABLE `servicio_tipo_servicio` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitudes`
+-- Estructura de tabla para la tabla `solicitudes`
 --
 
 CREATE TABLE `solicitudes` (
@@ -603,58 +608,28 @@ CREATE TABLE `solicitudes` (
   `nombre_usuario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fecha` date NOT NULL,
   `frecuencia` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `contacto_name_factura` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contacto_telefono_factura` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contacto_celular_factura` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `observaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_plan` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `instrucciones` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `estaciones_roedor` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lamparas_control` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cajas_alcantarilla` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `trampas_plasticas` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `numero_casas` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `numero_aptos` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `numero_bodegas` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contrato` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `forma_pago` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `facturacion` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `servicios_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `frecuencia_servicios_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valor_servicios_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `servicios_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `frecuencia_servicios_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valor_servicios_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `servicios_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `frecuencia_servicios_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valor_servicios_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_servicios` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dispositivos_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidad_dispositivos_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_dispositivos_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_dispositivos_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dispositivos_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidad_dispositivos_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_dispositivos_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_dispositivos_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dispositivos_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidad_dispositivos_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_dispositivos_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_dispositivos_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `observaciones_dispositivos` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dispositivos_comodato_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidad_dispositivos_comodato_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_dispositivos_comodato_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_dispositivos_comodato_1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dispositivos_comodato_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidad_dispositivos_comodato_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_dispositivos_comodato_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_dispositivos_comodato_2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dispositivos_comodato_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidad_dispositivos_comodato_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_dispositivos_comodato_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `total_dispositivos_comodato_3` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `observaciones_dispositivos_comodato` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `visitas` text COLLATE utf8_unicode_ci NOT NULL,
+  `valor_plan_saneamiento` int(11) NOT NULL,
+  `frecuencia_visitas` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `observaciones_visitas` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `detalle_servicios` text COLLATE utf8_unicode_ci NOT NULL,
+  `total_detalle_servicios` int(11) NOT NULL,
+  `tipo_facturacion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `forma_pago` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `contrato` tinyint(1) NOT NULL,
+  `residencias` text COLLATE utf8_unicode_ci NOT NULL,
+  `cant_lampara_lamina` int(11) NOT NULL,
+  `cant_lampara_insectocutora` int(11) NOT NULL,
+  `cant_trampas` int(11) NOT NULL,
+  `cant_jaulas` int(11) NOT NULL,
+  `cant_estaciones_roedor` int(11) NOT NULL,
+  `observaciones_estaciones` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cant_cajas_alca_elec` int(11) NOT NULL,
+  `sumideros` int(11) NOT NULL,
+  `compra_dispositivos` text COLLATE utf8_unicode_ci NOT NULL,
+  `dispositivos_comodato` text COLLATE utf8_unicode_ci NOT NULL,
+  `gestion_calidad` text COLLATE utf8_unicode_ci NOT NULL,
   `medio_contacto` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `otro` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cliente_id` int(11) NOT NULL,
@@ -663,22 +638,10 @@ CREATE TABLE `solicitudes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `solicitudes`
---
-
-INSERT INTO `solicitudes` (`id`, `codigo`, `nombre_usuario`, `fecha`, `frecuencia`, `contacto_name_factura`, `contacto_telefono_factura`, `contacto_celular_factura`, `observaciones`, `total_plan`, `instrucciones`, `estaciones_roedor`, `lamparas_control`, `cajas_alcantarilla`, `trampas_plasticas`, `numero_casas`, `numero_aptos`, `numero_bodegas`, `contrato`, `forma_pago`, `facturacion`, `servicios_1`, `frecuencia_servicios_1`, `valor_servicios_1`, `servicios_2`, `frecuencia_servicios_2`, `valor_servicios_2`, `servicios_3`, `frecuencia_servicios_3`, `valor_servicios_3`, `total_servicios`, `dispositivos_1`, `cantidad_dispositivos_1`, `unidad_dispositivos_1`, `total_dispositivos_1`, `dispositivos_2`, `cantidad_dispositivos_2`, `unidad_dispositivos_2`, `total_dispositivos_2`, `dispositivos_3`, `cantidad_dispositivos_3`, `unidad_dispositivos_3`, `total_dispositivos_3`, `observaciones_dispositivos`, `dispositivos_comodato_1`, `cantidad_dispositivos_comodato_1`, `unidad_dispositivos_comodato_1`, `total_dispositivos_comodato_1`, `dispositivos_comodato_2`, `cantidad_dispositivos_comodato_2`, `unidad_dispositivos_comodato_2`, `total_dispositivos_comodato_2`, `dispositivos_comodato_3`, `cantidad_dispositivos_comodato_3`, `unidad_dispositivos_comodato_3`, `total_dispositivos_comodato_3`, `observaciones_dispositivos_comodato`, `medio_contacto`, `otro`, `cliente_id`, `sede_id`, `created_at`, `updated_at`) VALUES
-(1, 'FS001', NULL, '2018-04-19', 'Semanal', NULL, NULL, NULL, 'Observacion FS01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2018-04-19 20:21:00', '2018-04-21 01:21:00'),
-(2, 'FS003', NULL, '2018-04-19', 'Mensual', NULL, NULL, NULL, 'Observacion FS03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, '2018-05-19 20:21:00', '2018-05-21 01:21:00'),
-(3, 'FS004', NULL, '2018-04-19', 'Bimestral', NULL, NULL, NULL, 'Observacion FS04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, '2018-02-19 20:21:00', '2018-02-21 01:21:00'),
-(4, 'FS005', NULL, '2018-04-19', 'Trimestral', NULL, NULL, NULL, 'Observacion FS05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 3, '2018-02-19 20:21:00', '2018-02-21 01:21:00'),
-(5, 'FS006', NULL, '2018-04-19', 'Semestral', NULL, NULL, NULL, 'Observacion FS06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 5, '2018-02-19 20:21:00', '2018-02-21 01:21:00'),
-(6, 'FS007', NULL, '2018-04-19', 'Anual', NULL, NULL, NULL, 'Observacion FS06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 0, '2018-02-19 20:21:00', '2018-02-21 01:21:00');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tareas`
+-- Estructura de tabla para la tabla `tareas`
 --
 
 CREATE TABLE `tareas` (
@@ -690,21 +653,10 @@ CREATE TABLE `tareas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tareas`
---
-
-INSERT INTO `tareas` (`id`, `asunto`, `completado`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Llamar al cliente #0321498', 0, 1, NULL, NULL),
-(2, 'Pagar recibo de Energia', 1, 1, NULL, NULL),
-(3, 'LLamar a Jhon', 0, 1, NULL, NULL),
-(4, 'Pasar lso clientes a ABAS', 0, 2, NULL, NULL),
-(5, 'Poner en el calendario algo', 1, 2, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tecnicos`
+-- Estructura de tabla para la tabla `tecnicos`
 --
 
 CREATE TABLE `tecnicos` (
@@ -716,21 +668,10 @@ CREATE TABLE `tecnicos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tecnicos`
---
-
-INSERT INTO `tecnicos` (`id`, `nombre`, `estado`, `color`, `created_at`, `updated_at`) VALUES
-(1, 'Carlos Antonio Pérez', 'activo', 'rgb(69,130,29)', NULL, NULL),
-(2, 'Luis Alejandro Rojas', 'activo', 'rgb(219,165,37)', NULL, NULL),
-(3, 'Fernando López', 'activo', 'rgb(92,174,39)', NULL, NULL),
-(4, 'Andrés Stiven Bejarano', 'activo', 'rgb(255,130,0)', NULL, NULL),
-(5, 'Jhon Alex Barrios', 'activo', 'rgb(2,112,192)', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `telefonos`
+-- Estructura de tabla para la tabla `telefonos`
 --
 
 CREATE TABLE `telefonos` (
@@ -744,7 +685,7 @@ CREATE TABLE `telefonos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_servicios`
+-- Estructura de tabla para la tabla `tipo_servicios`
 --
 
 CREATE TABLE `tipo_servicios` (
@@ -753,43 +694,39 @@ CREATE TABLE `tipo_servicios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tipo_servicios`
+-- Volcado de datos para la tabla `tipo_servicios`
 --
 
 INSERT INTO `tipo_servicios` (`id`, `nombre`) VALUES
 (1, 'CONTROL DE PLAGAS BASICO SIN ROEDORES'),
 (2, 'CONTROL DE PLAGAS BASICO Y ROEDORES'),
-(3, 'CONTROL DE PLAGAS BASICO EN OFICINA'),
-(4, 'CONTROL DE PLAGAS BASICO VEHICULOS'),
-(5, 'CONTROL DE PLAGAS BASICO CONTAINER'),
-(6, 'CONTROL SOLO ROEDORES'),
-(7, 'CONTROL INSECTOS RASTREROS'),
-(8, 'CONTROL INSECTOS VOLADORES'),
-(9, 'CONTROL CHINCHES'),
-(10, 'CONTROL GARRAPATAS'),
-(11, 'CONTROL PULGAS'),
-(12, 'CONTROL TERMITAS'),
-(13, 'CONTROL ABEJAS'),
-(14, 'CONTROL AVISPAS'),
-(15, 'DESINFECCION'),
-(16, 'ESPOLVOREO ELECTRICO'),
-(17, 'NEBULIZACION'),
-(18, 'TERMONEBULIZACION'),
-(19, 'GASIFICACION'),
-(20, 'RETIRO DE RESIDUOS / DESCARPADO'),
-(21, 'INSTALACION ESTACIONES ROEDOR'),
-(22, 'CONTROL DE PLAGAS EN ZONAS COMUNES'),
-(23, 'CONTROL EN CASAS Y/O APARTAMENTOS'),
-(24, 'CONTROL EN CAJAS DE ALCANTARILLA'),
-(25, 'RUTA LAMPARAS CONTROL INSECTOS VOLADORES'),
-(26, 'RUTA ESTACIONES CONTROL ROEDORES'),
-(27, 'CONTROL CARACOLES'),
-(28, 'CONTROL DE PLAGAS BASICO RESIDENCIAL');
+(3, 'CONTROL SOLO ROEDORES'),
+(4, 'CONTROL INSECTOS RASTREROS'),
+(5, 'CONTROL INSECTOS VOLADORES'),
+(6, 'CONTROL CHINCHES'),
+(7, 'CONTROL GARRAPATAS'),
+(8, 'CONTROL PULGAS'),
+(9, 'CONTROL TERMITAS'),
+(10, 'CONTROL ABEJAS'),
+(11, 'CONTROL AVISPAS'),
+(12, 'DESINFECCION'),
+(13, 'ESPOLVOREO ELECTRICO'),
+(14, 'NEBULIZACION'),
+(15, 'TERMONEBULIZACION'),
+(16, 'GASIFICACION'),
+(17, 'RETIRO DE RESIDUOS / DESCARPADO'),
+(18, 'INSTALACION ESTACIONES ROEDOR'),
+(19, 'CONTROL DE PLAGAS EN ZONAS COMUNES'),
+(20, 'CONTROL EN CASAS Y/O APARTAMENTOS'),
+(21, 'CONTROL EN CAJAS DE ALCANTARILLA'),
+(22, 'RUTA LAMPARAS CONTROL INSECTOS VOLADORES'),
+(23, 'CONTROL CARACOLES'),
+(24, 'CONTROL DE PLAGAS BASICO RESIDENCIAL');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -810,191 +747,197 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `cedula`, `nombres`, `apellidos`, `iniciales`, `telefono`, `foto`, `email`, `password`, `area_id`, `cargo_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'default-user.jpg', 'victormalsx@gmail.com', '$2y$10$peXpZCjfugAkusb.AkH81eOMEUYpS4t4A8QJXnHAVS7VfX2s4fWEi', 1, 1, NULL, NULL, NULL),
-(2, 987654321, 'Yurani', 'Calvo Ruiz', 'YCR', '3103195394', 'a6.jpg', 'yurani@gmail.com', '$2y$10$a8trnIZBB5UUM3y2smKUlurwUFUx7Vbv6i/zn6eH3xNgjhrqprZ6i', 2, 2, NULL, NULL, NULL),
-(3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'a1.jpg', 'andres@gmail.com', '$2y$10$gwGjGVwP5s2ABeQ.HHytdOh/LZp1UQESJsMngoCvf7APspV50A1sm', 1, 1, NULL, NULL, NULL),
-(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$.yHc1W1q985hOVwHVvhh3.vOIs5jj5/59KU/2dI210AJ4Vf4GANPS', 3, 3, NULL, NULL, NULL),
-(5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'a9.jpg', 'jhonny@gmail.com', '$2y$10$aZ1IGP6eK9mSUqdJ1jOXLusezzIphDSmGwVoZPAJvbTUM5zkSdi72', 3, 4, NULL, NULL, NULL),
-(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$LKvO4yhrwKCqT0B/JhxErOhyhvfNJxmTgEYnpTnd/jWvCV4Nsyede', 4, 5, NULL, NULL, NULL),
-(7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'a11.jpg', 'diego@gmail.com', '$2y$10$AHu3d.wM7ePhxFQhwQA4IOupeRBffkW5Q9XIdjwpb4uGlNKr4JXYi', 6, 7, NULL, NULL, NULL),
-(8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '$2y$10$VI/FB2lnoyz2DIwBnBri6eD2tGBngWKIb6mbYnWOyXQlC5dsRi83W', 5, 6, NULL, NULL, NULL);
+(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'default-user.jpg', 'victormalsx@gmail.com', '$2y$10$T0NoaYbKoPNXhMTfYbBTrOUHQ6Eq6Td9KMgz9JHlo981CUjSelQpS', 1, 1, NULL, NULL, NULL),
+(2, 987654321, 'Yurani', 'Calvo Ruiz', 'YCR', '3103195394', 'a6.jpg', 'yurani@gmail.com', '$2y$10$FPiFCZ5AqbnsFTTnzy.YQOfZ90e0/8pl1vNWahnbFEFzzX57XmcYm', 2, 2, NULL, NULL, NULL),
+(3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'a1.jpg', 'andres@gmail.com', '$2y$10$jGNq74OOVohMKC5.TGB.de.wVFtuwBFePc/xJTVIEudHfwT8vlTHC', 1, 1, NULL, NULL, NULL),
+(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$YdvqomDJDrtFvTY73xwRtem78KqA2UcA8j083pAG7R9wj51F1Sssy', 3, 3, NULL, NULL, NULL),
+(5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'a9.jpg', 'jhonny@gmail.com', '$2y$10$de9S/dhT1pCkDpfzsEW.5OBbdOjGjA8JqvU6nwpt1H0KuLjmxOR7a', 3, 4, NULL, NULL, NULL),
+(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$gXpFk6w.CXhz3ATIOeLBY.2PpgI2cT8wWU.9mPEL5eut7tKeCKQmC', 4, 5, NULL, NULL, NULL),
+(7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'a11.jpg', 'diego@gmail.com', '$2y$10$KdcBqHihmQW6Apo9KeLOXePOkDuLjd69w4H0izcpyxInzfWj6z4iO', 6, 7, NULL, NULL, NULL),
+(8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '$2y$10$xXIhjcG7d2ZPTOqv/6mzP.k56dlgDc57GpDFPeBRCL2bM3J5By9W2', 5, 6, NULL, NULL, NULL);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `areas`
+-- Indices de la tabla `areas`
 --
 ALTER TABLE `areas`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `areas_nombre_unique` (`nombre`);
 
 --
--- Indexes for table `cargos`
+-- Indices de la tabla `cargos`
 --
 ALTER TABLE `cargos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cargos_nombre_unique` (`nombre`);
 
 --
--- Indexes for table `certificados`
+-- Indices de la tabla `certificados`
 --
 ALTER TABLE `certificados`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `clientes`
+-- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cotizaciones`
+-- Indices de la tabla `cotizaciones`
 --
 ALTER TABLE `cotizaciones`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `eventos`
+-- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `facturas`
+-- Indices de la tabla `facturas`
 --
 ALTER TABLE `facturas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `metas`
+-- Indices de la tabla `inspeccions`
+--
+ALTER TABLE `inspeccions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `metas`
 --
 ALTER TABLE `metas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Indices de la tabla `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `notifications`
+-- Indices de la tabla `notifications`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `notifications_notifiable_id_notifiable_type_index` (`notifiable_id`,`notifiable_type`);
 
 --
--- Indexes for table `novedads`
+-- Indices de la tabla `novedads`
 --
 ALTER TABLE `novedads`
   ADD UNIQUE KEY `novedads_id_unique` (`id`);
 
 --
--- Indexes for table `novedad_temporals`
+-- Indices de la tabla `novedad_temporals`
 --
 ALTER TABLE `novedad_temporals`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orden_servicios`
+-- Indices de la tabla `orden_servicios`
 --
 ALTER TABLE `orden_servicios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orden_servicio_producto`
+-- Indices de la tabla `orden_servicio_producto`
 --
 ALTER TABLE `orden_servicio_producto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orden_servicio_tecnico`
+-- Indices de la tabla `orden_servicio_tecnico`
 --
 ALTER TABLE `orden_servicio_tecnico`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
+-- Indices de la tabla `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `producto_ruta`
+-- Indices de la tabla `producto_ruta`
 --
 ALTER TABLE `producto_ruta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rutas`
+-- Indices de la tabla `rutas`
 --
 ALTER TABLE `rutas`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `rutas_codigo_unique` (`codigo`);
 
 --
--- Indexes for table `sedes`
+-- Indices de la tabla `sedes`
 --
 ALTER TABLE `sedes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `servicios`
+-- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `servicio_tipo_servicio`
+-- Indices de la tabla `servicio_tipo_servicio`
 --
 ALTER TABLE `servicio_tipo_servicio`
   ADD PRIMARY KEY (`id_servicio_tipo`);
 
 --
--- Indexes for table `solicitudes`
+-- Indices de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tareas`
+-- Indices de la tabla `tareas`
 --
 ALTER TABLE `tareas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tecnicos`
+-- Indices de la tabla `tecnicos`
 --
 ALTER TABLE `tecnicos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `telefonos`
+-- Indices de la tabla `telefonos`
 --
 ALTER TABLE `telefonos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tipo_servicios`
+-- Indices de la tabla `tipo_servicios`
 --
 ALTER TABLE `tipo_servicios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -1002,160 +945,139 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `areas`
+-- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
--- AUTO_INCREMENT for table `cargos`
+-- AUTO_INCREMENT de la tabla `cargos`
 --
 ALTER TABLE `cargos`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
--- AUTO_INCREMENT for table `certificados`
+-- AUTO_INCREMENT de la tabla `certificados`
 --
 ALTER TABLE `certificados`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `cotizaciones`
+-- AUTO_INCREMENT de la tabla `cotizaciones`
 --
 ALTER TABLE `cotizaciones`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
--- AUTO_INCREMENT for table `eventos`
+-- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `facturas`
+-- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `metas`
+-- AUTO_INCREMENT de la tabla `inspeccions`
+--
+ALTER TABLE `inspeccions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `metas`
 --
 ALTER TABLE `metas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 --
--- AUTO_INCREMENT for table `novedad_temporals`
+-- AUTO_INCREMENT de la tabla `novedad_temporals`
 --
 ALTER TABLE `novedad_temporals`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `orden_servicios`
+-- AUTO_INCREMENT de la tabla `orden_servicios`
 --
 ALTER TABLE `orden_servicios`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `orden_servicio_producto`
+-- AUTO_INCREMENT de la tabla `orden_servicio_producto`
 --
 ALTER TABLE `orden_servicio_producto`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `orden_servicio_tecnico`
+-- AUTO_INCREMENT de la tabla `orden_servicio_tecnico`
 --
 ALTER TABLE `orden_servicio_tecnico`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
--- AUTO_INCREMENT for table `producto_ruta`
+-- AUTO_INCREMENT de la tabla `producto_ruta`
 --
 ALTER TABLE `producto_ruta`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `rutas`
+-- AUTO_INCREMENT de la tabla `rutas`
 --
 ALTER TABLE `rutas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `sedes`
+-- AUTO_INCREMENT de la tabla `sedes`
 --
 ALTER TABLE `sedes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `servicios`
+-- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `servicio_tipo_servicio`
+-- AUTO_INCREMENT de la tabla `servicio_tipo_servicio`
 --
 ALTER TABLE `servicio_tipo_servicio`
   MODIFY `id_servicio_tipo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `solicitudes`
+-- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `tareas`
+-- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `tecnicos`
+-- AUTO_INCREMENT de la tabla `tecnicos`
 --
 ALTER TABLE `tecnicos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `telefonos`
+-- AUTO_INCREMENT de la tabla `telefonos`
 --
 ALTER TABLE `telefonos`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `tipo_servicios`
+-- AUTO_INCREMENT de la tabla `tipo_servicios`
 --
 ALTER TABLE `tipo_servicios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -48,8 +48,9 @@
         </div>
         <div class="col-md-3">
                 <h3 class="no-margins"></h3>
-                <img src="{{asset('img/zender_logo.png')}}" class="img-fluid">
-                <p class="small">
+                {{-- <img src="{{asset('img/zender_logo.png')}}" class="img-fluid"> --}}
+                <h2 style="text-align: center; color: #5cae27">ABAS &trade;</h2>
+                <p class="small" style="text-align: center">
                     Administrador de base de datos de <br> Sanicontrol S.A.S. &copy; 2018 </p>
        </div>
 

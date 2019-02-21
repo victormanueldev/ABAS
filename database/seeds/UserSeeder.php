@@ -109,6 +109,31 @@ class UserSeeder extends Seeder
                 'area_id' => '5',
                 'cargo_id' => '6' 
             ],
+            '8' => [
+                'cedula' => '99999999',
+                'nombres' => 'Fernando',
+                'apellidos' => 'Serna',
+                'iniciales' => 'FS',
+                'telefono' => '3177777750',
+                'foto' => 'default-user.jpg',
+                'email' => 'fernandoserna@sanicontrol.com',
+                'password' => bcrypt('daniel02mafe12'),
+                'area_id' => '1',
+                'cargo_id' => '1' 
+            ],
+            '9' => [
+                'cedula' => '88888888',
+                'nombres' => 'Cristian',
+                'apellidos' => 'León',
+                'iniciales' => 'CL',
+                'telefono' => '3177777750',
+                'foto' => 'default-user.jpg',
+                'email' => 'cristianleon@sanicontrol.com',
+                'password' => bcrypt('jackeline22'),
+                'area_id' => '1',
+                'cargo_id' => '1' 
+            ],
+            
         ];
         DB::table('users')-> insert($users);
     }
