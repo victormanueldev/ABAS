@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('custom-css')
+<link href="{{asset('css/plugins/iCheck/custom.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
@@ -88,7 +89,18 @@
 
 
                                     <div class="ibox-title col-lg-12">
-                                        <h3>Facturar a Nombre de:</h3>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-xs-12">
+                                                <h3>Facturar a Nombre de:</h3>
+                                            </div>
+                                            <div class="col-lg-9 col-xs-12" id="client-options">
+                                                <input id="radio-1" type="radio" value="create"  name="option-client" class="i-checks"/>
+                                                <span class="m-l-xs" style="position: relative;margin-right: 20px;">Crear cliente nuevo</span>
+
+                                                <input id="radio-2" type="radio" value="exist"  name="option-client" class="i-checks" />
+                                                <span class="m-l-xs">Seleccionar cliente existente</span>
+                                            </div>
+                                        </div>
                                         <br>
                                     </div>
 
@@ -740,6 +752,7 @@
 <script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
 <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <script src="{{asset('js/plugins/autonumeric/autonumeric.js')}}"></script>
+<script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>
 <script>
     //Declaracion de variables globales
     var servicios;
@@ -752,8 +765,19 @@
     var totalPlanSaneamiento;
 
     $(document).ready(function () {
+
+        /** Inicializacion del iCheck **/
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+        /** Inicializacion de valores en Inputs **/
         var date = moment().format("YYYY-MM-DD");
         $('#fecha_creacion').val(date);
+        $("#total_servicio_detalle").val(0)
+
+        /** Inicializacion de servicios en el select **/
         $.get('/tipos')
         .then(res => {
             servicios = res;
@@ -766,9 +790,8 @@
         .catch(err => {
             console.log(err)
         })
-        $("#total_servicio_detalle").val(0)
 
-        //Inicializacion del input Autonumeric
+        /** Inicializacion del input Autonumeric **/
         valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'),{
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
@@ -824,6 +847,11 @@
             decimalPlaces: 0,
             outputFormat: "number"
         })
+
+        $("#radio-1, #radio-2").on('ifChecked', function(e){
+            console.log($("input[name=option-client]:checked", '#client-options').val())
+        })
+        
 
     });
 
