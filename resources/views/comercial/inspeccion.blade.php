@@ -31,7 +31,6 @@
 </div>
 
 
-
 <div class="wrapper wrapper-content animated fadeInRight">
     {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' =>
     'form-inspeccion')) !!}
@@ -109,7 +108,7 @@
 
                                         <!-- Select con Autocompletar-->
                                         <select data-placeholder="Seleccione NIT" class="chosen-select" tabindex="2" id="id_cliente"
-                                            name="id_cliente" required>
+                                            name="id_cliente">
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
                                         <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
@@ -186,12 +185,12 @@
                                     </div>
 
 
-                                    <div class="form-group col-lg-6" id="select-filter-sede">
+                                    {{-- <div class="form-group col-lg-6" id="select-filter-sede">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         <select style="text-transform: uppercase" class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group col-lg-6" id="input-nombre-sede">
                                         <label class="control-label">Razón Social/Nombre Sede*</label>
@@ -306,7 +305,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor plan de saneamiento</label>
-                                        <input type="text" min=0 name="total_plan" id="total_plan" placeholder="Valor total"
+                                        <input type="text" min=0 name="total_plan" id="total_plan" placeholder="Valor total del plan"
                                             class="form-control">
                                     </div>
 
@@ -348,7 +347,7 @@
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor </label>
                                             <input type="text" min=0 name="valor_servicio_detalle-0" id="valor_servicio_detalle-0"
-                                                placeholder="Valor total" class="form-control">
+                                                placeholder="Valor servicio" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
@@ -377,7 +376,7 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Total a facturar</label>
                                         <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle"
-                                            placeholder="Valor total" class="form-control" readonly>
+                                            placeholder="Valor total a facturar" class="form-control" readonly>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -477,31 +476,31 @@
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Lámpara con lámina</label>
                                         <input type="number" min=0 name="cantidad_lampara_lamina" id="cantidad_lampara_lamina"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Lámpara insectocutora</label>
                                         <input type="number" min=0 name="cant_lampara_insectocutora" id="cant_lampara_insectocutora"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Trampas de impacto</label>
                                         <input type="number" min=0 name="cant_trampas_impacto" id="cant_trampas_impacto"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Jaulas</label>
                                         <input type="number" min=0 name="cant_jaulas" id="cant_jaulas"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Estaciones de roedor</label>
                                         <input type="number" min=0 name="cant_estaciones_roedor" id="cant_estaciones_roedor"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -560,13 +559,13 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo-0" name="valor_sin_iva_dispositivo-0" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="valor_sin_iva_dispositivo-0" name="valor_sin_iva_dispositivo-0" placeholder="Valor sin IVA"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo-0" name="total_dispositivo-0" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="total_dispositivo-0" name="total_dispositivo-0" placeholder="Valor total"
                                                 class="form-control">
                                         </div>
 
@@ -618,13 +617,13 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0" name="valor_sin_iva_dispositivo_comodato-0" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0" name="valor_sin_iva_dispositivo_comodato-0" placeholder="Valor sin IVA"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo_comodato-0" name="total_dispositivo_comodato-0" placeholder="Nombre de dispositivo"
+                                            <input type="text" id="total_dispositivo_comodato-0" name="total_dispositivo_comodato-0" placeholder="Valor Total"
                                                 class="form-control">
                                         </div>
 
@@ -730,10 +729,10 @@
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Nivel act.</label>
                                             <select style="text-transform: uppercase" name="nivel_area-0" id="nivel_area-0" class="form-control">
-                                                <option value="alto">alto</option>
-                                                <option value="medio">medio</option>
-                                                <option value="bajo">bajo</option>
-                                                <option value="no">no</option>
+                                                <option value="alto">ALTO</option>
+                                                <option value="medio">MEDIO</option>
+                                                <option value="bajo">BAJO</option>
+                                                <option value="no">NO</option>
                                             </select>
                                         </div>
                                     </div>
@@ -776,8 +775,17 @@
     $(document).ready(function () {
 
         /** Ocultar inputs de crear cliente/sede **/
-        $("#input-create").addClass("hidden")
-        $("#input-nombre-sede").addClass("hidden")
+        if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
+            $("#input-create").removeClass("hidden")
+            $("#select-filter").addClass("hidden")
+            $("#select-filter-sede").addClass("hidden")
+            $("#input-nombre-sede").removeClass("hidden")
+        }else{
+            $("#input-create").addClass("hidden")
+            $("#select-filter").removeClass("hidden")
+            $("#select-filter-sede").removeClass("hidden")
+            $("#input-nombre-sede").addClass("hidden")
+        }
 
         /** Inicializacion del iCheck **/
         $('.i-checks').iCheck({
@@ -871,8 +879,8 @@
             }else{
                 $("#input-create").addClass("hidden")
                 $("#select-filter").removeClass("hidden")
-                $("#select-filter-sede").addClass("hidden")
-                $("#input-nombre-sede").removeClass("hidden")
+                $("#select-filter-sede").removeClass("hidden")
+                $("#input-nombre-sede").addClass("hidden")
             }
         })
         
@@ -914,7 +922,6 @@
             $("#input-sede-telefono").val('');
             $("#input-sede-celular").val('');
             $("#input-sede-email").val('');
-            console.log(res);
             if (res == '') {//Valida que el cliente tenga sedes
                 $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
                 $("#select_sedes").prop('required', false);
@@ -1343,10 +1350,10 @@
             <div class="form-group col-lg-2">
                 <label class="control-label">Nivel act.</label>
                 <select style="text-transform: uppercase" name="nivel_area-${contAreas}" id="nivel_area-${contAreas}" class="form-control">
-                    <option value="alto">alto</option>
-                    <option value="medio">medio</option>
-                    <option value="bajo">bajo</option>
-                    <option value="no">no</option>
+                    <option value="alto">ALTO</option>
+                    <option value="medio">MEDIO</option>
+                    <option value="bajo">BAJO</option>
+                    <option value="no">NO</option>
                 </select>
             </div>
         `)
@@ -1465,7 +1472,7 @@
             areas: [],
         }
 
-        //Plan de saneamiento
+        // //Plan de saneamiento
         for (let index = 0; index < contVisitas; index++) {
             dataToSendInspection.visitas[index] = {
                 num_visita: $(`#num_visita-${index}`).val(),
@@ -1473,7 +1480,7 @@
             }
         }
 
-        //Detalle del servicio correctivo y/o preventivo
+        // //Detalle del servicio correctivo y/o preventivo
         for (let index = 0; index < contServicio; index++) {
             dataToSendInspection.detalle_servicios[index] = {
                 tipo_servicio: $(`#servicio_detalle-${index}`).val(),
@@ -1484,7 +1491,7 @@
             
         }
 
-        //Numero de residencias
+        // //Numero de residencias
         for (let index = 0; index < contResidencias; index++) {
             dataToSendInspection.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
@@ -1494,7 +1501,7 @@
             }
         }
 
-        //Compra de dispositivos
+        // //Compra de dispositivos
         for (let index = 0; index < contDispositivos; index++) {
             dataToSendInspection.compra_dispositivos[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
@@ -1505,7 +1512,7 @@
             }   
         }
         
-        //Dispositivos en comodato
+        // //Dispositivos en comodato
         for (let index = 0; index < contComodatos; index++) {
             dataToSendInspection.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
@@ -1525,7 +1532,7 @@
             }
         }
 
-        //Areas de inspeccion
+        // //Areas de inspeccion
         for (let index = 0; index < contAreas; index++) {
             dataToSendInspection.areas[index] = {
                 area: $(`#area-${index}`).val(),
@@ -1584,30 +1591,34 @@
             if(isConfirm){
                 dataToSendInspection.codigo =  isConfirm;
                 if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
-                    dataToSendInspection.cliente_id = $("#id_cliente").val();
-                    dataToSendInspection.sede_id = $("#select_sedes").val();
                     guardarCliente()
                     .then(res => {
+                        dataToSendInspection.cliente_id = res.id_cliente;
+                        dataToSendInspection.sede_id = res.id_sede;
                         guardarInspeccion(dataToSendInspection);
                     })
                     .catch(err => {
                         console.log(err)
                     })
                 }else{
+                    dataToSendInspection.cliente_id = $("#id_cliente").val();
+                    dataToSendInspection.sede_id = $("#select_sedes").val(); 
                     guardarInspeccion(dataToSendInspection);
                 }
             }else if(isConfirm == ''){
                 if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
-                    dataToSendInspection.cliente_id = $("#id_cliente").val();
-                    dataToSendInspection.sede_id = $("#select_sedes").val(); 
                     guardarCliente()
                     .then(res => {
+                        dataToSendInspection.cliente_id = res.id_cliente;
+                        dataToSendInspection.sede_id = res.id_sede;
                         guardarInspeccion(dataToSendInspection);
                     })
                     .catch(err => {
                         console.log(err)
                     }) 
                 }else{
+                    dataToSendInspection.cliente_id = $("#id_cliente").val();
+                    dataToSendInspection.sede_id = $("#select_sedes").val(); 
                     guardarInspeccion(dataToSendInspection);
                 }
                 

@@ -57,7 +57,7 @@ class ClientesController extends Controller
             $idCliente = DB::table('clientes')->insertGetId([
                 'estado_registro' => 'cliente_nuevo',
                 'nit_cedula' => $request->nit_cliente,
-                'nombre_cliente' => $requestnombre_cliente,
+                'nombre_cliente' => $request->nombre_cliente,
                 'sector_economico' => $request->sector_economico_cliente,
                 'municipio' => strtoupper($request->ciudad_cliente),
                 'direccion' => strtoupper($request->direccion_cliente),
@@ -89,7 +89,7 @@ class ClientesController extends Controller
                 ]);
             }
 
-            return response()->json("Create Success", 201);
+            return response()->json(["id_cliente" => $idCliente, "id_sede" => $idSede], 201);
         }else{
             $this->validate(request(), [
                 'nombre_cliente' => 'required'

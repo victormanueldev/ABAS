@@ -70,7 +70,7 @@
 
                                                     <div class="form-group col-lg-5">
                                                     <label class="control-label">Nit/Cedula *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" >
                                                     </div>
                                                     <div class="form-group col-lg-1">
                                                         <label class="control-label">D.V.</label>
@@ -96,12 +96,12 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Ciudad *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="municipio" placeholder="Municipio" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="municipio" placeholder="Municipio" class="form-control" >
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Barrio *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="barrio" placeholder="Barrio" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="barrio" placeholder="Barrio" class="form-control" >
 
                                                     </div>
 
@@ -121,7 +121,7 @@
                                                             <span class="input-group-btn">
                                                                 <button id="btn-add3" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                                             </span>
-                                                            <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" >
+                                                            <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
                                                         </div>               
                                                     </div>
 
