@@ -49,88 +49,128 @@ class ClientesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $this->validate(request(), [
-            'nombre_cliente' => 'required'
-        ]);
-
+    {   
         //Cliente
         $now = Carbon::now();
 
-        $idCliente = DB::table('clientes')->insertGetId([
-            'tipo_cliente' => $request->get('tipo_cliente'),
-            'estado_registro' => $request->get('estado_registro'),
-            'nit_cedula' => !empty($request->get('nit_number'))  ? strtoupper($request->get('nit_cedula'))."-".$request->get('nit_number') : strtoupper($request->get('nit_cedula')),
-            'nombre_cliente' => strtoupper($request->get('nombre_cliente')),
-            'razon_social' => !empty($request->get('razon_social')) ? strtoupper($request->get('razon_social')) : strtoupper($request->get('nombre_cliente')),
-            'sector_economico' => $request->get('sector_economico'),
-            'municipio' => strtoupper($request->get('municipio')),
-            'direccion' => strtoupper($request->get('barrio')),
-            'barrio' => strtoupper($request->get('direccion')),
-            'zona' => strtoupper($request->get('zona')),
-            'nombre_contacto_inicial' => strtoupper($request->get('contacto_inicial')),
-            'cargo_contacto_inicial' => strtoupper($request->get('cargo_contacto_inicial')),
-            'celular_contacto_inicial' => strtoupper($request->get('celular_contacto_inicial')),
-            'email_contacto_inicial' => strtoupper($request->get('email_contacto_inicial')),
-            'nombre_contacto_tecnico' => strtoupper($request->get('contacto_tecnico')),
-            'cargo_contacto_tecnico' => strtoupper($request->get('cargo_contacto_tecnico')),
-            'celular_contacto_tecnico' => strtoupper($request->get('celular_contacto_tecnico')),
-            'email_contacto_tecnico' => strtoupper($request->get('email_contacto_tecnico')),
-            'nombre_contacto_facturacion' => strtoupper($request->get('contacto_facturacion')),
-            'cargo_contacto_facturacion' => strtoupper($request->get('cargo_contacto_facturacion')),
-            'celular_contacto_facturacion' => strtoupper($request->get('celular_contacto_facturacion')),
-            'email_contacto_facturacion' => strtoupper($request->get('email_contacto_facturacion')),
-            'empresa_actual' => strtoupper($request->get('empresa_actual')),
-            'razon_cambio' => strtoupper($request->get('razon_cambio')),
-            'medio_contacto' => strtoupper($request->get('medio_contacto')),
-            'otro_medio' => strtoupper($request->get('otro_medio')),
-            'user_id' => Auth::user()->id,
-            'created_at' => $now,
-            'updated_at' => $now
-        ]);
-
-        //Sedes
-        if(!empty($request->get('nombre_sedes'))){
-            $idSede = DB::table('sedes')->insertGetId([
-                'nombre' => strtoupper($request->get('nombre_sedes')),
-                'direccion' => strtoupper($request->get('direccion_sedes')),
-                'ciudad' => strtoupper($request->get('ciudad_sedes')),
-                'barrio' => strtoupper($request->get('barrio_sedes')),
-                'zona_ruta' => strtoupper($request->get('zona_ruta')),
-                'nombre_contacto' => strtoupper($request->get('nombre_contacto')),
-                'telefono_contacto' => strtoupper($request->get('telefono_sedes')),
-                'celular_contacto' => strtoupper($request->get('celular_sedes')),
-                'email_contacto' => strtoupper($request->get('email_sedes')),
-                'cliente_id' => $idCliente,
+        if($request->ajax()){
+            $idCliente = DB::table('clientes')->insertGetId([
+                'estado_registro' => 'cliente_nuevo',
+                'nit_cedula' => $request->nit_cliente,
+                'nombre_cliente' => $requestnombre_cliente,
+                'sector_economico' => $request->sector_economico_cliente,
+                'municipio' => strtoupper($request->ciudad_cliente),
+                'direccion' => strtoupper($request->direccion_cliente),
+                'barrio' => strtoupper($request->barrio_cliente),
+                'nombre_contacto_inicial' => strtoupper($request->contacto_cliente),
+                'cargo_contacto_inicial' => strtoupper($request->cargo_cliente),
+                'celular_contacto_inicial' => strtoupper($request->celular_cliente),
+                'email_contacto_inicial' => strtoupper($request->email_cliente),
+                'user_id' => Auth::user()->id,
                 'created_at' => $now,
                 'updated_at' => $now
             ]);
-        }
-
-        if($request->fecha_inicio != '' || $request->fecha_inicio != null){
-            $evento = new Evento();
-            $dt = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);
-            $evento->tipo  = $request->tipo_evento;
-            $evento->fecha_inicio = $dt->toDateString()." ".$dt->toTimeString();
-            $evento->fecha_fin = $dt->addHour()->toDateTimeString();
-            $evento->asunto = $request->asunto;
-            $evento->cliente_id = $idCliente;
-            $evento->sede_id = !empty($idSede) ? $idSede : null;
-            $evento->user_id = Auth::user()->id;
-            $evento->save();
-        }
-
-        if ($request->telefono[0] != '' || $request->telefono[0] != null) {               
-
-            for ($i=0; $i < count($request->telefono) ; $i++) { 
-                Telefono::create([
-                    'numero' => $request->telefono[$i],
-                    'cliente_id' => $idCliente
+    
+            //Sedes
+            if(!empty($request->nombre_sede)){
+                $idSede = DB::table('sedes')->insertGetId([
+                    'nombre' => strtoupper($request->nombre_sede),
+                    'direccion' => strtoupper($request->direccion_sede),
+                    'ciudad' => strtoupper($request->ciudad_sede),
+                    'barrio' => strtoupper($request->barrio_sede),
+                    'zona_ruta' => strtoupper($request->zona_sede),
+                    'nombre_contacto' => strtoupper($request->contacto_sede),
+                    'telefono_contacto' => strtoupper($request->telefono_sede),
+                    'celular_contacto' => strtoupper($request->celular_sede),
+                    'email_contacto' => strtoupper($request->email_sede),
+                    'cliente_id' => $idCliente,
+                    'created_at' => $now,
+                    'updated_at' => $now
                 ]);
             }
+
+            return response()->json("Create Success", 201);
+        }else{
+            $this->validate(request(), [
+                'nombre_cliente' => 'required'
+            ]);
+
+    
+            $idCliente = DB::table('clientes')->insertGetId([
+                'tipo_cliente' => $request->get('tipo_cliente'),
+                'estado_registro' => $request->get('estado_registro'),
+                'nit_cedula' => !empty($request->get('nit_number'))  ? strtoupper($request->get('nit_cedula'))."-".$request->get('nit_number') : strtoupper($request->get('nit_cedula')),
+                'nombre_cliente' => strtoupper($request->get('nombre_cliente')),
+                'razon_social' => !empty($request->get('razon_social')) ? strtoupper($request->get('razon_social')) : strtoupper($request->get('nombre_cliente')),
+                'sector_economico' => $request->get('sector_economico'),
+                'municipio' => strtoupper($request->get('municipio')),
+                'direccion' => strtoupper($request->get('barrio')),
+                'barrio' => strtoupper($request->get('direccion')),
+                'zona' => strtoupper($request->get('zona')),
+                'nombre_contacto_inicial' => strtoupper($request->get('contacto_inicial')),
+                'cargo_contacto_inicial' => strtoupper($request->get('cargo_contacto_inicial')),
+                'celular_contacto_inicial' => strtoupper($request->get('celular_contacto_inicial')),
+                'email_contacto_inicial' => strtoupper($request->get('email_contacto_inicial')),
+                'nombre_contacto_tecnico' => strtoupper($request->get('contacto_tecnico')),
+                'cargo_contacto_tecnico' => strtoupper($request->get('cargo_contacto_tecnico')),
+                'celular_contacto_tecnico' => strtoupper($request->get('celular_contacto_tecnico')),
+                'email_contacto_tecnico' => strtoupper($request->get('email_contacto_tecnico')),
+                'nombre_contacto_facturacion' => strtoupper($request->get('contacto_facturacion')),
+                'cargo_contacto_facturacion' => strtoupper($request->get('cargo_contacto_facturacion')),
+                'celular_contacto_facturacion' => strtoupper($request->get('celular_contacto_facturacion')),
+                'email_contacto_facturacion' => strtoupper($request->get('email_contacto_facturacion')),
+                'empresa_actual' => strtoupper($request->get('empresa_actual')),
+                'razon_cambio' => strtoupper($request->get('razon_cambio')),
+                'medio_contacto' => strtoupper($request->get('medio_contacto')),
+                'otro_medio' => strtoupper($request->get('otro_medio')),
+                'user_id' => Auth::user()->id,
+                'created_at' => $now,
+                'updated_at' => $now
+            ]);
+    
+            //Sedes
+            if(!empty($request->get('nombre_sedes'))){
+                $idSede = DB::table('sedes')->insertGetId([
+                    'nombre' => strtoupper($request->get('nombre_sedes')),
+                    'direccion' => strtoupper($request->get('direccion_sedes')),
+                    'ciudad' => strtoupper($request->get('ciudad_sedes')),
+                    'barrio' => strtoupper($request->get('barrio_sedes')),
+                    'zona_ruta' => strtoupper($request->get('zona_ruta')),
+                    'nombre_contacto' => strtoupper($request->get('nombre_contacto')),
+                    'telefono_contacto' => strtoupper($request->get('telefono_sedes')),
+                    'celular_contacto' => strtoupper($request->get('celular_sedes')),
+                    'email_contacto' => strtoupper($request->get('email_sedes')),
+                    'cliente_id' => $idCliente,
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ]);
+            }
+    
+            if($request->fecha_inicio != '' || $request->fecha_inicio != null){
+                $evento = new Evento();
+                $dt = Carbon::parse($request->fecha_inicio." ".$request->hora_inicio);
+                $evento->tipo  = $request->tipo_evento;
+                $evento->fecha_inicio = $dt->toDateString()." ".$dt->toTimeString();
+                $evento->fecha_fin = $dt->addHour()->toDateTimeString();
+                $evento->asunto = $request->asunto;
+                $evento->cliente_id = $idCliente;
+                $evento->sede_id = !empty($idSede) ? $idSede : null;
+                $evento->user_id = Auth::user()->id;
+                $evento->save();
+            }
+    
+            if ($request->telefono[0] != '' || $request->telefono[0] != null) {               
+    
+                for ($i=0; $i < count($request->telefono) ; $i++) { 
+                    Telefono::create([
+                        'numero' => $request->telefono[$i],
+                        'cliente_id' => $idCliente
+                    ]);
+                }
+            }
+            \Flash::success('Cliente creado correctamente.')->important();
+                return Redirect::to('/clientes/create');
         }
-        \Flash::success('Cliente creado correctamente.')->important();
-         return Redirect::to('/clientes/create');
         
     }
 

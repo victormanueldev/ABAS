@@ -17,15 +17,15 @@ class CreateSedesTable extends Migration
             $table->increments('id');//Identificador BD
             //Informacion de la Sede
             $table->string('nombre', 100);
-            $table->string('direccion', 100);
-            $table->string('ciudad', 100);
-            $table->string('barrio', 100);
-            $table->string('zona_ruta', 100);
+            $table->string('direccion', 100)->nullable();
+            $table->string('ciudad', 100)->nullable();
+            $table->string('barrio', 100)->nullable();
+            $table->string('zona_ruta', 100)->nullable();
             //Informacion del Contacto
-            $table->string('nombre_contacto', 100);
-            $table->string('telefono_contacto', 15);
-            $table->string('celular_contacto', 20);
-            $table->string('email_contacto', 100);
+            $table->string('nombre_contacto', 100)->nullable();
+            $table->string('telefono_contacto', 15)->nullable();
+            $table->string('celular_contacto', 20)->nullable();
+            $table->string('email_contacto', 100)->nullable();
             //Informacion del Cliente
             $table->integer('cliente_id');
             $table->timestamps();

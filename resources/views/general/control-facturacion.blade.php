@@ -395,7 +395,6 @@
 
             $("#tabla_clientes_cont tbody").on('click', 'tr', function () {
                 let dataToSend = table.row(this).data();
-                console.log()
                 //Alert de confirmacion
                 swal({
                     title: "Información!",

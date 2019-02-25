@@ -97,14 +97,14 @@
                                                 <input id="radio-1" type="radio" value="create"  name="option-client" class="i-checks"/>
                                                 <span class="m-l-xs" style="position: relative;margin-right: 20px;">Crear cliente nuevo</span>
 
-                                                <input id="radio-2" type="radio" value="exist"  name="option-client" class="i-checks" />
+                                                <input id="radio-2" type="radio" value="exist"  name="option-client" class="i-checks" checked />
                                                 <span class="m-l-xs">Seleccionar cliente existente</span>
                                             </div>
                                         </div>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-6" id="select-filter">
                                         <label class="control-label">Razón Social/Nombre *</label>
 
                                         <!-- Select con Autocompletar-->
@@ -117,14 +117,20 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                        <input type="text" id="input-nit" name="input-nit" placeholder="Nit ó Cedula"
+                                    <div class="form-group col-lg-6" id="input-create">
+                                            <label class="control-label">Razón Social/Nombre *</label>
+                                            <input type="text" style="text-transform: uppercase" id="nombre_cliente" name="nombre_cliente" placeholder="Razon social o Nombre del Cliente"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula </label>
+                                        <input type="text" style="text-transform: uppercase" type="text" id="input-nit" name="input-nit" placeholder="Nit ó Cedula"
                                             class="form-control">
 
                                     </div>
 
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Sector Ecónomico *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Sector Ecónomico </label>
                                         <input type="text" style="text-transform: uppercase" id="input-sector" name="input-sector" placeholder="Sector economico de cliente"
                                             class="form-control">
 
@@ -132,44 +138,44 @@
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
                                         <input type="text" style="text-transform: uppercase" id="input-direccion" name="input-direccion" placeholder="Dirección de cliente"
-                                            class="form-control">
+                                            class="form-control" required>
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Ciudad </label>
                                         <input type="text" style="text-transform: uppercase" id="input-ciudad" name="input-ciudad" placeholder="Ciudad del cliente"
                                             class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Barrio </label>
                                         <input type="text" style="text-transform: uppercase" id="input-barrio" name="input-barrio" placeholder="Barrio del cliente"
                                             class="form-control">
 
                                     </div>
 
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Inicial</label>
                                         <input type="text" style="text-transform: uppercase" id="input-contacto" name="input-contacto" placeholder="Nombre de contacto del servicio"
                                             class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Cargo </label>
                                         <input type="text" style="text-transform: uppercase" id="input-cargo" name="input-cargo" placeholder="Zona del cliente"
                                             class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Celular o Teléfono *</label>
                                         <input type="text" style="text-transform: uppercase" id="input-celular" name="input-celular" placeholder="Celular del contacto a facturar"
-                                            class="form-control">
+                                            class="form-control" required>
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email" id="input-email" name="input-email" placeholder="Email del contacto a facturar"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" type="email" id="input-email" name="input-email" placeholder="Email del contacto a facturar"
+                                            class="form-control" required>
 
                                     </div>
 
@@ -180,19 +186,22 @@
                                     </div>
 
 
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-6" id="select-filter-sede">
                                         <label class="control-label">Razón Social/Nombre *</label>
-
                                         <select style="text-transform: uppercase" class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
-
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula *</label>
-                                        <input type="text" id="input-sede-nit" name="input-sede-nit" placeholder="Nit ó Cedula"
+                                    <div class="form-group col-lg-6" id="input-nombre-sede">
+                                        <label class="control-label">Razón Social/Nombre Sede*</label>
+                                        <input style="text-transform: uppercase" type="text" id="nombre_sede" name="input-sede-nit" placeholder="Razon social o nombre de sede"
                                             class="form-control">
+                                    </div>
 
+                                    <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula </label>
+                                        <input type="text" style="text-transform: uppercase" type="text" id="input-sede-nit" name="input-sede-nit" placeholder="Nit ó Cedula"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
@@ -201,23 +210,23 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Ciudad </label>
                                         <input type="text" style="text-transform: uppercase" id="input-sede-ciudad" name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
                                             class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Barrio </label>
                                         <input type="text" style="text-transform: uppercase" id="input-sede-barrio" name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Zona </label>
                                         <input type="text" style="text-transform: uppercase" id="input-sede-zona" name="input-sede-zona" placeholder="Zona donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Contacto </label>
                                         <input type="text" style="text-transform: uppercase" id="input-sede-contacto" name="input-sede-contacto"
                                             placeholder="Nombre de contacto del lugar" class="form-control">
 
@@ -229,13 +238,13 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Celular </label>
                                         <input type="text" style="text-transform: uppercase" id="input-sede-celular" name="input-sede-celular"
                                             placeholder="Celular del contacto del lugar" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
-                                        <input type="email" id="input-sede-email" name="input-sede-email" placeholder="Email del contacto del servicio"
+                                        <input type="text" style="text-transform: uppercase" type="email" id="input-sede-email" name="input-sede-email" placeholder="Email del contacto del servicio"
                                             class="form-control">
 
                                     </div>
@@ -766,6 +775,10 @@
 
     $(document).ready(function () {
 
+        /** Ocultar inputs de crear cliente/sede **/
+        $("#input-create").addClass("hidden")
+        $("#input-nombre-sede").addClass("hidden")
+
         /** Inicializacion del iCheck **/
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
@@ -848,8 +861,19 @@
             outputFormat: "number"
         })
 
+        //Ocultar/Mostar input para crear cliente o filtrarlo en caso de existir
         $("#radio-1, #radio-2").on('ifChecked', function(e){
-            console.log($("input[name=option-client]:checked", '#client-options').val())
+            if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
+                $("#input-create").removeClass("hidden")
+                $("#select-filter").addClass("hidden")
+                $("#select-filter-sede").addClass("hidden")
+                $("#input-nombre-sede").removeClass("hidden")
+            }else{
+                $("#input-create").addClass("hidden")
+                $("#select-filter").removeClass("hidden")
+                $("#select-filter-sede").addClass("hidden")
+                $("#input-nombre-sede").removeClass("hidden")
+            }
         })
         
 
@@ -1343,9 +1367,46 @@
         }
     }
 
+    function guardarCliente() {
+        var dataCliente = {
+            nombre_cliente:$("#nombre_cliente").val(),
+            nit_cliente:$("#input-nit").val(),
+            direccion_cliente:$("#input-direccion").val(),
+            ciudad_cliente:$("#input-ciudad").val(),
+            barrio_cliente:$("#input-barrio").val(),
+            contacto_cliente:$("#input-contacto").val(),
+            cargo_cliente:$("#input-cargo").val(),
+            sector_economico_cliente:$("#input-sector").val(),
+            celular_cliente:$("#input-celular").val(),
+            email_cliente:$("#input-email").val(),
+            nombre_sede:$("#nombre_sede").val(),
+            direccion_sede:$("#input-sede-direccion").val(),
+            ciudad_sede:$("#input-sede-ciudad").val(),
+            barrio_sede:$("#input-sede-barrio").val(),
+            zona_sede:$("#input-sede-zona").val(),
+            contacto_sede:$("#input-sede-contacto").val(),
+            telefono_sede:$("#input-sede-telefono").val(),
+            celular_sede:$("#input-sede-celular").val(),
+            email_sede:$("#input-sede-email").val(),
+        }
+        return $.ajax({
+            url: '/clientes',
+            data:dataCliente,
+            type: 'POST',
+            headers:{
+                "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
+            },
+            success: (res) => {
+                return res;
+            },
+            error: (err) => {
+                return err;
+            }
+        })
+    }
+
     //Peticion HTTP POST para guardar el formato
     function guardarInspeccion(dataSend){
-        console.log("G")
         $.ajax({
             url: '/inspeccion',
             data: dataSend,
@@ -1371,7 +1432,8 @@
     -----------------------------------------------------*/
     $('#form-inspeccion').submit(e => {
         e.preventDefault();
-        var dataToSend = {
+        
+        var dataToSendInspection = {
             codigo: '',
             nombre_usuario: '',
             fecha: '',
@@ -1405,7 +1467,7 @@
 
         //Plan de saneamiento
         for (let index = 0; index < contVisitas; index++) {
-            dataToSend.visitas[index] = {
+            dataToSendInspection.visitas[index] = {
                 num_visita: $(`#num_visita-${index}`).val(),
                 duracion: (parseInt($(`#num_horas_visita-${index}`).val()) * 60) + parseInt($(`#num_minutos_visita-${index}`).val())
             }
@@ -1413,7 +1475,7 @@
 
         //Detalle del servicio correctivo y/o preventivo
         for (let index = 0; index < contServicio; index++) {
-            dataToSend.detalle_servicios[index] = {
+            dataToSendInspection.detalle_servicios[index] = {
                 tipo_servicio: $(`#servicio_detalle-${index}`).val(),
                 valor_servicio: valoresServicios[index].rawValue,
                 frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
@@ -1424,7 +1486,7 @@
 
         //Numero de residencias
         for (let index = 0; index < contResidencias; index++) {
-            dataToSend.residencias[index] = {
+            dataToSendInspection.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
                 valor_residencia: valoresResidencias[index].rawValue,
                 tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(`#num_minutos_residencia-${index}`).val()),
@@ -1434,7 +1496,7 @@
 
         //Compra de dispositivos
         for (let index = 0; index < contDispositivos; index++) {
-            dataToSend.compra_dispositivos[index] = {
+            dataToSendInspection.compra_dispositivos[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
                 valor_sin_iva: valoresSinIvaDispositivos.rawValue,
@@ -1445,7 +1507,7 @@
         
         //Dispositivos en comodato
         for (let index = 0; index < contComodatos; index++) {
-            dataToSend.dispositivos_comodato[index] = {
+            dataToSendInspection.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
                 valor_sin_iva: valoresSinIvaComodato.rawValue,
@@ -1456,7 +1518,7 @@
 
         //Gestion de calidad
         for (let index = 0; index < contDocs; index++) {
-            dataToSend.gestion_calidad[index] = {
+            dataToSendInspection.gestion_calidad[index] = {
                 tipo_documento: $(`#tipo_doc-${index}`).val(),
                 frecuencia_documento: $(`#frecuencia_doc-${index}`).val(),
                 observacion_documento: $(`#observacion_doc-${index}`).val(),
@@ -1465,7 +1527,7 @@
 
         //Areas de inspeccion
         for (let index = 0; index < contAreas; index++) {
-            dataToSend.areas[index] = {
+            dataToSendInspection.areas[index] = {
                 area: $(`#area-${index}`).val(),
                 tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) * 60) + parseInt($(`#num_minutos_area-${index}`).val()),
                 plagas_area: $(`#plagas_area-${index}`).val(),
@@ -1474,34 +1536,32 @@
             
         }
         
-        dataToSend.codigo = codigoAleatorio();
-        dataToSend.nombre_usuario = $("#nombre_usuario").val();
-        dataToSend.fecha  = $("#fecha_creacion").val();
-        dataToSend.frecuencia = $("#frecuencia_servicio").val();
-        dataToSend.observaciones = $("#observaciones_tecnico").val();
-        dataToSend.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
-        dataToSend.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
-        dataToSend.observaciones_visitas = $("#observaciones_plan").val();
-        dataToSend.total_detalle_servicios = $("#total_servicio_detalle").val();
-        dataToSend.tipo_facturacion = $("#tipo_facturacion").val();
-        dataToSend.forma_pago = $("#forma_pago").val();
-        dataToSend.contrato = $("#contrato").val() == 'si' ? true : false;
-        dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
-        dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
-        dataToSend.cant_trampas = $("#cant_trampas_impacto").val();
-        dataToSend.cant_jaulas = $("#cant_jaulas").val();
-        dataToSend.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
-        dataToSend.observaciones_estaciones = $("#observaciones_estaciones").val();
-        dataToSend.cant_cajas_alca_elec = $("#cant_cajas").val();
-        dataToSend.sumideros = $("#cant_sumideros").val();
-        dataToSend.cliente_id = $("#id_cliente").val();
-        dataToSend.sede_id = $("#select_sedes").val();
+        dataToSendInspection.codigo = codigoAleatorio();
+        dataToSendInspection.nombre_usuario = $("#nombre_usuario").val();
+        dataToSendInspection.fecha  = $("#fecha_creacion").val();
+        dataToSendInspection.frecuencia = $("#frecuencia_servicio").val();
+        dataToSendInspection.observaciones = $("#observaciones_tecnico").val();
+        dataToSendInspection.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
+        dataToSendInspection.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
+        dataToSendInspection.observaciones_visitas = $("#observaciones_plan").val();
+        dataToSendInspection.total_detalle_servicios = $("#total_servicio_detalle").val();
+        dataToSendInspection.tipo_facturacion = $("#tipo_facturacion").val();
+        dataToSendInspection.forma_pago = $("#forma_pago").val();
+        dataToSendInspection.contrato = $("#contrato").val() == 'si' ? true : false;
+        dataToSendInspection.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
+        dataToSendInspection.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
+        dataToSendInspection.cant_trampas = $("#cant_trampas_impacto").val();
+        dataToSendInspection.cant_jaulas = $("#cant_jaulas").val();
+        dataToSendInspection.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
+        dataToSendInspection.observaciones_estaciones = $("#observaciones_estaciones").val();
+        dataToSendInspection.cant_cajas_alca_elec = $("#cant_cajas").val();
+        dataToSendInspection.sumideros = $("#cant_sumideros").val();
 
-        console.log(dataToSend)
+        console.log(dataToSendInspection)
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
             title: "Código de Inspección",
-            text: "Código generado: "+dataToSend.codigo+", escribe otro código aquí: ",
+            text: "Código generado: "+dataToSendInspection.codigo+", escribe otro código aquí: ",
             icon: "warning",
             content: {
                 element: "input",
@@ -1521,12 +1581,35 @@
             dangerMode: false,
         })
         .then(isConfirm => {
-            console.log(isConfirm)
             if(isConfirm){
-                dataToSend.codigo =  isConfirm;
-                guardarInspeccion(dataToSend);
+                dataToSendInspection.codigo =  isConfirm;
+                if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
+                    dataToSendInspection.cliente_id = $("#id_cliente").val();
+                    dataToSendInspection.sede_id = $("#select_sedes").val();
+                    guardarCliente()
+                    .then(res => {
+                        guardarInspeccion(dataToSendInspection);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                }else{
+                    guardarInspeccion(dataToSendInspection);
+                }
             }else if(isConfirm == ''){
-                guardarInspeccion(dataToSend);
+                if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
+                    dataToSendInspection.cliente_id = $("#id_cliente").val();
+                    dataToSendInspection.sede_id = $("#select_sedes").val(); 
+                    guardarCliente()
+                    .then(res => {
+                        guardarInspeccion(dataToSendInspection);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    }) 
+                }else{
+                    guardarInspeccion(dataToSendInspection);
+                }
                 
             }else{
              return    

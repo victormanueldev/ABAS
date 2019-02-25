@@ -201,10 +201,6 @@
                     console.log(err);
                 });
             });
-<<<<<<< HEAD
-
-=======
->>>>>>> 758ec197e040f3639c1577dac55f10254b6cc78b
     })
 </script>
 @endsection
