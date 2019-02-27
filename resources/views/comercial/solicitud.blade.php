@@ -60,32 +60,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Inspector Comercial:</label>
-                                        <input style="text-transform: uppercase" type="text" id="nombre_usuario" name="nombre-usuario"
-                                            placeholder="" class="form-control" >
-                                        <br>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Frecuencia del Servicio</label>
-
-                                        <select style="text-transform: uppercase" class="form-control" id="frecuencia_servicio"
-                                            name="frecuencia_servicio" required>
-                                            <option value="" selected>Seleccione una frecuencia</option>
-                                            <option value="Semanal">SEMANAL</option>
-                                            <option value="Quincenal">QUINCENAL</option>
-                                            <option value="Mensual">MENSUAL</option>
-                                            <option value="Bimestral">BIMESTRAL</option>
-                                            <option value="Trimestral">TRIMESTRAL</option>
-                                            <option value="Cuatrimestral">CUATRIMESTRAL</option>
-                                            <option value="Semestral">SEMESTRAL</option>
-                                            <option value="Anual">ANUAL</option>
-                                            <option value="Ocasional">OCASIONAL</option>
-                                        </select>
-
-                                    </div>
-
 
                                     <div class="ibox-title col-lg-12">
                                         <h3>Facturar a Nombre de:</h3>
@@ -100,7 +74,8 @@
                                             name="id_cliente" required>
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
-                                        <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
+                                            <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." -
+                                                ".$cliente->razon_social}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -113,45 +88,45 @@
 
 
                                     <div class="form-group col-lg-6"><label class="control-label">Sector Ecónomico *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sector" name="input-sector" placeholder="Sector economico de cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sector" name="input-sector"
+                                            placeholder="Sector economico de cliente" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-direccion" name="input-direccion" placeholder="Dirección de cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-direccion" name="input-direccion"
+                                            placeholder="Dirección de cliente" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-ciudad" name="input-ciudad" placeholder="Ciudad del cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-ciudad" name="input-ciudad"
+                                            placeholder="Ciudad del cliente" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-barrio" name="input-barrio" placeholder="Barrio del cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-barrio" name="input-barrio"
+                                            placeholder="Barrio del cliente" class="form-control">
 
                                     </div>
 
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-contacto" name="input-contacto" placeholder="Nombre de contacto del servicio"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-contacto" name="input-contacto"
+                                            placeholder="Nombre de contacto del servicio" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Cargo *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-cargo" name="input-cargo" placeholder="Zona del cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-cargo" name="input-cargo"
+                                            placeholder="Zona del cliente" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-celular" name="input-celular" placeholder="Celular del contacto a facturar"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-celular" name="input-celular"
+                                            placeholder="Celular del contacto a facturar" class="form-control">
 
                                     </div>
 
@@ -171,7 +146,8 @@
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Razón Social/Nombre *</label>
 
-                                        <select style="text-transform: uppercase" class="form-control" id="select_sedes" name="id_sede">
+                                        <select style="text-transform: uppercase" class="form-control" id="select_sedes"
+                                            name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
 
@@ -184,42 +160,47 @@
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-direccion" name="input-sede-direccion"
-                                            placeholder="Dirección de donde se realizará el servicio" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-direccion"
+                                            name="input-sede-direccion" placeholder="Dirección de donde se realizará el servicio"
+                                            class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-ciudad" name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-ciudad"
+                                            name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-barrio" name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-barrio"
+                                            name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Zona *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-zona" name="input-sede-zona" placeholder="Zona donde se realizará el servicio"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-zona" name="input-sede-zona"
+                                            placeholder="Zona donde se realizará el servicio" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-contacto" name="input-sede-contacto"
-                                            placeholder="Nombre de contacto del lugar" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-contacto"
+                                            name="input-sede-contacto" placeholder="Nombre de contacto del lugar" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-telefono" name="input-sede-telefono"
-                                            placeholder="Teléfono del contacto del servicio" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-telefono"
+                                            name="input-sede-telefono" placeholder="Teléfono del contacto del servicio"
+                                            class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-celular" name="input-sede-celular"
-                                            placeholder="Celular del contacto del lugar" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-celular"
+                                            name="input-sede-celular" placeholder="Celular del contacto del lugar"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email *</label>
@@ -234,34 +215,49 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Factura *</label>
-                                        <input type="text" style="text-transform: uppercase" placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
-                                            id="contacto_name_factura" class="form-control" style="display: block;">
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Inspector Comercial:</label>
+                                        <input style="text-transform: uppercase" type="text" id="nombre_usuario" name="nombre-usuario"
+                                            placeholder="" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label class="control-label">Frecuencia del Servicio</label>
+                                        <input style="text-transform: uppercase" type="text" id="frecuencia_servicio"
+                                            name="frecuencia_servicio" placeholder="" class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
-                                        <input type="text" style="text-transform: uppercase" placeholder="Teléfono del contacto a facturar" name="contacto-telefono-factura"
-                                            id="contacto_telefono_factura" class="form-control">
+                                    <div class="form-group col-lg-4"><label class="control-label">Contacto Factura *</label>
+                                        <input type="text" style="text-transform: uppercase" placeholder="Nombre del contacto a facturar"
+                                            name="contacto-name-factura" id="contacto_name_factura" class="form-control"
+                                            style="display: block;">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" style="text-transform: uppercase" placeholder="Celular del contacto a facturar" name="contacto-celular-factura"
-                                            id="contacto_celular_factura" class="form-control">
+                                    <div class="form-group col-lg-4"><label class="control-label">Teléfono </label>
+                                        <input type="text" style="text-transform: uppercase" placeholder="Teléfono del contacto a facturar"
+                                            name="contacto-telefono-factura" id="contacto_email_factura" class="form-control">
+
+                                    </div>
+
+                                    <div class="form-group col-lg-4"><label class="control-label">Celular *</label>
+                                        <input type="text" style="text-transform: uppercase" placeholder="Celular del contacto a facturar"
+                                            name="contacto-celular-factura" id="contacto_celular_factura" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-12">
                                         <label>Instrucciones y Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
                                             rows="3" name="instrucciones" id="observaciones_tecnico" required></textarea>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Plan de Saneamiento</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i
-                                                class="fa fa-plus"></i> Agregar visitas</button>
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-visitas"><i class="fa fa-plus"></i> Agregar visitas</button>
                                         <hr>
                                         <br>
                                     </div>
@@ -269,8 +265,8 @@
                                     <div class="row" style="padding: 15px 15px" id="visitas">
                                         <div class="form-group col-lg-2">
                                             <label class="control-label"># Visita</label>
-                                            <input type="number" min=0 name="num_visita-0" id="num_visita-0" placeholder="Ej: 1"
-                                                class="form-control">
+                                            <input type="number" min=0 name="num_visita-0" id="num_visita-0"
+                                                placeholder="Ej: 1" class="form-control">
                                         </div>
                                         <div class="form-group col-lg-4 b-r">
                                             <label>Duración del servicio</label>
@@ -302,7 +298,8 @@
 
                                     <div class="form-group col-lg-4">
                                         <label>Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                             rows="1" name="observaciones_plan" id="observaciones_plan"></textarea>
                                     </div>
 
@@ -310,8 +307,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-servicio"><i
-                                                class="fa fa-plus"></i> Agregar servicio</button>
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-servicio"><i class="fa fa-plus"></i> Agregar servicio</button>
                                         <hr>
                                         <br>
                                     </div>
@@ -319,9 +316,8 @@
                                     <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Servicio a incluir</label>
-                                            <select style="text-transform: uppercase" id="servicio_detalle-0" class="form-control">
-
-                                            </select>
+                                            <input type="text" min=0 name="servicio_detalle-0" id="servicio_detalle-0"
+                                                placeholder="Servicio" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
@@ -332,23 +328,14 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Frecuencia</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0" class="form-control">
-                                                <option value="" selected>Seleccione una frecuencia</option>
-                                                <option value="Semanal">SEMANAL</option>
-                                                <option value="Quincenal">QUINCENAL</option>
-                                                <option value="Mensual">MENSUAL</option>
-                                                <option value="Bimestral">BIMESTRAL</option>
-                                                <option value="Trimestral">TRIMESTRAL</option>
-                                                <option value="Cuatrimestral">CUATRIMESTRAL</option>
-                                                <option value="Semestral">SEMESTRAL</option>
-                                                <option value="Anual">ANUAL</option>
-                                                <option value="Ocasional">OCASIONAL</option>
-                                            </select>
+                                            <input type="text" min=0 name="frecuencia_servicio_detalle-0" id="frecuencia_servicio_detalle-0"
+                                                placeholder="Frecuencia" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                                class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacion_servicio_detalle-0" id="observacion_servicio_detalle-0"></textarea>
                                         </div>
                                     </div>
@@ -402,8 +389,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Número de Residencias</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-residencia"><i
-                                                class="fa fa-plus"></i> Agregar residencia</button>
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-residencia"><i class="fa fa-plus"></i> Agregar residencia</button>
                                         <hr>
                                         <br>
                                     </div>
@@ -440,7 +427,8 @@
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                                class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observaciones_residencia-0" id="observaciones_residencia-0"></textarea>
                                         </div>
                                     </div>
@@ -473,8 +461,8 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Jaulas</label>
-                                        <input type="number" min=0 name="cant_jaulas" id="cant_jaulas"
-                                            placeholder="Valor total" class="form-control">
+                                        <input type="number" min=0 name="cant_jaulas" id="cant_jaulas" placeholder="Valor total"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -485,14 +473,15 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" name="observaciones_estaciones" id="observaciones_estaciones" placeholder="Escriba aquí las observaciones"
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            name="observaciones_estaciones" id="observaciones_estaciones" placeholder="Escriba aquí las observaciones"
                                             rows="1" class="form-control"></textarea>
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cajas de alcantarilla y eléctricas</label>
-                                        <input type="number" min=0 name="cant_cajas" id="cant_cajas"
-                                            placeholder="Valor total" class="form-control">
+                                        <input type="number" min=0 name="cant_cajas" id="cant_cajas" placeholder="Valor total"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -505,8 +494,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Compra de Dispositivos</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo"><i
-                                                class="fa fa-plus"></i> Agregar dispositivo</button>
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-dispositivo"><i class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
                                     </div>
@@ -515,43 +504,32 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select style="text-transform: uppercase" id="tipo_dispositivo-0" class="form-control">
-                                                <option style="text-transform: uppercase" value="" selected>Seleccione una opción</option>
-                                                <option style="text-transform: uppercase" value="estaciones_de_roedor">ESTACIONES DE ROEDOR</option>
-                                                <option style="text-transform: uppercase" value="identificadores_estaciones">IDENTIFICADORES DE ESTACIONES</option>
-                                                <option style="text-transform: uppercase" value="lamparas_de_lamina_adhesiva">LAMPARAS DE LAMINA ADHESIVA</option>
-                                                <option style="text-transform: uppercase" value="lamparas de lamina_adhesiva_p">LAMPARAS DE LAMINA ADHESIVA PLA.</option>
-                                                <option style="text-transform: uppercase" value="lamparas_insetocutoras">LAMPARAS INSECTOCUTORA</option>
-                                                <option style="text-transform: uppercase" value="identificadores_lamparas">IDENTIFICADORES DE LAMPARAS</option>
-                                                <option style="text-transform: uppercase" value="jaula_pequena">JAULA PEQUEÑA</option>
-                                                <option style="text-transform: uppercase" value="jaula_grande">JAULA GRANDE</option>
-                                                <option style="text-transform: uppercase" value="trampa_de_impacto_plastica">TRAMPA DE IMPACTO PLASTICA</option>
-                                                <option style="text-transform: uppercase" value="trampa_de_impacto_madera">TRAMPA DE PLASTICO MADERA</option>
-                                                <option style="text-transform: uppercase" value="cebadero_moscas">CEBADERO DE MOSCAS</option>
-                                            </select>
+                                            <input type="text" id="tipo_dispositivo-0" name="tipo_dispositivo-0"
+                                                placeholder="" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-1">
                                             <label class="control-label">Cant.</label>
-                                            <input type="text" id="cant_dispositivo-0" name="cant_dispositivo-0" placeholder=""
-                                                class="form-control">
+                                            <input type="text" id="cant_dispositivo-0" name="cant_dispositivo-0"
+                                                placeholder="" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo-0" name="valor_sin_iva_dispositivo-0" placeholder="Nombre de dispositivo"
-                                                class="form-control">
+                                            <input type="text" id="valor_sin_iva_dispositivo-0" name="valor_sin_iva_dispositivo-0"
+                                                placeholder="Nombre de dispositivo" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo-0" name="total_dispositivo-0" placeholder="Nombre de dispositivo"
-                                                class="form-control">
+                                            <input type="text" id="total_dispositivo-0" name="total_dispositivo-0"
+                                                placeholder="Nombre de dispositivo" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                                class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacion_dispositivo-0" id="observacion_dispositivo-0"></textarea>
                                         </div>
 
@@ -561,8 +539,9 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Dispositivos en Comodato para esta Propuesta</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo-comodato"><i
-                                                class="fa fa-plus"></i> Agregar dispositivo</button>
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-dispositivo-comodato"><i class="fa fa-plus"></i> Agregar
+                                            dispositivo</button>
                                         <hr>
                                         <br>
                                     </div>
@@ -571,7 +550,8 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-0"
+                                                class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="estaciones_de_roedor">estaciones de roedor</option>
                                                 <option value="identificadores_estaciones">identificadores de
@@ -591,25 +571,26 @@
 
                                         <div class="form-group col-lg-1">
                                             <label class="control-label">Cant.</label>
-                                            <input type="text" id="cant_dispositivo_comodato-0" name="cant_dispositivo_comodato-0" placeholder=""
-                                                class="form-control">
+                                            <input type="text" id="cant_dispositivo_comodato-0" name="cant_dispositivo_comodato-0"
+                                                placeholder="" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0" name="valor_sin_iva_dispositivo_comodato-0" placeholder="Nombre de dispositivo"
-                                                class="form-control">
+                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0" name="valor_sin_iva_dispositivo_comodato-0"
+                                                placeholder="Nombre de dispositivo" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo_comodato-0" name="total_dispositivo_comodato-0" placeholder="Nombre de dispositivo"
-                                                class="form-control">
+                                            <input type="text" id="total_dispositivo_comodato-0" name="total_dispositivo_comodato-0"
+                                                placeholder="Nombre de dispositivo" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                                class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacione_dispositivo_comodato-0" id="observacione_dispositivo_comodato-0"></textarea>
                                         </div>
 
@@ -619,8 +600,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Gestion de calidad</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-doc"><i
-                                                class="fa fa-plus"></i> Agregar documento</button>
+                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-doc"><i class="fa fa-plus"></i> Agregar documento</button>
                                         <hr>
                                         <br>
                                     </div>
@@ -628,34 +609,20 @@
                                     <div class="row" id="gestion-calidad" style="padding: 15px 15px">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Tipo de documento</label>
-                                            <select style="text-transform: uppercase" id="tipo_doc-0" class="form-control">
-                                                <option value="" selected>Seleccione una opción</option>
-                                                <option value="diagnostico_inicial">diagnostico inicial</option>
-                                                <option value="cronograma_servicios">cronograma de servicios</option>
-                                                <option value="mapas_estaciones_lamparas">mapas de estaciones/lamparas</option>
-                                                <option value="visitas_calidad">visitas_calidad</option>
-                                            </select>
+                                            <input type="text" id="tipo_doc-0" name="tipo_doc-0" placeholder="Nombre del Documento"
+                                                class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Frecuencia.</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_doc-0" class="form-control">
-                                                <option value="" selected>Seleccione una opción</option>
-                                                <option value="mensual">mensual</option>
-                                                <option value="semanal">semanal</option>
-                                                <option value="quincenal">quincenal</option>
-                                                <option value="bimestral">bimestral</option>
-                                                <option value="trimestral">trimestral</option>
-                                                <option value="cuatrimestral">cuatrimestral</option>
-                                                <option value="semestral">semestral</option>
-                                                <option value="anual">anual</option>
-                                                <option value="ocasional">ocasional</option>
-                                            </select>
+                                            <input type="text" id="frecuencia_doc-0" name="frecuencia_doc-0"
+                                                placeholder="Frecuencia del Documento" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                                class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                                 rows="1" name="observacion_doc-0" id="observacion_doc-0"></textarea>
                                         </div>
                                     </div>
@@ -674,7 +641,8 @@
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Otro ¿Cúal?</label>
-                                        <input type="text" id="otro" name="otro" placeholder="Otros medios" class="form-control" disabled>
+                                        <input type="text" id="otro" name="otro" placeholder="Otros medios" class="form-control"
+                                            disabled>
                                         <br>
                                     </div>
 
@@ -715,21 +683,21 @@
         var date = moment().format("YYYY-MM-DD");
         $('#fecha_creacion').val(date);
         $.get('/tipos')
-        .then(res => {
-            servicios = res;
-            servicios.forEach((value,index) => {
-                $("#servicio_detalle-0").append(`
+            .then(res => {
+                servicios = res;
+                servicios.forEach((value, index) => {
+                    $("#servicio_detalle-0").append(`
                     <option value="${value.nombre}">${value.nombre}</option>
                 `)
+                })
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
         $("#total_servicio_detalle").val(0)
 
         //Inicializacion del input Autonumeric
-        valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'),{
+        valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -737,7 +705,7 @@
             outputFormat: "number"
         })
 
-        valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'),{
+        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -745,7 +713,7 @@
             outputFormat: "number"
         })
 
-        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'),{
+        valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -753,15 +721,7 @@
             outputFormat: "number"
         })
 
-        valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'),{
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-        
-        valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'),{
+        valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -769,7 +729,7 @@
             outputFormat: "number"
         })
 
-        valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo_comodato-0'),{
+        valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo_comodato-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -777,7 +737,7 @@
             outputFormat: "number"
         })
 
-        valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'),{
+        valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -805,7 +765,10 @@
             $("#input-celular").val(res[0]['celular_contacto_inicial']);
             $("#input-email").val(res[0]['email_contacto_inicial']);
             $("#input-sede-nit").val(res[0]['nit_cedula']);
-            $("#nombre_usuario").val(res[0].user.nombres+" "+res[0].user.apellidos)
+            $("#contacto_name_factura").val(res[0]['nombre_contacto_facturacion']);
+            $("#contacto_email_factura").val(res[0]['email_contacto_facturacion']);
+            $("#contacto_celular_factura").val(res[0]['celular_contacto_facturacion']);
+            $("#nombre_usuario").val(res[0].user.nombres + " " + res[0].user.apellidos);
         }).then((res) => {//Peticion exitosa => status: 200
             console.log('Petición Exitosa');
         }).catch((err) => {//Peticion fallida => status: > 400
@@ -865,18 +828,30 @@
         });
     });
 
+    /* Estructuras de repeticion de inputs del formulario
+    -------------------------------------------------------*/
+    var contVisitas = 0;
+    var contServicio = 0;
+    var contResidencias = 0;
+    var contDispositivos = 0;
+    var contComodatos = 0;
+    var contDocs = 0;
+    var contAreas = 1;
+
     //Evento change del select de Sedes
     $("#select_sedes").change(event => {
         $.get(`/sedes/${event.target.value}`, function (res) {
             //Asignacion de valores de los inputs de Sede
-            $("#input-sede-direccion").val(res['direccion']);
-            $("#input-sede-ciudad").val(res['ciudad']);
-            $("#input-sede-barrio").val(res['barrio']);
-            $("#input-sede-zona").val(res['zona_ruta']);
-            $("#input-sede-contacto").val(res['nombre_contacto']);
-            $("#input-sede-telefono").val(res['telefono_contacto']);
-            $("#input-sede-celular").val(res['celular_contacto']);
-            $("#input-sede-email").val(res['email_contacto']);
+            $("#input-sede-direccion").val(res[0]['direccion']);
+            $("#input-sede-ciudad").val(res[0]['ciudad']);
+            $("#input-sede-barrio").val(res[0]['barrio']);
+            $("#input-sede-zona").val(res[0]['zona_ruta']);
+            $("#input-sede-contacto").val(res[0]['nombre_contacto']);
+            $("#input-sede-telefono").val(res[0]['telefono_contacto']);
+            $("#input-sede-celular").val(res[0]['celular_contacto']);
+            $("#input-sede-email").val(res[0]['email_contacto']);
+            //Diligencia todo el formulario de inspeccion
+            getInspectionForm(res[0]['inspeccion'])
         }).then((res) => {
             console.log('Petición Exitosa');
         }).catch((err) => {
@@ -884,18 +859,291 @@
         });
     });
 
-    /* Estructuras de repecticion de inputs del formulario
-    -------------------------------------------------------*/
-    var contVisitas = 1;
-    var contServicio = 1;
-    var contResidencias = 1;
-    var contDispositivos = 1;
-    var contComodatos = 1;
-    var contDocs = 1;
-    var contAreas = 1;
+    function getInspectionForm(dataInspection) {
+        //Info general de la inspeccion
+        $("#frecuencia_servicio").val(dataInspection.frecuencia);
+        $("#observaciones_tecnico").val(dataInspection.observaciones);
+
+        //Plan de Saneamiento
+        dataInspection.visitas.forEach((value, index) => {
+            var hours = 0;
+            var minutes = 0;
+
+            if (index === 0) {
+                hours = Math.floor((value.duracion) / 60);
+                minutes = (value.duracion % 60);
+                $("#num_visita-0").val(value.num_visita);
+                $("#num_horas_visita-0").val(hours);
+                $("#num_minutos_visita-0").val(minutes);
+            } else {
+                hours = Math.floor((value.duracion) / 60);
+                minutes = (value.duracion % 60);
+                $("#visitas").append(`
+                    <div class="form-group col-lg-2">
+                        <label class="control-label"># Visita</label>
+                        <input type="number" min=0 name="num_visita-${index}" id="num_visita-${index}" placeholder="Ej: 1"
+                            class="form-control" value="${value.num_visita}">
+                    </div>
+                    <div class="form-group col-lg-4 b-r">
+                        <label>Duración del servicio</label>
+                        <div class="input-group">
+                            <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
+                                class="form-control" id="num_horas_visita-${index}" placeholder="Horas" value="${hours}">
+                            <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
+                                class="form-control" id="num_minutos_visita-${index}" placeholder="Minutos" value="${minutes}">
+                        </div>
+                    </div>
+                `)
+            }
+            contVisitas++;
+        })
+        $('#total_plan').val(dataInspection.valor_plan_saneamiento);
+        $('#frecuencia_visitas_plan').val(dataInspection.frecuencia_visitas).change();
+        $('#observaciones_plan').val(dataInspection.observaciones_visitas);
+
+        //Detalle del servicio
+        dataInspection.detalle_servicios.forEach((value, index) => {
+            if (index === 0) {
+                $("#servicio_detalle-0").val(value.tipo_servicio);
+                $("#valor_servicio_detalle-0").val(value.valor_servicio);
+                $("#frecuencia_servicio_detalle-0").val(value.frecuencia_servicio);
+                $("#observacion_servicio_detalle-0").val(value.observacion_servicio);
+                valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
+            } else {
+                $("#detalle-servicios").append(`
+                    <div class="form-group col-lg-4">
+                        <label class="control-label">Servicio a incluir</label>
+                        <input type="text" min=0 name="servicio_detalle-${index}" id="servicio_detalle-${index}"
+                            placeholder="Valor total" class="form-control" value="${value.tipo_servicio}">
+                    </div>
+
+                    <div class="form-group col-lg-2">
+                        <label class="control-label">Valor </label>
+                        <input type="text" min=0 name="valor_servicio_detalle-${index}" id="valor_servicio_detalle-${index}"
+                            placeholder="Valor total" class="form-control" value="${value.valor_servicio}">
+                    </div>
+
+                    <div class="form-group col-lg-2">
+                        <label class="control-label">Frecuencia</label>
+                        <input type="text" min=0 name="frecuencia_servicio_detalle-${index}" id="frecuencia_servicio_detalle-${index}"
+                            placeholder="Valor total" class="form-control" value="${value.frecuencia_servicio}">
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label>Observaciones</label>
+                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                            rows="1" name="observacion_servicio_detalle-${index}" id="observacion_servicio_detalle-${index}" >${value.observacion_servicio}</textarea>
+                    </div>
+                `)
+
+                valoresServicios[index] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${index}`), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
+
+                //Añade el listener al evento especificado de cada input creado
+                $(`#valor_servicio_detalle-${index}`).on('keyup', e => {
+                    autosumaTotalServicio()
+                })
+            }
+            contServicio++;
+        })
+        $("#total_servicio_detalle").val(dataInspection.total_detalle_servicios);
+
+        //Forma de Pago
+        $("#tipo_facturacion").val(dataInspection.tipo_facturacion).change()
+        $("#forma_pago").val(dataInspection.forma_pago).change()
+        $("#contrato").val(dataInspection.contrato == 1 ? 'si' : 'no').change()
+
+        //Numero de residencias
+        dataInspection.residencias.forEach((value, index) => {
+            var hours = 0;
+            var minutes = 0;
+            if (index === 0) {
+                hours = Math.floor((value.tiempo_estimado) / 60);
+                minutes = (value.tiempo_estimado % 60);
+                $("#tipo_residencia-0").val(value.tipo_residencia);
+                $("#valor_residencia-0").val(value.valor_residencia);
+                $("#num_horas_residencia-0").val(hours);
+                $("#num_minutos_residencia-0").val(minutes);
+                $("#observaciones_residencia-0").val(value.observaciones_residencia);
+            } else {
+                hours = Math.floor((value.tiempo_estimado) / 60);
+                minutes = (value.tiempo_estimado % 60);
+                $("#residencias").append(`
+                    <div class="form-group col-lg-3">
+                        <label class="control-label">Tipo de residencia</label>
+                        <input type="text" min=0 name="tipo_residencia-${index}" id="tipo_residencia-${index}"
+                            placeholder="Valor total" class="form-control" value="${value.tipo_residencia}">
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label class="control-label">Valor</label>
+                        <input type="text" min=0 name="valor_residencia-${index}" id="valor_residencia-${index}"
+                            placeholder="Valor total" class="form-control" value="${value.valor_residencia}">
+                    </div>
+
+                    <div class="form-group col-lg-3 ">
+                        <label>Duración del servicio</label>
+                        <div class="input-group">
+                            <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
+                                class="form-control" id="num_horas_residencia-${index}" placeholder="Horas" value="${hours}">
+                            <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
+                                class="form-control" id="num_minutos_residencia-${index}" placeholder="Minutos" value="${minutes}">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-lg-3 ">
+                        <label>Observaciones</label>
+                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                            rows="1" name="observaciones_residencia-${index}" id="observaciones_residencia-${index}" >${value.observaciones_residencia}</textarea>
+                    </div>
+                `)
+            }
+            contResidencias++;
+        })
+
+        //Inventario Inicial del Cliente
+        $("#cantidad_lampara_lamina").val(dataInspection.cant_lampara_lamina);
+        $("#cant_lampara_insectocutora").val(dataInspection.cant_lampara_insectocutora);
+        $("#cant_trampas_impacto").val(dataInspection.cant_trampas);
+        $("#cant_jaulas").val(dataInspection.cant_jaulas);
+        $("#cant_estaciones_roedor").val(dataInspection.cant_estaciones_roedor);
+        $("#observaciones_estaciones").val(dataInspection.observaciones_estaciones);
+        $("#cant_cajas").val(dataInspection.cant_cajas_alca_elec);
+        $("#cant_sumideros").val(dataInspection.sumideros);
+
+        //Compra de dispositivos
+        dataInspection.compra_dispositivos.forEach((value, index) => {
+            if (index === 0) {
+                $("#tipo_dispositivo-0").val(value.tipo_dispositivo);
+                $("#cant_dispositivo-0").val(value.cant_dispositivo);
+                $("#valor_sin_iva_dispositivo-0").val(value.valor_sin_iva);
+                $("#total_dispositivo-0").val(value.total_dispositivo);
+                $("#observacion_dispositivo-0").val(value.observacion_dispositivo);
+            } else {
+                $("#dispositivos").append(`
+                    <div class="form-group col-lg-3">
+                        <label class="control-label">Tipo de dispositivo</label>
+                        <input type="text" id="tipo_dispositivo-${index}" name="tipo_dispositivo-${index}" placeholder=""
+                            class="form-control" value="${value.tipo_dispositivo}">
+                    </div>
+
+                    <div class="form-group col-lg-1">
+                        <label class="control-label">Cant.</label>
+                        <input type="text" id="cant_dispositivo-${index}" name="cant_dispositivo-${index}" placeholder=""
+                            class="form-control" value="${value.cant_dispositivo}">
+                    </div>
+
+                    <div class="form-group col-lg-2">
+                        <label class="control-label">Valor unitario sin IVA</label>
+                        <input type="text" id="valor_sin_iva_dispositivo-${index}" name="valor_sin_iva_dispositivo-${index}" placeholder="Nombre de dispositivo"
+                            class="form-control" value="${value.valor_sin_iva}">
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label class="control-label">Valor total.</label>
+                        <input type="text" id="total_dispositivo-${index}" name="total_dispositivo-${index}" placeholder="Nombre de dispositivo"
+                            class="form-control" value="${value.total_dispositivo}">
+                    </div>
+
+                    <div class="form-group col-lg-3 ">
+                        <label>Observaciones</label>
+                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                            rows="1" name="observacion_dispositivo-${index}" id="observacion_dispositivo-${index}" >${value.observacion_dispositivo}</textarea>
+                    </div>
+                `)
+            }
+            contDispositivos++;
+        })
+
+        //Dispositivos en Comodato
+        dataInspection.dispositivos_comodato.forEach((value, index) => {
+            if (index === 0) {
+                $("#tipo_dispositivo_comodato-0").val(value.tipo_dispositivo);
+                $("#cant_dispositivo_comodato-0").val(value.cant_dispositivo);
+                $("#valor_sin_iva_dispositivo_comodato-0").val(value.valor_sin_iva);
+                $("#total_dispositivo_comodato-0").val(value.total_dispositivo);
+                $("#observacione_dispositivo_comodato-0").val(value.observacion_dispositivo);
+            } else {
+                $("#dispositivos").append(`
+                    <div class="form-group col-lg-3">
+                        <label class="control-label">Tipo de dispositivo</label>
+                        <input type="text" id="tipo_dispositivo_comodato-${index}" name="tipo_dispositivo-${index}" placeholder=""
+                            class="form-control" value="${value.tipo_dispositivo}">
+                    </div>
+
+                    <div class="form-group col-lg-1">
+                        <label class="control-label">Cant.</label>
+                        <input type="text" id="cant_dispositivo_comodato-${index}" name="cant_dispositivo-${index}" placeholder=""
+                            class="form-control" value="${value.cant_dispositivo}">
+                    </div>
+
+                    <div class="form-group col-lg-2">
+                        <label class="control-label">Valor unitario sin IVA</label>
+                        <input type="text" id="valor_sin_iva_dispositivo_comodato-${index}" name="valor_sin_iva_dispositivo-${index}" placeholder="Nombre de dispositivo"
+                            class="form-control" value="${value.valor_sin_iva}">
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label class="control-label">Valor total.</label>
+                        <input type="text" id="total_dispositivo_comodato-${index}" name="total_dispositivo-${index}" placeholder="Nombre de dispositivo"
+                            class="form-control" value="${value.total_dispositivo}">
+                    </div>
+
+                    <div class="form-group col-lg-3 ">
+                        <label>Observaciones</label>
+                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                            rows="1" name="observacion_dispositivo-${index}" id="observacione_dispositivo_comodato-${index}" >${value.observacion_dispositivo}</textarea>
+                    </div>
+                `)
+            }
+            contComodatos++;
+
+            //Gestion de Calidad
+            dataInspection.gestion_calidad.forEach((value, index) => {
+                if (index === 0) {
+                    $("#tipo_doc-0").val(value.tipo_documento);
+                    $("#frecuencia_doc-0").val(value.frecuencia_documento);
+                    $("#observacion_doc-0").val(value.observacion_documento);
+                } else {
+                    $('#gestion-calidad').append(`
+                        <div class="form-group col-lg-4">
+                            <label class="control-label">Tipo de documento</label>
+                            <input type="text" id="tipo_doc-${index}" name="tipo_doc-${index}" placeholder="Nombre del Documento"
+                            class="form-control" value="${value.tipo_documento}">
+                        </div>
+
+                        <div class="form-group col-lg-4">
+                            <label class="control-label">Frecuencia.</label>
+                            <input type="text" id="frecuencia_doc-${index}" name="frecuencia_doc-${index}" placeholder="Frecuencia del Documento"
+                            class="form-control" value="${value.frecuencia_documento}">
+                        </div>
+
+                        <div class="form-group col-lg-4">
+                            <label>Observaciones</label>
+                            <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                rows="1" name="observacion_doc-${index}" id="observacion_doc-${index}" >${value.observacion_documento}</textarea>
+                        </div>
+                    `)
+                }
+                contDocs++;
+            })
+        })
+    }
 
     //Plan de sanemaiento
-    $("#btn-add-visitas").click(function(){
+    $("#btn-add-visitas").click(function () {
         $("#visitas").append(`
             <div class="form-group col-lg-2">
                 <label class="control-label"># Visita</label>
@@ -916,7 +1164,7 @@
     })
 
     //Detalle del servicio correctivo y/o preventivo
-    $("#btn-add-servicio").click(function(){
+    $("#btn-add-servicio").click(function () {
         $("#detalle-servicios").append(`
             <div class="form-group col-lg-4">
                 <label class="control-label">Servicio a incluir</label>
@@ -953,8 +1201,8 @@
                     rows="1" name="observacion_servicio_detalle-${contServicio}" id="observacion_servicio_detalle-${contServicio}"></textarea>
             </div>
         `)
-            
-        valoresServicios[contServicio] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${contServicio}`),{
+
+        valoresServicios[contServicio] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${contServicio}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -980,16 +1228,18 @@
     * Suma automaticamente los valores de los inputs con el id existente
     * @return void
     */
-    function autosumaTotalServicio(){
+    function autosumaTotalServicio() {
         var sum = 0;
         for (let index = 0; index < contServicio; index++) {
+            console.log(valoresServicios[index].rawValue)
             sum += parseInt(valoresServicios[index].rawValue);
         }
+
         $("#total_servicio_detalle").val(sum)
     }
 
-    function anadirServiciosSelect(idSelect){
-        servicios.forEach((value,index)=> {
+    function anadirServiciosSelect(idSelect) {
+        servicios.forEach((value, index) => {
             $(`#servicio_detalle-${idSelect}`).append(`
                 <option value="${value.nombre}">${value.nombre}</option>
             `)
@@ -997,7 +1247,7 @@
     }
 
     //Numero de residencias
-    $("#btn-add-residencia").click(function(){
+    $("#btn-add-residencia").click(function () {
         $("#residencias").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de residencia</label>
@@ -1035,7 +1285,7 @@
             </div>
         `)
 
-        valoresResidencias[contResidencias] = new AutoNumeric(document.getElementById(`valor_residencia-${contResidencias}`),{
+        valoresResidencias[contResidencias] = new AutoNumeric(document.getElementById(`valor_residencia-${contResidencias}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1046,7 +1296,7 @@
     })
 
     //Compra de dispositivos
-    $("#btn-add-dispositivo").click(function(){
+    $("#btn-add-dispositivo").click(function () {
         $("#dispositivos").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de dispositivo</label>
@@ -1093,7 +1343,7 @@
             </div>
         `)
 
-        valoresSinIvaDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo-${contDispositivos}`),{
+        valoresSinIvaDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo-${contDispositivos}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1101,7 +1351,7 @@
             outputFormat: "number"
         })
 
-        valorTotalDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`total_dispositivo-${contDispositivos}`),{
+        valorTotalDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`total_dispositivo-${contDispositivos}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1112,7 +1362,7 @@
     })
 
     //Dispositivos en comodato
-    $("#btn-add-dispositivo-comodato").click(function(){
+    $("#btn-add-dispositivo-comodato").click(function () {
         $("#dispositivos-comodato").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de dispositivo</label>
@@ -1157,7 +1407,7 @@
             </div>
         `)
 
-        valoresSinIvaComodato[contComodatos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo_comodato-${contComodatos}`),{
+        valoresSinIvaComodato[contComodatos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo_comodato-${contComodatos}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1165,7 +1415,7 @@
             outputFormat: "number"
         })
 
-        valorTotalComodato[contComodatos] = new AutoNumeric(document.getElementById(`total_dispositivo_comodato-${contComodatos}`),{
+        valorTotalComodato[contComodatos] = new AutoNumeric(document.getElementById(`total_dispositivo_comodato-${contComodatos}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1176,7 +1426,7 @@
     })
 
     //Gestion de calidad
-    $("#btn-add-doc").click(function(){
+    $("#btn-add-doc").click(function () {
         $('#gestion-calidad').append(`
             <div class="form-group col-lg-4">
                 <label class="control-label">Tipo de documento</label>
@@ -1228,26 +1478,26 @@
     }
 
     //Peticion HTTP POST para guardar el formato
-    function guardarSolicitud(dataSend){
+    function guardarSolicitud(dataSend) {
         $.ajax({
             url: '/solicitud',
             data: dataSend,
             type: 'POST',
-            headers:{
+            headers: {
                 "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
             }
         })
-        .then(res => {
-            swal("¡Formato Guardado!", 'La solicitud a programación fue guardado correctamente.', 'success')
-            .then(val => {
-                if(val){
-                    window.location.href = '/solicitud'
-                }
+            .then(res => {
+                swal("¡Formato Guardado!", 'La solicitud a programación fue guardado correctamente.', 'success')
+                    .then(val => {
+                        if (val) {
+                            window.location.href = '/solicitud'
+                        }
+                    })
             })
-        })
-        .catch(err => {
-            swal('¡Error!', err.statusText, "error")
-        })
+            .catch(err => {
+                swal('¡Error!', err.statusText, "error")
+            })
     }
     // var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
     /* Estructura de datos para envio del formulario
@@ -1303,7 +1553,7 @@
                 frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
                 observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
             }
-            
+
         }
 
         //Numero de residencias
@@ -1321,19 +1571,19 @@
             dataToSend.compra_dispositivos[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
-                valor_sin_iva: valoresSinIvaDispositivos.rawValue,
-                total_dispositivo: valorTotalDispositivos.rawValue,
+                valor_sin_iva: valoresSinIvaDispositivos[index].rawValue,
+                total_dispositivo: valorTotalDispositivos[index].rawValue,
                 observacion_dispositivo: $(`#observacion_dispositivo-${index}`).val()
-            }   
+            }
         }
-        
+
         //Dispositivos en comodato
         for (let index = 0; index < contComodatos; index++) {
             dataToSend.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
-                valor_sin_iva: valoresSinIvaComodato.rawValue,
-                total_dispositivo: valorTotalComodato.rawValue,
+                valor_sin_iva: valoresSinIvaComodato[index].rawValue,
+                total_dispositivo: valorTotalComodato[index].rawValue,
                 observacion_dispositivo: $(`#observacione_dispositivo_comodato-${index}`).val(),
             }
         }
@@ -1346,10 +1596,10 @@
                 observacion_documento: $(`#observacion_doc-${index}`).val(),
             }
         }
-        
+
         dataToSend.codigo = codigoAleatorio();
         dataToSend.nombre_usuario = $("#nombre_usuario").val();
-        dataToSend.fecha  = $("#fecha_creacion").val();
+        dataToSend.fecha = $("#fecha_creacion").val();
         dataToSend.frecuencia = $("#frecuencia_servicio").val();
         dataToSend.observaciones = $("#observaciones_tecnico").val();
         dataToSend.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
@@ -1375,13 +1625,13 @@
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
             title: "Código de Solicitud",
-            text: "Código generado: "+dataToSend.codigo+", escribe otro código aquí: ",
+            text: "Código generado: " + dataToSend.codigo + ", escribe otro código aquí: ",
             icon: "warning",
             content: {
                 element: "input",
                 attributes: {
-                placeholder: "Ingresa el código personalizado para el formulario de solicitud",
-                type: "text"
+                    placeholder: "Ingresa el código personalizado para el formulario de solicitud",
+                    type: "text"
                 },
             },
             buttons: {
@@ -1394,18 +1644,18 @@
             },
             dangerMode: false,
         })
-        .then(isConfirm => {
-            console.log(isConfirm)
-            if(isConfirm){
-                dataToSend.codigo =  isConfirm;
-                guardarSolicitud(dataToSend);
-            }else if(isConfirm == ''){
-                guardarSolicitud(dataToSend);
-                
-            }else{
-             return    
-            }
-        })
+            .then(isConfirm => {
+                console.log(isConfirm)
+                if (isConfirm) {
+                    dataToSend.codigo = isConfirm;
+                    guardarSolicitud(dataToSend);
+                } else if (isConfirm == '') {
+                    guardarSolicitud(dataToSend);
+
+                } else {
+                    return
+                }
+            })
     })
 
 

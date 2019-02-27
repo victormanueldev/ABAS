@@ -76,7 +76,7 @@ class SedesController extends Controller
     public function show($id)
     {
         //
-        $sede = Sede::find($id);
+        $sede = Sede::with('inspeccion')->where('id', $id)->get();
         return $sede;
     }
 

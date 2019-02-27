@@ -185,12 +185,12 @@
                                     </div>
 
 
-                                    {{-- <div class="form-group col-lg-6" id="select-filter-sede">
+                                    <div class="form-group col-lg-6" id="select-filter-sede">
                                         <label class="control-label">Razón Social/Nombre *</label>
                                         <select style="text-transform: uppercase" class="form-control" id="select_sedes" name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="form-group col-lg-6" id="input-nombre-sede">
                                         <label class="control-label">Razón Social/Nombre Sede*</label>
@@ -968,14 +968,14 @@
     $("#select_sedes").change(event => {
         $.get(`/sedes/${event.target.value}`, function (res) {
             //Asignacion de valores de los inputs de Sede
-            $("#input-sede-direccion").val(res['direccion']);
-            $("#input-sede-ciudad").val(res['ciudad']);
-            $("#input-sede-barrio").val(res['barrio']);
-            $("#input-sede-zona").val(res['zona_ruta']);
-            $("#input-sede-contacto").val(res['nombre_contacto']);
-            $("#input-sede-telefono").val(res['telefono_contacto']);
-            $("#input-sede-celular").val(res['celular_contacto']);
-            $("#input-sede-email").val(res['email_contacto']);
+            $("#input-sede-direccion").val(res[0]['direccion']);
+            $("#input-sede-ciudad").val(res[0]['ciudad']);
+            $("#input-sede-barrio").val(res[0]['barrio']);
+            $("#input-sede-zona").val(res[0]['zona_ruta']);
+            $("#input-sede-contacto").val(res[0]['nombre_contacto']);
+            $("#input-sede-telefono").val(res[0]['telefono_contacto']);
+            $("#input-sede-celular").val(res[0]['celular_contacto']);
+            $("#input-sede-email").val(res[0]['email_contacto']);
         }).then((res) => {
             console.log('Petición Exitosa');
         }).catch((err) => {
@@ -1588,7 +1588,7 @@
             dangerMode: false,
         })
         .then(isConfirm => {
-            if(isConfirm){
+            if(isConfirm){ //Valida si el input de codigo está diligenciado
                 dataToSendInspection.codigo =  isConfirm;
                 if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
                     guardarCliente()

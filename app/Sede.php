@@ -36,4 +36,9 @@ class Sede extends Model
     {
         return $this->hasOne(Solicitud::class);
     }
+
+    public function inspeccion()
+    {
+        return $this->hasOne(Inspeccion::class);
+    }
 }
