@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('custom-css')
 <link href="{{asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+<link href="{{asset('css/plugins/chosen/bootstrap-chosen.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <script>
@@ -68,22 +69,6 @@
                 <div class="social-feed-box">
                     {!! Form::open(['route' => ['novedades.store'], 'method' => 'POST']) !!}
                     {!! Form::token() !!}
-                        {{-- <div class="pull-right social-action dropdown">
-                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                <i class="fa fa-gear"></i>
-                            </button>
-                            <ul class="dropdown-menu m-t-xs">
-                                <li>
-                                    <a href="">Publica</a>
-                                </li>
-                                <li>
-                                    <a href="">Área Comercial</a>
-                                </li>
-                                <li>
-                                    <a href="">Área Programación</a>
-                                </li>
-                            </ul>
-                        </div> --}}
                         <div class="social-avatar">
                             <a href="" class="pull-left">
                                 <img alt="image" src="{{ Storage::url($user[0]->foto)}}">
@@ -94,8 +79,9 @@
                                 </a>
                             
                                 <small class="text-muted">
-                                    <i class="fa fa-globe"></i> Visibilidad: 
-                                    <select name="area" required>
+                                    <i class="fa fa-globe"></i> 
+                                    <label>Visibilidad: </label> 
+                                    <select name="area" class="form-control" style="padding: 0 5px;height: 19px;font-size: 10px;width: 45%;display: inline-block" required>
                                             <option value="{{$user[0]->area->id}}" selected>{{$user[0]->area->descripcion}}</option>
                                             @foreach($areas as $area)
                                                 @if($area->id != $user[0]->area->id)
@@ -106,7 +92,7 @@
                                     </select>
                                 </small>
                                 <small class="text-muted">
-                                        <select name="prioridad" required>
+                                        <select name="prioridad" class="form-control" style="padding: 0 5px;height: 19px;font-size: 10px;width: 34%;display: inline-block" required>
                                                 <option value="Normal" selected>Prioridad</option>
                                                 <option value="Normal"> Normal</option>
                                                 <option value="Urgente"> Urgente</option>
@@ -117,12 +103,29 @@
                         
                         </div>
                    
-                        <div class="social-body">
-                                <div class="form-group">
+                        <div class="social-body row">
+                                <div class="form-group col-lg-12">
                                     <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3" name="descripcion"></textarea>
                                 </div>
+                                <div class="form-group col-lg-6">
+                                    <label style="display: block">Cliente: </label>
+                                        <!-- Select con Autocompletar-->
+                                        <select data-placeholder="Seleccione NIT" class="chosen-select" tabindex="2" id="id_cliente"
+                                            name="id_cliente">
+                                            <option value="" selected disabled>SELECCIONA CLIENTE</option>
+                                            @foreach($clientes as $cliente)
+                                        <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                                <div class="form-group col-lg-6" id="select-filter-sede">
+                                        <label class="control-label">Sede *</label>
+                                        <select style="text-transform: uppercase;font-size: 13px" class="form-control" id="select_sedes" name="select_sedes">
+                                            <option value="">Selecciona una sede</option>
+                                        </select>
+                                    </div>
                     
-                                <div class="btn-group text-muted">
+                                <div class="btn-group text-muted col-lg-12">
                                     <button type="submit" class="btn btn-outline btn-primary btn-xs "><i class="fa fa-share"></i> Publicar</button>
                                 </div>  
                                     
@@ -153,44 +156,58 @@
                     <div class="vertical-timeline-content">
                         <h2>{{$evento['tipo']}}</h2>
                         <p>{{$evento['asunto']}}</p>
+                        <hr style="margin-top: 0px;margin-bottom: 10px;">
+                        <dl class="dl-horizontal">
+                            <dt style="float:left;width: 68px;text-align:left">Cliente:</dt>
+                            <dd style="margin-left: 0">{{$evento['cliente']}}</dd>
+
+                            <dt style="float:left;width: 68px;text-align:left">Sede:</dt>
+                            <dd style="margin-left: 0">{{$evento['sede']}}</dd>
+
+                            <dt style="float:left;width: 68px;text-align:left">Teléfono:</dt>
+                            <dd style="margin-left: 0">{{$evento['telefono']}}</dd>
+                            
+                            <dt style="float:left;width: 68px;text-align:left">Dirección:</dt>
+                            <dd style="margin-left: 0">{{$evento['direccion']}} </dd>
+                        </dl>
                         
                     @if($evento['tipo'] == 'Llamada')
-                        <a href="#" class="btn btn-sm btn-warning">Ver más</a>
+                        <a href="/cronograma/eventos" class="btn btn-sm btn-warning">Ver más</a>
                         @if($evento['fecha_inicio'] == $fecha_actual)
                             <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento['hora_inicio']}}</small>
+                            <small>{{date("g:i A", strtotime($evento['hora_inicio']))}}</small>
                             </span>
                         @else
                             <span class="vertical-date">
                             Mañana <br>
-                            <small>{{$evento['hora_inicio']}}</small>
+                            <small>{{date("g:i A", strtotime($evento['hora_inicio']))}}</small>
                             </span>
                         @endif
                     @elseif($evento['tipo'] == 'Visita')
-                        <a href="#" class="btn btn-sm btn-primary">Ver más</a>
+                        <a href="/cronograma/eventos" class="btn btn-sm btn-primary">Ver más</a>
                         @if($evento['fecha_inicio'] == $fecha_actual)
                             <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento['hora_inicio']}}</small>
+                            <small>{{date("g:i A", strtotime($evento['hora_inicio']))}}</small>
                             </span>
                         @else
                             <span class="vertical-date">
                             Mañana <br>
-                            <small>{{$evento['hora_inicio']}}</small>
+                            <small>{{date("g:i A", strtotime($evento['hora_inicio']))}}</small>
                             </span>
                         @endif
                     @else
-                        <a href="#" class="btn btn-sm btn-success">Ver más </a>
+                        <a href="/cronograma/eventos" class="btn btn-sm btn-success">Ver más </a>
                         @if($evento['fecha_inicio'] == $fecha_actual)
                             <span class="vertical-date">
                             Hoy <br>
-                            <small>{{$evento['hora_inicio']}}</small>
+                            <small>{{date("g:i A", strtotime($evento['hora_inicio']))}}</small>
                             </span>
                         @else
                             <span class="vertical-date">
                             Mañana <br>
-                            <small>{{$evento['hora_inicio']}}</small>
+                            <small>{{date("g:i A", strtotime($evento['hora_inicio']))}}</small>
                             </span>
                         @endif
                     @endif
@@ -206,4 +223,35 @@
     </div>
 
 </div>
+@section('ini-scripts')
+<script src="{{asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
+<script>
+    $(document).ready(function(){
+
+        //Inicializador del Select AUTOCOMPLETAR
+        $('.chosen-select').chosen({ width: "100%" });
+
+            //Evento change del select de clientes
+            $("#id_cliente").change(event => {
+                 //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
+                $.get(`/sedes/cliente/${event.target.value}`, function (res) {
+                    $("#select_sedes").empty();//Limipia el select
+                    if(res == ''){
+                        $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
+                        $("#select_sedes").prop('required', false);
+                    }else{
+                        $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                        $("#select_sedes").prop('required', true);
+                    }
+
+                    //Recorre la respuesta del servidor
+                    res.forEach(element => {
+                        //Añade Options al select de sedes dependiendo de la respues del servidor
+                        $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                    });
+                })
+            })
+    })
+</script>
+@endsection
 @endsection

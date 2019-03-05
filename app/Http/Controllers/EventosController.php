@@ -25,7 +25,7 @@ class EventosController extends Controller
             $sede = "";
             if(isset($evento->cliente_id)){
                 $cliente = Cliente::select('id', 'nombre_cliente')->where('id', $evento->cliente_id)->get();
-                if(isset($evento->sede_id)){
+                if(isset($evento->sede_id) && $evento->sede_id != 0){
                     $sede = Sede::select('id', 'nombre')->where('id', $evento->sede_id)->get();
                 }
             }
@@ -38,8 +38,10 @@ class EventosController extends Controller
                 'backgroundColor' => $evento->color, 
                 'borderColor' => $evento->color,
                 'cliente' => $cliente != "" ? $cliente[0]->nombre_cliente : "No definido",
-                'sede' => $sede != "" ? $sede[0]->nombre : "No definido"
-                ]);
+                'sede' => $sede != "" ? $sede[0]->nombre : "No definido",
+                'telefono' => $evento->telefono_evento != "" ? $evento->telefono_evento : 'No definido',
+                'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido'
+            ]);
         }
         $data->toJson();//Convierte la colecciona a formato JSON
         return $data;
@@ -67,14 +69,16 @@ class EventosController extends Controller
         try{
             if($request->ajax()){
                 $evento = new Evento();
-                $evento->asunto = $request->title;
-                $fecha_fin = Carbon::parse($request->start." ".$request->hora)->addHour();
-                $evento->fecha_inicio = $request->start." ".$request->hora;
+                $evento->asunto = strtoupper($request->title);
+                $fecha_fin = Carbon::parse($request->start." ".$request->hora_fin);
+                $evento->fecha_inicio = $request->start." ".$request->hora_inicio;
                 $evento->fecha_fin = $fecha_fin->toDateTimeString();
                 $evento->dia_completo = $request->allDay;
                 $evento->tipo = $request->tipo;
                 $evento->cliente_id = $request->idCliente;
                 $evento->sede_id = $request->idSede;
+                $evento->telefono_evento = strtoupper($request->telefono_evento);
+                $evento->direccion_evento = strtoupper($request->direccion_evento);
 
                 switch ($request->tipo) {
                     case 'Llamada':

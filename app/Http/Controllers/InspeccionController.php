@@ -5,6 +5,7 @@ namespace ABAS\Http\Controllers;
 use ABAS\Inspeccion;
 use Illuminate\Http\Request;
 use ABAS\Cliente;
+use ABAS\Solicitud;
 
 class InspeccionController extends Controller
 {
@@ -40,7 +41,7 @@ class InspeccionController extends Controller
     {
         //
         if($request->ajax()){
-            $inspeccion = new Inspeccion();
+            $inspeccion = new Solicitud();
             $inspeccion->codigo = $request->codigo;
             $inspeccion->nombre_usuario = $request->nombre_usuario;
             $inspeccion->fecha = $request->fecha;
@@ -83,7 +84,7 @@ class InspeccionController extends Controller
      * @param  \ABAS\Inspeccion  $inspeccion
      * @return \Illuminate\Http\Response
      */
-    public function show(Inspeccion $inspeccion)
+    public function show(Request $request)
     {
         //
     }
@@ -120,5 +121,14 @@ class InspeccionController extends Controller
     public function destroy(Inspeccion $inspeccion)
     {
         //
+    }
+
+    public function showInspectionClient($idCliente, $idSede)
+    {
+        $inspecciones = Inspeccion::select('codigo','fecha','frecuencia','observaciones','valor_plan_saneamiento','frecuencia_visitas','total_detalle_servicios','tipo_facturacion')
+                                    ->where('cliente_id', $idCliente)
+                                    ->where('sede_id', $idSede)
+                                    ->get();
+        return $inspecciones;
     }
 }

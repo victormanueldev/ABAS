@@ -7,11 +7,10 @@ Otros Ajustes
 
         - Solicitudes
             - Asignar el tipo de facturacion del cliente (Tipo 1: factura maestra con frecuencia, Tipo 2: factura por sede o servicio)
-            
-        - Novedades
-            - Ver listado de novedades solo del area a la que pertenezca el usuario.
+
         - ROL DE DIRECCION COMERCIAL
             - Asignar los permisos relacionados con metas
+
 
     AREA CALIDAD (2 Dias)
         - Clasificar las novedades en (PQRS y sacar informe)

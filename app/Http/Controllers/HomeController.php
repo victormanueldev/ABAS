@@ -9,6 +9,7 @@ use Auth;
 use Carbon\Carbon;
 use ABAS\Area;
 use ABAS\Cliente;
+use ABAS\Sede;
 
 class HomeController extends Controller
 {
@@ -48,6 +49,14 @@ class HomeController extends Controller
         $data_eventos = collect();
         $areas = Area::all();
         foreach ($eventos as $evento ) {
+            $clienteEvento = "";
+            $sedeEvento = "";
+            if(isset($evento->cliente_id)){
+                $clienteEvento = Cliente::select('id', 'nombre_cliente')->where('id', $evento->cliente_id)->get();
+                if(isset($evento->sede_id) && $evento->sede_id != 0){
+                    $sedeEvento = Sede::select('id', 'nombre')->where('id', $evento->sede_id)->get();
+                }
+            }
             $fecha_ini = Carbon::parse($evento->fecha_inicio);
             $fecha_ini_carbon = $fecha_ini->toDateString();//Fecha inicio de evento
             $hora_carbon = $fecha_ini->toTimeString();//Hora inicio del evento
@@ -57,12 +66,16 @@ class HomeController extends Controller
                     'tipo' => $evento->tipo,
                     'asunto' => $evento->asunto,
                     'fecha_inicio' => $fecha_ini_carbon,
-                    'hora_inicio' => $hora_carbon
+                    'hora_inicio' => $hora_carbon,
+                    'cliente' => $clienteEvento != "" ? $clienteEvento[0]->nombre_cliente : "No definido",
+                    'sede' => $sedeEvento != "" ? $sedeEvento[0]->nombre : "No definido",
+                    'telefono' => $evento->telefono_evento != "" ? $evento->telefono_evento : 'No definido',
+                    'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido'
                 ]);
             }
         }
         // dd($data_eventos);
-        // return $user;
-        return view('general.index', compact('user', 'data_eventos', 'fecha_actual','areas'));
+        //return $clientes;
+        return view('general.index', compact('user', 'data_eventos', 'fecha_actual','areas','clientes'));
     }
 }

@@ -4,6 +4,7 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\Cliente;
 use ABAS\User;
+use ABAS\Inspeccion;
 use ABAS\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -51,7 +52,7 @@ class SolicitudesController extends Controller
         // try{
             if ($request->ajax()) {
                 // $data = collect();
-                $solicitud = new Solicitud();
+                $solicitud = new Inspeccion();
                 $solicitud->codigo = $request->codigo;
                 $solicitud->nombre_usuario = $request->nombre_usuario;
                 $solicitud->fecha = $request->fecha;
@@ -114,7 +115,7 @@ class SolicitudesController extends Controller
                                     ->get();
         } else {
             $solicitud = DB::table('solicitudes')
-                                ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'clientes.barrio', 'clientes.nombre_contacto', 'clientes.celular AS telefono_contacto', 'clientes.direccion')
+                                ->select('solicitudes.id', 'solicitudes.frecuencia', 'solicitudes.observaciones', 'clientes.barrio', 'clientes.nombre_contacto_inicial', 'clientes.celular_contacto_inicial AS telefono_contacto', 'clientes.direccion')
                                 ->join('clientes', 'solicitudes.cliente_id', 'clientes.id')
                                 ->where('solicitudes.cliente_id', $request->id_cliente)
                                 ->where('solicitudes.sede_id', $request->id_sede)

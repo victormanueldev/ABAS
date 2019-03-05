@@ -90,8 +90,8 @@ class Cliente extends Model
         return $this->hasMany(Cotizacion::class);
     }
 
-    public function inspecciones()
+    public function inspeccion()
     {
-        return $this->hasMany(Inspeccion::class);
+        return $this->hasOne(Inspeccion::class);
     }
 }

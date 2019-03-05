@@ -78,7 +78,7 @@
                 /* Modal de Crear Servicio */
                 ====================================================-->
                 <div id="modal-servicios" class="modal inmodal fade" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-lg" style="width: 98%;">
                         <div class="modal-content ">
                             {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id'
                             =>'form-calendario']) !!}
@@ -91,7 +91,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-6 b-r">
+                                    <div class="col-sm-4 b-r">
                                         <h3 class="m-t-none m-b">Información del cliente</h3>
                                         <p>Indique los datos del cliente al que se le agendará el servicio.</p>
                                         <div class="row">
@@ -149,14 +149,52 @@
                                                 </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4 b-r">
+                                        <h3 class="m-t-none m-b">Información de la solicitud</h3>
+                                        <p>Indique los datos del cliente al que se le agendará el servicio.</p>
+                                        <div class="row">
+                                                
+                                                <div class="form-group col-lg-12" >
+                                                    <label class="control-label">Codigo de Solicitud *</label>
+                                                    <select class="form-control " id="select_solicitudes" style="margin-top: 10px;">
+                                                        <option value="" selected disabled>Selecciona una sede</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-lg-6" >
+                                                    <label class="control-label">Frec. de solicitud</label>
+                                                    <input type="text" id="frecuencia_solicitud" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-6" >
+                                                    <label class="control-label">Valor del plan</label>
+                                                    <input type="text" id="valor_plan_solicitud" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-6" >
+                                                    <label class="control-label">Frec. de visitas</label>
+                                                    <input type="text" id="frecuencia_visitas_solicitud" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-6" >
+                                                    <label class="control-label">Valor total de servicios</label>
+                                                    <input type="text" id="valor_servicios_solicitud" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-12" >
+                                                    <label class="control-label">Tipo de facturaciósn</label>
+                                                    <input type="text" id="tipo_facturacion_solicitud" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-12" >
+                                                    <label class="control-label">Observaciones de visitas</label>
+                                                    <textarea class="form-control" placeholder="Observaciones de visitas." rows="1"  id="observaciones_visitas_solicitud"></textarea>
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
                                         <h3 class="m-t-none m-b">Información del servicio</h3>
                                         <p>Diligencie todos los campos del referentes al servicio</p>
                                         <div class="row">
                                             <div class="form-group col-lg-6">
                                                 <label>Tipo de Servicio: </label>
-                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio">
-                                                    <option value="0">Seleccione una tipo.</option>
+                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio" >
+                                                    <option value="0">Seleccione un tipo.</option>
                                                     <option value="Normal">Normal</option>
                                                     <option value="Refuerzo">Refuerzo</option>
                                                     <option value="Neutro">Neutro</option>
@@ -164,13 +202,13 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                    <label>Frecuencia sugerida</label>
-                                                    <input class="form-control" id="sug_frecuency" readonly style="margin-top: 10px;">
-                                                </div>
+                                                <label>Frecuencia sugerida</label>
+                                                <input class="form-control" id="sug_frecuency" readonly style="margin-top: 10px;">
+                                            </div>
                                             <div class="form-group col-md-12">
                                                 <label>Repetir cada:</label>
                                                 <div class="input-group">
-                                                    <input style="width: 20%;margin-right: 10px;" type="number" name="indice-frecuencia"
+                                                    <input style="width: 18%;margin-right: 10px;" type="number" name="indice-frecuencia"
                                                         id="indice-frecuencia" class="form-control">
                                                     <select style="width: 30%;margin-left: 10px;" name="opcion-frecuencia"
                                                         id="opcion-frecuencia" class="form-control">
@@ -234,8 +272,8 @@
                                                     rows="1" name="instrucciones" id="text-instrucciones"></textarea>
                                             </div>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -1274,7 +1312,7 @@
                         $("#text-instrucciones").val(res[0]['observaciones']);
                         $("#dir_sede").val(res[0].direccion);
                         $("#barrio_sede").val(res[0].barrio);
-                        $("#contacto_sede").val(res[0].nombre_contacto);
+                        $("#contacto_sede").val(res[0].nombre_contacto_inicial);
                         $("#tel_sede").val(res[0].telefono_contacto);
                         $("#sug_frecuency").val(res[0]['frecuencia'])
                         //Inicializacion del Popover
@@ -1283,6 +1321,7 @@
                             container: false,
                             animation: true,
                             html: true,
+                            placement: 'left',
                             template: '<div class="popover" role="tooltip" style="top: -1.93333px; left: 55px; display: block;width: 250px;"><div class="arrow"></div><h3 class="popover-title" style="text-align: center;"></h3><div class="popover-content"></div></div>',
                             content: function () {
                                 return $("#list-historic").html();  //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
@@ -1337,6 +1376,13 @@
                             .catch( err => {
                                 console.log(err)
                             })
+                        $.get(`/show/inspections/${id_cliente}/${id_sede}`)
+                            .then(res => {
+                                console.log(res[0])
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     }
                 },
                 error: function (err) {
@@ -1361,6 +1407,14 @@
         //Evento Submit del modal de crear Servicio
         $('#form-calendario').submit(event => {
             event.preventDefault();
+            if($("#select_tipo_servicio").val() == '0'){
+                swal('Información','Selecciona un tipo de servicio.', 'info')
+                return 
+            }
+            if($("#num_horas").val() == '' || $("#num_minutos").val() == ''){
+                swal('Información','Número de horas o minutos inválido.', 'info')
+                return 
+            }
             //Declaracion de Variables locales de Servicio
             var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
             var frecuencia;

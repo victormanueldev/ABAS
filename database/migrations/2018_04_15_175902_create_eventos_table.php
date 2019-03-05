@@ -23,6 +23,8 @@ class CreateEventosTable extends Migration
             $table->string('tipo')->nullable();
             $table->integer('cliente_id')->nullable();
             $table->string('sede_id')->nullable();
+            $table->string('telefono_evento')->nullable();
+            $table->string('direccion_evento')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });

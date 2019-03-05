@@ -50,9 +50,8 @@ class CreateSolicitudesTable extends Migration
             $table->text('dispositivos_comodato');
             //Gestion de calidad
             $table->text('gestion_calidad');
-            $table->string('medio_contacto', 20)->nullable();
-            $table->string('otro', 20)->nullable();
-
+            //Descripcion de las Areas
+            $table->text('areas');
             $table->integer('cliente_id');
             $table->integer('sede_id')->default(0)->nullable();
             $table->timestamps();

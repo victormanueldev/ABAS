@@ -93,12 +93,17 @@
                                             </div>
                                             <div class="form-group col-lg-12" style="margin-top: 15px;">
                                                 <label class="control-label">Sede </label>
-                                                <select class="form-control " id="select_sedes">
+                                                <select class="form-control " id="select_sedes" required>
                                                     <option value="" selected disabled>Selecciona una sede</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-12" style="margin-top: 33px;">
-                                                <b>NOTA: </b><p>Diligencia los campos de cliente solo si necesita incluirlo.</p>
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label">Teléfono/Celular </label>
+                                                <input type="text" class="form-control" id="telefono_evento">
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label">Dirección</label>
+                                                <input type="text" class="form-control" id="direccion_evento">
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +113,7 @@
                                         <div class="row">
                                             <div class="form-group col-lg-12">
                                                 <label>Tipo de Evento: </label>
-                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio">
+                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio" required>
                                                     <option value="0">Seleccione un tipo.</option>
                                                     @if(Auth::user()->area_id == 1)
                                                         <option value="Llamada">Llamada</option>
@@ -122,13 +127,19 @@
                                                     @endif
                                                 </select>
                                             </div>
-                                            <div class="form-group col-lg-6">
+                                            <div class="form-group col-lg-4">
                                                 <label>Hora de inicio*</label>
                                                 <div class="input-group" style="width: 100%">
-                                                    <input type="time" class="form-control" id="hora_inicio" style="width: 100%">
+                                                    <input type="time" class="form-control" id="hora_inicio" min="07:00" max="18:00" style="width: 100%" required>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-lg-6">
+                                            <div class="form-group col-lg-4">
+                                                <label>Hora de fin*</label>
+                                                <div class="input-group" style="width: 100%">
+                                                    <input type="time" class="form-control" id="hora_fin" min="07:00" max="19:00" style="width: 100%" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-4">
                                                 <label>Todo el dia</label>
                                                 <div class="input-group" style="width: 100%">
                                                         <input type="checkbox" id="allDay">
@@ -314,6 +325,7 @@
                 $("#select_sedes").empty();
                 $('#input_autocomplete').val('');
                 $("#hora_inicio").val('');
+                $("#hora_fin").val('');
                 $("#text-instrucciones").val("");
                 $("#select_tipo_servicio").val('0').change();
             },
@@ -408,6 +420,8 @@
                                     <hr style="margin-top: 5px;margin-bottom: 5px;">
                                     <li><strong>Cliente: </strong>${event.cliente}</li>
                                     <li><strong>Sede: </strong>${event.sede}</li>
+                                    <li><strong>Teléfono: </strong>${event.telefono}</li>
+                                    <li><strong>Dirección: </strong>${event.direccion}</li>
                                 </ul>
                             </div>
                         </div>
@@ -439,14 +453,25 @@
 
         $("#form-calendario").submit(event => {
             event.preventDefault();
+            if(moment(`${inicio_servicio} ${$("#hora_fin").val()}`).hours() < moment(`${inicio_servicio} ${$("#hora_inicio").val()}`).hours()){
+                swal('Información', 'La hora final debe ser mayor que la hora inicial.', 'info')
+                return
+            }
+            if(!id_cliente){
+                swal('Información', 'Por favor selecciona un cliente.', 'info')
+                return
+            }
             var dataToSend = {
                 title: $("#text-instrucciones").val(),
                 start: inicio_servicio,
                 allDay: $("#allDay:checked").length,
                 tipo: $("#select_tipo_servicio").val(),
-                hora: $("#hora_inicio").val(),
+                hora_inicio: $("#hora_inicio").val(),
+                hora_fin: $("#hora_fin").val(),
                 idCliente: id_cliente,
-                idSede: $("#select_sedes").val()
+                idSede: $("#select_sedes").val(),
+                telefono_evento: $("#telefono_evento").val(),
+                direccion_evento: $("#direccion_evento").val()
             }
 
             swal({

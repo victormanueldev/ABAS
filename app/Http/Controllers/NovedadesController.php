@@ -131,8 +131,11 @@ class NovedadesController extends Controller
                 case "2":
                     $cliente = Cliente::where('razon_social', $request->id_cliente)->get();
                     break;
-                default:
+                case "3":
                     $cliente = Cliente::where('nit_cedula', $request->id_cliente)->get();
+                    break;
+                default:
+                    $cliente = Cliente::where('id', $request->id_cliente)->get();
                     break;
             }
             $novedad->cliente_id = $cliente[0]->id;
@@ -195,7 +198,8 @@ class NovedadesController extends Controller
                     'foto_user2'=> $novedad->user2->foto,//Datos del usuario que resolvió
                     'fecha_resuelto' => $novedad->updated_at->toDateString(),
                     'hora_resuelto' => $novedad->updated_at->format('g:i a'),
-                    'comentario' => $novedad->comentario
+                    'comentario' => $novedad->comentario,
+                    'area_id' => $novedad->area_id
                 ]);
             } else {
                 //Agrega todas las novedades a la coleccion
@@ -213,7 +217,8 @@ class NovedadesController extends Controller
                     'foto_user2' => '',
                     'fecha_resuelto' => '',
                     'hora_resuelto' => '',
-                    'comentario' => '-'
+                    'comentario' => '-',
+                    'area_id' => $novedad->area_id
                 ]);
             }
         }

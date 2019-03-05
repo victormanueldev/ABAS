@@ -4,6 +4,10 @@
 <link href="{{asset('css/plugins/dataTables/datatables.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
+<script>
+    document.getElementById('m-novedades').setAttribute("class", "active");
+    document.getElementById('a-novedades').removeAttribute("style");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Novedades</h2>
@@ -68,20 +72,22 @@
                                 </thead>
                                 <tbody>
                                 @foreach($data as $novedad)
-                                    <tr class="gradeX">
-                                        
-                                        <td>{{$novedad['nombres_user1']}} {{$novedad['apellidos_user1']}}</td>
-                                        <td>{{$novedad['descripcion']}}</td>
-                                        <td class="center">{{$novedad['fecha_creacion']}} - {{$novedad['hora_creacion']}}</td>
-                                        <td>{{$novedad['nombres_user2']}} {{$novedad['apellidos_user2']}}</td>
-                                        <td class="center">{{$novedad['fecha_resuelto']}} - {{$novedad['hora_resuelto']}}</td>
-                                        <td class="center">{{$novedad['comentario']}}</td> 
-                                         @if($novedad['estado'] == 'publicada')
-                                            <td><span class="label label-primary">Publicada</span></td>
-                                        @else
-                                            <td><span class="label label-warning">Resuelta</span></td>
-                                        @endif
-                                    </tr>
+                                    @if(Auth::user()->area_id == $novedad['area_id'])
+                                        <tr class="gradeX">
+                                            
+                                            <td>{{$novedad['nombres_user1']}} {{$novedad['apellidos_user1']}}</td>
+                                            <td>{{$novedad['descripcion']}}</td>
+                                            <td class="center">{{$novedad['fecha_creacion']}} - {{$novedad['hora_creacion']}}</td>
+                                            <td>{{$novedad['nombres_user2']}} {{$novedad['apellidos_user2']}}</td>
+                                            <td class="center">{{$novedad['fecha_resuelto']}} - {{$novedad['hora_resuelto']}}</td>
+                                            <td class="center">{{$novedad['comentario']}}</td> 
+                                            @if($novedad['estado'] == 'publicada')
+                                                <td><span class="label label-primary">Publicada</span></td>
+                                            @else
+                                                <td><span class="label label-warning">Resuelta</span></td>
+                                            @endif
+                                        </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                                 <tfoot>

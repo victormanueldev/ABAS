@@ -56,9 +56,10 @@
                                     <input type="text" placeholder="Cliente..." class="typeahead_1 form-control" id="input_autocomplete"
                                         autocomplete="off" name="id_cliente"/>
                                 </div>
-                            <div class="form-group col-md-2" style="margin-top: 37px">
+                                
+                            {{-- <div class="form-group col-md-2" style="margin-top: 37px">
                                     <button type="button" id="btn-edit-client" class="btn btn-primary">Clasificar cliente</button>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group col-md-4" style="margin-top: 15px">
                                 <label class="control-label">Sede </label>

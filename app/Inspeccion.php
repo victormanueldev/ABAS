@@ -13,8 +13,7 @@ class Inspeccion extends Model
         'residencias' => 'array',
         'compra_dispositivos' => 'array',
         'dispositivos_comodato' => 'array',
-        'gestion_calidad' => 'array',
-        'areas' => 'array'
+        'gestion_calidad' => 'array'
     ];
 
     protected $fillable = [
@@ -38,6 +37,8 @@ class Inspeccion extends Model
         'observaciones_estaciones',
         'cant_cajas_alca_elec',
         'sumideros',
+        'medio_contacto',
+        'otro',
         'cliente_id',
         'sede_id'
     ];

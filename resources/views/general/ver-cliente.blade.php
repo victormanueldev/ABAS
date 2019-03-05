@@ -177,7 +177,7 @@
                                     <div class="panel-options">
                                         <ul class="nav nav-tabs">
                                             <li class="active"><a href="#tab-1" data-toggle="tab">Sedes</a></li>
-                                            <li class=""><a href="#tab-2" data-toggle="tab">Ispecciones</a></li>
+                                            <li class=""><a href="#tab-2" data-toggle="tab">Inspección</a></li>
                                             <li class=""><a href="#tab-3" data-toggle="tab">Solicitudes</a></li>
                                             <li class=""><a href="#tab-4" data-toggle="tab">Cotizaciones</a></li>
                                             <li class=""><a href="#tab-5" data-toggle="tab">Certificados</a></li>
@@ -389,22 +389,24 @@
                                             </div>
 
                                         </div>
-                                        <div class="tab-pane" id="tab-2">
+                                        <div class="tab-pane" id="tab-3">
                                             <div class="row">
-                                                @foreach($cliente[0]->inspecciones as $inspeccion)
-                                                <div class="col-lg-6" style="padding: 0 30px">
-                                                    <h5>Solicitud</h5>
-                                                    <h1 class="no-margins">{{$inspeccion->codigo}}</h1>
-                                                    <strong>Creación: </strong><small>{{$inspeccion->created_at}}</small>
-                                                </div>
-                                                @endforeach
+                                                @if(isset($cliente[0]->inspecciones))
+                                                    @foreach($cliente[0]->inspecciones as $inspeccion)
+                                                    <div class="col-lg-6" style="padding: 0 30px">
+                                                        <h5>Solicitud</h5>
+                                                        <h1 class="no-margins">{{$inspeccion->codigo}}</h1>
+                                                        <strong>Creación: </strong><small>{{$inspeccion->created_at}}</small>
+                                                    </div>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="tab-3">
+                                        <div class="tab-pane" id="tab-2">
                                             <div class="row">
                                                 @foreach($cliente[0]->solicitudes as $solicitud)
                                                 <div class="col-lg-6" style="padding: 0 30px">
-                                                    <h5>Solicitud</h5>
+                                                    <h5>Inspección</h5>
                                                     <h1 class="no-margins">{{$solicitud->codigo}}</h1>
                                                     <strong>Creación: </strong><small>{{$solicitud->created_at}}</small>
                                                 </div>

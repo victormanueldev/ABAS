@@ -193,4 +193,7 @@ Route::get('recepcion/rutas', function(){
     return view('servicio-clientes.registro-rutas');
 });
 
-Route::resource('inspeccion', 'InspeccionController');
+Route::resource('inspeccion', 'InspeccionController', [
+    'except' => 'showInspectionClient'
+]);
+Route::get('show/inspections/{idCliente}/{idSede}', 'InspeccionController@showInspectionClient');

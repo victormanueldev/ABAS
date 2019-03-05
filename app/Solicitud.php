@@ -13,7 +13,8 @@ class Solicitud extends Model
         'residencias' => 'array',
         'compra_dispositivos' => 'array',
         'dispositivos_comodato' => 'array',
-        'gestion_calidad' => 'array'
+        'gestion_calidad' => 'array',
+        'areas' => 'array'
     ];
 
     protected $fillable = [
@@ -39,8 +40,6 @@ class Solicitud extends Model
         'sumideros',
         'cliente_id',
         'sede_id',
-        'medio_contacto',
-        'otro',
     ];
 
     /**

@@ -49,8 +49,10 @@ class CreateInspeccionsTable extends Migration
             $table->text('dispositivos_comodato');
             //Gestion de calidad
             $table->text('gestion_calidad');
-            //Descripcion de las Areas
-            $table->text('areas');
+            //Info de publicidad
+            $table->string('medio_contacto', 20)->nullable();
+            $table->string('otro', 20)->nullable();
+            //Info del Cliente
             $table->integer('cliente_id');
             $table->integer('sede_id');  
             $table->timestamps();

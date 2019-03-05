@@ -678,6 +678,7 @@
     var valoresSinIvaComodato = [];
     var valorTotalComodato = [];
     var totalPlanSaneamiento;
+    var inspeccionCliente;
 
     $(document).ready(function () {
         var date = moment().format("YYYY-MM-DD");
@@ -696,54 +697,6 @@
             })
         $("#total_servicio_detalle").val(0)
 
-        //Inicializacion del input Autonumeric
-        valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'), {
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-
-        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'), {
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-
-        valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'), {
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-
-        valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'), {
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-
-        valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo_comodato-0'), {
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-
-        valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'), {
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
 
     });
 
@@ -769,6 +722,7 @@
             $("#contacto_email_factura").val(res[0]['email_contacto_facturacion']);
             $("#contacto_celular_factura").val(res[0]['celular_contacto_facturacion']);
             $("#nombre_usuario").val(res[0].user.nombres + " " + res[0].user.apellidos);
+            inspeccionCliente = res[0].solicitudes[0];
         }).then((res) => {//Peticion exitosa => status: 200
             console.log('Petición Exitosa');
         }).catch((err) => {//Peticion fallida => status: > 400
@@ -785,7 +739,6 @@
             $("#input-sede-telefono").val('');
             $("#input-sede-celular").val('');
             $("#input-sede-email").val('');
-            console.log(res);
             if (res == '') {//Valida que el cliente tenga sedes
                 $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
                 $("#select_sedes").prop('required', false);
@@ -800,6 +753,8 @@
                 $("#input-sede-telefono").prop('disabled', true);
                 $("#input-sede-celular").prop('disabled', true);
                 $("#input-sede-email").prop('disabled', true);
+                //Diligencia todo el formulario de inspeccion
+                getInspectionForm(inspeccionCliente)
             } else {
                 $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
                 $("#select_sedes").prop('required', true);
@@ -851,7 +806,7 @@
             $("#input-sede-celular").val(res[0]['celular_contacto']);
             $("#input-sede-email").val(res[0]['email_contacto']);
             //Diligencia todo el formulario de inspeccion
-            getInspectionForm(res[0]['inspeccion'])
+            getInspectionForm(res[0]['solicitud'])
         }).then((res) => {
             console.log('Petición Exitosa');
         }).catch((err) => {
@@ -898,6 +853,13 @@
             contVisitas++;
         })
         $('#total_plan').val(dataInspection.valor_plan_saneamiento);
+        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'), {
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
         $('#frecuencia_visitas_plan').val(dataInspection.frecuencia_visitas).change();
         $('#observaciones_plan').val(dataInspection.observaciones_visitas);
 
@@ -908,7 +870,7 @@
                 $("#valor_servicio_detalle-0").val(value.valor_servicio);
                 $("#frecuencia_servicio_detalle-0").val(value.frecuencia_servicio);
                 $("#observacion_servicio_detalle-0").val(value.observacion_servicio);
-                valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'), {
+                valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'), {
                     digitalGroupSpacing: '3',
                     digitGroupSeparator: '.',
                     decimalCharacter: ',',
@@ -976,6 +938,13 @@
                 $("#num_horas_residencia-0").val(hours);
                 $("#num_minutos_residencia-0").val(minutes);
                 $("#observaciones_residencia-0").val(value.observaciones_residencia);
+                valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
             } else {
                 hours = Math.floor((value.tiempo_estimado) / 60);
                 minutes = (value.tiempo_estimado % 60);
@@ -1009,6 +978,13 @@
                             rows="1" name="observaciones_residencia-${index}" id="observaciones_residencia-${index}" >${value.observaciones_residencia}</textarea>
                     </div>
                 `)
+                valoresResidencias[index] = new AutoNumeric(document.getElementById(`valor_residencia-${index}`), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
             }
             contResidencias++;
         })
@@ -1031,6 +1007,21 @@
                 $("#valor_sin_iva_dispositivo-0").val(value.valor_sin_iva);
                 $("#total_dispositivo-0").val(value.total_dispositivo);
                 $("#observacion_dispositivo-0").val(value.observacion_dispositivo);
+                valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
+
+                valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
             } else {
                 $("#dispositivos").append(`
                     <div class="form-group col-lg-3">
@@ -1063,6 +1054,21 @@
                             rows="1" name="observacion_dispositivo-${index}" id="observacion_dispositivo-${index}" >${value.observacion_dispositivo}</textarea>
                     </div>
                 `)
+                valoresSinIvaDispositivos[index] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo-${index}`), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
+
+                valorTotalDispositivos[index] = new AutoNumeric(document.getElementById(`total_dispositivo-${index}`), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
             }
             contDispositivos++;
         })
@@ -1075,6 +1081,21 @@
                 $("#valor_sin_iva_dispositivo_comodato-0").val(value.valor_sin_iva);
                 $("#total_dispositivo_comodato-0").val(value.total_dispositivo);
                 $("#observacione_dispositivo_comodato-0").val(value.observacion_dispositivo);
+                valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo_comodato-0'), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
+
+                valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
             } else {
                 $("#dispositivos").append(`
                     <div class="form-group col-lg-3">
@@ -1107,6 +1128,21 @@
                             rows="1" name="observacion_dispositivo-${index}" id="observacione_dispositivo_comodato-${index}" >${value.observacion_dispositivo}</textarea>
                     </div>
                 `)
+                valoresSinIvaComodato[index] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo_comodato-${index}`), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
+
+                valorTotalComodato[index] = new AutoNumeric(document.getElementById(`total_dispositivo_comodato-${index}`), {
+                    digitalGroupSpacing: '3',
+                    digitGroupSeparator: '.',
+                    decimalCharacter: ',',
+                    decimalPlaces: 0,
+                    outputFormat: "number"
+                })
             }
             contComodatos++;
 

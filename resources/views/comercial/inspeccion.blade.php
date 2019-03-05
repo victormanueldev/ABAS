@@ -111,7 +111,7 @@
                                             name="id_cliente">
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
-                                        <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
+                                                <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -697,7 +697,7 @@
                                     <div class="row" id="areas" style="padding: 15px 15px">
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Nombre y/o descripción del área</label>
-                                            <input type="text" style="text-transform: uppercase" id="area-0" name="area-0" placeholder="Nombre de dispositivo"
+                                            <input type="text" style="text-transform: uppercase" id="area-0" name="area-0" placeholder="Nombre de area"
                                                 class="form-control">
                                         </div>
     
@@ -1506,8 +1506,8 @@
             dataToSendInspection.compra_dispositivos[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
-                valor_sin_iva: valoresSinIvaDispositivos.rawValue,
-                total_dispositivo: valorTotalDispositivos.rawValue,
+                valor_sin_iva: valoresSinIvaDispositivos[index].rawValue,
+                total_dispositivo: valorTotalDispositivos[index].rawValue,
                 observacion_dispositivo: $(`#observacion_dispositivo-${index}`).val()
             }   
         }
@@ -1517,8 +1517,8 @@
             dataToSendInspection.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
-                valor_sin_iva: valoresSinIvaComodato.rawValue,
-                total_dispositivo: valorTotalComodato.rawValue,
+                valor_sin_iva: valoresSinIvaComodato[index].rawValue,
+                total_dispositivo: valorTotalComodato[index].rawValue,
                 observacion_dispositivo: $(`#observacione_dispositivo_comodato-${index}`).val(),
             }
         }
