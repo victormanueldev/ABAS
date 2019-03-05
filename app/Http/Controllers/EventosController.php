@@ -106,7 +106,12 @@ class EventosController extends Controller
                         break;
                 }
                 $evento->user_id = Auth::user()->id;
-                $evento->save();
+                if($request->method == 'create'){
+                    $evento->save();
+                }else{
+                    Evento::destroy($request->id_evento);
+                    $evento->save();
+                }
                 return response()->json(['Evento Guardado'], 200);
             }else{
                 return response()->json(['error' => 'Datos no validos'], 400);
@@ -133,9 +138,11 @@ class EventosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
         //
+        $evento  = Evento::find($id);
+        
     }
 
     /**

@@ -52,6 +52,10 @@
                     id="btn-modal">
                     Launch modal
                 </button>
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editar-servicios"
+                    id="btn-modal-edit">
+                    Launch modal
+                </button>
 
                 <!--===================================================
                 /* Modal de Crear Evento */
@@ -78,13 +82,13 @@
                                                 <div class="col-sm-8">
                                                     <label class="radio-inline">
                                                         <input class="radio-options" type="radio" value="1" id="por_nombre"
-                                                            name="optionsRadios"> Nombre </label>
+                                                            name="optionsRadios2"> Nombre </label>
                                                     <label class="radio-inline">
                                                         <input class="radio-options" type="radio" value="2" id="por_rs"
-                                                            name="optionsRadios"> Razon Social </label>
+                                                            name="optionsRadios2"> Razon Social </label>
                                                     <label class="radio-inline">
                                                         <input class="radio-options" type="radio" value="3" id="por_nit"
-                                                            name="optionsRadios"> NIT/CC </label>
+                                                            name="optionsRadios2"> NIT/CC </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12" style="margin-top: 10px;">
@@ -99,11 +103,11 @@
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label class="control-label">Teléfono/Celular </label>
-                                                <input type="text" class="form-control" id="telefono_evento">
+                                                <input style="text-transform: uppercase" type="text" class="form-control" id="telefono_evento" placeholder="Escriba un teléfono">
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label class="control-label">Dirección</label>
-                                                <input type="text" class="form-control" id="direccion_evento">
+                                                <input style="text-transform: uppercase" type="text" class="form-control" id="direccion_evento" placeholder="escriba una dirección">
                                             </div>
                                         </div>
                                     </div>
@@ -114,16 +118,16 @@
                                             <div class="form-group col-lg-12">
                                                 <label>Tipo de Evento: </label>
                                                 <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio" required>
-                                                    <option value="0">Seleccione un tipo.</option>
+                                                    <option value="0">SELECCIONA UN TIPO.</option>
                                                     @if(Auth::user()->area_id == 1)
-                                                        <option value="Llamada">Llamada</option>
-                                                        <option value="Visita">Visita</option>
+                                                        <option value="Llamada">LLAMADA</option>
+                                                        <option value="Visita">VISITA</option>
                                                     @else
-                                                        <option value="Llamada">Llamada</option>
-                                                        <option value="Visita">Visita</option>
-                                                        <option value="Actualizacion">Actualización de documentos</option>
-                                                        <option value="Capacitacion">Capacitación</option>
-                                                        <option value="Diagnostico">Diagnostico</option>
+                                                        <option value="Llamada">LLAMADA</option>
+                                                        <option value="Visita">VISITA</option>
+                                                        <option value="Actualizacion">ACTUALIZACION DE DOCUMENTOS</option>
+                                                        <option value="Capacitacion">CAPACITACION</option>
+                                                        <option value="Diagnostico">DIAGNOSTICO</option>
                                                     @endif
                                                 </select>
                                             </div>
@@ -147,7 +151,7 @@
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label>Observaciones</label>
-                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones para el evento."
+                                                <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones para el evento."
                                                     rows="1" name="instrucciones" id="text-instrucciones"></textarea>
                                             </div>
                                         </div>
@@ -164,6 +168,125 @@
                     </div>
                 </div>
 
+                <!--===================================================
+                /* Modal de editar Evento */
+                ====================================================-->
+                <div id="modal-editar-servicios" class="modal inmodal fade" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content ">
+                                {!! Form::open(['route' => ['guardaEventos'], 'method' => 'POST', 'id' =>'form-calendario-edit']) !!}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h3 class="modal-title">Editar evento</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 b-r">
+                                            <h3 class="m-t-none m-b">Información del cliente</h3>
+                                            <p>Indique los datos del cliente al que se le agendará el servicio.</p>
+                                            <div class="row">
+                                                <div class="form-group ">
+                                                    <label class="col-sm-4 control-label">Buscar cliente por: </label>
+                                                    <div class="col-sm-8">
+                                                        <label class="radio-inline">
+                                                            <input class="radio-options-edit" type="radio" value="1" id="por_nombre"
+                                                                name="optionsRadios"> Nombre </label>
+                                                        <label class="radio-inline">
+                                                            <input class="radio-options-edit" type="radio" value="2" id="por_rs"
+                                                                name="optionsRadios"> Razon Social </label>
+                                                        <label class="radio-inline">
+                                                            <input class="radio-options-edit" type="radio" value="3" id="por_nit"
+                                                                name="optionsRadios"> NIT/CC </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12" style="margin-top: 10px;">
+                                                    <input type="text" placeholder="Cliente..." class="form-control"
+                                                    id="typeahead_2" autocomplete="off" />
+                                                </div>
+                                                <div class="form-group col-lg-12" style="margin-top: 15px;">
+                                                    <label class="control-label">Cliente Actual </label>
+                                                    <input type="text" id="actual-client" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-6" style="margin-top: 15px;">
+                                                    <label class="control-label">Sede Actual </label>
+                                                    <input type="text" id="actual-sede" class="form-control">
+                                                </div>
+                                                <div class="form-group col-lg-6" style="margin-top: 15px;">
+                                                    <label class="control-label">Nueva Sede *</label>
+                                                    <select class="form-control " id="select_sedes_edit" required>
+                                                        <option value="" selected disabled>Selecciona una sede</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label class="control-label">Teléfono/Celular </label>
+                                                    <input style="text-transform: uppercase" type="text" class="form-control" id="telefono_evento_edit" placeholder="Escriba un teléfono">
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label class="control-label">Dirección</label>
+                                                    <input style="text-transform: uppercase" type="text" class="form-control" id="direccion_evento_edit" placeholder="escriba una dirección">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h3 class="m-t-none m-b">Información del evento</h3>
+                                            <p>Diligencie todos los campos del referentes al evento</p>
+                                            <div class="row">
+                                                <div class="form-group col-lg-12">
+                                                    <label>Tipo de Evento: </label>
+                                                    <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio_edit" required>
+                                                        <option value="0">SELECCIONA UN TIPO.</option>
+                                                        @if(Auth::user()->area_id == 1)
+                                                            <option value="Llamada">LLAMADA</option>
+                                                            <option value="Visita">VISITA</option>
+                                                        @else
+                                                            <option value="Llamada">LLAMADA</option>
+                                                            <option value="Visita">VISITA</option>
+                                                            <option value="Actualizacion">ACTUALIZACION DE DOCUMENTOS</option>
+                                                            <option value="Capacitacion">CAPACITACION</option>
+                                                            <option value="Diagnostico">DIAGNOSTICO</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-lg-4">
+                                                    <label>Hora de inicio*</label>
+                                                    <div class="input-group" style="width: 100%">
+                                                        <input type="time" class="form-control" id="hora_inicio_edit" min="07:00" max="18:00" style="width: 100%" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-lg-4">
+                                                    <label>Hora de fin*</label>
+                                                    <div class="input-group" style="width: 100%">
+                                                        <input type="time" class="form-control" id="hora_fin_edit" min="07:00" max="19:00" style="width: 100%" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-lg-4">
+                                                    <label>Todo el dia</label>
+                                                    <div class="input-group" style="width: 100%">
+                                                            <input type="checkbox" id="allDay_edit">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-lg-12">
+                                                    <label>Observaciones</label>
+                                                    <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones para el evento."
+                                                        rows="1" name="instrucciones" id="text-instrucciones-edit"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button style="margin-bottom: 0;" type="button" id="btn-close3" class="btn btn-default"
+                                        data-dismiss="modal">Cancelar</button>
+                                        <button id="delete-event" type="button" class="btn btn-danger" >Eliminar evento</button>
+                                    <button id="edit-event" type="submit" class="btn btn-primary">Editar evento</button> 
+                                </div>
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
 
             </div>
         </div>
@@ -183,6 +306,7 @@
 <script>
 
     var inicio_servicio;
+    var id_evento;
     $(document).ready(function() {
 
 
@@ -218,6 +342,10 @@
             source: nit_clientes
         });
 
+        $input2 = $('#typeahead_2').typeahead({
+            source: nit_clientes
+        });
+
         //Evento click de los radiobuttons
         $(".radio-options").click(event => {
             //Valida el valor del radiobutton seleccionado
@@ -250,22 +378,49 @@
             }
         });
 
-        //Change del input de autocompletado
-        $input.change(function () {
-            var current = $input.typeahead("getActive");
-            id_cliente = current.id;
+        $(".radio-options-edit").click(event => {
+            //Valida el valor del radiobutton seleccionado
+            switch (event.target.value) {
+                //Buscar por nombre de clientes
+                case '1':
+                    data = nombres_clientes;
+                    $('#typeahead_2').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                //Buscar por razon social de clientes
+                case '2':
+                    data = razon_social_clientes;
+                    $('#typeahead_2').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                //Buscar por NIT o CC de clientes
+                case '3':
+                    data = nit_clientes;
+                    $('#typeahead_2').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                default:
+                    console.log('Default');
+                    data = [];
+                    break;
+            }
+        });
 
+        function getSedes(current,idSelect){
             //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
             $.get(`/sedes/cliente/${current.id}`, function (res) {
-                $("#select_sedes").empty();//Limipia el select
-                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                $(`#${idSelect}`).empty();//Limipia el select
+                $(`#${idSelect}`).append(`<option value='' disabled selected> Selecciona una sede </option>`);
                 if (res == '') {//Valida que el cliente tenga sedes
-                    $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
+                    $(`#${idSelect}`).append(`<option value="0"> Sede Única </option>`);
                 } else {
                     //Recorre la respuesta del servidor
                     res.forEach(element => {
                         //Añade Options al select de sedes dependiendo de la respues del servidor
-                        $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                        $(`#${idSelect}`).append(`<option value=${element.id}> ${element.nombre} </option>`);
                     });
                 }
             }).then((res) => {
@@ -273,6 +428,19 @@
             }).catch((err) => {
                 console.log(err);
             });
+        }
+
+        //Change del input de autocompletado
+        $input.change(() => {
+            var current = $input.typeahead("getActive");
+            id_cliente = current.id;
+            getSedes(current,'select_sedes')
+        });
+
+        $input2.change(() => {
+            var current = $input2.typeahead("getActive");
+            id_cliente = current.id;
+            getSedes(current, 'select_sedes_edit')
         });
 
 
@@ -328,6 +496,8 @@
                 $("#hora_fin").val('');
                 $("#text-instrucciones").val("");
                 $("#select_tipo_servicio").val('0').change();
+                $("#telefono_evento").val('');
+                $("#direccion_evento").val('');
             },
             
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -447,21 +617,48 @@
             
             //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
             eventClick: function (event, jsEvent, view) {
+                inicio_servicio = event.start.format("YYYY-MM-DD");
+                id_evento = event.id;
+                $("#btn-modal-edit").click()
+                $("#typeahead_2").val('');
+                $('#actual-client').val(event.cliente);
+                $('#actual-sede').val(event.sede);
+            }
+        })
 
-            }
-        });
 
-        $("#form-calendario").submit(event => {
-            event.preventDefault();
-            if(moment(`${inicio_servicio} ${$("#hora_fin").val()}`).hours() < moment(`${inicio_servicio} ${$("#hora_inicio").val()}`).hours()){
-                swal('Información', 'La hora final debe ser mayor que la hora inicial.', 'info')
-                return
+
+        function saveEvent(method){
+            if(method === 1){
+                if($("#select_tipo_servicio").val() == '0'){
+                    swal('Información', 'Selecciona el tipo de evento.', 'info')
+                    return
+                }
+                if(moment(`${inicio_servicio} ${$("#hora_fin").val()}`).hours() < moment(`${inicio_servicio} ${$("#hora_inicio").val()}`).hours()){
+                    swal('Información', 'La hora final debe ser mayor que la hora inicial.', 'info')
+                    return
+                }
+                if(!id_cliente){
+                    swal('Información', 'Por favor selecciona un cliente.', 'info')
+                    return
+                }
+            }else{
+                if($("#select_tipo_servicio_edit").val() == '0'){
+                    swal('Información', 'Selecciona el tipo de evento.', 'info')
+                    return
+                }
+                if(moment(`${inicio_servicio} ${$("#hora_fin_edit").val()}`).hours() < moment(`${inicio_servicio} ${$("#hora_inicio_edit").val()}`).hours()){
+                    swal('Información', 'La hora final debe ser mayor que la hora inicial.', 'info')
+                    return
+                }
+                if(!id_cliente){
+                    swal('Información', 'Por favor selecciona un cliente.', 'info')
+                    return
+                }
             }
-            if(!id_cliente){
-                swal('Información', 'Por favor selecciona un cliente.', 'info')
-                return
-            }
+
             var dataToSend = {
+                method: 'create',
                 title: $("#text-instrucciones").val(),
                 start: inicio_servicio,
                 allDay: $("#allDay:checked").length,
@@ -472,6 +669,20 @@
                 idSede: $("#select_sedes").val(),
                 telefono_evento: $("#telefono_evento").val(),
                 direccion_evento: $("#direccion_evento").val()
+            }
+            var dataToSendEdit = {
+                method: 'edit',
+                id_evento: id_evento,
+                title: $("#text-instrucciones-edit").val(),
+                start: inicio_servicio,
+                allDay: $("#allDay_edit:checked").length,
+                tipo: $("#select_tipo_servicio_edit").val(),
+                hora_inicio: $("#hora_inicio_edit").val(),
+                hora_fin: $("#hora_fin_edit").val(),
+                idCliente: id_cliente,
+                idSede: $("#select_sedes_edit").val(),
+                telefono_evento: $("#telefono_evento_edit").val(),
+                direccion_evento: $("#direccion_evento_edit").val()
             }
 
             swal({
@@ -493,7 +704,7 @@
                         //Peticion HTTP para guardar el evento
                         $.ajax({
                             url: '/evento/guardar',//URL del servicio
-                            data: dataToSend,
+                            data: method === 1 ? dataToSend : dataToSendEdit,
                             type: "POST",//Método de envío
                             headers: {
                                 "Content-Type": 'application/x-www-form-urlencoded',
@@ -506,6 +717,7 @@
                                     .then(value => { //Boton OK actualizado
                                         if (value) {
                                             $("#btn-close2").click();
+                                            $("#btn-close3").click();
                                             $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
                                         }
                                     })
@@ -515,6 +727,38 @@
                             })
                     }
                 })
+        }
+
+        $("#delete-event").click(function(){
+            $.ajax({
+                url: '/eventos/elminar-evento',
+                data: {
+                    id: id_evento
+                },
+                type: 'POST',
+                headers: {
+                    "Content-Type": 'application/x-www-form-urlencoded',
+                    "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                }
+            })
+            .then(res => {
+                $("#btn-close3").click();
+                $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+            })
+            .catch(err => {
+                $("#btn-close3").click();
+                $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
+            })
+        })
+
+        $("#form-calendario-edit").submit(event => {
+            event.preventDefault();
+            saveEvent(2);
+        })
+
+        $("#form-calendario").submit(event => {
+            event.preventDefault();
+            saveEvent(1);
         })
     });
 

@@ -125,7 +125,7 @@ class InspeccionController extends Controller
 
     public function showInspectionClient($idCliente, $idSede)
     {
-        $inspecciones = Inspeccion::select('codigo','fecha','frecuencia','observaciones','valor_plan_saneamiento','frecuencia_visitas','total_detalle_servicios','tipo_facturacion')
+        $inspecciones = Inspeccion::select('id','codigo','fecha','frecuencia','observaciones_visitas','valor_plan_saneamiento','frecuencia_visitas','total_detalle_servicios','tipo_facturacion')
                                     ->where('cliente_id', $idCliente)
                                     ->where('sede_id', $idSede)
                                     ->get();

@@ -162,7 +162,7 @@
                                                 </div>
                                                 <div class="form-group col-lg-6" >
                                                     <label class="control-label">Frec. de solicitud</label>
-                                                    <input type="text" id="frecuencia_solicitud" class="form-control">
+                                                    <input style="text-transform: uppercase" type="text" id="frecuencia_solicitud" class="form-control">
                                                 </div>
                                                 <div class="form-group col-lg-6" >
                                                     <label class="control-label">Valor del plan</label>
@@ -178,7 +178,7 @@
                                                 </div>
                                                 <div class="form-group col-lg-12" >
                                                     <label class="control-label">Tipo de facturaciósn</label>
-                                                    <input type="text" id="tipo_facturacion_solicitud" class="form-control">
+                                                    <input style="text-transform: uppercase" type="text" id="tipo_facturacion_solicitud" class="form-control">
                                                 </div>
                                                 <div class="form-group col-lg-12" >
                                                     <label class="control-label">Observaciones de visitas</label>
@@ -747,6 +747,7 @@
     //Inicializacion de variables globales
     var infoServiceSelected = {id: '',duration: '', state: 0};
     var inicio_servicio;
+    var solicitudes;
 
     $(document).ready(function () {
 
@@ -920,6 +921,12 @@
                 $("#create-services").prop('disabled', false);
                 $("#lista-servicios").empty();
                 $("#select_tipo_servicio").val('0').change();
+                $("#frecuencia_solicitud").val('');
+                $("#valor_plan_solicitud").val('');
+                $("#frecuencia_visitas_solicitud").val('');
+                $("#valor_servicios_solicitud").val('');
+                $("#tipo_facturacion_solicitud").val('');
+                $("#observaciones_visitas_solicitud").val('');
             },
 
             //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
@@ -1307,12 +1314,13 @@
                         $('#select_tecnicos2').select2("val", "");
                         $("#text-instrucciones").val('');
                         $("#sug_frecuency").val('');
+
                         id_solicitud = '';
                     } else {
                         $("#text-instrucciones").val(res[0]['observaciones']);
                         $("#dir_sede").val(res[0].direccion);
                         $("#barrio_sede").val(res[0].barrio);
-                        $("#contacto_sede").val(res[0].nombre_contacto_inicial);
+                        $("#contacto_sede").val(!res[0].nombre_contacto_inicial ? res[0].nombre_contacto : res[0].nombre_contacto_inicial);
                         $("#tel_sede").val(res[0].telefono_contacto);
                         $("#sug_frecuency").val(res[0]['frecuencia'])
                         //Inicializacion del Popover
@@ -1378,7 +1386,12 @@
                             })
                         $.get(`/show/inspections/${id_cliente}/${id_sede}`)
                             .then(res => {
-                                console.log(res[0])
+                                solicitudes = res;
+                                $("#select_solicitudes").empty();//Limipia el select
+                                $("#select_solicitudes").append(`<option value='' disabled selected> Selecciona una solicitud </option>`);
+                                res.forEach((value,index) => {
+                                    $("#select_solicitudes").append(`<option value="${value.id}">${value.codigo} - ${value.fecha}</option>`)
+                                })
                             })
                             .catch(err => {
                                 console.log(err)
@@ -1391,10 +1404,35 @@
             });
         }
 
+        $("#select_solicitudes").change(e => {
+            $("#frecuencia_solicitud").val('');
+            $("#valor_plan_solicitud").val('');
+            $("#frecuencia_visitas_solicitud").val('');
+            $("#valor_servicios_solicitud").val('');
+            $("#tipo_facturacion_solicitud").val('');
+            $("#observaciones_visitas_solicitud").val('');
+            solicitudes.forEach((value,index) => {
+                if(value.id == e.target.value){
+                    $("#frecuencia_solicitud").val(value.frecuencia)
+                    $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
+                    $("#frecuencia_visitas_solicitud").val(value.frecuencia_visitas)
+                    $("#valor_servicios_solicitud").val(value.total_detalle_servicios.toString())
+                    $("#tipo_facturacion_solicitud").val(value.tipo_facturacion)
+                    $("#observaciones_visitas_solicitud").val(value.observaciones_visitas)
+                }
+            })
+        })
+
         //Evento change del select de Sedes
         $("#select_sedes").change(event => {
             crsfToken = document.getElementsByName("_token")[0].value;
             var id_sede = $("#select_sedes").val();
+            $("#frecuencia_solicitud").val('');
+            $("#valor_plan_solicitud").val('');
+            $("#frecuencia_visitas_solicitud").val('');
+            $("#valor_servicios_solicitud").val('');
+            $("#tipo_facturacion_solicitud").val('');
+            $("#observaciones_visitas_solicitud").val('');
             //Referencia al metodo de obtener la solicitud del cliente
             obtenerSolicitudSede(id_sede, crsfToken);
 
