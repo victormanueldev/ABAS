@@ -92,6 +92,6 @@ class Cliente extends Model
 
     public function inspeccion()
     {
-        return $this->hasOne(Inspeccion::class);
+        return $this->hasMany(Inspeccion::class);
     }
 }

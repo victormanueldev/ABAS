@@ -102,9 +102,14 @@ class InspeccionController extends Controller
      * @param  \ABAS\Inspeccion  $inspeccion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inspeccion $inspeccion)
+    public function edit(Request $request, $id)
     {
         //
+        if($request->ajax()){
+            $inspeccion = Inspeccion::findOrFail($id);
+            return $inspeccion;
+        }
+        return view('comercial.ver-inspeccion');
     }
 
     /**

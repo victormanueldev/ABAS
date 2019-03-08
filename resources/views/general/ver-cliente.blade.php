@@ -391,8 +391,8 @@
                                         </div>
                                         <div class="tab-pane" id="tab-3">
                                             <div class="row">
-                                                @if(isset($cliente[0]->inspecciones))
-                                                    @foreach($cliente[0]->inspecciones as $inspeccion)
+                                                @if(isset($cliente[0]->inspeccion))
+                                                    @foreach($cliente[0]->inspeccion as $inspeccion)
                                                     <div class="col-lg-6" style="padding: 0 30px">
                                                         <h5>Solicitud</h5>
                                                         <h1 class="no-margins">{{$inspeccion->codigo}}</h1>
