@@ -156,7 +156,6 @@ class TecnicoController extends Controller
 
         if($dt_end->diffInDays($dt_ini) == 1){
             if ($id == 'all') {
-                # code...
                 $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
                                     ->where('fecha_inicio', '>=', $dateStart)
                                     ->where('fecha_inicio', '<=', $dateEnd)
@@ -175,11 +174,11 @@ class TecnicoController extends Controller
         }else{
             if ($id == 'all') {
                 $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
-                                    ->where('fecha_inicio', '==', $dateStart)
+                                    ->where('fecha_inicio', '=', $dateStart)
                                     ->get();
             } else {
                 $servicios = Servicio::with('solicitud.sede','tecnicos', 'solicitud.cliente')
-                                    ->where('fecha_inicio', '==', $dateStart)
+                                    ->where('fecha_inicio', '=', $dateStart)
                                     //Filtro por ID de Tecnico
                                     ->whereHas('tecnicos', function($query) use($id){
                                         //Columna Id de la tabla tecnicos
@@ -233,6 +232,7 @@ class TecnicoController extends Controller
         $rutasLamparas = [];
         $rutasRoedoresInternas = [];
         $rutasRoedoresExternas = [];
+        $tecnicos;
         //Valida que la opcion de impresion sea todos los servicios
         if($idServicio == 'all'){
             //Obtiene la informacion necesaria para crear ordenes de servicio
@@ -240,18 +240,18 @@ class TecnicoController extends Controller
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
                                         ->where('tipo','Normal')
-                                        ->whereHas('tecnicos', function($query) use($idTecnico){
-                                            $query->where('id', $idTecnico);  
-                                        })
+                                        // ->whereHas('tecnicos', function($query) use($idTecnico){
+                                        //     $query->where('id', $idTecnico);  
+                                        // })
                                         ->get();
             //Obtiene la informacion necesaria para crear las rutas por cada cliente/sede
             $rutas = Servicio::with('solicitud.rutas', 'tecnicos')
                                         ->where('fecha_inicio', '>=', $fechaInicio)
                                         ->where('fecha_fin', '<=', $fechaFin)
                                         ->where('tipo','Normal')
-                                        ->whereHas('tecnicos', function($query) use($idTecnico){
-                                            $query->where('id', $idTecnico);  
-                                        })
+                                        // ->whereHas('tecnicos', function($query) use($idTecnico){
+                                        //     $query->where('id', $idTecnico);  
+                                        // })
                                         ->get();
             //Recorre la respuesta de la BD de todos los clientes/sedes seleccionados
             foreach ($rutas as $ruta) {
@@ -273,6 +273,35 @@ class TecnicoController extends Controller
                     }
                 }
                 
+            }
+
+            if($idTecnico == 'all'){
+                $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                            $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                            $query->where('fecha_inicio', '>=', $fechaInicio);
+                                            $query->where('fecha_fin', '<=', $fechaFin);
+                                        }, 'servicios.solicitud' => function($query){ 
+                                            $query->select('id', 'cliente_id', 'sede_id');
+                                        }, 'servicios.solicitud.cliente' => function($query){
+                                            $query->select('nombre_cliente', 'direccion', 'id');
+                                        }, 'servicios.solicitud.sede' => function($query){
+                                            $query->select('nombre', 'direccion', 'id');
+                                        }])
+                                        ->get();
+            }else{
+                $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                            $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                            $query->where('fecha_inicio', '>=', $fechaInicio);
+                                            $query->where('fecha_fin', '<=', $fechaFin);
+                                        }, 'servicios.solicitud' => function($query){ 
+                                            $query->select('id', 'cliente_id', 'sede_id');
+                                        }, 'servicios.solicitud.cliente' => function($query){
+                                            $query->select('nombre_cliente', 'direccion', 'id');
+                                        }, 'servicios.solicitud.sede' => function($query){
+                                            $query->select('nombre', 'direccion', 'id');
+                                        }])
+                                        ->where('id', $idTecnico)
+                                        ->get();
             }
         //Valida que la opcion de imprimir sea de un servicio en especifico
         }else{
@@ -312,6 +341,35 @@ class TecnicoController extends Controller
                 }
                 
             }
+
+            if($idTecnico == 'all'){
+                $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                            $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                            $query->where('fecha_inicio', '>=', $fechaInicio);
+                                            $query->where('fecha_fin', '<=', $fechaFin);
+                                        }, 'servicios.solicitud' => function($query){ 
+                                            $query->select('id', 'cliente_id', 'sede_id');
+                                        }, 'servicios.solicitud.cliente' => function($query){
+                                            $query->select('nombre_cliente', 'direccion', 'id');
+                                        }, 'servicios.solicitud.sede' => function($query){
+                                            $query->select('nombre', 'direccion', 'id');
+                                        }])
+                                        ->get();
+            }else{
+                $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                            $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                            $query->where('fecha_inicio', '>=', $fechaInicio);
+                                            $query->where('fecha_fin', '<=', $fechaFin);
+                                        }, 'servicios.solicitud' => function($query){ 
+                                            $query->select('id', 'cliente_id', 'sede_id');
+                                        }, 'servicios.solicitud.cliente' => function($query){
+                                            $query->select('nombre_cliente', 'direccion', 'id');
+                                        }, 'servicios.solicitud.sede' => function($query){
+                                            $query->select('nombre', 'direccion', 'id');
+                                        }])
+                                        ->where('id', $idTecnico)
+                                        ->get();
+            }
         }
         //Organiza la informacion para mayor facilidad de acceso a sus propiedades
         $data = collect([
@@ -319,7 +377,8 @@ class TecnicoController extends Controller
             'rs' => $rutasSaneamiento,
             'rl' => $rutasLamparas,
             'rre' => $rutasRoedoresExternas,
-            'rri' => $rutasRoedoresInternas
+            'rri' => $rutasRoedoresInternas,
+            'tecnicos' => $tecnicos
         ]);
         $fechaActual = Carbon::now()->toDateString();
         $data->push(['now' => $fechaActual]);
@@ -389,7 +448,7 @@ class TecnicoController extends Controller
 
         $fechaActual = Carbon::now()->toDateString();
         $data->push(['now' => $fechaActual]);
-        // return $data;
+        //return $data;
         return view('print-layouts.ordenes-servicios', compact('data'));
     }
 

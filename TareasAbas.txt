@@ -1,7 +1,7 @@
 Otros Ajustes
     AREA COMERCIAL (1 Dia)
         - Crear Cliente         
-            - Atributo de Estado de comisiones RECOMPRA, NUEVO CON CONTRATO, REACTIVADO (Editar en solicitudes)
+            - Atributo de Estado de comisiones REACTIVADO (Editar en solicitudes)
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
@@ -22,8 +22,6 @@ Otros Ajustes
         - Revisar Consultas y detalles de interfaz
 
     AREA DE PROGRAMACION
-        - Imprimir el cronograma de todos los tecnicos
-        - Formato de impresion para cronograma de tecnicos (horario HTML) 1 por tecnico
         - asignacion de sedes a facturas maestras dependiendo de las fechas de vigencia de la factura maestra
         - Asignacion de facturas a servicios dependiendo del tipo de facturacion del cliente teniendo en cuenta la frecuencia dependiendo del tipo de fac.(Quitar asignacion de facturas del modal de calendario)
 
@@ -54,9 +52,8 @@ Otros Ajustes
 
 
     AREA DE TECNICOS
-        - Realizar formulario del nuevo formato de inspeccion. #Andres
         - Realizar el calculo de horas hombre, etc #Andres
-        - Visualizar el informe de estos formatos desde comercial y autocompletar la info el formato de Solicitud #Andres
+        - Visualizar el informe de estos formatos desde comercial
 
 
     AREA DE ADMINISTRACION 

@@ -182,7 +182,7 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Email </label>
-                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_facturacion" placeholder="email del contacto de facturación" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_facturacion" placeholder="email del contacto de facturación" class="form-control" >
                                                         
                                                     </div>
 

@@ -2731,7 +2731,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
       background: #f2f2f2;
       font-family: "Roboto";
       border-top: 30px solid #5CAE27;
-      border-bottom: 20px solid #5CAE27
+      border-bottom: 20px solid #5CAE27;
+      margin-bottom: 30px;
   }
 
   .wrap {
@@ -2879,7 +2880,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 <body>
   @foreach ($data['tecnicos'] as $tecnico)
-    @if(isset($tecnico->servicios) || $tecnico->servicios->count() > 0)
+    @if(!$tecnico->servicios->isEmpty() || $tecnico->servicios->count() > 0)
     <div class="body">
 
         <div class="contenedor-formulario">
@@ -2906,7 +2907,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
                             </thead>
                             <tbody>
                                 <!-- 13 SERVICIOS -->
-                                @for ($i = 0; $i < 14; $i++)                                    
+                                @for ($i = 0; $i < 16; $i++)                                    
                                   <tr style="height: 56px;">
                                       <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  date('h:i A', strtotime($tecnico->servicios[$i]->hora_inicio)) : ""}}</td>
                                       <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  date('h:i A', strtotime($tecnico->servicios[$i]->hora_inicio)) : ""}}</td>

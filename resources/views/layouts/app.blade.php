@@ -134,9 +134,9 @@
                             <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios de técnicos</span></a>
                         </li>
 
-                        {{-- <li id="m-control-facturacion">
-                                <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
-                            </li> --}}
+                        <li id="m-control-facturacion">
+                            <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                        </li>
 
 
                         <li id="m-listado-servicios">

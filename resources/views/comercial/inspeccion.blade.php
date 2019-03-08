@@ -72,7 +72,8 @@
 
                                         <select style="text-transform: uppercase" class="form-control" id="frecuencia_servicio"
                                             name="frecuencia_servicio" required>
-                                            <option value="" selected>Seleccione una frecuencia</option>
+                                            <option value="" disabled selected>Seleccione una frecuencia</option>
+                                            <option value="Ocasional" selected>OCASIONAL</option>
                                             <option value="Semanal">SEMANAL</option>
                                             <option value="Quincenal">QUINCENAL</option>
                                             <option value="Mensual">MENSUAL</option>
@@ -81,7 +82,7 @@
                                             <option value="Cuatrimestral">CUATRIMESTRAL</option>
                                             <option value="Semestral">SEMESTRAL</option>
                                             <option value="Anual">ANUAL</option>
-                                            <option value="Ocasional">OCASIONAL</option>
+                                            
                                         </select>
 
                                     </div>
@@ -172,9 +173,9 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Email *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Email </label>
                                         <input type="text" style="text-transform: uppercase" type="email" id="input-email" name="input-email" placeholder="Email del contacto a facturar"
-                                            class="form-control" required>
+                                            class="form-control" >
 
                                     </div>
 
@@ -242,7 +243,7 @@
                                             placeholder="Celular del contacto del lugar" class="form-control">
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Email *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Email </label>
                                         <input type="text" style="text-transform: uppercase" type="email" id="input-sede-email" name="input-sede-email" placeholder="Email del contacto del servicio"
                                             class="form-control">
 

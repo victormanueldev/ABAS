@@ -71,6 +71,13 @@ class InspeccionController extends Controller
             $inspeccion->dispositivos_comodato= $request->dispositivos_comodato;
             $inspeccion->gestion_calidad= $request->gestion_calidad;
             $inspeccion->areas= $request->areas;
+
+            if($request->contrato == 'true'){
+                $cliente = Cliente::findOrFail($request->cliente_id);
+                $cliente->estado_registro = 'cliente_contrato';
+                $cliente->save();
+            }
+
             $inspeccion->save();
             return response()->json("Creation Success", 201);
         }else{
