@@ -94,4 +94,9 @@ class Cliente extends Model
     {
         return $this->hasMany(Inspeccion::class);
     }
+
+    public function facturas()
+    {
+        return $this->hasMany(FacturaMaestra::class);
+    }
 }

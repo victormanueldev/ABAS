@@ -22,7 +22,7 @@
         </ol>
     </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight" id="clientes">
+<div class="wrapper wrapper-content " id="clientes">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
@@ -89,13 +89,18 @@
                             </div>
 
                             <div class="form-group col-md-2" style="margin-top: 15px" >
-                                    <label class="control-label" style="margin-bottom: 13px;">Estado de facturación *</label>
-                                    <div id="fac-state">
-                                        
-                                    </div>
+                                <label class="control-label" style="margin-bottom: 13px;">Estado de facturación *</label>
+                                <div id="fac-state">
+                                    
                                 </div>
-                            <div class="form-group col-md-2" style="margin-top: 37px">
+                            </div>
+
+                            <div class="form-group col-md-2" {{ Auth::user()->cargo_id == '3' ? 'style=display:none' : 'style=margin-top:37px'}}>
                                 <button type="button" id="btn-edit-client" class="btn btn-primary" {{ Auth::user()->cargo_id == '3' ? 'style=display:none' : ''}}>Clasificar cliente</button>
+                            </div>
+
+                            <div class="form-group col-md-2" {{ Auth::user()->cargo_id == '2' ? 'style=display:none' : 'style=margin-top:37px'}}>
+                                <button type="button" id="btn-edit-client" class="btn btn-primary" {{ Auth::user()->cargo_id == '2' ? 'style=display:none' : ''}} data-toggle="modal" data-target="#modal-create-fac">Facturas Maestras</button>
                             </div>
                         </div>
                         <hr>
@@ -128,7 +133,7 @@
                 Launch modal
             </button>
 
-            <!--===================================================
+                <!--===================================================
                 /* Modal opciones de actualizacion Factura
                 ====================================================-->
                 <div class="modal inmodal fade" id="modal-edit-fac" tabindex="-1" role="dialog" aria-hidden="true">
@@ -187,6 +192,56 @@
                         </div>
                     </div>
                 </div>
+
+                <!--===================================================
+                /* Modal creacion facturas maestras
+                ====================================================-->
+                <div class="modal inmodal fade" id="modal-create-fac" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <h2 class="modal-title" style="font-size: 23px;">Factura Maestra</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">   
+
+                                    <div class="form-group col-xs-12 col-lg-6">
+                                        <label class="control-label">Número de factura *</label>
+                                        <input type="text" class="form-control" id="num_factura_maestra"
+                                            style="width: 100%;background-color: #fff;">
+                                    </div>
+
+                                    <div class="form-group col-xs-12 col-lg-6">
+                                        <label class="control-label">Valor de factura *</label>
+                                        <input type="text" class="form-control" id="val_factura_maestra"
+                                            style="width: 100%;background-color: #fff;">
+                                    </div>
+
+                                    <div class="col-md-12" style="margin-top: 15px">
+                                        <div class="form-group" id="data_6">
+                                            <label class="control-label">Rango de fechas de asignación *</label>
+                                            <div class="input-daterange input-group" id="datepicker_2" style="width: 100%;">
+                                                <input type="text" id="date_start_factura_maestra" class="form-control-sm form-control"
+                                                    name="start" value="01/14/2018" />
+                                                <span class="input-group-addon">hasta</span>
+                                                <input type="text" id="date_end_factura_maestra" class="form-control-sm form-control" name="end"
+                                                    value="01/22/2018" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" id="btn-create-fac" class="btn btn-primary">Crear factura</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
     @endsection
@@ -222,6 +277,13 @@
 
         /** Inicializacion del Date Range **/
         $('#data_5 .input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
+
+        /** Inicializacion del Date Range **/
+        $('#data_6 .input-daterange').datepicker({
             keyboardNavigation: false,
             forceParse: false,
             autoclose: true
@@ -514,60 +576,60 @@
         });
 
 
-            function fillTable(idCliente, idSede){
-                table.clear().draw();
-                let serviciosTabla = [];
-                $.get({
-                        url: `/facturacion/cliente/${idCliente}/${idSede}`,
-                        data: {
-                            fecha_inicio: $("#date-start").val(),
-                            fecha_fin: $("#date-end").val()
-                        },
-                        type: 'GET',
-                        headers: {
-                            "X-CSRF-TOKEN": crsfToken       //Token de seguridad
-                        }
+        function fillTable(idCliente, idSede){
+            table.clear().draw();
+            let serviciosTabla = [];
+            $.get({
+                    url: `/facturacion/cliente/${idCliente}/${idSede}`,
+                    data: {
+                        fecha_inicio: moment($("#date-start").val(), 'MM/DD/YYYY').format('YYYY-MM-DD'),
+                        fecha_fin: moment($("#date-end").val(), 'MM/DD/YYYY').format('YYYY-MM-DD')
+                    },
+                    type: 'GET',
+                    headers: {
+                        "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                    }
+            })
+                .then(res => {
+                    if (res[0].solicitudes != null) {
+                            if (res[0].solicitudes[0].servicios != null) {
+                                dataServer = res;
+
+                                var serviciosTipo = res[0].solicitudes[0].servicios.map((servicio, index) => {
+                                    var servicios = [];
+                                    servicio.tipos.forEach((tipo, ind) => {
+                                        if(servicio.id == tipo.pivot.servicio_id){
+                                            servicios.push({servicio: servicio, tipo: tipo})
+                                        }
+                                    })
+                                    return servicios;
+                                })
+
+                                serviciosTipo.forEach(value => {
+                                    value.forEach( val => {
+                                        serviciosTabla.push(val)
+                                    })
+                                })
+                                
+                                table.rows.add(serviciosTabla).draw();
+                            } else {
+                                table.clear().draw();
+                                return;
+                            }
+                    } else {
+                        table.clear().draw();
+                        return;
+                    }
                 })
-                    .then(res => {
-                        if (res[0].solicitudes != null) {
-                                if (res[0].solicitudes[0].servicios != null) {
-                                    dataServer = res;
-
-                                    var serviciosTipo = res[0].solicitudes[0].servicios.map((servicio, index) => {
-                                        var servicios = [];
-                                        servicio.tipos.forEach((tipo, ind) => {
-                                            if(servicio.id == tipo.pivot.servicio_id){
-                                                servicios.push({servicio: servicio, tipo: tipo})
-                                            }
-                                        })
-                                        return servicios;
-                                    })
-
-                                    serviciosTipo.forEach(value => {
-                                        value.forEach( val => {
-                                            serviciosTabla.push(val)
-                                        })
-                                    })
-                                    
-                                    table.rows.add(serviciosTabla).draw();
-                                } else {
-                                    table.clear().draw();
-                                    return;
-                                }
-                        } else {
-                            table.clear().draw();
-                            return;
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    });
-            }
+                .catch(err => {
+                    console.log(err)
+                });
+        }
 
         function updateBill(dataToSend){
             swal({
                 title: "Información!",
-                    text: "¿Que acción desea realizar con esta factura?",
+                    text: "¿Está seguro de actualizar la factura?",
                     icon: "info",
                     buttons: {
                         cancel: true,
@@ -616,12 +678,59 @@
         });
 
         $("#btn-delete-fac").click(e => {
-                var data ={
-                    id_servicio_tipo: $("#id_tipo_servicio").val(),
-                    option: 'delete'
-                };
-                updateBill(data);
-            })   
+            var data ={
+                id_servicio_tipo: $("#id_tipo_servicio").val(),
+                option: 'delete'
+            };
+            updateBill(data);
+        })
+        
+        $("#btn-create-fac").click(() => {
+            swal({
+                title: "Información!",
+                    text: "¿Está seguro de crear la factura?",
+                    icon: "info",
+                    buttons: {
+                        cancel: true,
+                        confirm: {
+                            text: 'Aceptar',
+                            value: 'confirm',
+                            closeModal: false
+                        }
+                    }
+            })
+            .then(isConfirm => {
+                if(isConfirm){
+                    $.ajax({
+                        url: '/factura/maestra',
+                        data: {
+                            numero_factura: $("#num_factura_maestra").val(),
+                            total_factura: $("#val_factura_maestra").val(),
+                            cliente_id: clienteSeleccionado,
+                            sede_id: $("#select_sedes").val(),
+                            date_start: moment($("#date_start_factura_maestra").val()).format('YYYY-MM-DD'),
+                            date_end: moment($("#date_end_factura_maestra").val()).format('YYYY-MM-DD')
+                        },
+                        type: 'POST',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                        }
+                    })
+                    .then( res => {
+                        swal('¡Creación Exitosa!','Factura creada con exito', 'success')
+                        .then( value => {
+                            if(value){
+                                fillTable(clienteSeleccionado, $("#select_sedes").val());
+                            }    
+                        })
+                    })
+                    .catch( err => {
+                        swal('¡Error!', 'Error al intentar crear la factura', 'error')
+                    })
+                }
+            })
+
+        })
 
     </script>
     @endsection

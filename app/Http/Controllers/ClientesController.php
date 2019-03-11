@@ -307,16 +307,14 @@ class ClientesController extends Controller
         $dt_end = carbon::parse($request->fecha_fin)->toDateString();
         $facturas = Cliente::with(['solicitudes.sede' => function($query) use($idSede){
                                 $query->where('id',$idSede);
-                            },'solicitudes.servicios' => function($query){
+                            },'solicitudes.servicios' => function($query) use($dt_ini, $dt_end){
                                 $query->select('id', 'solicitud_id','fecha_inicio','hora_inicio','frecuencia_str','tipo','color');
+                                $query->where('fecha_inicio', '>=', $dt_ini);
+                                $query->where('fecha_fin', '<=', $dt_end);
                             } , 'solicitudes.servicios.tipos'])
                             ->select('id','nombre_cliente')
                             ->whereHas('solicitudes', function($query) use($idSede){
                                 $query->where('sede_id', $idSede);
-                            })
-                            ->whereHas('solicitudes.servicios', function($query) use($dt_ini, $dt_end){
-                                $query->where('fecha_inicio', '>=', $dt_ini);
-                                $query->where('fecha_fin', '<=', $dt_end);
                             })
                             ->where('id', $idCliente)
                             ->get();

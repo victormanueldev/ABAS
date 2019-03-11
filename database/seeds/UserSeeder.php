@@ -133,6 +133,19 @@ class UserSeeder extends Seeder
                 'area_id' => '1',
                 'cargo_id' => '1' 
             ],
+            '10' => [
+                'cedula' => '111111111',
+                'nombres' => 'Programador',
+                'apellidos' => 'Sanicontrol',
+                'iniciales' => 'PS',
+                'telefono' => '3177777750',
+                'foto' => 'default-user.jpg',
+                'email' => 'programacion@sanicontrol.com',
+                'password' => bcrypt('sanicontrol2012'),
+                'area_id' => '3',
+                'cargo_id' => '3' 
+            ],
+
             
         ];
         DB::table('users')-> insert($users);

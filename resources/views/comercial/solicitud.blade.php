@@ -353,7 +353,7 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-3">
                                         <label class="control-label">Facturación</label>
                                         <select style="text-transform: uppercase" id="tipo_facturacion" class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
@@ -362,7 +362,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-3">
                                         <label class="control-label">Forma de pago</label>
                                         <select style="text-transform: uppercase" id="forma_pago" class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
@@ -377,12 +377,21 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-3">
                                         <label class="control-label">¿Tiene contrato?</label>
                                         <select style="text-transform: uppercase" id="contrato" class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="si">SI</option>
                                             <option value="no">NO</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Forma de facturación</label>
+                                        <select style="text-transform: uppercase" id="factura_maestra" class="form-control" required>
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="si">Factura Maestra</option>
+                                            <option value="no">Factura Individual</option>
                                         </select>
                                     </div>
 
@@ -1553,6 +1562,7 @@
             tipo_facturacion: '',
             forma_pago: '',
             contrato: '',
+            factura_maestra: '',
             cant_lampara_lamina: '',
             cant_lampara_insectocutora: '',
             cant_trampas: '',
@@ -1645,6 +1655,7 @@
         dataToSend.tipo_facturacion = $("#tipo_facturacion").val();
         dataToSend.forma_pago = $("#forma_pago").val();
         dataToSend.contrato = $("#contrato").val() == 'si' ? true : false;
+        dataToSend.factura_maestra = $("#factura_maestra").val() == 'si' ? true : false;
         dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
         dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
         dataToSend.cant_trampas = $("#cant_trampas_impacto").val();

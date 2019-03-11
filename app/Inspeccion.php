@@ -40,7 +40,8 @@ class Inspeccion extends Model
         'medio_contacto',
         'otro',
         'cliente_id',
-        'sede_id'
+        'sede_id',
+        'factura_maestra',
     ];
 
     public function cliente()

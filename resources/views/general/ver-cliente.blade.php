@@ -396,6 +396,7 @@
                                                     <div class="col-lg-6" style="padding: 0 30px">
                                                         <h5>Solicitud</h5>
                                                         <h1 class="no-margins">{{$inspeccion->codigo}}</h1>
+                                                        <a href="/solicitud/{{$inspeccion->id}}/edit" class="stat-percent font-bold text-navy">Editar solicitud <i class="fa fa-edit"></i></a>
                                                         <strong>Creación: </strong><small>{{$inspeccion->created_at}}</small>
                                                     </div>
                                                     @endforeach
@@ -408,6 +409,7 @@
                                                 <div class="col-lg-6" style="padding: 0 30px">
                                                     <h5>Inspección</h5>
                                                     <h1 class="no-margins">{{$solicitud->codigo}}</h1>
+                                                    <a href="/inspeccion/{{$solicitud->id}}/edit" class="stat-percent font-bold text-navy">Editar inspección <i class="fa fa-edit"></i></a>
                                                     <strong>Creación: </strong><small>{{$solicitud->created_at}}</small>
                                                 </div>
                                                 @endforeach

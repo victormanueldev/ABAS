@@ -53,7 +53,7 @@ class InspeccionController extends Controller
             $inspeccion->total_detalle_servicios = $request->total_detalle_servicios;
             $inspeccion->tipo_facturacion = $request->tipo_facturacion;
             $inspeccion->forma_pago = $request->forma_pago;
-            $inspeccion->contrato = $request->contrato == 'true' ? true : false ;
+            $inspeccion->contrato = $request->contrato == 'true' ? true : false;
             $inspeccion->cant_lampara_lamina = $request->cant_lampara_lamina;
             $inspeccion->cant_lampara_insectocutora = $request->cant_lampara_insectocutora;
             $inspeccion->cant_trampas = $request->cant_trampas;
@@ -106,7 +106,7 @@ class InspeccionController extends Controller
     {
         //
         if($request->ajax()){
-            $inspeccion = Inspeccion::findOrFail($id);
+            $inspeccion = Solicitud::findOrFail($id);
             return $inspeccion;
         }
         return view('comercial.ver-inspeccion');
@@ -119,9 +119,40 @@ class InspeccionController extends Controller
      * @param  \ABAS\Inspeccion  $inspeccion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inspeccion $inspeccion)
+    public function update(Request $request, $id)
     {
         //
+        if($request->ajax()){
+            $inspeccion = Solicitud::findOrFail($id);
+            $inspeccion->codigo = $request->codigo;
+            $inspeccion->fecha = $request->fecha;
+            $inspeccion->frecuencia = $request->frecuencia;
+            $inspeccion->observaciones = $request->observaciones;
+            $inspeccion->valor_plan_saneamiento = $request->valor_plan_saneamiento;
+            $inspeccion->frecuencia_visitas = $request->frecuencia_visitas;
+            $inspeccion->observaciones_visitas = $request->observaciones_visitas;
+            $inspeccion->total_detalle_servicios = $request->total_detalle_servicios;
+            $inspeccion->tipo_facturacion = $request->tipo_facturacion;
+            $inspeccion->forma_pago = $request->forma_pago;
+            $inspeccion->contrato = $request->contrato == 'true' ? true : false ;
+            $inspeccion->cant_lampara_lamina = $request->cant_lampara_lamina;
+            $inspeccion->cant_lampara_insectocutora = $request->cant_lampara_insectocutora;
+            $inspeccion->cant_trampas = $request->cant_trampas;
+            $inspeccion->cant_jaulas = $request->cant_jaulas;
+            $inspeccion->cant_estaciones_roedor = $request->cant_estaciones_roedor;
+            $inspeccion->observaciones_estaciones = $request->observaciones_estaciones;
+            $inspeccion->cant_cajas_alca_elec = $request->cant_cajas_alca_elec;
+            $inspeccion->sumideros = $request->sumideros;
+            $inspeccion->visitas= $request->visitas;
+            $inspeccion->detalle_servicios= $request->detalle_servicios;
+            $inspeccion->residencias= $request->residencias;
+            $inspeccion->compra_dispositivos= $request->compra_dispositivos;
+            $inspeccion->dispositivos_comodato= $request->dispositivos_comodato;
+            $inspeccion->gestion_calidad= $request->gestion_calidad;
+            $inspeccion->areas= $request->areas;
+            $inspeccion->save();
+            return response()->json($inspeccion->cliente_id, 200);
+        }
     }
 
     /**

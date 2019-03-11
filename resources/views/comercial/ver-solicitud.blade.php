@@ -26,7 +26,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' =>
-    'form-inspeccion')) !!}
+    'form-solicitud')) !!}
     {!! Form::token() !!}
 
     <div class="row">
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="ibox-title col-lg-12">
-                                        <h1>FORMATO DE INSPECCIÓN</h1>
+                                        <h1>SOLICITUD A PROGRAMACIÓN</h1>
                                         <br>
                                         <br>
                                     </div>
@@ -210,6 +210,15 @@
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="si">SI</option>
                                             <option value="no">NO</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Forma de facturación</label>
+                                        <select style="text-transform: uppercase" id="factura_maestra" class="form-control" required>
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="si">Factura Maestra</option>
+                                            <option value="no">Factura Individual</option>
                                         </select>
                                     </div>
 
@@ -476,54 +485,24 @@
                                         </div>
                                     </div>
 
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Áreas</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-area"><i
-                                                class="fa fa-plus"></i> Agregar área</button>
-                                        <hr>
-                                        <br>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Medio por el cual se entero de nuestro servicio</label>
+                                        <select class="form-control" name="medio_contacto" id="medio_contacto">
+                                            <option value="amigo">Un amigo</option>
+                                            <option value="internet">Internet</option>
+                                            <option value="contacto_asesor">Contacto Asesor Directamente</option>
+                                            <option value="llamada_telefonica">Llamada Telefónica</option>
+                                            <option value="directorio">Directorio Telefónico</option>
+                                            <option value="otro">Otro</option>
+                                        </select>
                                     </div>
 
-                                    <div class="row" id="areas" style="padding: 15px 15px">
-                                        <div class="form-group col-lg-3">
-                                            <label class="control-label">Nombre y/o descripción del área</label>
-                                            <input type="text" style="text-transform: uppercase" id="area-0" name="area-0" placeholder="Nombre de area"
-                                                class="form-control">
-                                        </div>
-    
-                                        <div class="form-group col-lg-3 ">
-                                            <label>Tiempo estimado</label>
-                                            <div class="input-group">
-                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_area-0" placeholder="Horas">
-                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_area-0" placeholder="Minutos">
-                                            </div>
-                                        </div>
-    
-                                        <div class="form-group col-lg-4">
-                                            <label class="control-label">Evidencia y/o plaga observada</label>
-                                            <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" multiple style="width:350px;" id="plagas_area-0">
-                                                <option value="cucarachas">CUCARACHAS</option>
-                                                <option value="moscas">MOSCAS</option>
-                                                <option value="pulgas">PULGAS</option>
-                                                <option value="hormigas">HORMIGAS</option>
-                                                <option value="mosquitos">MOSQUITOS</option>
-                                                <option value="garrapatas">GARRAPATAS</option>
-                                                <option value="roedores">ROEDORES</option>
-                                                <option value="aranas">ARAÑAS</option>
-                                                <option value="chinches">CHINCHES</option>
-                                            </select>
-                                        </div>
-    
-                                        <div class="form-group col-lg-2">
-                                            <label class="control-label">Nivel act.</label>
-                                            <input style="text-transform: uppercase" name="nivel_area-0" id="nivel_area-0" class="form-control">
-
-                                        </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Otro ¿Cúal?</label>
+                                        <input type="text" id="otro" name="otro" placeholder="Otros medios" class="form-control"
+                                            disabled>
+                                        <br>
                                     </div>
-
 
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
@@ -559,7 +538,7 @@
     var valorTotalComodato = [];
     var totalPlanSaneamiento;
     var inspeccionCliente;
-    var id_inspeccion = window.location.pathname.split("/")[2];
+    var id_solicitud = window.location.pathname.split("/")[2];
 
     $(document).ready(function () {
         
@@ -579,9 +558,9 @@
             })
         $("#total_servicio_detalle").val(0)
 
-        $.get(`/inspeccion/${id_inspeccion}/edit`)
+        $.get(`/solicitud/${id_solicitud}/edit`)
             .then(res => {
-                getInspectionForm(res);
+                getSolicitudForm(res);
             })
             .catch(err => {
                 console.log(err);
@@ -599,7 +578,7 @@
     var contAreas = 1;
 
 
-    function getInspectionForm(dataInspection) {
+    function getSolicitudForm(dataInspection) {
         //Info general de la inspeccion
         $("#frecuencia_servicio").val(dataInspection.frecuencia);
         $("#observaciones_tecnico").val(dataInspection.observaciones);
@@ -710,6 +689,7 @@
         $("#tipo_facturacion").val(dataInspection.tipo_facturacion).change()
         $("#forma_pago").val(dataInspection.forma_pago).change()
         $("#contrato").val(dataInspection.contrato == 1 ? 'si' : 'no').change()
+        $("#factura_maestra").val(dataInspection.factura_maestra == 1 ? 'si' : 'no').change()
 
         //Numero de residencias
         dataInspection.residencias.forEach((value, index) => {
@@ -856,6 +836,11 @@
                 })
             }
             contDispositivos++;
+
+            //Medio de informacion
+            
+            $("#medio_contacto").val(dataInspection.medio_contacto);
+            $("#otro").val(dataInspection.otro);
         })
 
         //Dispositivos en Comodato
@@ -963,69 +948,6 @@
             contDocs++;
         })
 
-        //Areas de visitas
-        dataInspection.areas.forEach((value,index) => {
-            var hours = 0;
-            var minutes = 0;
-            if (index === 0) {
-                hours = Math.floor((value.tiempo_estimado) / 60);
-                minutes = (value.tiempo_estimado % 60);
-                $("#area-0").val(value.area);
-                $("#num_horas_area-0").val(hours);
-                $("#num_minutos_area-0").val(minutes);
-                $("#plagas_area-0").select2({
-                    width: '100%',
-                    placeholder: 'Servicios...'
-                });
-                $("#plagas_area-0").select2('val', value.plagas_area);
-                $("#nivel_area-0").val(value.nivel_actividad_area);
-            }else{
-                $("#areas").append(`
-                    <div class="form-group col-lg-3">
-                        <label class="control-label">Nombre y/o descripción del área</label>
-                        <input type="text" style="text-transform: uppercase" id="area-${index}" name="area-${index}" placeholder="Nombre de dispositivo"
-                            class="form-control" value="${value.area}">
-                    </div>
-
-                    <div class="form-group col-lg-3 ">
-                        <label>Tiempo estimado</label>
-                        <div class="input-group">
-                            <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                class="form-control" id="num_horas_area-${index}" placeholder="Horas">
-                            <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                class="form-control" id="num_minutos_area-${index}" placeholder="Minutos">
-                        </div>
-                    </div>
-
-                    <div class="form-group col-lg-4">
-                        <label class="control-label">Evidencia y/o plaga observada</label>
-                        <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" multiple style="width:350px;" id="plagas_area-${index}">
-                            <option value="cucarachas">CUCARACHAS</option>
-                            <option value="moscas">MOSCAS</option>
-                            <option value="pulgas">PULGAS</option>
-                            <option value="hormigas">HORMIGAS</option>
-                            <option value="mosquitos">MOSQUITOS</option>
-                            <option value="garrapatas">GARRAPATAS</option>
-                            <option value="roedores">ROEDORES</option>
-                            <option value="aranas">ARAÑAS</option>
-                            <option value="chinches">CHINCHES</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-lg-2">
-                        <label class="control-label">Nivel act.</label>
-                        <input type="text" style="text-transform: uppercase" id="nivel_area-${index}" name="nivel_area-${index}" placeholder="Actividad"
-                            class="form-control" value="${value.area}">
-                    </div>
-                `)
-                $(`#plagas_area-${index}`).select2({
-                    width: '100%',
-                    placeholder: 'Servicios...'
-                });
-                $(`#plagas_area-${index}`).select2('val', value.plagas_area)
-            }
-                contAreas++;
-        })
     }
 
     //Plan de sanemaiento
@@ -1350,98 +1272,49 @@
         contDocs++;
     })
 
-    //Descripcion de areas
-    $("#btn-add-area").click(function(){
-        $("#areas").append(`
-            <div class="form-group col-lg-3">
-                <label class="control-label">Nombre y/o descripción del área</label>
-                <input type="text" style="text-transform: uppercase" id="area-${contAreas}" name="area-${contAreas}" placeholder="Nombre de dispositivo"
-                    class="form-control">
-            </div>
-
-            <div class="form-group col-lg-3 ">
-                <label>Tiempo estimado</label>
-                <div class="input-group">
-                    <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                        class="form-control" id="num_horas_area-${contAreas}" placeholder="Horas">
-                    <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                        class="form-control" id="num_minutos_area-${contAreas}" placeholder="Minutos">
-                </div>
-            </div>
-
-            <div class="form-group col-lg-4">
-                <label class="control-label">Evidencia y/o plaga observada</label>
-                <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area-${contAreas}">
-                    <option value="cucarachas">CUCARACHAS</option>
-                    <option value="moscas">MOSCAS</option>
-                    <option value="pulgas">PULGAS</option>
-                    <option value="hormigas">HORMIGAS</option>
-                    <option value="mosquitos">MOSQUITOS</option>
-                    <option value="garrapatas">GARRAPATAS</option>
-                    <option value="roedores">ROEDORES</option>
-                    <option value="aranas">ARAÑAS</option>
-                    <option value="chinches">CHINCHES</option>
-                </select>
-            </div>
-
-            <div class="form-group col-lg-2">
-                <label class="control-label">Nivel act.</label>
-                <select style="text-transform: uppercase" name="nivel_area-${contAreas}" id="nivel_area-${contAreas}" class="form-control">
-                    <option value="alto">ALTO</option>
-                    <option value="medio">MEDIO</option>
-                    <option value="bajo">BAJO</option>
-                    <option value="no">NO</option>
-                </select>
-            </div>
-        `)
-        $('.chosen-select').chosen({ width: "100%" });
-        contAreas++;
-    })
-
 
     //Generar numero aleatorio
     function codigoAleatorio() {
         var randomCode = Math.round(Math.random() * (9999 - 0));
         if (randomCode <= 9) {
-            return "INSP00" + randomCode.toString();
+            return "FS00" + randomCode.toString();
         } else if (randomCode >= 9 && randomCode <= 99) {
-            return "INSP0" + randomCode.toString();
+            return "FS0" + randomCode.toString();
         } else {
-            return "INSP" + randomCode.toString();
+            return "FS" + randomCode.toString();
         }
     }
 
-    //Peticion HTTP PUT para actualizar el formato
-    function guardarInspeccion(dataSend){
+    //Peticion HTTP POST para actualzar el formato
+    function guardarSolicitud(dataSend) {
         $.ajax({
-            url: `/inspeccion/${id_inspeccion}`,
+            url: `/solicitud/${id_solicitud}`,
             data: dataSend,
             type: 'PUT',
-            headers:{
+            headers: {
                 "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
             }
         })
-        .then(res => {
-            swal("¡Formato Guardado!", 'El formato de inspeccion fue guardado correctamente.', 'success')
-            .then(val => {
-                if(val){
-                    window.location.href = `/clientes/${res}`
-                }
+            .then(res => {
+                swal("¡Formato Guardado!", 'La solicitud a programación fue guardado correctamente.', 'success')
+                    .then(val => {
+                        if (val) {
+                            window.location.href = `/clientes/${res}`
+                        }
+                    })
             })
-        })
-        .catch(err => {
-            swal('¡Error!', err.statusText, "error")
-        })
+            .catch(err => {
+                swal('¡Error!', err.statusText, "error")
+            })
     }
-    // var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
+    
     /* Estructura de datos para envio del formulario
     -----------------------------------------------------*/
-    $('#form-inspeccion').submit(e => {
+    $('#form-solicitud').submit(e => {
         e.preventDefault();
-        
-        var dataToSendInspection = {
-            idInspeccion: id_inspeccion,
+        var dataToSend = {
             codigo: '',
+            nombre_usuario: '',
             fecha: '',
             frecuencia: '',
             observaciones: '',
@@ -1452,6 +1325,7 @@
             tipo_facturacion: '',
             forma_pago: '',
             contrato: '',
+            factura_maestra:'',
             cant_lampara_lamina: '',
             cant_lampara_insectocutora: '',
             cant_trampas: '',
@@ -1460,37 +1334,40 @@
             observaciones_estaciones: '',
             cant_cajas_alca_elec: '',
             sumideros: '',
+            cliente_id: '',
+            sede_id: '',
             visitas: [],
             detalle_servicios: [],
             residencias: [],
             compra_dispositivos: [],
             dispositivos_comodato: [],
             gestion_calidad: [],
-            areas: [],
+            medio_contacto: '',
+            otro: ''
         }
 
-        // //Plan de saneamiento
+        //Plan de saneamiento
         for (let index = 0; index < contVisitas; index++) {
-            dataToSendInspection.visitas[index] = {
+            dataToSend.visitas[index] = {
                 num_visita: $(`#num_visita-${index}`).val(),
                 duracion: (parseInt($(`#num_horas_visita-${index}`).val()) * 60) + parseInt($(`#num_minutos_visita-${index}`).val())
             }
         }
 
-        // //Detalle del servicio correctivo y/o preventivo
+        //Detalle del servicio correctivo y/o preventivo
         for (let index = 0; index < contServicio; index++) {
-            dataToSendInspection.detalle_servicios[index] = {
+            dataToSend.detalle_servicios[index] = {
                 tipo_servicio: $(`#servicio_detalle-${index}`).val(),
                 valor_servicio: valoresServicios[index].rawValue,
                 frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
                 observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
             }
-            
+
         }
 
-        // //Numero de residencias
+        //Numero de residencias
         for (let index = 0; index < contResidencias; index++) {
-            dataToSendInspection.residencias[index] = {
+            dataToSend.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
                 valor_residencia: valoresResidencias[index].rawValue,
                 tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(`#num_minutos_residencia-${index}`).val()),
@@ -1498,20 +1375,20 @@
             }
         }
 
-        // //Compra de dispositivos
+        //Compra de dispositivos
         for (let index = 0; index < contDispositivos; index++) {
-            dataToSendInspection.compra_dispositivos[index] = {
+            dataToSend.compra_dispositivos[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
                 valor_sin_iva: valoresSinIvaDispositivos[index].rawValue,
                 total_dispositivo: valorTotalDispositivos[index].rawValue,
                 observacion_dispositivo: $(`#observacion_dispositivo-${index}`).val()
-            }   
+            }
         }
-        
-        // //Dispositivos en comodato
+
+        //Dispositivos en comodato
         for (let index = 0; index < contComodatos; index++) {
-            dataToSendInspection.dispositivos_comodato[index] = {
+            dataToSend.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
                 valor_sin_iva: valoresSinIvaComodato[index].rawValue,
@@ -1522,55 +1399,49 @@
 
         //Gestion de calidad
         for (let index = 0; index < contDocs; index++) {
-            dataToSendInspection.gestion_calidad[index] = {
+            dataToSend.gestion_calidad[index] = {
                 tipo_documento: $(`#tipo_doc-${index}`).val(),
                 frecuencia_documento: $(`#frecuencia_doc-${index}`).val(),
                 observacion_documento: $(`#observacion_doc-${index}`).val(),
             }
         }
 
-        // //Areas de inspeccion
-        for (let index = 0; index < contAreas; index++) {
-            dataToSendInspection.areas[index] = {
-                area: $(`#area-${index}`).val(),
-                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) * 60) + parseInt($(`#num_minutos_area-${index}`).val()),
-                plagas_area: $(`#plagas_area-${index}`).val(),
-                nivel_actividad_area: $(`#nivel_area-${index}`).val()
-            }
-            
-        }
-        
-        dataToSendInspection.codigo = codigoAleatorio();
-        dataToSendInspection.fecha  = $("#fecha_creacion").val();
-        dataToSendInspection.frecuencia = $("#frecuencia_servicio").val();
-        dataToSendInspection.observaciones = $("#observaciones_tecnico").val();
-        dataToSendInspection.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
-        dataToSendInspection.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
-        dataToSendInspection.observaciones_visitas = $("#observaciones_plan").val();
-        dataToSendInspection.total_detalle_servicios = $("#total_servicio_detalle").val();
-        dataToSendInspection.tipo_facturacion = $("#tipo_facturacion").val();
-        dataToSendInspection.forma_pago = $("#forma_pago").val();
-        dataToSendInspection.contrato = $("#contrato").val() == 'si' ? true : false;
-        dataToSendInspection.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
-        dataToSendInspection.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
-        dataToSendInspection.cant_trampas = $("#cant_trampas_impacto").val();
-        dataToSendInspection.cant_jaulas = $("#cant_jaulas").val();
-        dataToSendInspection.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
-        dataToSendInspection.observaciones_estaciones = $("#observaciones_estaciones").val();
-        dataToSendInspection.cant_cajas_alca_elec = $("#cant_cajas").val();
-        dataToSendInspection.sumideros = $("#cant_sumideros").val();
+        dataToSend.codigo = codigoAleatorio();
+        dataToSend.nombre_usuario = $("#nombre_usuario").val();
+        dataToSend.fecha = $("#fecha_creacion").val();
+        dataToSend.frecuencia = $("#frecuencia_servicio").val();
+        dataToSend.observaciones = $("#observaciones_tecnico").val();
+        dataToSend.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
+        dataToSend.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
+        dataToSend.observaciones_visitas = $("#observaciones_plan").val();
+        dataToSend.total_detalle_servicios = $("#total_servicio_detalle").val();
+        dataToSend.tipo_facturacion = $("#tipo_facturacion").val();
+        dataToSend.forma_pago = $("#forma_pago").val();
+        dataToSend.contrato = $("#contrato").val() == 'si' ? true : false;
+        dataToSend.factura_maestra = $("#factura_maestra").val() == 'si' ? true : false;
+        dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
+        dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
+        dataToSend.cant_trampas = $("#cant_trampas_impacto").val();
+        dataToSend.cant_jaulas = $("#cant_jaulas").val();
+        dataToSend.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
+        dataToSend.observaciones_estaciones = $("#observaciones_estaciones").val();
+        dataToSend.cant_cajas_alca_elec = $("#cant_cajas").val();
+        dataToSend.sumideros = $("#cant_sumideros").val();
+        dataToSend.cliente_id = $("#id_cliente").val();
+        dataToSend.sede_id = $("#select_sedes").val();
+        dataToSend.medio_contacto = $("#medio_contacto").val();
+        dataToSend.otro = $("#otro").val();
 
-        console.log(dataToSendInspection)
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
-            title: "Código de Inspección",
-            text: "Código generado: "+dataToSendInspection.codigo+", escribe otro código aquí: ",
+            title: "Código de Solicitud",
+            text: "Código generado: " + dataToSend.codigo + ", escribe otro código aquí: ",
             icon: "warning",
             content: {
                 element: "input",
                 attributes: {
-                placeholder: "Ingresa el código personalizado para el formulario de inspeccion",
-                type: "text"
+                    placeholder: "Ingresa el código personalizado para el formulario de solicitud",
+                    type: "text"
                 },
             },
             buttons: {
@@ -1583,17 +1454,18 @@
             },
             dangerMode: false,
         })
-        .then(isConfirm => {
-            if(isConfirm){ //Valida si el input de codigo está diligenciado
-                dataToSendInspection.codigo =  isConfirm;
-                guardarInspeccion(dataToSendInspection);
-                
-            }else if(isConfirm == ''){
-                guardarInspeccion(dataToSendInspection);
-            }else{
-             return    
-            }
-        })
+            .then(isConfirm => {
+                console.log(isConfirm)
+                if (isConfirm) {
+                    dataToSend.codigo = isConfirm;
+                    guardarSolicitud(dataToSend);
+                } else if (isConfirm == '') {
+                    guardarSolicitud(dataToSend);
+
+                } else {
+                    return
+                }
+            })
     })
 
 

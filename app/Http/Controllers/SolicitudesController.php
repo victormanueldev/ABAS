@@ -65,6 +65,7 @@ class SolicitudesController extends Controller
                 $solicitud->tipo_facturacion = $request->tipo_facturacion;
                 $solicitud->forma_pago = $request->forma_pago;
                 $solicitud->contrato = $request->contrato == 'true' ? true : false ;
+                $solicitud->factura_maestra = $request->factura_maestra == 'true' ? true : false;
                 $solicitud->cant_lampara_lamina = $request->cant_lampara_lamina;
                 $solicitud->cant_lampara_insectocutora = $request->cant_lampara_insectocutora;
                 $solicitud->cant_trampas = $request->cant_trampas;
@@ -130,9 +131,14 @@ class SolicitudesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        if($request->ajax()){
+            $solicitud = Inspeccion::findOrFail($id);
+            return $solicitud;
+        }
+        return view('comercial.ver-solicitud');
     }
 
     /**
@@ -145,6 +151,40 @@ class SolicitudesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->ajax()){
+            $solicitud = Inspeccion::findOrFail($id);
+            $solicitud->codigo = $request->codigo;
+            $solicitud->fecha = $request->fecha;
+            $solicitud->frecuencia = $request->frecuencia;
+            $solicitud->observaciones = $request->observaciones;
+            $solicitud->valor_plan_saneamiento = $request->valor_plan_saneamiento;
+            $solicitud->frecuencia_visitas = $request->frecuencia_visitas;
+            $solicitud->observaciones_visitas = $request->observaciones_visitas;
+            $solicitud->total_detalle_servicios = $request->total_detalle_servicios;
+            $solicitud->tipo_facturacion = $request->tipo_facturacion;
+            $solicitud->forma_pago = $request->forma_pago;
+            $solicitud->contrato = $request->contrato == 'true' ? true : false ;
+            $solicitud->factura_maestra = $request->factura_maestra == 'true' ? true : false;
+            $solicitud->cant_lampara_lamina = $request->cant_lampara_lamina;
+            $solicitud->cant_lampara_insectocutora = $request->cant_lampara_insectocutora;
+            $solicitud->cant_trampas = $request->cant_trampas;
+            $solicitud->cant_jaulas = $request->cant_jaulas;
+            $solicitud->cant_estaciones_roedor = $request->cant_estaciones_roedor;
+            $solicitud->observaciones_estaciones = $request->observaciones_estaciones;
+            $solicitud->cant_cajas_alca_elec = $request->cant_cajas_alca_elec;
+            $solicitud->sumideros = $request->sumideros;
+            $solicitud->visitas= $request->visitas;
+            $solicitud->detalle_servicios= $request->detalle_servicios;
+            $solicitud->residencias= $request->residencias;
+            $solicitud->compra_dispositivos= $request->compra_dispositivos;
+            $solicitud->dispositivos_comodato= $request->dispositivos_comodato;
+            $solicitud->gestion_calidad= $request->gestion_calidad;
+            $solicitud->medio_contacto = $request->medio_contacto;
+            $solicitud->otro = $request->otro;
+            $solicitud->save();
+            return response()->json($solicitud->cliente_id, 200);
+        }
+        
     }
 
     /**

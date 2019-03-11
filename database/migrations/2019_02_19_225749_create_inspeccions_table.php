@@ -32,6 +32,7 @@ class CreateInspeccionsTable extends Migration
             $table->string('tipo_facturacion');
             $table->string('forma_pago');
             $table->boolean('contrato');
+            $table->boolean('factura_maestra');
             //Numero de residencias
             $table->text('residencias');
             //Inventario inicial del cliente

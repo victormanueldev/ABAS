@@ -184,6 +184,7 @@
                                                     <label class="control-label">Observaciones de visitas</label>
                                                     <textarea class="form-control" placeholder="Observaciones de visitas." rows="1"  id="observaciones_visitas_solicitud"></textarea>
                                                 </div>
+                                                <div class="form-group col-lg-12" id="more-solicitud"></div>
 
                                         </div>
                                     </div>
@@ -1384,11 +1385,13 @@
                             .catch( err => {
                                 console.log(err)
                             })
+
                         $.get(`/show/inspections/${id_cliente}/${id_sede}`)
                             .then(res => {
                                 solicitudes = res;
                                 $("#select_solicitudes").empty();//Limipia el select
                                 $("#select_solicitudes").append(`<option value='' disabled selected> Selecciona una solicitud </option>`);
+
                                 res.forEach((value,index) => {
                                     $("#select_solicitudes").append(`<option value="${value.id}">${value.codigo} - ${value.fecha}</option>`)
                                 })
@@ -1411,14 +1414,16 @@
             $("#valor_servicios_solicitud").val('');
             $("#tipo_facturacion_solicitud").val('');
             $("#observaciones_visitas_solicitud").val('');
+            $("#more-solicitud").empty()
             solicitudes.forEach((value,index) => {
                 if(value.id == e.target.value){
                     $("#frecuencia_solicitud").val(value.frecuencia)
                     $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
-                    $("#frecuencia_visitas_solicitud").val(value.frecuencia_visitas)
+                    $("#frecuencia_visitas_solicitud").val("Cada "+value.frecuencia_visitas+" días")
                     $("#valor_servicios_solicitud").val(value.total_detalle_servicios.toString())
                     $("#tipo_facturacion_solicitud").val(value.tipo_facturacion)
                     $("#observaciones_visitas_solicitud").val(value.observaciones_visitas)
+                    $("#more-solicitud").append(`<a class="pull-right" href="/solicitud/${value.id}/edit">Ver más datos</a>`)
                 }
             })
         })
