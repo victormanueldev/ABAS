@@ -33,6 +33,7 @@ class TecnicoController extends Controller
     public function create()
     {
         //
+        return view('administracion.crear-tecnicos');
     }
 
     /**
@@ -44,6 +45,20 @@ class TecnicoController extends Controller
     public function store(Request $request)
     {
         //
+        $now = Carbon::now();
+        if($request->ajax()){
+            foreach ($request->tecnicos as $tecnico) {
+                DB::table('tecnicos')->insert([
+                    'nombre' => strtoupper($tecnico['nombre']),
+                    'color' => $tecnico['color'],
+                    'estado' => $tecnico['estado'] == '0' ? 'activo' : $tecnico['estado'],
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ]);
+            }
+
+            return response()->json("Creation Sucess", 201);
+        }
     }
 
     /**

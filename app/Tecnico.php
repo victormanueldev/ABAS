@@ -10,7 +10,9 @@ class Tecnico extends Model
     protected $fillable = [
         'id',
         'nombre',
-        'color'
+        'color',
+        'created_at',
+        'updated_at'
     ];
 
     public function servicios()

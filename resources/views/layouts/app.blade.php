@@ -143,6 +143,10 @@
                             <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de servicios</span></a>
                         </li>
 
+                        <li id="m-crear-tecnicos">
+                            <a href="/tecnicos/create" style="background-color: #5cae27;color: white;" title="Horario de técnicos" id="a-crear-tecnicos"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear técnicos</span></a>
+                        </li>
+
                     @elseif(Auth::user()->area_id == '4')
 
                     <li id="m-clientes">
