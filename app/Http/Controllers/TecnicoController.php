@@ -101,9 +101,16 @@ class TecnicoController extends Controller
      * @param  \ABAS\Tecnico  $tecnico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tecnico $tecnico)
+    public function update(Request $request, $id)
     {
         //
+        $tecnico = Tecnico::findOrFail($id);
+        $tecnico->nombre = $request->nombre;
+        $tecnico->color = $request->color;
+        $tecnico->estado = $request->estado;
+        $tecnico->save();
+
+        return response()->json("update success", 200);
     }
 
     /**
@@ -112,9 +119,12 @@ class TecnicoController extends Controller
      * @param  \ABAS\Tecnico  $tecnico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tecnico $tecnico)
+    public function destroy($id)
     {
-        //
+        $tecnico = Tecnico::findOrFail($id);
+        $tecnico->delete();
+
+        return response()->json("Delete Success", 200);
     }
 
     public function getColor($id)
