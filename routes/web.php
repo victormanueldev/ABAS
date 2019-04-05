@@ -108,40 +108,10 @@ Route::resource('rutas', 'RutaController', [
 ]);
 Route::post('find/route', 'RutaController@getRoute');
 Route::post('save/route/product', 'RutaController@saveRouteProduct');
-
 Route::get('show/ruta', 'RutaController@show');
+
 //Impresiones
 Route::get('impresiones/fechas/{id}/{inicio}/{fin}', 'ImpresionController@imprimirTodo');
-
-Route::get('testdates', function(){
-    $dateIni = Carbon::parse('2018-05-20');
-    $ordinal = 'Last';
-    $day = "Monday";
-    $cont=0;
-    $arrayDates = [];
-    $dt_fin = $dateIni->addMinutes(120);
-    while($dateIni->year <= 2019){
-        //$dateEnd = Carbon::parse($ordinal." ".$day." of ".$dateIni->format('F')." ".$dateIni->year);
-        //$dateEnd = Carbon::parse($day." ".$dateIni->format('F')." ".$dateIni->year); Repetir un dia especifico
-        // $dateEnd = Carbon::parse($dateIni);
-        // if($dateEnd->isSunday()){
-        //     $cont++;
-        //     $dateEnd->next(Carbon::MONDAY);
-        // }
-        //$dateIni->addWeeks($request->frecuencia);
-        $nueva_fecha = $dateIni;
-        //$dt_fin = $nueva_fecha;
-        //$servicio->fecha_inicio = $nueva_fecha;
-        //$servicio->hora_inicio = $nueva_fecha->toTimeString();
-        //$dt_fin->addMinutes(120);
-        array_push($arrayDates, $nueva_fecha->toDateTimeString());
-        //$servicio->fecha_fin =$dt_fin;
-        //$servicio->hora_fin = $dt_fin->toTimeString();
-        $dateIni->addWeek(2);
-    }
-    // $date = Carbon::parse('Last thursday of December 2018');
-    return $arrayDates;
-});
 
 //Cotizaciones
 Route::resource('cotizaciones', 'CotizacionController');
@@ -150,6 +120,7 @@ Route::resource('cotizaciones', 'CotizacionController');
 Route::resource('metas/comerciales', 'MetaController');
 Route::get('inspectores/metas', 'MetaController@progressInspect');
 Route::get('metas/director', 'MetaController@progresoDirector');
+Route::post('metas/todo', 'MetaController@assignManyGoals');
 
 Route::get('clientes/servicios/test', function(){
     $infoUsuarios = DB::table('users')

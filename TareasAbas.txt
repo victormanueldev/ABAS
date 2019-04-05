@@ -5,9 +5,6 @@ Otros Ajustes
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
-        - Solicitudes
-            - Asignar el tipo de facturacion del cliente (Tipo 1: factura maestra con frecuencia, Tipo 2: factura por sede o servicio)
-
         - ROL DE DIRECCION COMERCIAL
             - Asignar los permisos relacionados con metas
 
@@ -22,24 +19,19 @@ Otros Ajustes
         - Revisar Consultas y detalles de interfaz
 
     AREA DE PROGRAMACION
-        - asignacion de sedes a facturas maestras dependiendo de las fechas de vigencia de la factura maestra
-        - Asignacion de facturas a servicios dependiendo del tipo de facturacion del cliente teniendo en cuenta la frecuencia dependiendo del tipo de fac.(Quitar asignacion de facturas del modal de calendario)
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
 
-        - Generar novedad para mejorar frec y servicios de refuerz
+        - Generar novedad para mejorar frec y servicios de refuerzo
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
         - Comisiones para inspectores
         - Filtro de comisiones por facturacion pendiente, y por facturacion pagada <- ACTUAL
         - Reporte de clientes cerrados en el mes (Cotizacion final aprobada)
-        - Guardar las metas con un solo boton
-        - Puede editar las metas
         - Mascaras para inputs de precios y metas #Andres
         - Solo facturacion y comisiones
         - Revisar Consultas y detalles de interfaz
-        - Control de facturacion (solo puede registrar el pago y cambiar el estado de facturacion)
         - Estado de factura Cancelada
 
     AREA DE INVENTARIOS (3 Dias)

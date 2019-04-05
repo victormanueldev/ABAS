@@ -14,7 +14,8 @@ class Meta extends Model
         'meta_equipo_recompras',
         'meta_anual_inpector',
         'meta_anual_equipo',
-        'user_id'
+        'user_id',
+        'anio_vigencia'
     ];
 
     public function user()

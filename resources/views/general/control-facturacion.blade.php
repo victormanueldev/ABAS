@@ -488,7 +488,8 @@
                                     url: '/payment/register',//URL del servicio
                                     type: "PUT",//Método de envío
                                     data: {
-                                        id_servicio_tipo: dataToSend.tipo.pivot.id_servicio_tipo
+                                        id_servicio_tipo: dataToSend.tipo.pivot.id_servicio_tipo,
+                                        numero_factura: dataToSend.tipo.pivot.numero_factura
                                     },
                                     headers: {
                                         "Content-Type": 'application/x-www-form-urlencoded',

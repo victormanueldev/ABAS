@@ -111,7 +111,7 @@ class TipoServicioController extends Controller
         if($request->ajax()){
             $now = Carbon::now();
             try{
-                DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
+                DB::table('servicio_tipo_servicio')->where('numero_factura',$request->numero_factura)
                                                     ->update(['estado' => 'Pagado', 'updated_at' => $now]);
                 return response()->json("Payment success", 200);
             }catch(\Exception $e){

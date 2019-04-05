@@ -86,6 +86,41 @@ class MetaController extends Controller
         }
     }
 
+    public function assignManyGoals(Request $request)
+    {
+        if($request->ajax()){
+            $meta = new Meta();
+            if($request->metas[0]['rol'] == '1'){
+                $meta->tipo_meta = 'inspector';
+                $now = Carbon::now();
+                
+                //Borra todas las metas existextes del usuario
+                Meta::where('anio_vigencia', $now->year)
+                    ->where('tipo_meta', 'inspector')
+                    ->where('user_id', $request->metas[0]['idUser'])
+                    ->delete();
+
+                //Crea las nuevas metas enviadas
+                foreach ($request->metas as $meta) {
+                    DB::table('metas')->insert([
+                        'tipo_meta' => 'inspector',
+                        'meta_clientes_nuevos' => $meta['clientesNuevos'],
+                        'meta_recompras' => $meta['recompras'],
+                        'mes_vigencia' => $meta['mesVigencia'],
+                        'anio_vigencia' => $meta['anioVigencia'],
+                        'user_id' => $meta['idUser'],
+                        'created_at' => $now->toDateTimeString(),
+                        'updated_at' => $now->toDateTimeString()
+                    ]);
+                }
+            }else{
+                return response()->json($request->rol, 400);
+            }
+            
+            return response()->json('Creation Successfull', 201);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -200,13 +235,13 @@ class MetaController extends Controller
                 ->join('clientes', 'users.id', 'clientes.user_id')
                 ->join('cotizaciones', 'clientes.id', 'cotizaciones.cliente_id')
                 ->select('users.id', DB::raw('SUM(cotizaciones.valor) as total'))
-                // ->where('users.cargo_id', '1')
+                ->where('users.cargo_id', '1')
                 ->groupBy('users.id')
                 ->get();
         $metasUsers = DB::table('users')
                 ->join('metas', 'users.id', 'metas.user_id')
                 ->select('users.id', 'metas.*')
-                // ->where('users.cargo_id', '1')
+                ->where('users.cargo_id', '1')
                 ->where('metas.mes_vigencia', $request->monthValidity)
                 ->where('metas.tipo_meta', 'inspector')
                 ->get();

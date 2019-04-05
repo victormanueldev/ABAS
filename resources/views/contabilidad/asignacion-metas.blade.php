@@ -105,14 +105,14 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Clientes Nuevos:</label>
-                                            <input type="number" id="new-clients-{{$i}}" class="form-control" placeholder="$">
+                                            <input type="text" id="new-clients-{{$i}}" class="form-control" placeholder="$">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Recompras:</label>
-                                                <input type="number" id="repurchase-m-{{$i}}" class="form-control" placeholder="$">
+                                                <input type="text" id="repurchase-m-{{$i}}" class="form-control" placeholder="$">
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <button id="btn-save-goal-{{$i}}" type="button" class="btn btn-primary" style="margin-top: 24px;" onclick="saveGoal({{$i}})">Asignar</button>
+                                            <button id="btn-save-goal-{{$i}}" type="button" class="btn btn-primary" style="margin-top: 24px;" onclick="saveGoal({{$i}})">Editar</button>
                                         </div>
                                     @endfor 
                                         
@@ -121,6 +121,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button id="btn-save-all-goal" type="button" class="btn btn-primary">Guardar todo</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -192,7 +193,6 @@
 @endsection
 @section('ini-scripts')
 <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
-<!-- Sweet Alert -->
 <script src="{{asset('js/plugins/sweetalert/sweet-alert.js')}}"></script>
 <script>
 
@@ -210,6 +210,8 @@
         month: 0,
         year: 0
     };
+
+    var numericValues = []
 
     var crsfToken = document.getElementsByName("_token")[0].value;
 
@@ -268,10 +270,10 @@
                     if(value.id == idUser && value.metas.length > 0){
                         value.metas.forEach((meta,index) => {
                            if(meta.anio_vigencia == moment().year()){
-                            $(`#new-clients-${meta.mes_vigencia}`).val(meta.meta_clientes_nuevos);
-                            $(`#repurchase-m-${meta.mes_vigencia}`).val(meta.meta_recompras);
-                            $(`#btn-save-goal-${meta.mes_vigencia}`).attr('disabled','disabled');
-                           }
+                                    $(`#new-clients-${meta.mes_vigencia}`).val(meta.meta_clientes_nuevos);
+                                    $(`#repurchase-m-${meta.mes_vigencia}`).val(meta.meta_recompras);
+                               }
+                            //$(`#btn-save-goal-${meta.mes_vigencia}`).attr('disabled','disabled');
                         })
                     }
                 })
@@ -303,8 +305,8 @@
 
     function saveGoal(idMonthGoal) {
         let goal = {
-            clientesNuevos:$(`#new-clients-${idMonthGoal}`).val(),
-            recompras:$(`#repurchase-m-${idMonthGoal}`).val(),
+            clientesNuevos: $(`#new-clients-${idMonthGoal}`).val(),
+            recompras: $(`#repurchase-m-${idMonthGoal}`).val(),
             mesVigencia:idMonthGoal,
             anioVigencia:now.year,
             idUser: userSelected.id,
@@ -329,6 +331,43 @@
             }
         });
     }
+
+    $("#btn-save-all-goal").click(function(){
+        var goals = []
+
+        //Limpiar los inputs
+        for (let index = 0; index < 12; index++) {
+            if($(`#new-clients-${index}`).val()  != '' && $(`#repurchase-m-${index}`).val() != '' ){
+                goals.push({
+                    clientesNuevos: $(`#new-clients-${index}`).val(),
+                    recompras: $(`#repurchase-m-${index}`).val(),
+                    mesVigencia: index,
+                    anioVigencia: now.year,
+                    idUser: userSelected.id,
+                    rol: userSelected.idRole
+                })
+            }
+        }
+
+        $.ajax({
+            url: '/metas/todo',
+            data: {
+                metas: goals
+            },
+            type: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            },
+            success: (res) => {
+                console.log(res);
+                swal('¡Excelente!', 'Las Metas han sido asignadas con éxito', 'success')
+            },
+            error: (err) => {
+                console.log(err);
+                swal('Error!', 'Ha ocurrido un error al intentar guardar las metas', 'error')
+            }
+        });
+    })
 
     $("#month-validity").click(e => {
         assignGoal(userSelected.id, userSelected.name, 1, userSelected.role);
