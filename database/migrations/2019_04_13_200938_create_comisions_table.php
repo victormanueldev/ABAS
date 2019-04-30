@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacturaMaestrasTable extends Migration
+class CreateComisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateFacturaMaestrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('factura_maestras', function (Blueprint $table) {
+        Schema::create('comisions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('numero_factura', 60);
-            $table->integer('total_factura');
-            $table->string('estado')->default('na');
-            $table->integer('cliente_id');
+            $table->string('codigo')->unique();
+            $table->date('fecha_inicio_comision');
+            $table->date('fecha_fin_comision');
+            $table->integer('valor_pagado');
+            $table->integer('valor_pendiente');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateFacturaMaestrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('factura_maestras');
+        Schema::dropIfExists('comisions');
     }
 }

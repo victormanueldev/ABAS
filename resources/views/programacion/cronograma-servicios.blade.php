@@ -1231,15 +1231,16 @@
 
         $.get('/tecnicos')
             .then(res => {
+                $("#calendar").fullCalendar('addEventSource', '/servicios')
                 res.forEach(tecnico => {
-                    $('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` );    //Añade el source servicios de cada tecnico
-                    $(`#tecnico-${tecnico.id}`).click(e => {
+                    //$('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` );    //Añade el source servicios de cada tecnico
+                    /*$(`#tecnico-${tecnico.id}`).click(e => {
                         if($(`#tecnico-${tecnico.id}`).is(':checked')){ //Valida si el checkbox esta activo
                             $('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` )
                         }else{
                             $('#calendar').fullCalendar('removeEventSource', `/servicios/show/${tecnico.id}` ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
                         }
-                    })
+                    })*/
                 });
             })
             .catch(err => {

@@ -139,7 +139,7 @@ Route::get('clientes/servicios/test', function(){
     return $infoUsuarios;
 });
 
-//Route::resource('facturas', 'FacturaController');
+Route::resource('facturas', 'FacturaController');
 
 Route::put('tipo/bill', 'TipoServicioController@assignBill');
 Route::put('payment/register', 'TipoServicioController@registerPayment');
@@ -169,4 +169,5 @@ Route::resource('inspeccion', 'InspeccionController', [
 ]);
 Route::get('show/inspections/{idCliente}/{idSede}', 'InspeccionController@showInspectionClient');
 
-Route::resource('factura/maestra', 'FacturaMaestraController');
+Route::resource('comisiones', 'ComisionController');
+Route::post('show/comisiones', 'ComisionController@showByCode');

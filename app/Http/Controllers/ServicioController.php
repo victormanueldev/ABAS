@@ -420,7 +420,7 @@ class ServicioController extends Controller
     {
         //
         //Seleccionar columnas en las relaciones de eloquent
-        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede', 'factura')->where('id', $id)->get();
+        $servicio = Servicio::with('tipos:id,nombre', 'tecnicos:id,nombre,color', 'solicitud.cliente', 'solicitud.sede')->where('id', $id)->get();
         return $servicio;
     }
  
@@ -599,7 +599,6 @@ class ServicioController extends Controller
                             $servicio[0]->hora_fin = $request->hora_fin;
                             $servicio[0]->save();
                         }elseif ($request->opcionFrecuencia == "semanas") {
-                            # code...
                             $dt_ini->addWeeks($request->frecuencia);
                             $nueva_fecha = $dt_ini;
                             $servicio[0]->fecha_inicio = $nueva_fecha;
@@ -608,7 +607,6 @@ class ServicioController extends Controller
                             $servicio[0]->hora_fin = $request->hora_fin;
                             $servicio[0]->save();
                         }elseif ($request->opcionFrecuencia == "dias") {
-                            # code...
                             $dt_ini->addDays($request->frecuencia);
                             $nueva_fecha = $dt_ini;
                             //Valida que sea domingo
@@ -655,7 +653,6 @@ class ServicioController extends Controller
                                 $servicio->hora_fin = $request->hora_fin;
                                 $servicio->save();
                             }elseif ($request->opcionFrecuencia == "semanas") {
-                                # code...
                                 $dt_ini->addWeeks($request->frecuencia);
                                 $nueva_fecha = $dt_ini;
                                 $servicio->fecha_inicio = $nueva_fecha;
@@ -664,7 +661,6 @@ class ServicioController extends Controller
                                 $servicio->hora_fin = $request->hora_fin;//$nueva_fecha->addMinutes($request->duracion);
                                 $servicio->save();
                             }elseif ($request->opcionFrecuencia == "dias") {
-                                # code...
                                 $dt_ini->addDays($request->frecuencia);
                                 $nueva_fecha = $dt_ini;
                                 if($nueva_fecha->isSunday()){
@@ -709,7 +705,6 @@ class ServicioController extends Controller
                                 $servicio->hora_fin = $request->hora_fin;
                                 $servicio->save();
                             }elseif ($request->opcionFrecuencia == "semanas") {
-                                # code...
                                 $dt_ini->addWeeks($request->frecuencia);
                                 $nueva_fecha = $dt_ini;
                                 $servicio->fecha_inicio = $nueva_fecha;
@@ -718,7 +713,6 @@ class ServicioController extends Controller
                                 $servicio->hora_fin = $request->hora_fin;//$nueva_fecha->addMinutes($request->duracion);
                                 $servicio->save();
                             }elseif ($request->opcionFrecuencia == "dias") {
-                                # code...
                                 $dt_ini->addDays($request->frecuencia);
                                 $nueva_fecha = $dt_ini;
                                 if($nueva_fecha->isSunday()){

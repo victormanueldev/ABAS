@@ -14,6 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         '/logout',
         '/temporales/novedad/*',
-        '/solicitud'
+        '/solicitud',
+        '/show/comisiones'
     ];
 }

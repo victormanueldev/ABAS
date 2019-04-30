@@ -4,6 +4,9 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\Factura;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use ABAS\Servicio;
+use DB;
 
 class FacturaController extends Controller
 {
@@ -38,13 +41,39 @@ class FacturaController extends Controller
         //
         if($request->ajax()){
             try{
+                $dt = Carbon::now();
                 $factura = new Factura();
-                $factura->estado = 'Pendiente';
-                $factura->numero_factura = $request->numFac;
-                $factura->valor = $request->valFac;
-                $factura->servicio_id = $request->idServicio;
+                $factura->numero_factura = $request->numero_factura;
+                $factura->valor = $request->total_factura;
+                $factura->tipo = 'maestra';
+                $factura->fecha_inicio_vigencia = $request->date_start; 
+                $factura->fecha_fin_vigencia = $request->date_end;
+                $factura->cliente_id = $request->cliente_id;
                 $factura->save();
-                return response()->json('Creation Success', 201);
+    
+                $cliente_id = $request->cliente_id;
+                $sede_id = $request->sede_id;
+    
+                $servicios = Servicio::select('id', 'solicitud_id')->with('solicitud')
+                                                    ->whereHas('solicitud', function($query) use($cliente_id, $sede_id){
+                                                        $query->where('cliente_id',$cliente_id);
+                                                        $query->where('sede_id', $sede_id);    
+                                                    })
+                                                    ->where('fecha_inicio', '>=', $request->date_start)
+                                                    ->where('fecha_fin', '<=', $request->date_end)
+                                                    ->get();
+
+                foreach ($servicios as $servicio ) {
+                    DB::table('servicio_tipo_servicio')
+                        ->where('servicio_id', $servicio->id)
+                        ->where('numero_factura', null)
+                        ->update([
+                            'numero_factura' => $request->numero_factura,
+                            'estado' => 'Pendiente',
+                            'valor' => $request->total_factura
+                        ]);
+                }
+                return response()->json("Create success", 201);
             }catch(\Exception $e){
                 return response()->json($e, 500);
             }

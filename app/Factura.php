@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Factura extends Model
 {
     //
+
     protected $fillable = [
         'numero_factura',
         'valor',

@@ -15,9 +15,14 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('numero_factura');
+            $table->string('numero_factura')->unique();
             $table->integer('valor');
-            $table->integer('servicio_id');
+            $table->string('estado')->default('Pendiente');
+            $table->string('tipo');
+            $table->date('fecha_inicio_vigencia');
+            $table->date('fecha_fin_vigencia');
+            $table->date('fecha_pago')->nullable();
+            $table->integer('cliente_id');
             $table->timestamps();
         });
     }

@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" id="btn-close-modal" class="btn btn-white" data-dismiss="modal">Cancelar</button>
                                 <button type="button" id="btn-delete-fac" class="btn btn-danger">Borrar datos</button>
                                 <button type="button" id="btn-update-fac" class="btn btn-primary">Actualizar</button>
                             </div>
@@ -226,10 +226,10 @@
                                             <label class="control-label">Rango de fechas de asignación *</label>
                                             <div class="input-daterange input-group" id="datepicker_2" style="width: 100%;">
                                                 <input type="text" id="date_start_factura_maestra" class="form-control-sm form-control"
-                                                    name="start" value="01/14/2018" />
+                                                    name="start" value="01/14/2019" />
                                                 <span class="input-group-addon">hasta</span>
                                                 <input type="text" id="date_end_factura_maestra" class="form-control-sm form-control" name="end"
-                                                    value="01/22/2018" />
+                                                    value="01/22/2019" />
                                             </div>
                                         </div>
                                     </div>
@@ -268,12 +268,17 @@
             var table;
             let clientes;
             let url = window.location.pathname.split("/")
+            var factura_seleccionada;
 
         $(document).ready(function () {
 
         /** Asignacion de fechas por default a dateRange **/
         $("#date-start").val(moment().tz("America/Bogota").format("MM/DD/YYYY"));
         $("#date-end").val(moment().tz("America/Bogota").add(1, "month").format("MM/DD/YYYY"));
+
+        /** Asignacion de fechas por default a dateRange **/
+        $("#date_start_factura_maestra").val(moment().tz("America/Bogota").format("MM/DD/YYYY"));
+        $("#date_end_factura_maestra").val(moment().tz("America/Bogota").add(1, "month").format("MM/DD/YYYY"));
 
         /** Inicializacion del Date Range **/
         $('#data_5 .input-daterange').datepicker({
@@ -530,6 +535,7 @@
                 $("#numero_factura").val(dataTable.pivot.numero_factura);
                 $("#valor_factura").val(dataTable.pivot.valor);
                 $("#estado_factura").val(dataTable.pivot.estado);
+                factura_seleccionada = dataTable.pivot.numero_factura;
                 $("#btn-modal").click();
             }
 
@@ -657,6 +663,7 @@
                         .then( value => {
                             if(value){
                                 fillTable(clienteSeleccionado, $("#select_sedes").val());
+                                $("#btn-close-modal").click();
                             }    
                         })
                     })
@@ -671,9 +678,11 @@
         $("#btn-update-fac").click(e => {
             var data = {
                 id_servicio_tipo: $("#id_tipo_servicio").val(),
-                option: 'update',
+                option: factura_seleccionada != undefined ? 'update' : 'create',
                 num_fac: $("#numero_factura").val(),
-                total_fac: $("#valor_factura").val()
+                total_fac: $("#valor_factura").val(),
+                num_fac_ant: factura_seleccionada,
+                cliente_id: clienteSeleccionado
             }
             updateBill(data);
         });
@@ -681,7 +690,8 @@
         $("#btn-delete-fac").click(e => {
             var data ={
                 id_servicio_tipo: $("#id_tipo_servicio").val(),
-                option: 'delete'
+                option: 'delete',
+                num_fac: $("#numero_factura").val()
             };
             updateBill(data);
         })
@@ -703,7 +713,7 @@
             .then(isConfirm => {
                 if(isConfirm){
                     $.ajax({
-                        url: '/factura/maestra',
+                        url: '/facturas',
                         data: {
                             numero_factura: $("#num_factura_maestra").val(),
                             total_factura: $("#val_factura_maestra").val(),

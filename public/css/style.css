@@ -2147,7 +2147,7 @@ div.dt-button-info {
 }
 
 .pace .pace-progress {
-    background: #F3F3F399;
+    background: #fff;
     position: fixed;
     z-index: 2040;
     top: 0;

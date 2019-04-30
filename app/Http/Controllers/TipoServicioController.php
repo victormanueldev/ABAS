@@ -5,6 +5,7 @@ namespace ABAS\Http\Controllers;
 use ABAS\TipoServicio;
 use Illuminate\Http\Request;
 use DB;
+use ABAS\Factura;
 use Carbon\Carbon;
 
 class TipoServicioController extends Controller
@@ -111,6 +112,7 @@ class TipoServicioController extends Controller
         if($request->ajax()){
             $now = Carbon::now();
             try{
+                DB::table('facturas')->where('numero_factura', $request->numero_factura)->update(['estado' => 'Pagado', 'fecha_pago' => $now->toDateString()]);
                 DB::table('servicio_tipo_servicio')->where('numero_factura',$request->numero_factura)
                                                     ->update(['estado' => 'Pagado', 'updated_at' => $now]);
                 return response()->json("Payment success", 200);
@@ -124,7 +126,28 @@ class TipoServicioController extends Controller
     {
         if($request->ajax()){
             try{
-                if($request->option == 'update'){
+                if($request->option == 'create'){
+                    $dt = Carbon::now();
+                    $factura = new Factura();
+                    $factura->numero_factura = $request->num_fac;
+                    $factura->valor = $request->total_fac;
+                    $factura->tipo = 'individial';
+                    $factura->fecha_inicio_vigencia = $dt->toDateString(); 
+                    $factura->fecha_fin_vigencia = $dt->toDateString();
+                    $factura->cliente_id = $request->cliente_id;
+                    $factura->save();
+
+                    DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
+                    ->update([
+                        'numero_factura' => $request->num_fac,
+                        'valor' => $request->total_fac,
+                        'estado' => 'Pendiente'
+                    ]);
+                }elseif($request->option == 'update'){
+                    DB::table('facturas')->where('numero_factura', $request->num_fac_ant)->update([
+                        'numero_factura' => $request->num_fac,
+                        'valor' => $request->total_fac,
+                    ]);
                     DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
                                                         ->update([
                                                             'numero_factura' => $request->num_fac,
@@ -133,6 +156,7 @@ class TipoServicioController extends Controller
                                                         ]);
                     return response()->json("Update success", 200);
                 }else{
+                    DB::table('facturas')->where('numero_factura', $request->num_fac)->delete();
                     DB::table('servicio_tipo_servicio')->where('id_servicio_tipo',$request->id_servicio_tipo)
                     ->update([
                         'numero_factura' => null,
