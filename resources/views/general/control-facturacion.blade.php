@@ -440,6 +440,9 @@
                                 case 'Pagado':
                                     estadoRendered = `<span class="label label-primary" style="padding: 2px 14px;">${estado}</span>`;
                                     break;
+                                case 'Cancelado':
+                                    estadoRendered = `<span class="label label-danger" style="padding: 2px 7px;">${estado}</span>`
+                                    break;
                                 default:
                                     estadoRendered = `N/A`;
                                     break;
@@ -480,6 +483,13 @@
                             visible: url[1] == 'programacion' ? true : false,
                             value: 'edit',
                             closeModal: true, //Muestra el Loader
+                        },
+                        cancelFact: {
+                            text: 'Cancelar factura',
+                            visible: url[1] == 'contabilidad' ? true : false,
+                            value: 'cancelFact',
+                            closeModal: false, //Muestra el Loader,
+                            dangerMode: true
                         }
                     }
                 })
@@ -517,6 +527,31 @@
                             }
                         }else if(value === "edit"){
                             fillModal(dataToSend.tipo);
+                        }else if(value == 'cancelFact'){
+                            $.ajax({
+                                    url: `/facturas/${dataToSend.tipo.pivot.numero_factura}`,//URL del servicio
+                                    type: "PUT",//Método de envío
+                                    data: {
+                                        numero_factura: dataToSend.tipo.pivot.numero_factura
+                                    },
+                                    headers: {
+                                        "Content-Type": 'application/x-www-form-urlencoded',
+                                        "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                                    }
+
+                                })
+                                    .then(events => {
+                                        swal("¡Factura Cancelada!", "La Factura ha sido cancelada exitosamente.", "success")
+                                            .then(value => { //Boton OK actualizado
+                                                if (value) {
+                                                    console.log('Pago registrado');   //Escribe en la consola
+                                                    fillTable(clienteSeleccionado, $("#select_sedes").val());
+                                                }
+                                            })
+                                    })
+                                    .catch(error => {
+                                        swal("¡Error!", 'Ha ocurrido un error al intentar cancelar la factura', "error")
+                                    })
                         }
                     })
                     .catch(err => {

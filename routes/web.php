@@ -18,10 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('clientes/ver-clientes', function () {
-//     return view('ver-clientes');
-// })->name('ver-clientes');
-
 
 //Eventos
 Route::get('cronograma/eventos', function () {
@@ -48,8 +44,6 @@ Route::get('novedades/listado', 'NovedadesController@show')->name('novedades.sho
 //Clientees
 Route::resource('clientes', 'ClientesController');
 Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('clientes.updateCliente');
-// Route::post('clientes/crear-persona', 'ClientesController@store')->name('guardarCliente');
-// Route::post('clientes/crear-juridica', 'ClientesController@store')->name('guardarEmpresa');
 Route::put('estado/cliente', 'ClientesController@changeBillState');
 Route::get('documentos/cliente', 'ClientesController@docsReport');
 
@@ -57,7 +51,6 @@ Route::get('documentos/cliente', 'ClientesController@docsReport');
 Route::resource('sedes', 'SedesController', [
     'except' => 'index'
 ]);
-
 Route::get('sedes/cliente/{id}', 'SedesController@index');
 
 //Notificaciones
@@ -109,6 +102,9 @@ Route::resource('rutas', 'RutaController', [
 Route::post('find/route', 'RutaController@getRoute');
 Route::post('save/route/product', 'RutaController@saveRouteProduct');
 Route::get('show/ruta', 'RutaController@show');
+Route::get('recepcion/rutas', function(){
+    return view('servicio-clientes.registro-rutas');
+});
 
 //Impresiones
 Route::get('impresiones/fechas/{id}/{inicio}/{fin}', 'ImpresionController@imprimirTodo');
@@ -122,52 +118,46 @@ Route::get('inspectores/metas', 'MetaController@progressInspect');
 Route::get('metas/director', 'MetaController@progresoDirector');
 Route::post('metas/todo', 'MetaController@assignManyGoals');
 
-Route::get('clientes/servicios/test', function(){
-    $infoUsuarios = DB::table('users')
-                        ->join('clientes', 'users.id', 'clientes.user_id')
-                        ->join('solicitudes', 'clientes.id', 'solicitudes.cliente_id')
-                        ->join('servicios', 'solicitudes.id', 'servicios.solicitud_id')
-                        ->join('facturas', 'servicios.id', 'facturas.servicio_id')
-                        ->join('cargos', 'users.cargo_id', 'cargos.id')
-                        ->join('areas', 'users.area_id', 'areas.id')
-                        ->select('cargos.descripcion', 'users.nombres' , DB::raw('SUM(facturas.valor) as total'), 'users.id', 'users.foto')
-                        ->where('areas.id', '1')
-                        ->where('servicios.fecha_inicio', '>=', '2018-11-26')
-                        ->where('servicios.fecha_inicio', '<=', '2019-01-01')
-                        ->groupBy('users.id')
-                        ->get();
-    return $infoUsuarios;
-});
-
+//Facturas
 Route::resource('facturas', 'FacturaController');
 
+//Tipos de servicios
 Route::put('tipo/bill', 'TipoServicioController@assignBill');
 Route::put('payment/register', 'TipoServicioController@registerPayment');
 Route::put('payment/update', 'TipoServicioController@updateBill');
 
+//Control de facturacion por clientes
 Route::get('contabilidad/clientes', 'ClientesController@indexContablilidad');
 Route::get('contabilidad/facturacion', 'ClientesController@billingControl');    //Registro de Pagos
 Route::get('programacion/facturacion', 'ClientesController@billingControl');    //Facturacion
 Route::get('facturacion/cliente/{id}/{sede}', 'ClientesController@clientBills');
 
+//Novedades Temporales
 Route::resource('temporales/novedad', 'NovedadTemporalController', [
     'except' => 'show'
 ]);
 Route::get('temporales/novedad/{idCliente}/{idSede}', 'NovedadTemporalController@show');
 
+//Tipos de servicios 
 Route::get('neutral/edit/{id}', 'ServicioController@editNeutralService');
 Route::get('find/service/{fecha}/{cliente}/{sede}', 'ServicioController@serviceByDate');
+
+//Ordenes de serivicio
 Route::resource('ordenes', 'OrdenServicioController');
 
+//Productos
 Route::resource('productos', 'ProductoController');
-Route::get('recepcion/rutas', function(){
-    return view('servicio-clientes.registro-rutas');
-});
 
+//Inspecciones
 Route::resource('inspeccion', 'InspeccionController', [
     'except' => 'showInspectionClient'
 ]);
 Route::get('show/inspections/{idCliente}/{idSede}', 'InspeccionController@showInspectionClient');
 
+//Comisiones
 Route::resource('comisiones', 'ComisionController');
 Route::post('show/comisiones', 'ComisionController@showByCode');
+Route::get('all/comisiones', 'ComisionController@allComisions');
+
+//Valores Generales
+Route::resource('valores', 'ValorGeneralController');

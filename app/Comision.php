@@ -15,4 +15,9 @@ class Comision extends Model
         'valor_pagado',
         'valor_pendiente',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

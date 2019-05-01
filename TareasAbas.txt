@@ -2,11 +2,14 @@ Otros Ajustes
     AREA COMERCIAL (1 Dia)
         - Crear Cliente         
             - Atributo de Estado de comisiones REACTIVADO (Editar en solicitudes)
+            - Revisar formulario de editar info de clientes
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
         - ROL DE DIRECCION COMERCIAL
             - Asignar los permisos relacionados con metas
+        - Crear Inspecciones
+            - Asignar campos para la info de facturacion de la BD
 
 
     AREA CALIDAD (2 Dias)
@@ -27,16 +30,16 @@ Otros Ajustes
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
-        - Comisiones para inspectores OK
-        - Filtro de comisiones por facturacion pendiente, y por facturacion pagada OK <- ACTUAL
-        - Reporte de clientes cerrados en el mes (Cotizacion final aprobada)
-        - Mascaras para inputs de precios y metas #Andres
+        - Comisiones para inspectores (OK)
+        - Filtro de comisiones por facturacion pendiente, y por facturacion pagada (OK) 
+        - Reporte de clientes cerrados en el mes (Cotizacion final aprobada) (OK)
+        - Mascaras para inputs de precios y metas (OK)
         - Solo facturacion y comisiones
         - Revisar Consultas y detalles de interfaz
         - Estado de factura Cancelada
         - Ajustar las metas y progresos de comercial
-        - Reporte de comisiones pendientes 
-        - Porcentaje de comisiones desde la BD
+        - Resumen de comisiones (OK)
+        - Porcentaje de comisiones desde la BD (OK)
 
     AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos

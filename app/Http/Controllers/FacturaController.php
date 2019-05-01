@@ -111,9 +111,22 @@ class FacturaController extends Controller
      * @param  \ABAS\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Factura $factura)
+    public function update(Request $request, $idFactura)
     {
         //
+        if($request->ajax()){
+            DB::table('facturas')->where('numero_factura', $idFactura)->update([
+                'estado' => 'Cancelado'
+            ]);
+
+            DB::table('servicio_tipo_servicio')
+            ->where('numero_factura', $idFactura)
+            ->update([
+                'estado' => 'Cancelado'
+            ]);
+
+            return response()->json("Updated Success", 200);
+        }
     }
 
     /**

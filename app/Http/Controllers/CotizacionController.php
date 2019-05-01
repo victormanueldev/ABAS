@@ -6,6 +6,7 @@ use ABAS\Cotizacion;
 use Illuminate\Http\Request;
 use Auth;
 use ABAS\Cliente;
+use Carbon\Carbon;
 
 class CotizacionController extends Controller
 {
@@ -63,9 +64,21 @@ class CotizacionController extends Controller
      * @param  \ABAS\Cotizacion  $cotizacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Cotizacion $cotizacion)
+    public function show($all)
     {
         //
+        $dt = Carbon::now();
+        $cotizaciones = Cotizacion::with(['cliente' => function($query){
+            $query->select('id','tipo_cliente','nit_cedula','nombre_contacto_inicial','celular_contacto_inicial','nombre_cliente','estado_negociacion');
+        }])
+        ->where('estado', 'final')
+        ->where('estado_aprobacion', 'aprobada')
+        ->whereMonth('updated_at', $dt->month)
+        ->whereYear('updated_at', $dt->year)
+        ->get();
+
+        return $cotizaciones;
+
     }
 
     /**

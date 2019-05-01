@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de todas las novedades</h5>
+                    <h5>Listado de clientes cerrados en el mes</h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -46,18 +46,22 @@
                         <table id="tabla_clientes_cont" class="table table-hover dataTables-example" data-filter=#filter>
                             <thead>
                             <tr>
-                                
+                            
                                 <th>NIT/Cédula</th>
                                 <th>Tipo</th>
                                 <th>Nombre/Razon Social</th>
                                 <th>Contacto</th>
                                 <th>Celular</th>
-                                <th>Fecha de Creación</th>
-                                <th>Estado</th>
+                                <th>No. Cotizacion</th>
+                                <th>Valor acordado</th>
+                                <th>Fecha de aprovación</th>
+                                <th>Estado del cliente</th>
+
                             </tr>
                             </thead>
                             <tbody>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -83,32 +87,56 @@
                 {extend: 'pdf', title: 'ListadoNovedadesSanicontrolSAS'}
             ],
             columns: [
-                {data: 'nit_cedula'},
-                {data: 'tipo_cliente'},
-                {data: 'nombre_cliente'},
-                {data: 'nombre_contacto'},
-                {data: 'celular'},
-                {
-                    data: 'created_at',
-                    render: (data) => {
-                       return moment(data).format("YYYY-MM-DD HH:mm a");
-                    }    
+                { 
+                    data: 'cliente' ,
+                    render: (cliente) => {
+                        return cliente.nit_cedula
+                    }
                 },
                 {
-                    data: 'estado_negociacion',
-                    render: (data) => {
-                        if(data === 'Prospecto'){
-                            return `<label style="padding: 3px 16px;" class="label label-default">${data}</label>`
-                        }else{
-                            return `<label class="label label-primary">${data}</label>`
-                        }
+                    data: 'cliente' ,
+                    render: (cliente) => {
+                        return cliente.tipo_cliente
+                    }
+                },
+                {
+                    data: 'cliente' ,
+                    render: (cliente) => {
+                        return cliente.nombre_cliente
+                    }
+                },
+                {
+                    data: 'cliente' ,
+                    render: (cliente) => {
+                        return cliente.nombre_contacto_inicial
+                    }
+                },
+                {
+                    data: 'cliente' ,
+                    render: (cliente) => {
+                        return cliente.celular_contacto_inicial
+                    }
+                },
+                { data: 'codigo' },
+                { data: 'valor' },
+                { 
+                    data: 'updated_at',
+                    render: (updatedAt) => {
+                        return moment(updatedAt, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")
+                    }
+                },
+                {
+                    data: 'cliente',
+                    render: (cliente) => {
+                        return cliente.estado_negociacion == 'Prospecto' ? `<label class="label label-default">${cliente.estado_negociacion}</label>` : `<label class="label label-primary">${cliente.estado_negociacion}</label>`
                     }
                 }
             ]
         });
 
-        $.get('/contabilidad/clientes')
+        $.get('/cotizaciones/all')
             .then((res) => {
+                console.log(res)
                 table.rows.add(res).draw();
                // console.log(res)
             })

@@ -36,7 +36,9 @@ class HomeController extends Controller
         //Cambiar estado de clientes de NUEVO a RECOMPRA
         $clientes = Cliente::all();
         foreach ($clientes as $cliente) {
-            if($cliente->created_at->month < $dt->month || $cliente->created_at->year <= $dt->year){
+            $dt_cliente = '';
+            $dt_cliente = Carbon::parse($cliente->created_at);
+            if($dt->diffInMonths($dt_cliente) >= 1){
                 $cliente->estado_registro  = 'recompra';
                 $cliente->save();
             }

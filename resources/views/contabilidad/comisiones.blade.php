@@ -81,6 +81,42 @@
     var crsfToken = document.getElementsByName("_token")[0].value
     $(document).ready(function () {
 
+        /** 
+         * Asignacion de valores para calculo de comision
+         * ------------------------------------------------------------------
+         **/
+
+        porcentajesComision = {
+            recompras: 0,
+            clientesNuevos: 0,
+            clientesContrato: 0
+        }
+
+        $.get('/valores')
+            .then(res => {
+
+                //Asigna los valores
+                res.forEach(porcentaje => {
+                    if (porcentaje.descripcion == 'porcentaje_recompras') {
+                        porcentajesComision.recompras = parseFloat(porcentaje.valor) / 100
+                    } else if (porcentaje.descripcion == 'porcentaje_clientes_nuevos') {
+                        porcentajesComision.clientesNuevos = parseFloat(porcentaje.valor) / 100
+                    } else {
+                        porcentajesComision.clientesContrato = parseFloat(porcentaje.valor) / 100
+                    }
+                })
+
+
+            })
+            .catch(err => {
+                console.error(err)
+            })
+
+        /**
+         * Calculo de comisiones
+         * ---------------------------------------------------------------
+         **/
+
         $("#btn-comisiones").click(() => {
             //Creacion del loader como un NodeElement
             var loader = document.createElement("div")
@@ -101,7 +137,7 @@
             $.get(`/comisiones/${moment().year()}-${$("#mes").val()}-01`)
                 .then(res => {
 
-                    var meses = ["0","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+                    var meses = ["0", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
                     //Recorrido de array de inspectores
                     res.forEach((inspector, index) => {
@@ -178,6 +214,7 @@
                                                                     <td><b>Nombre Cliente</b></td>
                                                                     <td><b>No. Factura</b></td>
                                                                     <td><b>Total</b></td>
+                                                                    <td><b>Comisión</b></td>
                                                                     <td><b>Pago</b></td>
                                                                 </tr>
                                                             </thead>
@@ -197,6 +234,7 @@
                                                                     <td><b>Nombre Cliente</b></td>
                                                                     <td><b>No. Factura</b></td>
                                                                     <td><b>Total</b></td>
+                                                                    <td><b>Comisión</b></td>
                                                                     <td><b>Pago</b></td>
                                                                 </tr>
                                                             </thead>
@@ -260,7 +298,7 @@
                                         numFactura: factura.numero_factura,
                                         valorFactura: factura.valor,
                                         estadoFactura: factura.estado,
-                                        comision: factura.valor * 0.03 // <- DB Data
+                                        comision: factura.valor * porcentajesComision.recompras // <- DB Data
                                     })
 
 
@@ -273,7 +311,7 @@
                                         numFactura: factura.numero_factura,
                                         valorFactura: factura.valor,
                                         estadoFactura: factura.estado,
-                                        comision: factura.valor * 0.08 // <- DB Data
+                                        comision: factura.valor * porcentajesComision.clientesContrato // <- DB Data
                                     })
                                 })
                             } else {
@@ -284,7 +322,7 @@
                                         numFactura: factura.numero_factura,
                                         valorFactura: factura.valor,
                                         estadoFactura: factura.estado,
-                                        comision: factura.valor * 0.05 // <- DB Data
+                                        comision: factura.valor * porcentajesComision.clientesNuevos // <- DB Data
                                     })
                                 })
                             }
@@ -399,13 +437,13 @@
                         //Total pendiente  de comisiones de recompra
                         $(`#total-comisiones-pendientes-recompras_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteRecompra.toLocaleString('de-DE')}`)
                         //Total de comisiones de clientes nuevos
-                        $(`#total-comisiones-clientes-nuevos_${inspector.idInspector}`).append(`$ ${inspector.totalClientesNuevos}`)
+                        $(`#total-comisiones-clientes-nuevos_${inspector.idInspector}`).append(`$ ${inspector.totalClientesNuevos.toLocaleString('de-DE')}`)
                         //Total pendiente de comisiones clientes nuevos
-                        $(`#total-comisiones-pendientes-cnuevos_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteClientesNuevos}`)
+                        $(`#total-comisiones-pendientes-cnuevos_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteClientesNuevos.toLocaleString('de-DE')}`)
                         //Total de comisiones por clientes con contrato
-                        $(`#total-comisiones-clientes-contrato_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteClientesContrato}`)
+                        $(`#total-comisiones-clientes-contrato_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteClientesContrato.toLocaleString('de-DE')}`)
                         //Total pendiente en comsisiones por clientes con contrato
-                        $(`#total-comisiones-pendientes-ccontrato_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteClientesContrato}`)
+                        $(`#total-comisiones-pendientes-ccontrato_${inspector.idInspector}`).append(`$ ${inspector.totalComisionPendienteClientesContrato.toLocaleString('de-DE')}`)
                         //Codigo de comision
                         $(`#codigo-comision_${inspector.idInspector}`).append(inspector.codigoComision)
                     })
@@ -415,16 +453,16 @@
                     * -----------------------------------------------------------
                     **/
 
-                    $.post('/show/comisiones', {codigos: comisionesInspector}, (res) => {
+                    $.post('/show/comisiones', { codigos: comisionesInspector }, (res) => {
                         res.forEach(codigo => {
                             comisionesInspector.forEach(inspector => {
-                                if(codigo == inspector.codigoComision){
+                                if (codigo == inspector.codigoComision) {
                                     $(`#${codigo}`).prop("disabled", true);
                                 }
                             })
                         })
                     })
-                    
+
                     swal.close()
                 })
                 .catch(err => {
@@ -432,53 +470,53 @@
                 })
         })
 
-        
+
     })
 
     /**
-        * Guardar comisiones
-        * -----------------------------------------------
-        **/
+    * Guardar comisiones
+    * -----------------------------------------------
+    **/
 
-        function guardarComision(idInspector){
+    function guardarComision(idInspector) {
 
-            swal({
-                title: "¡Advertencia!",
-                text: "¿Estás seguro de guardar esta comisión?",
-                icon: "warning",
-                buttons: {
-                    cancel: true,
-                    confirm: {
-                        text: 'Aceptar',
-                        visible: true,
-                        value: true,
-                        closeModal: false, //Muestra el Loader
-                    }
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de guardar esta comisión?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
                 }
-            })
+            }
+        })
             .then(isConfirm => {
-                if(isConfirm){
+                if (isConfirm) {
                     $.ajax({
                         url: '/comisiones',
                         data: comisionesInspector.filter(inspector => { return inspector.idInspector == idInspector })[0],
                         type: 'POST',
-                        headers:{
+                        headers: {
                             "X-CSRF-TOKEN": crsfToken
                         }
                     })
-                    .then(res => {
-                        swal("¡Creación Correcta!", "Servicios creados correctamente.", "success")
-                            .then(value => { //Boton OK actualizado
-                                if (value) {
-                                    $(`#${res}`).prop("disabled", true);
-                                }
-                            })
-                            .catch(err => {
-                                swal("¡Error!", 'Ha ocurrido un error al intentar guardar la comisión', "error")
-                            })
-                    })
+                        .then(res => {
+                            swal("¡Creación Correcta!", "Servicios creados correctamente.", "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        $(`#${res}`).prop("disabled", true);
+                                    }
+                                })
+                                .catch(err => {
+                                    swal("¡Error!", 'Ha ocurrido un error al intentar guardar la comisión', "error")
+                                })
+                        })
                 }
             })
-        }
+    }
 </script>
 @endsection

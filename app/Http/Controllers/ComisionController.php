@@ -16,7 +16,10 @@ class ComisionController extends Controller
      */
     public function index()
     {
-        
+        $comisiones = Comision::with(['user' => function($query){
+            $query->select('id','nombres','apellidos');
+        }])->get();
+        return $comisiones;
     }
 
     /**
@@ -136,5 +139,10 @@ class ComisionController extends Controller
 
             return $codigos;
         }
+    }
+
+    public function allComisions()
+    {
+        return view('contabilidad.resumen-comisiones');
     }
 }
