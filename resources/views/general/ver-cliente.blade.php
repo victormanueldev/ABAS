@@ -541,7 +541,7 @@
                         <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
                             <div class="row">
 
-                                <div class="form-group col-sm-12 col-md-6">
+                                <div class="form-group col-sm-12 col-md-12">
                                     <label>Razon Social/Nombre: </label>
                                     <input style="text-transform: uppercase" type="text" class="form-control" id="nombre_cliente"
                                         name="nombre_cliente" value="{{$cliente[0]->nombre_cliente}}">
@@ -584,16 +584,6 @@
                                         id="nit_cedula" name="nit_cedula" value="{{$cliente[0]->nit_cedula}}">
                                 </div>
 
-                                <div class="form-group col-sm-12 col-md-6">
-                                    <label>Sector Economico *</label>
-                                    <select class="form-control">
-                                        <option value="Residencial">RESIDENCIAL</option>
-                                        <option value="Comercial">COMERCIAL</option>
-                                        <option value="Servicio">SERVICIO</option>
-                                        <option value="Industrial">INDUSTRIAL</option>
-                                    </select>
-
-                                </div>
 
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>Sector Económico: </label>
@@ -624,8 +614,8 @@
                                 </div>
 
                                 <div class="form-group col-lg-6"><label class="control-label">Teléfono principal*</label>
-                                    <input style="text-transform: uppercase" type="text" name="telefono[0]" placeholder="Nombre de contacto"
-                                        class="form-control" required>
+                                    <input style="text-transform: uppercase" type="text" name="telefono[0]" placeholder="Teléfono principal"
+                                class="form-control" value="{{ $cliente[0]->telefonos[0]->numero }}" required>
                                 </div>
 
                                 <div class="form-group col-lg-3"><label class="control-label">Contacto Inicial *</label>

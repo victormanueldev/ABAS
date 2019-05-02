@@ -78,7 +78,7 @@
                         <div class="col-md-3">
                             <b>R.S.:</b><p style="display: inline">Ruta de saneamiento.</p><br>
                             <b>R.L.:</b><p style="display: inline">Ruta de Lámparas.</p><br>
-                            <i class="fa fa-warning" style="color: rgb(219, 165, 37)"></i> : <p style="display: inline">Documento inexistente en el sistema.</p>
+                            <i class="fa fa-warning" style="color: rgb(219, 165, 37)"></i> : <p style="display: inline">Documento faltante en el sistema.</p>
                         </div>
                         <div class="col-md-3">
                             <b>R.R.I.:</b><p style="display: inline">Ruta de Roedores Interna.</p><br>

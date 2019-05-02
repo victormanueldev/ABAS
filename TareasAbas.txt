@@ -2,14 +2,14 @@ Otros Ajustes
     AREA COMERCIAL (1 Dia)
         - Crear Cliente         
             - Atributo de Estado de comisiones REACTIVADO (Editar en solicitudes)
-            - Revisar formulario de editar info de clientes
+            - Revisar formulario de editar info de clientes (OK)
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
         - ROL DE DIRECCION COMERCIAL
             - Asignar los permisos relacionados con metas
         - Crear Inspecciones
-            - Asignar campos para la info de facturacion de la BD
+            - Asignar campos para la info de contacto de facturacion de la BD
 
 
     AREA CALIDAD (2 Dias)
@@ -17,7 +17,7 @@ Otros Ajustes
         - Plagas creadas segun necesidad. 
         - Quitar checklist
         - Recepcion y asignacion de documentos con URL a Drive
-        - Inventario de documentos (Reporte de documentos) <- Cambiar nombre
+        - Inventario de documentos (Reporte de documentos) (OK)
         - Inventario de Documentos con frecuencia y advertencia si el doc no esta creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...)
         - Revisar Consultas y detalles de interfaz
 
@@ -26,7 +26,7 @@ Otros Ajustes
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
 
-        - Generar novedad para mejorar frec y servicios de refuerzo
+        - Generar novedad para mejorar frec y servicios de refuerzo 
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
@@ -36,8 +36,8 @@ Otros Ajustes
         - Mascaras para inputs de precios y metas (OK)
         - Solo facturacion y comisiones
         - Revisar Consultas y detalles de interfaz
-        - Estado de factura Cancelada
-        - Ajustar las metas y progresos de comercial
+        - Estado de factura Cancelada (OK)
+        - Ajustar las metas y progresos de comercial (OK)
         - Resumen de comisiones (OK)
         - Porcentaje de comisiones desde la BD (OK)
 
@@ -51,15 +51,15 @@ Otros Ajustes
 
 
     AREA DE TECNICOS
-        - Realizar el calculo de horas hombre, etc #Andres
+        - Realizar el calculo de horas hombre, etc 
         - Visualizar el informe de estos formatos desde comercial
 
 
     AREA DE ADMINISTRACION 
-        - Creacion de tecnicos #Andres
-        - Creacion de usuarios y asignacion de roles #Andres
-        - Todos los modulos disponnibles #Andres
+        - Creacion de tecnicos (OK)
+        - Creacion de usuarios y asignacion de roles 
+        - Todos los modulos disponibles 
 
     SESIONES VIP (2 Dias)
-        - Visualizar informacion #Andress
+        - Visualizar informacion 
 
