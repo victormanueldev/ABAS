@@ -38,11 +38,11 @@
         ])!!};
     </script>
 </head>
-
-<body class="md-skin" id="body-tag">
+<body class="md-skin mini-navbar" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
         <nav class="navbar-default  navbar-static-side" role="navigation" style="position: fixed">
             <div class="sidebar-collapse">
+                
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
@@ -285,7 +285,17 @@
                 $('.clockpicker').clockpicker({
                     twelvehour: true
                 });
+                
 
+                /**
+                 * Definicion de Popovers
+                 * ------------------------------------
+                 **/
+                $('#m-inicio').popover({
+                    placement: 'right click',
+                    content: "Inicio",
+                    trigger: "hover"
+                })
             }); 
     
     </script>

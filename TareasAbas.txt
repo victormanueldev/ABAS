@@ -18,7 +18,8 @@ Otros Ajustes
         - Quitar checklist
         - Recepcion y asignacion de documentos con URL a Drive
         - Inventario de documentos (Reporte de documentos) (OK)
-        - Inventario de Documentos con frecuencia y advertencia si el doc no esta creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...)
+        - Inventario de Documentos con frecuencia y advertencia si el doc no esta 
+          creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...) <- Actual
         - Revisar Consultas y detalles de interfaz
 
     AREA DE PROGRAMACION
@@ -40,6 +41,7 @@ Otros Ajustes
         - Ajustar las metas y progresos de comercial (OK)
         - Resumen de comisiones (OK)
         - Porcentaje de comisiones desde la BD (OK)
+        - Links del sidebar de comisiones
 
     AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2019 at 05:30 PM
+-- Generation Time: May 04, 2019 at 12:14 AM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.17-0ubuntu0.18.04.1
 
@@ -80,6 +80,17 @@ INSERT INTO `cotizaciones` (`id`, `codigo`, `estado`, `estado_aprobacion`, `valo
 (5, 'CT-JVP-5', 'Final', 'no_aprobada', 640000, 5, '2019-11-29 20:21:00', '2019-11-30 01:21:00'),
 (6, 'CT-JVP-6', 'Final', 'no_aprobada', 710000, 6, '2019-11-29 20:21:00', '2019-11-30 01:21:00'),
 (7, '465798', 'Final', 'no_aprobada', 510000, 7, '2019-05-01 20:08:16', '2019-05-01 20:08:16');
+
+--
+-- Dumping data for table `documentos`
+--
+
+INSERT INTO `documentos` (`id`, `codigo`, `tipo`, `fecha_inicio_vigencia`, `fecha_fin_vigencia`, `url`, `cliente_id`, `sede_id`, `created_at`, `updated_at`) VALUES
+(1, 'CSM120190501', 'diagnostico_inicial', '2019-04-01', '2019-05-01', 'www.google.com', 7, 6, '2019-05-03 05:00:00', '2019-05-03 05:00:00'),
+(2, 'DGI620190401', 'diagnostico_inicial', '2019-03-01', '2019-04-01', 'google-com', 7, 6, '2019-05-03 05:00:00', '2019-05-03 05:00:00'),
+(3, 'CRS120190401', 'cronograma_servicios', '2019-05-01', '2019-04-01', 'asdasdasdas', 1, 1, NULL, NULL),
+(4, 'CRS120190501', 'cronograma_servicios', '2019-05-09', '2019-05-01', 'asdasdasd', 1, 1, NULL, NULL),
+(5, 'VC620190501', 'visitas_calidad', '2019-05-01', '2019-05-01', 'asdasda', 7, 6, NULL, NULL);
 
 --
 -- Dumping data for table `eventos`
@@ -415,7 +426,7 @@ INSERT INTO `users` (`id`, `cedula`, `nombres`, `apellidos`, `iniciales`, `telef
 (3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'a1.jpg', 'andres@gmail.com', '$2y$10$Du7JITRNBCrqvj/2loo8eORFsGbOXcUl/sW5tKKpGnZBS4y4Anz/m', 1, 1, NULL, NULL, NULL),
 (4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, 'zrTlT7GMI4oD5gx6IAqvdFlJqqH1US8A5fWrf82qbJ0NQPYfBndSBObPQyiA', NULL, NULL),
 (5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'a9.jpg', 'jhonny@gmail.com', '$2y$10$UIDt0beHPXpkJ/pcuuuZtOoKRYoBhmqnhQgVzx2Laa8NjnbMvbSgG', 3, 4, NULL, NULL, NULL),
-(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, NULL, NULL, NULL),
+(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'tavnwqSMOqNgBUloy6zcVBcgXSKZVlAtuxyoVfzbU7iKNDv8dzYwLc1GhFLW', NULL, NULL),
 (7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'a11.jpg', 'diego@gmail.com', '$2y$10$Y2xgM9E4rPRgeaOzkxtKG.8d9snUTey4.w2tuG0luPzRkxNNs9h0q', 6, 7, NULL, NULL, NULL),
 (8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '$2y$10$twKtAG0AtB5Y3RvelIJTAeUVOtQMXIbj87s/1YfeKiWh9rJv37cn2', 5, 6, NULL, NULL, NULL),
 (9, 99999999, 'Fernando', 'Serna', 'FS', '3177777750', 'default-user.jpg', 'fernandoserna@sanicontrol.com', '$2y$10$7L.tN71DkEjAY7bhTzcC1uIrT3ACdKBPk28dGkXphrGpecDNsKxN.', 1, 1, NULL, NULL, NULL),

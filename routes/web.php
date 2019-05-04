@@ -161,3 +161,9 @@ Route::get('all/comisiones', 'ComisionController@allComisions');
 
 //Valores Generales
 Route::resource('valores', 'ValorGeneralController');
+
+//Documentos
+Route::resource('documents', 'DocumentoController', [
+    'except' => 'showByClient'
+]);
+Route::get('documents/show/{idCliente}/{idSede}','DocumentoController@showByClient');
