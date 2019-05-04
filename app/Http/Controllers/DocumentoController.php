@@ -3,6 +3,7 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Documento;
+use ABAS\Sede;
 use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
@@ -84,16 +85,14 @@ class DocumentoController extends Controller
         //
     }
 
-    public function showByClient($idCliente, $idSede)
+    public function showByClient($idCliente)
     {
-        $docs = Documento::with(['sede' => function($query){
-            $query->select('id','nombre');
+        $docs = Sede::with(['documentos' => function($query){
+           $query->select('id','codigo','fecha_fin_vigencia','sede_id');
         }])
-        ->where('cliente_id', $idCliente)
-        ->where('sede_id', $idSede)
-        ->orderBy('fecha_fin_vigencia', 'desc')
-        ->get();
-
+                    ->select('id','nombre','cliente_id')
+                    ->where('cliente_id', $idCliente)
+                    ->get();
         return $docs;
     }
 }

@@ -187,7 +187,7 @@
 
         $("#btn-find-docs").click(function (){
             $("#seccion-sedes").empty()
-            $.get(`/documents/show/${clienteSeleccionado}/${$("#select_sedes").val()}`)
+            $.get(`/documents/show/${clienteSeleccionado}`)
             .then(res => {
                 console.log(res)
             })

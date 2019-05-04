@@ -41,4 +41,9 @@ class Sede extends Model
     {
         return $this->hasOne(Inspeccion::class);
     }
+
+    public function documentos()
+    {
+        return $this->hasMany(Documento::class);
+    }
 }

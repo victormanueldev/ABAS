@@ -166,4 +166,4 @@ Route::resource('valores', 'ValorGeneralController');
 Route::resource('documents', 'DocumentoController', [
     'except' => 'showByClient'
 ]);
-Route::get('documents/show/{idCliente}/{idSede}','DocumentoController@showByClient');
+Route::get('documents/show/{idCliente}','DocumentoController@showByClient');
