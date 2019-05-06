@@ -26,7 +26,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de todas las novedades</h5>
+                    <h5>Reporte de estado de documentos</h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -55,24 +55,16 @@
                                         <input class="radio-options" type="radio" value="3" id="por_nit" name="optionsRadios">
                                         NIT/CC </label>
                                 </div>
-                                <div class="col-sm-12 col-md-12" style="margin-top: 10px;">
+                                <div class="col-sm-12 col-md-11" style="margin-top: 10px;width: 85%;">
                                     <input type="text" placeholder="Cliente..." class="typeahead_1 form-control" id="input_autocomplete"
                                         autocomplete="off" />
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-5" style="margin-top: 15px">
-                                <label class="control-label">Sede *</label>
-                                <select class="form-control " id="select_sedes">
-                                    <option value="" selected disabled>Selecciona una sede</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-2" style="margin-top: 37px">
-                                <button type="button" id="btn-find-docs" class="btn btn-primary">Buscar documentos</button>
+                            <div class="form-group col-md-1" style="margin-top: 10px">
+                                <button type="button" id="btn-find-docs" class="btn btn-primary">Buscar <i class="fa fa-search" style="margin-left: 3px"></i></button>
                             </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
@@ -161,79 +153,123 @@
             var current = $input.typeahead("getActive");
             //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
             clienteSeleccionado = current.id
-            $.get(`/sedes/cliente/${current.id}`, function (res) {
-                $("#select_sedes").empty();//Limipia el select
-                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
-                if (res == '') {//Valida que el cliente tenga sedes
-                    $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
-                } else {
-                    //Recorre la respuesta del servidor
-                    res.forEach(element => {
-                        //Añade Options al select de sedes dependiendo de la respues del servidor
-                        $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
-                    });
-                }
-            }).then((res) => {
-                console.log('Sedes encontradas');
-            }).catch((err) => {
-                console.log(err);
-            });
         });
 
         /**
          * Ver reporte de documentos por sede
          * ----------------------------------------------------------
          **/
+        
 
         $("#btn-find-docs").click(function (){
+            var docsSede = []
+            var docsTipoSede = [] 
+            
             $("#seccion-sedes").empty()
             $.get(`/documents/show/${clienteSeleccionado}`)
             .then(res => {
-                console.log(res)
+
+                function estadoDoc(documento){
+                    if(documento != null){
+                        if(moment(`${documento.fecha_fin_vigencia}`, 'YYYY-MM-DD') < moment()){
+                            return ['Vencido','warning']
+                        }else{
+                            return ['Vigente','primary']
+                        }
+                    }else{
+                        return ['Pendiente','detault']
+                    }
+                }
+
+                function toCapitalCase(tipoDoc) {
+                    switch (tipoDoc) {
+                        case 'diagnostico_inicial':
+                            return 'Diagnostico inicial'
+                            break
+                        case 'cronograma_servicios':
+                            return 'Cronograma de servicios'
+                            break
+                        case 'mapas_estaciones_lamparas':
+                            return 'Mapas de est./lamp.'
+                        default:
+                            return 'Visitas de calidad'
+                            break
+                    }
+                }
+
+               res[0].sedes.forEach((sede, index)=> {
+                    $("#seccion-sedes").append(`
+                        <div class="col-lg-6">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>${sede.nombre}</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content ">
+                                    <table class="table table-hover table-responsive" style="display: inline-block">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 25px">Tipo de documento</th>
+                                            <th>Frecuencia</th>
+                                            <th>Estado</th>
+                                            <th>Último registrado</th>
+                                            <th>Fecha vencimiento</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="sede-id_${sede.id}">
+                                            <!-- Docs sede -->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    `)
+                    
+                    res[0].inspecciones.forEach(inspeccion => {
+                        if(sede.nit_cedula){
+                            if(sede.id == inspeccion.cliente_id){
+                                inspeccion.gestion_calidad.forEach(tipo => {
+                                    docsTipoSede.push({tipo: tipo.tipo_documento, frec: tipo.frecuencia_documento, sede: sede.id, docs: sede.documentos})
+                                })
+                            }
+                            console.log(true)
+                        }else{
+                            if(sede.id == inspeccion.sede_id){
+                                inspeccion.gestion_calidad.forEach(tipo => {
+                                    docsTipoSede.push({tipo: tipo.tipo_documento, frec: tipo.frecuencia_documento, sede: sede.id, docs: sede.documentos})
+                                })
+                            }
+                            
+                        }
+                    })
+               })
+               console.log(docsTipoSede)
+
+               docsTipoSede.forEach(tiposDoc => {
+                    $(`#sede-id_${tiposDoc.sede}`).append(`
+                        <tr>
+                            <td>${ toCapitalCase(tiposDoc.tipo)}</td>
+                            <td>${tiposDoc.frec}</td>
+                            <td><span class="label label-${ estadoDoc(tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0])[1] }" style="padding: 3px 9px" >${ estadoDoc(tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0])[0] }<span></td>
+                            <td>${ tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0] != null ? tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0].codigo : '-----------' }</td>
+                            <td>${ tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0] != null ? tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0].fecha_fin_vigencia : '-----------' }</td>
+                        </tr>
+                    `)
+               })
+
             })
+
             .catch(err => {
                 console.error(err)
             })
-            $("#seccion-sedes").append(`
-                <div class="col-lg-6">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <h5>Nombre de sede</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content table-responsive">
-                            <table class="table table-hover no-margins">
-                                <thead>
-                                <tr>
-                                    <th>Tipo de documento</th>
-                                    <th>Frecuencia</th>
-                                    <th>Estado</th>
-                                    <th>Último registrado</th>
-                                    <th>Fecha vencimiento</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><small>Pending...</small></td>
-                                    <td><i class="fa fa-clock-o"></i> 11:20pm</td>
-                                    <td>Samantha</td>
-                                    <td class="text-navy"> <i class="fa fa-level-up"></i> 24% </td>
-                                    <td>INF020190515 <a class="btn btn-white btn-bitbucket" style="display: ruby-base; padding: 0px 3px">
-                                        <i class="fa fa-external-link text-navy"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            `)
         })
 
 

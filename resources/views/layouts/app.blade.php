@@ -38,7 +38,7 @@
         ])!!};
     </script>
 </head>
-<body class="md-skin mini-navbar" id="body-tag">
+<body class="md-skin" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
         <nav class="navbar-default  navbar-static-side" role="navigation" style="position: fixed">
             <div class="sidebar-collapse">

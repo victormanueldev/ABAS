@@ -4,6 +4,8 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\Documento;
 use ABAS\Sede;
+use ABAS\Solicitud;
+use ABAS\Cliente;
 use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
@@ -87,12 +89,30 @@ class DocumentoController extends Controller
 
     public function showByClient($idCliente)
     {
-        $docs = Sede::with(['documentos' => function($query){
-           $query->select('id','codigo','fecha_fin_vigencia','sede_id');
+        $data = collect();
+        $inspections = Solicitud::where('cliente_id', $idCliente)->select('id','cliente_id','gestion_calidad','sede_id')->get();
+        $sedes = Sede::with(['documentos' => function($query){
+           $query->select('id','codigo','fecha_fin_vigencia','sede_id','tipo','cliente_id');
+           $query->orderBy('fecha_fin_vigencia', 'desc');
         }])
                     ->select('id','nombre','cliente_id')
                     ->where('cliente_id', $idCliente)
                     ->get();
-        return $docs;
+
+        if($sedes->count() == 0){
+            $sedes = Cliente::with(['documentos' => function($query){
+                $query->select('id','codigo','fecha_fin_vigencia','sede_id','tipo','cliente_id');
+                $query->orderBy('fecha_fin_vigencia', 'desc');
+             }])
+             ->select('id','nombre_cliente as nombre','nit_cedula')
+             ->where('id', $idCliente)
+             ->get();
+        }
+
+        $data->push([
+            'sedes' => $sedes,
+            'inspecciones' => $inspections
+        ]);
+        return $data;
     }
 }

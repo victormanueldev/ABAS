@@ -651,10 +651,10 @@
                                             <label class="control-label">Tipo de documento</label>
                                             <select style="text-transform: uppercase" id="tipo_doc-0" class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
-                                                <option value="diagnostico_inicial">diagnostico inicial</option>
-                                                <option value="cronograma_servicios">cronograma de servicios</option>
-                                                <option value="mapas_estaciones_lamparas">mapas de estaciones/lamparas</option>
-                                                <option value="visitas_calidad">visitas_calidad</option>
+                                                <option value="diagnostico_inicial">Diagnostico inicial</option>
+                                                <option value="cronograma_servicios">Cronograma de servicios</option>
+                                                <option value="mapas_estaciones_lamparas">Mapas de estaciones/lamparas</option>
+                                                <option value="visitas_calidad">Visitas de calidad</option>
                                             </select>
                                         </div>
 
