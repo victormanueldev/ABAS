@@ -4,6 +4,8 @@ namespace ABAS\Http\Controllers;
 
 use ABAS\Producto;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DB;
 
 class ProductoController extends Controller
 {
@@ -42,6 +44,22 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $now = Carbon::now();
+        if($request->ajax()){
+            foreach ($request->productos as $producto) {
+                DB::table('productos')->insert([
+                    'nombre_comercial' => strtoupper($producto['nombreComercial']),
+                    'tipo' => $producto['tipo'],
+                    'presentacion' => $producto['presentacion'],
+                    'unidad_medida' => $producto['unindadMedida'],
+                    'total_unidades' => $producto['cantidadTotal'],
+                    'valor_unidad' => $producto['valorUnidad'],
+                    'costo_total' => $producto['costoTotal'],
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ]);
+            }
+        }
     }
 
     /**
