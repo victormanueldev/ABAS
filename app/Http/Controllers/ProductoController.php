@@ -91,9 +91,19 @@ class ProductoController extends Controller
      * @param  \ABAS\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request)
     {
-        //
+        $producto = Producto::findOrFail($request->id);
+        $producto->nombre_comercial = $request->nombreComercial;
+        $producto->tipo = $request->tipo;
+        $producto->presentacion = $request->presentacion;
+        $producto->unidad_medida = $request->unindadMedida;
+        $producto->total_unidades = $request->cantidadTotal;
+        $producto->valor_unidad = $request->valorUnidad;
+        $producto->costo_total = $request->costoTotal;
+        $producto->save();
+
+        return response()->json("Update Success", 200);
     }
 
     /**

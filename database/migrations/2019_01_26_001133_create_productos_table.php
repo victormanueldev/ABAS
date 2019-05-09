@@ -19,8 +19,8 @@ class CreateProductosTable extends Migration
             $table->string('tipo');
             $table->string('presentacion');
             $table->string('unidad_medida', 2); //Ej: gr, ml o un
-            $table->decimal('total_unidades', 10, 1); // Ej: 1500 (Multiplicacion del sistema)
-            $table->decimal('valor_unidad', 10, 2); // Ej: 0.01 -> $ 2
+            $table->string('total_unidades'); // Ej: 1500 (Multiplicacion del sistema)
+            $table->decimal('valor_unidad',10,2); // Ej: 0.01 -> $ 2
             $table->unsignedBigInteger('costo_total');
             $table->timestamps();
         });

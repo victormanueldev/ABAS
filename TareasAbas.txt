@@ -20,6 +20,7 @@ Otros Ajustes
         - Inventario de documentos (Reporte de documentos) (OK)
         - Inventario de Documentos con frecuencia y advertencia si el doc no esta 
           creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...) (OK)
+        - Links del sidebar de documentos
         - Revisar Consultas y detalles de interfaz
 
     AREA DE PROGRAMACION
@@ -45,6 +46,7 @@ Otros Ajustes
 
     AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos <- ACTUAL
+        - Links del sidebar de productos
         - Reporte de entrada de productos (Compras)
         - Reporte de salida de productos (Gasto de tecnicos)
         - Inventario General por rango de fechas y Frecuencias
