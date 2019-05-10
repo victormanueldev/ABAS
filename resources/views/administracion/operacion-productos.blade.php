@@ -32,9 +32,20 @@
                 </div>
 
                 <div class="ibox-content">
-                    <p>Indique los datos del producto para realizar el registro.</p>
-                    <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-product"><i
-                            class="fa fa-plus"></i> Agregar Producto</button>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>Indique los datos del producto para realizar el registro.</p>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" id="btn-compra"><i class="fa fa-cart-plus"
+                                    style="margin-right: 3px"></i> Registrar Compra</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" id="btn-add-product"><i class="fa fa-plus"></i>
+                                Agregar Producto</button>
+                        </div>
+                    </div>
+
                     <div class="row" id="productos">
                         <div class="col-lg-12">
                             <div class="row">
@@ -151,6 +162,11 @@
             Launch modal
         </button>
 
+        <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-compras"
+            id="btn-modal-compra">
+            Launch modal
+        </button>
+
         <!--===================================================
         /* Modal editar producto
         ====================================================-->
@@ -170,9 +186,70 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                        <button id="btn-cancel-modal" type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
                         <button id="btn-update" type="button" class="btn btn-primary">Actualizar</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!--===================================================
+        /* Modal compras de productos
+        ====================================================-->
+        <div class="modal inmodal fade" id="modal-compras" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <form id="form-compra">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h2 class="modal-title" style="font-size: 23px;">Comprar Producto</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" id="form-modal">
+                                <div class="form-group col-lg-12" style="margin-top: 15px;">
+                                        <label class="control-label">Selecciona el producto</label>
+                                        <select style="text-transform: uppercase" name="producto_compra" id="producto_compra"
+                                        class="form-control" required>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-6" style="margin-top: 15px;">
+                                    <label class="control-label">No. Factura *</label>
+                                    <input type="text" name="factura_compra" id="factura_compra" class="form-control"
+                                        required>
+                                </div>
+                                <div class="form-group col-lg-6" style="margin-top: 15px;">
+                                    <label class="control-label">Unidad de medida comprada</label>
+                                    <select style="text-transform: uppercase" name="unidad_medida_producto_compra" id="unidad_medida_producto_compra"
+                                        class="form-control" required>
+                                        <option value="0" selected>Seleccione una opción</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-lg-4" style="margin-top: 15px;">
+                                    <label class="control-label">Cantidad total comprada *</label>
+                                    <input type="number" step="0.01" name="cantidad_producto_compra" id="cantidad_producto_compra"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group col-lg-4" style="margin-top: 15px;">
+                                    <label class="control-label">Valor unidad *</label>
+                                    <input type="text" name="valor_unidad_producto_compra" id="valor_unidad_producto_compra"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group col-lg-4" style="margin-top: 15px;">
+                                    <label class="control-label">Costo total</label>
+                                    <input type="text" name="costo_producto_compra" id="costo_producto_compra" class="form-control"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn-cancel-compra" type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                            <button id="btn-guardar-compra" type="submit" class="btn btn-primary">Guardar C</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -198,8 +275,17 @@
 
         var inputsProductos = 1
         var costos_productos = []
+        var costo_producto_compra
 
         costos_productos[0] = new AutoNumeric(document.getElementById('costo_producto-0'), {
+            digitalGroupSpacing: '3',
+            digitGroupSeparator: '.',
+            decimalCharacter: ',',
+            decimalPlaces: 0,
+            outputFormat: "number"
+        })
+
+        costo_producto_compra = new AutoNumeric(document.getElementById('costo_producto_compra'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -387,6 +473,19 @@
          * --------------------------------------------------------
          **/
 
+        function obtenerProductos() {
+            return $.ajax({
+                url: '/productos',
+                type: 'GET',
+                success: (res) => {
+                    return res
+                },
+                error: (err) => {
+                    return err
+                }
+            })
+        }
+
         table = $("#tabla_productos").DataTable({
             pageLength: 25,
             responsive: true,
@@ -441,20 +540,18 @@
             ]
         })
 
-        !function fillTable() {
-            table.clear().draw()
-            $.get('/productos')
-                .then(res => {
-                    table.rows.add(res).draw()
-                    productos = res
-                })
-                .catch(err => {
-                    table.clear().draw();
-                    console.error(err)
-                })
-        }()
+        async function fillTable() {
+            productosBD = await obtenerProductos()
+            if (productosBD != null) {
+                table.clear().draw()
+                table.rows.add(productosBD).draw()
+                productos = productosBD
+            }
+        }
 
-        $("#btn-update").click(function(){
+        fillTable()
+
+        $("#btn-update").click(function () {
             swal({
                 title: "¡Advertencia!",
                 text: "¿Estás seguro de guardar esta información?",
@@ -491,8 +588,9 @@
                             .then(res => {
                                 swal('¡Actualización Completada!', 'Producto actualizado correctamente.', 'success')
                                     .then(okPressed => {
-                                        if(okPressed) {
-                                            this.fillTable()
+                                        if (okPressed) {
+                                            $("#btn-cancel-modal").click()
+                                            fillTable()
                                         }
                                     })
                             })
@@ -502,7 +600,147 @@
                     }
                 })
         })
+
+        $("#btn-compra").click( async function () {
+            $("#producto_compra").empty()
+            await productos.forEach(producto => {
+                $("#producto_compra").append(`
+                    <option value="${producto.id}">${producto.nombre_comercial}</option>
+                `)
+            })
+
+            $("#btn-modal-compra").click()
+        })
+
+        $("#producto_compra").change(e => {
+            $("#unidad_medida_producto_compra").empty()
+            let prodSel = productos.filter(producto => { return producto.id == e.target.value })[0]
+            switch (prodSel.unidad_medida) {
+                case 'ml':
+                    $("#unidad_medida_producto_compra").append(`
+                        <option value="ml">MILILITRO</option>
+                        <option value="l">LITRO</option>
+                        <option value="gal">GAlÓN</option>
+                    `)
+                    break
+                case 'gr':
+                    $("#unidad_medida_producto_compra").append(`
+                        <option value="mg">MILIGRAMO</option>
+                        <option value="lb">LIBRA</option>
+                        <option value="oz">ONZA</option>
+                        <option value="gr">GRAMO</option>
+                        <option value="kg">KILOGRAMO</option>
+                    `)
+                    break
+                default:
+                    $("#unidad_medida_producto_compra").append(`
+                        <option value="un">UNIDAD</option>
+                    `)
+                    break
+            }
+            $("#unidad_medida_producto_compra").val(prodSel.unidad_medida)
+
+        })
+
+        function guardarCompra(producto) {
+            return $.ajax({
+                url: '/compras',
+                data: producto,
+                type: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
+                },
+                success: (res) => {
+                    return res
+                },
+                error: (err) => {
+                    return err
+                }
+            })
+        }
+
+        $("#form-compra").submit(function (e) {
+            e.preventDefault()
+            let data = {
+                idProductoSeleccionado: $("#producto_compra").val(),
+                unidadMedida: valorConvertido($(`#unidad_medida_producto_compra`).val(), $(`#cantidad_producto_compra`).val())[0],
+                cantidadProducto: valorConvertido($(`#unidad_medida_producto_compra`).val(), $(`#cantidad_producto_compra`).val())[1],
+                valorUnidad: parseInt($(`#valor_unidad_producto_compra`).val()),
+                costoTotal: costo_producto_compra.rawValue,
+                numeroFactura: $("#factura_compra").val()
+            }
+            swal({
+                title: "¡Advertencia!",
+                text: "¿Estás seguro de guardar esta compra?",
+                icon: "warning",
+                buttons: {
+                    cancel: true,
+                    confirm: {
+                        text: 'Aceptar',
+                        visible: true,
+                        value: true,
+                        closeModal: false, //Muestra el Loader
+                    }
+                }
+            })
+                .then(isConfirm => {
+                    if (isConfirm) {
+                        guardarCompra(data)
+                            .then(res => {
+                                swal('¡Compra Guardada!', 'La compra se ha guardado correctamente', 'success')
+                                    .then(okPressed => {
+                                        if (okPressed) {
+                                            $("#btn-cancel-compra").click()
+                                            fillTable()
+                                        }
+                                    })
+                            })
+                            .catch(err => {
+                                swal('¡Error!', 'Error al guardar la compra', 'error')
+                            })
+                    }
+                })
+        })
     })
+
+    function deleteProd(idSelected) {
+        swal({
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de eliminar este producto?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
+                }
+            }
+        })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                        url: `/productos/${idSelected}`,
+                        type: 'DELETE',
+                        headers: {
+                            "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
+                        }
+                    })
+                        .then(res => {
+                            swal('¡Eliminación exitosa!', 'El producto ha sido eliminado correctamente.', 'success')
+                                .then(okPressed => {
+                                    if (okPressed) {
+                                        fillTable()
+                                    }
+                                })
+                        })
+                        .catch(err => {
+                            swal('¡Error!', 'Ha ocurrido un error al eliminar el producto', 'error')
+                        })
+                }
+            })
+    }
 
     function updateProd(idSelected) {
         $("#form-modal").empty()

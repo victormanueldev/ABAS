@@ -167,3 +167,6 @@ Route::resource('documents', 'DocumentoController', [
     'except' => 'showByClient'
 ]);
 Route::get('documents/show/{idCliente}','DocumentoController@showByClient');
+
+//Compras
+Route::resource('compras','CompraController');

@@ -115,5 +115,8 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
+        $producto = Producto::findOrFail($producto->id);
+        $producto->delete();
+        return response()->json("Delete success", 200);
     }
 }
