@@ -436,16 +436,12 @@
                                 </div>
                                 <div class="form-group col-sm-6 col-md-2">
                                     <label>Cantidad utilizada</label>
-                                    <input required type="number" class="form-control" id="cantidad_utilizada-0" step=".01">
+                                    <input required type="number" step="0.01" class="form-control" id="cantidad_utilizada-0" step=".01">
                                 </div>
                                 <div class="form-group col-md-2 col-sm-6 border-right">
                                     <label>Unidad de medida: </label>
                                     <select required class="form-control" id="unidad_medida-0">
-                                        <option value="0">Litros</option>
-                                        <option value="3">Mililitros</option>
-                                        <option value="1">Kilogramos</option>
-                                        <option value="2">Gramos</option>
-                                        <option value="3">Unidad</option>
+                                        <option value="gr">GRAMO</option>
                                     </select>
                                 </div>
                             </div>
@@ -459,12 +455,12 @@
                                 </div>
                                 <div class="col-md-3" style="text-align: center">
                                     <button type="button" id="btn-add-observacion" class="btn btn-primary">Añadir
-                                        Observacion<i class="fa fa-plus" style="margin-left: 10px;"></i> </button>
+                                        Observación<i class="fa fa-plus" style="margin-left: 10px;"></i> </button>
                                 </div>
                             </div>
                             <div class="row" id="observaciones">
                                 <div class="form-group col-lg-6">
-                                    <label>Obsrvación</label>
+                                    <label>Observación</label>
                                     <textarea required class="form-control" placeholder="Escriba aquí las observaciones del técnico o cliente."
                                         rows="2" name="instrucciones" id="observacion-0" maxlength="60"></textarea>
                                 </div>
@@ -611,6 +607,36 @@
             });
         });
 
+        //Evento change del select de unidad de medida 0
+        $(`#nombre-comercial-0`).change(function(e){
+            $(`#unidad_medida-0`).empty()
+            let prodSel = productos.filter(producto => { return producto.id == e.target.value })[0]
+            switch (prodSel.unidad_medida) {
+                case 'ml':
+                    $(`#unidad_medida-0`).append(`
+                        <option value="ml">MILILITRO</option>
+                        <!-- <option value="l">LITRO</option>
+                        <option value="gal">GAlÓN</option> -->
+                    `)
+                    break
+                case 'gr':
+                    $(`#unidad_medida-0`).append(`
+                        <!-- <option value="mg">MILIGRAMO</option>
+                        <option value="lb">LIBRA</option>
+                        <option value="oz">ONZA</option>
+                        <option value="kg">KILOGRAMO</option> -->
+                        <option value="gr">GRAMO</option>
+                    `)
+                    break
+                default:
+                    $(`#unidad_medida-0`).append(`
+                        <option value="un">UNIDAD</option>
+                    `)
+                    break
+            }
+            $(`#unidad_medida-0`).val(prodSel.unidad_medida)
+        })
+
         //Evento Chanfe del date picker
         $("#btn-find-service").click(e => {
             if ($("#fecha_inicio").val() && clienteSeleccionado != 0 && $("#select_sedes").val() != null) {
@@ -652,17 +678,14 @@
                 </div>
                 <div class="form-group col-sm-6 col-md-2">
                     <label>Cantidad utilizada</label>
-                    <input type="number" class="form-control" id="cantidad_utilizada-${contProductos - 1}" step=".01">
+                    <input type="number" step="0.01" class="form-control" id="cantidad_utilizada-${contProductos - 1}" step=".01">
                 </div>
                 <div class="form-group col-md-2 col-sm-6 border-right">
                     <label>Unidad de medida: </label>
-                    <select class="form-control" id="unidad_medida-${contProductos - 1}">
-                        <option value="0">Litros</option>
-                        <option value="3">Mililitros</option>
-                        <option value="1">Kilogramos</option>
-                        <option value="2">Gramos</option>
-                        <option value="3">Unidad</option>
+                    <select required class="form-control" id="unidad_medida-${contProductos - 1}">
+                        <option value="gr">GRAMO</option>
                     </select>
+
                 </div>`
             )
             anadirProductosSelect(contProductos - 1)
@@ -672,6 +695,34 @@
         function anadirProductosSelect(idSelect) {
             productos.forEach((producto, index) => {
                 $(`#nombre-comercial-${idSelect}`).append(`<option value="${producto.id}">${producto.nombre_comercial}</option>`)
+                $(`#nombre-comercial-${idSelect}`).change(function(e){
+                    $(`#unidad_medida-${idSelect}`).empty()
+                    let prodSel = productos.filter(producto => { return producto.id == e.target.value })[0]
+                    switch (prodSel.unidad_medida) {
+                        case 'ml':
+                            $(`#unidad_medida-${idSelect}`).append(`
+                                <option value="ml">MILILITRO</option>
+                                <!-- <option value="l">LITRO</option>
+                                <option value="gal">GAlÓN</option> -->
+                            `)
+                            break
+                        case 'gr':
+                            $(`#unidad_medida-${idSelect}`).append(`
+                                <!-- <option value="mg">MILIGRAMO</option>
+                                <option value="lb">LIBRA</option>
+                                <option value="oz">ONZA</option>
+                                <option value="kg">KILOGRAMO</option> -->
+                                <option value="gr">GRAMO</option>
+                            `)
+                            break
+                        default:
+                            $(`#unidad_medida-${idSelect}`).append(`
+                                <option value="un">UNIDAD</option>
+                            `)
+                            break
+                    }
+                    $(`#unidad_medida-${idSelect}`).val(prodSel.unidad_medida)
+                })
             })
         }
 
@@ -823,12 +874,13 @@
                         swal('Creación Correcta!','La orden de servicio se ha guardado exitosamente','success')
                         .then( value => {
                             if(value){
-                                window.location.reload();
+                                window.location.href = '/ordenes/create';
                             }
                         })
                     })
                     .catch( err => {
-                        swal('¡Error!', err.statusText ,'error')
+                        console.log(err)
+                        swal('¡Error!', err.responseJSON ,'error')
                     })
                 }
             })

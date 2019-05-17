@@ -5,7 +5,9 @@ namespace ABAS\Http\Controllers;
 use ABAS\Ruta;
 use Illuminate\Http\Request;
 use ABAS\Solicitud;
+use ABAS\Producto;
 use DB;
+use Carbon\Carbon;
 
 class RutaController extends Controller
 {
@@ -160,11 +162,30 @@ class RutaController extends Controller
     public function saveRouteProduct(Request $request)
     {
         if($request->ajax()){
+            $now = Carbon::now();
             foreach ($request->reporteProductos as $producto) {
+                $productoBD = '';
                 DB::table('producto_ruta')->insert([
                     'ruta_id' => $request->idRuta,
                     'producto_id' => $producto['idProducto'],
                     'cantidad_aplicada' => $producto['cantidadUtilizada']
+                ]);
+
+                $productoBD = Producto::findOrFail($producto['idProducto']);
+                DB::table('productos')->where('id', $producto['idProducto'])
+                                    ->update([
+                                        'total_unidades' => $productoBD->total_unidades - $producto['cantidadUtilizada'],
+                                        'updated_at' => $now
+                                    ]);
+
+            }
+
+            foreach ($request->tecnicos as $tecnico) {
+                DB::table('ruta_tecnico')->insert([
+                    'ruta_id' => $request->idRuta,
+                    'tecnico_id' => $tecnico['id'],
+                    'hora_entrada' => $tecnico['horaEntrada'],
+                    'hora_salida' => $tecnico['horaSalida']
                 ]);
             }
             return response()->json('Creation Success', 200);

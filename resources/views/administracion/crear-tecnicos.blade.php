@@ -85,7 +85,7 @@
                     </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <table id="tabla_tecnicos" class="table table-striped table-bordered table-hover dataTables-example"
+                        <table id="tabla_tecnicos" class="table table-striped table-hover dataTables-example"
                             data-filter=#filter>
                             <thead>
                                 <tr>

@@ -15,7 +15,7 @@ class CreateOrdenServiciosTable extends Migration
     {
         Schema::create('orden_servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo', 20);
+            $table->string('codigo', 20)->unique();
             $table->integer('servicio_id');
             $table->text('areas_plagas')->nullable();
             $table->text('nivel_actividad');

@@ -4,6 +4,7 @@ namespace ABAS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ABAS\Certificado;
+use ABAS\Inspeccion;
 use ABAS\Solicitud;
 
 class CertificadoController extends Controller
@@ -43,7 +44,7 @@ class CertificadoController extends Controller
             try{
                 $solicitudId = Solicitud::select('id')->where('cliente_id', $request->cliente_id)->where('sede_id', $request->sede_id)->get();
                 if(empty($solicitudId[0])){
-                    return response()->json('Solicitud a programacion invalida', 400); 
+                    return response()->json(['Solicitud a programacion invalida' => $solicitudId], 400); 
                 }else{
                     $certificado = new Certificado();
                     $certificado->area_tratada = $request->area_tratada;

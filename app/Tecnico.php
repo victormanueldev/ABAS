@@ -19,4 +19,9 @@ class Tecnico extends Model
     {
         return $this->belongsToMany(Servicio::class, 'servicio_tecnico');
     }
+
+    public function rutas()
+    {
+        return $this->hasMany(Ruta::class);
+    }
 }

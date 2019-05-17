@@ -45,10 +45,10 @@ Otros Ajustes
         - Links del sidebar de comisiones
 
     AREA DE INVENTARIOS (3 Dias)
-        - CRUD de productos <- ACTUAL
+        - CRUD de productos (OK)
         - Links del sidebar de productos
-        - Reporte de entrada de productos (Compras)
-        - Reporte de salida de productos (Gasto de tecnicos)
+        - Reporte de entrada de productos -Compras (OK)
+        - Reporte de salida de productos (Gasto de tecnicos) <- ACTUAL
         - Inventario General por rango de fechas y Frecuencias
         - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
         - Revisar Consultas y detalles de interfaz

@@ -71,6 +71,17 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         //
+        $producto = Producto::with([
+            'ordenes' => function($query){
+            },
+            'ordenes.tecnicos' => function($query){
+            },
+            'rutas' => function($query){
+            },
+            'rutas.tecnicos' => function($query){
+            }])
+            ->get();
+        return $producto;
     }
 
     /**
@@ -118,5 +129,29 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($producto->id);
         $producto->delete();
         return response()->json("Delete success", 200);
+    }
+
+    public function productsOut()
+    {
+        return view('administracion.salida-productos');
+    }
+
+    public function productSpend($dateIni, $dateEnd)
+    {
+        $producto = Producto::with([
+            'ordenes' => function($orden) use($dateIni, $dateEnd){
+                //Usar el nombre de la tabla
+                $orden->whereBetween('orden_servicios.created_at', [$dateIni, $dateEnd]);
+            },
+            'ordenes.tecnicos' => function($query){
+            },
+            'rutas' => function($ruta) use($dateIni, $dateEnd){
+                //Usar el nombre de la tabla
+                $ruta->whereBetween('rutas.created_at', [$dateIni, $dateEnd]);
+            },
+            'rutas.tecnicos' => function($query){
+            }])
+            ->get();
+        return $producto;
     }
 }

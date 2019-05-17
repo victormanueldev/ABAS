@@ -6,6 +6,7 @@ use ABAS\OrdenServicio;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use ABAS\Servicio;
+use ABAS\Producto;
 use DB;
 
 class OrdenServicioController extends Controller
@@ -58,10 +59,15 @@ class OrdenServicioController extends Controller
     {
         //
         if($request->ajax()){
+            $foundedOrden = OrdenServicio::select('id')->where('codigo', $request->codigo)->orWhere('servicio_id', $request->idServicio)->get(); 
+            if($foundedOrden->count() != 0){
+                return response()->json("El codigo de orden enviado ya existe", 401);
+            }else{
+
+            }
             try{
                 $now = Carbon::now();
                 $orden = new OrdenServicio ();
-
                 $idOrden = DB::table('orden_servicios')->insertGetId([
                     'codigo' => $request->codigo,
                     'servicio_id' => $request->idServicio,
@@ -86,11 +92,21 @@ class OrdenServicioController extends Controller
                 }
 
                 foreach ($request->reporteProductos as $producto) {
+                    $productoBD = '';
                     DB::table('orden_servicio_producto')->insert([
                         'orden_servicio_id' => $idOrden,
                         'producto_id' => $producto['idProducto'],
-                        'cantidad_aplicada' => $producto['cantidadUtilizada']
+                        'cantidad_aplicada' => $producto['cantidadUtilizada'],
+                        'created_at' => $now,
+                        'updated_at' => $now
                     ]);
+
+                    $productoBD = Producto::findOrFail($producto['idProducto']);
+                    DB::table('productos')->where('id', $producto['idProducto'])
+                                        ->update([
+                                            'total_unidades' => $productoBD->total_unidades - $producto['cantidadUtilizada'],
+                                            'updated_at' => $now
+                                        ]);
                 }
 
                 $servicio = Servicio::findOrFail($request->idServicio);
@@ -103,9 +119,9 @@ class OrdenServicioController extends Controller
                 $servicio->save();
 
                 
-                return response()->json('Create successfull', 200);
+                return response()->json("rgba({$res[1][0]},0.75)", 200);
             }catch(\Exception $e){
-                return response()->json($e, 500);
+                return response()->json("rgba({$res[1][0]},0.75)", 500);
             }
         }
     }

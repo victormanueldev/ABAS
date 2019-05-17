@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 05, 2019 at 09:16 PM
+-- Generation Time: May 15, 2019 at 09:45 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.17-0ubuntu0.18.04.1
 
@@ -48,6 +48,16 @@ INSERT INTO `cargos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
 (7, 'jefetecnico', 'Jefe Técnico', NULL, NULL);
 
 --
+-- Dumping data for table `certificados`
+--
+
+INSERT INTO `certificados` (`id`, `area_tratada`, `frecuencia`, `tratamientos`, `productos`, `solicitud_id`, `created_at`, `updated_at`) VALUES
+(2, 'TODAS', 'Mensual', '[\"Desinsectacion\"]', '[{\"producto\":\"Insecticida\",\"nombreComercial\":\"POLVO\",\"toxicidad\":\"1\"},{\"producto\":\"Trampas\",\"nombreComercial\":\"OTRO\",\"toxicidad\":\"0\"}]', 3, '2019-05-11 21:41:30', '2019-05-11 21:41:30'),
+(3, 'area prncipal', 'Mensual', '[\"Desinsectacion\"]', '[{\"producto\":\"Insecticida\",\"nombreComercial\":\"asdasd\",\"toxicidad\":\"1\"}]', 5, '2019-05-11 21:48:03', '2019-05-11 21:48:03'),
+(4, 'OTROS', 'Mensual', '[\"Desinsectacion\"]', '[{\"producto\":\"Insecticida\",\"nombreComercial\":\"iuyiu\",\"toxicidad\":\"1\"}]', 1, '2019-05-11 22:25:29', '2019-05-11 22:25:29'),
+(5, 'SALA', 'Mensual', '[\"Desinsectacion\"]', '[{\"producto\":\"Insecticida\",\"nombreComercial\":\"axczx\",\"toxicidad\":\"1\"}]', 2, '2019-05-11 22:26:06', '2019-05-11 22:26:06');
+
+--
 -- Dumping data for table `clientes`
 --
 
@@ -67,6 +77,15 @@ INSERT INTO `clientes` (`id`, `tipo_cliente`, `nit_cedula`, `nombre_cliente`, `r
 INSERT INTO `comisions` (`id`, `codigo`, `fecha_inicio_comision`, `fecha_fin_comision`, `valor_pagado`, `valor_pendiente`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'CM1052019', '2019-05-01', '2019-05-31', 75660, 46000, 1, '2019-05-01 20:27:02', '2019-05-01 20:27:02'),
 (2, 'CM3052019', '2019-05-01', '2019-05-31', 33000, 18600, 3, '2019-05-01 20:27:13', '2019-05-01 20:27:13');
+
+--
+-- Dumping data for table `compras`
+--
+
+INSERT INTO `compras` (`id`, `numero_factura`, `unidad_medida`, `total_unidades`, `valor_unidad`, `costo_total`, `producto_id`, `created_at`, `updated_at`) VALUES
+(2, '123423423', 'ml', '5', '450.00', 25, 19, '2019-05-10 04:33:59', '2019-05-10 04:33:59'),
+(3, '123423423', 'ml', '5', '450.00', 25, 19, '2019-05-10 04:34:22', '2019-05-10 04:34:22'),
+(4, '123423423', 'ml', '5', '450.00', 25, 19, '2019-05-10 04:35:12', '2019-05-10 04:35:12');
 
 --
 -- Dumping data for table `cotizaciones`
@@ -140,14 +159,47 @@ INSERT INTO `novedads` (`id`, `descripcion`, `estado`, `user2_id`, `prioridad`, 
 (3, 'Cliente No. 20316 no ha pagado el servicio', 'publicada', NULL, 'Normal', 1, 1, NULL, NULL, NULL, '2018-04-19 20:21:00', NULL);
 
 --
+-- Dumping data for table `orden_servicios`
+--
+
+INSERT INTO `orden_servicios` (`id`, `codigo`, `servicio_id`, `areas_plagas`, `nivel_actividad`, `realizo_inspeccion`, `tratamiento_correctivo`, `tratamiento_preventivo`, `requiere_refuerzo`, `mejorar_frecuencia`, `created_at`, `updated_at`) VALUES
+(9, 'ODS-VMA.S1', 21, '[\"asdasd\"]', '[{\"plaga\":\"BLATELLA GERMANICA\",\"nivel\":\"0\"},{\"plaga\":\"PERIPLANETA\",\"nivel\":\"0\"},{\"plaga\":\"DULCERA\",\"nivel\":\"0\"},{\"plaga\":\"LOCA\",\"nivel\":\"0\"},{\"plaga\":\"FARAONA\",\"nivel\":\"0\"},{\"plaga\":\"FUEGO\",\"nivel\":\"0\"},{\"plaga\":\"FANTASMA\",\"nivel\":\"0\"},{\"plaga\":\"RATTUS RATTUS\",\"nivel\":\"0\"},{\"plaga\":\"RATTUS NORVEGICUS\",\"nivel\":\"0\"},{\"plaga\":\"MUS MUSCULUS\",\"nivel\":\"0\"},{\"plaga\":\"otra_1\",\"nivel\":\"0\"},{\"plaga\":\"otra_2\",\"nivel\":\"0\"}]', 1, 0, 1, 1, 1, '2019-05-11 23:25:56', '2019-05-11 23:25:56'),
+(10, 'ODS-VMA.S2', 21, '[\"SALA\"]', '[{\"plaga\":\"BLATELLA GERMANICA\",\"nivel\":\"0\"},{\"plaga\":\"PERIPLANETA\",\"nivel\":\"0\"},{\"plaga\":\"DULCERA\",\"nivel\":\"0\"},{\"plaga\":\"LOCA\",\"nivel\":\"0\"},{\"plaga\":\"FARAONA\",\"nivel\":\"0\"},{\"plaga\":\"FUEGO\",\"nivel\":\"0\"},{\"plaga\":\"FANTASMA\",\"nivel\":\"0\"},{\"plaga\":\"RATTUS RATTUS\",\"nivel\":\"0\"},{\"plaga\":\"RATTUS NORVEGICUS\",\"nivel\":\"0\"},{\"plaga\":\"MUS MUSCULUS\",\"nivel\":\"0\"},{\"plaga\":\"otra_1\",\"nivel\":\"0\"},{\"plaga\":\"otra_2\",\"nivel\":\"0\"}]', 1, 0, 1, 1, 1, '2019-05-11 23:31:18', '2019-05-11 23:31:18');
+
+--
+-- Dumping data for table `orden_servicio_producto`
+--
+
+INSERT INTO `orden_servicio_producto` (`id`, `orden_servicio_id`, `producto_id`, `cantidad_aplicada`, `created_at`, `updated_at`) VALUES
+(13, 9, 1, '500', '2019-05-11 23:25:56', '2019-05-11 23:25:56'),
+(14, 10, 2, '1500', '2019-05-11 23:31:18', '2019-05-11 23:31:18'),
+(15, 10, 14, '100', '2019-05-11 23:31:18', '2019-05-11 23:31:18');
+
+--
+-- Dumping data for table `orden_servicio_tecnico`
+--
+
+INSERT INTO `orden_servicio_tecnico` (`id`, `orden_servicio_id`, `tecnico_id`, `hora_entrada`, `hora_salida`) VALUES
+(1, 1, 2, '14:30:00', '14:45:00'),
+(2, 2, 1, '13:18:00', '17:25:00'),
+(3, 3, 1, '13:18:00', '17:25:00'),
+(4, 4, 1, '13:18:00', '17:25:00'),
+(5, 5, 1, '13:18:00', '17:25:00'),
+(6, 6, 1, '13:18:00', '17:25:00'),
+(7, 7, 1, '13:18:00', '17:25:00'),
+(8, 8, 1, '13:18:00', '17:25:00'),
+(9, 9, 1, '13:18:00', '17:25:00'),
+(10, 10, 1, '15:30:00', '14:30:00');
+
+--
 -- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre_comercial`, `tipo`, `presentacion`, `unidad_medida`, `total_unidades`, `valor_unidad`, `costo_total`, `created_at`, `updated_at`) VALUES
-(1, 'Polvo', 'insecticida', 'po', 'gr', '15000.0', '2.01', 30000, NULL, NULL),
-(2, 'Gel', 'insecticida', 'gel', 'gr', '10000.0', '1.08', 30000, NULL, NULL),
-(3, 'Fosfuro de Aluminio', 'insecticida', 'bp', 'un', '10000.0', '1.50', 30000, NULL, NULL),
-(4, 'Cebo Café', 'insecticida', 'bp', 'un', '10000.0', '1.80', 30000, NULL, NULL),
+(1, 'Polvo', 'insecticida', 'po', 'gr', '11500', '2.01', 30000, NULL, '2019-05-16 01:44:23'),
+(2, 'Gel', 'insecticida', 'gel', 'gr', '-3001.25', '1.08', 30000, NULL, '2019-05-16 01:44:23'),
+(3, 'Fosfuro de Aluminio', 'insecticida', 'bp', 'un', '10045', '25000.00', 55000, NULL, '2019-05-11 01:02:10'),
+(4, 'Cebo Café', 'insecticida', 'bp', 'un', '10003', '1500.00', 50000, NULL, '2019-05-11 00:14:56'),
 (5, 'Cebo Verde', 'insecticida', 'bp', 'un', '10000.0', '1.00', 30000, NULL, NULL),
 (6, 'Trampa Rata', 'insecticida', 'ec', 'un', '10000.0', '1.22', 30000, NULL, NULL),
 (7, 'Trampa Raton', 'insecticida', 'ec', 'un', '10000.0', '1.14', 30000, NULL, NULL),
@@ -157,15 +209,37 @@ INSERT INTO `productos` (`id`, `nombre_comercial`, `tipo`, `presentacion`, `unid
 (11, 'Lam. Lampara', 'insecticida', 'bp', 'un', '10000.0', '1.20', 30000, NULL, NULL),
 (12, 'Sani-T 10', 'insecticida', 'bp', 'ml', '10000.0', '1.70', 30000, NULL, NULL),
 (13, 'Alfa-cipermetrina SC', 'insecticida', 'ec', 'ml', '10000.0', '1.30', 30000, NULL, NULL),
-(14, 'Beta-cipermetrina SC', 'insecticida', 'ec', 'ml', '10000.0', '1.80', 30000, NULL, NULL),
+(14, 'Beta-cipermetrina SC', 'insecticida', 'ec', 'ml', '9900', '1.80', 30000, NULL, '2019-05-11 23:31:18'),
 (15, 'Deltametrina SC', 'insecticida', 'ec', 'ml', '10000.0', '1.60', 30000, NULL, NULL),
-(16, 'Cyfluthrin EC', 'insecticida', 'ec', 'ml', '10000.0', '1.65', 30000, NULL, NULL),
+(16, 'Cyfluthrin EC', 'insecticida', 'ec', 'ml', '9998.75', '1.65', 30000, NULL, '2019-05-12 00:16:21'),
 (17, 'Deltametrina EC', 'insecticida', 'ec', 'ml', '10000.0', '1.44', 30000, NULL, NULL),
 (18, 'Piretrina Natural', 'insecticida', 'ec', 'ml', '10000.0', '1.21', 30000, NULL, NULL),
-(19, 'Fipronil SC', 'insecticida', 'sc', 'ml', '10000.0', '1.30', 30000, NULL, NULL),
+(19, 'Fipronil SC', 'insecticida', 'sc', 'ml', '10205', '500.00', 380000, NULL, '2019-05-10 04:37:08'),
 (20, 'Tiametoxan', 'insecticida', 'sc', 'gr', '10000.0', '1.96', 30000, NULL, NULL),
 (21, 'Temephos', 'insecticida', 'sc', 'gr', '10000.0', '2.10', 30000, NULL, NULL),
 (22, 'Bacillus Thuringiensis', 'insecticida', 'sc', 'gr', '10000.0', '3.20', 30000, NULL, NULL);
+
+--
+-- Dumping data for table `producto_ruta`
+--
+
+INSERT INTO `producto_ruta` (`id`, `ruta_id`, `producto_id`, `cantidad_aplicada`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '1.3', NULL, NULL),
+(4, 2, 2, '1.3', NULL, NULL),
+(5, 4, 1, '1500.0', NULL, NULL),
+(6, 4, 2, '2500.0', NULL, NULL),
+(7, 4, 1, '1500.0', NULL, NULL),
+(8, 4, 2, '2500.0', NULL, NULL);
+
+--
+-- Dumping data for table `rutas`
+--
+
+INSERT INTO `rutas` (`id`, `tipo`, `codigo`, `contenido`, `solicitud_id`, `created_at`, `updated_at`) VALUES
+(1, 'RUTA DE SANEAMIENTO', 'RS03', '[{\"area\":\"SALA\",\"frecuencia\":\"Mensual\"},{\"area\":\"OFICINA PRINCIPAL\",\"frecuencia\":\"Mensual\"}]', 3, '2019-05-11 21:30:26', '2019-05-11 21:30:26'),
+(2, 'RUTA DE LAMPARAS', 'RL03', '[{\"area\":\"SALA\",\"tipoLampara\":\"lamina\"}]', 3, '2019-05-11 21:30:46', '2019-05-11 21:30:46'),
+(3, 'RUTA DE ROEDORES EXTERNA', 'RRE03', '[{\"area\":\"SALA\",\"tipoTrampa\":\"Adhesiva\"}]', 3, '2019-05-11 21:31:04', '2019-05-11 21:31:04'),
+(4, 'RUTA DE ROEDORES INTERNA', 'RRI03', '[{\"area\":\"OFICNA\",\"tipoTrampa\":\"Cebo\"}]', 3, '2019-05-11 21:31:04', '2019-05-11 21:31:04');
 
 --
 -- Dumping data for table `sedes`
@@ -205,7 +279,7 @@ INSERT INTO `servicios` (`id`, `frecuencia`, `frecuencia_str`, `serie`, `tipo`, 
 (18, 2, 'meses', 'S11', 'Normal', '2020-07-10', '13:00:00', '2020-07-10', '15:00:00', 120, 0, 'Pendiente', 'rgb(255,130,0)', 'asdasd', 2, NULL, NULL),
 (19, 2, 'meses', 'S11', 'Normal', '2020-09-10', '13:00:00', '2020-09-10', '15:00:00', 120, 0, 'Pendiente', 'rgb(255,130,0)', 'asdasd', 2, NULL, NULL),
 (20, 2, 'meses', 'S11', 'Normal', '2020-11-10', '13:00:00', '2020-11-10', '15:00:00', 120, 0, 'Pendiente', 'rgb(255,130,0)', 'asdasd', 2, NULL, NULL),
-(21, 2, 'meses', 'S21', 'Normal', '2019-05-06', '13:00:00', '2019-05-06', '15:02:00', 122, 1, 'Pendiente', 'rgb(92,174,39)', 'observaciones', 3, '2019-05-01 20:11:58', '2019-05-01 20:12:08'),
+(21, 2, 'meses', 'S21', 'Normal', '2019-05-06', '13:00:00', '2019-05-06', '15:02:00', 122, 1, 'Realizado', 'rgba(92,174,39,0.75,0.75)', 'observaciones', 3, '2019-05-01 20:11:58', '2019-05-11 23:31:18'),
 (22, 2, 'meses', 'S21', 'Normal', '2019-07-06', '13:00:00', '2019-07-06', '15:02:00', 122, 0, 'Pendiente', 'rgb(92,174,39)', 'observaciones', 3, NULL, NULL),
 (23, 2, 'meses', 'S21', 'Normal', '2019-09-06', '13:00:00', '2019-09-06', '15:02:00', 122, 0, 'Pendiente', 'rgb(92,174,39)', 'observaciones', 3, NULL, NULL),
 (24, 2, 'meses', 'S21', 'Normal', '2019-11-06', '13:00:00', '2019-11-06', '15:02:00', 122, 0, 'Pendiente', 'rgb(92,174,39)', 'observaciones', 3, NULL, NULL),
@@ -422,14 +496,14 @@ INSERT INTO `tipo_servicios` (`id`, `nombre`) VALUES
 --
 
 INSERT INTO `users` (`id`, `cedula`, `nombres`, `apellidos`, `iniciales`, `telefono`, `foto`, `email`, `password`, `area_id`, `cargo_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'default-user.jpg', 'victormalsx@gmail.com', '$2y$10$ApzshZDpFrvQzf0ycAJDT.yMarzR5iXY4oMUyxZHsxl1lqDMZIWOu', 1, 1, 'UPQqrhS5zWuro2UiZSK41ZhdHxP0gdhPVD9OMJeeuFZ2LAmz4QEHil7zRO4T', NULL, NULL),
+(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'default-user.jpg', 'victormalsx@gmail.com', '$2y$10$ApzshZDpFrvQzf0ycAJDT.yMarzR5iXY4oMUyxZHsxl1lqDMZIWOu', 1, 1, 'aq38EqfKOQAYI4eIDcd2wXDdeaD6LHqYGD4LByt09Gszy2qpUnx3EFUUOoRg', NULL, NULL),
 (2, 987654321, 'Yurani', 'Calvo Ruiz', 'YCR', '3103195394', 'a6.jpg', 'yurani@gmail.com', '$2y$10$C279jhl0s46wYyr1uuu00OOouY1B4TYiQnbXXBK48l.yhUD7mN6ue', 2, 2, 'mWJBsslloCxdenyDG2LgzFBD6UZgKRS5cIr3hm1HdXKVf8ABXjy7gcvCGOn9', NULL, NULL),
 (3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'a1.jpg', 'andres@gmail.com', '$2y$10$Du7JITRNBCrqvj/2loo8eORFsGbOXcUl/sW5tKKpGnZBS4y4Anz/m', 1, 1, NULL, NULL, NULL),
-(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, 'zrTlT7GMI4oD5gx6IAqvdFlJqqH1US8A5fWrf82qbJ0NQPYfBndSBObPQyiA', NULL, NULL),
+(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, 'XBEJiSWiXB9zF6SoIsX1NDdy63AvTbfXx3Jg8yZZPcq61zxUY3AHIZQYceBT', NULL, NULL),
 (5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'a9.jpg', 'jhonny@gmail.com', '$2y$10$UIDt0beHPXpkJ/pcuuuZtOoKRYoBhmqnhQgVzx2Laa8NjnbMvbSgG', 3, 4, NULL, NULL, NULL),
-(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'tavnwqSMOqNgBUloy6zcVBcgXSKZVlAtuxyoVfzbU7iKNDv8dzYwLc1GhFLW', NULL, NULL),
+(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'erH6tfAu4pqMKj4WqeMgKNVPMSVwJNWk97s3QEfZhQFNng2O4JySRAASZOxC', NULL, NULL),
 (7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'a11.jpg', 'diego@gmail.com', '$2y$10$Y2xgM9E4rPRgeaOzkxtKG.8d9snUTey4.w2tuG0luPzRkxNNs9h0q', 6, 7, NULL, NULL, NULL),
-(8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '$2y$10$twKtAG0AtB5Y3RvelIJTAeUVOtQMXIbj87s/1YfeKiWh9rJv37cn2', 5, 6, NULL, NULL, NULL),
+(8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '$2y$10$twKtAG0AtB5Y3RvelIJTAeUVOtQMXIbj87s/1YfeKiWh9rJv37cn2', 5, 6, 'v8f3kiGU3TdVtMkv3K0Fj5Hwke0EqWK3KrWx9jIHas3k39faWBK8cRhIkLoX', NULL, NULL),
 (9, 99999999, 'Fernando', 'Serna', 'FS', '3177777750', 'default-user.jpg', 'fernandoserna@sanicontrol.com', '$2y$10$7L.tN71DkEjAY7bhTzcC1uIrT3ACdKBPk28dGkXphrGpecDNsKxN.', 1, 1, NULL, NULL, NULL),
 (10, 88888888, 'Cristian', 'León', 'CL', '3177777750', 'default-user.jpg', 'cristianleon@sanicontrol.com', '$2y$10$4cTNY0zGtG6wfzYApi/f/.yVJLVfW.4zi5a9WQuZWJ/e2mqtWTOFK', 1, 1, NULL, NULL, NULL),
 (11, 111111111, 'Programador', 'Sanicontrol', 'PS', '3177777750', 'default-user.jpg', 'programacion@sanicontrol.com', '$2y$10$w8uvk.q/.5eaAZ1yW2YehOJVLqRzWRDeMoPEjEHDtLrb/ReXhtOpy', 3, 3, NULL, NULL, NULL);

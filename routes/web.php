@@ -146,7 +146,12 @@ Route::get('find/service/{fecha}/{cliente}/{sede}', 'ServicioController@serviceB
 Route::resource('ordenes', 'OrdenServicioController');
 
 //Productos
-Route::resource('productos', 'ProductoController');
+Route::resource('productos', 'ProductoController', [
+    'except' => 'productsOut',
+    'except' => 'productSpend'
+]);
+Route::get('salida/productos', 'ProductoController@productsOut');
+Route::get('gasto/productos/{dateIni}/{dateEnd}', 'ProductoController@productSpend');
 
 //Inspecciones
 Route::resource('inspeccion', 'InspeccionController', [

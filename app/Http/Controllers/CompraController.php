@@ -13,9 +13,14 @@ class CompraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        if($request->ajax()){
+            $compras = Compra::with('producto')->get();
+            return $compras;
+        }
+        return view('administracion.ver-compras');
     }
 
     /**
@@ -45,6 +50,7 @@ class CompraController extends Controller
             $compra->valor_unidad = $request->valorUnidad;
             $compra->costo_total = $request->costoTotal;
             $compra->producto_id = $request->idProductoSeleccionado;
+            $compra->created_at = $request->fechaCompra;
             $compra->save();
 
             $producto = Producto::findOrFail($request->idProductoSeleccionado);
@@ -88,6 +94,17 @@ class CompraController extends Controller
     public function update(Request $request, Compra $compra)
     {
         //
+        $compra = Compra::findOrFail($compra->id);
+        $compra->numero_factura = $request->numeroFactura;
+        $compra->unidad_medida = $request->unidadMedida;
+        $compra->total_unidades = $request->cantidadProducto;
+        $compra->valor_unidad = $request->valorUnidad;
+        $compra->costo_total = $request->costoTotal;
+        $compra->producto_id = $request->idProductoSeleccionado;
+        $compra->created_at = $request->fechaCreacion;
+        $compra->save();
+
+        return response()->json("Update Success", 200);
     }
 
     /**
@@ -98,6 +115,8 @@ class CompraController extends Controller
      */
     public function destroy(Compra $compra)
     {
-        //
+        $compra = Compra::findOrFail($compra->id);
+        $compra->delete();
+        return response()->json("Delete success", 200);
     }
 }

@@ -435,34 +435,47 @@
                                         </div>
                                         <div class="tab-pane" id="tab-5">
                                             <div class="row">
-                                                @if(!isset($cliente[0]->solicitudes))
-                                                @if($cliente[0]->solicitudes[0]->certificados->count() == 0)
-                                                <div></div>
+                                                @if($cliente[0]->solicitudes->count() != 0)
+                                                @foreach($cliente[0]->solicitudes as $solicitud)
+                                                    @foreach($solicitud->certificados as $certificado)
+                                                            <div class="col-lg-6 " style="padding: 0 30px">
+                                                                <h5>Certificado</h5>
+                                                                <dl class="dl-horizontal no-margins">
+                                                                    <dt style="text-align:left;width: 30%;">Sede:</dt>
+                                                                    @if($cliente[0]->sedes->count() == 0)
+                                                                        <dd style="text-align:left;margin-left:0"><span>Sede Única</span></dd>    
+                                                                    @else
+                                                                        @foreach ($cliente[0]->sedes as $sede)
+                                                                            @if($solicitud->sede_id == $sede->id)
+                                                                                <dd style="text-align:left;margin-left:0"><span>{{$sede->nombre}}</span></dd>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                </dl>
+                                                                <dl class="dl-horizontal no-margins">
+                                                                    <dt style="text-align:left;width: 30%;">Frecuencia:</dt>
+                                                                    <dd style="text-align:left;margin-left:0"><span>{{$certificado->frecuencia}}</span></dd>
+                                                                </dl>
+                                                                <dl class="dl-horizontal no-margins">
+                                                                    <dt style="text-align:left;width: 30%;">Area Tratada:</dt>
+                                                                    <dd style="text-align:left;margin-left:0"><span>{{$certificado->area_tratada}}</span></dd>
+                                                                </dl>
+                                                                <dl class="dl-horizontal ">
+                                                                    @foreach($certificado->tratamientos as $tratamiento)
+                                                                    <dt style="text-align:left;width: 30%;">Tratamiento
+                                                                        {{$loop->index + 1 }}:</dt>
+                                                                    <dd style="text-align:left;margin-left:0"><span>{{$tratamiento}}
+                                                                        </span></dd>
+                                                                    @endforeach
+                                                                </dl>
+                                                                <strong>Creación: </strong><small>{{$certificado->created_at}}</small>
+                                                                <a href="javascript: deleteCertificate({{$certificado->id}})"
+                                                                    class="stat-percent font-bold text-navy">Eliminar <i class="fa fa-edit"></i></a>
+                                                            </div>
+                                                    @endforeach
+                                                @endforeach
                                                 @else
-                                                <div class="col-lg-6 " style="padding: 0 30px">
-                                                    <h5>Certificado</h5>
-                                                    <dl class="dl-horizontal no-margins">
-                                                        <dt style="text-align:left;width: 30%;">Frecuencia:</dt>
-                                                        <dd style="text-align:left;margin-left:0"><span>{{$cliente[0]->solicitudes[0]->certificados[0]->frecuencia}}</span></dd>
-                                                    </dl>
-                                                    <dl class="dl-horizontal no-margins">
-                                                        <dt style="text-align:left;width: 30%;">Area Tratada:</dt>
-                                                        <dd style="text-align:left;margin-left:0"><span>{{$cliente[0]->solicitudes[0]->certificados[0]->area_tratada}}</span></dd>
-                                                    </dl>
-                                                    <dl class="dl-horizontal ">
-                                                        @foreach($cliente[0]->solicitudes[0]->certificados[0]->tratamientos
-                                                        as $tratamiento)
-                                                        <dt style="text-align:left;width: 30%;">Tratamiento
-                                                            {{$loop->index + 1 }}:</dt>
-                                                        <dd style="text-align:left;margin-left:0"><span>{{$tratamiento}}
-                                                            </span></dd>
-                                                        @endforeach
-                                                    </dl>
-                                                    <strong>Creación: </strong><small>{{$cliente[0]->solicitudes[0]->certificados[0]->created_at}}</small>
-                                                    <a href="javascript: deleteCertificate({{$cliente[0]->solicitudes[0]->certificados[0]->id}})"
-                                                        class="stat-percent font-bold text-navy">Eliminar <i class="fa fa-edit"></i></a>
-                                                </div>
-                                                @endif
+                                                    <div></div>
                                                 @endif
                                             </div>
                                         </div>
@@ -615,7 +628,7 @@
 
                                 <div class="form-group col-lg-6"><label class="control-label">Teléfono principal*</label>
                                     <input style="text-transform: uppercase" type="text" name="telefono[0]" placeholder="Teléfono principal"
-                                class="form-control" value="{{ $cliente[0]->telefonos[0]->numero }}" required>
+                                class="form-control" value="{{ $cliente[0]->telefonos->count() != 0 ? $cliente[0]->telefonos[0]->numero : '' }}" required>
                                 </div>
 
                                 <div class="form-group col-lg-3"><label class="control-label">Contacto Inicial *</label>
@@ -878,7 +891,7 @@
                                         <option value="{{$cliente[0]->id.',0'}}">{{$cliente[0]->nombre_cliente}}</option>
                                         @else
                                         @foreach($cliente[0]->sedes as $sede)
-                                        <option value="{{$sede->id.",".$cliente[0]->id}}">{{$sede->nombre}}</option>
+                                        <option value="{{$cliente[0]->id.",".$sede->id}}">{{$sede->nombre}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -1568,7 +1581,7 @@
                                 })
                         })
                         .catch(err => {
-                            swal("¡Error!", err.statusText, 'error')
+                            swal("¡Error!", 'Solicitud a programación no encontrada.', 'error')
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
                                         $("#btn-close-certificate").click();

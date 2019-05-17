@@ -21,4 +21,9 @@ class Ruta extends Model
     public function solicitud(){
         return $this->belongsTo(Solicitud::class);
     }
+
+    public function tecnicos()
+    {
+        return $this->belongsToMany(Tecnico::class);
+    }
 }

@@ -57,7 +57,7 @@
                         </div> --}}
                         
                         <div class="table-responsive">
-                            <table id="tabla_novedades" class="table table-striped table-bordered table-hover dataTables-example" data-filter=#filter>
+                            <table id="tabla_novedades" class="table table-striped table-hover dataTables-example" data-filter=#filter>
                                 <thead>
                                 <tr>
                                     

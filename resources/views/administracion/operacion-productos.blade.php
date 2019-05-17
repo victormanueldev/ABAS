@@ -89,7 +89,7 @@
                                         <option value="kg">KILOGRAMO</option>
                                         <option value="gr">GRAMO</option>
                                         <option value="gal">GAlÓN</option>
-                                        <option value="und">UNIDAD</option>
+                                        <option value="un">UNIDAD</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-3" style="margin-top: 15px;">
@@ -209,9 +209,17 @@
                         </div>
                         <div class="modal-body">
                             <div class="row" id="form-modal">
-                                <div class="form-group col-lg-12" style="margin-top: 15px;">
-                                        <label class="control-label">Selecciona el producto</label>
-                                        <select style="text-transform: uppercase" name="producto_compra" id="producto_compra"
+                                <div class="form-group col-lg-6" id="data_1" style="margin-top: 15px;">
+                                    <label>Fecha *</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                            type="text" id="fecha_creacion" class="form-control" placeholder="" name="fecha_creacion"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" style="margin-top: 15px;">
+                                    <label class="control-label">Selecciona el producto</label>
+                                    <select style="text-transform: uppercase" name="producto_compra" id="producto_compra"
                                         class="form-control" required>
                                     </select>
                                 </div>
@@ -247,7 +255,7 @@
                         </div>
                         <div class="modal-footer">
                             <button id="btn-cancel-compra" type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                            <button id="btn-guardar-compra" type="submit" class="btn btn-primary">Guardar C</button>
+                            <button id="btn-guardar-compra" type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -267,6 +275,9 @@
     var costoProductoEdit
 
     $(document).ready(function () {
+
+        var date = moment().format("YYYY-MM-DD");
+        $('#fecha_creacion').val(date);
 
         /**
         * Guardar productos
@@ -469,7 +480,7 @@
 
 
         /**
-         * Ver, Editar y Eliminar Productos
+         * Ver Productos
          * --------------------------------------------------------
          **/
 
@@ -601,7 +612,12 @@
                 })
         })
 
-        $("#btn-compra").click( async function () {
+        /**
+        * Registro de compras de productos
+        * ------------------------------------------------
+        */
+
+        $("#btn-compra").click(async function () {
             $("#producto_compra").empty()
             await productos.forEach(producto => {
                 $("#producto_compra").append(`
@@ -642,10 +658,10 @@
 
         })
 
-        function guardarCompra(producto) {
+        function guardarCompra(compra) {
             return $.ajax({
                 url: '/compras',
-                data: producto,
+                data: compra,
                 type: 'POST',
                 headers: {
                     "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
@@ -667,7 +683,8 @@
                 cantidadProducto: valorConvertido($(`#unidad_medida_producto_compra`).val(), $(`#cantidad_producto_compra`).val())[1],
                 valorUnidad: parseInt($(`#valor_unidad_producto_compra`).val()),
                 costoTotal: costo_producto_compra.rawValue,
-                numeroFactura: $("#factura_compra").val()
+                numeroFactura: $("#factura_compra").val(),
+                fechaCompra: $("#fecha_creacion").val()
             }
             swal({
                 title: "¡Advertencia!",
@@ -702,6 +719,11 @@
                 })
         })
     })
+
+    /**
+    * Eliminar productos
+    * ---------------------------------------------------
+    **/
 
     function deleteProd(idSelected) {
         swal({
@@ -741,6 +763,11 @@
                 }
             })
     }
+
+    /**
+     * Editar productos
+     * ----------------------------------------------
+     **/
 
     function updateProd(idSelected) {
         $("#form-modal").empty()

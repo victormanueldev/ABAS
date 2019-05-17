@@ -134,19 +134,55 @@
                                 <div class="form-group col-md-2 col-sm-6 border-right">
                                     <label>Unidad de medida: </label>
                                     <select required class="form-control" id="unidad_medida-0">
-                                        <option value="0">Litros</option>
-                                        <option value="3">Mililitros</option>
-                                        <option value="1">Kilogramos</option>
-                                        <option value="2">Gramos</option>
-                                        <option value="3">Unidad</option>
+                                        <option value="gr">GRAMO</option>
                                     </select>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <!-- Información de técnics-->
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>Información de técnicos</h4>
+                                    <p>Ingresa los datos de identificacion y tiempo utilizado por el tecnico.</p>
+                                </div>
+                                <div class="col-md-3" style="text-align: center">
+                                    <button type="button" id="btn-add-tenico" class="btn btn-primary">Añadir técnico <i
+                                            class="fa fa-plus" style="margin-left: 10px;"></i> </button>
+                                </div>
+                            </div>
+                            <div class="row" id="tecnicos">
+                                <div class="form-group col-md-2 col-sm-4">
+                                    <label>Nombre del Técnico: </label>
+                                    <select required class="form-control" id="select-tecnicos-0">
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-2 col-sm-4">
+                                    <label>Hora de entrada</label>
+                                    <div class="input-group clockpicker" data-autoclose="true">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-clock-o"></span>
+                                        </span>
+                                        <input required type="text" class="form-control" placeholder="09:30" id="hora_entrada-0">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-2 col-sm-4">
+                                    <label>Hora de Salida</label>
+                                    <div class="input-group clockpicker" data-autoclose="true">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-clock-o"></span>
+                                        </span>
+                                        <input required type="text" class="form-control" placeholder="09:30PM" id="hora_salida-0">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="ibox-footer">
-                    <button type="submit" id="submit-orden" class="btn btn-w-m btn-primary pull-right">Guardar Orden de servicio</button>
+                    <button type="submit" id="submit-orden" class="btn btn-w-m btn-primary pull-right">Guardar Orden de
+                        servicio</button>
                     <button type="button" class="btn btn-w-m btn-default" id="test-submit">Limpiar formulario</button>
                 </div>
                 {!! Form::close() !!}
@@ -171,6 +207,7 @@
     var crsfToken = document.getElementsByName("_token")[0].value;
     var ruta;
     var contProductos = 1;
+    var contTecnicos = 1;
 
     $(document).ready(() => {
 
@@ -194,15 +231,26 @@
                 console.log(err);
             });
 
-            $.get('/productos')
+        $.get('/productos')
             .then(res => {
                 productos = res;
-                productos.forEach((producto, index) => {
-                    $("#nombre-comercial-0").append(`<option value="${producto.id}">${producto.nombre_comercial}</option>`)
-                })
+                // productos.forEach((producto, index) => {
+                //     $("#nombre-comercial-0").append(`<option value="${producto.id}">${producto.nombre_comercial}</option>`)
+                // })
             })
             .catch(err => {
                 console.log(err)
+            })
+
+        $.get('/all/tecnicos')
+            .then(res => {
+                tecnicos = res;
+                tecnicos.forEach((tecnico, index) => {
+                    $("#select-tecnicos-0").append(`<option value="${tecnico.id}">${tecnico.nombre}</option>`)
+                });
+            })
+            .catch(err => {
+                console.error(err)
             })
 
         //Inicia el Autocompletado con los NIT de los clientes
@@ -266,6 +314,36 @@
             });
         });
 
+        //Evento change del select de unidad de medida 0
+        $(`#nombre-comercial-0`).change(function (e) {
+            $(`#unidad_medida-0`).empty()
+            let prodSel = productos.filter(producto => { return producto.id == e.target.value })[0]
+            switch (prodSel.unidad_medida) {
+                case 'ml':
+                    $(`#unidad_medida-0`).append(`
+                        <option value="ml">MILILITRO</option>
+                        <! -- <option value="l">LITRO</option>
+                        <option value="gal">GAlÓN</option> -->
+                    `)
+                    break
+                case 'gr':
+                    $(`#unidad_medida-0`).append(`
+                        <!-- <option value="mg">MILIGRAMO</option>
+                        <option value="lb">LIBRA</option>
+                        <option value="oz">ONZA</option>
+                        <option value="kg">KILOGRAMO</option> -->
+                        <option value="gr">GRAMO</option>
+                    `)
+                    break
+                default:
+                    $(`#unidad_medida-0`).append(`
+                        <option value="un">UNIDAD</option>
+                    `)
+                    break
+            }
+            $(`#unidad_medida-0`).val(prodSel.unidad_medida)
+        })
+
         $("#btn-find-route").click(() => {
             $.ajax({
                 url: '/find/route',
@@ -292,7 +370,7 @@
 
         });
 
-         $("#btn-add-product").click(() => {
+        $("#btn-add-product").click(() => {
             contProductos++;
             $("#productos").append(
                 `<div class="form-group col-md-2 col-sm-6">
@@ -302,26 +380,90 @@
                 </div>
                 <div class="form-group col-sm-6 col-md-2">
                     <label>Cantidad utilizada</label>
-                    <input type="number" class="form-control" id="cantidad_utilizada-${contProductos - 1}" step=".01">
+                    <input type="number" step="0.01" class="form-control" id="cantidad_utilizada-${contProductos - 1}" step=".01">
                 </div>
                 <div class="form-group col-md-2 col-sm-6 border-right">
                     <label>Unidad de medida: </label>
                     <select class="form-control" id="unidad_medida-${contProductos - 1}">
-                        <option value="0">Litros</option>
-                        <option value="3">Mililitros</option>
-                        <option value="1">Kilogramos</option>
-                        <option value="2">Gramos</option>
-                        <option value="3">Unidad</option>
                     </select>
                 </div>`
             )
             anadirProductosSelect(contProductos - 1)
         })
 
+        $("#btn-add-tenico").click(() => {
+            contTecnicos++;
+            $("#tecnicos").append(
+                `<div class="form-group col-md-2 col-sm-4">
+                    <label>Nombre del Técnico: </label>
+                    <select class="form-control" id="select-tecnicos-${contTecnicos - 1}">
+                    </select>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>Hora de entrada</label>
+                    <div class="input-group clockpicker" data-autoclose="true">
+                        <span class="input-group-addon">
+                            <span class="fa fa-clock-o"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="09:30" id="hora_entrada-${contTecnicos - 1}">
+                    </div>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>Hora de Salida</label>
+                    <div class="input-group clockpicker" data-autoclose="true">
+                        <span class="input-group-addon">
+                            <span class="fa fa-clock-o"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="09:30PM" id="hora_salida-${contTecnicos - 1}">
+                    </div>
+                </div>`
+            )
+
+            //Inicializa el clickpocker
+            $('.clockpicker').clockpicker({
+                twelvehour: true
+            });
+            anadirTecnicosSelect(contTecnicos - 1)
+        });
+
+        function anadirTecnicosSelect(idSelect) {
+            tecnicos.forEach((tecnico, index) => {
+                $(`#select-tecnicos-${idSelect}`).append(`<option value="${tecnico.id}">${tecnico.nombre}</option>`)
+            });
+        }
+
         //Añade productos al select de Productos
         function anadirProductosSelect(idSelect) {
             productos.forEach((producto, index) => {
                 $(`#nombre-comercial-${idSelect}`).append(`<option value="${producto.id}">${producto.nombre_comercial}</option>`)
+                $(`#nombre-comercial-${idSelect}`).change(function (e) {
+                    $(`#unidad_medida-${idSelect}`).empty()
+                    let prodSel = productos.filter(producto => { return producto.id == e.target.value })[0]
+                    switch (prodSel.unidad_medida) {
+                        case 'ml':
+                            $(`#unidad_medida-${idSelect}`).append(`
+                                <option value="ml">MILILITRO</option>
+                                <! -- <option value="l">LITRO</option>
+                                <option value="gal">GAlÓN</option> -->
+                            `)
+                            break
+                        case 'gr':
+                            $(`#unidad_medida-${idSelect}`).append(`
+                                <!-- <option value="mg">MILIGRAMO</option>
+                                <option value="lb">LIBRA</option>
+                                <option value="oz">ONZA</option>
+                                <option value="kg">KILOGRAMO</option> -->
+                                <option value="gr">GRAMO</option>
+                            `)
+                            break
+                        default:
+                            $(`#unidad_medida-${idSelect}`).append(`
+                                <option value="un">UNIDAD</option>
+                            `)
+                            break
+                    }
+                    $(`#unidad_medida-${idSelect}`).val(prodSel.unidad_medida)
+                })
             })
         }
 
@@ -329,14 +471,22 @@
             e.preventDefault();
             var dataToSend = {
                 idRuta: ruta.id,
-                reporteProductos: []
+                reporteProductos: [],
+                tecnicos: []
             }
 
             //Reporte de productos
             for (var i = 0; i < contProductos; i++) {
-                dataToSend.reporteProductos[i] = { idProducto: $(`#nombre-comercial-${i}`).val(), cantidadUtilizada: '', unidadMedida: ''}
+                dataToSend.reporteProductos[i] = { idProducto: $(`#nombre-comercial-${i}`).val(), cantidadUtilizada: '', unidadMedida: '' }
                 dataToSend.reporteProductos[i].cantidadUtilizada = $(`#cantidad_utilizada-${i}`).val();
                 dataToSend.reporteProductos[i].unidadMedida = $(`#unidad_medida-${i}`).val();
+            }
+
+            //Asignacion de Tecnicos
+            for (var i = 0; i < contTecnicos; i++) {
+                dataToSend.tecnicos[i] = { id: $(`#select-tecnicos-${i}`).val(), horaEntrada: '', horaSalida: '' }
+                dataToSend.tecnicos[i].horaEntrada = moment(`0000-01-01 '${$(`#hora_entrada-${i}`).val()}`, 'YYYY-MM-DD hh:mmA').format('HH:mm:ss');
+                dataToSend.tecnicos[i].horaSalida = moment(`0000-01-01 '${$(`#hora_salida-${i}`).val()}`, 'YYYY-MM-DD hh:mmA').format('HH:mm:ss');
             }
 
             swal({
@@ -353,29 +503,29 @@
                     }
                 }
             })
-            .then(isConfirm => {
-                if(isConfirm){
-                    $.ajax({
-                        url: '/save/route/product',
-                        data: dataToSend,
-                        type: 'POST',
-                        headers: {
-                            "X-CSRF-TOKEN": crsfToken       //Token de seguridad
-                        }
-                    })
-                    .then( res => {
-                        swal('Creación Correcta!','La orden de servicio se ha guardado exitosamente','success')
-                        .then( value => {
-                            if(value){
-                                window.location.reload();
+                .then(isConfirm => {
+                    if (isConfirm) {
+                        $.ajax({
+                            url: '/save/route/product',
+                            data: dataToSend,
+                            type: 'POST',
+                            headers: {
+                                "X-CSRF-TOKEN": crsfToken       //Token de seguridad
                             }
                         })
-                    })
-                    .catch( err => {
-                        swal('¡Error!', err.statusText ,'error')
-                    })
-                }
-            })
+                            .then(res => {
+                                swal('Creación Correcta!', 'La orden de servicio se ha guardado exitosamente', 'success')
+                                    .then(value => {
+                                        if (value) {
+                                            window.location.href = '/recepcion/rutas';
+                                        }
+                                    })
+                            })
+                            .catch(err => {
+                                swal('¡Error!', err.responseJSON, 'error')
+                            })
+                    }
+                })
 
         })
     })

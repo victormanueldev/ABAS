@@ -187,7 +187,7 @@
                                                     <div class="full-height-scroll">
 
                                                         <h4>Recompras</h4>
-                                                        <table class="table table-responsive table-bordered">
+                                                        <table class="table table-responsive ">
                                                             <thead>
                                                                 <tr>
                                                                     <td><b>Nombre Cliente</b></td>
@@ -208,7 +208,7 @@
                                                         </div>
                                                         <br>
                                                         <h4>Clientes Nuevos</h4>
-                                                        <table class="table table-responsive table-bordered">
+                                                        <table class="table table-responsive ">
                                                             <thead>
                                                                 <tr>
                                                                     <td><b>Nombre Cliente</b></td>
@@ -228,7 +228,7 @@
                                                         </div>
                                                         <br>
                                                         <h4>Clientes con contrato</h4>
-                                                        <table class="table table-responsive table-bordered">
+                                                        <table class="table table-responsive ">
                                                             <thead>
                                                                 <tr>
                                                                     <td><b>Nombre Cliente</b></td>
