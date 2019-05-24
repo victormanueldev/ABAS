@@ -110,8 +110,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2" style="margin-top: 25px;padding: 0 0">
-                                        <button title="Actualizar resultados" class="btn btn-success btn-circle btn-outline"><i
-                                                style="font-size: 15px" class="fa fa-refresh"></i></button>
+                                        <button title="Actualizar resultados" class="btn btn-success btn-circle btn-outline"
+                                            id="act-resultados"><i style="font-size: 15px" class="fa fa-refresh"></i></button>
                                     </div>
                                 </li>
                                 <li style="margin-top: 0">
@@ -159,20 +159,6 @@
 <script>
     $(document).ready(function () {
 
-        //Creacion del loader como un NodeElement
-        var loader = document.createElement("div")
-        loader.innerHTML = `
-                    <div class="sk-spinner sk-spinner-double-bounce">
-                        <div class="sk-double-bounce1"></div>
-                        <div class="sk-double-bounce2"></div>
-                    </div>`
-        // Alert loader
-        swal({
-            title: "Recolectando información...",
-            content: loader,
-            buttons: false
-        })
-
         $("#date-start").val(moment().startOf("month").tz("America/Bogota").format("MM/DD/YYYY"));
         $("#date-end").val(moment().endOf("month").tz("America/Bogota").format("MM/DD/YYYY"));
 
@@ -195,9 +181,6 @@
                 }
             })
         }
-
-        var data2 = []  // Dataset Gastos
-        var data3 = []  // Dataset Ganancias
 
         function crearGrafico(data2, data3) {
             var dataset = [
@@ -225,24 +208,6 @@
                         lineWidth: 0,
                         opacity: 1
                     }
-                    // lines: {
-                    //     lineWidth: 1,
-                    //     show: true,
-                    //     fill: true,
-                    //     fillColor: {
-                    //         colors: [{
-                    //             opacity: 0.2
-                    //         }, {
-                    //             opacity: 0.4
-                    //         }]
-                    //     }
-                    // },
-                    // splines: {
-                    //     show: false,
-                    //     tension: 0.6,
-                    //     lineWidth: 1,
-                    //     fill: 0.1
-                    // },
                 }
             ];
 
@@ -292,11 +257,25 @@
             $.plot($("#flot-dashboard-chart"), dataset, options);
         }
 
-
-
-        (function crearEstadistica() {
+        function crearEstadistica() {
+            //Creacion del loader como un NodeElement
+            var loader = document.createElement("div")
+            loader.innerHTML = `
+                    <div class="sk-spinner sk-spinner-double-bounce">
+                        <div class="sk-double-bounce1"></div>
+                        <div class="sk-double-bounce2"></div>
+                    </div>`
+            // Alert loader
+            swal({
+                title: "Recolectando información...",
+                content: loader,
+                buttons: false
+            })
             obtenerResultado()
                 .then(res => {
+                    let data2 = []  // Dataset Gastos
+                    let data3 = []  // Dataset Ganancias
+
                     // Creación del grafico
                     data3 = res["facturas"].map(factura => { return [new Date(factura.fecha_pago).getTime(), factura.valor] })
                     let compras = res["compras"].map(compra => { return [new Date(compra.created_at).getTime(), compra.costo_total] })
@@ -309,7 +288,7 @@
                     // Calcula los totales
                     let totalFacturas = 0
                     res["facturas"].map(factura => { totalFacturas += factura.valor })
-                    
+
                     let totalCompras = 0
                     res["compras"].map(compra => { totalCompras += compra.costo_total })
 
@@ -319,17 +298,17 @@
                     let totalTecnicos = 0
                     res["tecnicos"].map(tecnico => { totalTecnicos += tecnico.totalInvertido })
 
-                    let totalGastos =  (totalCompras + totalProductos + totalTecnicos)
+                    let totalGastos = (totalCompras + totalProductos + totalTecnicos)
                     let totalGanancias = totalFacturas - totalGastos
-                    
+
                     // Añade las variables a la vista
                     $("#total-facturas").append(`$ ${totalFacturas.toLocaleString('de-DE')}`)
                     $("#total-compras").append(`$ ${totalCompras.toLocaleString('de-DE')}`)
-                    $("#porcentaje-gasto-compra").append(`${((totalCompras/totalGastos) * 100).toFixed(2)}%`)
+                    $("#porcentaje-gasto-compra").append(`${((totalCompras / totalGastos) * 100).toFixed(2)}%`)
                     $("#total-productos").append(`$ ${totalProductos.toLocaleString('de-DE')}`)
-                    $("#porcentaje-gasto-producto").append(`${((totalProductos/totalGastos) * 100).toFixed(2)}%`)
+                    $("#porcentaje-gasto-producto").append(`${((totalProductos / totalGastos) * 100).toFixed(2)}%`)
                     $("#total-tecnicos").append(`$ ${totalTecnicos.toLocaleString('de-DE')}`)
-                    $("#porcentaje-gasto-tecnicos").append(`${((totalTecnicos/totalGastos) * 100).toFixed(2)}%`)
+                    $("#porcentaje-gasto-tecnicos").append(`${((totalTecnicos / totalGastos) * 100).toFixed(2)}%`)
                     $("#total-ganancias").append(`$ ${totalGanancias.toLocaleString('de-DE')}`)
                     $("#total-gastos").append(`$ ${totalGastos.toLocaleString('de-DE')}`)
                     swal.close()
@@ -337,7 +316,22 @@
                 .catch(err => {
                     console.log(err)
                 })
-        })()
+        }
+
+        (function () { crearEstadistica() })()
+
+        $("#act-resultados").click(function () {
+            $("#total-facturas").empty()
+            $("#total-compras").empty()
+            $("#porcentaje-gasto-compra").empty()
+            $("#total-productos").empty()
+            $("#porcentaje-gasto-producto").empty()
+            $("#total-tecnicos").empty()
+            $("#porcentaje-gasto-tecnicos").empty()
+            $("#total-ganancias").empty()
+            $("#total-gastos").empty()
+            crearEstadistica()
+        })
 
     })
 </script>

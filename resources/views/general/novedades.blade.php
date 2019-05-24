@@ -72,7 +72,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($data as $novedad)
-                                    @if(Auth::user()->area_id == $novedad['area_id'])
+                                    @if(Auth::user()->area_id == $novedad['area_id'] || $novedad['area_id'] == '0')
                                         <tr class="gradeX">
                                             
                                             <td>{{$novedad['nombres_user1']}} {{$novedad['apellidos_user1']}}</td>
