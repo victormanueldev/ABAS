@@ -5,8 +5,6 @@
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet">
 <link href="{{asset('css/plugins/fullcalendar/fullcalendar.print.css')}}" rel='stylesheet' media='print'>
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
-{{--
-<link href="{{asset('css/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel='stylesheet'> --}}
 @endsection
 {{-- Contenido --}}
 @section('content')
@@ -49,7 +47,7 @@
                     <div class="row">
                         <form class="form-inline">
                             <div class="form-group col-sm-7 col-lg-9">
-                                <label>Frecuencia: </label>
+                                <label>Técnico: </label>
                                 <select class="form-control" style="width: 85%" id="select_tecnicos">
                                     <option value="" selected>Seleccione un técnico</option>
                                     <option value="all" selected>Todos los Tecnicos</option>

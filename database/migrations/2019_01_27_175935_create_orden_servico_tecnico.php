@@ -19,6 +19,7 @@ class CreateOrdenServicoTecnico extends Migration
             $table->integer('tecnico_id');
             $table->time('hora_entrada');
             $table->time('hora_salida');
+            $table->timestamps();
         });
     }
 

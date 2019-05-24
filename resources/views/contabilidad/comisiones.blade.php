@@ -126,7 +126,6 @@
                         <div class="sk-double-bounce2"></div>
                     </div>`
 
-            //Alert de confirmacion
             swal({
                 title: "Recolectando información...",
                 content: loader,

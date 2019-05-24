@@ -22,6 +22,11 @@ class Tecnico extends Model
 
     public function rutas()
     {
-        return $this->hasMany(Ruta::class);
+        return $this->belongsToMany(Ruta::class)->withPivot('hora_entrada','hora_salida')->withTimestamps();
+    }
+
+    public function ordenes()
+    {
+        return $this->belongsToMany(OrdenServicio::class)->withPivot('hora_entrada','hora_salida')->withTimestamps();
     }
 }

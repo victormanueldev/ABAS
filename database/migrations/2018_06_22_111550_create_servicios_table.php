@@ -27,7 +27,7 @@ class CreateServiciosTable extends Migration
             $table->boolean('confirmado')->default(false);
             $table->string('estado')->default('Pendiente');
             $table->string('color', 25);
-            $table->string('observaciones', 120);
+            $table->string('observaciones', 120)->nullable();
             $table->integer('solicitud_id');
             $table->timestamps();
         });

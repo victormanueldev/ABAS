@@ -32,6 +32,7 @@ Otros Ajustes
 
     AREA DE CONTABILIDAD (4 Dias)
         - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
+            - Timestamps para ruta_tecnico
         - Comisiones para inspectores (OK)
         - Filtro de comisiones por facturacion pendiente, y por facturacion pagada (OK) 
         - Reporte de clientes cerrados en el mes (Cotizacion final aprobada) (OK)
@@ -48,9 +49,9 @@ Otros Ajustes
         - CRUD de productos (OK)
         - Links del sidebar de productos
         - Reporte de entrada de productos -Compras (OK)
-        - Reporte de salida de productos (Gasto de tecnicos) <- ACTUAL
-        - Inventario General por rango de fechas y Frecuencias
-        - Inventario por tecnico (Cuanto ha gastado) por rango de fechas y frecuencias.
+        - Reporte de salida de productos (Gasto de tecnicos) (OK)
+        - Inventario General por rango de fechas y Frecuencias (OK)
+        - Inventario por tecnico (Cuanto ha gastado) (OK)
         - Revisar Consultas y detalles de interfaz
 
 

@@ -168,7 +168,9 @@ class RutaController extends Controller
                 DB::table('producto_ruta')->insert([
                     'ruta_id' => $request->idRuta,
                     'producto_id' => $producto['idProducto'],
-                    'cantidad_aplicada' => $producto['cantidadUtilizada']
+                    'cantidad_aplicada' => $producto['cantidadUtilizada'],
+                    'created_at' => $now,
+                    'updated_at' => $now
                 ]);
 
                 $productoBD = Producto::findOrFail($producto['idProducto']);
@@ -185,7 +187,9 @@ class RutaController extends Controller
                     'ruta_id' => $request->idRuta,
                     'tecnico_id' => $tecnico['id'],
                     'hora_entrada' => $tecnico['horaEntrada'],
-                    'hora_salida' => $tecnico['horaSalida']
+                    'hora_salida' => $tecnico['horaSalida'],
+                    'created_at' => $now,
+                    'updated_at' => $now
                 ]);
             }
             return response()->json('Creation Success', 200);

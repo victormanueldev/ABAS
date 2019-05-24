@@ -9,7 +9,7 @@ class OrdenServicio extends Model
     //
     public function productos()
     {
-        return $this->hasMany(Producto::class);
+        return $this->belongsToMany(Producto::class)->withPivot('cantidad_aplicada')->withTimestamps();
     }
 
     public function tecnicos()

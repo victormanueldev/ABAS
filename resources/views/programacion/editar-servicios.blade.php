@@ -164,6 +164,7 @@
                 $("#select_servicios").select2('val', tipos_seleccionados);
                 $("#select_tecnicos2").select2('val', tecnicos_asignados);
                 $("#select_frecuencia").val(res[0].frecuencia).change();
+                $("#select_tipo_servicio").val(res[0].tipo).change();
                 //Operacion para convertir los minutos a horas
                 var hours = Math.floor((res[0].duracion)/60);
                 var minutes = (res[0].duracion % 60);

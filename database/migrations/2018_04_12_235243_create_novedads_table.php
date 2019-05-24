@@ -20,6 +20,7 @@ class CreateNovedadsTable extends Migration
             $table->integer('user2_id')->nullable();
             $table->string('prioridad')->default('Normal');
             $table->integer('user_id');
+            $table->string('tipo')->default('Novedad');
             $table->integer('area_id');
             $table->integer('cliente_id')->nullable();
             $table->integer('sede_id')->nullable();

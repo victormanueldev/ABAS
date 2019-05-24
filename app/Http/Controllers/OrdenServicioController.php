@@ -87,7 +87,9 @@ class OrdenServicioController extends Controller
                         'orden_servicio_id' => $idOrden,
                         'tecnico_id' => $tecnico['id'],
                         'hora_entrada' => $tecnico['horaEntrada'],
-                        'hora_salida' => $tecnico['horaSalida']
+                        'hora_salida' => $tecnico['horaSalida'],
+                        'created_at' => $now->toDateTimeString(),
+                        'updated_at' => $now->toDateTimeString()
                     ]);
                 }
 

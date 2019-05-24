@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="wrapper wrapper-content" id="clientes">
-    <div class="row" id="productos">
+    <div class="row">
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -53,6 +53,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" id="productos">
 
     </div>
 </div>
@@ -75,6 +77,7 @@
         });
 
         $("#filter-dates").click(function () {
+            $("#productos").empty()
             $.get(`/gasto/productos/${moment(`${$("#date-start").val()} 00:00:00`, 'MM/DD/YYYY HH:mm:ss').format("YYYY-MM-DD HH:mm:ss")}/${moment(`${$("#date-end").val()} 23:59:59`, 'MM/DD/YYYY HH:mm:ss').format("YYYY-MM-DD HH:mm:ss")}`)
                 .then(res => {
                     var productosStock = []
@@ -113,8 +116,10 @@
                                         <span class="label label-primary pull-right">
                                             <a href="/detalle/producto/${producto.id}/${moment(`${$("#date-start").val()} 00:00:00`, 'MM/DD/YYYY HH:mm:ss').format("YYYY-MM-DD HH:mm:ss")}/${moment(`${$("#date-end").val()} 23:59:59`, 'MM/DD/YYYY HH:mm:ss').format("YYYY-MM-DD HH:mm:ss")}" style="color: white">Ver detalle</a> 
                                             <i class="fa fa-external-link"></i></span>
-                                        <h3 style="margin: 0">${producto.nombre}</h3>
-                                        <span>${producto.tipo}</span>
+                                        <h3 style="margin: 0;">${producto.nombre}</h3>
+                                        <span >${producto.tipo}</span>
+                                        ${parseFloat(producto.totalStock) <= 0 ? '<em class="badge badge-warning" style="display: inline;font-size: 9px;padding: 2px 10px;position: relative;bottom: 2px;margin-left: 13px;">Agotado <i class="fa fa-warning"></i></em>' : ''}
+                                        
                                     </div>
                                     <div class="ibox-content">
 

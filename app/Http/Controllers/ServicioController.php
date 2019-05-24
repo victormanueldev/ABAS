@@ -126,44 +126,45 @@ class ServicioController extends Controller
                 $servicio->tipo = $request->tipo_servicio;
                 $servicio->color = $color_servicio;
                 $servicio->observaciones = $request->observaciones;
-                if($request->tipo_servicio == 'Neutro' || $request->tipo_servicio == 'Mensajeria'){
-                    $servicio->hora_inicio = "00:00:00";
-                    $servicio->save();
-                    return response()->json(["Servicio Guardado con Exito"], 200);
-                }else if($request->tipo_servicio == 'Refuerzo'){
-                    $servicio->frecuencia = 0;
-                    $servicio->frecuencia_str = 'unica';
-                    $servicio->hora_inicio = $request->hora_inicio;
-                    $servicio->duracion = $request->duracion;
-                    $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
-                    $servicio->fecha_fin = $dt_fin->toDateString();
-                    $servicio->hora_fin = $request->hora_fin; 
-                    $servicio->save();
+                // if($request->tipo_servicio == 'Neutro' || $request->tipo_servicio == 'Mensajeria' || $request->tipo_servicio == 'Refuerzo'){
+                //     $servicio->frecuencia = $request->frecuencia;
+                //     $servicio->frecuencia_str = $request->opcionFrecuencia;
+                //     $servicio->hora_inicio = $request->hora_inicio;
+                //     $servicio->duracion = $request->duracion;
+                //     $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
+                //     $servicio->fecha_fin = $dt_fin->toDateString();
+                //     $servicio->hora_fin = $request->hora_fin; 
+                //     $servicio->save();
 
-                     //Obtiene el ultimo servicio agendado
-                    $max_id = DB::table('servicios')->max('id');
-                    $serie = "S".$max_id;
-                    //Actualizar el registro creado con el numero de serie S+$max_id
-                    DB::table('servicios')->where('id', $max_id)->update(['serie' => $serie]);
-                    //Crea el registro en la table pivot (servicio_tecnico) del actual servicio agendado
-                    foreach ($request->id_tecnicos as $index => $value) {
-                        DB::table('servicio_tecnico')->insert([
-                            'servicio_id' => $max_id,
-                            'tecnico_id' => $value
-                        ]);
-                    }
-                    //Crea el registro en la table pivot (servicio_tipo) del actual servicio agendado
-                    $now = Carbon::now();
-                    foreach ($request->tipos as $index => $value) {
-                        DB::table('servicio_tipo_servicio')->insert([
-                            'servicio_id' => $max_id,
-                            'tipo_servicio_id' => $value,
-                            'created_at' => $now
-                        ]);
-                    }
+                //      //Obtiene el ultimo servicio agendado
+                //     $max_id = DB::table('servicios')->max('id');
+                //     $serie = "S".$max_id;
+                //     //Actualizar el registro creado con el numero de serie S+$max_id
+                //     DB::table('servicios')->where('id', $max_id)->update(['serie' => $serie]);
+                //     if(!empty($reques->id_tecnicos)){
+                //         //Crea el registro en la table pivot (servicio_tecnico) del actual servicio agendado
+                //         foreach ($request->id_tecnicos as $index => $value) {
+                //             DB::table('servicio_tecnico')->insert([
+                //                 'servicio_id' => $max_id,
+                //                 'tecnico_id' => $value
+                //             ]);
+                //         }
+                //     }
+                //     if(!empty($reques->tipos)){
+                //         //Crea el registro en la table pivot (servicio_tipo) del actual servicio agendado
+                //         $now = Carbon::now();
+                //         foreach ($request->tipos as $index => $value) {
+                //             DB::table('servicio_tipo_servicio')->insert([
+                //                 'servicio_id' => $max_id,
+                //                 'tipo_servicio_id' => $value,
+                //                 'created_at' => $now
+                //             ]);
+                //         }
+                //     }
 
-                    return response()->json(["Servicio Guardado con Exito"], 200);
-                }
+                //     return response()->json(["Servicio Guardado con Exito"], 200);
+                // }
+
                 $servicio->frecuencia = $request->frecuencia;
                 $servicio->frecuencia_str = $request->opcionFrecuencia;
                 $servicio->hora_inicio = $request->hora_inicio;
@@ -178,21 +179,31 @@ class ServicioController extends Controller
                 $serie = "S".$max_id;
                 //Actualizar el registro creado con el numero de serie S+$max_id
                 DB::table('servicios')->where('id', $max_id)->update(['serie' => $serie]);
-                //Crea el registro en la table pivot (servicio_tecnico) del actual servicio agendado
-                foreach ($request->id_tecnicos as $index => $value) {
-                    DB::table('servicio_tecnico')->insert([
-                        'servicio_id' => $max_id,
-                        'tecnico_id' => $value
-                    ]);
+
+                if($request->id_tecnicos != 'sin tecnicos'){
+                    //Crea el registro en la table pivot (servicio_tecnico) del actual servicio agendado
+                    foreach ($request->id_tecnicos as $index => $value) {
+                        DB::table('servicio_tecnico')->insert([
+                            'servicio_id' => $max_id,
+                            'tecnico_id' => $value
+                        ]);
+                    }
                 }
-                //Crea el registro en la table pivot (servicio_tipo) del actual servicio agendado
-                $now = Carbon::now();
-                foreach ($request->tipos as $index => $value) {
-                    DB::table('servicio_tipo_servicio')->insert([
-                        'servicio_id' => $max_id,
-                        'tipo_servicio_id' => $value,
-                        'created_at' => $now
-                    ]);
+                
+                if($request->tipos != 'sin servicios'){
+                    //Crea el registro en la table pivot (servicio_tipo) del actual servicio agendado
+                    $now = Carbon::now();
+                    foreach ($request->tipos as $index => $value) {
+                        DB::table('servicio_tipo_servicio')->insert([
+                            'servicio_id' => $max_id,
+                            'tipo_servicio_id' => $value,
+                            'created_at' => $now
+                        ]);
+                    }
+                }
+
+                if($request->frecuenciaUnica == 'unico'){
+                    return response()->json(["Servicio Guardado con Exito"], 200);
                 }
 
                 $index = 0;
@@ -227,22 +238,25 @@ class ServicioController extends Controller
                                 'hora_fin' => $request->hora_fin
                             ]);
                     
-                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
-                            foreach ($request->id_tecnicos as $index => $value) {
-                                DB::table('servicio_tecnico')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tecnico_id' => $value
-                                ]);
+                            if($request->id_tecnicos != 'sin tecnicos'){
+                                //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                                foreach ($request->id_tecnicos as $index => $value) {
+                                    DB::table('servicio_tecnico')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tecnico_id' => $value
+                                    ]);
+                                }
                             }
-
-                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
-                            $now = Carbon::now();
-                            foreach ($request->tipos as $index => $value) {
-                                DB::table('servicio_tipo_servicio')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tipo_servicio_id' => $value,
-                                    'created_at' => $now->toDateTimeString()
-                                ]);
+                            if($request->tipos != 'sin servicios'){
+                                //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                                $now = Carbon::now();
+                                foreach ($request->tipos as $index => $value) {
+                                    DB::table('servicio_tipo_servicio')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tipo_servicio_id' => $value,
+                                        'created_at' => $now->toDateTimeString()
+                                    ]);
+                                }
                             }
                             $dt_ini->addMonths($request->frecuencia);
                         }elseif($request->opcionFrecuencia == 'semanas'){
@@ -268,21 +282,26 @@ class ServicioController extends Controller
                                 'hora_fin' => $request->hora_fin
                             ]);
                     
-                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
-                            foreach ($request->id_tecnicos as $index => $value) {
-                                DB::table('servicio_tecnico')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tecnico_id' => $value
-                                ]);
+                            if($request->id_tecnicos != 'sin tecnicos'){
+                                //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                                foreach ($request->id_tecnicos as $index => $value) {
+                                    DB::table('servicio_tecnico')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tecnico_id' => $value
+                                    ]);
+                                }
                             }
-                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
-                            $now = Carbon::now();
-                            foreach ($request->tipos as $index => $value) {
-                                DB::table('servicio_tipo_servicio')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tipo_servicio_id' => $value,
-                                    'created_at' => $now->toDateTimeString()
-                                ]);
+
+                            if($request->tipos != 'sin servicios'){
+                                //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                                $now = Carbon::now();
+                                foreach ($request->tipos as $index => $value) {
+                                    DB::table('servicio_tipo_servicio')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tipo_servicio_id' => $value,
+                                        'created_at' => $now->toDateTimeString()
+                                    ]);
+                                }
                             }
                            $dt_ini->addWeeks($request->frecuencia);
                         }elseif($request->opcionFrecuencia == "anios"){
@@ -307,22 +326,27 @@ class ServicioController extends Controller
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
                             ]);
-                    
-                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
-                            foreach ($request->id_tecnicos as $index => $value) {
-                                DB::table('servicio_tecnico')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tecnico_id' => $value
-                                ]);
+
+                            if($request->id_tecnicos != 'sin tecnicos'){
+                                //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                                foreach ($request->id_tecnicos as $index => $value) {
+                                    DB::table('servicio_tecnico')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tecnico_id' => $value
+                                    ]);
+                                }
                             }
-                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
-                            $now = Carbon::now();
-                            foreach ($request->tipos as $index => $value) {
-                                DB::table('servicio_tipo_servicio')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tipo_servicio_id' => $value,
-                                    'created_at' => $now->toDateTimeString()
-                                ]);
+
+                            if($request->tipos != 'sin servicios'){
+                                //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                                $now = Carbon::now();
+                                foreach ($request->tipos as $index => $value) {
+                                    DB::table('servicio_tipo_servicio')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tipo_servicio_id' => $value,
+                                        'created_at' => $now->toDateTimeString()
+                                    ]);
+                                }
                             }
                             $dt_ini->addYears($request->frecuencia);
 
@@ -346,22 +370,26 @@ class ServicioController extends Controller
                                 'fecha_fin' => $nueva_fecha,
                                 'hora_fin' => $request->hora_fin
                             ]);
-                    
-                            //Insertar los registros en la tabla pivot (Servicio_tecnico)
-                            foreach ($request->id_tecnicos as $index => $value) {
-                                DB::table('servicio_tecnico')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tecnico_id' => $value
-                                ]);
+                            if($request->id_tecnicos != 'sin tecnicos'){
+                                //Insertar los registros en la tabla pivot (Servicio_tecnico)
+                                foreach ($request->id_tecnicos as $index => $value) {
+                                    DB::table('servicio_tecnico')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tecnico_id' => $value
+                                    ]);
+                                }
                             }
-                            //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
-                            $now = Carbon::now();
-                            foreach ($request->tipos as $index => $value) {
-                                DB::table('servicio_tipo_servicio')->insert([
-                                    'servicio_id' => $id_servicio,
-                                    'tipo_servicio_id' => $value,
-                                    'created_at' => $now->toDateTimeString()
-                                ]);
+
+                            if($request->tipos != 'sin servicios'){
+                                //Insertar los registros en la tabla pivot (Servicio_tipo_servicio)
+                                $now = Carbon::now();
+                                foreach ($request->tipos as $index => $value) {
+                                    DB::table('servicio_tipo_servicio')->insert([
+                                        'servicio_id' => $id_servicio,
+                                        'tipo_servicio_id' => $value,
+                                        'created_at' => $now->toDateTimeString()
+                                    ]);
+                                }
                             }
                             $dt_ini->addDays($request->frecuencia);
                         }

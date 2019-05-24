@@ -54,7 +54,7 @@ class CompraController extends Controller
             $compra->save();
 
             $producto = Producto::findOrFail($request->idProductoSeleccionado);
-            $producto->total_unidades = $producto->total_unidades + $request->cantidadProducto;
+            $producto->total_unidades = $producto->total_unidades <= 0 ? $request->cantidadProducto : $request->cantidadProducto + $request->cantidadProducto;
             $producto->valor_unidad = $request->valorUnidad;
             $producto->costo_total = $producto->costo_total + $request->costoTotal;
             $producto->save();

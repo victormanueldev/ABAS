@@ -1,6 +1,4 @@
 <?php
-use ABAS\User;
-use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -148,10 +146,14 @@ Route::resource('ordenes', 'OrdenServicioController');
 //Productos
 Route::resource('productos', 'ProductoController', [
     'except' => 'productsOut',
-    'except' => 'productSpend'
+    'except' => 'productSpent',
+    'except' => 'productSpentOne',
+    'except' => 'productSpentByTecnician'
 ]);
 Route::get('salida/productos', 'ProductoController@productsOut');
-Route::get('gasto/productos/{dateIni}/{dateEnd}', 'ProductoController@productSpend');
+Route::get('gasto/productos/{dateIni}/{dateEnd}', 'ProductoController@productSpent');
+Route::get('detalle/producto/{idProducto}/{dateIni}/{dateEnd}', 'ProductoController@productSpentOne');
+Route::get('gasto/tecnico/{id}', 'ProductoController@productSpentByTecnician');
 
 //Inspecciones
 Route::resource('inspeccion', 'InspeccionController', [
@@ -175,3 +177,7 @@ Route::get('documents/show/{idCliente}','DocumentoController@showByClient');
 
 //Compras
 Route::resource('compras','CompraController');
+
+//Ganancias
+Route::get('ganancias/totales', 'GananciaController@earingsView');
+Route::get('reporte/ganancias/{dateIni}/{dateFin}', 'GananciaController@earingsAndSpend');

@@ -282,7 +282,7 @@
                                     data-dismiss="modal">Cancelar</button>
                                 <button id="create-services" type="submit" class="btn btn-primary">Crear servicios</button> {{-- No se si este
                                 boton de guardar sea necesario. --}}
-                                {{-- <button id="btn-print" type="button" class="btn btn-primary">Guardar e imprimir</button> --}}
+                                <button id="btn-unique" type="button" class="btn btn-success">Guardar servicio único</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -537,6 +537,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
                                 <button id="edit-neutral-service" class="btn btn-primary">Editar</button>
+                                <button id="delete-neutral-service" class="btn btn-danger">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -1448,9 +1449,7 @@
             addOptionsAtSelects('frecuencia', 'personalizada');
         })
 
-        //Evento Submit del modal de crear Servicio
-        $('#form-calendario').submit(event => {
-            event.preventDefault();
+        function saveService(unique){
             if($("#select_tipo_servicio").val() == '0'){
                 swal('Información','Selecciona un tipo de servicio.', 'info')
                 return 
@@ -1459,6 +1458,11 @@
                 swal('Información','Número de horas o minutos inválido.', 'info')
                 return 
             }
+            if($("#indice-frecuencia").val() == '' || $("#opcion-frecuencia").val() == ''){
+                swal('Información','Selecciona una frecuencia válida.', 'info')
+                return 
+            }
+
             //Declaracion de Variables locales de Servicio
             var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
             var frecuencia;
@@ -1474,7 +1478,7 @@
             $("#select_servicios").val().forEach((value, index) => {
                 tipos_servicio[index] = value
             });
-            console.log(tecnicos);
+
             //Prueba de fechas y horas
             console.log($("#hora_inicio").val());//email, start1.format('YYYY-MM-DD HH:mm'));
             crsfToken = document.getElementsByName("_token")[0].value;
@@ -1482,21 +1486,22 @@
             var end_service = start_service.add(duracion_servicio, 'minutes');
             //var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
             let dataToSend = {
-                tipos: tipos_servicio,
+                tipos: tipos_servicio.length != 0 ? tipos_servicio : 'sin servicios',
                 frecuencia: frecuencia,
                 tipo_servicio: tipoServicio,
                 start: start_event,
                 hora_inicio: moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA').format("HH:mm"),
                 hora_fin: end_service.format("HH:mm"),
                 duracion: duracion_servicio,
-                id_tecnicos: tecnicos,
+                id_tecnicos: tecnicos.length != 0 ? tecnicos : 'sin tecnicos',
                 id_solicitud: id_solicitud,
                 opcionFrecuencia: '',
                 diaOrdinal: '',
                 nombreDia: '',
                 dayOfWeek: '',
                 diaDelMes: '',
-                observaciones: observaciones
+                observaciones: observaciones,
+                frecuenciaUnica: unique
             };
             if ($("#opcion-frecuencia").val() == 'semanas') {
                 dataToSend.opcionFrecuencia = "semanas";
@@ -1516,6 +1521,13 @@
                 dataToSend.opcionFrecuencia = "dias";
             } else {
                 dataToSend.opcionFrecuencia = "anios";
+            }
+
+            if($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() == 'Refuerzo'){
+                if(dataToSend.id_tecnicos == 'sin tecnicos' || dataToSend.tipos == 'sin servicios'){
+                    swal('Información','Selecciona al menos un técnico y servicio.', 'info')
+                    return 
+                }
             }
             //Alert de confirmacion
             swal({
@@ -1538,17 +1550,6 @@
                         $.ajax({
                             url: '/servicios',//URL del servicio
                             data: dataToSend,
-                            //Datos que enviará
-                            /*{
-                                tipos: tipos_servicio,
-                                frecuencia: frecuencia,
-                                tipo_servicio: tipoServicio,
-                                start: start_event,
-                                hora_inicio: horaInicioFormat,
-                                duracion: duracion_servicio,
-                                id_tecnicos: tecnicos,
-                                id_solicitud: id_solicitud
-                            },*/
                             type: "POST",//Método de envío
                             headers: {
                                 "Content-Type": 'application/x-www-form-urlencoded',
@@ -1569,9 +1570,20 @@
                             .catch(error => {
                                 swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios', "error")
                             })
+                        console.log(dataToSend)
                     }
                 })
+        }
+
+        //Evento Submit del modal de crear Servicio
+        $('#form-calendario').submit(event => {
+            event.preventDefault();
+            saveService("duplicado");
         });
+
+        $("#btn-unique").click(function(){
+            saveService("unico");
+        })
 
         //Evento click del boton de imprimir Modal (Crear Servicio)
 
@@ -1912,6 +1924,18 @@
             });
     }
 
+    $("#delete-neutral-service").click(e => {
+        e.preventDefault()
+        idEventVal = infoServiceSelected.id
+        $("#neutral-service").modal('hide')
+        .on('hidden.bs.modal', (e) => {
+            $('#modal-delete-options').modal('show');    //Muestra el nuevo modal
+
+            $(this).off('hidden.bs.modal');
+        })
+        
+    })
+
     /**
     * Evento click del boton para el envio del formulario
     * con las opciones de eliminacion de servicios (Radio Inputs)
@@ -2117,13 +2141,13 @@
     $("#select_tipo_servicio").change(event => {
         switch (event.target.value) {
             case 'Neutro':
-                disableInputs(1);
+                disableInputs(0);
                 break;
             case "Mensajeria":
                 disableInputs(1);
                 break;
             case "Refuerzo":
-                disableInputs(2);
+                disableInputs(0);
                 break;
             default:
                 disableInputs(0);
@@ -2132,7 +2156,7 @@
     });
 
     $("#edit-neutral-service").click(e => {
-        window.location.href = `/neutral/edit/${infoServiceSelected.id}`;
+        window.location.href = `/servicios/${infoServiceSelected.id}`;
     })
 
     //Metodo para cancelar un servicio

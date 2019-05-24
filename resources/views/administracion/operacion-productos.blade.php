@@ -521,7 +521,10 @@
                     }
                 },
                 {
-                    data: 'total_unidades'
+                    data: 'total_unidades',
+                    render: (totalUnidades) => {
+                        return parseFloat(totalUnidades) <= 0 ? `${totalUnidades} <i class="fa fa-warning text-warning" ></i>` : totalUnidades
+                    }
                 },
                 {
                     data: 'valor_unidad',

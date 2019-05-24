@@ -26,4 +26,9 @@ class Ruta extends Model
     {
         return $this->belongsToMany(Tecnico::class);
     }
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class)->withPivot('cantidad_aplicada')->withTimestamps();
+    }
 }

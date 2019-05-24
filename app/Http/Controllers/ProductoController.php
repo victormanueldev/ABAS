@@ -3,6 +3,7 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Producto;
+use ABAS\Tecnico;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
@@ -136,7 +137,7 @@ class ProductoController extends Controller
         return view('administracion.salida-productos');
     }
 
-    public function productSpend($dateIni, $dateEnd)
+    public function productSpent($dateIni, $dateEnd)
     {
         $producto = Producto::with([
             'ordenes' => function($orden) use($dateIni, $dateEnd){
@@ -153,5 +154,49 @@ class ProductoController extends Controller
             }])
             ->get();
         return $producto;
+    }
+
+    public function productSpentOne(Request $request, $id, $dateIni, $dateEnd)
+    {
+        if($request->ajax()){
+            $producto = Producto::with([
+                'ordenes' => function($orden) use($dateIni, $dateEnd){
+                    //Usar el nombre de la tabla
+                    $orden->whereBetween('orden_servicios.created_at', [$dateIni, $dateEnd]);
+                },
+                'ordenes.tecnicos' => function($query){
+                },
+                'rutas' => function($ruta) use($dateIni, $dateEnd){
+                    //Usar el nombre de la tabla
+                    $ruta->whereBetween('rutas.created_at', [$dateIni, $dateEnd]);
+                },
+                'rutas.tecnicos' => function($query){
+                }])
+                ->where('id', $id)
+                ->get();
+            return $producto;
+        }else{
+            $producto = Producto::select('id','nombre_comercial')->where('id', $id)->get();
+            return view('administracion.detalle-salida-productos', compact('producto'));
+        }
+
+    }
+
+    public function productSpentByTecnician(Request $request,$idTecnico)
+    {
+        if($request->ajax()){
+            if($idTecnico == 'all'){
+                $tecnico = Tecnico  ::with('ordenes.productos', 'rutas.productos')
+                                    ->get();
+                return $tecnico;
+            }else{
+                $tecnico = Tecnico  ::with('ordenes.productos', 'rutas.productos')
+                                    ->where('id', $idTecnico)
+                                    ->get();
+                return $tecnico;
+            }
+        }else{
+            return view('administracion.gasto-tecnicos');
+        }
     }
 }
