@@ -44,28 +44,31 @@
         <nav class="navbar-default  navbar-static-side" role="navigation" style="position: fixed">
             <div class="sidebar-collapse">
 
-                <ul class="nav metismenu" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
-                                    style="width: 50px;" />
-                            </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{
-                                            Auth::user()->nombres}}</strong>
-                                    </span> <span class="text-muted text-xs block">{{
-                                        Auth::user()->cargo->descripcion}} <b class="caret"></b></span> </span> </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Perfil</a></li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">Cerrar Sesión</a></li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">
-                            ABAS
-                        </div>
-                    </li>
+                <ul class="nav metismenu">
+                        <li class="nav-header">
+                                <div class="dropdown profile-element"> <span>
+                                        <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
+                                            style="width: 50px;" />
+                                    </span>
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{
+                                                    Auth::user()->nombres}}</strong>
+                                            </span> <span class="text-muted text-xs block">{{
+                                                Auth::user()->cargo->descripcion}} <b class="caret"></b></span> </span> </a>
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                        <li><a href="profile.html">Perfil</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="login.html">Cerrar Sesión</a></li>
+                                    </ul>
+                                </div>
+                                <div class="logo-element">
+                                    ABAS
+                                </div>
+                            </li>
+                </ul>
 
+                <ul class="nav metismenu2" id="side-menu">
+                    
                     <li id="m-inicio">
                         <a href="/home" style="background-color: #5cae27;color: white;" id="a-inicio"><i class="fa fa-th-large"></i>
                             <span class="nav-label">Inicio</span></a>
@@ -82,9 +85,9 @@
                         </ul>
                     </li>
 
-                    <li id="m-cronograma">
-                        <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma"><i
-                                class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
+                    <li id="m-cronograma-eventos">
+                        <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma-eventos"><i
+                                class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
                     </li>
 
                     <li id="m-documentacion">
@@ -93,14 +96,51 @@
 
                         <ul class="nav nav-second-level collapse" id="ml2-documentacion">
 
-                            <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}"
-                                    style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
-                                        de Solicitud</span></a></li>
                             <li id="ml2-formato-inspeccion" style="margin-bottom: 10px;"><a href="/inspeccion/create"
                                     style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
                                         de Inspección</span></a></li>
+                            <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}"
+                                    style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
+                                        de Solicitud</span></a></li>
                         </ul>
                     </li>
+
+                    <li id="m-cronograma">
+                            <a href="{{route('servicios.create')}}" onclick="window.location.href='/servicios/create'"
+                                style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i>
+                                <span class="nav-label">Calendario</span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
+                                <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;">
+                                    @foreach (ABAS\Tecnico::all() as $tecnico)
+                                    @if($tecnico->estado == 'activo')
+                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                        <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked"
+                                            value="{{$tecnico->id}}">
+                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                </li>
+                                <li id="ml2-progreso-directores">
+    
+                                </li>
+                            </ul>
+                        </li>
+
+                    <li id="m-asignar-metas">
+                            <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i
+                                    class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
+                        </li>
+
+                        <li id="m-control-facturacion">
+                                <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i
+                                        class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación C</span></a>
+                            </li>
+                            <li id="m-control-facturacion-programacion">
+                                    <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion-programacion"><i
+                                            class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación P</span></a>
+                                </li>
+ 
 
                     <li id="m-metas-comerciales">
                         <a href="{{ url('/metas') }}" style="background-color: #5cae27;color: white;" id="a-metas-comerciales"><i
@@ -114,53 +154,18 @@
                         </ul>
                     </li>
                 
-                    <li id="m-asignar-metas">
-                        <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i
-                                class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
-                    </li>
+
 
                     <li id="m-listado-clientes">
                         <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i
                                 class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
                     </li>
-
-                    <li id="m-control-facturacion">
-                        <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i
-                                class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
-                    </li>
-
-                    <li id="m-cronograma">
-                        <a href="{{route('servicios.create')}}" onclick="window.location.href='/servicios/create'"
-                            style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i>
-                            <span class="nav-label">Calendario</span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
-                            <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;">
-                                @foreach (ABAS\Tecnico::all() as $tecnico)
-                                @if($tecnico->estado == 'activo')
-                                <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
-                                    <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked"
-                                        value="{{$tecnico->id}}">
-                                    <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
-                                </div>
-                                @endif
-                                @endforeach
-                            </li>
-                            <li id="ml2-progreso-directores">
-
-                            </li>
-                        </ul>
-                    </li>
-
                     <li id="m-calendario-tecnicos">
-                        <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
-                            id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios
-                                de técnicos</span></a>
-                    </li>
+                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
+                                id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios
+                                    de técnicos</span></a>
+                        </li>
 
-                    <li id="m-control-facturacion-programacion">
-                        <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion-programacion"><i
-                                class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
-                    </li>
 
 
                     <li id="m-listado-servicios">

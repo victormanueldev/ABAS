@@ -11,6 +11,9 @@ Otros Ajustes
         - Crear Inspecciones
             - Asignar campos para la info de contacto de facturacion de la BD
 
+        - Ver cliente
+            - Bug actualizar sede (valor de inputs con .class )
+
 
     AREA CALIDAD (2 Dias)
         - Clasificar las novedades en (PQRS y sacar informe)

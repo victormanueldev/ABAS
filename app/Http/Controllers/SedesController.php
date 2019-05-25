@@ -127,8 +127,8 @@ class SedesController extends Controller
                 $sedes->nombre_contacto = strtoupper($request->get('nombre_contacto'));
                 $sedes->telefono_contacto = $request->get('telefono_sedes');
                 $sedes->celular_contacto = $request->get('celular_sedes');
-                $sedes->email = strtoupper($request->get('email_sedes'));
-                $sedes -> save();
+                $sedes->email_contacto = strtoupper($request->get('email_sedes'));
+                $sedes->save();
                 return response()->json('Creation Successfully', 201);
                 
             } catch (\Exception $e) {

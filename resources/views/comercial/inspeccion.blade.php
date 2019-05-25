@@ -261,9 +261,9 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono </label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Email </label>
                                         <input type="text" style="text-transform: uppercase" placeholder="Teléfono del contacto a facturar" name="contacto-telefono-factura"
-                                            id="contacto_telefono_factura" class="form-control">
+                                            id="contacto_email_factura" class="form-control">
 
                                     </div>
 
@@ -907,6 +907,9 @@
             $("#input-email").val(res[0]['email_contacto_inicial']);
             $("#input-sede-nit").val(res[0]['nit_cedula']);
             $("#nombre_usuario").val(res[0].user.nombres+" "+res[0].user.apellidos)
+            $("#contacto_name_factura").val(res[0]["nombre_contacto_facturacion"])
+            $("#contacto_email_factura").val(res[0]["email_contacto_facturacion"])
+            $("#contacto_celular_factura").val(res[0]["celular_contacto_facturacion"])
         }).then((res) => {//Peticion exitosa => status: 200
             console.log('Petición Exitosa');
         }).catch((err) => {//Peticion fallida => status: > 400

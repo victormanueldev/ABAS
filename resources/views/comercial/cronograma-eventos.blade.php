@@ -9,8 +9,8 @@
 {{-- Contenido --}}
 @section('content')
 <script>
-    document.getElementById('m-cronograma').setAttribute("class", "active");
-    document.getElementById('a-cronograma').removeAttribute("style");
+    document.getElementById('m-cronograma-eventos').setAttribute("class", "active");
+    document.getElementById('a-cronograma-eventos').removeAttribute("style");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">

@@ -371,8 +371,8 @@
                                                                                 <button style="margin-bottom: 0;" type="button"
                                                                                     id="btn-close-sedes" class="btn btn-white"
                                                                                     data-dismiss="modal">Cerrar</button>
-                                                                                <button type="button" id="btn-update-sedes"
-                                                                                    class="btn btn-primary">Guardar</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary btn-update-sedes">Guardar</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1256,7 +1256,7 @@
             outputFormat: "number"
         })
 
-        $("#btn-update-sedes").click(event => {
+        $(".btn-update-sedes").click(event => {
             let dataSedes = {
                 nombre_sedes: $("#nombre_sedes").val(),
                 direccion_sedes: $("#direccion_sedes").val(),

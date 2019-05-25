@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <script>
-        document.getElementById('m-metas-comerciales').setAttribute("class", "active");
-        document.getElementById('a-metas-comerciales').removeAttribute("style");
-        document.getElementById('ml2-metas-comerciales').setAttribute("class", "nav nav-second-level collapse in");
-        document.getElementById('ml2-progreso-inspectores').setAttribute("class", "active");
-    </script>
+    document.getElementById('m-metas-comerciales').setAttribute("class", "active");
+    document.getElementById('a-metas-comerciales').removeAttribute("style");
+    document.getElementById('ml2-metas-comerciales').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-progreso-inspectores').setAttribute("class", "active");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Metas Comerciales</h2>
@@ -100,19 +100,21 @@
                 .then((res) => {
                     let userData = [];
                     res.cotizaciones.forEach((value, index) => {
-                        if (value.id == res[index].id) {
-                            userData[index] = {
-                                id: value.id,
-                                name: res[index].nombres,
-                                lastName: res[index].apellidos,
-                                fac: parseInt(res[index].total),
-                                cotizaciones: parseInt(value.total),
-                                role: res[index].descripcion,
-                                avatar: res[index].foto,
-                                pieChart1: "pie-newc-"+index,
-                                pieChart2: "pie-repurchase-"+(index+=3),
-                                goalNewClients: 0,
-                                goalRepurchases: 0
+                        if(res[index] !== undefined){
+                            if (value.id == res[index].id) {
+                                userData[index] = {
+                                    id: value.id,
+                                    name: res[index].nombres,
+                                    lastName: res[index].apellidos,
+                                    fac: parseInt(res[index].total),
+                                    cotizaciones: parseInt(value.total),
+                                    role: res[index].descripcion,
+                                    avatar: res[index].foto,
+                                    pieChart1: "pie-newc-"+index,
+                                    pieChart2: "pie-repurchase-"+(index+=3),
+                                    goalNewClients: 0,
+                                    goalRepurchases: 0
+                                }
                             }
                         }
                     });
@@ -125,7 +127,7 @@
                         });
                         
                     });
-                    console.log(userData);
+                    console.log(userData)
                     userData.forEach((value, index) => {
                         $("#users").append(`
                         <div class="col-lg-6 col-md-6">
