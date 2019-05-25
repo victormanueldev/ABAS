@@ -4,8 +4,8 @@
 @endsection
 @section('content')
 <script>
-    document.getElementById('m-asignar-metas').setAttribute("class", "active");
-    document.getElementById('a-asignar-metas').removeAttribute("style");
+    document.getElementById('m-ver-comisiones').setAttribute("class", "active");
+    document.getElementById('a-ver-comisiones').removeAttribute("style");
 </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">

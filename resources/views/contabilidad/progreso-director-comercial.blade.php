@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <script>
-    document.getElementById('m-metas-comerciales').setAttribute("class", "active");
-    document.getElementById('a-metas-comerciales').removeAttribute("style");
-</script>
+        document.getElementById('m-metas-comerciales').setAttribute("class", "active");
+        document.getElementById('a-metas-comerciales').removeAttribute("style");
+        document.getElementById('ml2-metas-comerciales').setAttribute("class", "nav nav-second-level collapse in");
+        document.getElementById('ml2-progreso-directores').setAttribute("class", "active");
+    </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Metas Comerciales</h2>

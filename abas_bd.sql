@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 22, 2019 at 11:56 PM
+-- Generation Time: May 24, 2019 at 10:07 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.17-0ubuntu0.18.04.1
 
@@ -33,6 +33,18 @@ INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`) 
 (4, 'calidad', 'Área de Calidad', NULL, NULL),
 (5, 'serviciocliente', 'Área de Servicio al Cliente', NULL, NULL),
 (6, 'operaciones', 'Área de Operaciones', NULL, NULL);
+
+--
+-- Dumping data for table `area_novedad`
+--
+
+INSERT INTO `area_novedad` (`area_id`, `novedad_id`, `created_at`, `updated_at`) VALUES
+(1, 4, NULL, NULL),
+(2, 4, NULL, NULL),
+(3, 4, NULL, NULL),
+(4, 4, NULL, NULL),
+(5, 4, NULL, NULL),
+(6, 4, NULL, NULL);
 
 --
 -- Dumping data for table `cargos`
@@ -129,16 +141,16 @@ INSERT INTO `eventos` (`id`, `fecha_inicio`, `fecha_fin`, `dia_completo`, `color
 
 INSERT INTO `facturas` (`id`, `numero_factura`, `valor`, `estado`, `tipo`, `fecha_inicio_vigencia`, `fecha_fin_vigencia`, `fecha_pago`, `cliente_id`, `created_at`, `updated_at`) VALUES
 (1, '912878931', 500000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 1, '2019-05-01 18:38:56', '2019-05-01 18:38:56'),
-(2, '9879283', 350000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 1, '2019-05-01 18:39:08', '2019-05-01 18:39:08'),
-(3, '12312313', 422000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 1, '2019-05-01 18:39:20', '2019-05-01 18:39:20'),
+(2, '9879283', 350000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-02', 1, '2019-05-01 18:39:08', '2019-05-01 18:39:08'),
+(3, '12312313', 422000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-10', 1, '2019-05-01 18:39:20', '2019-05-01 18:39:20'),
 (4, '787867', 450000, 'Pendiente', 'individial', '2019-05-01', '2019-05-01', NULL, 1, '2019-05-01 18:39:33', '2019-05-01 18:39:33'),
-(5, '546464', 300000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 3, '2019-05-01 18:40:04', '2019-05-01 18:40:04'),
-(6, '234241114', 550000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 3, '2019-05-01 18:40:16', '2019-05-01 18:40:16'),
+(5, '546464', 300000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-06', 3, '2019-05-01 18:40:04', '2019-05-01 18:40:04'),
+(6, '234241114', 550000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-16', 3, '2019-05-01 18:40:16', '2019-05-01 18:40:16'),
 (7, '6516548', 620000, 'Pendiente', 'individial', '2019-05-01', '2019-05-01', NULL, 3, '2019-05-01 18:40:28', '2019-05-01 18:40:28'),
-(8, '876871', 250000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 3, '2019-05-01 18:40:41', '2019-05-01 18:40:41'),
+(8, '876871', 250000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-17', 3, '2019-05-01 18:40:41', '2019-05-01 18:40:41'),
 (9, '28716837', 980000, 'Pendiente', 'maestra', '2019-11-01', '2019-12-31', NULL, 1, '2019-05-01 18:41:22', '2019-05-01 18:41:22'),
-(10, '2327684', 450000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 7, '2019-05-01 20:12:56', '2019-05-01 20:12:56'),
-(11, '566666', 300000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-01', 7, '2019-05-01 20:13:10', '2019-05-01 20:13:10'),
+(10, '2327684', 450000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-20', 7, '2019-05-01 20:12:56', '2019-05-01 20:12:56'),
+(11, '566666', 300000, 'Pagado', 'individial', '2019-05-01', '2019-05-01', '2019-05-04', 7, '2019-05-01 20:13:10', '2019-05-01 20:13:10'),
 (12, '844444', 650000, 'Pendiente', 'individial', '2019-05-01', '2019-05-01', NULL, 7, '2019-05-01 20:13:22', '2019-05-01 20:13:22');
 
 --
@@ -151,13 +163,29 @@ INSERT INTO `inspeccions` (`id`, `codigo`, `nombre_usuario`, `fecha`, `frecuenci
 (3, 'FS2032', 'Victor Manuel Arenas Lopez', '2019-05-01', 'Ocasional', 'observaciones', '[{\"num_visita\":\"1\",\"duracion\":\"61\"}]', 111111, '12', '5564654', '[{\"tipo_servicio\":\"CONTROL DE PLAGAS BASICO SIN ROEDORES\",\"valor_servicio\":\"15000\",\"frecuencia_servicio\":\"Quincenal\",\"observacion_servicio\":\"asdasd\"}]', 15000, 'green', '8_dias', 0, 0, '[{\"tipo_residencia\":\"apto\",\"valor_residencia\":\"250000\",\"tiempo_estimado\":\"61\",\"observaciones_residencia\":\"obvarsoinas\"}]', 1, 1, 1, 1, 1, '1', 1, 1, '[{\"tipo_dispositivo\":\"estaciones_de_roedor\",\"cant_dispositivo\":\"1\",\"valor_sin_iva\":\"111111\",\"total_dispositivo\":\"121211\",\"observacion_dispositivo\":\"observaciones\"}]', '[{\"tipo_dispositivo\":\"identificadores_estaciones\",\"cant_dispositivo\":\"1\",\"valor_sin_iva\":\"11\",\"total_dispositivo\":\"1111\",\"observacion_dispositivo\":\"asdasd\"}]', '[{\"tipo_documento\":\"cronograma_servicios\",\"frecuencia_documento\":\"quincenal\",\"observacion_documento\":\"asdasd\"}]', 'amigo', NULL, 7, 6, '2019-05-01 20:11:04', '2019-05-01 20:11:04');
 
 --
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `type`, `notifiable_id`, `notifiable_type`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
+('03e26017-86fc-4c70-9f3d-a317f1e3b103', 'ABAS\\Notifications\\NovedadPublicada', 5, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('1aeee6ad-fea9-4042-a902-844b0b82a3a6', 'ABAS\\Notifications\\NovedadPublicada', 10, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('3547197f-9c3a-49b1-91c9-dedaefb36dce', 'ABAS\\Notifications\\NovedadPublicada', 9, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('3f315c7b-266a-468f-bf51-3c65b7755b50', 'ABAS\\Notifications\\NovedadPublicada', 7, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('57c4ee5c-ce92-4b15-abc2-8734883aba14', 'ABAS\\Notifications\\NovedadPublicada', 11, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('7296056a-7b1d-437f-b110-0d31a21b2750', 'ABAS\\Notifications\\NovedadPublicada', 8, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('776574ce-2b27-4c86-bf04-f0b6a909ffb7', 'ABAS\\Notifications\\NovedadPublicada', 2, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('7c236629-ed53-4d5d-8145-8244353c80d7', 'ABAS\\Notifications\\NovedadPublicada', 4, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43'),
+('f62037f4-d2a2-4bdf-8782-a10b48c83ca6', 'ABAS\\Notifications\\NovedadPublicada', 3, 'ABAS\\User', '{\"id\":0,\"descripcion\":\"Novedad de prueba\",\"user_id\":6,\"nombres\":\"Jhon\",\"apellidos\":\"Doe\",\"foto\":\"a10.jpg\"}', NULL, '2019-05-24 07:07:43', '2019-05-24 07:07:43');
+
+--
 -- Dumping data for table `novedads`
 --
 
-INSERT INTO `novedads` (`id`, `descripcion`, `estado`, `user2_id`, `prioridad`, `user_id`, `area_id`, `cliente_id`, `sede_id`, `comentario`, `created_at`, `updated_at`) VALUES
-(1, 'Cliente 04456 presenta plaga de ratas en la sede principal', 'publicada', NULL, 'Normal', 1, 3, NULL, NULL, 'Novedad resuleta con éxito', '2018-04-18 21:58:00', NULL),
-(2, 'La factura 00565468 no ha sido pagada', 'publicada', NULL, 'Normal', 2, 2, NULL, NULL, NULL, '2018-04-17 20:58:00', NULL),
-(3, 'Cliente No. 20316 no ha pagado el servicio', 'publicada', NULL, 'Normal', 1, 1, NULL, NULL, NULL, '2018-04-19 20:21:00', NULL);
+INSERT INTO `novedads` (`id`, `descripcion`, `estado`, `user2_id`, `prioridad`, `user_id`, `tipo`, `area_id`, `cliente_id`, `sede_id`, `comentario`, `created_at`, `updated_at`) VALUES
+(1, 'Cliente 04456 presenta plaga de ratas en la sede principal', 'publicada', NULL, 'Normal', 1, 'Novedad', 3, NULL, NULL, 'Novedad resuleta con éxito', '2018-04-18 21:58:00', NULL),
+(2, 'La factura 00565468 no ha sido pagada', 'publicada', NULL, 'Normal', 2, 'Novedad', 2, NULL, NULL, NULL, '2018-04-17 20:58:00', NULL),
+(3, 'Cliente No. 20316 no ha pagado el servicio', 'publicada', NULL, 'Normal', 1, 'Novedad', 1, NULL, NULL, NULL, '2018-04-19 20:21:00', NULL),
+(4, 'Novedad de prueba', 'resuelta', 1, 'Normal', 6, 'Novedad', 0, NULL, NULL, 'Prueba resuelta', '2019-05-24 07:07:43', '2019-05-24 07:08:32');
 
 --
 -- Dumping data for table `orden_servicios`
@@ -180,17 +208,17 @@ INSERT INTO `orden_servicio_producto` (`id`, `orden_servicio_id`, `producto_id`,
 -- Dumping data for table `orden_servicio_tecnico`
 --
 
-INSERT INTO `orden_servicio_tecnico` (`id`, `orden_servicio_id`, `tecnico_id`, `hora_entrada`, `hora_salida`) VALUES
-(1, 1, 2, '14:30:00', '14:45:00'),
-(2, 2, 1, '13:18:00', '17:25:00'),
-(3, 3, 1, '13:18:00', '17:25:00'),
-(4, 4, 1, '13:18:00', '17:25:00'),
-(5, 5, 1, '13:18:00', '17:25:00'),
-(6, 6, 1, '13:18:00', '17:25:00'),
-(7, 7, 1, '13:18:00', '17:25:00'),
-(8, 8, 1, '13:18:00', '17:25:00'),
-(9, 9, 1, '13:18:00', '17:25:00'),
-(10, 10, 1, '15:30:00', '14:30:00');
+INSERT INTO `orden_servicio_tecnico` (`id`, `orden_servicio_id`, `tecnico_id`, `hora_entrada`, `hora_salida`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '14:30:00', '14:45:00', '2019-05-22 05:00:00', NULL),
+(2, 2, 1, '13:18:00', '17:25:00', '2019-05-20 05:00:00', NULL),
+(3, 3, 1, '13:18:00', '17:25:00', '2019-05-11 05:00:00', NULL),
+(4, 4, 1, '13:18:00', '17:25:00', '2019-05-20 05:00:00', NULL),
+(5, 5, 1, '13:18:00', '17:25:00', '2019-05-03 05:00:00', NULL),
+(6, 6, 1, '13:18:00', '17:25:00', '2019-05-04 05:00:00', NULL),
+(7, 7, 1, '13:18:00', '17:25:00', '2019-05-19 05:00:00', NULL),
+(8, 8, 1, '13:18:00', '17:25:00', '2019-05-16 05:00:00', NULL),
+(9, 9, 1, '13:18:00', '17:17:00', '2019-05-13 05:00:00', NULL),
+(10, 10, 1, '15:30:00', '14:30:00', '2019-05-18 05:00:00', NULL);
 
 --
 -- Dumping data for table `productos`
@@ -250,9 +278,9 @@ INSERT INTO `rutas` (`id`, `tipo`, `codigo`, `contenido`, `solicitud_id`, `creat
 -- Dumping data for table `ruta_tecnico`
 --
 
-INSERT INTO `ruta_tecnico` (`id`, `ruta_id`, `tecnico_id`, `hora_entrada`, `hora_salida`) VALUES
-(1, 4, 1, '02:30:00', '04:30:00'),
-(2, 3, 3, '17:30:00', '19:00:00');
+INSERT INTO `ruta_tecnico` (`id`, `ruta_id`, `tecnico_id`, `hora_entrada`, `hora_salida`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, '02:30:00', '04:30:00', '2019-05-13 05:00:00', NULL),
+(2, 3, 3, '17:30:00', '19:00:00', NULL, NULL);
 
 --
 -- Dumping data for table `sedes`
@@ -553,12 +581,12 @@ INSERT INTO `tipo_servicios` (`id`, `nombre`) VALUES
 --
 
 INSERT INTO `users` (`id`, `cedula`, `nombres`, `apellidos`, `iniciales`, `telefono`, `foto`, `email`, `password`, `area_id`, `cargo_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'default-user.jpg', 'victormalsx@gmail.com', '$2y$10$ApzshZDpFrvQzf0ycAJDT.yMarzR5iXY4oMUyxZHsxl1lqDMZIWOu', 1, 1, 'Juqsv9vYnHLoJPlBZMXZo7PK8k95dmz0MQIBgHn13lYbP8ehaQl5sGNss2FO', NULL, NULL),
+(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'default-user.jpg', 'victormalsx@gmail.com', '$2y$10$ApzshZDpFrvQzf0ycAJDT.yMarzR5iXY4oMUyxZHsxl1lqDMZIWOu', 1, 1, 'zngBBXqGy44HSSrMJi4xebdLtmNS74T3eXTb4oKFpaamlIHPS1QNL0IdQ7O1', NULL, NULL),
 (2, 987654321, 'Yurani', 'Calvo Ruiz', 'YCR', '3103195394', 'a6.jpg', 'yurani@gmail.com', '$2y$10$C279jhl0s46wYyr1uuu00OOouY1B4TYiQnbXXBK48l.yhUD7mN6ue', 2, 2, 'mWJBsslloCxdenyDG2LgzFBD6UZgKRS5cIr3hm1HdXKVf8ABXjy7gcvCGOn9', NULL, NULL),
 (3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'a1.jpg', 'andres@gmail.com', '$2y$10$Du7JITRNBCrqvj/2loo8eORFsGbOXcUl/sW5tKKpGnZBS4y4Anz/m', 1, 1, NULL, NULL, NULL),
-(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, 'vRXojQwRlXu6KpDNPn80cOWY7SOHwqtBZz9O3HSdrPYPFlBCr4vDwxDHtxrG', NULL, NULL),
+(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, '2GpyNjqGR3iOdjdWIbJfXkxBfdcsMrQyaL3T9Ru0wVAymxZiMaeGXQDB6iUa', NULL, NULL),
 (5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'a9.jpg', 'jhonny@gmail.com', '$2y$10$UIDt0beHPXpkJ/pcuuuZtOoKRYoBhmqnhQgVzx2Laa8NjnbMvbSgG', 3, 4, NULL, NULL, NULL),
-(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'erH6tfAu4pqMKj4WqeMgKNVPMSVwJNWk97s3QEfZhQFNng2O4JySRAASZOxC', NULL, NULL),
+(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'K3tW4AkCUHQQ4UzqwOs4rNpa6CUpRDgijuLRcLVnGdGoQud9znSOGlDVbH90', NULL, NULL),
 (7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'a11.jpg', 'diego@gmail.com', '$2y$10$Y2xgM9E4rPRgeaOzkxtKG.8d9snUTey4.w2tuG0luPzRkxNNs9h0q', 6, 7, NULL, NULL, NULL),
 (8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '$2y$10$twKtAG0AtB5Y3RvelIJTAeUVOtQMXIbj87s/1YfeKiWh9rJv37cn2', 5, 6, 'XzyB4OweXavIfsvNyb1YaKmZcRbftxvIlZsq5r8Qam7FHlUej39zmMzJtvrj', NULL, NULL),
 (9, 99999999, 'Fernando', 'Serna', 'FS', '3177777750', 'default-user.jpg', 'fernandoserna@sanicontrol.com', '$2y$10$7L.tN71DkEjAY7bhTzcC1uIrT3ACdKBPk28dGkXphrGpecDNsKxN.', 1, 1, NULL, NULL, NULL),
@@ -572,7 +600,8 @@ INSERT INTO `users` (`id`, `cedula`, `nombres`, `apellidos`, `iniciales`, `telef
 INSERT INTO `valor_generals` (`id`, `descripcion`, `valor`, `created_at`, `updated_at`) VALUES
 (1, 'porcentaje_recompras', '3', NULL, NULL),
 (2, 'porcentaje_clientes_nuevos', '5', NULL, NULL),
-(3, 'porcentaje_clientes_contrato', '8', NULL, NULL);
+(3, 'porcentaje_clientes_contrato', '8', NULL, NULL),
+(4, 'minuto_hombre', '250', '2019-05-22 05:00:00', '2019-05-22 05:00:00');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

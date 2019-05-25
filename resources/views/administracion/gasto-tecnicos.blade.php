@@ -6,6 +6,12 @@
 @endsection
 {{-- Contenido --}}
 @section('content')
+<script>
+    document.getElementById('m-gastos').setAttribute("class", "active");
+    document.getElementById('a-gastos').removeAttribute("style");
+    document.getElementById('ml2-gastos').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-gastos-tecnicos').setAttribute("class", "active");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Cronograma</h2>

@@ -6,6 +6,12 @@
 @endsection
 
 @section('content')
+<script>
+    document.getElementById('m-productos').setAttribute("class", "active");
+    document.getElementById('a-productos').removeAttribute("style");
+    document.getElementById('ml2-productos').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-ver-compras').setAttribute("class", "active");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Registro de Técnicos</h2>

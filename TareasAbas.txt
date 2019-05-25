@@ -68,3 +68,49 @@ Otros Ajustes
     SESIONES VIP (2 Dias)
         - Visualizar informacion 
 
+
+Crear clientes <- Creado
+Ver clientes <- Creado
+Cronograma eventos <-Creado
+Documentos (inspeccion, solicitud) <- Creado
+
+Asignacion de metas <- Creado
+ver comisiones <- Creado
+listado de clientes <- Creado
+Progreso de metas inspectores, jefes <- Creado
+resumen de comisiones <- Creado
+
+control de facturacion <- Creado
+Novedades <- Creado
+
+calendario de tecnicos <- Creado
+calendario de servicios <- Creado
+listado de servicios <- Creado
+
+Registro de ordenes <- Creado
+registro de rutas <- Creado
+
+inventario de Documentos <-Creado
+registro de Novedades <- Creado
+reporte de Documentos <- Creado
+
+crear tecnicos <- Creado
+crear usuarios <- Creado
+reporte ganancias  <- Creado
+operacion productos <- Creado
+gasto de tecnicos <- Creado
+salida productos <- Creado
+ver compras <- Creado
+
+<script>
+    document.getElementById('m-inicio').setAttribute("class", "active");
+    document.getElementById('a-inicio').removeAttribute("style");
+</script>
+
+<script>
+    document.getElementById('m-clientes').setAttribute("class", "active");
+    document.getElementById('a-clientes').removeAttribute("style");
+    document.getElementById('ml2-clientes').setAttribute("class", "nav nav-second-level collapse in");
+    document.getElementById('ml2-crearEmpresa').setAttribute("class", "active");
+</script>
+

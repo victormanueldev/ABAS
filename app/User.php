@@ -26,6 +26,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $casts = [
+        'permisos' => 'arrays'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

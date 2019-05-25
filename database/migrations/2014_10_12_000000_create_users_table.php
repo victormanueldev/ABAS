@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('nombres', 45);
             $table->string('apellidos', 45);
             $table->string('iniciales', 3);
-            $table->string('telefono', 13);
+            $table->string('telefono', 13)->nullable();
             $table->string('foto');
             $table->string('email', 99)->unique();
+            $table->text('permisos');
             $table->string('password');
             $table->integer('area_id');
             $table->integer('cargo_id');

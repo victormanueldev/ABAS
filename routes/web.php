@@ -181,3 +181,6 @@ Route::resource('compras','CompraController');
 //Ganancias
 Route::get('ganancias/totales', 'GananciaController@earingsView');
 Route::get('reporte/ganancias/{dateIni}/{dateFin}', 'GananciaController@earingsAndSpend');
+
+//Usuarios
+Route::resource('users','UserController');

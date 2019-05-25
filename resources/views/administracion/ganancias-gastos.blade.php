@@ -3,8 +3,11 @@
 @section('custom-css')
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
-
 @section('content')
+<script>
+    document.getElementById('m-reporte-ganancias').setAttribute("class", "active");
+    document.getElementById('a-reporte-ganancias').removeAttribute("style");
+</script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Reporte de ganancias</h2>
