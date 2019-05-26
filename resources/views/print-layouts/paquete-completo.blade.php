@@ -13746,7 +13746,7 @@
         font-family: "Roboto";
         border-top: 30px solid #5CAE27;
         border-bottom: 20px solid #5CAE27;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
     }
 
     .wrap {
@@ -13925,7 +13925,7 @@
                             </thead>
                             <tbody>
                                 <!-- 13 SERVICIOS -->
-                                @for ($i = 0; $i < 16; $i++)                                    
+                                @for ($i = 0; $i < 23; $i++)                                    
                                   <tr style="height: 56px;">
                                       <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  date('h:i A', strtotime($tecnico->servicios[$i]->hora_inicio)) : ""}}</td>
                                       <td style="text-align: center">{{ isset($tecnico->servicios[$i]) ?  date('h:i A', strtotime($tecnico->servicios[$i]->hora_inicio)) : ""}}</td>
@@ -13971,7 +13971,7 @@
   ORDENES DE SERVICIO
   -------------------------------------------------->
   @foreach ($data["ods"] as $ods)
-  <div id="ODS V5 - CENDIS_22905" align=center x:publishsource="Excel" style="margin-bottom: 40px">
+  <div id="ODS V5 - CENDIS_22905" align=center x:publishsource="Excel" style="margin-bottom: 500px;margin-top: 500px">
 
     <table border=0 cellpadding=0 cellspacing=0 width=786 style='border-collapse:collapse;table-layout:fixed;width:591pt'>
       <col width=8 span=43 style='mso-width-source:userset;mso-width-alt:292;width:6pt'>
@@ -20189,7 +20189,7 @@
         <td class=xl135821669></td>
         <td class=xl135821669></td>
       </tr>
-      @for ($i = 0; $i < 49; $i++) <tr class=xl135921669 height=36 style='mso-height-source:userset;height:16.6pt'>
+      @for ($i = 0; $i < 45; $i++) <tr class=xl135921669 height=36 style='mso-height-source:userset;height:16.6pt'>
         <td height="36" class="xl138021669" width="176" style="height: 17.6pt;width: 114pt;padding-left: 3px;">
           @php
           if(count($rutaSaneamiento->contenido) > $i){
@@ -24510,7 +24510,7 @@
         <td class=xl135629955></td>
         <td class=xl135629955></td>
       </tr>
-      @for ($i = 0; $i < 49; $i++) <tr class=xl135829955 height=36 style='mso-height-source:userset;height:16.6pt'>
+      @for ($i = 0; $i < 45; $i++) <tr class=xl135829955 height=36 style='mso-height-source:userset;height:16.6pt'>
 
         <td height=36 class=xl137329955 width=30 style="height: 17.6pt;width: 114pt;padding: 0;">{{$i + 1}}</td>
         <td class=xl135729955 width=241 style='border-left:none;width:181pt;padding-left: 4px;'>
@@ -26739,7 +26739,7 @@
         <td class=xl135629955></td>
         <td class=xl135629955></td>
       </tr>
-      @for ($i = 0; $i < 49; $i++) <tr class=xl135829955 height=36 style='mso-height-source:userset;height:16.6pt'>
+      @for ($i = 0; $i < 45; $i++) <tr class=xl135829955 height=36 style='mso-height-source:userset;height:16.6pt'>
 
         <td height=36 class=xl137329955 width=30 style="height: 17.6pt;width: 114pt;padding: 0;">{{$i + 1}}</td>
         <td class=xl135729955 width=241 style='border-left:none;width:181pt;padding-left: 4px;'>
