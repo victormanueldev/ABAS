@@ -26,6 +26,15 @@
 <div class="wrapper wrapper-content animated fadeInRight" id="clientes">
     <div class="row">
         <div class="col-lg-12">
+            @if(count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-success" style="margin: 10px 15px;">{{$error}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    </div>
+                @endforeach
+            @else
+                @include('flash::message')
+            @endif
             <div class="ibox float-e-margins">
                 {!! Form::open(['route' => ['users.store'], 'method' => 'POST', 'id' => 'crear-usuario','enctype' =>
                 'multipart/form-data', 'files' => 'true']) !!}
@@ -76,17 +85,23 @@
 
                         <div class="form-group col-lg-4" style="margin-top: 15px;">
                             <label class="control-label">Cargo *</label>
-                            <select style="text-transform: uppercase" required name="cargo_tecnico" id="cargo_tecnico"
+                            <select style="text-transform: uppercase" required name="cargo_usuario" id="cargo_usuario"
                                 class="form-control">
                                 <option value="0" selected>Seleccione una opción</option>
+                                @foreach($cargos as $cargo)
+                                    <option value="{{$cargo->id}}">{{$cargo->descripcion}}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="form-group col-lg-4" style="margin-top: 15px;">
                             <label class="control-label">Area </label>
-                            <select style="text-transform: uppercase" disabled name="area_tecnico" id="area_tecnico"
+                            <select style="text-transform: uppercase" disabled name="area_usuario" id="area_usuario"
                                 class="form-control">
                                 <option value="0" selected>Seleccione una opción</option>
+                                @foreach($areas as $area)
+                                    <option value="{{$area->id}}">{{$area->descripcion}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-lg-12" style="margin-top: 15px;">
@@ -94,12 +109,92 @@
                             <div class="row" style="margin-top: 15px">
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" name="crear_clientes" class="i-checks" />
-                                    <span >Crear usuarios *</span>
+                                    <span >Crear Clientes </span>
                                 </div>
                                 <div class="form-group col-lg-3">
-                                        <input type="checkbox" name="crear_clientes" class="i-checks" />
-                                        <span >Crear usuarios *</span>
-                                    </div>
+                                    <input type="checkbox" name="ver_clientes" class="i-checks" />
+                                    <span >Ver Clientes </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="crear_docs" class="i-checks" />
+                                    <span >Crear Inspecciones/Solicitudes </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="asignar_metas" class="i-checks" />
+                                    <span >Asignación de metas </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="ver_progresos" class="i-checks" />
+                                    <span >Ver progresos comerciales </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="ver_comisiones" class="i-checks" />
+                                    <span >Ver Comisiones </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="resumen_comisiones" class="i-checks" />
+                                    <span >Ver Resumen de Comisiones </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="clientes_cerrados" class="i-checks" />
+                                    <span >Listado de  clientes cerrados </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="asignar_facturas" class="i-checks" />
+                                    <span >Asignación de facturas </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="control_pagos" class="i-checks" />
+                                    <span >Control de pagos </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="agendar_servicios" class="i-checks" />
+                                    <span >Agendamiento de servicios </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="horarios_tecnicos" class="i-checks" />
+                                    <span >Horarios de técnicos </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="listado_servicios" class="i-checks" />
+                                    <span >Listado de servicios </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="recepcion_docs" class="i-checks" />
+                                    <span >Recepción de órdenes </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="inventario_docs" class="i-checks" />
+                                    <span >Inventario de documentos </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="reporte_docs" class="i-checks" />
+                                    <span >Reporte de documentos </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="crear_novedades" class="i-checks" />
+                                    <span >Registro de novedades </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="crear_tecnicos" class="i-checks" />
+                                    <span >Crear técnicos </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="crear_usuarios" class="i-checks" />
+                                    <span >Crear usuarios </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="reporte_ganancias" class="i-checks" />
+                                    <span >Reporte de ganancias </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="gestion_productos" class="i-checks" />
+                                    <span >Gestión de productos </span>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input type="checkbox" name="gastos" class="i-checks" />
+                                    <span >Gastos de técnicos/productos </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,6 +219,32 @@
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green'
         });
+
+        $("#cargo_usuario").change(e => {
+            switch (e.target.value) {
+                case '1':
+                    $("#area_usuario").val('1').change()
+                    break
+                case '2':
+                    $("#area_usuario").val('2').change()
+                    break
+                case '3':
+                    $("#area_usuario").val('3').change()
+                    break
+                case '4':
+                    $("#area_usuario").val('1').change()
+                    break
+                case '5':
+                    $("#area_usuario").val('4').change()
+                    break
+                case '6':
+                    $("#area_usuario").val('5').change()
+                    break
+                default:
+                    $("#area_usuario").val('6').change()
+                    break
+            }
+        })
     })
 </script>
 @endsection

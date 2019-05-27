@@ -105,15 +105,3 @@ gasto de tecnicos <- Creado
 salida productos <- Creado
 ver compras <- Creado
 
-<script>
-    document.getElementById('m-inicio').setAttribute("class", "active");
-    document.getElementById('a-inicio').removeAttribute("style");
-</script>
-
-<script>
-    document.getElementById('m-clientes').setAttribute("class", "active");
-    document.getElementById('a-clientes').removeAttribute("style");
-    document.getElementById('ml2-clientes').setAttribute("class", "nav nav-second-level collapse in");
-    document.getElementById('ml2-crearEmpresa').setAttribute("class", "active");
-</script>
-

@@ -4,7 +4,7 @@
       <div v-if="novedad.area_auth == novedad.area_id || novedad.area_id == 0 || novedad.id_user1 == novedad.id_auth">
         <div class="social-avatar">
           <a href="#" class="pull-left">
-            <img alt="image" :src="'/storage/'+novedad.foto_user1">
+            <img alt="image" :src="'/storage/'+novedad.foto_user1.substr(6,)">
           </a>
           <div class="media-body">
             <a
@@ -25,7 +25,7 @@
         <div v-if="novedad.estado == 'resuelta'" class="social-footer">
           <div class="social-comment">
             <a href class="pull-left">
-              <img alt="image" :src="'/storage/'+novedad.foto_user2">
+              <img alt="image" :src="'/storage/'+novedad.foto_user2.substr(6,)">
             </a>
             <div class="media-body">
               <a
@@ -45,7 +45,7 @@
         <div v-else class="social-footer">
           <div class="social-comment">
             <a href class="pull-left">
-              <img alt="image" :src="'/storage/'+novedad.foto_auth">
+              <img alt="image" :src="'/storage/'+novedad.foto_auth.substr(6,)">
             </a>
             <div class="media-body">
               <div class="form-group">

@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'permisos' => 'arrays'
+        'permisos' => 'array'
     ];
 
     /**

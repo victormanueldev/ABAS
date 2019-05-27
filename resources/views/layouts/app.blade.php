@@ -45,72 +45,87 @@
             <div class="sidebar-collapse">
 
                 <ul class="nav metismenu">
-                        <li class="nav-header">
-                                <div class="dropdown profile-element"> <span>
-                                        <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
-                                            style="width: 50px;" />
-                                    </span>
-                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{
-                                                    Auth::user()->nombres}}</strong>
-                                            </span> <span class="text-muted text-xs block">{{
-                                                Auth::user()->cargo->descripcion}} <b class="caret"></b></span> </span> </a>
-                                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                        <li><a href="profile.html">Perfil</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="login.html">Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
-                                <div class="logo-element">
-                                    ABAS
-                                </div>
-                            </li>
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                                <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
+                                    style="width: 50px;" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{
+                                            Auth::user()->nombres}}</strong>
+                                    </span> <span class="text-muted text-xs block">{{
+                                        Auth::user()->cargo->descripcion}} <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            ABAS
+                        </div>
+                    </li>
                 </ul>
 
                 <ul class="nav metismenu2" id="side-menu">
-                    
+                    <!-- Inicio -->
                     <li id="m-inicio">
                         <a href="/home" style="background-color: #5cae27;color: white;" id="a-inicio"><i class="fa fa-th-large"></i>
                             <span class="nav-label">Inicio</span></a>
                     </li>
 
-                    <li id="m-clientes">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i>
-                            <span class="nav-label">Clientes </span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-clientes">
-                            <li id="ml2-crearEmpresa"><a href="{{route('clientes.create')}}" style="color: white;">Crear
-                                    Cliente</a></li>
-                            <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
-                                    Clientes</a></li>
-                        </ul>
-                    </li>
-
+                    <!-- Cronograma de eventos -->
                     <li id="m-cronograma-eventos">
                         <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma-eventos"><i
                                 class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
                     </li>
 
-                    <li id="m-documentacion">
-                        <a href="{{ url('/documentacion') }}" style="background-color: #5cae27;color: white;" id="a-documentacion"><i
-                                class="fa fa-list-alt"></i> <span class="nav-label">Documentación</span></a>
-
-                        <ul class="nav nav-second-level collapse" id="ml2-documentacion">
-
-                            <li id="ml2-formato-inspeccion" style="margin-bottom: 10px;"><a href="/inspeccion/create"
-                                    style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
-                                        de Inspección</span></a></li>
-                            <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}"
-                                    style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
-                                        de Solicitud</span></a></li>
-                        </ul>
+                    <!-- Ver novedades -->
+                    <li id="m-novedades">
+                        <a href="{{route('novedades.show')}}" style="background-color: #5cae27;color: white;" id="a-novedades"><i
+                                class="fa fa-bullhorn"></i> <span class="nav-label">Novedades</span></a>
                     </li>
 
-                    <li id="m-cronograma">
+                    @foreach (Auth::user()->permisos as $permiso)
+                    
+                    @if($permiso["crear_clientes"] === 'true')
+                        <!-- Crear/Ver clientes -->
+                        <li id="m-clientes">
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i>
+                                <span class="nav-label">Clientes </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-clientes">
+                                <li id="ml2-crearEmpresa"><a href="{{route('clientes.create')}}" style="color: white;">Crear
+                                        Cliente</a></li>
+                                <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
+                                        Clientes</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso["crear_docs"] === 'true')
+                        <!-- Crear docs inspeccion/solicitud -->
+                        <li id="m-documentacion">
+                            <a href="{{ url('/documentacion') }}" style="background-color: #5cae27;color: white;" id="a-documentacion"><i
+                                    class="fa fa-list-alt"></i> <span class="nav-label">Documentación</span></a>
+
+                            <ul class="nav nav-second-level collapse" id="ml2-documentacion">
+
+                                <li id="ml2-formato-inspeccion" style="margin-bottom: 10px;"><a href="/inspeccion/create"
+                                        style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
+                                            de Inspección</span></a></li>
+                                <li id="ml2-solicitud-programacion" style="margin-bottom: 10px;"><a href="{{ url('solicitud') }}"
+                                        style="color: white;"><i class="fa fa-list-alt"></i><span class="nav-label sub-nav-label">Formato
+                                            de Solicitud</span></a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso["agendar_servicios"] === 'true')
+                        <!-- Cronograma de servicios -->
+                        <li id="m-cronograma">
                             <a href="{{route('servicios.create')}}" onclick="window.location.href='/servicios/create'"
                                 style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i>
                                 <span class="nav-label">Calendario</span></a>
-                            <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
-                                <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;">
+                            <ul class="nav nav-second-level collapse" id="ml2-cronograma-servicios">
+                                <li id="ml2-cronograma-tecnicos" style="margin-bottom: 10px;">
                                     @foreach (ABAS\Tecnico::all() as $tecnico)
                                     @if($tecnico->estado == 'activo')
                                     <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
@@ -121,142 +136,172 @@
                                     @endif
                                     @endforeach
                                 </li>
-                                <li id="ml2-progreso-directores">
-    
-                                </li>
                             </ul>
                         </li>
-
-                    <li id="m-asignar-metas">
+                    @endif
+                    @if($permiso['asignar_metas'] === 'true')
+                        <!-- Asignar metas comerciales -->
+                        <li id="m-asignar-metas">
                             <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i
                                     class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
                         </li>
-
+                    @endif
+                    @if($permiso['control_pagos'] === 'true')
+                        <!-- Control de pagos -->
                         <li id="m-control-facturacion">
-                                <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i
-                                        class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación C</span></a>
-                            </li>
-                            <li id="m-control-facturacion-programacion">
-                                    <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion-programacion"><i
-                                            class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación P</span></a>
-                                </li>
- 
-
-                    <li id="m-metas-comerciales">
-                        <a href="{{ url('/metas') }}" style="background-color: #5cae27;color: white;" id="a-metas-comerciales"><i
-                                class="fa fa-trophy"></i> <span class="nav-label">Metas Comerciales</span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
-                            <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;"><a href="/metas/comerciales"
-                                    style="color: white;"><i class="fa fa-users"></i><span class="nav-label sub-nav-label">Progreso
-                                        Inspectores</span></a></li>
-                            <li id="ml2-progreso-directores"><a href="/metas/director" style="color: white;"><i class="fa fa-user-circle"></i><span
-                                        class="nav-label sub-nav-label">Progreso Directores</span></a></li>
-                        </ul>
-                    </li>
-                
-
-
-                    <li id="m-listado-clientes">
-                        <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i
-                                class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
-                    </li>
-                    <li id="m-calendario-tecnicos">
+                            <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i
+                                    class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['asignar_facturas'] === 'true')
+                        <!-- Asignacion de facturas -->
+                        <li id="m-control-facturacion-programacion">
+                            <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion-programacion"><i
+                                    class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['ver_progresos'] === 'true')
+                        <!-- Ver progreso comercial -->
+                        <li id="m-metas-comerciales">
+                            <a href="{{ url('/metas') }}" style="background-color: #5cae27;color: white;" id="a-metas-comerciales"><i
+                                    class="fa fa-trophy"></i> <span class="nav-label">Metas Comerciales</span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-metas-comerciales">
+                                <li id="ml2-progreso-inspectores" style="margin-bottom: 10px;"><a href="/metas/comerciales"
+                                        style="color: white;"><i class="fa fa-users"></i><span class="nav-label sub-nav-label">Progreso
+                                            Inspectores</span></a></li>
+                                <li id="ml2-progreso-directores"><a href="/metas/director" style="color: white;"><i class="fa fa-user-circle"></i><span
+                                            class="nav-label sub-nav-label">Progreso Directores</span></a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso['clientes_cerrados'] === 'true')
+                        <!-- Listado de clientes cerrados -->
+                        <li id="m-listado-clientes">
+                            <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i
+                                    class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['horarios_tecnicos'] === 'true')
+                        <!-- Horario de tecnicos -->
+                        <li id="m-calendario-tecnicos">
                             <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
                                 id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios
                                     de técnicos</span></a>
                         </li>
-
-
-
-                    <li id="m-listado-servicios">
-                        <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
-                            id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de
-                                servicios</span></a>
-                    </li>
-
-                    <li id="m-crear-tecnicos">
-                        <a href="/tecnicos/create" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
-                            id="a-crear-tecnicos"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear
-                                técnicos</span></a>
-                    </li>
-                
-                    <li id="m-clientes-calidad">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i>
-                            <span class="nav-label">Clientes </span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-clientes">
-                            <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
-                                    Clientes</a></li>
-                        </ul>
-                    </li>
- 
-                    <li id="m-registro-novedades">
-                        <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i
-                                class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
-                    </li>
-
-                    <li id="m-reporte-documentos">
-                        <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i
-                                class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
-                    </li>
-
-                    <li id="m-recepcion">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-recepcion"><i class="fa fa-folder-open"></i>
-                            <span class="nav-label">Recepción documentos </span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-recepcion">
-                            <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de
-                                    servicio</a></li>
-                            <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
-                        </ul>
-                    </li>
-
-                    <li id="m-ver-comisiones">
-                        <a href="/comisiones/create" style="background-color: #5cae27;color: white;" id="a-ver-comisiones"><i
-                                class="fa fa-money"></i> <span class="nav-label">Ver comisiones</span></a>
-                    </li>
-
-                    <li id="m-resumen-comisiones">
-                        <a href="/all/comisiones" style="background-color: #5cae27;color: white;" id="a-resumen-comisiones"><i
-                                class="fa fa-file-text-o"></i> <span class="nav-label">Resumen comisiones</span></a>
-                    </li>
-
-                    <li id="m-inventario-documentos">
-                        <a href="/documents/create" style="background-color: #5cae27;color: white;" id="a-inventario-documentos"><i
-                                class="fa fa-clone"></i> <span class="nav-label">Inventario documentos</span></a>
-                    </li>
-
-                    <li id="m-crear-usuarios">
-                        <a href="/users/create" style="background-color: #5cae27;color: white;" id="a-crear-usuarios"><i
-                                class="fa fa-user-plus"></i> <span class="nav-label">Crear usuarios</span></a>
-                    </li>
-
-                    <li id="m-reporte-ganancias">
-                        <a href="/ganancias/totales" style="background-color: #5cae27;color: white;" id="a-reporte-ganancias"><i
-                                class="fa fa-line-chart"></i> <span class="nav-label">Reporte ganancias</span></a>
-                    </li>
-
-                    <li id="m-productos">
-                        <a href="#" style="background-color: #5cae27;color: white;" id="a-productos"><i class="fa fa-cubes"></i>
-                            <span class="nav-label">Productos </span></a>
-                        <ul class="nav nav-second-level collapse" id="ml2-productos">
-                            <li id="ml2-crear-productos"><a href="/productos/create" style="color: white;">Crear
-                                    productos</a></li>
-                            <li id="ml2-ver-compras"><a href="/compras" style="color: white;">Ver compras</a></li>
-                        </ul>
-                    </li>
-
-                    <li id="m-gastos">
+                    @endif
+                    @if($permiso['listado_servicios'] === 'true')
+                        <!-- Listado de servicios -->
+                        <li id="m-listado-servicios">
+                            <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
+                                id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de
+                                    servicios</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['crear_tecnicos'] === 'true')
+                        <!-- Crear tecnicos -->
+                        <li id="m-crear-tecnicos">
+                            <a href="/tecnicos/create" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
+                                id="a-crear-tecnicos"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear
+                                    técnicos</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['ver_clientes'] === 'true')
+                        <!-- Ver clientes -->
+                        <li id="m-clientes-calidad">
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i>
+                                <span class="nav-label">Clientes </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-clientes">
+                                <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
+                                        Clientes</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso['crear_novedades'] === 'true')
+                        <!-- Registro de novedades -->
+                        <li id="m-registro-novedades">
+                            <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i
+                                    class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['reporte_docs'] === 'true')
+                        <!-- Reporte de documentos -->
+                        <li id="m-reporte-documentos">
+                            <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i
+                                    class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['recepcion_docs'] === 'true')
+                        <!-- Recepcion de docs ordenes/rutas -->
+                        <li id="m-recepcion">
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-recepcion"><i class="fa fa-folder-open"></i>
+                                <span class="nav-label">Recepción documentos </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-recepcion">
+                                <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de
+                                        servicio</a></li>
+                                <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso['ver_comisiones'] === 'true')
+                        <!-- Ver comisiones -->
+                        <li id="m-ver-comisiones">
+                            <a href="/comisiones/create" style="background-color: #5cae27;color: white;" id="a-ver-comisiones"><i
+                                    class="fa fa-money"></i> <span class="nav-label">Ver comisiones</span></a>
+                        </li>
+                    @endif 
+                    @if($permiso['resumen_comisiones'] === 'true')
+                        <!-- Resumen de comisiones -->
+                        <li id="m-resumen-comisiones">
+                            <a href="/all/comisiones" style="background-color: #5cae27;color: white;" id="a-resumen-comisiones"><i
+                                    class="fa fa-file-text-o"></i> <span class="nav-label">Resumen comisiones</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['inventario_docs'] === 'true')
+                        <!-- Inventario de documemtns -->
+                        <li id="m-inventario-documentos">
+                            <a href="/documents/create" style="background-color: #5cae27;color: white;" id="a-inventario-documentos"><i
+                                    class="fa fa-clone"></i> <span class="nav-label">Inventario documentos</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['crear_usuarios'] === 'true')
+                        <!-- Crear usuarios -->
+                        <li id="m-crear-usuarios">
+                            <a href="/users/create" style="background-color: #5cae27;color: white;" id="a-crear-usuarios"><i
+                                    class="fa fa-user-plus"></i> <span class="nav-label">Crear usuarios</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['reporte_ganancias'] === 'true')
+                        <!-- Reporte de ganancias -->
+                        <li id="m-reporte-ganancias">
+                            <a href="/ganancias/totales" style="background-color: #5cae27;color: white;" id="a-reporte-ganancias"><i
+                                    class="fa fa-line-chart"></i> <span class="nav-label">Reporte ganancias</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['gestion_productos'] === 'true')
+                        <!-- Gestion de productos -->
+                        <li id="m-productos">
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-productos"><i class="fa fa-cubes"></i>
+                                <span class="nav-label">Productos </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-productos">
+                                <li id="ml2-crear-productos"><a href="/productos/create" style="color: white;">Crear
+                                        productos</a></li>
+                                <li id="ml2-ver-compras"><a href="/compras" style="color: white;">Ver compras</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso['gastos'] === 'true')
+                        <!-- Gastos tecnicos/productos -->
+                        <li id="m-gastos">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-gastos"><i class="fa fa-minus-square"></i>
                                 <span class="nav-label">Gastos </span></a>
                             <ul class="nav nav-second-level collapse" id="ml2-gastos">
                                 <li id="ml2-gastos-tecnicos"><a href="/gasto/tecnico/all" style="color: white;">Por técnico</a></li>
-                                <li id="ml2-gastos-productos"><a href="/salida/productos" style="color: white;">Por producto</a></li>
+                                <li id="ml2-gastos-productos"><a href="/salida/productos" style="color: white;">Por
+                                        producto</a></li>
                             </ul>
                         </li>
-
-                    <li id="m-novedades">
-                        <a href="{{route('novedades.show')}}" style="background-color: #5cae27;color: white;" id="a-novedades"><i
-                                class="fa fa-bullhorn"></i> <span class="nav-label">Novedades</span></a>
-                    </li>
+                    @endif
+                    @endforeach
                 </ul>
 
             </div>

@@ -30917,7 +30917,7 @@ var render = function() {
                   _c("img", {
                     attrs: {
                       alt: "image",
-                      src: "/storage/" + novedad.foto_user1
+                      src: "/storage/" + novedad.foto_user1.substr(6)
                     }
                   })
                 ]),
@@ -30989,7 +30989,7 @@ var render = function() {
                           _c("img", {
                             attrs: {
                               alt: "image",
-                              src: "/storage/" + novedad.foto_user2
+                              src: "/storage/" + novedad.foto_user2.substr(6)
                             }
                           })
                         ]
@@ -31038,7 +31038,7 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 alt: "image",
-                                src: "/storage/" + novedad.foto_auth
+                                src: "/storage/" + novedad.foto_auth.substr(6)
                               }
                             })
                           ]
