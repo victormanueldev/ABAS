@@ -59,16 +59,18 @@ Otros Ajustes
 
 
     AREA DE TECNICOS
-        - Realizar el calculo de horas hombre, etc 
-        - Visualizar el informe de estos formatos desde comercial
+        - Realizar el calculo de horas hombre, etc (OK)
+        - Visualizar el informe de estos formatos desde comercial (OK)
 
 
     AREA DE ADMINISTRACION 
         - Creacion de tecnicos (OK)
-        - Creacion de usuarios y asignacion de roles 
-        - Todos los modulos disponibles 
+        - Creacion de usuarios y asignacion de roles (OK)
+        - Revisar swalerts
+        - Todos los modulos disponibles (OK)
 
     SESIONES VIP (2 Dias)
+        
         - Visualizar informacion 
 
 

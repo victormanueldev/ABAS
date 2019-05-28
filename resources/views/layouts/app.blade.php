@@ -266,8 +266,12 @@
                     @if($permiso['crear_usuarios'] === 'true')
                         <!-- Crear usuarios -->
                         <li id="m-crear-usuarios">
-                            <a href="/users/create" style="background-color: #5cae27;color: white;" id="a-crear-usuarios"><i
-                                    class="fa fa-user-plus"></i> <span class="nav-label">Crear usuarios</span></a>
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-crear-usuarios"><i class="fa fa-user-plus"></i>
+                                <span class="nav-label">Usuarios </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-crear-usuarios">
+                                <li id="ml2-crear-usuarios-l"><a href="/users/create" style="color: white;">Crear usuarios</a></li>
+                                <li id="ml2-ver-usuarios-l"><a href="/users" style="color: white;">Ver/Editar usuarios</a></li>
+                            </ul>
                         </li>
                     @endif
                     @if($permiso['reporte_ganancias'] === 'true')
@@ -322,7 +326,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right" id="notificacion">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">Sanicontrol S.A. &copy; 2018</span>
+                            <span class="m-r-sm text-muted welcome-message">Sanicontrol S.A. &copy; 2019</span>
                         </li>
 
                         <notificaciones></notificaciones>
@@ -341,7 +345,7 @@
             @yield('content');
             <div class="footer">
                 <div>
-                    <strong>Copyright</strong> Sanicontrol S.A. &copy; 2018
+                    <strong>Copyright</strong> Sanicontrol S.A. &copy; 2019
                 </div>
             </div>
         </div>
