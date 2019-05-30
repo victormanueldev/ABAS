@@ -245,7 +245,7 @@
                     res.users.forEach((user, indexUser) => {
                         sumAuxNewClients = 0;
                         sumAuxRepurchases = 0;
-                        if(repurchases.length > 0){
+                        if(repurchases.length > 0 && cotizations.length > 0  ){
                             repurchases.forEach((repurchase, indexRep) => {
                                 if(user.id == repurchase.user_id){
                                     inspects[indexUser] = {
