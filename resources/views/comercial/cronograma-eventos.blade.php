@@ -623,6 +623,12 @@
                 $("#typeahead_2").val('');
                 $('#actual-client').val(event.cliente);
                 $('#actual-sede').val(event.sede);
+                $("#telefono_evento_edit").val(event.direccion)
+                $("#direccion_evento_edit").val(event.telefono)
+                $("#select_tipo_servicio_edit").val(event.title).change()
+                $("#hora_inicio_edit").val(event.start.format("hh:MM"))
+                $("#hora_fin_edit").val(event.end.format('hh:MM'))
+                $("#text-instrucciones-edit").val(event.asunto)
             }
         })
 

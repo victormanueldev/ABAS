@@ -70,7 +70,7 @@ Otros Ajustes
         - Todos los modulos disponibles (OK)
 
     SESIONES VIP (2 Dias)
-        
+        - Realizar vista de recibir documentos para los clientes 
         - Visualizar informacion 
 
 

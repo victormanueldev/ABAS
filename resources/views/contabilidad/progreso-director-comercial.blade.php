@@ -178,7 +178,7 @@
                                         <small class="m-t-sm small">${directorInfo.lastName}</small>
                                     </h2>
                                     <div class="text-center">
-                                        <img alt="image" style="margin: 24px auto 24px;" class="img-circle m-t-xs img-responsive" src="{{asset('img/${directorInfo.avatar}')}}">
+                                        <img alt="image" style="margin: 24px auto 24px;" class="img-circle m-t-xs img-responsive" src="/storage/${directorInfo.avatar.substr(6,)}">
                                         <div class="m-t-xs font-bold">${directorInfo.role}</div>
                                     </div>
                                 </div>

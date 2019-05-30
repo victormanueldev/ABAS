@@ -4,21 +4,24 @@
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
 @section('content')
-<<script>
+<script>
         document.getElementById('m-inventario-documentos').setAttribute("class", "active");
         document.getElementById('a-inventario-documentos').removeAttribute("style");
         document.getElementById('ml2-inventario-documentos').setAttribute("class", "nav nav-second-level collapse in");
-        document.getElementById('ml2-ver-inventario').setAttribute("class", "active");
+        document.getElementById('ml2-registrar-docs').setAttribute("class", "active");
     </script>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>Comisiones</h2>
+        <h2>Registro de documentos</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/home">Inicio</a>
             </li>
+            <li>
+                <a href="#">Documentos de clientes</a>
+            </li>
             <li class="active">
-                <strong>Comisiones Pendientes</strong>
+                <strong>Registro de documentos</strong>
             </li>
         </ol>
     </div>
@@ -28,7 +31,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reporte de estado de documentos</h5>
+                    <h5>Registro de documentos por cliente</h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">

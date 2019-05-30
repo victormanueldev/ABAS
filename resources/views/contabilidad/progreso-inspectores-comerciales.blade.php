@@ -136,7 +136,7 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <img alt="image" style="margin: 15px" class="img-circle img-responsive" src="{{asset('img/${value.avatar}')}}">
+                                                <img alt="image" style="margin: 15px" class="img-circle img-responsive" src="/storage/${value.avatar.substr(6,)}">
                                             </div>
                                             <div class="col-lg-12 ">
                                                 <div style="margin: 0px 15px 15px 20px;width: 100%;" class="font-bold">${value.role}</div>

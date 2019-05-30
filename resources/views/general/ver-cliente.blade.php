@@ -20,8 +20,11 @@
 </div>
 <div class="wrapper wrapper-content ">
     <div class="row">
-
-        <div class="col-lg-{{Auth::user()->area_id == "4" ? '9' : "12"}}">
+        @if(Auth::user()->area_id == "4" || Auth::user()->area_id == "6")
+            <div class="col-lg-9">
+        @else
+            <div class="col-lg-12">
+        @endif
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="row">
@@ -516,7 +519,7 @@
             </div>
         </div>
         <div class="col-lg-3" id="documentos">
-            @if (Auth::user()->area_id == '4')
+            @if (Auth::user()->area_id == '4' || Auth::user()->area_id == '6')
             <documentos></documentos>
 
             <div class="ibox">

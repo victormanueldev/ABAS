@@ -28,6 +28,7 @@ class DocumentoController extends Controller
     public function index()
     {
         //
+        return view('calidad.inventario-documentos');
     }
 
     /**
@@ -38,7 +39,7 @@ class DocumentoController extends Controller
     public function create()
     {
         //
-        return view('calidad.inventario-documentos');
+        return view('calidad.registro-documentos');
     }
 
     /**

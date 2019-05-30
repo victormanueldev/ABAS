@@ -479,7 +479,7 @@ class ServicioController extends Controller
         $servicio->hora_inicio = $request->hora_inicio;
         $dt_fin = $dt_ini->addMinutes($request->duracion);  //Suma los minutos a la hora especificada
         $servicio->fecha_fin = $dt_fin->toDateString();
-        $servicio->hora_fin = $request->hora_fin; 
+        $servicio->hora_fin = $dt_fin->toTimeString(); 
         $servicio->duracion = $request->duracion;
         //Definicion de tipo y color de servicios
         $color_servicio = '';

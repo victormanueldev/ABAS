@@ -50,7 +50,8 @@ class EventosController extends Controller
                 'cliente' => $cliente != "" ? $cliente[0]->nombre_cliente : "No definido",
                 'sede' => $sede != "" ? $sede[0]->nombre : "No definido",
                 'telefono' => $evento->telefono_evento != "" ? $evento->telefono_evento : 'No definido',
-                'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido'
+                'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido',
+                'asunto' => $evento->asunto != "" ? $evento->asunto : "Sin Observaciones"
             ]);
         }
         $data->toJson();//Convierte la colecciona a formato JSON

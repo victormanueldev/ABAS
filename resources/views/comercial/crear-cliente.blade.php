@@ -298,8 +298,7 @@
                                                         <label>Tipo</label>
                                                         <select class="form-control" name="tipo_evento">
                                                                 <option value="Llamada">LLAMADA</option>
-                                                                <option value="visita">VISITA</option>
-                                                                <option value="seguimiento">SEGUIMIENTO</option>
+                                                                <option value="Visita">VISITA</option>
                                                         </select>
                                                     </div>
                                     

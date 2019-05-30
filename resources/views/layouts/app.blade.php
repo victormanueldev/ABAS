@@ -259,8 +259,12 @@
                     @if($permiso['inventario_docs'] === 'true')
                         <!-- Inventario de documemtns -->
                         <li id="m-inventario-documentos">
-                            <a href="/documents/create" style="background-color: #5cae27;color: white;" id="a-inventario-documentos"><i
-                                    class="fa fa-clone"></i> <span class="nav-label">Inventario documentos</span></a>
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-inventario-documentos"><i class="fa fa-clone"></i>
+                                <span class="nav-label">Documentos de clientes </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-inventario-documentos">
+                                <li id="ml2-registrar-docs"><a href="/documents/create" style="color: white;">Registro documentos</a></li>
+                                <li id="ml2-ver-inventario"><a href="/documents" style="color: white;">Ver inventario</a></li>
+                            </ul>
                         </li>
                     @endif
                     @if($permiso['crear_usuarios'] === 'true')

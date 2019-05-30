@@ -355,7 +355,7 @@
                                             <div class="col-sm-5 col-xs-12" style="margin-bottom: 7px;">
                                                 <a class="btn btn-primary" id="btn-lock" ></a>
                                             </div>
-                                            <div class="col-sm-7 col-xs-12" style="margin-bottom: 7px;padding-left: 96px;"
+                                            <div class="col-sm-7 col-xs-12" style="margin-bottom: 7px;padding-left: 90px;"
                                                 id="div-opciones">
 
                                             </div>

@@ -165,6 +165,8 @@ class ClientesController extends Controller
                 $evento->asunto = $request->asunto;
                 $evento->cliente_id = $idCliente;
                 $evento->sede_id = !empty($idSede) ? $idSede : null;
+                $evento->direccion_evento = strtoupper($request->get('direccion'));
+                $evento->telefono_evento = strtoupper($request->celular_cliente);
                 $evento->user_id = Auth::user()->id;
                 $evento->save();
             }

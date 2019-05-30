@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="form-group col-md-2" style="margin-top: 15px" >
-                                <label class="control-label" style="margin-bottom: 13px;">Estado de facturación *</label>
+                                <label class="control-label" style="margin-bottom: 13px;">Estado de facturación</label>
                                 <div id="fac-state">
                                     
                                 </div>
