@@ -245,25 +245,27 @@
                     res.users.forEach((user, indexUser) => {
                         sumAuxNewClients = 0;
                         sumAuxRepurchases = 0;
-                        repurchases.forEach((repurchase, indexRep) => {
-                            if(user.id == repurchase.user_id){
-                                inspects[indexUser] = {
-                                    sumRepurchases: sumAuxRepurchases += repurchase.total_facturas,
-                                    name: user.nombres
+                        if(repurchases.length > 0){
+                            repurchases.forEach((repurchase, indexRep) => {
+                                if(user.id == repurchase.user_id){
+                                    inspects[indexUser] = {
+                                        sumRepurchases: sumAuxRepurchases += repurchase.total_facturas,
+                                        name: user.nombres
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        
 
-                        cotizations.forEach((cotization, indexCotization) => {
-                            if(user.id == cotization.user_id){
-                                inspects[indexUser].sumNewClients = sumAuxNewClients += cotization.total_cotization
-                                
-                            }
-                        })
+                            cotizations.forEach((cotization, indexCotization) => {
+                                if(user.id == cotization.user_id){
+                                    inspects[indexUser].sumNewClients = sumAuxNewClients += cotization.total_cotization
+                                    
+                                }
+                            })
 
-                        inspects[indexUser].sumInspect = inspects[indexUser].sumRepurchases + inspects[indexUser].sumNewClients
+                            inspects[indexUser].sumInspect = inspects[indexUser].sumRepurchases + inspects[indexUser].sumNewClients
 
-                        $("#content-dir-inspect").append(`                            
+                            $("#content-dir-inspect").append(`                            
                             <div class="col-lg-6">
                                 <div class="ibox">
                                     <div class="ibox-content">
@@ -280,6 +282,18 @@
                                 </div>
                             </div>
                         `);
+
+                        }else{
+                            $("#content-dir-inspect").append(`                            
+                                <div class="col-lg-6">
+                                    <div class="ibox">
+                                        <div class="ibox-content">
+                                            <h5>Total por inspector Sin recompras y/o comisinoes</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        }
                     }) 
                     
                     // console.log(cotizations)

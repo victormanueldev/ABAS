@@ -85,7 +85,7 @@
                         <a href="{{route('novedades.show')}}" style="background-color: #5cae27;color: white;" id="a-novedades"><i
                                 class="fa fa-bullhorn"></i> <span class="nav-label">Novedades</span></a>
                     </li>
-
+                    
                     @foreach (Auth::user()->permisos as $permiso)
                     
                     @if($permiso["crear_clientes"] === 'true')

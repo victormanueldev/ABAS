@@ -260,7 +260,7 @@
             picker = new jscolor(document.getElementById(`color_tecnico-${colorInputs}`))
             //Evento Change del input
             $(`#color_tecnico-${colorInputs}`).on('change', function () {
-                update(picker, colorInputs - 1)
+                updateColor(picker, colorInputs - 1)
             })
             colorInputs++;
         })
