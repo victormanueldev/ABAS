@@ -16,15 +16,6 @@ use DB;
 
 class ClientesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -99,7 +90,7 @@ class ClientesController extends Controller
                 ]);
             }
 
-            return response()->json(["id_cliente" => $idCliente, "id_sede" => $idSede], 201);
+            return response()->json(["id_cliente" => $idCliente, "id_sede" => isset($idSede) ? $idSede : '0'], 201);
         }else{
             $this->validate(request(), [
                 'nombre_cliente' => 'required'
@@ -361,6 +352,54 @@ class ClientesController extends Controller
             return response()->json($data, 200);
         }
         return view('calidad.reporte-documentos');
+    }
+
+    public function clientByNit(Request $request, $numDoc)
+    {
+        $cliente = Cliente::select('id','nombre_cliente','nit_cedula')->where('nit_cedula', $numDoc)->get();
+        if(count($cliente) > 0){
+            return response()->json($cliente[0], 200);
+        }else {
+            return response()->json(['Not found'], 404);
+        }
+        
+
+    }
+
+    public function updateLoginData(Request $request)
+    {
+        try{
+            $username = Cliente::select('id')->where('usuario', $request->username)->get();
+            if(count($username) > 0){
+                return response()->json('Este nombre de usuario ya existe.', 400);
+            } else {
+                $cliente = CLiente::findOrFail($request->cid);
+                $cliente->usuario = $request->username;
+                $cliente->password = bcrypt($request->password);
+                $cliente->save();
+            }
+
+            return response()->json("Update success", 200);
+        } catch (\Exception $e){
+            return response()->json($e, 500);
+        }
+    }
+
+    public function clientLogin(Request $request)
+    {
+        $cliente = Cliente::select('password')
+                        ->where('usuario', $request->username)
+                        ->get();
+
+        if(count($cliente) > 0){
+            if(password_verify($request->password, $cliente[0]->password)){
+                return response()->json("Logged", 200);
+            } else {
+                return response()->json('¡Contraseña incorrecta!', 400);
+            }
+        } else {
+            return response()->json('¡Credenciales Incorrectas!', 404);
+        }
     }
 
 }

@@ -66,7 +66,7 @@
 
 	// Popover template
 	var tpl = [
-		'<div class="popover clockpicker-popover">',
+		'<div class="popover clockpicker-popover" style="z-index: 2060;">',
 			'<div class="arrow"></div>',
 			'<div class="popover-title">',
 				'<span class="clockpicker-span-hours text-primary"></span>',

@@ -24,7 +24,7 @@ class CreateInspeccionsTable extends Migration
             $table->text('visitas');
             $table->integer('valor_plan_saneamiento');
             $table->string('frecuencia_visitas');
-            $table->string('observaciones_visitas');
+            $table->string('observaciones_visitas')->nullable();
             //Detalle del servicio correctivo y/o preventivo
             $table->text('detalle_servicios');
             $table->integer('total_detalle_servicios');

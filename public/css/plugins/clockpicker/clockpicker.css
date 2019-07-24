@@ -12,6 +12,7 @@
 }
 .clockpicker-align-left.popover > .arrow {
 	left: 25px;
+	z-index: 2050;
 }
 .clockpicker-align-top.popover > .arrow {
 	top: 17px;
@@ -31,6 +32,7 @@
 	font-weight: bold;
 	line-height: 30px;
 	text-align: center;
+	z-index: 2050;
 }
 .clockpicker-popover .popover-title span {
 	cursor: pointer;

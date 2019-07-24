@@ -1,18 +1,27 @@
 Otros Ajustes
     AREA COMERCIAL (1 Dia)
         - Crear Cliente         
-            - Atributo de Estado de comisiones REACTIVADO (Editar en solicitudes)
             - Revisar formulario de editar info de clientes (OK)
+            - Disminuir el tamaño del texto del placeholder o convertir en Capital Case (OK)
+            - Quitar textos redundantes placeholder (OK)
+            - Notificar a programacion solicitud es creada  (OK)
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
         - ROL DE DIRECCION COMERCIAL
-            - Asignar los permisos relacionados con metas
+            - Asignar los permisos relacionados con metas (OK)
         - Crear Inspecciones
-            - Asignar campos para la info de contacto de facturacion de la BD
-
+            - Asignar campos para la info de contacto de facturacion de la BD (OK)
+            - Diagnostico con relacion a frecuencias predefinido (OK)
+            - No. de visita automatica (OK)
+            - Valor sin IVA * cantidad = valor total (OK)
+            - Creacion de cliente con sede no obligatorio (OK)
+            - Validar creacion de clientes (OK)
         - Ver cliente
-            - Bug actualizar sede (valor de inputs con .class )
+            - Bug actualizar sede (valor de inputs con .class ) (OK)
+            - El cambio de NIT bloqueada y solo editada por ADMIN y DIRECTOR COMERCIAl (OK)
+        - Cronograma
+            - Mostrar observaciones en el label del tipo (OK)
 
 
     AREA CALIDAD (2 Dias)
@@ -21,41 +30,47 @@ Otros Ajustes
         - Quitar checklist
         - Recepcion y asignacion de documentos con URL a Drive
         - Inventario de documentos (Reporte de documentos) (OK)
-        - Inventario de Documentos con frecuencia y advertencia si el doc no esta 
+        - Inventario de Documentos con frecuencia y advertencia si el doc no esta
           creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...) (OK)
-        - Links del sidebar de documentos
-        - Revisar Consultas y detalles de interfaz
+        - Links del sidebar de documentos (OK)
+        - Revisar Consultas y detalles de interfaz (OK)
 
     AREA DE PROGRAMACION
-        - Ocultar/Mostrar servicios por tecnico en calendario
+        - Ocultar/Mostrar servicios por tecnico en calendario (OK)
+        - Crear notifiaciones para creacion de solicitudes (OK)
+        - Reloj en agendamiento de servicios (OK)
+        - Canales individuales para tecnicos (OK)
+        - Añadir facturacion desde la vista de ver servicio (OK)
+        - Cmabiar nombre a: Impresion  Documentos (OK)
+        - Cambiar la estructura visual modulo (OK)
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
 
         - Generar novedad para mejorar frec y servicios de refuerzo 
 
     AREA DE CONTABILIDAD (4 Dias)
-        - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio
-            - Timestamps para ruta_tecnico
+        - Reporte de ganancias con respecto al valor de las facturas y el valor de los gastos a un servicio (OK)
+            - Timestamps para ruta_tecnico #P
         - Comisiones para inspectores (OK)
         - Filtro de comisiones por facturacion pendiente, y por facturacion pagada (OK) 
         - Reporte de clientes cerrados en el mes (Cotizacion final aprobada) (OK)
         - Mascaras para inputs de precios y metas (OK)
-        - Solo facturacion y comisiones
-        - Revisar Consultas y detalles de interfaz
+        - Solo facturacion y comisiones (OK)
+        - Revisar Consultas y detalles de interfaz (OK)
         - Estado de factura Cancelada (OK)
         - Ajustar las metas y progresos de comercial (OK)
         - Resumen de comisiones (OK)
         - Porcentaje de comisiones desde la BD (OK)
-        - Links del sidebar de comisiones
+        - Links del sidebar de comisiones (OK)
 
     AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos (OK)
-        - Links del sidebar de productos
+        - Links del sidebar de productos (OK)
         - Reporte de entrada de productos -Compras (OK)
         - Reporte de salida de productos (Gasto de tecnicos) (OK)
         - Inventario General por rango de fechas y Frecuencias (OK)
         - Inventario por tecnico (Cuanto ha gastado) (OK)
-        - Revisar Consultas y detalles de interfaz
+        - Revisar Consultas y detalles de interfaz (OK)
 
 
     AREA DE TECNICOS
@@ -66,7 +81,7 @@ Otros Ajustes
     AREA DE ADMINISTRACION 
         - Creacion de tecnicos (OK)
         - Creacion de usuarios y asignacion de roles (OK)
-        - Revisar swalerts
+        - Revisar swalerts P
         - Todos los modulos disponibles (OK)
 
     SESIONES VIP (2 Dias)
@@ -107,3 +122,17 @@ gasto de tecnicos <- Creado
 salida productos <- Creado
 ver compras <- Creado
 
+
+*DOCUMENTOS LEGALES (Actualización mensual)
+*DOCUMENTOS CONTROL DE PLAGAS (Actualización anual) # 
+*FICHAS TÉCNICAS (modificaciones frecuentes) #
+*INFORMES FRECUENTES (mensuales) # 
+*INFORMES CON TENDENCIAS (mensuales) #
+*CRONOGRAMAS (anuales) #
+*DIAGNÓSTICOS (semestrales) #
+*PROGRAMA DE PREVENCIÓN Y CONTROL DE PLAGAS (anual) #
+
+#38B300 -> Primary
+#2B8800 -> Gradient finish
+
+#0092a4 -> Secondary

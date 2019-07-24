@@ -96,8 +96,13 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
             'Cron\\' => 5,
             'Collective\\Html\\' => 16,
         ),
+        'B' => 
+        array (
+            'Barryvdh\\Cors\\' => 14,
+        ),
         'A' => 
         array (
+            'Asm89\\Stack\\' => 12,
             'ABAS\\' => 5,
         ),
     );
@@ -241,6 +246,14 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         array (
             0 => __DIR__ . '/..' . '/laravelcollective/html/src',
         ),
+        'Barryvdh\\Cors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-cors/src',
+        ),
+        'Asm89\\Stack\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
+        ),
         'ABAS\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -310,6 +323,7 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\Evento' => __DIR__ . '/../..' . '/app/Evento.php',
         'ABAS\\Events\\NovedadActualizada' => __DIR__ . '/../..' . '/app/Events/NovedadActualizada.php',
         'ABAS\\Events\\NovedadCreada' => __DIR__ . '/../..' . '/app/Events/NovedadCreada.php',
+        'ABAS\\Events\\SolicitudCreada' => __DIR__ . '/../..' . '/app/Events/SolicitudCreada.php',
         'ABAS\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'ABAS\\Factura' => __DIR__ . '/../..' . '/app/Factura.php',
         'ABAS\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -325,6 +339,7 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\Http\\Controllers\\DocumentoController' => __DIR__ . '/../..' . '/app/Http/Controllers/DocumentoController.php',
         'ABAS\\Http\\Controllers\\EventosController' => __DIR__ . '/../..' . '/app/Http/Controllers/EventosController.php',
         'ABAS\\Http\\Controllers\\FacturaController' => __DIR__ . '/../..' . '/app/Http/Controllers/FacturaController.php',
+        'ABAS\\Http\\Controllers\\GananciaController' => __DIR__ . '/../..' . '/app/Http/Controllers/GananciaController.php',
         'ABAS\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'ABAS\\Http\\Controllers\\ImpresionController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImpresionController.php',
         'ABAS\\Http\\Controllers\\InspeccionController' => __DIR__ . '/../..' . '/app/Http/Controllers/InspeccionController.php',
@@ -341,6 +356,7 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\Http\\Controllers\\TareasController' => __DIR__ . '/../..' . '/app/Http/Controllers/TareasController.php',
         'ABAS\\Http\\Controllers\\TecnicoController' => __DIR__ . '/../..' . '/app/Http/Controllers/TecnicoController.php',
         'ABAS\\Http\\Controllers\\TipoServicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/TipoServicioController.php',
+        'ABAS\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'ABAS\\Http\\Controllers\\ValorGeneralController' => __DIR__ . '/../..' . '/app/Http/Controllers/ValorGeneralController.php',
         'ABAS\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'ABAS\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -350,9 +366,11 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\Inspeccion' => __DIR__ . '/../..' . '/app/Inspeccion.php',
         'ABAS\\Listeners\\NotificaUsuariosNovedadActualizada' => __DIR__ . '/../..' . '/app/Listeners/NotificaUsuariosNovedadActualizada.php',
         'ABAS\\Listeners\\NotificaUsuariosNovedadPublicada' => __DIR__ . '/../..' . '/app/Listeners/NotificaUsuariosNovedadPublicada.php',
+        'ABAS\\Listeners\\NotificaUsuariosSolicitudCreada' => __DIR__ . '/../..' . '/app/Listeners/NotificaUsuariosSolicitudCreada.php',
         'ABAS\\Meta' => __DIR__ . '/../..' . '/app/Meta.php',
         'ABAS\\Notifications\\NovedadPublicada' => __DIR__ . '/../..' . '/app/Notifications/NovedadPublicada.php',
         'ABAS\\Notifications\\NovedadResuelta' => __DIR__ . '/../..' . '/app/Notifications/NovedadResuelta.php',
+        'ABAS\\Notifications\\SolicitudPublicada' => __DIR__ . '/../..' . '/app/Notifications/SolicitudPublicada.php',
         'ABAS\\Novedad' => __DIR__ . '/../..' . '/app/Novedad.php',
         'ABAS\\NovedadTemporal' => __DIR__ . '/../..' . '/app/NovedadTemporal.php',
         'ABAS\\OrdenServicio' => __DIR__ . '/../..' . '/app/OrdenServicio.php',
@@ -374,7 +392,13 @@ class ComposerStaticInit88cad3b7f60ab529d52c784bca798618
         'ABAS\\ValorGeneral' => __DIR__ . '/../..' . '/app/ValorGeneral.php',
         'AreaSeeder' => __DIR__ . '/../..' . '/database/seeds/AreaSeeder.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
+        'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
+        'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
+        'Barryvdh\\Cors\\HandleCors' => __DIR__ . '/..' . '/barryvdh/laravel-cors/src/HandleCors.php',
+        'Barryvdh\\Cors\\HandlePreflight' => __DIR__ . '/..' . '/barryvdh/laravel-cors/src/HandlePreflight.php',
+        'Barryvdh\\Cors\\LumenServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-cors/src/LumenServiceProvider.php',
+        'Barryvdh\\Cors\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-cors/src/ServiceProvider.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\CarbonPeriod' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriod.php',

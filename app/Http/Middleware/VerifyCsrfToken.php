@@ -15,6 +15,8 @@ class VerifyCsrfToken extends BaseVerifier
         '/logout',
         '/temporales/novedad/*',
         '/solicitud',
-        '/show/comisiones'
+        '/show/comisiones',
+        '/crear-cuenta',
+        '/login-cliente'
     ];
 }

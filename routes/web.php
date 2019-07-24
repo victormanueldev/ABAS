@@ -44,6 +44,9 @@ Route::resource('clientes', 'ClientesController');
 Route::post('clientes/{id}', 'ClientesController@updateCliente') -> name('clientes.updateCliente');
 Route::put('estado/cliente', 'ClientesController@changeBillState');
 Route::get('documentos/cliente', 'ClientesController@docsReport');
+Route::get('ver-cliente/{id}', 'ClientesController@clientByNit');
+Route::put('crear-cuenta', 'ClientesController@updateLoginData' );
+Route::post('login-cliente', 'ClientesController@clientLogin');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [

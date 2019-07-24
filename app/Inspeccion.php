@@ -3,6 +3,7 @@
 namespace ABAS;
 
 use Illuminate\Database\Eloquent\Model;
+use ABAS\Events\SolicitudCreada;
 
 class Inspeccion extends Model
 {
@@ -42,6 +43,10 @@ class Inspeccion extends Model
         'cliente_id',
         'sede_id',
         'factura_maestra',
+    ];
+
+    protected $events = [
+        'created' => SolicitudCreada::class
     ];
 
     public function cliente()
