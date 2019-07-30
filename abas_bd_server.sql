@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 30, 2019 at 10:01 AM
+-- Generation Time: Jun 30, 2019 at 07:50 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
--- PHP Version: 7.2.17-0ubuntu0.18.04.1
+-- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -86,7 +86,8 @@ INSERT INTO `cargos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
 (4, 'directorcom', 'Director Comercial', NULL, NULL),
 (5, 'auditor', 'Auditor General', NULL, NULL),
 (6, 'agentedeservicio', 'Representante de Servicio al Cliente', NULL, NULL),
-(7, 'jefetecnico', 'Jefe Técnico', NULL, NULL);
+(7, 'jefetecnico', 'Jefe Técnico', NULL, NULL),
+(8, 'admin', 'Administrador General', '2019-05-27 05:00:00', '2019-05-27 05:00:00');
 
 -- --------------------------------------------------------
 
@@ -338,50 +339,50 @@ CREATE TABLE `metas` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(614, '2014_10_12_000000_create_users_table', 1),
-(615, '2014_10_12_100000_create_password_resets_table', 1),
-(616, '2018_04_12_022651_create_areas_table', 1),
-(617, '2018_04_12_023001_create_cargos_table', 1),
-(618, '2018_04_12_190550_create_clientes_table', 1),
-(619, '2018_04_12_193958_create_sedes_table', 1),
-(620, '2018_04_12_195156_create_tareas_table', 1),
-(621, '2018_04_12_235243_create_novedads_table', 1),
-(622, '2018_04_13_011115_create_area_novedad_table', 1),
-(623, '2018_04_15_175902_create_eventos_table', 1),
-(624, '2018_05_10_203827_create_notifications_table', 1),
-(625, '2018_05_14_205719_create_solicitudes_table', 1),
-(626, '2018_05_30_215131_create_telefonos_table', 1),
-(627, '2018_06_22_111550_create_servicios_table', 1),
-(628, '2018_06_22_115017_create_tecnicos_table', 1),
-(629, '2018_07_27_215505_create_tipo_servicios_table', 1),
-(630, '2018_07_27_220255_create_servicio_tecnico', 1),
-(631, '2018_08_01_220413_create_servicio_tipo_servicio_table', 1),
-(632, '2018_11_08_185829_create_certificados_table', 1),
-(633, '2018_11_11_100214_create_rutas_table', 1),
-(634, '2018_11_27_214335_create_cotizaciones_table', 1),
-(635, '2018_11_29_200551_create_metas_table', 1),
-(636, '2018_11_30_195752_create_facturas_table', 1),
-(637, '2019_01_10_190005_create_novedad_temporals_table', 1),
-(638, '2019_01_25_233108_create_orden_servicios_table', 1),
-(639, '2019_01_26_001133_create_productos_table', 1),
-(640, '2019_01_26_003818_create_orden_servicio_producto', 1),
-(641, '2019_01_27_175935_create_orden_servico_tecnico', 1),
-(642, '2019_01_27_221128_create_producto_ruta', 1),
-(643, '2019_02_19_225749_create_inspeccions_table', 1),
-(644, '2019_04_13_200938_create_comisions_table', 1),
-(645, '2019_05_01_155648_create_valor_generals_table', 1),
-(646, '2019_05_03_205251_create_documentos_table', 1),
-(647, '2019_05_09_204650_create_compras_table', 1),
-(648, '2019_05_15_201525_ruta_tecnico', 1);
+(2508, '2014_10_12_000000_create_users_table', 1),
+(2509, '2014_10_12_100000_create_password_resets_table', 1),
+(2510, '2018_04_12_022651_create_areas_table', 1),
+(2511, '2018_04_12_023001_create_cargos_table', 1),
+(2512, '2018_04_12_190550_create_clientes_table', 1),
+(2513, '2018_04_12_193958_create_sedes_table', 1),
+(2514, '2018_04_12_195156_create_tareas_table', 1),
+(2515, '2018_04_12_235243_create_novedads_table', 1),
+(2516, '2018_04_13_011115_create_area_novedad_table', 1),
+(2517, '2018_04_15_175902_create_eventos_table', 1),
+(2518, '2018_05_10_203827_create_notifications_table', 1),
+(2519, '2018_05_14_205719_create_solicitudes_table', 1),
+(2520, '2018_05_30_215131_create_telefonos_table', 1),
+(2521, '2018_06_22_111550_create_servicios_table', 1),
+(2522, '2018_06_22_115017_create_tecnicos_table', 1),
+(2523, '2018_07_27_215505_create_tipo_servicios_table', 1),
+(2524, '2018_07_27_220255_create_servicio_tecnico', 1),
+(2525, '2018_08_01_220413_create_servicio_tipo_servicio_table', 1),
+(2526, '2018_11_08_185829_create_certificados_table', 1),
+(2527, '2018_11_11_100214_create_rutas_table', 1),
+(2528, '2018_11_27_214335_create_cotizaciones_table', 1),
+(2529, '2018_11_29_200551_create_metas_table', 1),
+(2530, '2018_11_30_195752_create_facturas_table', 1),
+(2531, '2019_01_10_190005_create_novedad_temporals_table', 1),
+(2532, '2019_01_25_233108_create_orden_servicios_table', 1),
+(2533, '2019_01_26_001133_create_productos_table', 1),
+(2534, '2019_01_26_003818_create_orden_servicio_producto', 1),
+(2535, '2019_01_27_175935_create_orden_servico_tecnico', 1),
+(2536, '2019_01_27_221128_create_producto_ruta', 1),
+(2537, '2019_02_19_225749_create_inspeccions_table', 1),
+(2538, '2019_04_13_200938_create_comisions_table', 1),
+(2539, '2019_05_01_155648_create_valor_generals_table', 1),
+(2540, '2019_05_03_205251_create_documentos_table', 1),
+(2541, '2019_05_09_204650_create_compras_table', 1),
+(2542, '2019_05_15_201525_ruta_tecnico', 1);
 
 -- --------------------------------------------------------
 
@@ -782,7 +783,7 @@ CREATE TABLE `users` (
   `nombres` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `apellidos` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `iniciales` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
   `foto` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(99) COLLATE utf8_unicode_ci NOT NULL,
   `permisos` text COLLATE utf8_unicode_ci NOT NULL,
@@ -799,17 +800,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `cedula`, `nombres`, `apellidos`, `iniciales`, `telefono`, `foto`, `email`, `permisos`, `password`, `area_id`, `cargo_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'public/a4.jpg', 'victormalsx@gmail.com', '[{\"crear_clientes\":\"true\",\"ver_clientes\":\"true\",\"crear_docs\":\"true\",\"asignar_metas\":\"true\",\"ver_progresos\":\"true\",\"ver_comisiones\":\"true\",\"resumen_comisiones\":\"true\",\"clientes_cerrados\":\"true\",\"asignar_facturas\":\"true\",\"control_pagos\":\"true\",\"agendar_servicios\":\"true\",\"horarios_tecnicos\":\"true\",\"listado_servicios\":\"true\",\"recepcion_docs\":\"true\",\"inventario_docs\":\"true\",\"reporte_docs\":\"true\",\"crear_novedades\":\"true\",\"crear_tecnicos\":\"true\",\"crear_usuarios\":\"true\",\"reporte_ganancias\":\"true\",\"gestion_productos\":\"true\",\"gastos\":\"true\"}]', '$2y$10$ApzshZDpFrvQzf0ycAJDT.yMarzR5iXY4oMUyxZHsxl1lqDMZIWOu', 1, 1, 'gsaI2U8aTCwB3hADySdXzUc1NIumlqk9MxJhbHiPowhVYjBub4Y0ojNmrDVm', NULL, '2019-05-30 13:47:36'),
-(2, 987654321, 'Yurani', 'Calvo Ruiz', 'YCR', '3103195394', 'a6.jpg', 'yurani@gmail.com', '', '$2y$10$C279jhl0s46wYyr1uuu00OOouY1B4TYiQnbXXBK48l.yhUD7mN6ue', 2, 2, 'mWJBsslloCxdenyDG2LgzFBD6UZgKRS5cIr3hm1HdXKVf8ABXjy7gcvCGOn9', NULL, NULL),
-(3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'a1.jpg', 'andres@gmail.com', '', '$2y$10$Du7JITRNBCrqvj/2loo8eORFsGbOXcUl/sW5tKKpGnZBS4y4Anz/m', 1, 1, NULL, NULL, NULL),
-(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'a7.jpg', 'jhon@gmail.com', '', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, '2GpyNjqGR3iOdjdWIbJfXkxBfdcsMrQyaL3T9Ru0wVAymxZiMaeGXQDB6iUa', NULL, NULL),
-(5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'a9.jpg', 'jhonny@gmail.com', '', '$2y$10$UIDt0beHPXpkJ/pcuuuZtOoKRYoBhmqnhQgVzx2Laa8NjnbMvbSgG', 3, 4, NULL, NULL, NULL),
-(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'a10.jpg', 'jhon.doe@gmail.com', '', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'K3tW4AkCUHQQ4UzqwOs4rNpa6CUpRDgijuLRcLVnGdGoQud9znSOGlDVbH90', NULL, NULL),
-(7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'a11.jpg', 'diego@gmail.com', '', '$2y$10$Y2xgM9E4rPRgeaOzkxtKG.8d9snUTey4.w2tuG0luPzRkxNNs9h0q', 6, 7, NULL, NULL, NULL),
-(8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'a12.jpg', 'sarah@gmail.com', '', '$2y$10$twKtAG0AtB5Y3RvelIJTAeUVOtQMXIbj87s/1YfeKiWh9rJv37cn2', 5, 6, 'XzyB4OweXavIfsvNyb1YaKmZcRbftxvIlZsq5r8Qam7FHlUej39zmMzJtvrj', NULL, NULL),
-(9, 99999999, 'Fernando', 'Serna', 'FS', '3177777750', 'default-user.jpg', 'fernandoserna@sanicontrol.com', '', '$2y$10$7L.tN71DkEjAY7bhTzcC1uIrT3ACdKBPk28dGkXphrGpecDNsKxN.', 1, 1, NULL, NULL, NULL),
-(10, 88888888, 'Cristian', 'León', 'CL', '3177777750', 'default-user.jpg', 'cristianleon@sanicontrol.com', '', '$2y$10$4cTNY0zGtG6wfzYApi/f/.yVJLVfW.4zi5a9WQuZWJ/e2mqtWTOFK', 1, 1, NULL, NULL, NULL),
-(11, 111111111, 'Programador', 'Sanicontrol', 'PS', '3177777750', 'default-user.jpg', 'programacion@sanicontrol.com', '', '$2y$10$w8uvk.q/.5eaAZ1yW2YehOJVLqRzWRDeMoPEjEHDtLrb/ReXhtOpy', 3, 3, NULL, NULL, NULL);
+(1, 1061807769, 'Victor Manuel', 'Arenas Lopez', 'VMA', '3103195394', 'public/5FsTQtBKM49CyE2yIhi3D7dkBjdESDNvU4djrqAA.jpeg', 'victormalsx@gmail.com', '[{\"crear_clientes\":\"true\",\"ver_clientes\":\"true\",\"crear_docs\":\"true\",\"asignar_metas\":\"true\",\"ver_progresos\":\"true\",\"ver_comisiones\":\"true\",\"resumen_comisiones\":\"true\",\"clientes_cerrados\":\"true\",\"asignar_facturas\":\"true\",\"control_pagos\":\"true\",\"agendar_servicios\":\"true\",\"horarios_tecnicos\":\"true\",\"listado_servicios\":\"true\",\"recepcion_docs\":\"true\",\"inventario_docs\":\"true\",\"reporte_docs\":\"true\",\"crear_novedades\":\"true\",\"crear_tecnicos\":\"true\",\"crear_usuarios\":\"true\",\"reporte_ganancias\":\"true\",\"gestion_productos\":\"true\",\"gastos\":\"true\"}]', '$2y$10$mABUq89Wj69VW5QOOSmnp.YJNdgwrbt5QKihYWdXPS4jhuTplSSfO', 6, 8, 'a6ggjoXkikp8SIvqfljrfkCjtHEeNCMrKzuPkFg5xPEDnRlSMpyzLvyyteuP', NULL, '2019-05-28 01:48:01'),
+(2, 987654321, 'Yurani', 'Calvo Ruiz', 'YCR', '3103195394', 'public/a6.jpg', 'yurani@gmail.com', '[{\"crear_clientes\":\"false\",\"ver_clientes\":\"false\",\"crear_docs\":\"true\",\"asignar_metas\":\"true\",\"ver_progresos\":\"false\",\"ver_comisiones\":\"false\",\"resumen_comisiones\":\"false\",\"clientes_cerrados\":\"false\",\"asignar_facturas\":\"false\",\"control_pagos\":\"true\",\"agendar_servicios\":\"false\",\"horarios_tecnicos\":\"false\",\"listado_servicios\":\"true\",\"recepcion_docs\":\"false\",\"inventario_docs\":\"false\",\"reporte_docs\":\"false\",\"crear_novedades\":\"false\",\"crear_tecnicos\":\"false\",\"crear_usuarios\":\"false\",\"reporte_ganancias\":\"true\",\"gestion_productos\":\"false\",\"gastos\":\"true\"}]', '$2y$10$C279jhl0s46wYyr1uuu00OOouY1B4TYiQnbXXBK48l.yhUD7mN6ue', 2, 2, 'tUzOpzPc0kJys0pjxKDepNgcxju2G9zP6wQny4KJvUOdDgtRox9vdYSCCVRE', NULL, '2019-05-28 01:44:28'),
+(3, 123456789, 'Andres Stiven', 'Medina Bejarano', 'ASM', '3115552222', 'public/a1.jpg', 'andres@gmail.com', '', '$2y$10$Du7JITRNBCrqvj/2loo8eORFsGbOXcUl/sW5tKKpGnZBS4y4Anz/m', 1, 1, NULL, NULL, NULL),
+(4, 987654621, 'Jhon Edward', 'Nieto', 'JEN', '3177777750', 'public/a7.jpg', 'jhon@gmail.com', '[{\"crear_clientes\":\"false\",\"ver_clientes\":\"false\",\"crear_docs\":\"false\",\"asignar_metas\":\"false\",\"ver_progresos\":\"false\",\"ver_comisiones\":\"false\",\"resumen_comisiones\":\"false\",\"clientes_cerrados\":\"false\",\"asignar_facturas\":\"true\",\"control_pagos\":\"false\",\"agendar_servicios\":\"true\",\"horarios_tecnicos\":\"true\",\"listado_servicios\":\"true\",\"recepcion_docs\":\"false\",\"inventario_docs\":\"false\",\"reporte_docs\":\"false\",\"crear_novedades\":\"false\",\"crear_tecnicos\":\"true\",\"crear_usuarios\":\"false\",\"reporte_ganancias\":\"false\",\"gestion_productos\":\"false\",\"gastos\":\"false\"}]', '$2y$10$SbxWHsjMEtVC0K2ERjxCIe4K2zzMvSl/CkvktfZSEI4oyCN7KoXTG', 3, 3, 'IdlUJGf2eAREMKsQjq9MAFgAkaxh8k0Tn2Hv6IpxflPI0VdMDvp8yflAJHKF', NULL, '2019-05-30 06:17:33'),
+(5, 654159789, 'Jhonny', 'Vargas Perez', 'JVP', '3177777750', 'public/a9.jpg', 'jhonny@gmail.com', '', '$2y$10$UIDt0beHPXpkJ/pcuuuZtOoKRYoBhmqnhQgVzx2Laa8NjnbMvbSgG', 1, 4, NULL, NULL, NULL),
+(6, 951789123, 'Jhon', 'Doe', 'JD', '3177777750', 'public/a10.jpg', 'jhon.doe@gmail.com', '', '$2y$10$RH/f89iBHKiMNcc6p2h8qupNtOconBR1UAE88LeRzqQygFmjHgfCC', 4, 5, 'K3tW4AkCUHQQ4UzqwOs4rNpa6CUpRDgijuLRcLVnGdGoQud9znSOGlDVbH90', NULL, NULL),
+(7, 1062545984, 'Diego', 'Leguizamo', 'DLL', '321654987', 'public/a11.jpg', 'diego@gmail.com', '', '$2y$10$Y2xgM9E4rPRgeaOzkxtKG.8d9snUTey4.w2tuG0luPzRkxNNs9h0q', 6, 7, NULL, NULL, NULL),
+(8, 687459687, 'Sarah', 'Jhonson', 'SCJ', '3177777750', 'public/a12.jpg', 'sarah@gmail.com', '', '$2y$10$twKtAG0AtB5Y3RvelIJTAeUVOtQMXIbj87s/1YfeKiWh9rJv37cn2', 5, 6, 'XzyB4OweXavIfsvNyb1YaKmZcRbftxvIlZsq5r8Qam7FHlUej39zmMzJtvrj', NULL, NULL),
+(9, 99999999, 'Fernando', 'Serna', 'FS', '3177777750', 'public/default-user.jpg', 'fernandoserna@sanicontrol.com', '[{\"crear_clientes\":\"true\",\"ver_clientes\":\"true\",\"crear_docs\":\"true\",\"asignar_metas\":\"true\",\"ver_progresos\":\"true\",\"ver_comisiones\":\"true\",\"resumen_comisiones\":\"true\",\"clientes_cerrados\":\"true\",\"asignar_facturas\":\"true\",\"control_pagos\":\"true\",\"agendar_servicios\":\"true\",\"horarios_tecnicos\":\"true\",\"listado_servicios\":\"true\",\"recepcion_docs\":\"true\",\"inventario_docs\":\"true\",\"reporte_docs\":\"true\",\"crear_novedades\":\"true\",\"crear_tecnicos\":\"true\",\"crear_usuarios\":\"true\",\"reporte_ganancias\":\"true\",\"gestion_productos\":\"true\",\"gastos\":\"true\"}]', '$2y$10$7L.tN71DkEjAY7bhTzcC1uIrT3ACdKBPk28dGkXphrGpecDNsKxN.', 1, 1, NULL, NULL, NULL),
+(10, 88888888, 'Cristian', 'León', 'CL', '3177777750', 'public/default-user.jpg', 'cristianleon@sanicontrol.com', '', '$2y$10$4cTNY0zGtG6wfzYApi/f/.yVJLVfW.4zi5a9WQuZWJ/e2mqtWTOFK', 1, 1, NULL, NULL, NULL),
+(11, 111111111, 'Programador', 'Sanicontrol', 'PS', '3177777750', 'public/default-user.jpg', 'programacion@sanicontrol.com', '', '$2y$10$w8uvk.q/.5eaAZ1yW2YehOJVLqRzWRDeMoPEjEHDtLrb/ReXhtOpy', 3, 3, NULL, NULL, NULL),
+(14, 123123, 'USER', 'TEST', 'UST', '123198', 'public/hHU7PQqzMUTvX9SgZZ0K2fXVemjbeRYIEe74aMyi.jpeg', 'user@gmail.com', '[{\"crear_clientes\":\"true\",\"ver_clientes\":\"false\",\"crear_docs\":\"false\",\"asignar_metas\":\"false\",\"ver_progresos\":\"false\",\"ver_comisiones\":\"false\",\"resumen_comisiones\":\"true\",\"clientes_cerrados\":\"false\",\"asignar_facturas\":\"true\",\"control_pagos\":\"false\",\"agendar_servicios\":\"false\",\"horarios_tecnicos\":\"false\",\"listado_servicios\":\"false\",\"recepcion_docs\":\"true\",\"inventario_docs\":\"false\",\"reporte_docs\":\"false\",\"crear_novedades\":\"false\",\"crear_tecnicos\":\"false\",\"crear_usuarios\":\"true\",\"reporte_ganancias\":\"true\",\"gestion_productos\":\"true\",\"gastos\":\"true\"}]', '$2y$10$O5tbp9yryM9BKc2wNAT1JOz2iQ2V2xRKtQtNgUG9YSboaPyKO37cm', 2, 2, NULL, '2019-05-27 05:04:29', '2019-05-27 05:04:29');
 
 -- --------------------------------------------------------
 
@@ -1066,7 +1068,7 @@ ALTER TABLE `areas`
 -- AUTO_INCREMENT for table `cargos`
 --
 ALTER TABLE `cargos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `certificados`
@@ -1132,7 +1134,7 @@ ALTER TABLE `metas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=649;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2543;
 
 --
 -- AUTO_INCREMENT for table `novedad_temporals`
@@ -1234,7 +1236,7 @@ ALTER TABLE `tipo_servicios`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `valor_generals`

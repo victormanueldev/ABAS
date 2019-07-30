@@ -31237,58 +31237,104 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    //Se ejecuta cuando se carga el documento
-    mounted: function mounted() {
-        console.log('Notificaciones Montado');
-        this.notificacionesNoLeidas();
+  //Se ejecuta cuando se carga el documento
+  mounted: function mounted() {
+    console.log('Notificaciones Montado');
+    this.notificacionesNoLeidas();
+  },
+  data: function data() {
+    return {
+      notificaciones: [],
+      notificacion: []
+    };
+  },
+
+  methods: {
+    /**
+    * Obtiene todas las notificaciones No leidas del usuario autenticado 
+     */
+    notificacionesNoLeidas: function notificacionesNoLeidas() {
+      var _this = this;
+
+      axios.get('/notificaciones').then(function (res) {
+        res.data.forEach(function (notificacion) {
+          if (notificacion.type !== 'ABAS\\Notifications\\SolicitudPublicada') {
+            _this.notificaciones.push(notificacion);
+          }
+        });
+
+        // this.notificaciones = res.data
+      }).catch(function (err) {
+        console.log(err);
+      });
     },
-    data: function data() {
-        return {
-            notificaciones: [],
-            notificacion: []
-        };
+
+    /**
+    * Elimina una notificacion de la base de datos 
+     */
+    eliminarNotificacion: function eliminarNotificacion(notificacion) {
+      var _this2 = this;
+
+      axios.delete('/notificaciones/' + notificacion.id).then(function (res) {
+        res.data.forEach(function (notificacion) {
+          if (notificacion.type !== 'ABAS\\Notifications\\SolicitudPublicada') {
+            _this2.notificaciones.push(notificacion);
+          }
+        });
+
+        //   this.notificaciones = res.data
+      }).catch(function (err) {
+        console.log(err);
+      });
     },
 
-    methods: {
-        /**
-        * Obtiene todas las notificaciones No leidas del usuario autenticado 
-         */
-        notificacionesNoLeidas: function notificacionesNoLeidas() {
-            var _this = this;
+    /**
+    * Elimina todas las notificaciones de la base de datos del usuario autenticado
+     */
+    eliminarTodasNotificaciones: function eliminarTodasNotificaciones(notificacion) {
+      var _this3 = this;
 
-            axios.get('/notificaciones').then(function (res) {
-                _this.notificaciones = res.data;
-            }).catch(function (err) {
-                console.log(err);
-            });
-        },
-
-        /**
-        * Elimina una notificacion de la base de datos 
-         */
-        eliminarNotificacion: function eliminarNotificacion(notificacion) {
-            var _this2 = this;
-
-            axios.delete('/notificaciones/' + notificacion.id).then(function (res) {
-                _this2.notificaciones = res.data;
-            }).catch(function (err) {
-                console.log(err);
-            });
-        },
-
-        /**
-        * Elimina todas las notificaciones de la base de datos del usuario autenticado
-         */
-        eliminarTodasNotificaciones: function eliminarTodasNotificaciones(notificacion) {
-            var _this3 = this;
-
-            this.notificaciones.forEach(function (notificacion) {
-                _this3.eliminarNotificacion(notificacion);
-            });
-        }
+      this.notificaciones.forEach(function (notificacion) {
+        _this3.eliminarNotificacion(notificacion);
+      });
     }
+  }
 });
 
 /***/ }),

@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'ABAS\Events\NovedadActualizada' => [
             'ABAS\Listeners\NotificaUsuariosNovedadActualizada',
         ],
+        'ABAS\Events\SolicitudCreada' => [
+            'ABAS\Listeners\NotificaUsuariosSolicitudCreada',
+        ],
     ];
 
     /**

@@ -101,6 +101,17 @@
                             </ul>
                         </li>
                     @endif
+                    @if($permiso['ver_clientes'] === 'true')
+                        <!-- Ver clientes -->
+                        <li id="m-clientes-calidad">
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i>
+                                <span class="nav-label">Clientes </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-clientes">
+                                <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
+                                        Clientes</a></li>
+                            </ul>
+                        </li>
+                    @endif
                     @if($permiso["crear_docs"] === 'true')
                         <!-- Crear docs inspeccion/solicitud -->
                         <li id="m-documentacion">
@@ -139,25 +150,47 @@
                             </ul>
                         </li>
                     @endif
-                    @if($permiso['asignar_metas'] === 'true')
-                        <!-- Asignar metas comerciales -->
-                        <li id="m-asignar-metas">
-                            <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i
-                                    class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
+                    @if($permiso['horarios_tecnicos'] === 'true')
+                        <!-- Horario de tecnicos -->
+                        <li id="m-calendario-tecnicos">
+                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
+                                id="a-calendario-tecnicos"><i class="fa fa-print"></i> <span class="nav-label">Impresión documentos</span></a>
                         </li>
                     @endif
-                    @if($permiso['control_pagos'] === 'true')
-                        <!-- Control de pagos -->
-                        <li id="m-control-facturacion">
-                            <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i
-                                    class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                    @if($permiso['listado_servicios'] === 'true')
+                        <!-- Listado de servicios -->
+                        <li id="m-listado-servicios">
+                            <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
+                                id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de
+                                    servicios</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['clientes_cerrados'] === 'true')
+                        <!-- Listado de clientes cerrados -->
+                        <li id="m-listado-clientes">
+                            <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i
+                                    class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
                         </li>
                     @endif
                     @if($permiso['asignar_facturas'] === 'true')
                         <!-- Asignacion de facturas -->
                         <li id="m-control-facturacion-programacion">
                             <a href="/programacion/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion-programacion"><i
-                                    class="fa fa-credit-card-alt"></i> <span class="nav-label">Facturación</span></a>
+                                    class="fa fa-credit-card-alt"></i> <span class="nav-label">Asignación facturas</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['control_pagos'] === 'true')
+                        <!-- Control de pagos -->
+                        <li id="m-control-facturacion">
+                            <a href="/contabilidad/facturacion" style="background-color: #5cae27;color: white;" id="a-control-facturacion"><i
+                                    class="fa fa-credit-card-alt"></i> <span class="nav-label">Control de pagos</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['asignar_metas'] === 'true')
+                        <!-- Asignar metas comerciales -->
+                        <li id="m-asignar-metas">
+                            <a href="/metas/comerciales/create" style="background-color: #5cae27;color: white;" id="a-asignar-metas"><i
+                                    class="fa fa-edit"></i> <span class="nav-label">Asignar Metas</span></a>
                         </li>
                     @endif
                     @if($permiso['ver_progresos'] === 'true')
@@ -171,74 +204,6 @@
                                             Inspectores</span></a></li>
                                 <li id="ml2-progreso-directores"><a href="/metas/director" style="color: white;"><i class="fa fa-user-circle"></i><span
                                             class="nav-label sub-nav-label">Progreso Directores</span></a></li>
-                            </ul>
-                        </li>
-                    @endif
-                    @if($permiso['clientes_cerrados'] === 'true')
-                        <!-- Listado de clientes cerrados -->
-                        <li id="m-listado-clientes">
-                            <a href="/contabilidad/clientes" style="background-color: #5cae27;color: white;" id="a-listado-clientes"><i
-                                    class="fa fa-list"></i> <span class="nav-label">Listado de Clientes</span></a>
-                        </li>
-                    @endif
-                    @if($permiso['horarios_tecnicos'] === 'true')
-                        <!-- Horario de tecnicos -->
-                        <li id="m-calendario-tecnicos">
-                            <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
-                                id="a-calendario-tecnicos"><i class="fa fa-calendar-check-o"></i> <span class="nav-label">Horarios
-                                    de técnicos</span></a>
-                        </li>
-                    @endif
-                    @if($permiso['listado_servicios'] === 'true')
-                        <!-- Listado de servicios -->
-                        <li id="m-listado-servicios">
-                            <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
-                                id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de
-                                    servicios</span></a>
-                        </li>
-                    @endif
-                    @if($permiso['crear_tecnicos'] === 'true')
-                        <!-- Crear tecnicos -->
-                        <li id="m-crear-tecnicos">
-                            <a href="/tecnicos/create" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
-                                id="a-crear-tecnicos"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear
-                                    técnicos</span></a>
-                        </li>
-                    @endif
-                    @if($permiso['ver_clientes'] === 'true')
-                        <!-- Ver clientes -->
-                        <li id="m-clientes-calidad">
-                            <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i>
-                                <span class="nav-label">Clientes </span></a>
-                            <ul class="nav nav-second-level collapse" id="ml2-clientes">
-                                <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
-                                        Clientes</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                    @if($permiso['crear_novedades'] === 'true')
-                        <!-- Registro de novedades -->
-                        <li id="m-registro-novedades">
-                            <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i
-                                    class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
-                        </li>
-                    @endif
-                    @if($permiso['reporte_docs'] === 'true')
-                        <!-- Reporte de documentos -->
-                        <li id="m-reporte-documentos">
-                            <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i
-                                    class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
-                        </li>
-                    @endif
-                    @if($permiso['recepcion_docs'] === 'true')
-                        <!-- Recepcion de docs ordenes/rutas -->
-                        <li id="m-recepcion">
-                            <a href="#" style="background-color: #5cae27;color: white;" id="a-recepcion"><i class="fa fa-folder-open"></i>
-                                <span class="nav-label">Recepción documentos </span></a>
-                            <ul class="nav nav-second-level collapse" id="ml2-recepcion">
-                                <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de
-                                        servicio</a></li>
-                                <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
                             </ul>
                         </li>
                     @endif
@@ -256,6 +221,32 @@
                                     class="fa fa-file-text-o"></i> <span class="nav-label">Resumen comisiones</span></a>
                         </li>
                     @endif
+                    @if($permiso['crear_novedades'] === 'true')
+                        <!-- Registro de novedades -->
+                        <li id="m-registro-novedades">
+                            <a href="{{route('novedades.create')}}" style="background-color: #5cae27;color: white;" id="a-registro-novedades"><i
+                                    class="fa fa-inbox"></i> <span class="nav-label">Registro de novedades</span></a>
+                        </li>
+                    @endif
+                    @if($permiso['recepcion_docs'] === 'true')
+                        <!-- Recepcion de docs ordenes/rutas -->
+                        <li id="m-recepcion">
+                            <a href="#" style="background-color: #5cae27;color: white;" id="a-recepcion"><i class="fa fa-folder-open"></i>
+                                <span class="nav-label">Recepción documentos </span></a>
+                            <ul class="nav nav-second-level collapse" id="ml2-recepcion">
+                                <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de
+                                        servicio</a></li>
+                                <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if($permiso['reporte_docs'] === 'true')
+                        <!-- Reporte de documentos -->
+                        <li id="m-reporte-documentos">
+                            <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i
+                                    class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
+                        </li>
+                    @endif
                     @if($permiso['inventario_docs'] === 'true')
                         <!-- Inventario de documemtns -->
                         <li id="m-inventario-documentos">
@@ -267,6 +258,14 @@
                             </ul>
                         </li>
                     @endif
+                    @if($permiso['crear_tecnicos'] === 'true')
+                        <!-- Crear tecnicos -->
+                        <li id="m-crear-tecnicos">
+                            <a href="/tecnicos/create" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
+                                id="a-crear-tecnicos"><i class="fa fa-user-plus"></i> <span class="nav-label">Crear
+                                    técnicos</span></a>
+                        </li>
+                    @endif
                     @if($permiso['crear_usuarios'] === 'true')
                         <!-- Crear usuarios -->
                         <li id="m-crear-usuarios">
@@ -276,13 +275,6 @@
                                 <li id="ml2-crear-usuarios-l"><a href="/users/create" style="color: white;">Crear usuarios</a></li>
                                 <li id="ml2-ver-usuarios-l"><a href="/users" style="color: white;">Ver/Editar usuarios</a></li>
                             </ul>
-                        </li>
-                    @endif
-                    @if($permiso['reporte_ganancias'] === 'true')
-                        <!-- Reporte de ganancias -->
-                        <li id="m-reporte-ganancias">
-                            <a href="/ganancias/totales" style="background-color: #5cae27;color: white;" id="a-reporte-ganancias"><i
-                                    class="fa fa-line-chart"></i> <span class="nav-label">Reporte ganancias</span></a>
                         </li>
                     @endif
                     @if($permiso['gestion_productos'] === 'true')
@@ -298,17 +290,25 @@
                         </li>
                     @endif
                     @if($permiso['gastos'] === 'true')
-                        <!-- Gastos tecnicos/productos -->
-                        <li id="m-gastos">
-                            <a href="#" style="background-color: #5cae27;color: white;" id="a-gastos"><i class="fa fa-minus-square"></i>
-                                <span class="nav-label">Gastos </span></a>
-                            <ul class="nav nav-second-level collapse" id="ml2-gastos">
-                                <li id="ml2-gastos-tecnicos"><a href="/gasto/tecnico/all" style="color: white;">Por técnico</a></li>
-                                <li id="ml2-gastos-productos"><a href="/salida/productos" style="color: white;">Por
-                                        producto</a></li>
-                            </ul>
+                    <!-- Gastos tecnicos/productos -->
+                    <li id="m-gastos">
+                        <a href="#" style="background-color: #5cae27;color: white;" id="a-gastos"><i class="fa fa-minus-square"></i>
+                            <span class="nav-label">Gastos </span></a>
+                        <ul class="nav nav-second-level collapse" id="ml2-gastos">
+                            <li id="ml2-gastos-tecnicos"><a href="/gasto/tecnico/all" style="color: white;">Por técnico</a></li>
+                            <li id="ml2-gastos-productos"><a href="/salida/productos" style="color: white;">Por
+                                    producto</a></li>
+                        </ul>
+                    </li>
+                    @endif 
+                    @if($permiso['reporte_ganancias'] === 'true')
+                        <!-- Reporte de ganancias -->
+                        <li id="m-reporte-ganancias">
+                            <a href="/ganancias/totales" style="background-color: #5cae27;color: white;" id="a-reporte-ganancias"><i
+                                    class="fa fa-line-chart"></i> <span class="nav-label">Reporte ganancias</span></a>
                         </li>
                     @endif
+
                     @endforeach
                 </ul>
 

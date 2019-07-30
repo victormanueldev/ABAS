@@ -269,14 +269,14 @@
                                                                             <div class="modal-body ibox-content" style="padding: 20px 30px 15px 30px;">
                                                                                 <div class="row">
 
-                                                                                    <input type="hidden" id="id_sede"
+                                                                                <input type="hidden" id="id_sede-{{$loop->index}}" 
                                                                                         value="{{$sede->id}}">
 
                                                                                     <div class="form-group col-lg-6"><label
                                                                                             class="control-label">Nombre
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="nombre_sedes"
+                                                                                            type="text" id="nombre_sedes-{{$loop->index}}"
                                                                                             placeholder="Ej: Norte, C.C. Unicentro, Salomia..."
                                                                                             class="form-control" value="{{$sede->nombre}}">
                                                                                     </div>
@@ -285,7 +285,7 @@
                                                                                             class="control-label">Dirección
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="direccion_sedes"
+                                                                                            type="text" id="direccion_sedes-{{$loop->index}}"
                                                                                             placeholder="Escriba la dirección"
                                                                                             class="form-control" value="{{$sede->direccion}}">
                                                                                     </div>
@@ -294,7 +294,7 @@
                                                                                             class="control-label">Ciudad
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="ciudad_sedes"
+                                                                                            type="text" id="ciudad_sedes-{{$loop->index}}"
                                                                                             placeholder="Escriba la ciudad"
                                                                                             class="form-control" value="{{$sede->ciudad}}">
                                                                                     </div>
@@ -303,7 +303,7 @@
                                                                                             class="control-label">Barrio
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="barrio_sedes"
+                                                                                            type="text" id="barrio_sedes-{{$loop->index}}"
                                                                                             placeholder="Escriba el Barrio"
                                                                                             class="form-control" value="{{$sede->barrio}}">
                                                                                     </div>
@@ -312,7 +312,7 @@
                                                                                             class="control-label">Zona/Ruta
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="ruta_sedes"
+                                                                                            type="text" id="ruta_sedes-{{$loop->index}}"
                                                                                             placeholder="Zona Ruta"
                                                                                             class="form-control" value="{{$sede->zona_ruta}}">
                                                                                     </div>
@@ -322,7 +322,7 @@
                                                                                             de
                                                                                             Contacto *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="nombre_contacto"
+                                                                                            type="text" id="nombre_contacto-{{$loop->index}}"
                                                                                             placeholder="Nombre del contacto o cliente"
                                                                                             class="form-control" value="{{$sede->nombre_contacto}}">
                                                                                     </div>
@@ -331,7 +331,7 @@
                                                                                             class="control-label">Teléfono
                                                                                         </label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="telefono_sedes"
+                                                                                            type="text" id="telefono_sedes-{{$loop->index}}"
                                                                                             placeholder="Teléfono del contacto o cliente"
                                                                                             class="form-control" value="{{$sede->telefono_contacto}}">
 
@@ -341,7 +341,7 @@
                                                                                             class="control-label">Celular
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="text" id="celular_sedes"
+                                                                                            type="text" id="celular_sedes-{{$loop->index}}"
                                                                                             placeholder="Celular del contacto"
                                                                                             class="form-control" value="{{$sede->celular_contacto}}">
                                                                                     </div>
@@ -350,7 +350,7 @@
                                                                                             class="control-label">Email
                                                                                             *</label>
                                                                                         <input style="text-transform: uppercase"
-                                                                                            type="email" id="email_sedes"
+                                                                                            type="email" id="email_sedes-{{$loop->index}}"
                                                                                             placeholder="Email de contacto"
                                                                                             class="form-control" value="{{$sede->email_contacto}}">
 
@@ -375,7 +375,7 @@
                                                                                     id="btn-close-sedes" class="btn btn-white"
                                                                                     data-dismiss="modal">Cerrar</button>
                                                                                 <button type="button"
-                                                                                    class="btn btn-primary btn-update-sedes">Guardar</button>
+                                                                                    class="btn btn-primary btn-update-sedes" onclick="dataSede({{$loop->index}})">Guardar</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -525,15 +525,15 @@
             <div class="ibox">
                 <div class="ibox-content">
                     <h2>Generación de Documentos</h2>
-                    <small>Creación de certificados y rutas.</small>
+                    <small>Creación de certificados.</small>
                     <hr style="margin-top: 8px; margin-bottom: 8px;">
                     <button type="button" class="btn btn-primary btn-block btn-outline" data-toggle="modal" data-target="#modal-create-cert">Certificados</button>
-                    <button type="button" class="btn btn-primary btn-block btn-outline" data-toggle="modal" data-target="#modal-create-route-s">Ruta
+                    {{-- <button type="button" class="btn btn-primary btn-block btn-outline" data-toggle="modal" data-target="#modal-create-route-s">Ruta
                         de saneamiento</button>
                     <button type="button" class="btn btn-primary btn-block btn-outline" data-toggle="modal" data-target="#modal-create-route-l">Ruta
                         de lámparas</button>
                     <button type="button" class="btn btn-primary btn-block btn-outline" data-toggle="modal" data-target="#modal-create-route-r">Ruta
-                        de roedores</button>
+                        de roedores</button> --}}
                 </div>
             </div>
             @endif
@@ -597,7 +597,7 @@
                                 <div class="form-group col-sm-12 col-md-6">
                                     <label>NIT: </label>
                                     <input style="text-transform: uppercase" type="text" min="0" class="form-control"
-                                        id="nit_cedula" name="nit_cedula" value="{{$cliente[0]->nit_cedula}}">
+                                        id="nit_cedula" name="nit_cedula" value="{{$cliente[0]->nit_cedula}}" {{ Auth::user()->cargo_id == '8' || Auth::user()->cargo_id == '6' ? '' : 'readonly'}}>
                                 </div>
 
 
@@ -1248,6 +1248,24 @@
     var contAreaInt = 1;
     var contAreasLampara = 1;
     var auInnput;
+    var dataSedesUpdate = null
+
+    function dataSede(id){
+        dataSedesUpdate = {
+                id_sede: $(`#id_sede-${id.toString()}`).val(),
+                nombre_sedes: $(`#nombre_sedes-${id.toString()}`).val(),
+                direccion_sedes: $(`#direccion_sedes-${id.toString()}`).val(),
+                ciudad_sedes: $(`#ciudad_sedes-${id.toString()}`).val(),
+                barrio_sedes: $(`#barrio_sedes-${id.toString()}`).val(),
+                ruta_sedes: $(`#ruta_sedes-${id.toString()}`).val(),
+                nombre_contacto: $(`#nombre_contacto-${id.toString()}`).val(),
+                telefono_sedes: $(`#telefono_sedes-${id.toString()}`).val(),
+                celular_sedes: $(`#celular_sedes-${id.toString()}`).val(),
+                email_sedes: $(`#email_sedes-${id.toString()}`).val(),
+                //cliente_id: parseInt({{ $cliente[0] -> id }})
+            };
+    }
+
 
     $(document).ready(() => {
         //Inicializacion del plugin para input de numeros
@@ -1259,21 +1277,11 @@
             outputFormat: "number"
         })
 
-        $(".btn-update-sedes").click(event => {
-            let dataSedes = {
-                nombre_sedes: $("#nombre_sedes").val(),
-                direccion_sedes: $("#direccion_sedes").val(),
-                ciudad_sedes: $("#ciudad_sedes").val(),
-                barrio_sedes: $("#barrio_sedes").val(),
-                ruta_sedes: $("#ruta_sedes").val(),
-                nombre_contacto: $("#nombre_contacto").val(),
-                telefono_sedes: $("#telefono_sedes").val(),
-                celular_sedes: $("#celular_sedes").val(),
-                email_sedes: $("#email_sedes").val(),
-                //cliente_id: parseInt({{ $cliente[0] -> id }})
-            };
 
-            console.log(dataSedes);
+
+        $(".btn-update-sedes").click(event => {
+
+
             let crsfToken = document.getElementsByName("_token")[0].value;
 
             swal({
@@ -1292,8 +1300,8 @@
             }).then(isConfirm => {
                 if (isConfirm) {
                     $.ajax({
-                        url: `/sedes/${$("#id_sede").val()}`,
-                        data: dataSedes,
+                        url: `/sedes/${dataSedesUpdate.id_sede}`,
+                        data: dataSedesUpdate,
                         type: 'PUT',
                         headers: {
                             "X-CSRF-TOKEN": crsfToken

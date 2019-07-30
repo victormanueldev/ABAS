@@ -48,20 +48,20 @@
                 </div>
 
                 {{-- Botones de mostrar modal --}}
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-servicios"
-                    id="btn-modal">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#modal-servicios" id="btn-modal">
                     Launch modal
                 </button>
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#event-option"
-                    id="btn-modal2">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#event-option" id="btn-modal2">
                     Launch modal
                 </button>
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#neutral-service"
-                    id="btn-modal3">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#neutral-service" id="btn-modal3">
                     Launch modal
                 </button>
-                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delivery-service"
-                    id="btn-modal4">
+                <button style="display: none" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#delivery-service" id="btn-modal4">
                     Launch modal
                 </button>
 
@@ -99,8 +99,8 @@
                                                 <label class="col-sm-4 control-label">Buscar cliente por: </label>
                                                 <div class="col-sm-8">
                                                     <label class="radio-inline">
-                                                        <input class="radio-options" type="radio" value="1" id="por_nombre"
-                                                            name="optionsRadios"> Nombre </label>
+                                                        <input class="radio-options" type="radio" value="1"
+                                                            id="por_nombre" name="optionsRadios"> Nombre </label>
                                                     <label class="radio-inline">
                                                         <input class="radio-options" type="radio" value="2" id="por_rs"
                                                             name="optionsRadios"> Razon Social </label>
@@ -110,8 +110,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12" style="margin-top: 10px;">
-                                                <input type="text" placeholder="Cliente..." class="typeahead_1 form-control"
-                                                    id="input_autocomplete" autocomplete="off" />
+                                                <input type="text" placeholder="Cliente..."
+                                                    class="typeahead_1 form-control" id="input_autocomplete"
+                                                    autocomplete="off" />
                                             </div>
                                             <div class="form-group col-lg-12" style="margin-top: 15px;">
                                                 <label class="control-label">Sede *</label>
@@ -141,50 +142,56 @@
                                                 <input class="form-control" rows="2" id="tel_sede" readonly>
                                             </div>
                                             <div class="form-group col-lg-12">
-                                                    <label>Novedades temporales</label>
-                                                    <ul class="todo-list ui-sortable" id="lista-servicios" style="cursor: pointer;margin-top:6px;">
-                                                        {{-- Servicios --}}
-                                                        
-                                                    </ul>
-                                                </div>
+                                                <label>Novedades temporales</label>
+                                                <ul class="todo-list ui-sortable" id="lista-servicios"
+                                                    style="cursor: pointer;margin-top:6px;">
+                                                    {{-- Servicios --}}
+
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 b-r">
                                         <h3 class="m-t-none m-b">Información de la solicitud</h3>
                                         <p>Indique los datos del cliente al que se le agendará el servicio.</p>
                                         <div class="row">
-                                                
-                                                <div class="form-group col-lg-12" >
-                                                    <label class="control-label">Codigo de Solicitud *</label>
-                                                    <select class="form-control " id="select_solicitudes" style="margin-top: 10px;">
-                                                        <option value="" selected disabled>Selecciona una sede</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-lg-6" >
-                                                    <label class="control-label">Frec. de solicitud</label>
-                                                    <input style="text-transform: uppercase" type="text" id="frecuencia_solicitud" class="form-control">
-                                                </div>
-                                                <div class="form-group col-lg-6" >
-                                                    <label class="control-label">Valor del plan</label>
-                                                    <input type="text" id="valor_plan_solicitud" class="form-control">
-                                                </div>
-                                                <div class="form-group col-lg-6" >
-                                                    <label class="control-label">Frec. de visitas</label>
-                                                    <input type="text" id="frecuencia_visitas_solicitud" class="form-control">
-                                                </div>
-                                                <div class="form-group col-lg-6" >
-                                                    <label class="control-label">Valor total de servicios</label>
-                                                    <input type="text" id="valor_servicios_solicitud" class="form-control">
-                                                </div>
-                                                <div class="form-group col-lg-12" >
-                                                    <label class="control-label">Tipo de facturaciósn</label>
-                                                    <input style="text-transform: uppercase" type="text" id="tipo_facturacion_solicitud" class="form-control">
-                                                </div>
-                                                <div class="form-group col-lg-12" >
-                                                    <label class="control-label">Observaciones de visitas</label>
-                                                    <textarea class="form-control" placeholder="Observaciones de visitas." rows="1"  id="observaciones_visitas_solicitud"></textarea>
-                                                </div>
-                                                <div class="form-group col-lg-12" id="more-solicitud"></div>
+
+                                            <div class="form-group col-lg-12">
+                                                <label class="control-label">Codigo de Solicitud *</label>
+                                                <select class="form-control " id="select_solicitudes"
+                                                    style="margin-top: 10px;">
+                                                    <option value="" selected disabled>Selecciona una sede</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label">Frec. de solicitud</label>
+                                                <input style="text-transform: uppercase" type="text"
+                                                    id="frecuencia_solicitud" class="form-control">
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label">Valor del plan</label>
+                                                <input type="text" id="valor_plan_solicitud" class="form-control">
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label">Frec. de visitas</label>
+                                                <input type="text" id="frecuencia_visitas_solicitud"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label">Valor total de servicios</label>
+                                                <input type="text" id="valor_servicios_solicitud" class="form-control">
+                                            </div>
+                                            <div class="form-group col-lg-12">
+                                                <label class="control-label">Tipo de facturaciósn</label>
+                                                <input style="text-transform: uppercase" type="text"
+                                                    id="tipo_facturacion_solicitud" class="form-control">
+                                            </div>
+                                            <div class="form-group col-lg-12">
+                                                <label class="control-label">Observaciones de visitas</label>
+                                                <textarea class="form-control" placeholder="Observaciones de visitas."
+                                                    rows="1" id="observaciones_visitas_solicitud"></textarea>
+                                            </div>
+                                            <div class="form-group col-lg-12" id="more-solicitud"></div>
 
                                         </div>
                                     </div>
@@ -194,7 +201,8 @@
                                         <div class="row">
                                             <div class="form-group col-lg-6">
                                                 <label>Tipo de Servicio: </label>
-                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio" >
+                                                <select class="form-control" style="margin-top: 10px;"
+                                                    id="select_tipo_servicio">
                                                     <option value="0">Seleccione un tipo.</option>
                                                     <option value="Normal">Normal</option>
                                                     <option value="Refuerzo">Refuerzo</option>
@@ -204,40 +212,55 @@
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label>Frecuencia sugerida</label>
-                                                <input class="form-control" id="sug_frecuency" readonly style="margin-top: 10px;">
+                                                <input class="form-control" id="sug_frecuency" readonly
+                                                    style="margin-top: 10px;">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Repetir cada:</label>
                                                 <div class="input-group">
-                                                    <input style="width: 18%;margin-right: 10px;" type="number" name="indice-frecuencia"
-                                                        id="indice-frecuencia" class="form-control">
-                                                    <select style="width: 30%;margin-left: 10px;" name="opcion-frecuencia"
-                                                        id="opcion-frecuencia" class="form-control">
+                                                    <input style="width: 18%;margin-right: 10px;" type="number"
+                                                        name="indice-frecuencia" id="indice-frecuencia"
+                                                        class="form-control">
+                                                    <select style="width: 30%;margin-left: 10px;"
+                                                        name="opcion-frecuencia" id="opcion-frecuencia"
+                                                        class="form-control">
                                                         <option value="0" selected>Seleccione una opcion</option>
                                                         <option value="dias" selected>Días</option>
                                                         <option value="semanas">Semanas</option>
                                                         <option value="meses">Meses</option>
                                                         <option value="anios">Años</option>
                                                     </select>
-                                                    <select style="width: 42.5%;margin-left: 10px;" name="" id="opcion-personalizada"
-                                                        class="form-control">
+                                                    <select style="width: 42.5%;margin-left: 10px;" name=""
+                                                        id="opcion-personalizada" class="form-control">
                                                         <option value="">Opción personalizada</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-4">
+                                                <label>Hora *</label>
+                                                <div class="input-group clockpicker" data-autoclose="true">
+                                                    <span class="input-group-addon">
+                                                        <span class="fa fa-clock-o"></span>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="09:30"
+                                                        name="hora_inicio">
+                                                </div>
+                                            </div>
+                                            {{-- <div class="form-group col-lg-4">
                                                 <label>Hora de inicio*</label>
                                                 <div class="input-group" style="width: 100%">
                                                     <input type="time" class="form-control" id="hora_inicio" style="width: 100%">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group col-lg-8">
                                                 <label>Duración del servicio</label>
                                                 <div class="input-group">
                                                     <input style="width: 40%;margin-right: 10px;" type="number" min="0"
-                                                        max="11" class="form-control" id="num_horas" placeholder="Horas">
+                                                        max="11" class="form-control" id="num_horas"
+                                                        placeholder="Horas">
                                                     <input style="width: 42%;margin-left: 10px;" type="number" min="0"
-                                                        max="60" class="form-control" id="num_minutos" placeholder="Minutos">
+                                                        max="60" class="form-control" id="num_minutos"
+                                                        placeholder="Minutos">
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-12">
@@ -269,7 +292,8 @@
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label>Instrucciones y Observaciones</label>
-                                                <textarea class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
+                                                <textarea class="form-control"
+                                                    placeholder="Escriba aquí las observaciones para el técnico."
                                                     rows="1" name="instrucciones" id="text-instrucciones"></textarea>
                                             </div>
                                         </div>
@@ -280,9 +304,11 @@
                             <div class="modal-footer">
                                 <button style="margin-bottom: 0;" type="button" id="btn-close2" class="btn btn-default"
                                     data-dismiss="modal">Cancelar</button>
-                                <button id="create-services" type="submit" class="btn btn-primary">Crear servicios</button> {{-- No se si este
+                                <button id="create-services" type="submit" class="btn btn-primary">Crear
+                                    servicios</button> {{-- No se si este
                                 boton de guardar sea necesario. --}}
-                                <button id="btn-unique" type="button" class="btn btn-success">Guardar servicio único</button>
+                                <button id="btn-unique" type="button" class="btn btn-success">Guardar servicio
+                                    único</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -353,10 +379,10 @@
                                     <div class="col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-5 col-xs-12" style="margin-bottom: 7px;">
-                                                <a class="btn btn-primary" id="btn-lock" ></a>
+                                                <a class="btn btn-primary" id="btn-lock"></a>
                                             </div>
-                                            <div class="col-sm-7 col-xs-12" style="margin-bottom: 7px;padding-left: 90px;"
-                                                id="div-opciones">
+                                            <div class="col-sm-7 col-xs-12"
+                                                style="margin-bottom: 7px;padding-left: 90px;" id="div-opciones">
 
                                             </div>
                                             <div class="form-group col-xs-12 col-lg-6">
@@ -372,7 +398,8 @@
 
                                             <div class="form-group col-sm-6">
                                                 <label>Frecuencia: </label>
-                                                <input type="button" class="form-control" value="Cambiar frecuencia" id="change-frecuency">
+                                                <input type="button" class="form-control" value="Cambiar frecuencia"
+                                                    id="change-frecuency">
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label>Duración del servicio</label>
@@ -419,12 +446,14 @@
                                         </table>
                                     </div>
                                 </div>
-  
+
 
                             </div>
                             <div class="modal-footer">
-                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal" id="btn-close3">Cerrar</button>
-                                <button style="margin-bottom: 0;" type="button" class="btn btn-danger" data-dismiss="modal" id="btn-cancelar-servicio">Cancelar servicio</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-white"
+                                    data-dismiss="modal" id="btn-close3">Cerrar</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-danger"
+                                    data-dismiss="modal" id="btn-cancelar-servicio">Cancelar servicio</button>
                             </div>
                         </div>
                     </div>
@@ -467,7 +496,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-white"
+                                    data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Aceptar</button>
                             </div>
                             {!! Form::close() !!}
@@ -529,8 +559,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-md-12">
                                         <label class="control-label">Observaciones</label>
-                                        <textarea class="form-control" id="ver_observaciones_3"
-                                        rows="1" ></textarea>
+                                        <textarea class="form-control" id="ver_observaciones_3" rows="1"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -557,7 +586,7 @@
                                 <h2 class="modal-title" style="font-size: 23px;">Servicio de Mensajería</h2>
                             </div>
                             <div class="modal-body">
-                                <div class="row">   
+                                <div class="row">
                                     <div class="col-sm-8" style="margin-bottom: 15px;">
                                         <h3>Información del cliente </h3>
                                     </div>
@@ -597,8 +626,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-md-12">
                                         <label class="control-label">Observaciones</label>
-                                        <textarea class="form-control" id="ver_observaciones_4"
-                                        rows="1" ></textarea>
+                                        <textarea class="form-control" id="ver_observaciones_4" rows="1"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -614,7 +642,8 @@
                 <!--===================================================
                 /* Modal opciones de Eliminacion
                 ====================================================-->
-                <div class="modal inmodal fade" id="modal-delete-options" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal inmodal fade" id="modal-delete-options" tabindex="-1" role="dialog"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             {!! Form::open(['id' => 'form-delete']) !!}
@@ -658,7 +687,8 @@
                 <!--===================================================
                 /* Modal opciones de Actualizacion de Frecuencia
                 ====================================================-->
-                <div class="modal inmodal fade" id="modal-update-options" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal inmodal fade" id="modal-update-options" tabindex="-1" role="dialog"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -673,17 +703,18 @@
                                     <div class="form-group col-md-12">
                                         <label>Repetir cada:</label>
                                         <div class="input-group">
-                                            <input style="width: 20%;margin-right: 10px;" type="number" name="indice-frecuencia"
-                                                id="indice-frecuencia-actl" class="form-control">
-                                            <select style="width: 30%;margin-left: 10px;" name="opcion-frecuencia" id="opcion-frecuencia-actl"
+                                            <input style="width: 20%;margin-right: 10px;" type="number"
+                                                name="indice-frecuencia" id="indice-frecuencia-actl"
                                                 class="form-control">
+                                            <select style="width: 30%;margin-left: 10px;" name="opcion-frecuencia"
+                                                id="opcion-frecuencia-actl" class="form-control">
                                                 <option value="dias" selected>Días</option>
                                                 <option value="semanas">Semanas</option>
                                                 <option value="meses">Meses</option>
                                                 <option value="anios">Años</option>
                                             </select>
-                                            <select style="width: 42.5%;margin-left: 10px;" name="" id="opcion-personalizada-actl"
-                                                class="form-control">
+                                            <select style="width: 42.5%;margin-left: 10px;" name=""
+                                                id="opcion-personalizada-actl" class="form-control">
                                                 <option value="">Opción personalizada</option>
                                             </select>
                                         </div>
@@ -745,306 +776,381 @@
 <!-- Typehead -->
 <script src="{{asset('js/plugins/typehead/bootstrap3-typeahead.min.js')}}"></script>
 <script>
-
     //Inicializacion de variables globales
-    var infoServiceSelected = {id: '',duration: '', state: 0};
+    var infoServiceSelected = {
+        id: '',
+        duration: '',
+        state: 0
+    };
     var inicio_servicio;
     var solicitudes;
+    var notificacionesListadas = []
 
     $(document).ready(function () {
+        /** Servicio de notificaiones
+        --------------------------------------------------------------------------*/
+        setInterval(() => {
+            $.get('/notificaciones')
+                .then(res => {
 
-        $("#select_servicios").select2({
-            width: '100%',
-            placeholder: 'Servicios...'
-        });
+                    res.forEach(value => {
+                        if(notificacionesListadas.length == 0 && value.type == 'ABAS\\Notifications\\SolicitudPublicada'){
+                            notificacionesListadas.push(value.id)
+                            mostrarToast(value.data.cliente, value.data.sede, value.data.codigo, value.id)
+                        }
+                        
+                        let existeNotificacion = notificacionesListadas.includes(value.id)
 
-        $("#select_tecnicos2").select2({
-            width: '100%',
-            placeholder: 'Técnicos...'
-        });
+                        if(!existeNotificacion && value.type == 'ABAS\\Notifications\\SolicitudPublicada'){
+                            notificacionesListadas.push(value.id)
+                            mostrarToast(value.data.cliente, value.data.sede, value.data.codigo, value.id)
+                        }
+                    })
+                    
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }, 6000)
+    
 
-        /* Estructuracion de la información del cliente para el autocompletado
-        ------------------------------------------------------------------------*/
-        //Inicializacion de variables
-        var nit_clientes = [];
-        var nombres_clientes = [];
-        var razon_social_clientes = [];
-        var $input;
-        var data;
-        var info_clientes = [];
-
-        //Peticion al servidor para obtener los clientes de la DB
-        $.get('/clientes')
-            .then((res) => {
-                //Recorre la respueta
-                res.forEach((value, index) => {
-                    //Convertir a formato JSON para poder ser mostrados en el typehead
-                    nit_clientes[index] = JSON.parse(`{"name": "${value.nit_cedula}", "id": "${value.id}"}`);
-                    nombres_clientes[index] = JSON.parse(`{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
-                    if (value.razon_social == 'null' || value.razon_social == null) {
-                        razon_social_clientes[index] = JSON.parse(`{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
-                    } else {
-                        razon_social_clientes[index] = JSON.parse(`{"name": "${value.razon_social}", "id": "${value.id}"}`);
-                    }
-                });
-
-                info_clientes = res;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        //Inicia el Autocompletado con los NIT de los clientes
-        $input = $('.typeahead_1').typeahead({
-            source: nit_clientes
-        });
-
-        //Evento click de los radiobuttons
-        $(".radio-options").click(event => {
-            //Valida el valor del radiobutton seleccionado
-            switch (event.target.value) {
-                //Buscar por nombre de clientes
-                case '1':
-                    data = nombres_clientes;
-                    $('.typeahead_1').typeahead('destroy').typeahead({
-                        source: data
-                    });
-                    break;
-                //Buscar por razon social de clientes
-                case '2':
-                    data = razon_social_clientes;
-                    $('.typeahead_1').typeahead('destroy').typeahead({
-                        source: data
-                    });
-                    break;
-                //Buscar por NIT o CC de clientes
-                case '3':
-                    data = nit_clientes;
-                    $('.typeahead_1').typeahead('destroy').typeahead({
-                        source: data
-                    });
-                    break;
-                default:
-                    console.log('Default');
-                    data = [];
-                    break;
+    function eliminarNotificacion(idNotificacion) {
+        $.ajax({
+            url: `/notificaciones/${idNotificacion}`,
+            type: 'DELETE',
+            headers: {
+                "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value //Token de seguridad
             }
         })
+    }
 
-        /* Inicialización de componentes de la pagina
-         -----------------------------------------------------------------*/
-        //Inicia iCheck 
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
+    function mostrarToast(cliente, sede, codigoSolicitud, idToast) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": true,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": true,
+            "showDuration": "0",
+            "hideDuration": "0",
+            "timeOut": "0",
+            "extendedTimeOut": "0",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+        }
+
+        toastr["error"](`Solicitud ${codigoSolicitud} para ${cliente} ${sede}`, "¡Nueva solicitud creada!", {
+            own_id: idToast,
+            onHidden: function () {
+                eliminarNotificacion(this.own_id)
+            }
+        })
+    }
+
+    //Inicializacion de selects
+    $("#select_servicios").select2({
+        width: '100%',
+        placeholder: 'Servicios...'
+    });
+
+    $("#select_tecnicos2").select2({
+        width: '100%',
+        placeholder: 'Técnicos...'
+    });
+
+    /* Estructuracion de la información del cliente para el autocompletado
+    ------------------------------------------------------------------------*/
+    //Inicializacion de variables
+    var nit_clientes = [];
+    var nombres_clientes = [];
+    var razon_social_clientes = [];
+    var $input;
+    var data;
+    var info_clientes = [];
+
+    //Peticion al servidor para obtener los clientes de la DB
+    $.get('/clientes')
+    .then((res) => {
+        //Recorre la respueta
+        res.forEach((value, index) => {
+            //Convertir a formato JSON para poder ser mostrados en el typehead
+            nit_clientes[index] = JSON.parse(
+                `{"name": "${value.nit_cedula}", "id": "${value.id}"}`);
+            nombres_clientes[index] = JSON.parse(
+                `{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
+            if (value.razon_social == 'null' || value.razon_social == null) {
+                razon_social_clientes[index] = JSON.parse(
+                    `{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
+            } else {
+                razon_social_clientes[index] = JSON.parse(
+                    `{"name": "${value.razon_social}", "id": "${value.id}"}`);
+            }
         });
 
+        info_clientes = res;
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
-        /* Inicializa el Calendario
-         -----------------------------------------------------------------*/
-        //Instancia la Clase Date para obtener la fecha actual
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        //Declaracion de Variables publicas de Servicio
-        var checkbox = false;
-        var color;
-        var frecuencia_solicitud;
-        var id_solicitud;
-        var id_cliente;
+    //Inicia el Autocompletado con los NIT de los clientes
+    $input = $('.typeahead_1').typeahead({
+        source: nit_clientes
+    });
 
-        //Inicializa el calendario
-        $('#calendar').fullCalendar({
-
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            buttonText: {
-                today: 'Hoy',
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día'
-            },
-            //Muestra todas las eventos de la BD
-            // events: {
-            //     url: "/servicios"
-            // },
-            eventLimit: true,
-            editable: true,
-            eventLimit: true,
-            nowIndicator: true,
-            firstDay: 0,
-            businessHours: {
-                // Dias de la semana en un array (0=Domingo)
-                dow: [1, 2, 3, 4, 5, 6], // Lunes a Sabado
-
-                start: '07:00', // Hora de inicio
-                end: '18:00', // Hora de finalizacion
-            },
-            droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
-
-            //Evento para renderizar contenido HMTL en cada uno de los eventos
-            eventRender: function (event, element, view) {
-                if (event.lock === 0) {
-                    element.find('.fc-title').prepend('<i style="margin-left: 5px" class="fa fa-unlock"></i> ');
-                } else {
-                    element.find('.fc-title').prepend('<i style="margin-left: 5px"  class="fa fa-lock"></i> ');
-                }
-            },
-
-            //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
-            dayClick: function (start, end, allDay) {
-                //Simula click en el boton de mostrar el modal
-                document.getElementById("btn-modal").click();
-                //Guarda la fecha y hora del dia seleccionado
-                inicio_servicio = start.format("YYYY-MM-DD");
-                //Limpiar elementos
-                $("#select_sedes").empty();
-                $(".list-group-item").remove();
-                $('#input_autocomplete').val('');
-                $("#dir_sede").val('');
-                $("#barrio_sede").val('');
-                $("#contacto_sede").val('');
-                $("#tel_sede").val('');
-                $("#select_frecuencia").val('0').change();
-                $("#opcion-frecuencia").val('0').change();
-                $("#hora_inicio").val('');
-                $("#num_horas").val('');
-                $("#num_minutos").val('');
-                $("#opcion-personalizada").empty();
-                $("#opcion-personalizada").append(`<option>Opción personalizad</option>`);
-                $('#select_servicios').select2("val", "");
-                $('#select_tecnicos2').select2("val", "");
-                $("#historial_tecnicos").popover('destroy');
-                $("#text-instrucciones").val("")
-                $("#create-services").prop('disabled', false);
-                $("#lista-servicios").empty();
-                $("#select_tipo_servicio").val('0').change();
-                $("#frecuencia_solicitud").val('');
-                $("#valor_plan_solicitud").val('');
-                $("#frecuencia_visitas_solicitud").val('');
-                $("#valor_servicios_solicitud").val('');
-                $("#tipo_facturacion_solicitud").val('');
-                $("#observaciones_visitas_solicitud").val('');
-            },
-
-            //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
-            eventResize: function (event) {
-                var start = event.start.format("YYYY-MM-DD HH:mm");
-                var backgroundC = event.backgroundColor;
-                var allDay = event.allDay;
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "progressBar": true,
-                    "preventDuplicates": false,
-                    "positionClass": "toast-bottom-right",
-                    "onclick": null,
-                    "showDuration": "400",
-                    "hideDuration": "1000",
-                    "timeOut": "2000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                if (event.end) {//valida si hay una fecha de terminación de la evento
-                    var end = event.end.format("YYYY-MM-DD HH:mm");
-                } else {
-                    var end = "NULL"; //Sino la iguala a NULL
-                }
-                crsfToken = document.getElementsByName("_token")[0].value;
-                $.ajax({
-                    url: '/servicios/edit/dates',
-                    data: {
-                        idServicio: event.id,
-                        start: start,
-                        end: end,
-                        option: 'resize'
-                    },
-                    type: "PUT",
-                    headers: {
-                        "X-CSRF-TOKEN": crsfToken
-                    },
-                    success: function (json) {
-                        toastr.success('La hora de finalización ha cambiado.','Actualizacion exitosa');
-                    },
-                    error: function (json) {
-                        console.log("Error al actualizar evento");
-                    }
+    //Evento click de los radiobuttons
+    $(".radio-options").click(event => {
+        //Valida el valor del radiobutton seleccionado
+        switch (event.target.value) {
+            //Buscar por nombre de clientes
+            case '1':
+                data = nombres_clientes;
+                $('.typeahead_1').typeahead('destroy').typeahead({
+                    source: data
                 });
-            },
-
-            //Evento de cambiar de dia la evento dentro del calendario
-            eventDrop: function (event, delta) {
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "progressBar": true,
-                    "preventDuplicates": false,
-                    "positionClass": "toast-bottom-right",
-                    "onclick": null,
-                    "showDuration": "400",
-                    "hideDuration": "1000",
-                    "timeOut": "2000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                var start = event.start.format("YYYY-MM-DD");
-                if (event.end) {
-                    var end = event.end.format("YYYY-MM-DD");
-                } else {
-                    var end = "NULL";
-                }
-                var back = event.backgroundColor;
-                var allDay = event.allDay;
-                crsfToken = document.getElementsByName("_token")[0].value;
-                $.ajax({
-                    url: '/servicios/edit/dates',
-                    data: {
-                        idServicio: event.id,
-                        start: start,
-                        end: end,
-                        option: 'drop'
-                    },
-                    type: "PUT",
-                    headers: {
-                        "X-CSRF-TOKEN": crsfToken
-                    },
-                    success: function (json) {
-                        toastr.success('Las fechas han sido actualizadas.','Actualizacion exitosa');
-                        $("#calendar").fullCalendar('refetchEvents');
-                    },
-                    error: function (json) {
-                        console.log("Error al actualizar evento");
-                    }
+                break;
+                //Buscar por razon social de clientes
+            case '2':
+                data = razon_social_clientes;
+                $('.typeahead_1').typeahead('destroy').typeahead({
+                    source: data
                 });
-            },
+                break;
+                //Buscar por NIT o CC de clientes
+            case '3':
+                data = nit_clientes;
+                $('.typeahead_1').typeahead('destroy').typeahead({
+                    source: data
+                });
+                break;
+            default:
+                console.log('Default');
+                data = [];
+                break;
+        }
+    })
 
-            //Evento de mostrar el Tooltip teniendo el mouse dentro de la evento
-            eventMouseover: function (event, jsEvent, view) {
-                var start = (event.start.format("HH:mm"));
-                var back = event.backgroundColor;
-                if (event.end != null) {
-                    var end = event.end.format("HH:mm");
-                } else {
-                    var end = "No definido";
+    /* Inicialización de componentes de la pagina
+     -----------------------------------------------------------------*/
+    //Inicia iCheck 
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
+
+
+    /* Inicializa el Calendario
+     -----------------------------------------------------------------*/
+    //Instancia la Clase Date para obtener la fecha actual
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    //Declaracion de Variables publicas de Servicio
+    var checkbox = false;
+    var color;
+    var frecuencia_solicitud;
+    var id_solicitud;
+    var id_cliente;
+
+    //Inicializa el calendario
+    $('#calendar').fullCalendar({
+
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        buttonText: {
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día'
+        },
+        //Muestra todas las eventos de la BD
+        // events: {
+        //     url: "/servicios"
+        // },
+        eventLimit: true,
+        editable: true,
+        eventLimit: true,
+        nowIndicator: true,
+        firstDay: 0,
+        businessHours: {
+            // Dias de la semana en un array (0=Domingo)
+            dow: [1, 2, 3, 4, 5, 6], // Lunes a Sabado
+
+            start: '07:00', // Hora de inicio
+            end: '18:00', // Hora de finalizacion
+        },
+        droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
+
+        //Evento para renderizar contenido HMTL en cada uno de los eventos
+        eventRender: function (event, element, view) {
+            if (event.lock === 0) {
+                element.find('.fc-title').prepend(
+                    '<i style="margin-left: 5px" class="fa fa-unlock"></i> ');
+            } else {
+                element.find('.fc-title').prepend(
+                    '<i style="margin-left: 5px"  class="fa fa-lock"></i> ');
+            }
+        },
+
+        //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
+        dayClick: function (start, end, allDay) {
+            //Simula click en el boton de mostrar el modal
+            document.getElementById("btn-modal").click();
+            //Guarda la fecha y hora del dia seleccionado
+            inicio_servicio = start.format("YYYY-MM-DD");
+            //Limpiar elementos
+            $("#select_sedes").empty();
+            $(".list-group-item").remove();
+            $('#input_autocomplete').val('');
+            $("#dir_sede").val('');
+            $("#barrio_sede").val('');
+            $("#contacto_sede").val('');
+            $("#tel_sede").val('');
+            $("#select_frecuencia").val('0').change();
+            $("#opcion-frecuencia").val('0').change();
+            $("#hora_inicio").val('');
+            $("#num_horas").val('');
+            $("#num_minutos").val('');
+            $("#opcion-personalizada").empty();
+            $("#opcion-personalizada").append(`<option>Opción personalizad</option>`);
+            $('#select_servicios').select2("val", "");
+            $('#select_tecnicos2').select2("val", "");
+            $("#historial_tecnicos").popover('destroy');
+            $("#text-instrucciones").val("")
+            $("#create-services").prop('disabled', false);
+            $("#lista-servicios").empty();
+            $("#select_tipo_servicio").val('0').change();
+            $("#frecuencia_solicitud").val('');
+            $("#valor_plan_solicitud").val('');
+            $("#frecuencia_visitas_solicitud").val('');
+            $("#valor_servicios_solicitud").val('');
+            $("#tipo_facturacion_solicitud").val('');
+            $("#observaciones_visitas_solicitud").val('');
+        },
+
+        //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
+        eventResize: function (event) {
+            var start = event.start.format("YYYY-MM-DD HH:mm");
+            var backgroundC = event.backgroundColor;
+            var allDay = event.allDay;
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            if (event.end) { //valida si hay una fecha de terminación de la evento
+                var end = event.end.format("YYYY-MM-DD HH:mm");
+            } else {
+                var end = "NULL"; //Sino la iguala a NULL
+            }
+            crsfToken = document.getElementsByName("_token")[0].value;
+            $.ajax({
+                url: '/servicios/edit/dates',
+                data: {
+                    idServicio: event.id,
+                    start: start,
+                    end: end,
+                    option: 'resize'
+                },
+                type: "PUT",
+                headers: {
+                    "X-CSRF-TOKEN": crsfToken
+                },
+                success: function (json) {
+                    toastr.success('La hora de finalización ha cambiado.',
+                        'Actualizacion exitosa');
+                },
+                error: function (json) {
+                    console.log("Error al actualizar evento");
                 }
-                if (event.allDay) {
-                    var allDay = "Si";
-                } else {
-                    var allDay = "No";
+            });
+        },
+
+        //Evento de cambiar de dia la evento dentro del calendario
+        eventDrop: function (event, delta) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            var start = event.start.format("YYYY-MM-DD");
+            if (event.end) {
+                var end = event.end.format("YYYY-MM-DD");
+            } else {
+                var end = "NULL";
+            }
+            var back = event.backgroundColor;
+            var allDay = event.allDay;
+            crsfToken = document.getElementsByName("_token")[0].value;
+            $.ajax({
+                url: '/servicios/edit/dates',
+                data: {
+                    idServicio: event.id,
+                    start: start,
+                    end: end,
+                    option: 'drop'
+                },
+                type: "PUT",
+                headers: {
+                    "X-CSRF-TOKEN": crsfToken
+                },
+                success: function (json) {
+                    toastr.success('Las fechas han sido actualizadas.',
+                        'Actualizacion exitosa');
+                    $("#calendar").fullCalendar('refetchEvents');
+                },
+                error: function (json) {
+                    console.log("Error al actualizar evento");
                 }
-                //Componente HTML para mostrar la descripcion de la evento (Tooltip)
-                var tooltip =
-                    `<div 
+            });
+        },
+
+        //Evento de mostrar el Tooltip teniendo el mouse dentro de la evento
+        eventMouseover: function (event, jsEvent, view) {
+            var start = (event.start.format("HH:mm"));
+            var back = event.backgroundColor;
+            if (event.end != null) {
+                var end = event.end.format("HH:mm");
+            } else {
+                var end = "No definido";
+            }
+            if (event.allDay) {
+                var allDay = "Si";
+            } else {
+                var allDay = "No";
+            }
+            //Componente HTML para mostrar la descripcion de la evento (Tooltip)
+            var tooltip =
+                `<div 
                         class="tooltipevent" 
                         style=" border: 1px solid #d2d2d2;
                                 width:210px;
@@ -1071,34 +1177,34 @@
                             </div>
                         </div>
                     </div>`;
-                //Agrega el elemento al DOM
-                $("body").append(tooltip);
-                //Eventos cuando el mouse esta dentro de la evento
-                $(this).mouseover(function (e) {
-                    $(this).css('z-index', 10000);//Mueve el tooltip con el mouse
-                    $('.tooltipevent').fadeIn('500');
-                    $('.tooltipevent').fadeTo('10', 1.9);
-                }).mousemove(function (e) {
-                    $('.tooltipevent').css('top', e.pageY + 10);
-                    $('.tooltipevent').css('left', e.pageX + 20);
-                });
-            },
+            //Agrega el elemento al DOM
+            $("body").append(tooltip);
+            //Eventos cuando el mouse esta dentro de la evento
+            $(this).mouseover(function (e) {
+                $(this).css('z-index', 10000); //Mueve el tooltip con el mouse
+                $('.tooltipevent').fadeIn('500');
+                $('.tooltipevent').fadeTo('10', 1.9);
+            }).mousemove(function (e) {
+                $('.tooltipevent').css('top', e.pageY + 10);
+                $('.tooltipevent').css('left', e.pageX + 20);
+            });
+        },
 
-            //Evento de quitar el tooltip cuando el mouse está fuera de la evento
-            eventMouseout: function (calEvent, jsEvent) {
-                $(this).css('z-index', 8);
-                $('.tooltipevent').remove();
-            },
+        //Evento de quitar el tooltip cuando el mouse está fuera de la evento
+        eventMouseout: function (calEvent, jsEvent) {
+            $(this).css('z-index', 8);
+            $('.tooltipevent').remove();
+        },
 
-            //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
-            eventClick: (event, jsEvent, view) => {
-                infoServiceSelected.id = event.id;
-                infoServiceSelected.duration = event.duration;
-                inicio_servicio = event.start.format("YYYY-MM-DD HH:mm:ss");
-                $("#div-opciones").empty();
-                //Añadir opciones al modal de ver servicio
-                $("#div-opciones").append(
-                    `<label>Opciones: </label>
+        //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
+        eventClick: (event, jsEvent, view) => {
+            infoServiceSelected.id = event.id;
+            infoServiceSelected.duration = event.duration;
+            inicio_servicio = event.start.format("YYYY-MM-DD HH:mm:ss");
+            $("#div-opciones").empty();
+            //Añadir opciones al modal de ver servicio
+            $("#div-opciones").append(
+                `<label>Opciones: </label>
                     <a href="/servicios/${event.id}" class="btn btn-default btn-outline" id="btn-editar-servicio" title="Editar Servicio">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -1108,264 +1214,291 @@
                     <button class="btn btn-default btn-outline" id="btn-eliminar-servicio" onclick="deleteEvent(${event.id})" title="Eliminar Servicios">
                         <i class="fa fa-trash-o"></i>
                     </button>`
-                )
-                //Variables locales
-                var id_servicio = event.id;
-                var nombre_sede;
-                var direccion_cliente;
-                var barrio_cliente;
-                var telefono_cliente;
-                var nombre_contacto;
-                var observaciones;
-                crsfToken = document.getElementsByName("_token")[0].value;
-                $("#ind-fac").removeClass('hidden')
-                $("#info-client").empty();
-                $("#tbody-tipos").empty();
-                $("#tbody-tecnicos").empty();
-                $("#btn-lock").empty();                 //Limpia el boton de bloqueado
-                $("#btn-lock").removeClass('active');   //Quita la clase css del elemento HTML
-                //Peticion al servidor para obtener los datos del servicio seleccionado
-                $.get(`/servicios/${event.id}/edit`)
-                    .then((res) => {
-                        console.log(res)
-                        //Valida que el cliente sea persona natural o juridica
-                        if (res[0].solicitud.sede) {
-                            nombre_sede = res[0].solicitud.sede.nombre;
-                            direccion_cliente = res[0].solicitud.sede.direccion;
-                            barrio_cliente = res[0].solicitud.sede.barrio;
-                            telefono_cliente = res[0].solicitud.sede.telefono_contacto;
-                            nombre_contacto = res[0].solicitud.sede.nombre_contacto;
-                        } else {
-                            nombre_sede = 'Sede única';
-                            direccion_cliente = res[0].solicitud.cliente.direccion;
-                            barrio_cliente = res[0].solicitud.cliente.barrio;
-                            telefono_cliente = res[0].solicitud.cliente.celular;
-                            nombre_contacto = res[0].solicitud.cliente.nombre_contacto;
-                        }
-                        //Valida si el servicio esta bloqueado o no
-                        infoServiceSelected.state = res[0].confirmado;
-                        if (res[0].confirmado === 0) {
-                            $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
-                        } else {
-                            $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`).addClass('active');
-                        }
-                        //Conversiones y procesamiento de las fechas para su correcta visualización
-                        var date1 = moment(res[0].fecha_inicio + " " + res[0].hora_inicio, "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh:mm a');
-                        var date2 = moment(res[0].fecha_fin + " " + res[0].hora_fin, "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh.mm a');
-                        var hours = Math.floor((res[0].duracion) / 60);
-                        var minutes = (res[0].duracion % 60);
-                        //Llena los input con los valores de la respuesta del servidor
-                        $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
-                        $("#ver_nombre_sede").val(nombre_sede);
-                        $("#ver_direccion_sede").val(direccion_cliente);
-                        $("#ver_barrio_sede").val(barrio_cliente);
-                        $("#ver_contacto_sede").val(nombre_contacto);
-                        $("#ver_telefono_sede").val(telefono_cliente);
-                        $("#ver_hora_inicio").val(date1);
-                        $("#ver_datos_fin").val(date2);
-                        $("#ver_frecuencia").val(res[0].frecuencia).change();
-                        $("#ver_duracion").val(hours + " hora(s) " + minutes + " minuto(s)");
-                        $("#ver_instrucciones").val(res[0].solicitud.observaciones);
-                        res[0].tipos.forEach((value, index) => {
-                            $("#tbody-tipos").append(
-                                `<tr>    
+            )
+            //Variables locales
+            var id_servicio = event.id;
+            var nombre_sede;
+            var direccion_cliente;
+            var barrio_cliente;
+            var telefono_cliente;
+            var nombre_contacto;
+            var observaciones;
+            crsfToken = document.getElementsByName("_token")[0].value;
+            $("#ind-fac").removeClass('hidden')
+            $("#info-client").empty();
+            $("#tbody-tipos").empty();
+            $("#tbody-tecnicos").empty();
+            $("#btn-lock").empty(); //Limpia el boton de bloqueado
+            $("#btn-lock").removeClass('active'); //Quita la clase css del elemento HTML
+            //Peticion al servidor para obtener los datos del servicio seleccionado
+            $.get(`/servicios/${event.id}/edit`)
+                .then((res) => {
+                    console.log(res)
+                    //Valida que el cliente sea persona natural o juridica
+                    if (res[0].solicitud.sede) {
+                        nombre_sede = res[0].solicitud.sede.nombre;
+                        direccion_cliente = res[0].solicitud.sede.direccion;
+                        barrio_cliente = res[0].solicitud.sede.barrio;
+                        telefono_cliente = res[0].solicitud.sede.telefono_contacto;
+                        nombre_contacto = res[0].solicitud.sede.nombre_contacto;
+                    } else {
+                        nombre_sede = 'Sede única';
+                        direccion_cliente = res[0].solicitud.cliente.direccion;
+                        barrio_cliente = res[0].solicitud.cliente.barrio;
+                        telefono_cliente = res[0].solicitud.cliente.celular;
+                        nombre_contacto = res[0].solicitud.cliente.nombre_contacto;
+                    }
+                    //Valida si el servicio esta bloqueado o no
+                    infoServiceSelected.state = res[0].confirmado;
+                    if (res[0].confirmado === 0) {
+                        $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
+                    } else {
+                        $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`)
+                            .addClass('active');
+                    }
+                    //Conversiones y procesamiento de las fechas para su correcta visualización
+                    var date1 = moment(res[0].fecha_inicio + " " + res[0].hora_inicio,
+                        "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh:mm a');
+                    var date2 = moment(res[0].fecha_fin + " " + res[0].hora_fin,
+                        "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh.mm a');
+                    var hours = Math.floor((res[0].duracion) / 60);
+                    var minutes = (res[0].duracion % 60);
+                    //Llena los input con los valores de la respuesta del servidor
+                    $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
+                    $("#ver_nombre_sede").val(nombre_sede);
+                    $("#ver_direccion_sede").val(direccion_cliente);
+                    $("#ver_barrio_sede").val(barrio_cliente);
+                    $("#ver_contacto_sede").val(nombre_contacto);
+                    $("#ver_telefono_sede").val(telefono_cliente);
+                    $("#ver_hora_inicio").val(date1);
+                    $("#ver_datos_fin").val(date2);
+                    $("#ver_frecuencia").val(res[0].frecuencia).change();
+                    $("#ver_duracion").val(hours + " hora(s) " + minutes + " minuto(s)");
+                    $("#ver_instrucciones").val(res[0].solicitud.observaciones);
+                    res[0].tipos.forEach((value, index) => {
+                        $("#tbody-tipos").append(
+                            `<tr>    
                                 <td>${index + 1}</td>
                                 <td>${value.nombre}</td>
                                 <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
                                 <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.valor)}"/></td>
-                                <!--<td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>-->
+                                <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>
 
                             </tr>`);
-                        });
-                        res[0].tecnicos.forEach((value, index) => {
-                            $("#tbody-tecnicos").append(
-                                `<tr>    
+                    });
+                    res[0].tecnicos.forEach((value, index) => {
+                        $("#tbody-tecnicos").append(
+                            `<tr>    
                                 <td>${index + 1}</td>
                                 <td>${value.nombre}</td>
                             </tr>`);
-                        });
-                        if(res[0].factura){
-                            
-                            $("#num-fac").val(res[0].factura.numero_factura);
-                            $("#val-fac").val(res[0].factura.valor);
-                        }else{
-                            $("#num-fac").val('');
-                            $("#val-fac").val('');
-                        }
-                        if(res[0].solicitud.cliente.estado_facturacion !== "Normal"){
-                            $("#info-client").append(`<label class="label label-danger">Cliente en mora</label>`);
-                        }
-                        //Quita el loader de la vista
-                        $(".modal-body").removeClass('sk-loading');
-                        console.log('GET ver servicios Successfully');
-                        if(res[0].tipo == 'Neutro'){
-                            $("#ver_nombre_cliente_3").val(res[0].solicitud.cliente.nombre_cliente);
-                            $("#ver_nombre_sede_3").val(nombre_sede);
-                            $("#ver_direccion_sede_3").val(direccion_cliente);
-                            $("#ver_barrio_sede_3").val(barrio_cliente);
-                            $("#ver_contacto_sede_3").val(nombre_contacto);
-                            $("#ver_telefono_sede_3").val(telefono_cliente);
-                            $("#ver_observaciones_3").val(res[0].observaciones);
-                            document.getElementById("btn-modal3").click()
-                            return;
-                        }
-                        if(res[0].tipo == 'Mensajeria'){
-                            $("#ver_nombre_cliente_4").val(res[0].solicitud.cliente.nombre_cliente);
-                            $("#ver_nombre_sede_4").val(nombre_sede);
-                            $("#ver_direccion_sede_4").val(direccion_cliente);
-                            $("#ver_barrio_sede_4").val(barrio_cliente);
-                            $("#ver_contacto_sede_4").val(nombre_contacto);
-                            $("#ver_telefono_sede_4").val(telefono_cliente);
-                            $("#ver_observaciones_4").val(res[0].observaciones);
-                            document.getElementById("btn-modal4").click()
-                            return ;
-                        }
-                        document.getElementById("btn-modal2").click();
-                    })
-                    .catch((err) => {
-                        $(".modal-body").removeClass('sk-loading');
-                        console.log(err);
-                    })
-
-            }
-        });
-
-        $.get('/tecnicos')
-            .then(res => {
-                $("#calendar").fullCalendar('addEventSource', '/servicios')
-                res.forEach(tecnico => {
-                    //$('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` );    //Añade el source servicios de cada tecnico
-                    /*$(`#tecnico-${tecnico.id}`).click(e => {
-                        if($(`#tecnico-${tecnico.id}`).is(':checked')){ //Valida si el checkbox esta activo
-                            $('#calendar').fullCalendar('addEventSource', `/servicios/show/${tecnico.id}` )
-                        }else{
-                            $('#calendar').fullCalendar('removeEventSource', `/servicios/show/${tecnico.id}` ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
-                        }
-                    })*/
-                });
-            })
-            .catch(err => {
-                console.log(err)
-            })
-
-
-        //Change del input de autocompletado
-        $input.change(function () {
-            var current = $input.typeahead("getActive");
-            id_cliente = current.id;
-            //Valida si el cliente esta en Mora
-            info_clientes.forEach(cliente => {
-                if(id_cliente == cliente.id){
-                    if(cliente.estado_facturacion !== "Normal"){
-                        swal('¡Advertencia!', 'El cliente seleccionado se encuentra en mora.', 'warning');
-                        $("#create-services").attr('disabled', 'disabled')
-                    }else if(!cliente.estado_facturacion){
-                        $("#create-services").prop('disabled', false)
-                    }else{
-                        $("#create-services").prop('disabled', false)
-                    }
-                }
-            })
-
-            //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
-            $.get(`/sedes/cliente/${current.id}`, function (res) {
-                $("#select_sedes").empty();//Limipia el select
-                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
-                if (res == '') {//Valida que el cliente tenga sedes
-                    $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
-                } else {
-                    //Recorre la respuesta del servidor
-                    res.forEach(element => {
-                        //Añade Options al select de sedes dependiendo de la respues del servidor
-                        $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
                     });
-                }
-            }).then((res) => {
-                console.log('Petición Exitosa');
-            }).catch((err) => {
-                console.log(err);
-            });
-        });
+                    if (res[0].factura) {
 
-        //Peticion al servidor para obtener la solicitud de una sede
-        function obtenerSolicitudSede(id_sede, crsfToken) {
-            $.ajax({
-                url: '/solicitud/show',
-                data: {
-                    'id_cliente': id_cliente,
-                    'id_sede': id_sede,
-                    '_token': crsfToken //Obligatorio
-                },
-                type: 'POST',
-                header: {
-                    "Content-Type": 'application/x-www-form-urlencoded',
-                    "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
-                },
-                success: function (res) {
-                    if (res == '') {  //Valida que la respueta este vacia
-                        swal('¡Error!', 'Esta sede no tiene una solicitud a programación.', 'error');
-                        $(".list-group-item").remove();
-                        $("#dir_sede").val('');
-                        $("#barrio_sede").val('');
-                        $("#contacto_sede").val('');
-                        $("#tel_sede").val('');
-                        $("#select_frecuencia").val('0').change();
-                        $("#hora_inicio").val('');
-                        $("#num_horas").val('');
-                        $("#num_minutos").val('');
-                        $('#select_servicios').select2("val", "");
-                        $('#select_tecnicos2').select2("val", "");
-                        $("#text-instrucciones").val('');
-                        $("#sug_frecuency").val('');
-
-                        id_solicitud = '';
+                        $("#num-fac").val(res[0].factura.numero_factura);
+                        $("#val-fac").val(res[0].factura.valor);
                     } else {
-                        $("#text-instrucciones").val(res[0]['observaciones']);
-                        $("#dir_sede").val(res[0].direccion);
-                        $("#barrio_sede").val(res[0].barrio);
-                        $("#contacto_sede").val(!res[0].nombre_contacto_inicial ? res[0].nombre_contacto : res[0].nombre_contacto_inicial);
-                        $("#tel_sede").val(res[0].telefono_contacto);
-                        $("#sug_frecuency").val(res[0]['frecuencia'])
-                        //Inicializacion del Popover
-                        $('#historial_tecnicos').popover({
-                            title: "Historial de Tecnicos",
-                            container: false,
-                            animation: true,
-                            html: true,
-                            placement: 'left',
-                            template: '<div class="popover" role="tooltip" style="top: -1.93333px; left: 55px; display: block;width: 250px;"><div class="arrow"></div><h3 class="popover-title" style="text-align: center;"></h3><div class="popover-content"></div></div>',
-                            content: function () {
-                                return $("#list-historic").html();  //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
+                        $("#num-fac").val('');
+                        $("#val-fac").val('');
+                    }
+                    if (res[0].solicitud.cliente.estado_facturacion !== "Normal") {
+                        $("#info-client").append(
+                            `<label class="label label-danger">Cliente en mora</label>`);
+                    }
+                    //Quita el loader de la vista
+                    $(".modal-body").removeClass('sk-loading');
+                    console.log('GET ver servicios Successfully');
+                    if (res[0].tipo == 'Neutro') {
+                        $("#ver_nombre_cliente_3").val(res[0].solicitud.cliente
+                            .nombre_cliente);
+                        $("#ver_nombre_sede_3").val(nombre_sede);
+                        $("#ver_direccion_sede_3").val(direccion_cliente);
+                        $("#ver_barrio_sede_3").val(barrio_cliente);
+                        $("#ver_contacto_sede_3").val(nombre_contacto);
+                        $("#ver_telefono_sede_3").val(telefono_cliente);
+                        $("#ver_observaciones_3").val(res[0].observaciones);
+                        document.getElementById("btn-modal3").click()
+                        return;
+                    }
+                    if (res[0].tipo == 'Mensajeria') {
+                        $("#ver_nombre_cliente_4").val(res[0].solicitud.cliente
+                            .nombre_cliente);
+                        $("#ver_nombre_sede_4").val(nombre_sede);
+                        $("#ver_direccion_sede_4").val(direccion_cliente);
+                        $("#ver_barrio_sede_4").val(barrio_cliente);
+                        $("#ver_contacto_sede_4").val(nombre_contacto);
+                        $("#ver_telefono_sede_4").val(telefono_cliente);
+                        $("#ver_observaciones_4").val(res[0].observaciones);
+                        document.getElementById("btn-modal4").click()
+                        return;
+                    }
+                    document.getElementById("btn-modal2").click();
+                })
+                .catch((err) => {
+                    $(".modal-body").removeClass('sk-loading');
+                    console.log(err);
+                })
+
+        }
+    });
+
+    $.get('/tecnicos')
+    .then(res => {
+        //$("#calendar").fullCalendar('addEventSource', '/servicios')
+        res.forEach(tecnico => {
+            $('#calendar').fullCalendar('addEventSource',
+                `/servicios/show/${tecnico.id}`); //Añade el source servicios de cada tecnico
+            $(`#tecnico-${tecnico.id}`).click(e => {
+                if ($(`#tecnico-${tecnico.id}`).is(
+                        ':checked')) { //Valida si el checkbox esta activo
+                    $('#calendar').fullCalendar('addEventSource',
+                        `/servicios/show/${tecnico.id}`)
+                } else {
+                    $('#calendar').fullCalendar('removeEventSource',
+                        `/servicios/show/${tecnico.id}`
+                    ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
+                }
+            })
+        });
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+
+    //Change del input de autocompletado
+    $input.change(function () {
+        var current = $input.typeahead("getActive");
+        id_cliente = current.id;
+        //Valida si el cliente esta en Mora
+        info_clientes.forEach(cliente => {
+            if (id_cliente == cliente.id) {
+                if (cliente.estado_facturacion !== "Normal") {
+                    swal('¡Advertencia!', 'El cliente seleccionado se encuentra en mora.',
+                        'warning');
+                    $("#create-services").attr('disabled', 'disabled')
+                } else if (!cliente.estado_facturacion) {
+                    $("#create-services").prop('disabled', false)
+                } else {
+                    $("#create-services").prop('disabled', false)
+                }
+            }
+        })
+
+        //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
+        $.get(`/sedes/cliente/${current.id}`, function (res) {
+            $("#select_sedes").empty(); //Limipia el select
+            $("#select_sedes").append(
+                `<option value='' disabled selected> Selecciona una sede </option>`);
+            if (res == '') { //Valida que el cliente tenga sedes
+                $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
+            } else {
+                //Recorre la respuesta del servidor
+                res.forEach(element => {
+                    //Añade Options al select de sedes dependiendo de la respues del servidor
+                    $("#select_sedes").append(
+                        `<option value=${element.id}> ${element.nombre} </option>`
+                    );
+                });
+            }
+        }).then((res) => {
+            console.log('Petición Exitosa');
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+
+    //Peticion al servidor para obtener la solicitud de una sede
+    function obtenerSolicitudSede(id_sede, crsfToken) {
+        $.ajax({
+            url: '/solicitud/show',
+            data: {
+                'id_cliente': id_cliente,
+                'id_sede': id_sede,
+                '_token': crsfToken //Obligatorio
+            },
+            type: 'POST',
+            header: {
+                "Content-Type": 'application/x-www-form-urlencoded',
+                "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
+            },
+            success: function (res) {
+                if (res == '') { //Valida que la respueta este vacia
+                    swal('¡Error!', 'Esta sede no tiene una solicitud a programación.',
+                        'error');
+                    $(".list-group-item").remove();
+                    $("#dir_sede").val('');
+                    $("#barrio_sede").val('');
+                    $("#contacto_sede").val('');
+                    $("#tel_sede").val('');
+                    $("#select_frecuencia").val('0').change();
+                    $("#hora_inicio").val('');
+                    $("#num_horas").val('');
+                    $("#num_minutos").val('');
+                    $('#select_servicios').select2("val", "");
+                    $('#select_tecnicos2').select2("val", "");
+                    $("#text-instrucciones").val('');
+                    $("#sug_frecuency").val('');
+
+                    id_solicitud = '';
+                } else {
+                    $("#text-instrucciones").val(res[0]['observaciones']);
+                    $("#dir_sede").val(res[0].direccion);
+                    $("#barrio_sede").val(res[0].barrio);
+                    $("#contacto_sede").val(!res[0].nombre_contacto_inicial ? res[0]
+                        .nombre_contacto : res[0].nombre_contacto_inicial);
+                    $("#tel_sede").val(res[0].telefono_contacto);
+                    $("#sug_frecuency").val(res[0]['frecuencia'])
+                    //Inicializacion del Popover
+                    $('#historial_tecnicos').popover({
+                        title: "Historial de Tecnicos",
+                        container: false,
+                        animation: true,
+                        html: true,
+                        placement: 'left',
+                        template: '<div class="popover" role="tooltip" style="top: -1.93333px; left: 55px; display: block;width: 250px;"><div class="arrow"></div><h3 class="popover-title" style="text-align: center;"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            return $("#list-historic")
+                                .html(); //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
+                        }
+                    });
+                    id_solicitud = res[0]['id'];
+                    //Servicio para obtener el historia de tecnicos del cliente seleccionado
+                    $.get(`/tecnicos/${id_solicitud}`)
+                        .then((data) => {
+                            $(".list-group-item")
+                                .remove(); //Quita los elementos del DOM que contengan esta clase
+                            if (data == '') { //Valida que haya tenido servicios
+                                $("#list-tecnicos").append(
+                                    `<li class="list-group-item" style="text-align: center">Todavia no hay servicios en esta sede.</li>`
+                                ); //Agreaga elementos HTML en el elem con el ID seleccionado
+                            } else {
+                                data.forEach((value, index) => {
+                                    $("#list-tecnicos").append(
+                                        `<li class="list-group-item" style="text-align: center" id="tec${index}" onmouseover="tool(${index},${value.id},${id_solicitud})" onmouseout="quit(${index})">${value.nombre}</li>`
+                                    );
+                                });
+
                             }
                         });
-                        id_solicitud = res[0]['id'];
-                        //Servicio para obtener el historia de tecnicos del cliente seleccionado
-                        $.get(`/tecnicos/${id_solicitud}`)
-                            .then((data) => {
-                                $(".list-group-item").remove(); //Quita los elementos del DOM que contengan esta clase
-                                if (data == '') {   //Valida que haya tenido servicios
-                                    $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center">Todavia no hay servicios en esta sede.</li>`); //Agreaga elementos HTML en el elem con el ID seleccionado
-                                } else {
-                                    data.forEach((value, index) => {
-                                        $("#list-tecnicos").append(`<li class="list-group-item" style="text-align: center" id="tec${index}" onmouseover="tool(${index},${value.id},${id_solicitud})" onmouseout="quit(${index})">${value.nombre}</li>`);
-                                    });
+                    frecuencia_solicitud = res[0][
+                        'frecuencia'
+                    ]; //Guarda la frecuencia en la variable publica
+                    $("#select_frecuencia").val(frecuencia_solicitud)
+                        .change(); //Cambia el valor del input   
 
-                                }
-                            });
-                        frecuencia_solicitud = res[0]['frecuencia']; //Guarda la frecuencia en la variable publica
-                        $("#select_frecuencia").val(frecuencia_solicitud).change(); //Cambia el valor del input   
-                        
-                        $.get(`/temporales/novedad/${id_cliente}/${id_sede}`)
-                            .then( res => {
-                                res.forEach((novedad, index) => {
-                                    $("#lista-servicios").append(`
+                    $.get(`/temporales/novedad/${id_cliente}/${id_sede}`)
+                        .then(res => {
+                            res.forEach((novedad, index) => {
+                                $("#lista-servicios").append(`
                                         <li class="item-list" id="item-novedad-${novedad.id}">
                                             <input type="checkbox" value="${novedad.id}" id="check-${index}"/>
                                             <span class="m-l-xs">${novedad.descripcion}</span>
                                         </li>
                                     `);
 
-                                    document.getElementById(`check-${index}`).addEventListener('click', e => {
+                                document.getElementById(`check-${index}`)
+                                    .addEventListener('click', e => {
                                         $.ajax({
                                             url: `/temporales/novedad/${e.target.value}`,
                                             type: 'DELETE',
@@ -1374,163 +1507,176 @@
                                                 "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
                                             },
                                             success: (res) => {
-                                            url: `/temporales/novedad/${e.target.value}`,
-                                                $(`#item-novedad-${e.target.value}`).remove();
+                                                url: `/temporales/novedad/${e.target.value}`,
+                                                $(
+                                                    `#item-novedad-${e.target.value}`
+                                                    )
+                                                .remove();
                                             },
                                             error: (err) => {
                                                 console.log(err)
                                             }
                                         })
                                     })
-                                })
                             })
-                            .catch( err => {
-                                console.log(err)
-                            })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
 
-                        $.get(`/show/inspections/${id_cliente}/${id_sede}`)
-                            .then(res => {
-                                solicitudes = res;
-                                $("#select_solicitudes").empty();//Limipia el select
-                                $("#select_solicitudes").append(`<option value='' disabled selected> Selecciona una solicitud </option>`);
+                    $.get(`/show/inspections/${id_cliente}/${id_sede}`)
+                        .then(res => {
+                            solicitudes = res;
+                            $("#select_solicitudes").empty(); //Limipia el select
+                            $("#select_solicitudes").append(
+                                `<option value='' disabled selected> Selecciona una solicitud </option>`
+                            );
 
-                                res.forEach((value,index) => {
-                                    $("#select_solicitudes").append(`<option value="${value.id}">${value.codigo} - ${value.fecha}</option>`)
-                                })
+                            res.forEach((value, index) => {
+                                $("#select_solicitudes").append(
+                                    `<option value="${value.id}">${value.codigo} - ${value.fecha}</option>`
+                                )
                             })
-                            .catch(err => {
-                                console.log(err)
-                            })
-                    }
-                },
-                error: function (err) {
-                   swal('¡Error!', 'Error al obtener la información de la sede', 'error');
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 }
-            });
+            },
+            error: function (err) {
+                swal('¡Error!', 'Error al obtener la información de la sede', 'error');
+            }
+        });
+    }
+
+    $("#select_solicitudes").change(e => {
+        $("#frecuencia_solicitud").val('');
+        $("#valor_plan_solicitud").val('');
+        $("#frecuencia_visitas_solicitud").val('');
+        $("#valor_servicios_solicitud").val('');
+        $("#tipo_facturacion_solicitud").val('');
+        $("#observaciones_visitas_solicitud").val('');
+        $("#more-solicitud").empty()
+        solicitudes.forEach((value, index) => {
+            if (value.id == e.target.value) {
+                $("#frecuencia_solicitud").val(value.frecuencia)
+                $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
+                $("#frecuencia_visitas_solicitud").val("Cada " + value.frecuencia_visitas +
+                    " días")
+                $("#valor_servicios_solicitud").val(value.total_detalle_servicios
+                    .toString())
+                $("#tipo_facturacion_solicitud").val(value.tipo_facturacion)
+                $("#observaciones_visitas_solicitud").val(value.observaciones_visitas)
+                $("#more-solicitud").append(
+                    `<a class="pull-right" href="/solicitud/${value.id}/edit">Ver más datos</a>`
+                )
+            }
+        })
+    })
+
+    //Evento change del select de Sedes
+    $("#select_sedes").change(event => {
+        crsfToken = document.getElementsByName("_token")[0].value;
+        var id_sede = $("#select_sedes").val();
+        $("#frecuencia_solicitud").val('');
+        $("#valor_plan_solicitud").val('');
+        $("#frecuencia_visitas_solicitud").val('');
+        $("#valor_servicios_solicitud").val('');
+        $("#tipo_facturacion_solicitud").val('');
+        $("#observaciones_visitas_solicitud").val('');
+        //Referencia al metodo de obtener la solicitud del cliente
+        obtenerSolicitudSede(id_sede, crsfToken);
+
+    });
+
+    $("#opcion-frecuencia").change(event => {
+        addOptionsAtSelects('frecuencia', 'personalizada');
+    })
+
+    function saveService(unique) {
+        if ($("#select_tipo_servicio").val() == '0') {
+            swal('Información', 'Selecciona un tipo de servicio.', 'info')
+            return
+        }
+        if ($("#num_horas").val() == '' || $("#num_minutos").val() == '') {
+            swal('Información', 'Número de horas o minutos inválido.', 'info')
+            return
+        }
+        if ($("#indice-frecuencia").val() == '' || $("#opcion-frecuencia").val() == '') {
+            swal('Información', 'Selecciona una frecuencia válida.', 'info')
+            return
         }
 
-        $("#select_solicitudes").change(e => {
-            $("#frecuencia_solicitud").val('');
-            $("#valor_plan_solicitud").val('');
-            $("#frecuencia_visitas_solicitud").val('');
-            $("#valor_servicios_solicitud").val('');
-            $("#tipo_facturacion_solicitud").val('');
-            $("#observaciones_visitas_solicitud").val('');
-            $("#more-solicitud").empty()
-            solicitudes.forEach((value,index) => {
-                if(value.id == e.target.value){
-                    $("#frecuencia_solicitud").val(value.frecuencia)
-                    $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
-                    $("#frecuencia_visitas_solicitud").val("Cada "+value.frecuencia_visitas+" días")
-                    $("#valor_servicios_solicitud").val(value.total_detalle_servicios.toString())
-                    $("#tipo_facturacion_solicitud").val(value.tipo_facturacion)
-                    $("#observaciones_visitas_solicitud").val(value.observaciones_visitas)
-                    $("#more-solicitud").append(`<a class="pull-right" href="/solicitud/${value.id}/edit">Ver más datos</a>`)
-                }
-            })
-        })
-
-        //Evento change del select de Sedes
-        $("#select_sedes").change(event => {
-            crsfToken = document.getElementsByName("_token")[0].value;
-            var id_sede = $("#select_sedes").val();
-            $("#frecuencia_solicitud").val('');
-            $("#valor_plan_solicitud").val('');
-            $("#frecuencia_visitas_solicitud").val('');
-            $("#valor_servicios_solicitud").val('');
-            $("#tipo_facturacion_solicitud").val('');
-            $("#observaciones_visitas_solicitud").val('');
-            //Referencia al metodo de obtener la solicitud del cliente
-            obtenerSolicitudSede(id_sede, crsfToken);
-
+        //Declaracion de Variables locales de Servicio
+        var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
+        var frecuencia;
+        var start_event = inicio_servicio;
+        var tipoServicio = $("#select_tipo_servicio").val();
+        var observaciones = $("#text-instrucciones").val();
+        frecuencia = parseInt($("#indice-frecuencia").val());
+        var tecnicos = [];
+        $("#select_tecnicos2").val().forEach((value, index) => {
+            tecnicos[index] = value;
+        });
+        var tipos_servicio = [];
+        $("#select_servicios").val().forEach((value, index) => {
+            tipos_servicio[index] = value
         });
 
-        $("#opcion-frecuencia").change(event => {
-            addOptionsAtSelects('frecuencia', 'personalizada');
-        })
-
-        function saveService(unique){
-            if($("#select_tipo_servicio").val() == '0'){
-                swal('Información','Selecciona un tipo de servicio.', 'info')
-                return 
-            }
-            if($("#num_horas").val() == '' || $("#num_minutos").val() == ''){
-                swal('Información','Número de horas o minutos inválido.', 'info')
-                return 
-            }
-            if($("#indice-frecuencia").val() == '' || $("#opcion-frecuencia").val() == ''){
-                swal('Información','Selecciona una frecuencia válida.', 'info')
-                return 
-            }
-
-            //Declaracion de Variables locales de Servicio
-            var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
-            var frecuencia;
-            var start_event = inicio_servicio;
-            var tipoServicio = $("#select_tipo_servicio").val();
-            var observaciones = $("#text-instrucciones").val();
-            frecuencia = parseInt($("#indice-frecuencia").val());
-            var tecnicos = [];
-            $("#select_tecnicos2").val().forEach((value, index) => {
-                tecnicos[index] = value;
-            });
-            var tipos_servicio = [];
-            $("#select_servicios").val().forEach((value, index) => {
-                tipos_servicio[index] = value
-            });
-
-            //Prueba de fechas y horas
-            console.log($("#hora_inicio").val());//email, start1.format('YYYY-MM-DD HH:mm'));
-            crsfToken = document.getElementsByName("_token")[0].value;
-            var start_service = moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA');
-            var end_service = start_service.add(duracion_servicio, 'minutes');
-            //var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
-            let dataToSend = {
-                tipos: tipos_servicio.length != 0 ? tipos_servicio : 'sin servicios',
-                frecuencia: frecuencia,
-                tipo_servicio: tipoServicio,
-                start: start_event,
-                hora_inicio: moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA').format("HH:mm"),
-                hora_fin: end_service.format("HH:mm"),
-                duracion: duracion_servicio,
-                id_tecnicos: tecnicos.length != 0 ? tecnicos : 'sin tecnicos',
-                id_solicitud: id_solicitud,
-                opcionFrecuencia: '',
-                diaOrdinal: '',
-                nombreDia: '',
-                dayOfWeek: '',
-                diaDelMes: '',
-                observaciones: observaciones,
-                frecuenciaUnica: unique
-            };
-            if ($("#opcion-frecuencia").val() == 'semanas') {
-                dataToSend.opcionFrecuencia = "semanas";
-                dataToSend.dayOfWeek = $("#opcion-personalizada").val();
-            } else if ($("#opcion-frecuencia").val() == 'meses') {
-                dataToSend.opcionFrecuencia = "meses";
-                let arrCustomOption = ($("#opcion-personalizada").val()).split('-');
-                console.log(arrCustomOption);
-                if (arrCustomOption[0] != 'all') {
-                    dataToSend.diaOrdinal = arrCustomOption[0];
-                    dataToSend.nombreDia = arrCustomOption[1];
-                } else {
-                    dataToSend.diaDelMes = arrCustomOption[1];
-                }
-
-            } else if ($("#opcion-frecuencia").val() == 'dias') {
-                dataToSend.opcionFrecuencia = "dias";
+        //Prueba de fechas y horas
+        console.log($("#hora_inicio").val()); //email, start1.format('YYYY-MM-DD HH:mm'));
+        crsfToken = document.getElementsByName("_token")[0].value;
+        var start_service = moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA');
+        var end_service = start_service.add(duracion_servicio, 'minutes');
+        //var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
+        let dataToSend = {
+            tipos: tipos_servicio.length != 0 ? tipos_servicio : 'sin servicios',
+            frecuencia: frecuencia,
+            tipo_servicio: tipoServicio,
+            start: start_event,
+            hora_inicio: moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA').format(
+                "HH:mm"),
+            hora_fin: end_service.format("HH:mm"),
+            duracion: duracion_servicio,
+            id_tecnicos: tecnicos.length != 0 ? tecnicos : 'sin tecnicos',
+            id_solicitud: id_solicitud,
+            opcionFrecuencia: '',
+            diaOrdinal: '',
+            nombreDia: '',
+            dayOfWeek: '',
+            diaDelMes: '',
+            observaciones: observaciones,
+            frecuenciaUnica: unique
+        };
+        if ($("#opcion-frecuencia").val() == 'semanas') {
+            dataToSend.opcionFrecuencia = "semanas";
+            dataToSend.dayOfWeek = $("#opcion-personalizada").val();
+        } else if ($("#opcion-frecuencia").val() == 'meses') {
+            dataToSend.opcionFrecuencia = "meses";
+            let arrCustomOption = ($("#opcion-personalizada").val()).split('-');
+            console.log(arrCustomOption);
+            if (arrCustomOption[0] != 'all') {
+                dataToSend.diaOrdinal = arrCustomOption[0];
+                dataToSend.nombreDia = arrCustomOption[1];
             } else {
-                dataToSend.opcionFrecuencia = "anios";
+                dataToSend.diaDelMes = arrCustomOption[1];
             }
 
-            if($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() == 'Refuerzo'){
-                if(dataToSend.id_tecnicos == 'sin tecnicos' || dataToSend.tipos == 'sin servicios'){
-                    swal('Información','Selecciona al menos un técnico y servicio.', 'info')
-                    return 
-                }
+        } else if ($("#opcion-frecuencia").val() == 'dias') {
+            dataToSend.opcionFrecuencia = "dias";
+        } else {
+            dataToSend.opcionFrecuencia = "anios";
+        }
+
+        if ($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() ==
+            'Refuerzo') {
+            if (dataToSend.id_tecnicos == 'sin tecnicos' || dataToSend.tipos == 'sin servicios') {
+                swal('Información', 'Selecciona al menos un técnico y servicio.', 'info')
+                return
             }
-            //Alert de confirmacion
-            swal({
+        }
+        //Alert de confirmacion
+        swal({
                 title: "¡Advertencia!",
                 text: "¿Estás seguro de guardar este servicio?",
                 icon: "warning",
@@ -1544,79 +1690,83 @@
                     }
                 }
             })
-                .then(isConfirm => {
-                    if (isConfirm) {
-                        //Peticion HTTP para guardar el evento
-                        $.ajax({
-                            url: '/servicios',//URL del servicio
+            .then(isConfirm => {
+                if (isConfirm) {
+                    //Peticion HTTP para guardar el evento
+                    $.ajax({
+                            url: '/servicios', //URL del servicio
                             data: dataToSend,
-                            type: "POST",//Método de envío
+                            type: "POST", //Método de envío
                             headers: {
                                 "Content-Type": 'application/x-www-form-urlencoded',
-                                "X-CSRF-TOKEN": crsfToken       //Token de seguridad
+                                "X-CSRF-TOKEN": crsfToken //Token de seguridad
                             },
 
                         })
-                            .then(events => {
-                                swal("¡Creación Correcta!", "Servicios creados correctamente.", "success")
-                                    .then(value => { //Boton OK actualizado
-                                        if (value) {
-                                            console.log('Evento creado');   //Escribe en la consola
-                                            $("#btn-close2").click();
-                                            $('#calendar').fullCalendar('refetchEvents');//Refresca todos los eventos dentro del calendario
-                                        }
-                                    })
-                            })
-                            .catch(error => {
-                                swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios', "error")
-                            })
-                        console.log(dataToSend)
-                    }
-                })
-        }
-
-        //Evento Submit del modal de crear Servicio
-        $('#form-calendario').submit(event => {
-            event.preventDefault();
-            saveService("duplicado");
-        });
-
-        $("#btn-unique").click(function(){
-            saveService("unico");
-        })
-
-        //Evento click del boton de imprimir Modal (Crear Servicio)
-
-        // $("#btn-print").click(event => {
-        $("#btn-imprimir-servicio").click(event => {
-            console.log("event.target");
-            event.preventDefault();
-
-            // var url="/eventos/index";
-            // $('#calendar').fullCalendar({ events: {url: url}    });//Refresca todos los eventos dentro del calendario
-            // $('#calendar').fullCalendar('removeEvents');
-            // $('#calendar').fullCalendar('addEventSource', url);
-            // $('#event-option')
-            // .modal('hide')                          //Oculta el modal abierto
-            // .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
-            //     $('#event-print').modal('show');    //Muestra el nuevo modal
-
-            //     $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
-            // });
-        });
-
-
-        $("#form-print").submit(event => {
-            event.preventDefault();
-            swal({
-                type: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href>Why do I have this issue?</a>'
+                        .then(events => {
+                            swal("¡Creación Correcta!", "Servicios creados correctamente.",
+                                    "success")
+                                .then(value => { //Boton OK actualizado
+                                    if (value) {
+                                        console.log('Evento creado'); //Escribe en la consola
+                                        $("#btn-close2").click();
+                                        $('#calendar').fullCalendar(
+                                            'refetchEvents'
+                                            ); //Refresca todos los eventos dentro del calendario
+                                    }
+                                })
+                        })
+                        .catch(error => {
+                            swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios',
+                                "error")
+                        })
+                    console.log(dataToSend)
+                }
             })
-            $('#event-print')
-                .modal('hide')
+    }
+
+    //Evento Submit del modal de crear Servicio
+    $('#form-calendario').submit(event => {
+        event.preventDefault();
+        saveService("duplicado");
+    });
+
+    $("#btn-unique").click(function () {
+        saveService("unico");
+    })
+
+    //Evento click del boton de imprimir Modal (Crear Servicio)
+
+    // $("#btn-print").click(event => {
+    $("#btn-imprimir-servicio").click(event => {
+        console.log("event.target");
+        event.preventDefault();
+
+        // var url="/eventos/index";
+        // $('#calendar').fullCalendar({ events: {url: url}    });//Refresca todos los eventos dentro del calendario
+        // $('#calendar').fullCalendar('removeEvents');
+        // $('#calendar').fullCalendar('addEventSource', url);
+        // $('#event-option')
+        // .modal('hide')                          //Oculta el modal abierto
+        // .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
+        //     $('#event-print').modal('show');    //Muestra el nuevo modal
+
+        //     $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+        // });
+    });
+
+
+    $("#form-print").submit(event => {
+        event.preventDefault();
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href>Why do I have this issue?</a>'
         })
+        $('#event-print')
+            .modal('hide')
+    })
 
 
     });
@@ -1628,10 +1778,10 @@
     var idEventVal;
 
     /**
-    * Obtiene el texto en español del lugar del dia en el mes.
-    * @param {Number} weekContainer: Numero de la semana que contiene el dia seleccionado
-    * @return {Array} Texto en español. 
-    **/
+     * Obtiene el texto en español del lugar del dia en el mes.
+     * @param {Number} weekContainer: Numero de la semana que contiene el dia seleccionado
+     * @return {Array} Texto en español. 
+     **/
     function getOrdinalDay(weekContainer) {
         console.log(weekContainer)
         let text = [];
@@ -1656,12 +1806,12 @@
     }
 
     /**
-    * Obtiene el numero de la semana en la que se encuentra un dia del mes
-    * @param {Number} year: El presente año
-    * @param {Number} month: El mes seleccionado en el calendario
-    * @param {Number} numberOfDay: Numero del dia en el mes seleccionado
-    * @return {Number} Retorna el numero de la semana que contiene el dia evaluado
-    **/
+     * Obtiene el numero de la semana en la que se encuentra un dia del mes
+     * @param {Number} year: El presente año
+     * @param {Number} month: El mes seleccionado en el calendario
+     * @param {Number} numberOfDay: Numero del dia en el mes seleccionado
+     * @return {Number} Retorna el numero de la semana que contiene el dia evaluado
+     **/
     function getWeeksContainerOfDay(year, month, numberOfDay, indexDay) {
         //Declara las variables de inicio y fin
         var monthStart = moment().year(year).month(month).date(1);
@@ -1734,7 +1884,8 @@
                             //y que el dia de la semana seleccionado no se encuentre en el ultimo rango de semanas
                             if (index == 5 && !weekRange[5].indexDayOnWeek.includes(indexDay)) {
                                 weekContainer = 5;
-                            } else if (index == 4 && weekRange[4].indexDayOnWeek.includes(indexDay) && month == 1) {
+                            } else if (index == 4 && weekRange[4].indexDayOnWeek.includes(indexDay) && month ==
+                                1) {
                                 weekContainer = 5;
                             } else {
                                 weekContainer = 4;
@@ -1760,10 +1911,10 @@
     }
 
     /**
-    * Obtiene el nombre del dia en español
-    * @param {Number} indexDay: Indice del dia en la semana
-    * @return {String} El nombre del dia
-    **/
+     * Obtiene el nombre del dia en español
+     * @param {Number} indexDay: Indice del dia en la semana
+     * @return {String} El nombre del dia
+     **/
     function getNameOfDaySpanish(indexDay) {
         let nameOfDaySpanish;
         switch (indexDay) {
@@ -1816,7 +1967,8 @@
             $(`#opcion-${slctCustomOpt}`).attr("disabled", "disabled");
         } else if ($(`#opcion-${slctFrecuency}`).val() == 'meses') {
             $(`#opcion-${slctCustomOpt}`).empty();
-            let ordinalTextOfDay = getWeeksContainerOfDay(dateSelected.year(), dateSelected.month(), dateSelected.date(), dateSelected.day());
+            let ordinalTextOfDay = getWeeksContainerOfDay(dateSelected.year(), dateSelected.month(), dateSelected
+                .date(), dateSelected.day());
             let nameOfDaySpanish = getNameOfDaySpanish(dateSelected.day());
             $(`#opcion-${slctCustomOpt}`).append(`
                 <option value="all-${dateSelected.date()}">El ${dateSelected.date()} de cada mes</option>
@@ -1832,12 +1984,12 @@
     }
 
     /**
-    * Evento MouseOver del item de la lista del historial de tecnicos
-    * Muestra el tooltip para cada elemento de la lista
-    * @param {id} ID del elemento HTML
-    * @param {tecnico} ID del tecnico (BD)
-    * @param {id_solicitud} ID de la solicitud
-    */
+     * Evento MouseOver del item de la lista del historial de tecnicos
+     * Muestra el tooltip para cada elemento de la lista
+     * @param {id} ID del elemento HTML
+     * @param {tecnico} ID del tecnico (BD)
+     * @param {id_solicitud} ID de la solicitud
+     */
     function tool(id, tecnico, id_solicitud) {
         //Variable que guarda el contenido HTML del tooltip a mostrar
         var tooltip2 =
@@ -1877,7 +2029,9 @@
                 //Recorre el array de la respuesta del servidor
                 res.forEach(value => {
                     //Añade un item a la lista de fechas (tooltip)
-                    $("#list-dates").append(`<li class="list-group-item date-service" style="border: none;">${value.fecha_inicio}</li>`);
+                    $("#list-dates").append(
+                        `<li class="list-group-item date-service" style="border: none;">${value.fecha_inicio}</li>`
+                    );
                 })
             })
             .catch((err) => {
@@ -1887,40 +2041,40 @@
 
 
     /**
-    * Quita el tooltip activado
-    * @param {id} ID del elemento HTML
-    */
+     * Quita el tooltip activado
+     * @param {id} ID del elemento HTML
+     */
     function quit(id) {
         $(".tooltipevent").remove();
     }
 
     /**
-    * Mestra el modal de opciones de impresion
-    * envia los datos del formulario
-    */
+     * Mestra el modal de opciones de impresion
+     * envia los datos del formulario
+     */
     function printOptions() {
         console.log("Click!");
         $('#event-option')
-            .modal('hide')                          //Oculta el modal abierto
-            .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
-                $('#event-print').modal('show');    //Muestra el nuevo modal
+            .modal('hide') //Oculta el modal abierto
+            .on('hidden.bs.modal', function (e) { //Evento de ocultar el modal abiert
+                $('#event-print').modal('show'); //Muestra el nuevo modal
 
-                $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+                $(this).off('hidden.bs.modal'); // Quita el evento del objeto actual
             });
     }
 
     /**
-    * Muestra el modal de Opciones de Eliminacion
-    * @param {idElemento}
-    */
+     * Muestra el modal de Opciones de Eliminacion
+     * @param {idElemento}
+     */
     function deleteEvent(idEvent) {
         idEventVal = idEvent
         $('#event-option')
-            .modal('hide')                          //Oculta el modal abierto
-            .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
-                $('#modal-delete-options').modal('show');    //Muestra el nuevo modal
+            .modal('hide') //Oculta el modal abierto
+            .on('hidden.bs.modal', function (e) { //Evento de ocultar el modal abiert
+                $('#modal-delete-options').modal('show'); //Muestra el nuevo modal
 
-                $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+                $(this).off('hidden.bs.modal'); // Quita el evento del objeto actual
             });
     }
 
@@ -1928,18 +2082,18 @@
         e.preventDefault()
         idEventVal = infoServiceSelected.id
         $("#neutral-service").modal('hide')
-        .on('hidden.bs.modal', (e) => {
-            $('#modal-delete-options').modal('show');    //Muestra el nuevo modal
+            .on('hidden.bs.modal', (e) => {
+                $('#modal-delete-options').modal('show'); //Muestra el nuevo modal
 
-            $(this).off('hidden.bs.modal');
-        })
-        
+                $(this).off('hidden.bs.modal');
+            })
+
     })
 
     /**
-    * Evento click del boton para el envio del formulario
-    * con las opciones de eliminacion de servicios (Radio Inputs)
-    */
+     * Evento click del boton para el envio del formulario
+     * con las opciones de eliminacion de servicios (Radio Inputs)
+     */
     $("#btn-delete-servicio").on('click', e => {
         e.preventDefault();
         crsfToken = document.getElementsByName("_token")[0].value;
@@ -1952,11 +2106,12 @@
             type: 'DELETE',
             headers: {
                 "Content-Type": 'application/x-www-form-urlencoded',
-                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+                "X-CSRF-TOKEN": crsfToken //Token de seguridad
             },
             success: (res) => {
                 console.log(res);
-                $('#calendar').fullCalendar('refetchEvents'); //Actualiza los servicios del calendario
+                $('#calendar').fullCalendar(
+                    'refetchEvents'); //Actualiza los servicios del calendario
                 $("#modal-delete-options").modal('hide'); //Oculta el modal abierto
             },
             error: (err) => {
@@ -1967,11 +2122,11 @@
 
     $("#change-frecuency").click(event => {
         $('#event-option')
-            .modal('hide')                          //Oculta el modal abierto
-            .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
-                $('#modal-update-options').modal('show');    //Muestra el nuevo modal
+            .modal('hide') //Oculta el modal abierto
+            .on('hidden.bs.modal', function (e) { //Evento de ocultar el modal abiert
+                $('#modal-update-options').modal('show'); //Muestra el nuevo modal
 
-                $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+                $(this).off('hidden.bs.modal'); // Quita el evento del objeto actual
             });
     })
 
@@ -1981,7 +2136,8 @@
 
     $("#btn-actl-servicio").click(() => {
         let formattedDate = moment(inicio_servicio, 'YYYY-MM-DD HH:mm:ss');
-        let dateEnd = moment(inicio_servicio, 'YYYY-MM-DD HH:mm:ss').add(parseInt(infoServiceSelected.duration), 'minutes');
+        let dateEnd = moment(inicio_servicio, 'YYYY-MM-DD HH:mm:ss').add(parseInt(infoServiceSelected.duration),
+            'minutes');
         let dataToSendUpdt = {
             idServicio: infoServiceSelected.id,
             duracion: infoServiceSelected.duration,
@@ -1997,8 +2153,8 @@
             optionActl: $("input[name=update-op]:checked").val()
         };
         if ($("#opcion-frecuencia-actl").val() == 'semanas') {
-                dataToSendUpdt.opcionFrecuencia = "semanas";
-                dataToSendUpdt.dayOfWeek = $("#opcion-personalizada-actl").val();
+            dataToSendUpdt.opcionFrecuencia = "semanas";
+            dataToSendUpdt.dayOfWeek = $("#opcion-personalizada-actl").val();
         } else if ($("#opcion-frecuencia-actl").val() == 'meses') {
             dataToSendUpdt.opcionFrecuencia = "meses";
             let arrCustomOption = ($("#opcion-personalizada-actl").val()).split('-');
@@ -2014,19 +2170,20 @@
         } else {
             dataToSendUpdt.opcionFrecuencia = "anios";
         }
-        let crsfToken = document.getElementsByName("_token")[0].value; 
-        
+        let crsfToken = document.getElementsByName("_token")[0].value;
+
         $.ajax({
             url: '/servicios/edit/frecuency',
             type: 'PUT',
             data: dataToSendUpdt,
-            headers:{
+            headers: {
                 "Content-Type": 'application/x-www-form-urlencoded',
-                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+                "X-CSRF-TOKEN": crsfToken //Token de seguridad
             },
-            success: (res)=> {
+            success: (res) => {
                 console.log(res)
-                $('#calendar').fullCalendar('refetchEvents'); //Actualiza los servicios del calendario
+                $('#calendar').fullCalendar(
+                    'refetchEvents'); //Actualiza los servicios del calendario
                 $("#modal-update-options").modal('hide'); //Oculta el modal abierto
             },
             error: (err) => {
@@ -2046,8 +2203,8 @@
             url: '/facturas',
             data: factura,
             type: 'POST',
-            headers:{
-                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+            headers: {
+                "X-CSRF-TOKEN": crsfToken //Token de seguridad
             },
             success: (res) => {
                 $("#ind-fac").remove();
@@ -2060,24 +2217,26 @@
         })
     });
 
-    $("#btn-lock").click( event => {
+    $("#btn-lock").click(event => {
         let state;
 
         $.ajax({
             url: '/servicios/edit/state',
             data: infoServiceSelected,
             type: 'PUT',
-            headers:{
+            headers: {
                 "Content-Type": 'application/x-www-form-urlencoded',
-                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+                "X-CSRF-TOKEN": crsfToken //Token de seguridad
             },
             success: (res) => {
                 $("#btn-lock").empty();
-                if(!res){
-                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`).removeClass('active');
+                if (!res) {
+                    $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`).removeClass(
+                        'active');
                     $("#calendar").fullCalendar('refetchEvents');
-                }else{
-                    $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`).addClass('active');
+                } else {
+                    $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`).addClass(
+                        'active');
                     $("#calendar").fullCalendar('refetchEvents');
                 }
             },
@@ -2096,13 +2255,13 @@
                 value: $(`#val-factura-${idTypeService}`).val(),
             },
             type: 'PUT',
-            headers:{
+            headers: {
                 "Content-Type": 'application/x-www-form-urlencoded',
-                "X-CSRF-TOKEN": crsfToken   //Token de seguridad
+                "X-CSRF-TOKEN": crsfToken //Token de seguridad
             },
             success: (res) => {
                 swal('¡Excelente!', 'La factura ha sido asignada con éxito', 'success')
-                $(`#btn-save-fac-${idTypeService}`).attr('disabled','disabled')
+                $(`#btn-save-fac-${idTypeService}`).attr('disabled', 'disabled')
             },
             error: (err) => {
                 swal('Error!', 'Ha ocurrido un error al intentar guardar la factura', 'error')
@@ -2111,27 +2270,27 @@
     }
 
     function disableInputs(type) {
-        if(type == 1){
-                $("#indice-frecuencia").attr("disabled", "disabled");
-                $("#opcion-frecuencia").attr("disabled", "disabled");
-                $("#opcion-personalizada").attr("disabled", "disabled");
-                $("#hora_inicio").attr("disabled", "disabled");
-                $("#num_horas").attr("disabled", "disabled");
-                $("#num_minutos").attr("disabled", "disabled");
-                $("#select_servicios").attr("disabled", "disabled");
-                $("#select_tecnicos2").attr("disabled", "disabled");
-                //$("#text-instrucciones").attr("disabled", "disabled");
-        }else if(type == 0){
-                $("#indice-frecuencia").prop("disabled", false);
-                $("#opcion-frecuencia").prop("disabled", false);
-                $("#opcion-personalizada").prop("disabled", false);
-                $("#hora_inicio").prop("disabled", false);
-                $("#num_horas").prop("disabled", false);
-                $("#num_minutos").prop("disabled", false);
-                $("#select_servicios").prop("disabled", false);
-                $("#select_tecnicos2").prop("disabled", false);
-                //$("#text-instrucciones").prop("disabled", false);
-        }else{
+        if (type == 1) {
+            $("#indice-frecuencia").attr("disabled", "disabled");
+            $("#opcion-frecuencia").attr("disabled", "disabled");
+            $("#opcion-personalizada").attr("disabled", "disabled");
+            $("#hora_inicio").attr("disabled", "disabled");
+            $("#num_horas").attr("disabled", "disabled");
+            $("#num_minutos").attr("disabled", "disabled");
+            $("#select_servicios").attr("disabled", "disabled");
+            $("#select_tecnicos2").attr("disabled", "disabled");
+            //$("#text-instrucciones").attr("disabled", "disabled");
+        } else if (type == 0) {
+            $("#indice-frecuencia").prop("disabled", false);
+            $("#opcion-frecuencia").prop("disabled", false);
+            $("#opcion-personalizada").prop("disabled", false);
+            $("#hora_inicio").prop("disabled", false);
+            $("#num_horas").prop("disabled", false);
+            $("#num_minutos").prop("disabled", false);
+            $("#select_servicios").prop("disabled", false);
+            $("#select_tecnicos2").prop("disabled", false);
+            //$("#text-instrucciones").prop("disabled", false);
+        } else {
             $("#indice-frecuencia").attr("disabled", "disabled");
             $("#opcion-frecuencia").attr("disabled", "disabled");
             $("#opcion-personalizada").attr("disabled", "disabled");
@@ -2162,7 +2321,7 @@
     //Metodo para cancelar un servicio
     $("#btn-cancelar-servicio").click(e => {
         swal({
-            title: "¡Advertencia!",
+                title: "¡Advertencia!",
                 text: "¿Estás seguro de cancelar este servicio?",
                 icon: "warning",
                 buttons: {
@@ -2174,32 +2333,34 @@
                         closeModal: false, //Muestra el Loader
                     }
                 }
-        })
-        .then(isConfirm => {
-            if(isConfirm){
-                $.ajax({
-                    url: `/servicios/${infoServiceSelected.id}`,
-                    data:{
-                        option: '4',
-                    },
-                    type: 'DELETE',
-                    headers: {
-                        "X-CSRF-TOKEN": crsfToken
-                    }
-                })
-                .then(res => {
-                    swal('¡Servivio Cancelado', 'El servicio seleccionado fue cancelado', 'success')
-                    .then(value => {
-                        if(value){
-                            $('#calendar').fullCalendar('refetchEvents');
-                        }
-                    })
-                })
-                .catch(err => {
-                    swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios', "error")
-                })
-            }
-        })
+            })
+            .then(isConfirm => {
+                if (isConfirm) {
+                    $.ajax({
+                            url: `/servicios/${infoServiceSelected.id}`,
+                            data: {
+                                option: '4',
+                            },
+                            type: 'DELETE',
+                            headers: {
+                                "X-CSRF-TOKEN": crsfToken
+                            }
+                        })
+                        .then(res => {
+                            swal('¡Servivio Cancelado', 'El servicio seleccionado fue cancelado',
+                                    'success')
+                                .then(value => {
+                                    if (value) {
+                                        $('#calendar').fullCalendar('refetchEvents');
+                                    }
+                                })
+                        })
+                        .catch(err => {
+                            swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios',
+                                "error")
+                        })
+                }
+            })
     })
 </script>
 @endsection

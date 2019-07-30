@@ -53,6 +53,9 @@ class CreateClientesTable extends Migration
             $table->boolean('doc_rut')->default(false);
             $table->boolean('doc_identidad')->default(false);
             $table->boolean('doc_camara_comercio')->default(false);
+            // Datos de inicio de sesion VIP
+            $table->string('usuario')->unique()->nullable();
+            $table->string('password')->nullable();
             //Informacion del Asesor que registra al cliente
             $table->integer('user_id');
             $table->timestamps();

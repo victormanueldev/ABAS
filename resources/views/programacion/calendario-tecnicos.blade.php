@@ -129,7 +129,7 @@
                                         <h3>Opciones de impresión</h3>
                                         <table class="table">
                                             <tbody>
-                                                <tr>
+                                                {{-- <tr>
 
                                                     <td class="row" colspan="2">
                                                         <div class="col-sm-6 col-md-2" style="padding: 0">
@@ -144,7 +144,7 @@
                                                         </div>
                                                     </td>
 
-                                                </tr>
+                                                </tr> --}}
                                                 <tr>
 
                                                     <td class="row">
@@ -157,59 +157,6 @@
                                                                     por ABAS)</i></p>
                                                         </div>
                                                     </td>
-
-                                                    <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rs">RS</button>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-
-                                                            <p style="margin-bottom: 0">Ruta de Saneamiento <br><i
-                                                                    style="font-size: 10px;position: absolute;">(Tomado
-                                                                    de la BD)</i></p>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-
-                                                    <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rri">RI</button>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-
-                                                            <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">(Tomado
-                                                                    de la BD)</i></p>
-                                                        </div>
-                                                    </td>
-
-                                                    <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rre">RE</button>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-
-                                                            <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i
-                                                                    style="font-size: 10px;position: absolute;">(Tomado
-                                                                    de la BD)</i></p>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-
-                                                    <td class="row">
-                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rl">RL</button>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
-
-                                                            <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">(Tomado
-                                                                    de la BD)</i></p>
-                                                        </div>
-                                                    </td>
-
                                                     <td class="row">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
                                                             <button type="button" class="btn btn-warning m-r-sm" id="print-ctf">CT</button>
@@ -220,6 +167,59 @@
                                                                     de la BD)</i></p>
                                                         </div>
                                                     </td>
+
+                                                    {{-- <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rs">RS</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta de Saneamiento <br><i
+                                                                    style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td> --}}
+
+                                                </tr>
+                                                <tr>
+
+                                                    {{-- <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rri">RI</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta Roedores Int.<br><i style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td> --}}
+{{-- 
+                                                    <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rre">RE</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta de Roedores Ext.<br><i
+                                                                    style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td> --}}
+
+                                                </tr>
+                                                <tr>
+
+                                                    {{-- <td class="row">
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-rl">RL</button>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-8" style="padding: 0">
+
+                                                            <p style="margin-bottom: 0">Ruta de Lámparas <br><i style="font-size: 10px;position: absolute;">(Tomado
+                                                                    de la BD)</i></p>
+                                                        </div>
+                                                    </td> --}}
+
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -70,7 +70,7 @@
 
                                                     <div class="form-group col-lg-5">
                                                     <label class="control-label">Nit/Cedula *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Nit o Cedula" class="form-control" >
+                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Identificación del cliente" class="form-control" required>
                                                     </div>
                                                     <div class="form-group col-lg-1">
                                                         <label class="control-label">D.V.</label>
@@ -86,7 +86,7 @@
                                                     </div>
 
                                                      <div class="form-group col-lg-6"><label class="control-label">Sector Economico *</label>
-                                                        <select class="form-control" name="sector_economico">
+                                                        <select class="form-control" name="sector_economico" required>
                                                             <option value="RESIDENCIAL">RESIDENCIAL</option>
                                                             <option value="COMERCIAL">COMERCIAL</option>
                                                             <option value="SERVICIO">SERVICIO</option>
@@ -95,24 +95,24 @@
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Ciudad *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="municipio" placeholder="Municipio" class="form-control" >
+                                                    <div class="form-group col-lg-3"><label class="control-label">Ciudad </label>
+                                                        <input style="text-transform: uppercase" type="text" name="municipio" placeholder="Nombre del municipio" class="form-control" >
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Barrio *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="barrio" placeholder="Barrio" class="form-control" >
+                                                    <div class="form-group col-lg-3"><label class="control-label">Barrio </label>
+                                                        <input style="text-transform: uppercase" type="text" name="barrio" placeholder="Nombre del barrio" class="form-control" >
 
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Dirección *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="direccion" placeholder="Direcció del contacto o cliente" class="form-control" required>
+                                                        <input style="text-transform: uppercase" type="text" name="direccion" placeholder="Residencia del cliente" class="form-control" required>
                                                         
                                                     </div>
                                                     
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Zona *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="zona" placeholder="Zona" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Zona </label>
+                                                        <input style="text-transform: uppercase" type="text" name="zona" placeholder="Ej: Norte, Sur..." class="form-control">
 
                                                     </div>
 
@@ -131,63 +131,63 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
-                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_inicial" placeholder="Cargo del contacto inicial" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_inicial" placeholder="Del contacto inicial" class="form-control">
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Celular </label>
-                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_inicial" placeholder="celular del contacto inicial" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Celular *</label>
+                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_inicial" placeholder="Del contacto inicial" class="form-control" required>
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
-                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_inicial" placeholder="email del contacto inicial" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Email *</label>
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_inicial" placeholder="Del contacto inicial" class="form-control" required>
                                                         
                                                     </div>
 
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Técnico *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="contacto_tecnico" placeholder="nombre del contacto técnico" class="form-control">
-                                                        
-                                                    </div>
-
-                                                    <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
-                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_tecnico" placeholder="cargo del contacto técnico" class="form-control">
-                                                        
-                                                    </div>
-
-                                                    <div class="form-group col-lg-3"><label class="control-label">Celular </label>
-                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_tecnico" placeholder="celular del contacto técnico" class="form-control">
-                                                        
-                                                    </div>
-
-                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
-                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_tecnico" placeholder="email del contacto técnico" class="form-control">
-                                                        
-                                                    </div>
-
-                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Facturacion electrónica *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="contacto_facturacion" placeholder="Nombre del contacto de facturación" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Técnico </label>
+                                                        <input style="text-transform: uppercase" type="text" name="contacto_tecnico" placeholder="Nombre del contacto técnico" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
-                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_facturacion" placeholder="cargo del contacto de facturación" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_tecnico" placeholder="Del contacto técnico" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Celular </label>
-                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_facturacion" placeholder="celular del contacto de facturación" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_tecnico" placeholder="Del contacto técnico" class="form-control">
                                                         
                                                     </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Email </label>
-                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_facturacion" placeholder="email del contacto de facturación" class="form-control" >
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_tecnico" placeholder="Del contacto técnico" class="form-control">
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-12"><label class="control-label">Empresa de fumigación actualmente *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="empresa_actual" placeholder="Empresa que le presta los servicios de fumigación" class="form-control">
+                                                    <div class="form-group col-lg-3"><label class="control-label">Contacto Facturacion electrónica </label>
+                                                        <input style="text-transform: uppercase" type="text" name="contacto_facturacion" placeholder="Del contacto de facturación" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Cargo </label>
+                                                        <input style="text-transform: uppercase" type="text" name="cargo_contacto_facturacion" placeholder="Del contacto de facturación" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Celular </label>
+                                                        <input style="text-transform: uppercase" type="text" name="celular_contacto_facturacion" placeholder="Del contacto de facturación" class="form-control">
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_facturacion" placeholder="Del contacto de facturación" class="form-control" >
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group col-lg-12"><label class="control-label">Empresa de fumigación actualmente </label>
+                                                        <input style="text-transform: uppercase" type="text" name="empresa_actual" placeholder="Nombre de la empresa que le presta los servicios de fumigación" class="form-control">
                                                         
                                                     </div>
 
@@ -253,25 +253,25 @@
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Zona/Ruta *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="zona_ruta" placeholder="Zona Ruta" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="zona_ruta" placeholder="Ej: Oriente, Sur..." class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Nombre de contacto </label>
-                                                        <input style="text-transform: uppercase" type="text" name="nombre_contacto" placeholder="Nombre del contacto o cliente" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="nombre_contacto" placeholder="Escriba el nombre del contacto o cliente" class="form-control">
                                                         
                                                     </div>
                                 
                                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="telefono_sedes" placeholder="Teléfono del contacto o cliente" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="telefono_sedes" placeholder="Del contacto o cliente" class="form-control">
                                                         
                                                     </div>
                         
                                                     <div class="form-group col-lg-6"><label class="control-label">Celular </label>
-                                                        <input style="text-transform: uppercase" type="text" name="celular_sedes" placeholder="Celular del contacto" class="form-control">
+                                                        <input style="text-transform: uppercase" type="text" name="celular_sedes" placeholder="Del contacto" class="form-control">
                                                     </div>
 
                                                     <div class="form-group col-lg-6"><label class="control-label">Email </label>
-                                                        <input style="text-transform: uppercase" type="email" name="email_sedes" placeholder="Email de contacto" class="form-control">
+                                                        <input style="text-transform: uppercase" type="email" name="email_sedes" placeholder="Del contacto" class="form-control">
                                                         
                                                     </div>
 

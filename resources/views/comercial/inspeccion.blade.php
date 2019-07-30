@@ -62,16 +62,16 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Inspector Comercial:</label>
-                                        <input style="text-transform: uppercase" type="text" id="nombre_usuario" name="nombre-usuario"
-                                            placeholder="" class="form-control" >
+                                        <input style="text-transform: uppercase" type="text" id="nombre_usuario"
+                                            name="nombre-usuario" placeholder="" class="form-control">
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Frecuencia del Servicio</label>
 
-                                        <select style="text-transform: uppercase" class="form-control" id="frecuencia_servicio"
-                                            name="frecuencia_servicio" required>
+                                        <select style="text-transform: uppercase" class="form-control"
+                                            id="frecuencia_servicio" name="frecuencia_servicio" required>
                                             <option value="" disabled selected>Seleccione una frecuencia</option>
                                             <option value="Ocasional" selected>OCASIONAL</option>
                                             <option value="Semanal">SEMANAL</option>
@@ -82,7 +82,7 @@
                                             <option value="Cuatrimestral">CUATRIMESTRAL</option>
                                             <option value="Semestral">SEMESTRAL</option>
                                             <option value="Anual">ANUAL</option>
-                                            
+
                                         </select>
 
                                     </div>
@@ -94,10 +94,14 @@
                                                 <h3>Facturar a Nombre de:</h3>
                                             </div>
                                             <div class="col-lg-9 col-xs-12" id="client-options">
-                                                <input id="radio-1" type="radio" value="create"  name="option-client" class="i-checks"/>
-                                                <span class="m-l-xs" style="position: relative;margin-right: 20px;">Crear cliente nuevo</span>
+                                                <input id="radio-1" type="radio" value="create" name="option-client"
+                                                    class="i-checks" />
+                                                <span class="m-l-xs"
+                                                    style="position: relative;margin-right: 20px;">Crear cliente
+                                                    nuevo</span>
 
-                                                <input id="radio-2" type="radio" value="exist"  name="option-client" class="i-checks" checked />
+                                                <input id="radio-2" type="radio" value="exist" name="option-client"
+                                                    class="i-checks" checked />
                                                 <span class="m-l-xs">Seleccionar cliente existente</span>
                                             </div>
                                         </div>
@@ -108,74 +112,87 @@
                                         <label class="control-label">Razón Social/Nombre *</label>
 
                                         <!-- Select con Autocompletar-->
-                                        <select data-placeholder="Seleccione NIT" class="chosen-select" tabindex="2" id="id_cliente"
-                                            name="id_cliente">
+                                        <select data-placeholder="Seleccione NIT" class="chosen-select" tabindex="2"
+                                            id="id_cliente" name="id_cliente">
                                             <option value="" selected disabled>Selecciona un cliente</option>
                                             @foreach($clientes as $cliente)
-                                                <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
+                                            <option value="{{$cliente->id}}">
+                                                {{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-6" id="input-create">
-                                            <label class="control-label">Razón Social/Nombre *</label>
-                                            <input type="text" style="text-transform: uppercase" id="nombre_cliente" name="nombre_cliente" placeholder="Razon social o Nombre del Cliente"
+                                        <label class="control-label">Razón Social/Nombre *</label>
+                                        <input type="text" style="text-transform: uppercase" id="nombre_cliente"
+                                            name="nombre_cliente" placeholder="Razon social o Nombre del Cliente"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula </label>
-                                        <input type="text" style="text-transform: uppercase" type="text" id="input-nit" name="input-nit" placeholder="Nit ó Cedula"
+                                        <input type="text" style="text-transform: uppercase" type="text" id="input-nit"
+                                            name="input-nit" placeholder="Identificación del cliente"
                                             class="form-control">
 
                                     </div>
 
-
-                                    <div class="form-group col-lg-6"><label class="control-label">Sector Ecónomico </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sector" name="input-sector" placeholder="Sector economico de cliente"
-                                            class="form-control">
-
+                                    <div class="form-group col-lg-6"><label class="control-label">Sector Económico
+                                            *</label>
+                                        <select class="form-control" name="input-sector" id="input-sector">
+                                            <option value="RESIDENCIAL">RESIDENCIAL</option>
+                                            <option value="COMERCIAL">COMERCIAL</option>
+                                            <option value="SERVICIO">SERVICIO</option>
+                                            <option value="INDUSTRIAL">INDUSTRIAL</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-direccion" name="input-direccion" placeholder="Dirección de cliente"
+                                        <input type="text" style="text-transform: uppercase" id="input-direccion"
+                                            name="input-direccion" placeholder="Residencia del cliente"
                                             class="form-control" required>
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-ciudad" name="input-ciudad" placeholder="Ciudad del cliente"
+                                        <input type="text" style="text-transform: uppercase" id="input-ciudad"
+                                            name="input-ciudad" placeholder="Nombre del municipio/ciudad"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-barrio" name="input-barrio" placeholder="Barrio del cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-barrio"
+                                            name="input-barrio" placeholder="Nombre del barrio" class="form-control">
 
                                     </div>
 
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Inicial</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-contacto" name="input-contacto" placeholder="Nombre de contacto del servicio"
+                                    <div class="form-group col-lg-6"><label class="control-label">Contacto
+                                            Inicial</label>
+                                        <input type="text" style="text-transform: uppercase" id="input-contacto"
+                                            name="input-contacto" placeholder="Nombre de contacto del servicio"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Cargo </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-cargo" name="input-cargo" placeholder="Zona del cliente"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-cargo"
+                                            name="input-cargo" placeholder="Zona del cliente" class="form-control">
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Celular o Teléfono *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-celular" name="input-celular" placeholder="Celular del contacto a facturar"
+                                    <div class="form-group col-lg-6"><label class="control-label">Celular o Teléfono
+                                            *</label>
+                                        <input type="text" style="text-transform: uppercase" id="input-celular"
+                                            name="input-celular" placeholder="Celular del contacto a facturar"
                                             class="form-control" required>
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email </label>
-                                        <input type="text" style="text-transform: uppercase" type="email" id="input-email" name="input-email" placeholder="Email del contacto a facturar"
-                                            class="form-control" >
+                                        <input type="text" style="text-transform: uppercase" type="email"
+                                            id="input-email" name="input-email"
+                                            placeholder="Email del contacto a facturar" class="form-control">
 
                                     </div>
 
@@ -188,64 +205,75 @@
 
                                     <div class="form-group col-lg-6" id="select-filter-sede">
                                         <label class="control-label">Razón Social/Nombre *</label>
-                                        <select style="text-transform: uppercase" class="form-control" id="select_sedes" name="id_sede">
+                                        <select style="text-transform: uppercase" class="form-control" id="select_sedes"
+                                            name="id_sede">
                                             <option value="">Selecciona una sede</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-6" id="input-nombre-sede">
                                         <label class="control-label">Razón Social/Nombre Sede*</label>
-                                        <input style="text-transform: uppercase" type="text" id="nombre_sede" name="input-sede-nit" placeholder="Razon social o nombre de sede"
+                                        <input style="text-transform: uppercase" type="text" id="nombre_sede"
+                                            name="input-sede-nit" placeholder="Razon social o nombre de sede"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Nit/Cedula </label>
-                                        <input type="text" style="text-transform: uppercase" type="text" id="input-sede-nit" name="input-sede-nit" placeholder="Nit ó Cedula"
+                                        <input type="text" style="text-transform: uppercase" type="text"
+                                            id="input-sede-nit" name="input-sede-nit" placeholder="Nit ó Cedula"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-direccion" name="input-sede-direccion"
-                                            placeholder="Dirección de donde se realizará el servicio" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-direccion"
+                                            name="input-sede-direccion"
+                                            placeholder="Dirección donde se realizará el servicio" class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Ciudad </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-ciudad" name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-ciudad"
+                                            name="input-sede-ciudad" placeholder="Ciudad donde se realizará el servicio"
                                             class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Barrio </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-barrio" name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-barrio"
+                                            name="input-sede-barrio" placeholder="Barrio donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Zona </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-zona" name="input-sede-zona" placeholder="Zona donde se realizará el servicio"
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-zona"
+                                            name="input-sede-zona" placeholder="Zona donde se realizará el servicio"
                                             class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Contacto </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-contacto" name="input-sede-contacto"
-                                            placeholder="Nombre de contacto del lugar" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-contacto"
+                                            name="input-sede-contacto" placeholder="Nombre de contacto del lugar"
+                                            class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-telefono" name="input-sede-telefono"
-                                            placeholder="Teléfono del contacto del servicio" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-telefono"
+                                            name="input-sede-telefono" placeholder="Teléfono del contacto del servicio"
+                                            class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular </label>
-                                        <input type="text" style="text-transform: uppercase" id="input-sede-celular" name="input-sede-celular"
-                                            placeholder="Celular del contacto del lugar" class="form-control">
+                                        <input type="text" style="text-transform: uppercase" id="input-sede-celular"
+                                            name="input-sede-celular" placeholder="Celular del contacto del lugar"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email </label>
-                                        <input type="text" style="text-transform: uppercase" type="email" id="input-sede-email" name="input-sede-email" placeholder="Email del contacto del servicio"
-                                            class="form-control">
+                                        <input type="text" style="text-transform: uppercase" type="email"
+                                            id="input-sede-email" name="input-sede-email"
+                                            placeholder="Email del contacto del servicio" class="form-control">
 
                                     </div>
 
@@ -255,33 +283,42 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Factura *</label>
-                                        <input type="text" style="text-transform: uppercase" placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
+                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Factura
+                                            *</label>
+                                        <input type="text" style="text-transform: uppercase"
+                                            placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
                                             id="contacto_name_factura" class="form-control" style="display: block;">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Email </label>
-                                        <input type="text" style="text-transform: uppercase" placeholder="Teléfono del contacto a facturar" name="contacto-telefono-factura"
-                                            id="contacto_email_factura" class="form-control">
+                                        <input type="text" style="text-transform: uppercase"
+                                            placeholder="Teléfono del contacto a facturar"
+                                            name="contacto-telefono-factura" id="contacto_email_factura"
+                                            class="form-control">
 
                                     </div>
 
                                     <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
-                                        <input type="text" style="text-transform: uppercase" placeholder="Celular del contacto a facturar" name="contacto-celular-factura"
-                                            id="contacto_celular_factura" class="form-control">
+                                        <input type="text" style="text-transform: uppercase"
+                                            placeholder="Celular del contacto a facturar"
+                                            name="contacto-celular-factura" id="contacto_celular_factura"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-12">
                                         <label>Instrucciones y Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
-                                            rows="3" name="instrucciones" id="observaciones_tecnico" required></textarea>
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            class="form-control"
+                                            placeholder="Escriba aquí las observaciones para el técnico." rows="3"
+                                            name="instrucciones" id="observaciones_tecnico"></textarea>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Plan de Saneamiento</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-visitas"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-visitas"><i
                                                 class="fa fa-plus"></i> Agregar visitas</button>
                                         <hr>
                                         <br>
@@ -290,29 +327,32 @@
                                     <div class="row" style="padding: 15px 15px" id="visitas">
                                         <div class="form-group col-lg-2">
                                             <label class="control-label"># Visita</label>
-                                            <input type="number" min=0 name="num_visita-0" id="num_visita-0" placeholder="Ej: 1"
-                                                class="form-control">
+                                            <input type="number" min=0 name="num_visita-0" id="num_visita-0"
+                                                placeholder="Ej: 1" value="1" class="form-control">
                                         </div>
                                         <div class="form-group col-lg-4 b-r">
                                             <label>Duración del servicio</label>
                                             <div class="input-group">
-                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_visita-0" placeholder="Horas">
-                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_visita-0" placeholder="Minutos">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
+                                                    max="11" class="form-control" id="num_horas_visita-0"
+                                                    placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
+                                                    max="60" class="form-control" id="num_minutos_visita-0"
+                                                    placeholder="Minutos">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor plan de saneamiento</label>
-                                        <input type="text" min=0 name="total_plan" id="total_plan" placeholder="Valor total del plan"
-                                            class="form-control">
+                                        <input type="text" min=0 name="total_plan" id="total_plan"
+                                            placeholder="Valor total del plan" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Frecuencia de visitas</label>
-                                        <select style="text-transform: uppercase" id="frecuencia_visitas_plan" class="form-control">
+                                        <select style="text-transform: uppercase" id="frecuencia_visitas_plan"
+                                            class="form-control">
                                             <option value="8">Cada 8 días</option>
                                             <option value="10">Cada 10 días</option>
                                             <option value="12">Cada 12 días</option>
@@ -323,7 +363,8 @@
 
                                     <div class="form-group col-lg-4">
                                         <label>Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                             rows="1" name="observaciones_plan" id="observaciones_plan"></textarea>
                                     </div>
 
@@ -331,7 +372,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-servicio"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-servicio"><i
                                                 class="fa fa-plus"></i> Agregar servicio</button>
                                         <hr>
                                         <br>
@@ -340,20 +382,23 @@
                                     <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Servicio a incluir</label>
-                                            <select style="text-transform: uppercase" id="servicio_detalle-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="servicio_detalle-0"
+                                                class="form-control">
 
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor </label>
-                                            <input type="text" min=0 name="valor_servicio_detalle-0" id="valor_servicio_detalle-0"
-                                                placeholder="Valor servicio" class="form-control">
+                                            <input type="text" min=0 name="valor_servicio_detalle-0"
+                                                id="valor_servicio_detalle-0" placeholder="Valor del servicio"
+                                                class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Frecuencia</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0"
+                                                class="form-control">
                                                 <option value="" selected>Seleccione una frecuencia</option>
                                                 <option value="Semanal">SEMANAL</option>
                                                 <option value="Quincenal">QUINCENAL</option>
@@ -369,15 +414,19 @@
 
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_servicio_detalle-0" id="observacion_servicio_detalle-0"></textarea>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observacion_servicio_detalle-0"
+                                                id="observacion_servicio_detalle-0"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Total a facturar</label>
-                                        <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle"
-                                            placeholder="Valor total a facturar" class="form-control" readonly>
+                                        <input type="number" min=0 name="total_servicio_detalle"
+                                            id="total_servicio_detalle" placeholder="Valor total a facturar"
+                                            class="form-control" readonly>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -389,7 +438,8 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Facturación</label>
-                                        <select style="text-transform: uppercase" id="tipo_facturacion" class="form-control">
+                                        <select style="text-transform: uppercase" id="tipo_facturacion"
+                                            class="form-control">
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="sc">SC</option>
                                             <option value="green">GREEN</option>
@@ -423,7 +473,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Número de Residencias</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-residencia"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-residencia"><i
                                                 class="fa fa-plus"></i> Agregar residencia</button>
                                         <hr>
                                         <br>
@@ -432,7 +483,8 @@
                                     <div class="row" id="residencias" style="padding: 15px 15px">
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de residencia</label>
-                                            <select style="text-transform: uppercase" id="tipo_residencia-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_residencia-0"
+                                                class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="casa">CASA</option>
                                                 <option value="apto">APTO</option>
@@ -445,24 +497,29 @@
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor</label>
                                             <input type="text" min=0 name="valor_residencia-0" id="valor_residencia-0"
-                                                placeholder="Valor total" class="form-control">
+                                                placeholder="Valor total por residencia" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Duración del servicio</label>
                                             <div class="input-group">
-                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_residencia-0" placeholder="Horas">
-                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_residencia-0" placeholder="Minutos">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
+                                                    max="11" class="form-control" id="num_horas_residencia-0"
+                                                    placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
+                                                    max="60" class="form-control" id="num_minutos_residencia-0"
+                                                    placeholder="Minutos">
                                             </div>
                                         </div>
 
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observaciones_residencia-0" id="observaciones_residencia-0"></textarea>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observaciones_residencia-0"
+                                                id="observaciones_residencia-0"></textarea>
                                         </div>
                                     </div>
 
@@ -476,14 +533,16 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Lámpara con lámina</label>
-                                        <input type="number" min=0 name="cantidad_lampara_lamina" id="cantidad_lampara_lamina"
-                                            placeholder="Cantidad total" class="form-control">
+                                        <input type="number" min=0 name="cantidad_lampara_lamina"
+                                            id="cantidad_lampara_lamina" placeholder="Cantidad total"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Lámpara insectocutora</label>
-                                        <input type="number" min=0 name="cant_lampara_insectocutora" id="cant_lampara_insectocutora"
-                                            placeholder="Cantidad total" class="form-control">
+                                        <input type="number" min=0 name="cant_lampara_insectocutora"
+                                            id="cant_lampara_insectocutora" placeholder="Cantidad total"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -500,14 +559,9 @@
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Estaciones de roedor</label>
-                                        <input type="number" min=0 name="cant_estaciones_roedor" id="cant_estaciones_roedor"
-                                            placeholder="Cantidad total" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase" name="observaciones_estaciones" id="observaciones_estaciones" placeholder="Escriba aquí las observaciones"
-                                            rows="1" class="form-control"></textarea>
+                                        <input type="number" min=0 name="cant_estaciones_roedor"
+                                            id="cant_estaciones_roedor" placeholder="Cantidad total"
+                                            class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -522,11 +576,20 @@
                                             placeholder="Valor total" class="form-control">
                                     </div>
 
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Observaciones</label>
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            name="observaciones_estaciones" id="observaciones_estaciones"
+                                            placeholder="Escriba aquí las observaciones" rows="1"
+                                            class="form-control"></textarea>
+                                    </div>
+
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Compra de Dispositivos</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-dispositivo"><i
                                                 class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
@@ -536,44 +599,67 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select style="text-transform: uppercase" id="tipo_dispositivo-0" class="form-control">
-                                                <option style="text-transform: uppercase" value="" selected>Seleccione una opción</option>
-                                                <option style="text-transform: uppercase" value="estaciones_de_roedor">ESTACIONES DE ROEDOR</option>
-                                                <option style="text-transform: uppercase" value="identificadores_estaciones">IDENTIFICADORES DE ESTACIONES</option>
-                                                <option style="text-transform: uppercase" value="lamparas_de_lamina_adhesiva">LAMPARAS DE LAMINA ADHESIVA</option>
-                                                <option style="text-transform: uppercase" value="lamparas de lamina_adhesiva_p">LAMPARAS DE LAMINA ADHESIVA PLA.</option>
-                                                <option style="text-transform: uppercase" value="lamparas_insetocutoras">LAMPARAS INSECTOCUTORA</option>
-                                                <option style="text-transform: uppercase" value="identificadores_lamparas">IDENTIFICADORES DE LAMPARAS</option>
-                                                <option style="text-transform: uppercase" value="jaula_pequena">JAULA PEQUEÑA</option>
-                                                <option style="text-transform: uppercase" value="jaula_grande">JAULA GRANDE</option>
-                                                <option style="text-transform: uppercase" value="trampa_de_impacto_plastica">TRAMPA DE IMPACTO PLASTICA</option>
-                                                <option style="text-transform: uppercase" value="trampa_de_impacto_madera">TRAMPA DE PLASTICO MADERA</option>
-                                                <option style="text-transform: uppercase" value="cebadero_moscas">CEBADERO DE MOSCAS</option>
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo-0"
+                                                class="form-control">
+                                                <option style="text-transform: uppercase" value="" selected>Seleccione
+                                                    una opción</option>
+                                                <option style="text-transform: uppercase" value="estaciones_de_roedor">
+                                                    ESTACIONES DE ROEDOR</option>
+                                                <option style="text-transform: uppercase"
+                                                    value="identificadores_estaciones">IDENTIFICADORES DE ESTACIONES
+                                                </option>
+                                                <option style="text-transform: uppercase"
+                                                    value="lamparas_de_lamina_adhesiva">LAMPARAS DE LAMINA ADHESIVA
+                                                </option>
+                                                <option style="text-transform: uppercase"
+                                                    value="lamparas de lamina_adhesiva_p">LAMPARAS DE LAMINA ADHESIVA
+                                                    PLA.</option>
+                                                <option style="text-transform: uppercase"
+                                                    value="lamparas_insetocutoras">LAMPARAS INSECTOCUTORA</option>
+                                                <option style="text-transform: uppercase"
+                                                    value="identificadores_lamparas">IDENTIFICADORES DE LAMPARAS
+                                                </option>
+                                                <option style="text-transform: uppercase" value="jaula_pequena">JAULA
+                                                    PEQUEÑA</option>
+                                                <option style="text-transform: uppercase" value="jaula_grande">JAULA
+                                                    GRANDE</option>
+                                                <option style="text-transform: uppercase"
+                                                    value="trampa_de_impacto_plastica">TRAMPA DE IMPACTO PLASTICA
+                                                </option>
+                                                <option style="text-transform: uppercase"
+                                                    value="trampa_de_impacto_madera">TRAMPA DE PLASTICO MADERA</option>
+                                                <option style="text-transform: uppercase" value="cebadero_moscas">
+                                                    CEBADERO DE MOSCAS</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-1">
                                             <label class="control-label">Cant.</label>
-                                            <input type="text" id="cant_dispositivo-0" name="cant_dispositivo-0" placeholder=""
-                                                class="form-control">
+                                            <input type="text" id="cant_dispositivo-0" name="cant_dispositivo-0"
+                                                placeholder="" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo-0" name="valor_sin_iva_dispositivo-0" placeholder="Valor sin IVA"
+                                            <input type="text" id="valor_sin_iva_dispositivo-0"
+                                                name="valor_sin_iva_dispositivo-0" placeholder="Valor sin IVA"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo-0" name="total_dispositivo-0" placeholder="Valor total"
+                                            <input type="text" readonly id="total_dispositivo-0"
+                                                name="total_dispositivo-0" placeholder="Valor total"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_dispositivo-0" id="observacion_dispositivo-0"></textarea>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observacion_dispositivo-0"
+                                                id="observacion_dispositivo-0"></textarea>
                                         </div>
 
                                     </div>
@@ -582,7 +668,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Dispositivos en Comodato para esta Propuesta</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-dispositivo-comodato"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-dispositivo-comodato"><i
                                                 class="fa fa-plus"></i> Agregar dispositivo</button>
                                         <hr>
                                         <br>
@@ -592,46 +679,56 @@
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Tipo de dispositivo</label>
-                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_dispositivo_comodato-0"
+                                                class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
                                                 <option value="estaciones_de_roedor">estaciones de roedor</option>
                                                 <option value="identificadores_estaciones">identificadores de
                                                     estaciones</option>
-                                                <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva</option>
+                                                <option value="lamparas_de_lamina_adhesiva">lamparas de lamina adhesiva
+                                                </option>
                                                 <option value="lamparas de lamina_adhesiva_p">lamparas de lamina
                                                     adhesiva p.</option>
                                                 <option value="lamparas_insetocutoras">lamparas insetocutoras</option>
-                                                <option value="identificadores_lamparas">identificadores de lamparas</option>
+                                                <option value="identificadores_lamparas">identificadores de lamparas
+                                                </option>
                                                 <option value="jaula_pequena">jaula pequeña</option>
                                                 <option value="jaula_grande">jaula grande</option>
-                                                <option value="trampa_de_impacto_plastica">trampa de impacto plastica</option>
-                                                <option value="trampa_de_impacto_madera">trampa de impacto madera</option>
+                                                <option value="trampa_de_impacto_plastica">trampa de impacto plastica
+                                                </option>
+                                                <option value="trampa_de_impacto_madera">trampa de impacto madera
+                                                </option>
                                                 <option value="cebadero_moscas">cebadero moscas</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-1">
                                             <label class="control-label">Cant.</label>
-                                            <input type="text" id="cant_dispositivo_comodato-0" name="cant_dispositivo_comodato-0" placeholder=""
-                                                class="form-control">
+                                            <input type="text" id="cant_dispositivo_comodato-0"
+                                                name="cant_dispositivo_comodato-0" placeholder="" class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Valor unitario sin IVA</label>
-                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0" name="valor_sin_iva_dispositivo_comodato-0" placeholder="Valor sin IVA"
+                                            <input type="text" id="valor_sin_iva_dispositivo_comodato-0"
+                                                name="valor_sin_iva_dispositivo_comodato-0" placeholder="Valor sin IVA"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Valor total.</label>
-                                            <input type="text" id="total_dispositivo_comodato-0" name="total_dispositivo_comodato-0" placeholder="Valor Total"
+                                            <input type="text" id="total_dispositivo_comodato-0"
+                                                name="total_dispositivo_comodato-0" placeholder="Valor Total"
                                                 class="form-control">
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacione_dispositivo_comodato-0" id="observacione_dispositivo_comodato-0"></textarea>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observacione_dispositivo_comodato-0"
+                                                id="observacione_dispositivo_comodato-0"></textarea>
                                         </div>
 
                                     </div>
@@ -640,7 +737,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Gestion de calidad</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-doc"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-doc"><i
                                                 class="fa fa-plus"></i> Agregar documento</button>
                                         <hr>
                                         <br>
@@ -649,35 +747,46 @@
                                     <div class="row" id="gestion-calidad" style="padding: 15px 15px">
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Tipo de documento</label>
-                                            <select style="text-transform: uppercase" id="tipo_doc-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="tipo_doc-0"
+                                                class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
-                                                <option value="diagnostico_inicial">Diagnostico inicial</option>
+                                                <option value="diagnostico_inicial">Diagnósticos</option>
                                                 <option value="cronograma_servicios">Cronograma de servicios</option>
-                                                <option value="mapas_estaciones_lamparas">Mapas de estaciones/lamparas</option>
-                                                <option value="visitas_calidad">Visitas de calidad</option>
+                                                <option value="mapas_dispositivos">Mapa de dispositivos</option>
+                                                <option value="programa_prevencion_control_plagas">Programa de
+                                                    prevención y control de plagas</option>
+                                                <option value="informes_tendencias">Informes con tendencias</option>
+                                                <option value="informes_frecuentes">Informes frecuentes</option>
+                                                <option value="fichas_tecnicas">Fichas técnicas</option>
+                                                <option value="documentos_legales">Documentos legales</option>
+                                                <option value="docs_prevencion_control_plagas">Documentos prevención de
+                                                    plagas</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Frecuencia.</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_doc-0" class="form-control">
+                                            <select style="text-transform: uppercase" id="frecuencia_doc-0"
+                                                class="form-control">
                                                 <option value="" selected>Seleccione una opción</option>
-                                                <option value="mensual">mensual</option>
-                                                <option value="semanal">semanal</option>
-                                                <option value="quincenal">quincenal</option>
-                                                <option value="bimestral">bimestral</option>
-                                                <option value="trimestral">trimestral</option>
+                                                <option value="mensual">Mensual</option>
+                                                <option value="semanal">Semanal</option>
+                                                <option value="quincenal">Quincenal</option>
+                                                <option value="bimestral">Bimestral</option>
+                                                <option value="trimestral">Trimestral</option>
                                                 <option value="cuatrimestral">cuatrimestral</option>
-                                                <option value="semestral">semestral</option>
-                                                <option value="anual">anual</option>
-                                                <option value="ocasional">ocasional</option>
+                                                <option value="semestral">Semestral</option>
+                                                <option value="anual">Anual</option>
+                                                <option value="ocasional">Ocasional</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                             <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_doc-0" id="observacion_doc-0"></textarea>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observacion_doc-0" id="observacion_doc-0"></textarea>
                                         </div>
                                     </div>
 
@@ -689,7 +798,8 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Áreas</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right" id="btn-add-area"><i
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-area"><i
                                                 class="fa fa-plus"></i> Agregar área</button>
                                         <hr>
                                         <br>
@@ -698,23 +808,28 @@
                                     <div class="row" id="areas" style="padding: 15px 15px">
                                         <div class="form-group col-lg-3">
                                             <label class="control-label">Nombre y/o descripción del área</label>
-                                            <input type="text" style="text-transform: uppercase" id="area-0" name="area-0" placeholder="Nombre de area"
+                                            <input type="text" style="text-transform: uppercase" id="area-0"
+                                                name="area-0" placeholder="Ej: Pasillo, sala, terraza..."
                                                 class="form-control">
                                         </div>
-    
+
                                         <div class="form-group col-lg-3 ">
                                             <label>Tiempo estimado</label>
                                             <div class="input-group">
-                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                                    class="form-control" id="num_horas_area-0" placeholder="Horas">
-                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                                    class="form-control" id="num_minutos_area-0" placeholder="Minutos">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
+                                                    max="11" class="form-control" id="num_horas_area-0"
+                                                    placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
+                                                    max="60" class="form-control" id="num_minutos_area-0"
+                                                    placeholder="Minutos">
                                             </div>
                                         </div>
-    
+
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Evidencia y/o plaga observada</label>
-                                            <select style="text-transform: uppercase" data-placeholder="Seleccione las opciones" class="chosen-select" multiple style="width:350px;" tabindex="4" id="plagas_area-0">
+                                            <select style="text-transform: uppercase"
+                                                data-placeholder="Seleccione las opciones" class="chosen-select"
+                                                multiple style="width:350px;" tabindex="4" id="plagas_area-0">
                                                 <option value="cucarachas">CUCARACHAS</option>
                                                 <option value="moscas">MOSCAS</option>
                                                 <option value="pulgas">PULGAS</option>
@@ -726,10 +841,11 @@
                                                 <option value="chinches">CHINCHES</option>
                                             </select>
                                         </div>
-    
+
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Nivel act.</label>
-                                            <select style="text-transform: uppercase" name="nivel_area-0" id="nivel_area-0" class="form-control">
+                                            <select style="text-transform: uppercase" name="nivel_area-0"
+                                                id="nivel_area-0" class="form-control">
                                                 <option value="alto">ALTO</option>
                                                 <option value="medio">MEDIO</option>
                                                 <option value="bajo">BAJO</option>
@@ -741,8 +857,10 @@
 
                                     <div class="col-lg-12">
                                         <div class="ibox-footer">
-                                            <button type="submit" class="btn btn-primary" id="btn-submit">Guardar</button>
-                                            <a href="\home"><button type="button" class="btn btn-default" style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
+                                            <button type="submit" class="btn btn-primary"
+                                                id="btn-submit">Guardar</button>
+                                            <a href="\home"><button type="button" class="btn btn-default"
+                                                    style="text-decoration: none; color: #676a6c;">Cancelar</button></a>
                                         </div>
                                     </div>
 
@@ -776,12 +894,12 @@
     $(document).ready(function () {
 
         /** Ocultar inputs de crear cliente/sede **/
-        if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
+        if ($("input[name=option-client]:checked", '#client-options').val() == "create") {
             $("#input-create").removeClass("hidden")
             $("#select-filter").addClass("hidden")
             $("#select-filter-sede").addClass("hidden")
             $("#input-nombre-sede").removeClass("hidden")
-        }else{
+        } else {
             $("#input-create").addClass("hidden")
             $("#select-filter").removeClass("hidden")
             $("#select-filter-sede").removeClass("hidden")
@@ -801,20 +919,20 @@
 
         /** Inicializacion de servicios en el select **/
         $.get('/tipos')
-        .then(res => {
-            servicios = res;
-            servicios.forEach((value,index) => {
-                $("#servicio_detalle-0").append(`
+            .then(res => {
+                servicios = res;
+                servicios.forEach((value, index) => {
+                    $("#servicio_detalle-0").append(`
                     <option value="${value.nombre}">${value.nombre}</option>
                 `)
+                })
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
 
         /** Inicializacion del input Autonumeric **/
-        valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'),{
+        valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -822,7 +940,7 @@
             outputFormat: "number"
         })
 
-        valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'),{
+        valoresResidencias[0] = new AutoNumeric(document.getElementById('valor_residencia-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -830,7 +948,7 @@
             outputFormat: "number"
         })
 
-        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'),{
+        totalPlanSaneamiento = new AutoNumeric(document.getElementById('total_plan'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -838,15 +956,7 @@
             outputFormat: "number"
         })
 
-        valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'),{
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
-        
-        valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'),{
+        valoresSinIvaDispositivos[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -854,7 +964,16 @@
             outputFormat: "number"
         })
 
-        valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById('valor_sin_iva_dispositivo_comodato-0'),{
+        // valorTotalDispositivos[0] = new AutoNumeric(document.getElementById('total_dispositivo-0'), {
+        //     digitalGroupSpacing: '3',
+        //     digitGroupSeparator: '.',
+        //     decimalCharacter: ',',
+        //     decimalPlaces: 0,
+        //     outputFormat: "number"
+        // })
+
+        valoresSinIvaComodato[0] = new AutoNumeric(document.getElementById(
+            'valor_sin_iva_dispositivo_comodato-0'), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -862,34 +981,36 @@
             outputFormat: "number"
         })
 
-        valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'),{
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
-        })
+        // valorTotalComodato[0] = new AutoNumeric(document.getElementById('total_dispositivo_comodato-0'), {
+        //     digitalGroupSpacing: '3',
+        //     digitGroupSeparator: '.',
+        //     decimalCharacter: ',',
+        //     decimalPlaces: 0,
+        //     outputFormat: "number"
+        // })
 
         //Ocultar/Mostar input para crear cliente o filtrarlo en caso de existir
-        $("#radio-1, #radio-2").on('ifChecked', function(e){
-            if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
+        $("#radio-1, #radio-2").on('ifChecked', function (e) {
+            if ($("input[name=option-client]:checked", '#client-options').val() == "create") {
                 $("#input-create").removeClass("hidden")
                 $("#select-filter").addClass("hidden")
                 $("#select-filter-sede").addClass("hidden")
                 $("#input-nombre-sede").removeClass("hidden")
-            }else{
+            } else {
                 $("#input-create").addClass("hidden")
                 $("#select-filter").removeClass("hidden")
                 $("#select-filter-sede").removeClass("hidden")
                 $("#input-nombre-sede").addClass("hidden")
             }
         })
-        
+
 
     });
 
     //Inicializador del Select AUTOCOMPLETAR
-    $('.chosen-select').chosen({ width: "100%" });
+    $('.chosen-select').chosen({
+        width: "100%"
+    });
 
     //Evento change del select de clientes
     $("#id_cliente").change(event => {
@@ -906,18 +1027,18 @@
             $("#input-celular").val(res[0]['celular_contacto_inicial']);
             $("#input-email").val(res[0]['email_contacto_inicial']);
             $("#input-sede-nit").val(res[0]['nit_cedula']);
-            $("#nombre_usuario").val(res[0].user.nombres+" "+res[0].user.apellidos)
+            $("#nombre_usuario").val(res[0].user.nombres + " " + res[0].user.apellidos)
             $("#contacto_name_factura").val(res[0]["nombre_contacto_facturacion"])
             $("#contacto_email_factura").val(res[0]["email_contacto_facturacion"])
             $("#contacto_celular_factura").val(res[0]["celular_contacto_facturacion"])
-        }).then((res) => {//Peticion exitosa => status: 200
+        }).then((res) => { //Peticion exitosa => status: 200
             console.log('Petición Exitosa');
-        }).catch((err) => {//Peticion fallida => status: > 400
+        }).catch((err) => { //Peticion fallida => status: > 400
             console.log(err);
         });
         //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
         $.get(`/sedes/cliente/${event.target.value}`, function (res) {
-            $("#select_sedes").empty();//Limipia el select
+            $("#select_sedes").empty(); //Limipia el select
             $("#input-sede-direccion").val('');
             $("#input-sede-ciudad").val('');
             $("#input-sede-barrio").val('');
@@ -926,7 +1047,7 @@
             $("#input-sede-telefono").val('');
             $("#input-sede-celular").val('');
             $("#input-sede-email").val('');
-            if (res == '') {//Valida que el cliente tenga sedes
+            if (res == '') { //Valida que el cliente tenga sedes
                 $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
                 $("#select_sedes").prop('required', false);
 
@@ -941,7 +1062,8 @@
                 $("#input-sede-celular").prop('disabled', true);
                 $("#input-sede-email").prop('disabled', true);
             } else {
-                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                $("#select_sedes").append(
+                    `<option value='' disabled selected> Selecciona una sede </option>`);
                 $("#select_sedes").prop('required', true);
 
                 $("#select_sedes").prop('disabled', false);
@@ -958,7 +1080,8 @@
                 //Recorre la respuesta del servidor
                 res.forEach(element => {
                     //Añade Options al select de sedes dependiendo de la respues del servidor
-                    $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                    $("#select_sedes").append(
+                        `<option value=${element.id}> ${element.nombre} </option>`);
                 });
             }
         }).then((res) => {
@@ -997,12 +1120,83 @@
     var contDocs = 1;
     var contAreas = 1;
 
+    // Suma automatica de total de compra
+    let valueCant = 0
+    let valueContInputs = 0
+
+    $(`#cant_dispositivo-0`).on("input", (e) => {
+        valueCant = e.target.value
+    })
+
+    $(`#valor_sin_iva_dispositivo-0`).on("input", (e) => {
+        let valueInput = e.target.value
+        let arrValues = valueInput.split(".")
+        let valueAsNumber = parseInt(arrValues.join(""))
+        $(`#total_dispositivo-${valueContInputs}`).val((valueCant * valueAsNumber).toString())
+    })
+
+    // Suma automatica de productos comodato
+    let valueCant2 = 0
+    let valueContInputs2 = 0
+
+    $(`#cant_dispositivo_comodato-0`).on("input", (e) => {
+        valueCant2 = e.target.value
+    })
+
+    $(`#valor_sin_iva_dispositivo_comodato-0`).on("input", (e) => {
+        let valueInput = e.target.value
+        let arrValues = valueInput.split(".")
+        let valueAsNumber = parseInt(arrValues.join(""))
+        $(`#total_dispositivo_comodato-${valueContInputs2}`).val((valueCant2 * valueAsNumber).toString())
+    })
+
+    //Definicion de frencuencias para documentos
+    function frecuenciaDefinida(tipoDocumento, idSelectFrecuencia) {
+        console.log("f7ht89h")
+        switch (tipoDocumento) {
+            case 'diagnostico_inicial':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('semestral').change()
+                break
+            case 'cronograma_servicios':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('anual').change()
+                break
+            case 'mapas_dispositivos':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('ocasional').change()
+                break
+            case 'programa_prevencion_control_plagas':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('anual').change()
+                break
+            case 'informes_tendencias':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('mensual').change()
+                break
+            case 'informes_frecuentes':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('mensual').change()
+                break
+            case 'fichas_tecnicas':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('ocasional').change()
+                break
+            case 'documentos_legales':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('mensual').change()
+                break
+            case 'docs_prevencion_control_plagas':
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('anual').change()
+                break
+            default:
+                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('ocasional').change()
+                break;
+        }
+
+    }
+    $("#tipo_doc-0").change(e => {
+        frecuenciaDefinida(e.target.value, 0)
+    })
+
     //Plan de sanemaiento
-    $("#btn-add-visitas").click(function(){
+    $("#btn-add-visitas").click(function () {
         $("#visitas").append(`
             <div class="form-group col-lg-2">
                 <label class="control-label"># Visita</label>
-                <input type="number" min=0 name="num_visita-${contVisitas}" id="num_visita-${contVisitas}" placeholder="Ej: 1"
+                <input type="number" min=0 name="num_visita-${contVisitas}" id="num_visita-${contVisitas}" placeholder="Ej: 1" value="${contVisitas + 1}"
                     class="form-control">
             </div>
             <div class="form-group col-lg-4 b-r">
@@ -1019,7 +1213,7 @@
     })
 
     //Detalle del servicio correctivo y/o preventivo
-    $("#btn-add-servicio").click(function(){
+    $("#btn-add-servicio").click(function () {
         $("#detalle-servicios").append(`
             <div class="form-group col-lg-4">
                 <label class="control-label">Servicio a incluir</label>
@@ -1056,8 +1250,9 @@
                     rows="1" name="observacion_servicio_detalle-${contServicio}" id="observacion_servicio_detalle-${contServicio}"></textarea>
             </div>
         `)
-            
-        valoresServicios[contServicio] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${contServicio}`),{
+
+        valoresServicios[contServicio] = new AutoNumeric(document.getElementById(
+            `valor_servicio_detalle-${contServicio}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1080,10 +1275,10 @@
     })
 
     /**
-    * Suma automaticamente los valores de los inputs con el id existente
-    * @return void
-    */
-    function autosumaTotalServicio(){
+     * Suma automaticamente los valores de los inputs con el id existente
+     * @return void
+     */
+    function autosumaTotalServicio() {
         var sum = 0;
         for (let index = 0; index < contServicio; index++) {
             sum += parseInt(valoresServicios[index].rawValue);
@@ -1091,8 +1286,8 @@
         $("#total_servicio_detalle").val(sum)
     }
 
-    function anadirServiciosSelect(idSelect){
-        servicios.forEach((value,index)=> {
+    function anadirServiciosSelect(idSelect) {
+        servicios.forEach((value, index) => {
             $(`#servicio_detalle-${idSelect}`).append(`
                 <option value="${value.nombre}">${value.nombre}</option>
             `)
@@ -1100,7 +1295,7 @@
     }
 
     //Numero de residencias
-    $("#btn-add-residencia").click(function(){
+    $("#btn-add-residencia").click(function () {
         $("#residencias").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de residencia</label>
@@ -1138,7 +1333,8 @@
             </div>
         `)
 
-        valoresResidencias[contResidencias] = new AutoNumeric(document.getElementById(`valor_residencia-${contResidencias}`),{
+        valoresResidencias[contResidencias] = new AutoNumeric(document.getElementById(
+            `valor_residencia-${contResidencias}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1149,7 +1345,7 @@
     })
 
     //Compra de dispositivos
-    $("#btn-add-dispositivo").click(function(){
+    $("#btn-add-dispositivo").click(function () {
         $("#dispositivos").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de dispositivo</label>
@@ -1186,7 +1382,7 @@
             <div class="form-group col-lg-3">
                 <label class="control-label">Valor total.</label>
                 <input type="text" id="total_dispositivo-${contDispositivos}" name="total_dispositivo-${contDispositivos}" placeholder="Nombre de dispositivo"
-                    class="form-control">
+                   readonly class="form-control">
             </div>
 
             <div class="form-group col-lg-3 ">
@@ -1196,7 +1392,8 @@
             </div>
         `)
 
-        valoresSinIvaDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo-${contDispositivos}`),{
+        valoresSinIvaDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(
+            `valor_sin_iva_dispositivo-${contDispositivos}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1204,18 +1401,33 @@
             outputFormat: "number"
         })
 
-        valorTotalDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`total_dispositivo-${contDispositivos}`),{
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
+        let valueCant = 0
+        let valueContInputs = contDispositivos
+
+        $(`#cant_dispositivo-${contDispositivos}`).on("input", (e) => {
+            valueCant = e.target.value
         })
+
+        $(`#valor_sin_iva_dispositivo-${contDispositivos}`).on("input", (e) => {
+            let valueInput = e.target.value
+            let arrValues = valueInput.split(".")
+            let valueAsNumber = parseInt(arrValues.join(""))
+            $(`#total_dispositivo-${valueContInputs}`).val((valueCant * valueAsNumber).toString())
+        })
+
+        // valorTotalDispositivos[contDispositivos] = new AutoNumeric(document.getElementById(`total_dispositivo-${contDispositivos}`),{
+        //     digitalGroupSpacing: '3',
+        //     digitGroupSeparator: '.',
+        //     decimalCharacter: ',',
+        //     decimalPlaces: 0,
+        //     outputFormat: "number"
+        // })
+
         contDispositivos++;
     })
 
     //Dispositivos en comodato
-    $("#btn-add-dispositivo-comodato").click(function(){
+    $("#btn-add-dispositivo-comodato").click(function () {
         $("#dispositivos-comodato").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Tipo de dispositivo</label>
@@ -1250,7 +1462,7 @@
             <div class="form-group col-lg-3">
                 <label class="control-label">Valor total.</label>
                 <input type="text" id="total_dispositivo_comodato-${contComodatos}" name="total_dispositivo_comodato-${contComodatos}" placeholder="Nombre de dispositivo"
-                    class="form-control">
+                   readonly class="form-control">
             </div>
 
             <div class="form-group col-lg-3 ">
@@ -1260,7 +1472,8 @@
             </div>
         `)
 
-        valoresSinIvaComodato[contComodatos] = new AutoNumeric(document.getElementById(`valor_sin_iva_dispositivo_comodato-${contComodatos}`),{
+        valoresSinIvaComodato[contComodatos] = new AutoNumeric(document.getElementById(
+            `valor_sin_iva_dispositivo_comodato-${contComodatos}`), {
             digitalGroupSpacing: '3',
             digitGroupSeparator: '.',
             decimalCharacter: ',',
@@ -1268,27 +1481,49 @@
             outputFormat: "number"
         })
 
-        valorTotalComodato[contComodatos] = new AutoNumeric(document.getElementById(`total_dispositivo_comodato-${contComodatos}`),{
-            digitalGroupSpacing: '3',
-            digitGroupSeparator: '.',
-            decimalCharacter: ',',
-            decimalPlaces: 0,
-            outputFormat: "number"
+        let valueCant = 0
+        let valueContInputs = contComodatos
+
+        $(`#cant_dispositivo_comodato-${contComodatos}`).on("input", (e) => {
+            valueCant = e.target.value
         })
+
+        $(`#valor_sin_iva_dispositivo_comodato-${contComodatos}`).on("input", (e) => {
+            let valueInput = e.target.value
+            let arrValues = valueInput.split(".")
+            let valueAsNumber = parseInt(arrValues.join(""))
+            $(`#total_dispositivo_comodato-${valueContInputs}`).val((valueCant * valueAsNumber)
+                .toString())
+        })
+
+        // valorTotalComodato[contComodatos] = new AutoNumeric(document.getElementById(`total_dispositivo_comodato-${contComodatos}`),{
+        //     digitalGroupSpacing: '3',
+        //     digitGroupSeparator: '.',
+        //     decimalCharacter: ',',
+        //     decimalPlaces: 0,
+        //     outputFormat: "number"
+        // })
         contComodatos++;
     })
 
     //Gestion de calidad
-    $("#btn-add-doc").click(function(){
+    $("#btn-add-doc").click(function () {
         $('#gestion-calidad').append(`
             <div class="form-group col-lg-4">
                 <label class="control-label">Tipo de documento</label>
                 <select style="text-transform: uppercase" id="tipo_doc-${contDocs}" class="form-control">
                     <option value="" selected>Seleccione una opción</option>
-                    <option value="diagnostico_inicial">diagnostico inicial</option>
-                    <option value="cronograma_servicios">cronograma de servicios</option>
-                    <option value="mapas_estaciones_lamparas">mapas de estaciones/lamparas</option>
-                    <option value="visitas_calidad">visitas_calidad</option>
+                    <option value="diagnostico_inicial">Diagnósticos</option>
+                    <option value="cronograma_servicios">Cronograma de servicios</option>
+                    <option value="mapas_dispositivos">Mapa de dispositivos</option>
+                    <option value="programa_prevencion_control_plagas">Programa de
+                        prevención y control de plagas</option>
+                    <option value="informes_tendencias">Informes con tendencias</option>
+                    <option value="informes_frecuentes">Informes frecuentes</option>
+                    <option value="fichas_tecnicas">Fichas técnicas</option>
+                    <option value="documentos_legales">Documentos legales</option>
+                    <option value="docs_prevencion_control_plagas">Documentos prevención de
+                        plagas</option>
                 </select>
             </div>
 
@@ -1314,11 +1549,17 @@
                     rows="1" name="observacion_doc-${contDocs}" id="observacion_doc-${contDocs}"></textarea>
             </div>
         `)
+
+        $(`#tipo_doc-${contDocs}`).change(e => {
+            console.log(contDocs)
+            frecuenciaDefinida(e.target.value, contDocs - 1 )
+        })
+
         contDocs++;
     })
 
     //Descripcion de areas
-    $("#btn-add-area").click(function(){
+    $("#btn-add-area").click(function () {
         $("#areas").append(`
             <div class="form-group col-lg-3">
                 <label class="control-label">Nombre y/o descripción del área</label>
@@ -1361,7 +1602,9 @@
                 </select>
             </div>
         `)
-        $('.chosen-select').chosen({ width: "100%" });
+        $('.chosen-select').chosen({
+            width: "100%"
+        });
         contAreas++;
     })
 
@@ -1380,31 +1623,31 @@
 
     function guardarCliente() {
         var dataCliente = {
-            nombre_cliente:$("#nombre_cliente").val(),
-            nit_cliente:$("#input-nit").val(),
-            direccion_cliente:$("#input-direccion").val(),
-            ciudad_cliente:$("#input-ciudad").val(),
-            barrio_cliente:$("#input-barrio").val(),
-            contacto_cliente:$("#input-contacto").val(),
-            cargo_cliente:$("#input-cargo").val(),
-            sector_economico_cliente:$("#input-sector").val(),
-            celular_cliente:$("#input-celular").val(),
-            email_cliente:$("#input-email").val(),
-            nombre_sede:$("#nombre_sede").val(),
-            direccion_sede:$("#input-sede-direccion").val(),
-            ciudad_sede:$("#input-sede-ciudad").val(),
-            barrio_sede:$("#input-sede-barrio").val(),
-            zona_sede:$("#input-sede-zona").val(),
-            contacto_sede:$("#input-sede-contacto").val(),
-            telefono_sede:$("#input-sede-telefono").val(),
-            celular_sede:$("#input-sede-celular").val(),
-            email_sede:$("#input-sede-email").val(),
+            nombre_cliente: $("#nombre_cliente").val(),
+            nit_cliente: $("#input-nit").val(),
+            direccion_cliente: $("#input-direccion").val(),
+            ciudad_cliente: $("#input-ciudad").val(),
+            barrio_cliente: $("#input-barrio").val(),
+            contacto_cliente: $("#input-contacto").val(),
+            cargo_cliente: $("#input-cargo").val(),
+            sector_economico_cliente: $("#input-sector").val(),
+            celular_cliente: $("#input-celular").val(),
+            email_cliente: $("#input-email").val(),
+            nombre_sede: $("#nombre_sede").val(),
+            direccion_sede: $("#input-sede-direccion").val(),
+            ciudad_sede: $("#input-sede-ciudad").val(),
+            barrio_sede: $("#input-sede-barrio").val(),
+            zona_sede: $("#input-sede-zona").val(),
+            contacto_sede: $("#input-sede-contacto").val(),
+            telefono_sede: $("#input-sede-telefono").val(),
+            celular_sede: $("#input-sede-celular").val(),
+            email_sede: $("#input-sede-email").val(),
         }
         return $.ajax({
             url: '/clientes',
-            data:dataCliente,
+            data: dataCliente,
             type: 'POST',
-            headers:{
+            headers: {
                 "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
             },
             success: (res) => {
@@ -1417,33 +1660,33 @@
     }
 
     //Peticion HTTP POST para guardar el formato
-    function guardarInspeccion(dataSend){
+    function guardarInspeccion(dataSend) {
         $.ajax({
-            url: '/inspeccion',
-            data: dataSend,
-            type: 'POST',
-            headers:{
-                "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
-            }
-        })
-        .then(res => {
-            swal("¡Formato Guardado!", 'El formato de inspeccion fue guardado correctamente.', 'success')
-            .then(val => {
-                if(val){
-                    window.location.href = '/inspeccion/create'
+                url: '/inspeccion',
+                data: dataSend,
+                type: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value
                 }
             })
-        })
-        .catch(err => {
-            swal('¡Error!', err.statusText, "error")
-        })
+            .then(res => {
+                swal("¡Formato Guardado!", 'El formato de inspeccion fue guardado correctamente.', 'success')
+                    .then(val => {
+                        if (val) {
+                            window.location.href = '/inspeccion/create'
+                        }
+                    })
+            })
+            .catch(err => {
+                swal('¡Error!', err.statusText, "error")
+            })
     }
     // var crsfToken = document.getElementsByName("_token")[0].value; //Obtiene el token del formulario a enviar
     /* Estructura de datos para envio del formulario
     -----------------------------------------------------*/
     $('#form-inspeccion').submit(e => {
         e.preventDefault();
-        
+
         var dataToSendInspection = {
             codigo: '',
             nombre_usuario: '',
@@ -1480,7 +1723,8 @@
         for (let index = 0; index < contVisitas; index++) {
             dataToSendInspection.visitas[index] = {
                 num_visita: $(`#num_visita-${index}`).val(),
-                duracion: (parseInt($(`#num_horas_visita-${index}`).val()) * 60) + parseInt($(`#num_minutos_visita-${index}`).val())
+                duracion: (parseInt($(`#num_horas_visita-${index}`).val()) * 60) + parseInt($(
+                    `#num_minutos_visita-${index}`).val())
             }
         }
 
@@ -1492,7 +1736,7 @@
                 frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
                 observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
             }
-            
+
         }
 
         // //Numero de residencias
@@ -1500,7 +1744,8 @@
             dataToSendInspection.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
                 valor_residencia: valoresResidencias[index].rawValue,
-                tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(`#num_minutos_residencia-${index}`).val()),
+                tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(
+                    `#num_minutos_residencia-${index}`).val()),
                 observaciones_residencia: $(`#observaciones_residencia-${index}`).val()
             }
         }
@@ -1511,18 +1756,20 @@
                 tipo_dispositivo: $(`#tipo_dispositivo-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo-${index}`).val(),
                 valor_sin_iva: valoresSinIvaDispositivos[index].rawValue,
-                total_dispositivo: valorTotalDispositivos[index].rawValue,
+                total_dispositivo: $(`#total_dispositivo-${index}`)
+                    .val(), //valorTotalDispositivos[index].rawValue,
                 observacion_dispositivo: $(`#observacion_dispositivo-${index}`).val()
-            }   
+            }
         }
-        
+
         // //Dispositivos en comodato
         for (let index = 0; index < contComodatos; index++) {
             dataToSendInspection.dispositivos_comodato[index] = {
                 tipo_dispositivo: $(`#tipo_dispositivo_comodato-${index}`).val(),
                 cant_dispositivo: $(`#cant_dispositivo_comodato-${index}`).val(),
                 valor_sin_iva: valoresSinIvaComodato[index].rawValue,
-                total_dispositivo: valorTotalComodato[index].rawValue,
+                total_dispositivo: $(`#total_dispositivo_comodato-${index}`)
+                    .val(), //valorTotalComodato[index].rawValue,
                 observacion_dispositivo: $(`#observacione_dispositivo_comodato-${index}`).val(),
             }
         }
@@ -1540,16 +1787,17 @@
         for (let index = 0; index < contAreas; index++) {
             dataToSendInspection.areas[index] = {
                 area: $(`#area-${index}`).val(),
-                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) * 60) + parseInt($(`#num_minutos_area-${index}`).val()),
+                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) * 60) + parseInt($(
+                    `#num_minutos_area-${index}`).val()),
                 plagas_area: $(`#plagas_area-${index}`).val(),
                 nivel_actividad_area: $(`#nivel_area-${index}`).val()
             }
-            
+
         }
-        
+
         dataToSendInspection.codigo = codigoAleatorio();
         dataToSendInspection.nombre_usuario = $("#nombre_usuario").val();
-        dataToSendInspection.fecha  = $("#fecha_creacion").val();
+        dataToSendInspection.fecha = $("#fecha_creacion").val();
         dataToSendInspection.frecuencia = $("#frecuencia_servicio").val();
         dataToSendInspection.observaciones = $("#observaciones_tecnico").val();
         dataToSendInspection.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
@@ -1571,68 +1819,66 @@
         console.log(dataToSendInspection)
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
-            title: "Código de Inspección",
-            text: "Código generado: "+dataToSendInspection.codigo+", escribe otro código aquí: ",
-            icon: "warning",
-            content: {
-                element: "input",
-                attributes: {
-                placeholder: "Ingresa el código personalizado para el formulario de inspeccion",
-                type: "text"
+                title: "Código de Inspección",
+                text: "Código generado: " + dataToSendInspection.codigo + ", escribe otro código aquí: ",
+                icon: "warning",
+                content: {
+                    element: "input",
+                    attributes: {
+                        placeholder: "Ingresa el código personalizado para el formulario de inspeccion",
+                        type: "text"
+                    },
                 },
-            },
-            buttons: {
-                cancel: true,
-                confirm: {
-                    text: 'Aceptar',
-                    visible: true,
-                    closeModal: false, //Muestra el Loader
-                }
-            },
-            dangerMode: false,
-        })
-        .then(isConfirm => {
-            if(isConfirm){ //Valida si el input de codigo está diligenciado
-                dataToSendInspection.codigo =  isConfirm;
-                if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
-                    guardarCliente()
-                    .then(res => {
-                        dataToSendInspection.cliente_id = res.id_cliente;
-                        dataToSendInspection.sede_id = res.id_sede;
+                buttons: {
+                    cancel: true,
+                    confirm: {
+                        text: 'Aceptar',
+                        visible: true,
+                        closeModal: false, //Muestra el Loader
+                    }
+                },
+                dangerMode: false,
+            })
+            .then(isConfirm => {
+                if (isConfirm) { //Valida si el input de codigo está diligenciado
+                    dataToSendInspection.codigo = isConfirm;
+                    if ($("input[name=option-client]:checked", '#client-options').val() == "create") {
+                        guardarCliente()
+                            .then(res => {
+                                dataToSendInspection.cliente_id = res.id_cliente;
+                                dataToSendInspection.sede_id = res.id_sede;
+                                guardarInspeccion(dataToSendInspection);
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    } else {
+                        dataToSendInspection.cliente_id = $("#id_cliente").val();
+                        dataToSendInspection.sede_id = $("#select_sedes").val();
                         guardarInspeccion(dataToSendInspection);
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-                }else{
-                    dataToSendInspection.cliente_id = $("#id_cliente").val();
-                    dataToSendInspection.sede_id = $("#select_sedes").val(); 
-                    guardarInspeccion(dataToSendInspection);
-                }
-            }else if(isConfirm == ''){
-                if ($("input[name=option-client]:checked", '#client-options').val() == "create"){
-                    guardarCliente()
-                    .then(res => {
-                        dataToSendInspection.cliente_id = res.id_cliente;
-                        dataToSendInspection.sede_id = res.id_sede;
+                    }
+                } else if (isConfirm == '') {
+                    if ($("input[name=option-client]:checked", '#client-options').val() == "create") {
+                        guardarCliente()
+                            .then(res => {
+                                dataToSendInspection.cliente_id = res.id_cliente;
+                                dataToSendInspection.sede_id = res.id_sede;
+                                guardarInspeccion(dataToSendInspection);
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    } else {
+                        dataToSendInspection.cliente_id = $("#id_cliente").val();
+                        dataToSendInspection.sede_id = $("#select_sedes").val();
                         guardarInspeccion(dataToSendInspection);
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    }) 
-                }else{
-                    dataToSendInspection.cliente_id = $("#id_cliente").val();
-                    dataToSendInspection.sede_id = $("#select_sedes").val(); 
-                    guardarInspeccion(dataToSendInspection);
+                    }
+
+                } else {
+                    return
                 }
-                
-            }else{
-             return    
-            }
-        })
+            })
     })
-
-
 </script>
 @endsection
 

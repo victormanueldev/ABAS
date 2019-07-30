@@ -101,17 +101,61 @@ class TipoServicioController extends Controller
     public function assignBill(Request $request)
     {
         if($request->ajax()){
-            try{
+            // try{
+				$now = Carbon::now();
                 $tipo_servicio = DB::table('servicio_tipo_servicio')
                                     ->where('id_servicio_tipo', $request->idTypeService)
                                     ->update([
                                         'numero_factura' => $request->bill,
                                         'valor' => $request->value
-                                    ]);
-                return response()->json('Update Success', 200);
-            }catch(\Exception $e){
-                return response()->json($e, 500);
-            }
+									]);
+				
+				$id_cliente = DB::table('servicio_tipo_servicio')
+								->join('servicios', 'servicios.id', 'servicio_tipo_servicio.servicio_id')
+								->join('solicitudes', 'solicitudes.id', 'servicios.solicitud_id')
+								->join('clientes', 'clientes.id', 'solicitudes.cliente_id')
+								->where('id_servicio_tipo', $request->idTypeService)
+								->select('clientes.id')
+								->get();
+
+				$facturaExistente = Factura::where('numero_factura', $request->bill)->get();
+
+				if(isset($facturaExistente->id)){
+
+					$factura = DB::table('facturas')
+								->where('numero_factura', $request->bill)
+								->update([
+									'numero_factura' => $request->bill,
+									'valor' => $request->value,
+									'estado' => 'Pendiente',
+									'tipo' => 'individual',
+									'fecha_inicio_vigencia' => $now->toDateString(),
+									'fecha_fin_vigencia' => $now->toDateString(),
+									'cliente_id' => $id_cliente[0]->id,
+									'created_at' => $now,
+									'updated_at' => $now,
+								]);
+
+				} else {
+					
+					$factura = DB::table('facturas')
+									->insert([
+										'numero_factura' => $request->bill,
+										'valor' => $request->value,
+										'estado' => 'Pendiente',
+										'tipo' => 'individual',
+										'fecha_inicio_vigencia' => $now->toDateString(),
+										'fecha_fin_vigencia' => $now->toDateString(),
+										'cliente_id' => $id_cliente[0]->id,
+										'created_at' => $now,
+										'updated_at' => $now,
+									]);
+				}
+
+                return response()->json('Update success', 200);
+            // }catch(\Exception $e){
+            //     return response()->json($e, 500);
+            // }
         }else{
             return response()->json(['error: ' => 'Error en la petición'], 500);
         }

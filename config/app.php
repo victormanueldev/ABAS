@@ -178,7 +178,8 @@ return [
         ABAS\Providers\EventServiceProvider::class,
         ABAS\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class
+        Laracasts\Flash\FlashServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*

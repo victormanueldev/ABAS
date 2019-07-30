@@ -3018,7 +3018,7 @@ label.error {
 }
 
 #toast-container>.toast-error:before {
-    content: "\f071";
+    content: "\f05a";
 }
 
 #toast-container>.toast-info:before {
@@ -10575,6 +10575,22 @@ body.md-skin {
     border-radius: 7px;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: none;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    text-transform: none;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    text-transform: none;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    text-transform: none;
+}
+::placeholder { /* Recent browsers */
+    text-transform: none;
 }
     
 body{
