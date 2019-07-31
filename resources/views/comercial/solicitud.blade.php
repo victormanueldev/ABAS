@@ -250,7 +250,7 @@
                                         <label>Instrucciones y Observaciones</label>
                                         <textarea style="text-transform: uppercase" style="text-transform: uppercase"
                                             class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
-                                            rows="3" name="instrucciones" id="observaciones_tecnico" required></textarea>
+                                            rows="3" name="instrucciones" id="observaciones_tecnico" ></textarea>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">

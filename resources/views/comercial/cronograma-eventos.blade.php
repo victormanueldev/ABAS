@@ -97,7 +97,7 @@
                                             </div>
                                             <div class="form-group col-lg-12" style="margin-top: 15px;">
                                                 <label class="control-label">Sede </label>
-                                                <select class="form-control " id="select_sedes" required>
+                                                <select class="form-control " id="select_sedes" >
                                                     <option value="" selected disabled>Selecciona una sede</option>
                                                 </select>
                                             </div>
@@ -625,9 +625,9 @@
                 $('#actual-sede').val(event.sede);
                 $("#telefono_evento_edit").val(event.direccion)
                 $("#direccion_evento_edit").val(event.telefono)
-                $("#select_tipo_servicio_edit").val(event.title).change()
-                $("#hora_inicio_edit").val(event.start.format("hh:MM"))
-                $("#hora_fin_edit").val(event.end.format('hh:MM'))
+                $("#select_tipo_servicio_edit").val(event.tipo).change()
+                $("#hora_inicio_edit").val(event.start.format("hh:mm"))
+                $("#hora_fin_edit").val(event.end.format('hh:mm'))
                 $("#text-instrucciones-edit").val(event.asunto)
             }
         })
@@ -644,10 +644,10 @@
                     swal('Información', 'La hora final debe ser mayor que la hora inicial.', 'info')
                     return
                 }
-                if(!id_cliente){
-                    swal('Información', 'Por favor selecciona un cliente.', 'info')
-                    return
-                }
+                // if(!id_cliente){
+                //     swal('Información', 'Por favor selecciona un cliente.', 'info')
+                //     return
+                // }
             }else{
                 if($("#select_tipo_servicio_edit").val() == '0'){
                     swal('Información', 'Selecciona el tipo de evento.', 'info')
@@ -657,10 +657,10 @@
                     swal('Información', 'La hora final debe ser mayor que la hora inicial.', 'info')
                     return
                 }
-                if(!id_cliente){
-                    swal('Información', 'Por favor selecciona un cliente.', 'info')
-                    return
-                }
+                // if(!id_cliente){
+                //     swal('Información', 'Por favor selecciona un cliente.', 'info')
+                //     return
+                // }
             }
 
             var dataToSend = {
@@ -671,7 +671,7 @@
                 tipo: $("#select_tipo_servicio").val(),
                 hora_inicio: $("#hora_inicio").val(),
                 hora_fin: $("#hora_fin").val(),
-                idCliente: id_cliente,
+                idCliente: id_cliente || '',
                 idSede: $("#select_sedes").val(),
                 telefono_evento: $("#telefono_evento").val(),
                 direccion_evento: $("#direccion_evento").val()
@@ -685,7 +685,7 @@
                 tipo: $("#select_tipo_servicio_edit").val(),
                 hora_inicio: $("#hora_inicio_edit").val(),
                 hora_fin: $("#hora_fin_edit").val(),
-                idCliente: id_cliente,
+                idCliente: id_cliente || '',
                 idSede: $("#select_sedes_edit").val(),
                 telefono_evento: $("#telefono_evento_edit").val(),
                 direccion_evento: $("#direccion_evento_edit").val()

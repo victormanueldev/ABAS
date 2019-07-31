@@ -92,7 +92,7 @@
                         <!-- Crear/Ver clientes -->
                         <li id="m-clientes">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i>
-                                <span class="nav-label">Clientes </span></a>
+                                <span class="nav-label">Crear clientes </span></a>
                             <ul class="nav nav-second-level collapse" id="ml2-clientes">
                                 <li id="ml2-crearEmpresa"><a href="{{route('clientes.create')}}" style="color: white;">Crear
                                         Cliente</a></li>
@@ -105,7 +105,7 @@
                         <!-- Ver clientes -->
                         <li id="m-clientes-calidad">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i>
-                                <span class="nav-label">Clientes </span></a>
+                                <span class="nav-label">Ver clientes </span></a>
                             <ul class="nav nav-second-level collapse" id="ml2-clientes">
                                 <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
                                         Clientes</a></li>

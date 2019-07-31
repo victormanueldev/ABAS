@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ClienteFormRequest;
 use Illuminate\Support\Facades\Redirect;
 use ABAS\Cliente;
+use ABAS\Sede;
 use ABAS\Evento;
 use ABAS\Novedad;
 use ABAS\Telefono;
@@ -55,42 +56,50 @@ class ClientesController extends Controller
         $now = Carbon::now();
 
         if($request->ajax()){
-            $idCliente = DB::table('clientes')->insertGetId([
-                'estado_registro' => 'cliente_nuevo',
-                'nit_cedula' => $request->nit_cliente,
-                'nombre_cliente' => $request->nombre_cliente,
-                'sector_economico' => $request->sector_economico_cliente,
-                'municipio' => strtoupper($request->ciudad_cliente),
-                'direccion' => strtoupper($request->direccion_cliente),
-                'barrio' => strtoupper($request->barrio_cliente),
-                'nombre_contacto_inicial' => strtoupper($request->contacto_cliente),
-                'cargo_contacto_inicial' => strtoupper($request->cargo_cliente),
-                'celular_contacto_inicial' => strtoupper($request->celular_cliente),
-                'email_contacto_inicial' => strtoupper($request->email_cliente),
-                'user_id' => Auth::user()->id,
-                'created_at' => $now,
-                'updated_at' => $now
-            ]);
-    
-            //Sedes
-            if(!empty($request->nombre_sede)){
-                $idSede = DB::table('sedes')->insertGetId([
-                    'nombre' => strtoupper($request->nombre_sede),
-                    'direccion' => strtoupper($request->direccion_sede),
-                    'ciudad' => strtoupper($request->ciudad_sede),
-                    'barrio' => strtoupper($request->barrio_sede),
-                    'zona_ruta' => strtoupper($request->zona_sede),
-                    'nombre_contacto' => strtoupper($request->contacto_sede),
-                    'telefono_contacto' => strtoupper($request->telefono_sede),
-                    'celular_contacto' => strtoupper($request->celular_sede),
-                    'email_contacto' => strtoupper($request->email_sede),
-                    'cliente_id' => $idCliente,
+            $idCliente = Cliente::select('id')->where('nit_cedula', $request->nit_cliente)->get();
+            $idSede = Sede::select('id')->where('nombre', strtoupper($request->nombre_sede))->get();
+            if(count($idCliente) == 0){
+                $idCliente = DB::table('clientes')->insertGetId([
+                    'estado_registro' => 'cliente_nuevo',
+                    'nit_cedula' => $request->nit_cliente,
+                    'nombre_cliente' => $request->nombre_cliente,
+                    'sector_economico' => $request->sector_economico_cliente,
+                    'municipio' => strtoupper($request->ciudad_cliente),
+                    'direccion' => strtoupper($request->direccion_cliente),
+                    'barrio' => strtoupper($request->barrio_cliente),
+                    'nombre_contacto_inicial' => strtoupper($request->contacto_cliente),
+                    'cargo_contacto_inicial' => strtoupper($request->cargo_cliente),
+                    'celular_contacto_inicial' => strtoupper($request->celular_cliente),
+                    'email_contacto_inicial' => strtoupper($request->email_cliente),
+                    'user_id' => Auth::user()->id,
                     'created_at' => $now,
                     'updated_at' => $now
                 ]);
-            }
 
-            return response()->json(["id_cliente" => $idCliente, "id_sede" => isset($idSede) ? $idSede : '0'], 201);
+                //Sedes
+                if(!empty($request->nombre_sede)){
+                    $idSede = DB::table('sedes')->insertGetId([
+                        'nombre' => strtoupper($request->nombre_sede),
+                        'direccion' => strtoupper($request->direccion_sede),
+                        'ciudad' => strtoupper($request->ciudad_sede),
+                        'barrio' => strtoupper($request->barrio_sede),
+                        'zona_ruta' => strtoupper($request->zona_sede),
+                        'nombre_contacto' => strtoupper($request->contacto_sede),
+                        'telefono_contacto' => strtoupper($request->telefono_sede),
+                        'celular_contacto' => strtoupper($request->celular_sede),
+                        'email_contacto' => strtoupper($request->email_sede),
+                        'cliente_id' => $idCliente,
+                        'created_at' => $now,
+                        'updated_at' => $now
+                    ]);
+                }
+
+                return response()->json(["id_cliente" => $idCliente, "id_sede" => isset($idSede) ? $idSede : '0'], 201);
+            } else {
+                return response()->json(["id_cliente" => $idCliente[0]->id, "id_sede" => count($idSede) > 0 ? $idSede[0]->id : '0'], 201);
+            }
+    
+            
         }else{
             $this->validate(request(), [
                 'nombre_cliente' => 'required'

@@ -42,7 +42,8 @@ class EventosController extends Controller
             //Agrega todos los elementos a la coleccion
             $data->push([
                 'id' => $evento->id, 
-                'title' => $evento->asunto != "" ? $evento->asunto : $evento->tipo, 
+                'title' => $evento->asunto != "" ? $evento->asunto : $evento->tipo,
+                'tipo' => $evento->tipo, 
                 'start' => $evento->fecha_inicio,
                 'end' =>$evento->fecha_fin, 
                 'backgroundColor' => $evento->color, 
