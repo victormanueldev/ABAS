@@ -92,7 +92,7 @@
                         <!-- Crear/Ver clientes -->
                         <li id="m-clientes">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-user-plus"></i>
-                                <span class="nav-label">Clientes </span></a>
+                                <span class="nav-label">Crear clientes </span></a>
                             <ul class="nav nav-second-level collapse" id="ml2-clientes">
                                 <li id="ml2-crearEmpresa"><a href="{{route('clientes.create')}}" style="color: white;">Crear
                                         Cliente</a></li>
@@ -105,7 +105,7 @@
                         <!-- Ver clientes -->
                         <li id="m-clientes-calidad">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-clientes"><i class="fa fa-users"></i>
-                                <span class="nav-label">Clientes </span></a>
+                                <span class="nav-label">Ver clientes </span></a>
                             <ul class="nav nav-second-level collapse" id="ml2-clientes">
                                 <li id="ml2-verClientes"><a href="{{route('clientes.index')}}" style="color: white;">Ver
                                         Clientes</a></li>
@@ -138,14 +138,24 @@
                             <ul class="nav nav-second-level collapse" id="ml2-cronograma-servicios">
                                 <li id="ml2-cronograma-tecnicos" style="margin-bottom: 10px;">
                                     @foreach (ABAS\Tecnico::all() as $tecnico)
-                                    @if($tecnico->estado == 'activo')
-                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
-                                        <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked"
-                                            value="{{$tecnico->id}}">
-                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
-                                    </div>
-                                    @endif
+                                        @if($tecnico->estado == 'activo')
+                                            <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                                <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked"
+                                                    value="{{$tecnico->id}}">
+                                                <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
+                                            </div>
+                                        @endif
                                     @endforeach
+                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                        <input class="checkbox-c" id="neutros" type="checkbox" checked="checked"
+                                            value="neutro">
+                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: rgb(236,71,88);text-transform: uppercase">NEUTROS</label>
+                                    </div>
+                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                        <input class="checkbox-c" id="mensajeria" type="checkbox" checked="checked"
+                                            value="mensajeria">
+                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: rgb(35,198,200);text-transform: uppercase">MENSAJERIA</label>
+                                    </div>
                                 </li>
                             </ul>
                         </li>

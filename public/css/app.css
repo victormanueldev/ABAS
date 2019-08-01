@@ -7631,7 +7631,7 @@ button.close {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2060;
+  z-index: 2050;
   display: none;
   max-width: 276px;
   padding: 1px;

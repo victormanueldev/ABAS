@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 30, 2019 at 10:28 AM
+-- Generation Time: Jul 24, 2019 at 12:39 AM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
--- PHP Version: 7.2.17-0ubuntu0.18.04.1
+-- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -23,16 +23,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `tipo_servicios`
---
-
-CREATE TABLE `tipo_servicios` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(40) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 --
 -- Dumping data for table `tipo_servicios`
 --
@@ -66,23 +56,6 @@ INSERT INTO `tipo_servicios` (`id`, `nombre`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `tipo_servicios`
---
-ALTER TABLE `tipo_servicios`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tipo_servicios`
---
-ALTER TABLE `tipo_servicios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -858,11 +858,22 @@ class ServicioController extends Controller
 
     public function getServicesByTecnician($idTecnico)
     {
-        $servicios = Servicio::with('solicitud','tecnicos')
-                                ->whereHas('tecnicos', function($query) use($idTecnico){
-                                    $query->where('id', $idTecnico);
-                                })
-                                ->get();
+        if($idTecnico == 'neutro'){
+            $servicios = Servicio::with('solicitud','tecnicos')
+                                    ->where('tipo', 'Neutro')
+                                    ->get();
+        } elseif($idTecnico == 'mensajeria') {
+            $servicios = Servicio::with('solicitud','tecnicos')
+                                    ->where('tipo', 'Mensajeria')
+                                    ->get();
+        } else {
+            $servicios = Servicio::with('solicitud','tecnicos')
+                                    ->whereHas('tecnicos', function($query) use($idTecnico){
+                                        $query->where('id', $idTecnico);
+                                    })
+                                    ->get();
+        }
+
         $data = collect();
         foreach ($servicios as $servicio) {
             //Valida que el cliente sea persona natural o juridica (Si tiene sedes)

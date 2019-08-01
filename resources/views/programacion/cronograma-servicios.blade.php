@@ -632,6 +632,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button id="delete-mensajeria-service" class="btn btn-danger">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -794,363 +795,368 @@
                 .then(res => {
 
                     res.forEach(value => {
-                        if(notificacionesListadas.length == 0 && value.type == 'ABAS\\Notifications\\SolicitudPublicada'){
+                        if (notificacionesListadas.length == 0 && value.type ==
+                            'ABAS\\Notifications\\SolicitudPublicada') {
                             notificacionesListadas.push(value.id)
-                            mostrarToast(value.data.cliente, value.data.sede, value.data.codigo, value.id)
+                            mostrarToast(value.data.cliente, value.data.sede, value.data
+                                .codigo, value.id)
                         }
-                        
+
                         let existeNotificacion = notificacionesListadas.includes(value.id)
 
-                        if(!existeNotificacion && value.type == 'ABAS\\Notifications\\SolicitudPublicada'){
+                        if (!existeNotificacion && value.type ==
+                            'ABAS\\Notifications\\SolicitudPublicada') {
                             notificacionesListadas.push(value.id)
-                            mostrarToast(value.data.cliente, value.data.sede, value.data.codigo, value.id)
+                            mostrarToast(value.data.cliente, value.data.sede, value.data
+                                .codigo, value.id)
                         }
                     })
-                    
+
                 })
                 .catch(err => {
                     console.log(err)
                 })
         }, 6000)
-    
 
-    function eliminarNotificacion(idNotificacion) {
-        $.ajax({
-            url: `/notificaciones/${idNotificacion}`,
-            type: 'DELETE',
-            headers: {
-                "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value //Token de seguridad
-            }
-        })
-    }
 
-    function mostrarToast(cliente, sede, codigoSolicitud, idToast) {
-        toastr.options = {
-            "closeButton": true,
-            "debug": true,
-            "newestOnTop": true,
-            "progressBar": false,
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": true,
-            "showDuration": "0",
-            "hideDuration": "0",
-            "timeOut": "0",
-            "extendedTimeOut": "0",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut",
+        function eliminarNotificacion(idNotificacion) {
+            $.ajax({
+                url: `/notificaciones/${idNotificacion}`,
+                type: 'DELETE',
+                headers: {
+                    "X-CSRF-TOKEN": document.getElementsByName("_token")[0].value //Token de seguridad
+                }
+            })
         }
 
-        toastr["error"](`Solicitud ${codigoSolicitud} para ${cliente} ${sede}`, "¡Nueva solicitud creada!", {
-            own_id: idToast,
-            onHidden: function () {
-                eliminarNotificacion(this.own_id)
+        function mostrarToast(cliente, sede, codigoSolicitud, idToast) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": true,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true,
+                "showDuration": "0",
+                "hideDuration": "0",
+                "timeOut": "0",
+                "extendedTimeOut": "0",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
             }
-        })
-    }
 
-    //Inicializacion de selects
-    $("#select_servicios").select2({
-        width: '100%',
-        placeholder: 'Servicios...'
-    });
+            toastr["error"](`Solicitud ${codigoSolicitud} para ${cliente} ${sede}`,
+                "¡Nueva solicitud creada!", {
+                    own_id: idToast,
+                    onHidden: function () {
+                        eliminarNotificacion(this.own_id)
+                    }
+                })
+        }
 
-    $("#select_tecnicos2").select2({
-        width: '100%',
-        placeholder: 'Técnicos...'
-    });
-
-    /* Estructuracion de la información del cliente para el autocompletado
-    ------------------------------------------------------------------------*/
-    //Inicializacion de variables
-    var nit_clientes = [];
-    var nombres_clientes = [];
-    var razon_social_clientes = [];
-    var $input;
-    var data;
-    var info_clientes = [];
-
-    //Peticion al servidor para obtener los clientes de la DB
-    $.get('/clientes')
-    .then((res) => {
-        //Recorre la respueta
-        res.forEach((value, index) => {
-            //Convertir a formato JSON para poder ser mostrados en el typehead
-            nit_clientes[index] = JSON.parse(
-                `{"name": "${value.nit_cedula}", "id": "${value.id}"}`);
-            nombres_clientes[index] = JSON.parse(
-                `{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
-            if (value.razon_social == 'null' || value.razon_social == null) {
-                razon_social_clientes[index] = JSON.parse(
-                    `{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
-            } else {
-                razon_social_clientes[index] = JSON.parse(
-                    `{"name": "${value.razon_social}", "id": "${value.id}"}`);
-            }
+        //Inicializacion de selects
+        $("#select_servicios").select2({
+            width: '100%',
+            placeholder: 'Servicios...'
         });
 
-        info_clientes = res;
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+        $("#select_tecnicos2").select2({
+            width: '100%',
+            placeholder: 'Técnicos...'
+        });
 
-    //Inicia el Autocompletado con los NIT de los clientes
-    $input = $('.typeahead_1').typeahead({
-        source: nit_clientes
-    });
+        /* Estructuracion de la información del cliente para el autocompletado
+        ------------------------------------------------------------------------*/
+        //Inicializacion de variables
+        var nit_clientes = [];
+        var nombres_clientes = [];
+        var razon_social_clientes = [];
+        var $input;
+        var data;
+        var info_clientes = [];
 
-    //Evento click de los radiobuttons
-    $(".radio-options").click(event => {
-        //Valida el valor del radiobutton seleccionado
-        switch (event.target.value) {
-            //Buscar por nombre de clientes
-            case '1':
-                data = nombres_clientes;
-                $('.typeahead_1').typeahead('destroy').typeahead({
-                    source: data
+        //Peticion al servidor para obtener los clientes de la DB
+        $.get('/clientes')
+            .then((res) => {
+                //Recorre la respueta
+                res.forEach((value, index) => {
+                    //Convertir a formato JSON para poder ser mostrados en el typehead
+                    nit_clientes[index] = JSON.parse(
+                        `{"name": "${value.nit_cedula}", "id": "${value.id}"}`);
+                    nombres_clientes[index] = JSON.parse(
+                        `{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
+                    if (value.razon_social == 'null' || value.razon_social == null) {
+                        razon_social_clientes[index] = JSON.parse(
+                            `{"name": "${value.nombre_cliente}", "id": "${value.id}"}`);
+                    } else {
+                        razon_social_clientes[index] = JSON.parse(
+                            `{"name": "${value.razon_social}", "id": "${value.id}"}`);
+                    }
                 });
-                break;
-                //Buscar por razon social de clientes
-            case '2':
-                data = razon_social_clientes;
-                $('.typeahead_1').typeahead('destroy').typeahead({
-                    source: data
-                });
-                break;
-                //Buscar por NIT o CC de clientes
-            case '3':
-                data = nit_clientes;
-                $('.typeahead_1').typeahead('destroy').typeahead({
-                    source: data
-                });
-                break;
-            default:
-                console.log('Default');
-                data = [];
-                break;
-        }
-    })
 
-    /* Inicialización de componentes de la pagina
-     -----------------------------------------------------------------*/
-    //Inicia iCheck 
-    $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green'
-    });
-
-
-    /* Inicializa el Calendario
-     -----------------------------------------------------------------*/
-    //Instancia la Clase Date para obtener la fecha actual
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    //Declaracion de Variables publicas de Servicio
-    var checkbox = false;
-    var color;
-    var frecuencia_solicitud;
-    var id_solicitud;
-    var id_cliente;
-
-    //Inicializa el calendario
-    $('#calendar').fullCalendar({
-
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        buttonText: {
-            today: 'Hoy',
-            month: 'Mes',
-            week: 'Semana',
-            day: 'Día'
-        },
-        //Muestra todas las eventos de la BD
-        // events: {
-        //     url: "/servicios"
-        // },
-        eventLimit: true,
-        editable: true,
-        eventLimit: true,
-        nowIndicator: true,
-        firstDay: 0,
-        businessHours: {
-            // Dias de la semana en un array (0=Domingo)
-            dow: [1, 2, 3, 4, 5, 6], // Lunes a Sabado
-
-            start: '07:00', // Hora de inicio
-            end: '18:00', // Hora de finalizacion
-        },
-        droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
-
-        //Evento para renderizar contenido HMTL en cada uno de los eventos
-        eventRender: function (event, element, view) {
-            if (event.lock === 0) {
-                element.find('.fc-title').prepend(
-                    '<i style="margin-left: 5px" class="fa fa-unlock"></i> ');
-            } else {
-                element.find('.fc-title').prepend(
-                    '<i style="margin-left: 5px"  class="fa fa-lock"></i> ');
-            }
-        },
-
-        //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
-        dayClick: function (start, end, allDay) {
-            //Simula click en el boton de mostrar el modal
-            document.getElementById("btn-modal").click();
-            //Guarda la fecha y hora del dia seleccionado
-            inicio_servicio = start.format("YYYY-MM-DD");
-            //Limpiar elementos
-            $("#select_sedes").empty();
-            $(".list-group-item").remove();
-            $('#input_autocomplete').val('');
-            $("#dir_sede").val('');
-            $("#barrio_sede").val('');
-            $("#contacto_sede").val('');
-            $("#tel_sede").val('');
-            $("#select_frecuencia").val('0').change();
-            $("#opcion-frecuencia").val('0').change();
-            $("#hora_inicio").val('');
-            $("#num_horas").val('');
-            $("#num_minutos").val('');
-            $("#opcion-personalizada").empty();
-            $("#opcion-personalizada").append(`<option>Opción personalizad</option>`);
-            $('#select_servicios').select2("val", "");
-            $('#select_tecnicos2').select2("val", "");
-            $("#historial_tecnicos").popover('destroy');
-            $("#text-instrucciones").val("")
-            $("#create-services").prop('disabled', false);
-            $("#lista-servicios").empty();
-            $("#select_tipo_servicio").val('0').change();
-            $("#frecuencia_solicitud").val('');
-            $("#valor_plan_solicitud").val('');
-            $("#frecuencia_visitas_solicitud").val('');
-            $("#valor_servicios_solicitud").val('');
-            $("#tipo_facturacion_solicitud").val('');
-            $("#observaciones_visitas_solicitud").val('');
-        },
-
-        //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
-        eventResize: function (event) {
-            var start = event.start.format("YYYY-MM-DD HH:mm");
-            var backgroundC = event.backgroundColor;
-            var allDay = event.allDay;
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "progressBar": true,
-                "preventDuplicates": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "showDuration": "400",
-                "hideDuration": "1000",
-                "timeOut": "2000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-            if (event.end) { //valida si hay una fecha de terminación de la evento
-                var end = event.end.format("YYYY-MM-DD HH:mm");
-            } else {
-                var end = "NULL"; //Sino la iguala a NULL
-            }
-            crsfToken = document.getElementsByName("_token")[0].value;
-            $.ajax({
-                url: '/servicios/edit/dates',
-                data: {
-                    idServicio: event.id,
-                    start: start,
-                    end: end,
-                    option: 'resize'
-                },
-                type: "PUT",
-                headers: {
-                    "X-CSRF-TOKEN": crsfToken
-                },
-                success: function (json) {
-                    toastr.success('La hora de finalización ha cambiado.',
-                        'Actualizacion exitosa');
-                },
-                error: function (json) {
-                    console.log("Error al actualizar evento");
-                }
+                info_clientes = res;
+            })
+            .catch((err) => {
+                console.log(err);
             });
-        },
 
-        //Evento de cambiar de dia la evento dentro del calendario
-        eventDrop: function (event, delta) {
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "progressBar": true,
-                "preventDuplicates": false,
-                "positionClass": "toast-bottom-right",
-                "onclick": null,
-                "showDuration": "400",
-                "hideDuration": "1000",
-                "timeOut": "2000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
+        //Inicia el Autocompletado con los NIT de los clientes
+        $input = $('.typeahead_1').typeahead({
+            source: nit_clientes
+        });
+
+        //Evento click de los radiobuttons
+        $(".radio-options").click(event => {
+            //Valida el valor del radiobutton seleccionado
+            switch (event.target.value) {
+                //Buscar por nombre de clientes
+                case '1':
+                    data = nombres_clientes;
+                    $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                    //Buscar por razon social de clientes
+                case '2':
+                    data = razon_social_clientes;
+                    $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                    //Buscar por NIT o CC de clientes
+                case '3':
+                    data = nit_clientes;
+                    $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    break;
+                default:
+                    console.log('Default');
+                    data = [];
+                    break;
             }
-            var start = event.start.format("YYYY-MM-DD");
-            if (event.end) {
-                var end = event.end.format("YYYY-MM-DD");
-            } else {
-                var end = "NULL";
-            }
-            var back = event.backgroundColor;
-            var allDay = event.allDay;
-            crsfToken = document.getElementsByName("_token")[0].value;
-            $.ajax({
-                url: '/servicios/edit/dates',
-                data: {
-                    idServicio: event.id,
-                    start: start,
-                    end: end,
-                    option: 'drop'
-                },
-                type: "PUT",
-                headers: {
-                    "X-CSRF-TOKEN": crsfToken
-                },
-                success: function (json) {
-                    toastr.success('Las fechas han sido actualizadas.',
-                        'Actualizacion exitosa');
-                    $("#calendar").fullCalendar('refetchEvents');
-                },
-                error: function (json) {
-                    console.log("Error al actualizar evento");
+        })
+
+        /* Inicialización de componentes de la pagina
+         -----------------------------------------------------------------*/
+        //Inicia iCheck 
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+
+        /* Inicializa el Calendario
+         -----------------------------------------------------------------*/
+        //Instancia la Clase Date para obtener la fecha actual
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        //Declaracion de Variables publicas de Servicio
+        var checkbox = false;
+        var color;
+        var frecuencia_solicitud;
+        var id_solicitud;
+        var id_cliente;
+
+        //Inicializa el calendario
+        $('#calendar').fullCalendar({
+
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día'
+            },
+            //Muestra todas las eventos de la BD
+            // events: {
+            //     url: "/servicios"
+            // },
+            eventLimit: true,
+            editable: true,
+            eventLimit: true,
+            nowIndicator: true,
+            firstDay: 0,
+            businessHours: {
+                // Dias de la semana en un array (0=Domingo)
+                dow: [1, 2, 3, 4, 5, 6], // Lunes a Sabado
+
+                start: '07:00', // Hora de inicio
+                end: '18:00', // Hora de finalizacion
+            },
+            droppable: true, // Premite las eventos se puedan arrastrar dentro del calendario
+
+            //Evento para renderizar contenido HMTL en cada uno de los eventos
+            eventRender: function (event, element, view) {
+                if (event.lock === 0) {
+                    element.find('.fc-title').prepend(
+                        '<i style="margin-left: 5px" class="fa fa-unlock"></i> ');
+                } else {
+                    element.find('.fc-title').prepend(
+                        '<i style="margin-left: 5px"  class="fa fa-lock"></i> ');
                 }
-            });
-        },
+            },
 
-        //Evento de mostrar el Tooltip teniendo el mouse dentro de la evento
-        eventMouseover: function (event, jsEvent, view) {
-            var start = (event.start.format("HH:mm"));
-            var back = event.backgroundColor;
-            if (event.end != null) {
-                var end = event.end.format("HH:mm");
-            } else {
-                var end = "No definido";
-            }
-            if (event.allDay) {
-                var allDay = "Si";
-            } else {
-                var allDay = "No";
-            }
-            //Componente HTML para mostrar la descripcion de la evento (Tooltip)
-            var tooltip =
-                `<div 
+            //Evento de mostrar la interfaz de agenda del dia, dando click en cualquier dia del calendario
+            dayClick: function (start, end, allDay) {
+                //Simula click en el boton de mostrar el modal
+                document.getElementById("btn-modal").click();
+                //Guarda la fecha y hora del dia seleccionado
+                inicio_servicio = start.format("YYYY-MM-DD");
+                //Limpiar elementos
+                $("#select_sedes").empty();
+                $(".list-group-item").remove();
+                $('#input_autocomplete').val('');
+                $("#dir_sede").val('');
+                $("#barrio_sede").val('');
+                $("#contacto_sede").val('');
+                $("#tel_sede").val('');
+                $("#select_frecuencia").val('0').change();
+                $("#opcion-frecuencia").val('0').change();
+                $("#hora_inicio").val('');
+                $("#num_horas").val('');
+                $("#num_minutos").val('');
+                $("#opcion-personalizada").empty();
+                $("#opcion-personalizada").append(`<option>Opción personalizad</option>`);
+                $('#select_servicios').select2("val", "");
+                $('#select_tecnicos2').select2("val", "");
+                $("#historial_tecnicos").popover('destroy');
+                $("#text-instrucciones").val("")
+                $("#create-services").prop('disabled', false);
+                $("#lista-servicios").empty();
+                $("#select_tipo_servicio").val('0').change();
+                $("#frecuencia_solicitud").val('');
+                $("#valor_plan_solicitud").val('');
+                $("#frecuencia_visitas_solicitud").val('');
+                $("#valor_servicios_solicitud").val('');
+                $("#tipo_facturacion_solicitud").val('');
+                $("#observaciones_visitas_solicitud").val('');
+            },
+
+            //Evento de reajustar el tamaño de la evento dentro del calendario (interfaz de agenda dia)
+            eventResize: function (event) {
+                var start = event.start.format("YYYY-MM-DD HH:mm");
+                var backgroundC = event.backgroundColor;
+                var allDay = event.allDay;
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "preventDuplicates": false,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "2000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                if (event.end) { //valida si hay una fecha de terminación de la evento
+                    var end = event.end.format("YYYY-MM-DD HH:mm");
+                } else {
+                    var end = "NULL"; //Sino la iguala a NULL
+                }
+                crsfToken = document.getElementsByName("_token")[0].value;
+                $.ajax({
+                    url: '/servicios/edit/dates',
+                    data: {
+                        idServicio: event.id,
+                        start: start,
+                        end: end,
+                        option: 'resize'
+                    },
+                    type: "PUT",
+                    headers: {
+                        "X-CSRF-TOKEN": crsfToken
+                    },
+                    success: function (json) {
+                        toastr.success('La hora de finalización ha cambiado.',
+                            'Actualizacion exitosa');
+                    },
+                    error: function (json) {
+                        console.log("Error al actualizar evento");
+                    }
+                });
+            },
+
+            //Evento de cambiar de dia la evento dentro del calendario
+            eventDrop: function (event, delta) {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "preventDuplicates": false,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "2000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                var start = event.start.format("YYYY-MM-DD");
+                if (event.end) {
+                    var end = event.end.format("YYYY-MM-DD");
+                } else {
+                    var end = "NULL";
+                }
+                var back = event.backgroundColor;
+                var allDay = event.allDay;
+                crsfToken = document.getElementsByName("_token")[0].value;
+                $.ajax({
+                    url: '/servicios/edit/dates',
+                    data: {
+                        idServicio: event.id,
+                        start: start,
+                        end: end,
+                        option: 'drop'
+                    },
+                    type: "PUT",
+                    headers: {
+                        "X-CSRF-TOKEN": crsfToken
+                    },
+                    success: function (json) {
+                        toastr.success('Las fechas han sido actualizadas.',
+                            'Actualizacion exitosa');
+                        $("#calendar").fullCalendar('refetchEvents');
+                    },
+                    error: function (json) {
+                        console.log("Error al actualizar evento");
+                    }
+                });
+            },
+
+            //Evento de mostrar el Tooltip teniendo el mouse dentro de la evento
+            eventMouseover: function (event, jsEvent, view) {
+                var start = (event.start.format("HH:mm"));
+                var back = event.backgroundColor;
+                if (event.end != null) {
+                    var end = event.end.format("HH:mm");
+                } else {
+                    var end = "No definido";
+                }
+                if (event.allDay) {
+                    var allDay = "Si";
+                } else {
+                    var allDay = "No";
+                }
+                //Componente HTML para mostrar la descripcion de la evento (Tooltip)
+                var tooltip =
+                    `<div 
                         class="tooltipevent" 
                         style=" border: 1px solid #d2d2d2;
                                 width:210px;
@@ -1177,34 +1183,34 @@
                             </div>
                         </div>
                     </div>`;
-            //Agrega el elemento al DOM
-            $("body").append(tooltip);
-            //Eventos cuando el mouse esta dentro de la evento
-            $(this).mouseover(function (e) {
-                $(this).css('z-index', 10000); //Mueve el tooltip con el mouse
-                $('.tooltipevent').fadeIn('500');
-                $('.tooltipevent').fadeTo('10', 1.9);
-            }).mousemove(function (e) {
-                $('.tooltipevent').css('top', e.pageY + 10);
-                $('.tooltipevent').css('left', e.pageX + 20);
-            });
-        },
+                //Agrega el elemento al DOM
+                $("body").append(tooltip);
+                //Eventos cuando el mouse esta dentro de la evento
+                $(this).mouseover(function (e) {
+                    $(this).css('z-index', 10000); //Mueve el tooltip con el mouse
+                    $('.tooltipevent').fadeIn('500');
+                    $('.tooltipevent').fadeTo('10', 1.9);
+                }).mousemove(function (e) {
+                    $('.tooltipevent').css('top', e.pageY + 10);
+                    $('.tooltipevent').css('left', e.pageX + 20);
+                });
+            },
 
-        //Evento de quitar el tooltip cuando el mouse está fuera de la evento
-        eventMouseout: function (calEvent, jsEvent) {
-            $(this).css('z-index', 8);
-            $('.tooltipevent').remove();
-        },
+            //Evento de quitar el tooltip cuando el mouse está fuera de la evento
+            eventMouseout: function (calEvent, jsEvent) {
+                $(this).css('z-index', 8);
+                $('.tooltipevent').remove();
+            },
 
-        //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
-        eventClick: (event, jsEvent, view) => {
-            infoServiceSelected.id = event.id;
-            infoServiceSelected.duration = event.duration;
-            inicio_servicio = event.start.format("YYYY-MM-DD HH:mm:ss");
-            $("#div-opciones").empty();
-            //Añadir opciones al modal de ver servicio
-            $("#div-opciones").append(
-                `<label>Opciones: </label>
+            //Evento de eliminar evento, cuando el usuario hace click en alguna de ellas
+            eventClick: (event, jsEvent, view) => {
+                infoServiceSelected.id = event.id;
+                infoServiceSelected.duration = event.duration;
+                inicio_servicio = event.start.format("YYYY-MM-DD HH:mm:ss");
+                $("#div-opciones").empty();
+                //Añadir opciones al modal de ver servicio
+                $("#div-opciones").append(
+                    `<label>Opciones: </label>
                     <a href="/servicios/${event.id}" class="btn btn-default btn-outline" id="btn-editar-servicio" title="Editar Servicio">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -1214,70 +1220,70 @@
                     <button class="btn btn-default btn-outline" id="btn-eliminar-servicio" onclick="deleteEvent(${event.id})" title="Eliminar Servicios">
                         <i class="fa fa-trash-o"></i>
                     </button>`
-            )
-            //Variables locales
-            var id_servicio = event.id;
-            var nombre_sede;
-            var direccion_cliente;
-            var barrio_cliente;
-            var telefono_cliente;
-            var nombre_contacto;
-            var observaciones;
-            crsfToken = document.getElementsByName("_token")[0].value;
-            $("#ind-fac").removeClass('hidden')
-            $("#info-client").empty();
-            $("#tbody-tipos").empty();
-            $("#tbody-tecnicos").empty();
-            $("#btn-lock").empty(); //Limpia el boton de bloqueado
-            $("#btn-lock").removeClass('active'); //Quita la clase css del elemento HTML
-            //Peticion al servidor para obtener los datos del servicio seleccionado
-            $.get(`/servicios/${event.id}/edit`)
-                .then((res) => {
-                    console.log(res)
-                    //Valida que el cliente sea persona natural o juridica
-                    if (res[0].solicitud.sede) {
-                        nombre_sede = res[0].solicitud.sede.nombre;
-                        direccion_cliente = res[0].solicitud.sede.direccion;
-                        barrio_cliente = res[0].solicitud.sede.barrio;
-                        telefono_cliente = res[0].solicitud.sede.telefono_contacto;
-                        nombre_contacto = res[0].solicitud.sede.nombre_contacto;
-                    } else {
-                        nombre_sede = 'Sede única';
-                        direccion_cliente = res[0].solicitud.cliente.direccion;
-                        barrio_cliente = res[0].solicitud.cliente.barrio;
-                        telefono_cliente = res[0].solicitud.cliente.celular;
-                        nombre_contacto = res[0].solicitud.cliente.nombre_contacto;
-                    }
-                    //Valida si el servicio esta bloqueado o no
-                    infoServiceSelected.state = res[0].confirmado;
-                    if (res[0].confirmado === 0) {
-                        $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
-                    } else {
-                        $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`)
-                            .addClass('active');
-                    }
-                    //Conversiones y procesamiento de las fechas para su correcta visualización
-                    var date1 = moment(res[0].fecha_inicio + " " + res[0].hora_inicio,
-                        "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh:mm a');
-                    var date2 = moment(res[0].fecha_fin + " " + res[0].hora_fin,
-                        "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh.mm a');
-                    var hours = Math.floor((res[0].duracion) / 60);
-                    var minutes = (res[0].duracion % 60);
-                    //Llena los input con los valores de la respuesta del servidor
-                    $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
-                    $("#ver_nombre_sede").val(nombre_sede);
-                    $("#ver_direccion_sede").val(direccion_cliente);
-                    $("#ver_barrio_sede").val(barrio_cliente);
-                    $("#ver_contacto_sede").val(nombre_contacto);
-                    $("#ver_telefono_sede").val(telefono_cliente);
-                    $("#ver_hora_inicio").val(date1);
-                    $("#ver_datos_fin").val(date2);
-                    $("#ver_frecuencia").val(res[0].frecuencia).change();
-                    $("#ver_duracion").val(hours + " hora(s) " + minutes + " minuto(s)");
-                    $("#ver_instrucciones").val(res[0].solicitud.observaciones);
-                    res[0].tipos.forEach((value, index) => {
-                        $("#tbody-tipos").append(
-                            `<tr>    
+                )
+                //Variables locales
+                var id_servicio = event.id;
+                var nombre_sede;
+                var direccion_cliente;
+                var barrio_cliente;
+                var telefono_cliente;
+                var nombre_contacto;
+                var observaciones;
+                crsfToken = document.getElementsByName("_token")[0].value;
+                $("#ind-fac").removeClass('hidden')
+                $("#info-client").empty();
+                $("#tbody-tipos").empty();
+                $("#tbody-tecnicos").empty();
+                $("#btn-lock").empty(); //Limpia el boton de bloqueado
+                $("#btn-lock").removeClass('active'); //Quita la clase css del elemento HTML
+                //Peticion al servidor para obtener los datos del servicio seleccionado
+                $.get(`/servicios/${event.id}/edit`)
+                    .then((res) => {
+                        console.log(res)
+                        //Valida que el cliente sea persona natural o juridica
+                        if (res[0].solicitud.sede) {
+                            nombre_sede = res[0].solicitud.sede.nombre;
+                            direccion_cliente = res[0].solicitud.sede.direccion;
+                            barrio_cliente = res[0].solicitud.sede.barrio;
+                            telefono_cliente = res[0].solicitud.sede.telefono_contacto;
+                            nombre_contacto = res[0].solicitud.sede.nombre_contacto;
+                        } else {
+                            nombre_sede = 'Sede única';
+                            direccion_cliente = res[0].solicitud.cliente.direccion;
+                            barrio_cliente = res[0].solicitud.cliente.barrio;
+                            telefono_cliente = res[0].solicitud.cliente.celular;
+                            nombre_contacto = res[0].solicitud.cliente.nombre_contacto;
+                        }
+                        //Valida si el servicio esta bloqueado o no
+                        infoServiceSelected.state = res[0].confirmado;
+                        if (res[0].confirmado === 0) {
+                            $("#btn-lock").append(`<i class="fa fa-unlock"></i> Desbloqueado`);
+                        } else {
+                            $("#btn-lock").append(`<i class="fa fa-lock"></i> Bloqueado`)
+                                .addClass('active');
+                        }
+                        //Conversiones y procesamiento de las fechas para su correcta visualización
+                        var date1 = moment(res[0].fecha_inicio + " " + res[0].hora_inicio,
+                            "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh:mm a');
+                        var date2 = moment(res[0].fecha_fin + " " + res[0].hora_fin,
+                            "YYYY-MM-DD HH:mm").format('YYYY-MM-DD hh.mm a');
+                        var hours = Math.floor((res[0].duracion) / 60);
+                        var minutes = (res[0].duracion % 60);
+                        //Llena los input con los valores de la respuesta del servidor
+                        $("#ver_nombre_cliente").val(res[0].solicitud.cliente.nombre_cliente);
+                        $("#ver_nombre_sede").val(nombre_sede);
+                        $("#ver_direccion_sede").val(direccion_cliente);
+                        $("#ver_barrio_sede").val(barrio_cliente);
+                        $("#ver_contacto_sede").val(nombre_contacto);
+                        $("#ver_telefono_sede").val(telefono_cliente);
+                        $("#ver_hora_inicio").val(date1);
+                        $("#ver_datos_fin").val(date2);
+                        $("#ver_frecuencia").val(res[0].frecuencia).change();
+                        $("#ver_duracion").val(hours + " hora(s) " + minutes + " minuto(s)");
+                        $("#ver_instrucciones").val(res[0].solicitud.observaciones);
+                        res[0].tipos.forEach((value, index) => {
+                            $("#tbody-tipos").append(
+                                `<tr>    
                                 <td>${index + 1}</td>
                                 <td>${value.nombre}</td>
                                 <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
@@ -1285,488 +1291,521 @@
                                 <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>
 
                             </tr>`);
-                    });
-                    res[0].tecnicos.forEach((value, index) => {
-                        $("#tbody-tecnicos").append(
-                            `<tr>    
+                        });
+                        res[0].tecnicos.forEach((value, index) => {
+                            $("#tbody-tecnicos").append(
+                                `<tr>    
                                 <td>${index + 1}</td>
                                 <td>${value.nombre}</td>
                             </tr>`);
-                    });
-                    if (res[0].factura) {
+                        });
+                        if (res[0].factura) {
 
-                        $("#num-fac").val(res[0].factura.numero_factura);
-                        $("#val-fac").val(res[0].factura.valor);
-                    } else {
-                        $("#num-fac").val('');
-                        $("#val-fac").val('');
-                    }
-                    if (res[0].solicitud.cliente.estado_facturacion !== "Normal") {
-                        $("#info-client").append(
-                            `<label class="label label-danger">Cliente en mora</label>`);
-                    }
-                    //Quita el loader de la vista
-                    $(".modal-body").removeClass('sk-loading');
-                    console.log('GET ver servicios Successfully');
-                    if (res[0].tipo == 'Neutro') {
-                        $("#ver_nombre_cliente_3").val(res[0].solicitud.cliente
-                            .nombre_cliente);
-                        $("#ver_nombre_sede_3").val(nombre_sede);
-                        $("#ver_direccion_sede_3").val(direccion_cliente);
-                        $("#ver_barrio_sede_3").val(barrio_cliente);
-                        $("#ver_contacto_sede_3").val(nombre_contacto);
-                        $("#ver_telefono_sede_3").val(telefono_cliente);
-                        $("#ver_observaciones_3").val(res[0].observaciones);
-                        document.getElementById("btn-modal3").click()
-                        return;
-                    }
-                    if (res[0].tipo == 'Mensajeria') {
-                        $("#ver_nombre_cliente_4").val(res[0].solicitud.cliente
-                            .nombre_cliente);
-                        $("#ver_nombre_sede_4").val(nombre_sede);
-                        $("#ver_direccion_sede_4").val(direccion_cliente);
-                        $("#ver_barrio_sede_4").val(barrio_cliente);
-                        $("#ver_contacto_sede_4").val(nombre_contacto);
-                        $("#ver_telefono_sede_4").val(telefono_cliente);
-                        $("#ver_observaciones_4").val(res[0].observaciones);
-                        document.getElementById("btn-modal4").click()
-                        return;
-                    }
-                    document.getElementById("btn-modal2").click();
-                })
-                .catch((err) => {
-                    $(".modal-body").removeClass('sk-loading');
-                    console.log(err);
-                })
+                            $("#num-fac").val(res[0].factura.numero_factura);
+                            $("#val-fac").val(res[0].factura.valor);
+                        } else {
+                            $("#num-fac").val('');
+                            $("#val-fac").val('');
+                        }
+                        if (res[0].solicitud.cliente.estado_facturacion !== "Normal") {
+                            $("#info-client").append(
+                                `<label class="label label-danger">Cliente en mora</label>`);
+                        }
+                        //Quita el loader de la vista
+                        $(".modal-body").removeClass('sk-loading');
+                        console.log('GET ver servicios Successfully');
+                        if (res[0].tipo == 'Neutro') {
+                            $("#ver_nombre_cliente_3").val(res[0].solicitud.cliente
+                                .nombre_cliente);
+                            $("#ver_nombre_sede_3").val(nombre_sede);
+                            $("#ver_direccion_sede_3").val(direccion_cliente);
+                            $("#ver_barrio_sede_3").val(barrio_cliente);
+                            $("#ver_contacto_sede_3").val(nombre_contacto);
+                            $("#ver_telefono_sede_3").val(telefono_cliente);
+                            $("#ver_observaciones_3").val(res[0].observaciones);
+                            document.getElementById("btn-modal3").click()
+                            return;
+                        }
+                        if (res[0].tipo == 'Mensajeria') {
+                            $("#ver_nombre_cliente_4").val(res[0].solicitud.cliente
+                                .nombre_cliente);
+                            $("#ver_nombre_sede_4").val(nombre_sede);
+                            $("#ver_direccion_sede_4").val(direccion_cliente);
+                            $("#ver_barrio_sede_4").val(barrio_cliente);
+                            $("#ver_contacto_sede_4").val(nombre_contacto);
+                            $("#ver_telefono_sede_4").val(telefono_cliente);
+                            $("#ver_observaciones_4").val(res[0].observaciones);
+                            document.getElementById("btn-modal4").click()
+                            return;
+                        }
+                        document.getElementById("btn-modal2").click();
+                    })
+                    .catch((err) => {
+                        $(".modal-body").removeClass('sk-loading');
+                        console.log(err);
+                    })
 
-        }
-    });
+            }
+        });
 
-    $.get('/tecnicos')
-    .then(res => {
-        //$("#calendar").fullCalendar('addEventSource', '/servicios')
-        res.forEach(tecnico => {
-            $('#calendar').fullCalendar('addEventSource',
-                `/servicios/show/${tecnico.id}`); //Añade el source servicios de cada tecnico
-            $(`#tecnico-${tecnico.id}`).click(e => {
-                if ($(`#tecnico-${tecnico.id}`).is(
-                        ':checked')) { //Valida si el checkbox esta activo
+        $.get('/tecnicos')
+            .then(res => {
+                //$("#calendar").fullCalendar('addEventSource', '/servicios')
+                res.forEach(tecnico => {
                     $('#calendar').fullCalendar('addEventSource',
-                        `/servicios/show/${tecnico.id}`)
-                } else {
-                    $('#calendar').fullCalendar('removeEventSource',
                         `/servicios/show/${tecnico.id}`
-                    ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
+                    ); //Añade el source servicios de cada tecnico
+                    $(`#tecnico-${tecnico.id}`).click(e => {
+                        if ($(`#tecnico-${tecnico.id}`).is(
+                                ':checked')) { //Valida si el checkbox esta activo
+                            $('#calendar').fullCalendar('addEventSource',
+                                `/servicios/show/${tecnico.id}`)
+                        } else {
+                            $('#calendar').fullCalendar('removeEventSource',
+                                `/servicios/show/${tecnico.id}`
+                            ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
+                        }
+                    })
+                });
+
+                $('#calendar').fullCalendar('addEventSource',
+                    `/servicios/show/neutro`); //Añade el source servicios de cada tecnico
+                $("#neutros").click(e => {
+                    if ($(`#neutros`).is(
+                            ':checked')) { //Valida si el checkbox esta activo
+                        $('#calendar').fullCalendar('addEventSource',
+                            `/servicios/show/neutro`)
+                    } else {
+                        $('#calendar').fullCalendar('removeEventSource',
+                            `/servicios/show/neutro`
+                        ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
+                    }
+                })
+
+                $('#calendar').fullCalendar('addEventSource',
+                    `/servicios/show/mensajeria`); //Añade el source servicios de cada tecnico
+                $("#mensajeria").click(e => {
+                    if ($(`#mensajeria`).is(
+                            ':checked')) { //Valida si el checkbox esta activo
+                        $('#calendar').fullCalendar('addEventSource',
+                            `/servicios/show/mensajeria`)
+                    } else {
+                        $('#calendar').fullCalendar('removeEventSource',
+                            `/servicios/show/mensajeria`
+                        ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+
+        //Change del input de autocompletado
+        $input.change(function () {
+            var current = $input.typeahead("getActive");
+            id_cliente = current.id;
+            //Valida si el cliente esta en Mora
+            info_clientes.forEach(cliente => {
+                if (id_cliente == cliente.id) {
+                    if (cliente.estado_facturacion !== "Normal") {
+                        swal('¡Advertencia!', 'El cliente seleccionado se encuentra en mora.',
+                            'warning');
+                        $("#create-services").attr('disabled', 'disabled')
+                    } else if (!cliente.estado_facturacion) {
+                        $("#create-services").prop('disabled', false)
+                    } else {
+                        $("#create-services").prop('disabled', false)
+                    }
                 }
             })
-        });
-    })
-    .catch(err => {
-        console.log(err)
-    })
 
-
-    //Change del input de autocompletado
-    $input.change(function () {
-        var current = $input.typeahead("getActive");
-        id_cliente = current.id;
-        //Valida si el cliente esta en Mora
-        info_clientes.forEach(cliente => {
-            if (id_cliente == cliente.id) {
-                if (cliente.estado_facturacion !== "Normal") {
-                    swal('¡Advertencia!', 'El cliente seleccionado se encuentra en mora.',
-                        'warning');
-                    $("#create-services").attr('disabled', 'disabled')
-                } else if (!cliente.estado_facturacion) {
-                    $("#create-services").prop('disabled', false)
+            //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
+            $.get(`/sedes/cliente/${current.id}`, function (res) {
+                $("#select_sedes").empty(); //Limipia el select
+                $("#select_sedes").append(
+                    `<option value='' disabled selected> Selecciona una sede </option>`);
+                if (res == '') { //Valida que el cliente tenga sedes
+                    $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
                 } else {
-                    $("#create-services").prop('disabled', false)
-                }
-            }
-        })
-
-        //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
-        $.get(`/sedes/cliente/${current.id}`, function (res) {
-            $("#select_sedes").empty(); //Limipia el select
-            $("#select_sedes").append(
-                `<option value='' disabled selected> Selecciona una sede </option>`);
-            if (res == '') { //Valida que el cliente tenga sedes
-                $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
-            } else {
-                //Recorre la respuesta del servidor
-                res.forEach(element => {
-                    //Añade Options al select de sedes dependiendo de la respues del servidor
-                    $("#select_sedes").append(
-                        `<option value=${element.id}> ${element.nombre} </option>`
-                    );
-                });
-            }
-        }).then((res) => {
-            console.log('Petición Exitosa');
-        }).catch((err) => {
-            console.log(err);
-        });
-    });
-
-    //Peticion al servidor para obtener la solicitud de una sede
-    function obtenerSolicitudSede(id_sede, crsfToken) {
-        $.ajax({
-            url: '/solicitud/show',
-            data: {
-                'id_cliente': id_cliente,
-                'id_sede': id_sede,
-                '_token': crsfToken //Obligatorio
-            },
-            type: 'POST',
-            header: {
-                "Content-Type": 'application/x-www-form-urlencoded',
-                "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
-            },
-            success: function (res) {
-                if (res == '') { //Valida que la respueta este vacia
-                    swal('¡Error!', 'Esta sede no tiene una solicitud a programación.',
-                        'error');
-                    $(".list-group-item").remove();
-                    $("#dir_sede").val('');
-                    $("#barrio_sede").val('');
-                    $("#contacto_sede").val('');
-                    $("#tel_sede").val('');
-                    $("#select_frecuencia").val('0').change();
-                    $("#hora_inicio").val('');
-                    $("#num_horas").val('');
-                    $("#num_minutos").val('');
-                    $('#select_servicios').select2("val", "");
-                    $('#select_tecnicos2').select2("val", "");
-                    $("#text-instrucciones").val('');
-                    $("#sug_frecuency").val('');
-
-                    id_solicitud = '';
-                } else {
-                    $("#text-instrucciones").val(res[0]['observaciones']);
-                    $("#dir_sede").val(res[0].direccion);
-                    $("#barrio_sede").val(res[0].barrio);
-                    $("#contacto_sede").val(!res[0].nombre_contacto_inicial ? res[0]
-                        .nombre_contacto : res[0].nombre_contacto_inicial);
-                    $("#tel_sede").val(res[0].telefono_contacto);
-                    $("#sug_frecuency").val(res[0]['frecuencia'])
-                    //Inicializacion del Popover
-                    $('#historial_tecnicos').popover({
-                        title: "Historial de Tecnicos",
-                        container: false,
-                        animation: true,
-                        html: true,
-                        placement: 'left',
-                        template: '<div class="popover" role="tooltip" style="top: -1.93333px; left: 55px; display: block;width: 250px;"><div class="arrow"></div><h3 class="popover-title" style="text-align: center;"></h3><div class="popover-content"></div></div>',
-                        content: function () {
-                            return $("#list-historic")
-                                .html(); //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
-                        }
+                    //Recorre la respuesta del servidor
+                    res.forEach(element => {
+                        //Añade Options al select de sedes dependiendo de la respues del servidor
+                        $("#select_sedes").append(
+                            `<option value=${element.id}> ${element.nombre} </option>`
+                        );
                     });
-                    id_solicitud = res[0]['id'];
-                    //Servicio para obtener el historia de tecnicos del cliente seleccionado
-                    $.get(`/tecnicos/${id_solicitud}`)
-                        .then((data) => {
-                            $(".list-group-item")
-                                .remove(); //Quita los elementos del DOM que contengan esta clase
-                            if (data == '') { //Valida que haya tenido servicios
-                                $("#list-tecnicos").append(
-                                    `<li class="list-group-item" style="text-align: center">Todavia no hay servicios en esta sede.</li>`
-                                ); //Agreaga elementos HTML en el elem con el ID seleccionado
-                            } else {
-                                data.forEach((value, index) => {
-                                    $("#list-tecnicos").append(
-                                        `<li class="list-group-item" style="text-align: center" id="tec${index}" onmouseover="tool(${index},${value.id},${id_solicitud})" onmouseout="quit(${index})">${value.nombre}</li>`
-                                    );
-                                });
+                }
+            }).then((res) => {
+                console.log('Petición Exitosa');
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
 
+        //Peticion al servidor para obtener la solicitud de una sede
+        function obtenerSolicitudSede(id_sede, crsfToken) {
+            $.ajax({
+                url: '/solicitud/show',
+                data: {
+                    'id_cliente': id_cliente,
+                    'id_sede': id_sede,
+                    '_token': crsfToken //Obligatorio
+                },
+                type: 'POST',
+                header: {
+                    "Content-Type": 'application/x-www-form-urlencoded',
+                    "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
+                },
+                success: function (res) {
+                    if (res == '') { //Valida que la respueta este vacia
+                        swal('¡Error!', 'Esta sede no tiene una solicitud a programación.',
+                            'error');
+                        $(".list-group-item").remove();
+                        $("#dir_sede").val('');
+                        $("#barrio_sede").val('');
+                        $("#contacto_sede").val('');
+                        $("#tel_sede").val('');
+                        $("#select_frecuencia").val('0').change();
+                        $("#hora_inicio").val('');
+                        $("#num_horas").val('');
+                        $("#num_minutos").val('');
+                        $('#select_servicios').select2("val", "");
+                        $('#select_tecnicos2').select2("val", "");
+                        $("#text-instrucciones").val('');
+                        $("#sug_frecuency").val('');
+
+                        id_solicitud = '';
+                    } else {
+                        $("#text-instrucciones").val(res[0]['observaciones']);
+                        $("#dir_sede").val(res[0].direccion);
+                        $("#barrio_sede").val(res[0].barrio);
+                        $("#contacto_sede").val(!res[0].nombre_contacto_inicial ? res[0]
+                            .nombre_contacto : res[0].nombre_contacto_inicial);
+                        $("#tel_sede").val(res[0].telefono_contacto);
+                        $("#sug_frecuency").val(res[0]['frecuencia'])
+                        //Inicializacion del Popover
+                        $('#historial_tecnicos').popover({
+                            title: "Historial de Tecnicos",
+                            container: false,
+                            animation: true,
+                            html: true,
+                            placement: 'left',
+                            template: '<div class="popover" role="tooltip" style="top: -1.93333px; left: 55px; display: block;width: 250px;"><div class="arrow"></div><h3 class="popover-title" style="text-align: center;"></h3><div class="popover-content"></div></div>',
+                            content: function () {
+                                return $("#list-historic")
+                                    .html(); //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
                             }
                         });
-                    frecuencia_solicitud = res[0][
-                        'frecuencia'
-                    ]; //Guarda la frecuencia en la variable publica
-                    $("#select_frecuencia").val(frecuencia_solicitud)
-                        .change(); //Cambia el valor del input   
+                        id_solicitud = res[0]['id'];
+                        //Servicio para obtener el historia de tecnicos del cliente seleccionado
+                        $.get(`/tecnicos/${id_solicitud}`)
+                            .then((data) => {
+                                $(".list-group-item")
+                                    .remove(); //Quita los elementos del DOM que contengan esta clase
+                                if (data == '') { //Valida que haya tenido servicios
+                                    $("#list-tecnicos").append(
+                                        `<li class="list-group-item" style="text-align: center">Todavia no hay servicios en esta sede.</li>`
+                                    ); //Agreaga elementos HTML en el elem con el ID seleccionado
+                                } else {
+                                    data.forEach((value, index) => {
+                                        $("#list-tecnicos").append(
+                                            `<li class="list-group-item" style="text-align: center" id="tec${index}" onmouseover="tool(${index},${value.id},${id_solicitud})" onmouseout="quit(${index})">${value.nombre}</li>`
+                                        );
+                                    });
 
-                    $.get(`/temporales/novedad/${id_cliente}/${id_sede}`)
-                        .then(res => {
-                            res.forEach((novedad, index) => {
-                                $("#lista-servicios").append(`
+                                }
+                            });
+                        frecuencia_solicitud = res[0][
+                            'frecuencia'
+                        ]; //Guarda la frecuencia en la variable publica
+                        $("#select_frecuencia").val(frecuencia_solicitud)
+                            .change(); //Cambia el valor del input   
+
+                        $.get(`/temporales/novedad/${id_cliente}/${id_sede}`)
+                            .then(res => {
+                                res.forEach((novedad, index) => {
+                                    $("#lista-servicios").append(`
                                         <li class="item-list" id="item-novedad-${novedad.id}">
                                             <input type="checkbox" value="${novedad.id}" id="check-${index}"/>
                                             <span class="m-l-xs">${novedad.descripcion}</span>
                                         </li>
                                     `);
 
-                                document.getElementById(`check-${index}`)
-                                    .addEventListener('click', e => {
-                                        $.ajax({
-                                            url: `/temporales/novedad/${e.target.value}`,
-                                            type: 'DELETE',
-                                            header: {
-                                                "Content-Type": 'application/x-www-form-urlencoded',
-                                                "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
-                                            },
-                                            success: (res) => {
+                                    document.getElementById(`check-${index}`)
+                                        .addEventListener('click', e => {
+                                            $.ajax({
                                                 url: `/temporales/novedad/${e.target.value}`,
-                                                $(
-                                                    `#item-novedad-${e.target.value}`
+                                                type: 'DELETE',
+                                                header: {
+                                                    "Content-Type": 'application/x-www-form-urlencoded',
+                                                    "X-CSRF-TOKEN": crsfToken //Token de segurodad (Obligatorio)
+                                                },
+                                                success: (res) => {
+                                                    url: `/temporales/novedad/${e.target.value}`,
+                                                    $(
+                                                        `#item-novedad-${e.target.value}`
                                                     )
-                                                .remove();
-                                            },
-                                            error: (err) => {
-                                                console.log(err)
-                                            }
+                                                    .remove();
+                                                },
+                                                error: (err) => {
+                                                    console.log(err)
+                                                }
+                                            })
                                         })
-                                    })
+                                })
                             })
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        })
+                            .catch(err => {
+                                console.log(err)
+                            })
 
-                    $.get(`/show/inspections/${id_cliente}/${id_sede}`)
-                        .then(res => {
-                            solicitudes = res;
-                            $("#select_solicitudes").empty(); //Limipia el select
-                            $("#select_solicitudes").append(
-                                `<option value='' disabled selected> Selecciona una solicitud </option>`
-                            );
-
-                            res.forEach((value, index) => {
+                        $.get(`/show/inspections/${id_cliente}/${id_sede}`)
+                            .then(res => {
+                                solicitudes = res;
+                                $("#select_solicitudes").empty(); //Limipia el select
                                 $("#select_solicitudes").append(
-                                    `<option value="${value.id}">${value.codigo} - ${value.fecha}</option>`
-                                )
+                                    `<option value='' disabled selected> Selecciona una solicitud </option>`
+                                );
+
+                                res.forEach((value, index) => {
+                                    $("#select_solicitudes").append(
+                                        `<option value="${value.id}">${value.codigo} - ${value.fecha}</option>`
+                                    )
+                                })
                             })
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    }
+                },
+                error: function (err) {
+                    swal('¡Error!', 'Error al obtener la información de la sede', 'error');
                 }
-            },
-            error: function (err) {
-                swal('¡Error!', 'Error al obtener la información de la sede', 'error');
-            }
-        });
-    }
+            });
+        }
 
-    $("#select_solicitudes").change(e => {
-        $("#frecuencia_solicitud").val('');
-        $("#valor_plan_solicitud").val('');
-        $("#frecuencia_visitas_solicitud").val('');
-        $("#valor_servicios_solicitud").val('');
-        $("#tipo_facturacion_solicitud").val('');
-        $("#observaciones_visitas_solicitud").val('');
-        $("#more-solicitud").empty()
-        solicitudes.forEach((value, index) => {
-            if (value.id == e.target.value) {
-                $("#frecuencia_solicitud").val(value.frecuencia)
-                $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
-                $("#frecuencia_visitas_solicitud").val("Cada " + value.frecuencia_visitas +
-                    " días")
-                $("#valor_servicios_solicitud").val(value.total_detalle_servicios
-                    .toString())
-                $("#tipo_facturacion_solicitud").val(value.tipo_facturacion)
-                $("#observaciones_visitas_solicitud").val(value.observaciones_visitas)
-                $("#more-solicitud").append(
-                    `<a class="pull-right" href="/solicitud/${value.id}/edit">Ver más datos</a>`
-                )
-            }
+        $("#select_solicitudes").change(e => {
+            $("#frecuencia_solicitud").val('');
+            $("#valor_plan_solicitud").val('');
+            $("#frecuencia_visitas_solicitud").val('');
+            $("#valor_servicios_solicitud").val('');
+            $("#tipo_facturacion_solicitud").val('');
+            $("#observaciones_visitas_solicitud").val('');
+            $("#more-solicitud").empty()
+            solicitudes.forEach((value, index) => {
+                if (value.id == e.target.value) {
+                    $("#frecuencia_solicitud").val(value.frecuencia)
+                    $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
+                    $("#frecuencia_visitas_solicitud").val("Cada " + value.frecuencia_visitas +
+                        " días")
+                    $("#valor_servicios_solicitud").val(value.total_detalle_servicios
+                        .toString())
+                    $("#tipo_facturacion_solicitud").val(value.tipo_facturacion)
+                    $("#observaciones_visitas_solicitud").val(value.observaciones_visitas)
+                    $("#more-solicitud").append(
+                        `<a class="pull-right" href="/solicitud/${value.id}/edit">Ver más datos</a>`
+                    )
+                }
+            })
         })
-    })
 
-    //Evento change del select de Sedes
-    $("#select_sedes").change(event => {
-        crsfToken = document.getElementsByName("_token")[0].value;
-        var id_sede = $("#select_sedes").val();
-        $("#frecuencia_solicitud").val('');
-        $("#valor_plan_solicitud").val('');
-        $("#frecuencia_visitas_solicitud").val('');
-        $("#valor_servicios_solicitud").val('');
-        $("#tipo_facturacion_solicitud").val('');
-        $("#observaciones_visitas_solicitud").val('');
-        //Referencia al metodo de obtener la solicitud del cliente
-        obtenerSolicitudSede(id_sede, crsfToken);
+        //Evento change del select de Sedes
+        $("#select_sedes").change(event => {
+            crsfToken = document.getElementsByName("_token")[0].value;
+            var id_sede = $("#select_sedes").val();
+            $("#frecuencia_solicitud").val('');
+            $("#valor_plan_solicitud").val('');
+            $("#frecuencia_visitas_solicitud").val('');
+            $("#valor_servicios_solicitud").val('');
+            $("#tipo_facturacion_solicitud").val('');
+            $("#observaciones_visitas_solicitud").val('');
+            //Referencia al metodo de obtener la solicitud del cliente
+            obtenerSolicitudSede(id_sede, crsfToken);
 
-    });
-
-    $("#opcion-frecuencia").change(event => {
-        addOptionsAtSelects('frecuencia', 'personalizada');
-    })
-
-    function saveService(unique) {
-        if ($("#select_tipo_servicio").val() == '0') {
-            swal('Información', 'Selecciona un tipo de servicio.', 'info')
-            return
-        }
-        if ($("#num_horas").val() == '' || $("#num_minutos").val() == '') {
-            swal('Información', 'Número de horas o minutos inválido.', 'info')
-            return
-        }
-        if ($("#indice-frecuencia").val() == '' || $("#opcion-frecuencia").val() == '') {
-            swal('Información', 'Selecciona una frecuencia válida.', 'info')
-            return
-        }
-
-        //Declaracion de Variables locales de Servicio
-        var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
-        var frecuencia;
-        var start_event = inicio_servicio;
-        var tipoServicio = $("#select_tipo_servicio").val();
-        var observaciones = $("#text-instrucciones").val();
-        frecuencia = parseInt($("#indice-frecuencia").val());
-        var tecnicos = [];
-        $("#select_tecnicos2").val().forEach((value, index) => {
-            tecnicos[index] = value;
-        });
-        var tipos_servicio = [];
-        $("#select_servicios").val().forEach((value, index) => {
-            tipos_servicio[index] = value
         });
 
-        //Prueba de fechas y horas
-        console.log($("#hora_inicio").val()); //email, start1.format('YYYY-MM-DD HH:mm'));
-        crsfToken = document.getElementsByName("_token")[0].value;
-        var start_service = moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA');
-        var end_service = start_service.add(duracion_servicio, 'minutes');
-        //var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
-        let dataToSend = {
-            tipos: tipos_servicio.length != 0 ? tipos_servicio : 'sin servicios',
-            frecuencia: frecuencia,
-            tipo_servicio: tipoServicio,
-            start: start_event,
-            hora_inicio: moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA').format(
-                "HH:mm"),
-            hora_fin: end_service.format("HH:mm"),
-            duracion: duracion_servicio,
-            id_tecnicos: tecnicos.length != 0 ? tecnicos : 'sin tecnicos',
-            id_solicitud: id_solicitud,
-            opcionFrecuencia: '',
-            diaOrdinal: '',
-            nombreDia: '',
-            dayOfWeek: '',
-            diaDelMes: '',
-            observaciones: observaciones,
-            frecuenciaUnica: unique
-        };
-        if ($("#opcion-frecuencia").val() == 'semanas') {
-            dataToSend.opcionFrecuencia = "semanas";
-            dataToSend.dayOfWeek = $("#opcion-personalizada").val();
-        } else if ($("#opcion-frecuencia").val() == 'meses') {
-            dataToSend.opcionFrecuencia = "meses";
-            let arrCustomOption = ($("#opcion-personalizada").val()).split('-');
-            console.log(arrCustomOption);
-            if (arrCustomOption[0] != 'all') {
-                dataToSend.diaOrdinal = arrCustomOption[0];
-                dataToSend.nombreDia = arrCustomOption[1];
-            } else {
-                dataToSend.diaDelMes = arrCustomOption[1];
-            }
+        $("#opcion-frecuencia").change(event => {
+            addOptionsAtSelects('frecuencia', 'personalizada');
+        })
 
-        } else if ($("#opcion-frecuencia").val() == 'dias') {
-            dataToSend.opcionFrecuencia = "dias";
-        } else {
-            dataToSend.opcionFrecuencia = "anios";
-        }
-
-        if ($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() ==
-            'Refuerzo') {
-            if (dataToSend.id_tecnicos == 'sin tecnicos' || dataToSend.tipos == 'sin servicios') {
-                swal('Información', 'Selecciona al menos un técnico y servicio.', 'info')
+        function saveService(unique) {
+            if ($("#select_tipo_servicio").val() == '0') {
+                swal('Información', 'Selecciona un tipo de servicio.', 'info')
                 return
             }
-        }
-        //Alert de confirmacion
-        swal({
-                title: "¡Advertencia!",
-                text: "¿Estás seguro de guardar este servicio?",
-                icon: "warning",
-                buttons: {
-                    cancel: true,
-                    confirm: {
-                        text: 'Aceptar',
-                        visible: true,
-                        value: true,
-                        closeModal: false, //Muestra el Loader
+            if ($("#num_horas").val() == '' || $("#num_minutos").val() == '') {
+                if($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() == 'Refuerzo'){
+                    swal('Información', 'Número de horas o minutos inválido.', 'info')
+                    return
+                }
+            }
+            if ($("#indice-frecuencia").val() == '' || $("#opcion-frecuencia").val() == '') {
+                if($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() == 'Refuerzo'){
+                    swal('Información', 'Selecciona una frecuencia válida.', 'info')
+                    return
+                }
+            }
+
+            //Declaracion de Variables locales de Servicio
+            var duracion_servicio = (parseInt($("#num_horas").val()) * 60) + parseInt($("#num_minutos").val());
+            var frecuencia;
+            var start_event = inicio_servicio;
+            var tipoServicio = $("#select_tipo_servicio").val();
+            var observaciones = $("#text-instrucciones").val();
+            frecuencia = parseInt($("#indice-frecuencia").val());
+            var tecnicos = [];
+            $("#select_tecnicos2").val().forEach((value, index) => {
+                tecnicos[index] = value;
+            });
+            var tipos_servicio = [];
+            $("#select_servicios").val().forEach((value, index) => {
+                tipos_servicio[index] = value
+            });
+
+            //Prueba de fechas y horas
+            console.log($("#hora_inicio").val()); //email, start1.format('YYYY-MM-DD HH:mm'));
+            crsfToken = document.getElementsByName("_token")[0].value;
+            var start_service = moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA');
+            var end_service = start_service.add(duracion_servicio || 30, 'minutes');
+            //var horaInicioFormat = moment($("#hora_inicio").val(), 'hh:mmA').format('HH:mm');
+            let dataToSend = {
+                tipos: tipos_servicio.length != 0 ? tipos_servicio : 'sin servicios',
+                frecuencia: frecuencia || 0,
+                tipo_servicio: tipoServicio,
+                start: start_event,
+                hora_inicio: moment(start_event + $("#hora_inicio").val(), 'YYYY-MM-DD hh:mmA').format(
+                    "HH:mm"),
+                hora_fin: end_service.format("HH:mm"),
+                duracion: duracion_servicio || 0,
+                id_tecnicos: tecnicos.length != 0 ? tecnicos : 'sin tecnicos',
+                id_solicitud: id_solicitud,
+                opcionFrecuencia: '',
+                diaOrdinal: '',
+                nombreDia: '',
+                dayOfWeek: '',
+                diaDelMes: '',
+                observaciones: observaciones,
+                frecuenciaUnica: unique
+            };
+            if ($("#opcion-frecuencia").val() == 'semanas') {
+                dataToSend.opcionFrecuencia = "semanas";
+                dataToSend.dayOfWeek = $("#opcion-personalizada").val();
+            } else if ($("#opcion-frecuencia").val() == 'meses') {
+                dataToSend.opcionFrecuencia = "meses";
+                let arrCustomOption = ($("#opcion-personalizada").val()).split('-');
+                console.log(arrCustomOption);
+                if (arrCustomOption[0] != 'all') {
+                    dataToSend.diaOrdinal = arrCustomOption[0];
+                    dataToSend.nombreDia = arrCustomOption[1];
+                } else {
+                    dataToSend.diaDelMes = arrCustomOption[1];
+                }
+
+            } else if ($("#opcion-frecuencia").val() == 'dias') {
+                dataToSend.opcionFrecuencia = "dias";
+            } else {
+                dataToSend.opcionFrecuencia = "anios";
+            }
+
+            if ($("#select_tipo_servicio").val() == 'Normal' || $("#select_tipo_servicio").val() ==
+                'Refuerzo') {
+                if (dataToSend.id_tecnicos == 'sin tecnicos' || dataToSend.tipos == 'sin servicios') {
+                    swal('Información', 'Selecciona al menos un técnico y servicio.', 'info')
+                    return
+                }
+            }
+            //Alert de confirmacion
+            swal({
+                    title: "¡Advertencia!",
+                    text: "¿Estás seguro de guardar este servicio?",
+                    icon: "warning",
+                    buttons: {
+                        cancel: true,
+                        confirm: {
+                            text: 'Aceptar',
+                            visible: true,
+                            value: true,
+                            closeModal: false, //Muestra el Loader
+                        }
                     }
-                }
-            })
-            .then(isConfirm => {
-                if (isConfirm) {
-                    //Peticion HTTP para guardar el evento
-                    $.ajax({
-                            url: '/servicios', //URL del servicio
-                            data: dataToSend,
-                            type: "POST", //Método de envío
-                            headers: {
-                                "Content-Type": 'application/x-www-form-urlencoded',
-                                "X-CSRF-TOKEN": crsfToken //Token de seguridad
-                            },
+                })
+                .then(isConfirm => {
+                    if (isConfirm) {
+                        //Peticion HTTP para guardar el evento
+                        $.ajax({
+                                url: '/servicios', //URL del servicio
+                                data: dataToSend,
+                                type: "POST", //Método de envío
+                                headers: {
+                                    "Content-Type": 'application/x-www-form-urlencoded',
+                                    "X-CSRF-TOKEN": crsfToken //Token de seguridad
+                                },
 
-                        })
-                        .then(events => {
-                            swal("¡Creación Correcta!", "Servicios creados correctamente.",
-                                    "success")
-                                .then(value => { //Boton OK actualizado
-                                    if (value) {
-                                        console.log('Evento creado'); //Escribe en la consola
-                                        $("#btn-close2").click();
-                                        $('#calendar').fullCalendar(
-                                            'refetchEvents'
+                            })
+                            .then(events => {
+                                swal("¡Creación Correcta!", "Servicios creados correctamente.",
+                                        "success")
+                                    .then(value => { //Boton OK actualizado
+                                        if (value) {
+                                            console.log('Evento creado'); //Escribe en la consola
+                                            $("#btn-close2").click();
+                                            $('#calendar').fullCalendar(
+                                                'refetchEvents'
                                             ); //Refresca todos los eventos dentro del calendario
-                                    }
-                                })
-                        })
-                        .catch(error => {
-                            swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios',
-                                "error")
-                        })
-                    console.log(dataToSend)
-                }
-            })
-    }
+                                        }
+                                    })
+                            })
+                            .catch(error => {
+                                swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios',
+                                    "error")
+                            })
+                        console.log(dataToSend)
+                    }
+                })
+        }
 
-    //Evento Submit del modal de crear Servicio
-    $('#form-calendario').submit(event => {
-        event.preventDefault();
-        saveService("duplicado");
-    });
+        //Evento Submit del modal de crear Servicio
+        $('#form-calendario').submit(event => {
+            event.preventDefault();
+            saveService("duplicado");
+        });
 
-    $("#btn-unique").click(function () {
-        saveService("unico");
-    })
-
-    //Evento click del boton de imprimir Modal (Crear Servicio)
-
-    // $("#btn-print").click(event => {
-    $("#btn-imprimir-servicio").click(event => {
-        console.log("event.target");
-        event.preventDefault();
-
-        // var url="/eventos/index";
-        // $('#calendar').fullCalendar({ events: {url: url}    });//Refresca todos los eventos dentro del calendario
-        // $('#calendar').fullCalendar('removeEvents');
-        // $('#calendar').fullCalendar('addEventSource', url);
-        // $('#event-option')
-        // .modal('hide')                          //Oculta el modal abierto
-        // .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
-        //     $('#event-print').modal('show');    //Muestra el nuevo modal
-
-        //     $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
-        // });
-    });
-
-
-    $("#form-print").submit(event => {
-        event.preventDefault();
-        swal({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href>Why do I have this issue?</a>'
+        $("#btn-unique").click(function () {
+            saveService("unico");
         })
-        $('#event-print')
-            .modal('hide')
-    })
+
+        //Evento click del boton de imprimir Modal (Crear Servicio)
+
+        // $("#btn-print").click(event => {
+        $("#btn-imprimir-servicio").click(event => {
+            console.log("event.target");
+            event.preventDefault();
+
+            // var url="/eventos/index";
+            // $('#calendar').fullCalendar({ events: {url: url}    });//Refresca todos los eventos dentro del calendario
+            // $('#calendar').fullCalendar('removeEvents');
+            // $('#calendar').fullCalendar('addEventSource', url);
+            // $('#event-option')
+            // .modal('hide')                          //Oculta el modal abierto
+            // .on('hidden.bs.modal', function (e) {   //Evento de ocultar el modal abiert
+            //     $('#event-print').modal('show');    //Muestra el nuevo modal
+
+            //     $(this).off('hidden.bs.modal');     // Quita el evento del objeto actual
+            // });
+        });
+
+
+        $("#form-print").submit(event => {
+            event.preventDefault();
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href>Why do I have this issue?</a>'
+            })
+            $('#event-print')
+                .modal('hide')
+        })
 
 
     });
@@ -2087,7 +2126,17 @@
 
                 $(this).off('hidden.bs.modal');
             })
+    })
 
+    $("#delete-mensajeria-service").click(e => {
+        e.preventDefault()
+        idEventVal = infoServiceSelected.id
+        $("#delivery-service").modal('hide')
+            .on('hidden.bs.modal', (e) => {
+                $('#modal-delete-options').modal('show'); //Muestra el nuevo modal
+
+                $(this).off('hidden.bs.modal');
+            })
     })
 
     /**

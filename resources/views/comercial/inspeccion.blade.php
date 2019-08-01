@@ -63,7 +63,8 @@
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Inspector Comercial:</label>
                                         <input style="text-transform: uppercase" type="text" id="nombre_usuario"
-                                            name="nombre-usuario" placeholder="" class="form-control">
+                                            name="nombre-usuario" placeholder="" class="form-control"
+                                            value="{{ Auth::user()->nombres." ".Auth::user()->apellidos }}">
                                         <br>
                                     </div>
 
@@ -287,15 +288,16 @@
                                             *</label>
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
-                                            id="contacto_name_factura" class="form-control" style="display: block;">
+                                            id="contacto_name_factura" class="form-control" style="display: block;"
+                                            required>
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Email </label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Email *</label>
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Teléfono del contacto a facturar"
                                             name="contacto-telefono-factura" id="contacto_email_factura"
-                                            class="form-control">
+                                            class="form-control" required>
 
                                     </div>
 
@@ -303,7 +305,7 @@
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Celular del contacto a facturar"
                                             name="contacto-celular-factura" id="contacto_celular_factura"
-                                            class="form-control">
+                                            class="form-control" required>
                                     </div>
 
                                     <div class="form-group col-lg-12">
@@ -366,60 +368,6 @@
                                         <textarea style="text-transform: uppercase" style="text-transform: uppercase"
                                             class="form-control" placeholder="Escriba aquí las observaciones que desee."
                                             rows="1" name="observaciones_plan" id="observaciones_plan"></textarea>
-                                    </div>
-
-
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
-                                        <button type="button" style="margin-top: -35px;"
-                                            class="btn btn-primary pull-right" id="btn-add-servicio"><i
-                                                class="fa fa-plus"></i> Agregar servicio</button>
-                                        <hr>
-                                        <br>
-                                    </div>
-
-                                    <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
-                                        <div class="form-group col-lg-4">
-                                            <label class="control-label">Servicio a incluir</label>
-                                            <select style="text-transform: uppercase" id="servicio_detalle-0"
-                                                class="form-control">
-
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-2">
-                                            <label class="control-label">Valor </label>
-                                            <input type="text" min=0 name="valor_servicio_detalle-0"
-                                                id="valor_servicio_detalle-0" placeholder="Valor del servicio"
-                                                class="form-control">
-                                        </div>
-
-                                        <div class="form-group col-lg-2">
-                                            <label class="control-label">Frecuencia</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0"
-                                                class="form-control">
-                                                <option value="" selected>Seleccione una frecuencia</option>
-                                                <option value="Semanal">SEMANAL</option>
-                                                <option value="Quincenal">QUINCENAL</option>
-                                                <option value="Mensual">MENSUAL</option>
-                                                <option value="Bimestral">BIMESTRAL</option>
-                                                <option value="Trimestral">TRIMESTRAL</option>
-                                                <option value="Cuatrimestral">CUATRIMESTRAL</option>
-                                                <option value="Semestral">SEMESTRAL</option>
-                                                <option value="Anual">ANUAL</option>
-                                                <option value="Ocasional">OCASIONAL</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-4">
-                                            <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase"
-                                                style="text-transform: uppercase" class="form-control"
-                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
-                                                name="observacion_servicio_detalle-0"
-                                                id="observacion_servicio_detalle-0"></textarea>
-                                        </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
@@ -853,6 +801,65 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Valor total</label>
+                                        <input type="text" style="text-transform: uppercase" id="valor_total_areas"
+                                            name="valor_total_areas" readonly class="form-control">
+                                    </div>
+
+
+                                    <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-servicio"><i
+                                                class="fa fa-plus"></i> Agregar servicio</button>
+                                        <hr>
+                                        <br>
+                                    </div>
+
+                                    <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
+                                        <div class="form-group col-lg-4">
+                                            <label class="control-label">Servicio a incluir</label>
+                                            <select style="text-transform: uppercase" id="servicio_detalle-0"
+                                                class="form-control">
+
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Valor </label>
+                                            <input type="text" min=0 name="valor_servicio_detalle-0"
+                                                id="valor_servicio_detalle-0" placeholder="Valor del servicio"
+                                                class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label class="control-label">Frecuencia</label>
+                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0"
+                                                class="form-control">
+                                                <option value="" selected>Seleccione una frecuencia</option>
+                                                <option value="Semanal">SEMANAL</option>
+                                                <option value="Quincenal">QUINCENAL</option>
+                                                <option value="Mensual">MENSUAL</option>
+                                                <option value="Bimestral">BIMESTRAL</option>
+                                                <option value="Trimestral">TRIMESTRAL</option>
+                                                <option value="Cuatrimestral">CUATRIMESTRAL</option>
+                                                <option value="Semestral">SEMESTRAL</option>
+                                                <option value="Anual">ANUAL</option>
+                                                <option value="Ocasional">OCASIONAL</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+                                            <label>Observaciones</label>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observacion_servicio_detalle-0"
+                                                id="observacion_servicio_detalle-0"></textarea>
+                                        </div>
+                                    </div>
 
 
                                     <div class="col-lg-12">
@@ -890,6 +897,8 @@
     var valoresSinIvaComodato = [];
     var valorTotalComodato = [];
     var totalPlanSaneamiento;
+    var valorHoraHombre;
+    var totalValorAreas = 0;
 
     $(document).ready(function () {
 
@@ -929,6 +938,19 @@
             })
             .catch(err => {
                 console.log(err)
+            })
+
+        /** Inicializacion de variables de Horas Hombre **/
+        $.get('/valores')
+            .then(res => {
+                res.forEach(valor => {
+                    if(valor.descripcion == 'hora_hombre'){
+                        valorHoraHombre = parseInt(valor.valor)
+                    }
+                });
+            })
+            .catch(err => {
+                console.log(err);
             })
 
         /** Inicializacion del input Autonumeric **/
@@ -1150,9 +1172,29 @@
         $(`#total_dispositivo_comodato-${valueContInputs2}`).val((valueCant2 * valueAsNumber).toString())
     })
 
+    //Suma automatica de valores por area
+    $("#num_horas_area-0").on("input", e => {
+        calcularValorArea(e.target.value, 'h') 
+    })
+
+    $("#num_minutos_area-0").on("input", e => {
+        calcularValorArea(e.target.value, 'm')
+    })
+
+    function calcularValorArea(nuevoValor, tiempo) {
+        if (tiempo == 'h') {
+            totalValorAreas = nuevoValor * valorHoraHombre;
+        } else {
+            totalValorAreas += nuevoValor * (valorHoraHombre / 60)
+        }
+
+        $("#valor_total_areas").val(totalValorAreas.toString())
+    }
+
+
+
     //Definicion de frencuencias para documentos
     function frecuenciaDefinida(tipoDocumento, idSelectFrecuencia) {
-        console.log("f7ht89h")
         switch (tipoDocumento) {
             case 'diagnostico_inicial':
                 $(`#frecuencia_doc-${idSelectFrecuencia}`).val('semestral').change()
@@ -1552,7 +1594,7 @@
 
         $(`#tipo_doc-${contDocs}`).change(e => {
             console.log(contDocs)
-            frecuenciaDefinida(e.target.value, contDocs - 1 )
+            frecuenciaDefinida(e.target.value, contDocs - 1)
         })
 
         contDocs++;
