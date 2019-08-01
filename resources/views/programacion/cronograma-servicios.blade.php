@@ -243,7 +243,7 @@
                                                         <span class="fa fa-clock-o"></span>
                                                     </span>
                                                     <input type="text" class="form-control" placeholder="09:30"
-                                                        name="hora_inicio">
+                                                        name="hora_inicio" id="hora_inicio"> 
                                                 </div>
                                             </div>
                                             {{-- <div class="form-group col-lg-4">

@@ -48,8 +48,8 @@ class EventosController extends Controller
                 'end' =>$evento->fecha_fin, 
                 'backgroundColor' => $evento->color, 
                 'borderColor' => $evento->color,
-                'cliente' => $cliente != "" ? $cliente[0]->nombre_cliente : "No definido",
-                'sede' => $sede != "" ? $sede[0]->nombre : "No definido",
+                'cliente' => !isset($cliente) ? $cliente[0]->nombre_cliente : "No definido",
+                'sede' => !isset($sede) ? $sede[0]->nombre : "No definido",
                 'telefono' => $evento->telefono_evento != "" ? $evento->telefono_evento : 'No definido',
                 'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido',
                 'asunto' => $evento->asunto != "" ? $evento->asunto : "Sin Observaciones"

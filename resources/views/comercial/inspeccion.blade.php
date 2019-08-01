@@ -289,7 +289,7 @@
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
                                             id="contacto_name_factura" class="form-control" style="display: block;"
-                                            required>
+                                            >
 
                                     </div>
 
@@ -297,7 +297,7 @@
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Teléfono del contacto a facturar"
                                             name="contacto-telefono-factura" id="contacto_email_factura"
-                                            class="form-control" required>
+                                            class="form-control" >
 
                                     </div>
 
@@ -305,7 +305,7 @@
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Celular del contacto a facturar"
                                             name="contacto-celular-factura" id="contacto_celular_factura"
-                                            class="form-control" required>
+                                            class="form-control" >
                                     </div>
 
                                     <div class="form-group col-lg-12">
@@ -387,7 +387,7 @@
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Facturación</label>
                                         <select style="text-transform: uppercase" id="tipo_facturacion"
-                                            class="form-control">
+                                            class="form-control" required>
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="sc">SC</option>
                                             <option value="green">GREEN</option>
@@ -396,7 +396,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Forma de pago</label>
-                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control">
+                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control" required>
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="contado">CONTADO</option>
                                             <option value="8_dias">8 Dias</option>
@@ -411,7 +411,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">¿Tiene contrato?</label>
-                                        <select style="text-transform: uppercase" id="contrato" class="form-control">
+                                        <select style="text-transform: uppercase" id="contrato" class="form-control" required>
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="si">SI</option>
                                             <option value="no">NO</option>
@@ -758,7 +758,7 @@
                                             <label class="control-label">Nombre y/o descripción del área</label>
                                             <input type="text" style="text-transform: uppercase" id="area-0"
                                                 name="area-0" placeholder="Ej: Pasillo, sala, terraza..."
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
 
                                         <div class="form-group col-lg-3 ">
@@ -769,7 +769,7 @@
                                                     placeholder="Horas">
                                                 <input style="width: 42%;margin-left: 10px;" type="number" min="0"
                                                     max="60" class="form-control" id="num_minutos_area-0"
-                                                    placeholder="Minutos">
+                                                    placeholder="Minutos" >
                                             </div>
                                         </div>
 
@@ -793,7 +793,7 @@
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Nivel act.</label>
                                             <select style="text-transform: uppercase" name="nivel_area-0"
-                                                id="nivel_area-0" class="form-control">
+                                                id="nivel_area-0" class="form-control" required>
                                                 <option value="alto">ALTO</option>
                                                 <option value="medio">MEDIO</option>
                                                 <option value="bajo">BAJO</option>
@@ -1190,7 +1190,6 @@
 
         $("#valor_total_areas").val(totalValorAreas.toString())
     }
-
 
 
     //Definicion de frencuencias para documentos
