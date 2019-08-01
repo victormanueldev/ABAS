@@ -138,14 +138,24 @@
                             <ul class="nav nav-second-level collapse" id="ml2-cronograma-servicios">
                                 <li id="ml2-cronograma-tecnicos" style="margin-bottom: 10px;">
                                     @foreach (ABAS\Tecnico::all() as $tecnico)
-                                    @if($tecnico->estado == 'activo')
-                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
-                                        <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked"
-                                            value="{{$tecnico->id}}">
-                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
-                                    </div>
-                                    @endif
+                                        @if($tecnico->estado == 'activo')
+                                            <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                                <input class="checkbox-c" id="tecnico-{{$tecnico->id}}" type="checkbox" checked="checked"
+                                                    value="{{$tecnico->id}}">
+                                                <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: {{$tecnico->color}};text-transform: uppercase">{{$tecnico->nombre}}</label>
+                                            </div>
+                                        @endif
                                     @endforeach
+                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                        <input class="checkbox-c" id="neutros" type="checkbox" checked="checked"
+                                            value="neutro">
+                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: rgb(236,71,88);text-transform: uppercase">NEUTROS</label>
+                                    </div>
+                                    <div class="checkbox checkbox-primary" style="margin-left: 22px;color:white;">
+                                        <input class="checkbox-c" id="mensajeria" type="checkbox" checked="checked"
+                                            value="mensajeria">
+                                        <label for="checkbox-c" style="font-size: 9px;font-weight: bold;padding-top: 0px;--tecnician-color: rgb(35,198,200);text-transform: uppercase">MENSAJERIA</label>
+                                    </div>
                                 </li>
                             </ul>
                         </li>
