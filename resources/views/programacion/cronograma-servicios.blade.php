@@ -1395,6 +1395,9 @@
                         ) //Elimina del calendario los servicios segun el id del tecnico seleccionado
                     }
                 })
+
+
+                console.log("Add source events")
             })
             .catch(err => {
                 console.log(err)
@@ -2337,7 +2340,7 @@
             $("#num_horas").prop("disabled", false);
             $("#num_minutos").prop("disabled", false);
             $("#select_servicios").prop("disabled", false);
-            $("#select_tecnicos2").prop("disabled", false);
+            $("#select_tecnicos2").prop("disabled", true);
             //$("#text-instrucciones").prop("disabled", false);
         } else {
             $("#indice-frecuencia").attr("disabled", "disabled");

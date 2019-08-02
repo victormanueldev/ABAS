@@ -822,7 +822,7 @@
                                         <div class="form-group col-lg-4">
                                             <label class="control-label">Servicio a incluir</label>
                                             <select style="text-transform: uppercase" id="servicio_detalle-0"
-                                                class="form-control">
+                                                class="form-control" required>
 
                                             </select>
                                         </div>
@@ -831,13 +831,13 @@
                                             <label class="control-label">Valor </label>
                                             <input type="text" min=0 name="valor_servicio_detalle-0"
                                                 id="valor_servicio_detalle-0" placeholder="Valor del servicio"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Frecuencia</label>
                                             <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0"
-                                                class="form-control">
+                                                class="form-control" required>
                                                 <option value="" selected>Seleccione una frecuencia</option>
                                                 <option value="Semanal">SEMANAL</option>
                                                 <option value="Quincenal">QUINCENAL</option>
@@ -1173,22 +1173,30 @@
     })
 
     //Suma automatica de valores por area
+    let horas = []
+    let minutos = []
+    let totalAreas = 0
+
     $("#num_horas_area-0").on("input", e => {
-        calcularValorArea(e.target.value, 'h') 
+        horas[0] = parseInt(e.target.value) || 0
+        calcularValorArea() 
     })
 
     $("#num_minutos_area-0").on("input", e => {
-        calcularValorArea(e.target.value, 'm')
+        minutos[0] = parseInt(e.target.value) || 0
+        calcularValorArea()
     })
 
     function calcularValorArea(nuevoValor, tiempo) {
-        if (tiempo == 'h') {
-            totalValorAreas = nuevoValor * valorHoraHombre;
-        } else {
-            totalValorAreas += nuevoValor * (valorHoraHombre / 60)
-        }
+        let sumaHoras = 0
+        let sumaMinutos = 0
+        horas.forEach(hora =>  sumaHoras += hora )
+        minutos.forEach(minuto => sumaMinutos += minuto )
+        console.log({sumaHoras, sumaMinutos});
+        
+        totalAreas = (sumaHoras * valorHoraHombre) + (sumaMinutos * (valorHoraHombre / 60))
 
-        $("#valor_total_areas").val(totalValorAreas.toString())
+        $("#valor_total_areas").val(`$ ${totalAreas.toFixed(2).toString()}`)
     }
 
 
@@ -1646,7 +1654,18 @@
         $('.chosen-select').chosen({
             width: "100%"
         });
+
+        $(`#num_horas_area-${contAreas}`).on('input', e => {
+            horas[contAreas] =  parseInt(e.target.value) || 0
+            calcularValorArea()
+        })
+        $(`#num_minutos_area-${contAreas}`).on('input', e => {
+            minutos[contAreas] = parseInt(e.target.value) || 0
+            calcularValorArea()
+        })
+
         contAreas++;
+
     })
 
 
@@ -1764,8 +1783,8 @@
         for (let index = 0; index < contVisitas; index++) {
             dataToSendInspection.visitas[index] = {
                 num_visita: $(`#num_visita-${index}`).val(),
-                duracion: (parseInt($(`#num_horas_visita-${index}`).val()) * 60) + parseInt($(
-                    `#num_minutos_visita-${index}`).val())
+                duracion: (parseInt($(`#num_horas_visita-${index}`).val()) || 0 * 60) + parseInt($(
+                    `#num_minutos_visita-${index}`).val()) || 0
             }
         }
 
@@ -1785,8 +1804,8 @@
             dataToSendInspection.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
                 valor_residencia: valoresResidencias[index].rawValue,
-                tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) * 60) + parseInt($(
-                    `#num_minutos_residencia-${index}`).val()),
+                tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) || 0 * 60) + parseInt($(
+                    `#num_minutos_residencia-${index}`).val() || 0) ,
                 observaciones_residencia: $(`#observaciones_residencia-${index}`).val()
             }
         }
@@ -1828,8 +1847,8 @@
         for (let index = 0; index < contAreas; index++) {
             dataToSendInspection.areas[index] = {
                 area: $(`#area-${index}`).val(),
-                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) * 60) + parseInt($(
-                    `#num_minutos_area-${index}`).val()),
+                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) || 0  * 60) + parseInt($(
+                    `#num_minutos_area-${index}`).val() || 0) ,
                 plagas_area: $(`#plagas_area-${index}`).val(),
                 nivel_actividad_area: $(`#nivel_area-${index}`).val()
             }
