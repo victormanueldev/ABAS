@@ -856,6 +856,48 @@ class TecnicoController extends Controller
     {
         return Tecnico::select('id', 'nombre')->get();
     }
+
+    public function printTecnicianSchedule($idTecnico, $fechaInicio, $fechaFin,$idServicio)
+    {
+        if($idTecnico == 'all'){
+            $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                        $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                        $query->where('fecha_inicio', '>=', $fechaInicio);
+                                        $query->where('fecha_fin', '<=', $fechaFin);
+                                    }, 'servicios.solicitud' => function($query){ 
+                                        $query->select('id', 'cliente_id', 'sede_id');
+                                    }, 'servicios.solicitud.cliente' => function($query){
+                                        $query->select('nombre_cliente', 'direccion', 'id');
+                                    }, 'servicios.solicitud.sede' => function($query){
+                                        $query->select('nombre', 'direccion', 'id');
+                                    }])
+                                    ->get();
+        }else{
+            $tecnicos = Tecnico::with(['servicios' => function($query) use($fechaInicio, $fechaFin){
+                                        $query->select('id', 'fecha_inicio', 'fecha_fin','solicitud_id', 'hora_inicio','hora_fin');
+                                        $query->where('fecha_inicio', '>=', $fechaInicio);
+                                        $query->where('fecha_fin', '<=', $fechaFin);
+                                    }, 'servicios.solicitud' => function($query){ 
+                                        $query->select('id', 'cliente_id', 'sede_id');
+                                    }, 'servicios.solicitud.cliente' => function($query){
+                                        $query->select('nombre_cliente', 'direccion', 'id');
+                                    }, 'servicios.solicitud.sede' => function($query){
+                                        $query->select('nombre', 'direccion', 'id');
+                                    }])
+                                    ->where('id', $idTecnico)
+                                    ->get();
+        }
+
+        //Organiza la informacion para mayor facilidad de acceso a sus propiedades
+        $data = collect([
+            'tecnicos' => $tecnicos
+        ]);
+
+        $fechaActual = Carbon::now()->toDateString();
+        $data->push(['now' => $fechaActual]);
+        //return $data;
+        return view('print-layouts.horarios-tecnicos', compact('data'));
+    }
 }
 
 

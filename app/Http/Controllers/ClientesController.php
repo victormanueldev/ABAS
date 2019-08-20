@@ -396,13 +396,13 @@ class ClientesController extends Controller
 
     public function clientLogin(Request $request)
     {
-        $cliente = Cliente::select('password')
+        $cliente = Cliente::select('id','password')
                         ->where('usuario', $request->username)
                         ->get();
 
         if(count($cliente) > 0){
             if(password_verify($request->password, $cliente[0]->password)){
-                return response()->json("Logged", 200);
+                return response()->json($cliente[0]->id, 200);
             } else {
                 return response()->json('¡Contraseña incorrecta!', 400);
             }

@@ -370,13 +370,6 @@
                                             rows="1" name="observaciones_plan" id="observaciones_plan"></textarea>
                                     </div>
 
-                                    <div class="form-group col-lg-6">
-                                        <label class="control-label">Total a facturar</label>
-                                        <input type="number" min=0 name="total_servicio_detalle"
-                                            id="total_servicio_detalle" placeholder="Valor total a facturar"
-                                            class="form-control" readonly>
-                                    </div>
-
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Forma de Pago de Servicios </h3>
@@ -859,6 +852,13 @@
                                                 name="observacion_servicio_detalle-0"
                                                 id="observacion_servicio_detalle-0"></textarea>
                                         </div>
+                                    </div>
+                                    
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Total a facturar</label>
+                                        <input type="number" min=0 name="total_servicio_detalle"
+                                            id="total_servicio_detalle" placeholder="Valor total a facturar"
+                                            class="form-control" readonly>
                                     </div>
 
 
@@ -1876,7 +1876,6 @@
         dataToSendInspection.cant_cajas_alca_elec = $("#cant_cajas").val();
         dataToSendInspection.sumideros = $("#cant_sumideros").val();
 
-        console.log(dataToSendInspection)
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
                 title: "Código de Inspección",

@@ -187,19 +187,7 @@
                 }
 
                 function toCapitalCase(tipoDoc) {
-                    switch (tipoDoc) {
-                        case 'diagnostico_inicial':
-                            return 'Diagnostico inicial'
-                            break
-                        case 'cronograma_servicios':
-                            return 'Cronograma de servicios'
-                            break
-                        case 'mapas_estaciones_lamparas':
-                            return 'Mapas de est./lamp.'
-                        default:
-                            return 'Visitas de calidad'
-                            break
-                    }
+                    return tipoDoc.replace("_", " ").toUpperCase()
                 }
 
                res[0].sedes.forEach((sede, index)=> {
@@ -208,14 +196,7 @@
                             <div class="ibox ">
                                 <div class="ibox-title">
                                     <h5>${sede.nombre}</h5>
-                                    <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
-                                        <a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
+                                    <a class="text-navy" style="margin-left: 10px;" href="/docs/update/${clienteSeleccionado}/${sede.id}">Actualizar documentos <i class="fa fa-external-link"></i></a>
                                 </div>
                                 <div class="ibox-content ">
                                     <table class="table table-hover table-responsive" style="display: inline-block">

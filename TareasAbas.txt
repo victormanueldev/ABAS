@@ -5,6 +5,7 @@ Otros Ajustes
             - Disminuir el tamaño del texto del placeholder o convertir en Capital Case (OK)
             - Quitar textos redundantes placeholder (OK)
             - Notificar a programacion solicitud es creada  (OK)
+            - Organizar la creacion de telefonos (OK)
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
@@ -28,7 +29,7 @@ Otros Ajustes
         - Clasificar las novedades en (PQRS y sacar informe)
         - Plagas creadas segun necesidad. 
         - Quitar checklist
-        - Recepcion y asignacion de documentos con URL a Drive
+        - Recepcion y asignacion de documentos con URL a Drive (OK)
         - Inventario de documentos (Reporte de documentos) (OK)
         - Inventario de Documentos con frecuencia y advertencia si el doc no esta
           creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...) (OK)
@@ -43,6 +44,10 @@ Otros Ajustes
         - Añadir facturacion desde la vista de ver servicio (OK)
         - Cmabiar nombre a: Impresion  Documentos (OK)
         - Cambiar la estructura visual modulo (OK)
+        - Asignar los tipos de servicios en el calendario al seleccionar la solicitud. (OK)
+        - Agregar el valor de la factura de cada servicio y mostrarlo en el servicio. (OK)
+        - Imprimir los horarios de los tecnicos por separado, boton de imprimir horarios. (OK)
+
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
 
@@ -62,6 +67,7 @@ Otros Ajustes
         - Resumen de comisiones (OK)
         - Porcentaje de comisiones desde la BD (OK)
         - Links del sidebar de comisiones (OK)
+        - Mostrar porcentaje de comision en la tabla de detalle. (OK)
 
     AREA DE INVENTARIOS (3 Dias)
         - CRUD de productos (OK)
@@ -71,6 +77,7 @@ Otros Ajustes
         - Inventario General por rango de fechas y Frecuencias (OK)
         - Inventario por tecnico (Cuanto ha gastado) (OK)
         - Revisar Consultas y detalles de interfaz (OK)
+        - Reporte de gasto total de un producto por tecnico. (OK)
 
 
     AREA DE TECNICOS
@@ -83,9 +90,10 @@ Otros Ajustes
         - Creacion de usuarios y asignacion de roles (OK)
         - Revisar swalerts P
         - Todos los modulos disponibles (OK)
+        - Modulo para cambiar valores generales
 
     SESIONES VIP (2 Dias)
-        - Realizar vista de recibir documentos para los clientes 
+        - Realizar vista de recibir documentos para los clientes (OK)
         - Visualizar informacion 
 
 
@@ -136,3 +144,27 @@ ver compras <- Creado
 #2B8800 -> Gradient finish
 
 #0092a4 -> Secondary
+
+DESCRIPCION DE DOCUMENTOS
+CRONOGRAMA Agenda de actividades por frecuencia y tipo de  servicios.
+
+DOCUMENTOS LEGALES 
+Información legal de SANICONTROL S.A.S.
+
+DOCUMENTOS CONTROL DE PLAGAS
+Información legal como empresa aplicadora.
+
+FICHAS TÉCNICAS
+MSDS información legal de los productos utilizados.
+
+INFORMES FRECUENTES
+Documentos donde se reportan los hallazgos, tipos de plagas, niveles de actividad, novedades, mejoras y planes de acción.
+
+INFORMES CON TENDENCIAS
+Documentos donde se reportan los niveles de actividad por plaga y sectores por tipos de dispositivos.
+
+DIAGNÓSTICOS
+Informe en texto y fotográfico de hallazgos, novedades, recomendaciones y mejoras.
+
+PROGRAMA DE PREVENCIÓN Y CONTROL DE PLAGAS
+Plan de trabajo y actividades, protocolos de servicio, modelos seguros de aplicación.

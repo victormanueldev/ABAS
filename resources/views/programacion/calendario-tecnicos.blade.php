@@ -129,30 +129,28 @@
                                         <h3>Opciones de impresión</h3>
                                         <table class="table">
                                             <tbody>
-                                                {{-- <tr>
+                                                <tr>
 
                                                     <td class="row" colspan="2">
-                                                        <div class="col-sm-6 col-md-2" style="padding: 0">
-                                                            <button id="print-all" type="button" class="btn btn-danger m-r-sm">
-                                                                PC
-                                                            </button>
+                                                        <div class="col-sm-6 col-md-4" style="padding: 0">
+                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-ods">OS</button>
                                                         </div>
-                                                        <div class="col-sm-6 col-md-10" style="padding: 0">
-                                                            <p style="margin-bottom: 0">Paquete Completo de Documentos<br><i
-                                                                    style="font-size: 10px;position: absolute;">(Órdenes
-                                                                    de Servicio y todas las rutas)</i></p>
+                                                        <div class="col-sm-6 col-md-18" style="padding: 0">
+                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i
+                                                                    style="font-size: 10px;position: absolute;">(Generadas
+                                                                    por ABAS)</i></p>
                                                         </div>
                                                     </td>
 
-                                                </tr> --}}
+                                                </tr>
                                                 <tr>
 
                                                     <td class="row">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-success m-r-sm" id="print-ods">OS</button>
+                                                            <button type="button" class="btn btn-success m-r-sm" id="print-rt">RT</button>
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
-                                                            <p style="margin-bottom: 0">Órdenes de Servicio <br><i
+                                                            <p style="margin-bottom: 0">Ruta de técnicos <br><i
                                                                     style="font-size: 10px;position: absolute;">(Generadas
                                                                     por ABAS)</i></p>
                                                         </div>
@@ -566,6 +564,10 @@
 
     $("#print-ctf").click(event => {
         printOptions('ctf')
+    })
+
+    $("#print-rt").click(event => {
+        printOptions('horarios')
     })
 
     //Evento click del checkbox de Seleccionar todos

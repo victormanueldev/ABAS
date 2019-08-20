@@ -88,6 +88,7 @@ Route::get('tecnicos/imprimir-rl/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnic
 Route::get('tecnicos/imprimir-rri/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRI');
 Route::get('tecnicos/imprimir-rre/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printRRE');
 Route::get('tecnicos/imprimir-ctf/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printCertificates');
+Route::get('tecnicos/imprimir-horarios/{idServicio}/{fechaInicio}/{fechaFin}/{idTecnico}', 'TecnicoController@printTecnicianSchedule');
 Route::get('all/tecnicos', 'TecnicoController@getAll');
 
 //Tipos de Servicios
@@ -174,8 +175,10 @@ Route::resource('valores', 'ValorGeneralController');
 
 //Documentos
 Route::resource('documents', 'DocumentoController', [
-    'except' => 'showByClient'
+    'except' => 'showByClient',
+    'except' => 'show'
 ]);
+Route::get('docs/update/{idCliente}/{idSede}', 'DocumentoController@show');
 Route::get('documents/show/{idCliente}','DocumentoController@showByClient');
 
 //Compras

@@ -101,7 +101,7 @@
                         porcentajesComision.recompras = parseFloat(porcentaje.valor) / 100
                     } else if (porcentaje.descripcion == 'porcentaje_clientes_nuevos') {
                         porcentajesComision.clientesNuevos = parseFloat(porcentaje.valor) / 100
-                    } else {
+                    } else if(porcentaje.descripcion == 'porcentaje_clientes_contrato'){
                         porcentajesComision.clientesContrato = parseFloat(porcentaje.valor) / 100
                     }
                 })
@@ -185,13 +185,14 @@
                                                 <div class="client-detail">
                                                     <div class="full-height-scroll">
 
-                                                        <h4>Recompras</h4>
+                                                        <h4>Recompras </h4>
                                                         <table class="table table-responsive ">
                                                             <thead>
                                                                 <tr>
                                                                     <td><b>Nombre Cliente</b></td>
                                                                     <td><b>No. Factura</b></td>
                                                                     <td><b>Total</b></td>
+                                                                    <td><b>% C.</b></td>
                                                                     <td><b>Comisión</b></td>
                                                                     <td><b>Pago</b></td>
                                                                 </tr>
@@ -206,13 +207,14 @@
                                                             <b>Pendiente: </b> <label class="label label-default" id="total-comisiones-pendientes-recompras_${inspector.id}"></label>
                                                         </div>
                                                         <br>
-                                                        <h4>Clientes Nuevos</h4>
+                                                        <h4>Clientes Nuevos </h4>
                                                         <table class="table table-responsive ">
                                                             <thead>
                                                                 <tr>
                                                                     <td><b>Nombre Cliente</b></td>
                                                                     <td><b>No. Factura</b></td>
                                                                     <td><b>Total</b></td>
+                                                                    <td><b>% C.</b></td>
                                                                     <td><b>Comisión</b></td>
                                                                     <td><b>Pago</b></td>
                                                                 </tr>
@@ -226,13 +228,14 @@
                                                             <b>Pendiente: </b> <label class="label label-default" id="total-comisiones-pendientes-cnuevos_${inspector.id}"></label>
                                                         </div>
                                                         <br>
-                                                        <h4>Clientes con contrato</h4>
+                                                        <h4>Clientes con contrato </b></h4>
                                                         <table class="table table-responsive ">
                                                             <thead>
                                                                 <tr>
                                                                     <td><b>Nombre Cliente</b></td>
                                                                     <td><b>No. Factura</b></td>
                                                                     <td><b>Total</b></td>
+                                                                    <td><b>% C.</b></td>
                                                                     <td><b>Comisión</b></td>
                                                                     <td><b>Pago</b></td>
                                                                 </tr>
@@ -340,6 +343,7 @@
                                 <td>${factura.nombreCliente}</td>
                                 <td>${factura.numFactura}</td>
                                 <td>${factura.valorFactura}</td>
+                                <td>${porcentajesComision.recompras * 100}</td>
                                 <td>${factura.comision.toFixed(1)}</td>
                                 <td>${factura.estadoFactura == 'Pagado' ? `<i class="fa fa-check-circle " style="color: #5CAE27; font-size: 21px"></i>` : `<label class="badge badge-danger">P</label>`}</td>
                             </tr>
@@ -370,6 +374,7 @@
                                 <td>${factura.nombreCliente}</td>
                                 <td>${factura.numFactura}</td>
                                 <td>${factura.valorFactura}</td>
+                                <td>${porcentajesComision.clientesNuevos * 100}</td>
                                 <td>${factura.comision.toFixed(1)}</td>
                                 <td>${factura.estadoFactura == 'Pagado' ? `<i class="fa fa-check-circle " style="color: #5CAE27; font-size: 21px"></i>` : `<label class="badge badge-danger">P</label>`}</td>
                             </tr>
@@ -400,6 +405,7 @@
                                 <td>${factura.nombreCliente}</td>
                                 <td>${factura.numFactura}</td>
                                 <td>${factura.valorFactura}</td>
+                                <td>${porcentajesComision.clientesContrato * 100}</td>
                                 <td>${factura.comision.toFixed(1)}</td>
                                 <td>${factura.estadoFactura == 'Pagado' ? `<i class="fa fa-check-circle " style="color: #5CAE27; font-size: 21px"></i>` : `<label class="badge badge-danger">P</label>`}</td>
                             </tr>

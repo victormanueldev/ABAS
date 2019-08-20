@@ -4,7 +4,7 @@
 <link href="{{asset('css/plugins/sweetalert/sweetalert.css')}}" rel='stylesheet'>
 @endsection
 @section('content')
-<<script>
+<script>
         document.getElementById('m-inventario-documentos').setAttribute("class", "active");
         document.getElementById('a-inventario-documentos').removeAttribute("style");
         document.getElementById('ml2-inventario-documentos').setAttribute("class", "nav nav-second-level collapse in");
@@ -256,6 +256,7 @@
                console.log(docsTipoSede)
 
                docsTipoSede.forEach(tiposDoc => {
+                   if(tiposDoc.tipo){
                     $(`#sede-id_${tiposDoc.sede}`).append(`
                         <tr>
                             <td>${ toCapitalCase(tiposDoc.tipo)}</td>
@@ -265,6 +266,7 @@
                             <td>${ tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0] != null ? tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0].fecha_fin_vigencia : '-----------' }</td>
                         </tr>
                     `)
+                   }
                })
 
             })

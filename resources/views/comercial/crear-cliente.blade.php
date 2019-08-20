@@ -124,6 +124,9 @@
                                                             <input type="text" class="form-control" style="text-transform: uppercase" placeholder="Teléfono del contacto o cliente" name="telefono[0]" required>
                                                         </div>               
                                                     </div>
+                                                    <div class="row" id="columna_principal3" style="padding: 0px 15px;">
+                                                        
+                                                    </div>
 
                                                     <div class="form-group col-lg-3"><label class="control-label">Contacto Inicial *</label>
                                                         <input style="text-transform: uppercase" type="text" name="contacto_inicial" placeholder="Nombre del contacto inicial" class="form-control">
@@ -216,12 +219,7 @@
                                                         <input style="text-transform: uppercase" type="text" name="otro_medio" placeholder="Otros medios" class="form-control">
                                                         <br>
                                                     </div>
-
-                                                    <div class="row" id="columna_principal3" style="padding: 0px 15px;">
-                                                        
-                                                    </div>
                                                     
-
                                                 </div>
                                             </div>
 

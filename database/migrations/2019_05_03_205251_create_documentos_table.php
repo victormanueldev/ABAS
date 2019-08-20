@@ -15,6 +15,7 @@ class CreateDocumentosTable extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
             $table->string('codigo');               // {tipo_documento}{id_sede}{fecha_inicio}
             $table->string('tipo');                 // Abreviacion de tipos de documentos (inspeccion)
             $table->date('fecha_inicio_vigencia');  

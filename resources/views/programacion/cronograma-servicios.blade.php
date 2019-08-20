@@ -786,8 +786,10 @@
     var inicio_servicio;
     var solicitudes;
     var notificacionesListadas = []
+    var tiposServicios = []
 
     $(document).ready(function () {
+
         /** Servicio de notificaiones
         --------------------------------------------------------------------------*/
         setInterval(() => {
@@ -901,6 +903,14 @@
             .catch((err) => {
                 console.log(err);
             });
+        
+        $.get('/tipos')
+        .then(res => {
+            tiposServicios = res;
+        }).catch(err => {
+            console.log("No se pudieron obtener los tipos de servicio");
+            
+        })
 
         //Inicia el Autocompletado con los NIT de los clientes
         $input = $('.typeahead_1').typeahead({
@@ -1282,15 +1292,25 @@
                         $("#ver_duracion").val(hours + " hora(s) " + minutes + " minuto(s)");
                         $("#ver_instrucciones").val(res[0].solicitud.observaciones);
                         res[0].tipos.forEach((value, index) => {
-                            $("#tbody-tipos").append(
-                                `<tr>    
-                                <td>${index + 1}</td>
-                                <td>${value.nombre}</td>
-                                <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
-                                <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.valor)}"/></td>
-                                <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>
-
-                            </tr>`);
+                            if(value.pivot.valor){
+                                $("#tbody-tipos").append(
+                                    `<tr>    
+                                        <td>${index + 1}</td>
+                                        <td>${value.nombre}</td>
+                                        <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.numero_factura)}"/></td>
+                                        <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(value.pivot.valor)}"/></td>
+                                        <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})" ${value.pivot.valor ? 'disabled="disabled"' : ''}><i class="fa fa-save"></i></button></td>
+                                    </tr>`);
+                            } else {
+                                $("#tbody-tipos").append(
+                                    `<tr>    
+                                        <td>${index + 1}</td>
+                                        <td>${res[0].solicitud.detalle_servicios[index].tipo_servicio}</td>
+                                        <td><input id="num-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value=""/></td>
+                                        <td><input id="val-factura-${value.pivot.id_servicio_tipo}" class="form-control" type="number" value="${parseInt(res[0].solicitud.detalle_servicios[index].valor_servicio)}"/></td>
+                                        <td><button class="btn btn-primary" id="btn-save-fac-${value.pivot.id_servicio_tipo}" onclick="assignBill(${value.pivot.id_servicio_tipo})"><i class="fa fa-save"></i></button></td>
+                                    </tr>`);
+                            }
                         });
                         res[0].tecnicos.forEach((value, index) => {
                             $("#tbody-tecnicos").append(
@@ -1597,6 +1617,20 @@
             $("#more-solicitud").empty()
             solicitudes.forEach((value, index) => {
                 if (value.id == e.target.value) {
+
+                    // Añadir los tipos de servicios al select de tipos de servicio
+                    if(value.detalle_servicios.length > 0){
+                        let tiposServiciosSeleccionados = []
+                        tiposServicios.forEach(tipo => {
+                            value.detalle_servicios.forEach(tipoSolicitud => {
+                                if(tipo.nombre == tipoSolicitud.tipo_servicio){
+                                    tiposServiciosSeleccionados.push(tipo.id.toString())
+                                }
+                            })
+                        })
+                        $("#select_servicios").select2('val', tiposServiciosSeleccionados)
+                    }
+
                     $("#frecuencia_solicitud").val(value.frecuencia)
                     $("#valor_plan_solicitud").val(value.valor_plan_saneamiento.toString())
                     $("#frecuencia_visitas_solicitud").val("Cada " + value.frecuencia_visitas +
@@ -2340,9 +2374,19 @@
             $("#num_horas").prop("disabled", false);
             $("#num_minutos").prop("disabled", false);
             $("#select_servicios").prop("disabled", false);
-            $("#select_tecnicos2").prop("disabled", true);
+            $("#select_tecnicos2").prop("disabled", false);
             //$("#text-instrucciones").prop("disabled", false);
-        } else {
+        } else if(type == 2){
+            $("#indice-frecuencia").prop("disabled", false);
+            $("#opcion-frecuencia").prop("disabled", false);
+            $("#opcion-personalizada").prop("disabled", false);
+            $("#hora_inicio").prop("disabled", false);
+            $("#num_horas").prop("disabled", false);
+            $("#num_minutos").prop("disabled", false);
+            $("#select_servicios").prop("disabled", false);
+            $("#select_tecnicos2").prop("disabled", true);
+        } 
+        else {
             $("#indice-frecuencia").attr("disabled", "disabled");
             $("#opcion-frecuencia").attr("disabled", "disabled");
             $("#opcion-personalizada").attr("disabled", "disabled");
@@ -2352,7 +2396,7 @@
     $("#select_tipo_servicio").change(event => {
         switch (event.target.value) {
             case 'Neutro':
-                disableInputs(0);
+                disableInputs(2);
                 break;
             case "Mensajeria":
                 disableInputs(1);
