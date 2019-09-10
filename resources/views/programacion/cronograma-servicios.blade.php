@@ -974,7 +974,6 @@
 
         //Inicializa el calendario
         $('#calendar').fullCalendar({
-
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -1118,9 +1117,9 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                var start = event.start.format("YYYY-MM-DD");
+                var start = event.start.format("YYYY-MM-DD HH:mm:ss");
                 if (event.end) {
-                    var end = event.end.format("YYYY-MM-DD");
+                    var end = event.end.format("YYYY-MM-DD HH:mm:ss");
                 } else {
                     var end = "NULL";
                 }

@@ -176,10 +176,12 @@ Route::resource('valores', 'ValorGeneralController');
 //Documentos
 Route::resource('documents', 'DocumentoController', [
     'except' => 'showByClient',
-    'except' => 'show'
+    'except' => 'show',
+    'except' => 'edit'
 ]);
 Route::get('docs/update/{idCliente}/{idSede}', 'DocumentoController@show');
 Route::get('documents/show/{idCliente}','DocumentoController@showByClient');
+Route::get('documents/edit/{idCliente}/{idSede}/{tipoDoc}', 'DocumentoController@edit');
 
 //Compras
 Route::resource('compras','CompraController');

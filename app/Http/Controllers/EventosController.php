@@ -31,8 +31,8 @@ class EventosController extends Controller
         $eventos = Auth::user()->eventos;//Consulta todas las eventos de la BD
         $data = collect();//Crea una coleccion
         foreach ($eventos as $evento) {
-            $cliente = "";
-            $sede = "";
+            $cliente = collect();
+            $sede = collect();
             if(isset($evento->cliente_id)){
                 $cliente = Cliente::select('id', 'nombre_cliente')->where('id', $evento->cliente_id)->get();
                 if(isset($evento->sede_id) && $evento->sede_id != 0){
@@ -42,14 +42,14 @@ class EventosController extends Controller
             //Agrega todos los elementos a la coleccion
             $data->push([
                 'id' => $evento->id, 
-                'title' => $evento->asunto != "" ? $evento->asunto : $evento->tipo,
+                'title' => isset($cliente) ? $cliente[0]->nombre_cliente : $evento->tipo,
                 'tipo' => $evento->tipo, 
                 'start' => $evento->fecha_inicio,
                 'end' =>$evento->fecha_fin, 
                 'backgroundColor' => $evento->color, 
                 'borderColor' => $evento->color,
-                'cliente' => !isset($cliente) ? $cliente[0]->nombre_cliente : "No definido",
-                'sede' => !isset($sede) ? $sede[0]->nombre : "No definido",
+                'cliente' => isset($cliente) ? $cliente[0]->nombre_cliente : "No definido",
+                'sede' => $sede->count() > 0 ? $sede[0]->nombre : "No definido",
                 'telefono' => $evento->telefono_evento != "" ? $evento->telefono_evento : 'No definido',
                 'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido',
                 'asunto' => $evento->asunto != "" ? $evento->asunto : "Sin Observaciones"

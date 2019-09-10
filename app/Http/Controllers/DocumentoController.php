@@ -86,9 +86,19 @@ class DocumentoController extends Controller
      * @param  \ABAS\Documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Documento $documento)
+    public function edit(Request $request, $idCliente, $idSede, $tipoDoc)
     {
         //
+        if($request->ajax()){
+            $documentos = Documento::select('id','nombre','fecha_inicio_vigencia', 'fecha_fin_vigencia', 'url')
+                                    ->where('cliente_id', $idCliente)
+                                    ->where('sede_id', $idSede)
+                                    ->where('tipo', $tipoDoc)
+                                    ->get();
+            return $documentos;
+        }else{
+            return view('calidad.editar-documentos');
+        }
     }
 
     /**
@@ -98,9 +108,17 @@ class DocumentoController extends Controller
      * @param  \ABAS\Documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Documento $documento)
+    public function update(Request $request, $action)
     {
         //
+        if($request->ajax()){
+            $documento = Documento::findOrFail($request->id);
+            $documento->nombre = $request["nombre"];
+            $documento->fecha_inicio_vigencia = $request["fechaInicio"];
+            $documento->fecha_fin_vigencia = $request["fechaFin"];
+            $documento->url = $request["url"];
+            $documento->save();
+        }
     }
 
     /**
@@ -109,9 +127,12 @@ class DocumentoController extends Controller
      * @param  \ABAS\Documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Documento $documento)
+    public function destroy($id)
     {
         //
+        $doc = Documento::findOrFail($id);
+        $doc->delete();
+
     }
 
     public function showByClient($idCliente)

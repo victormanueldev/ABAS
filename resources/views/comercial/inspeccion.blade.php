@@ -284,8 +284,7 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Factura
-                                            *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Contacto Factura</label>
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Nombre del contacto a facturar" name="contacto-name-factura"
                                             id="contacto_name_factura" class="form-control" style="display: block;"
@@ -293,7 +292,7 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Email *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Email </label>
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Teléfono del contacto a facturar"
                                             name="contacto-telefono-factura" id="contacto_email_factura"
@@ -301,7 +300,7 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6"><label class="control-label">Celular *</label>
+                                    <div class="form-group col-lg-6"><label class="control-label">Celular </label>
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Celular del contacto a facturar"
                                             name="contacto-celular-factura" id="contacto_celular_factura"
@@ -380,7 +379,7 @@
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Facturación</label>
                                         <select style="text-transform: uppercase" id="tipo_facturacion"
-                                            class="form-control" required>
+                                            class="form-control" >
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="sc">SC</option>
                                             <option value="green">GREEN</option>
@@ -389,7 +388,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Forma de pago</label>
-                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control" required>
+                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control" >
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="contado">CONTADO</option>
                                             <option value="8_dias">8 Dias</option>
@@ -404,7 +403,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">¿Tiene contrato?</label>
-                                        <select style="text-transform: uppercase" id="contrato" class="form-control" required>
+                                        <select style="text-transform: uppercase" id="contrato" class="form-control" >
                                             <option value="" selected>Seleccione una opción</option>
                                             <option value="si">SI</option>
                                             <option value="no">NO</option>

@@ -91,6 +91,7 @@
     var $input;
     var data;
     var clienteSeleccionado;
+
     ///var crsfToken = document.getElementsByName("_token")[0].value;
 
     $(document).ready(function () {
@@ -169,6 +170,7 @@
         $("#btn-find-docs").click(function (){
             var docsSede = []
             var docsTipoSede = [] 
+            var clienteNatural;
             
             $("#seccion-sedes").empty()
             $.get(`/documents/show/${clienteSeleccionado}`)
@@ -207,6 +209,7 @@
                                             <th>Estado</th>
                                             <th>Último registrado</th>
                                             <th>Fecha vencimiento</th>
+                                            <th>Acción</th>
                                         </tr>
                                         </thead>
                                         <tbody id="sede-id_${sede.id}">
@@ -222,15 +225,16 @@
                     res[0].inspecciones.forEach(inspeccion => {
                         if(sede.nit_cedula){
                             if(sede.id == inspeccion.cliente_id){
+                                clienteNatural = 0;
                                 inspeccion.gestion_calidad.forEach(tipo => {
-                                    docsTipoSede.push({tipo: tipo.tipo_documento, frec: tipo.frecuencia_documento, sede: sede.id, docs: sede.documentos})
+                                    docsTipoSede.push({tipo: tipo.tipo_documento, frec: tipo.frecuencia_documento, sede: sede.id, docs: sede.documentos, id_cliente: inspeccion.cliente_id})
                                 })
                             }
                             console.log(true)
                         }else{
                             if(sede.id == inspeccion.sede_id){
                                 inspeccion.gestion_calidad.forEach(tipo => {
-                                    docsTipoSede.push({tipo: tipo.tipo_documento, frec: tipo.frecuencia_documento, sede: sede.id, docs: sede.documentos})
+                                    docsTipoSede.push({tipo: tipo.tipo_documento, frec: tipo.frecuencia_documento, sede: sede.id, docs: sede.documentos, id_cliente: inspeccion.cliente_id})
                                 })
                             }
                             
@@ -247,6 +251,9 @@
                             <td><span class="label label-${ estadoDoc(tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0])[1] }" style="padding: 3px 9px" >${ estadoDoc(tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0])[0] }<span></td>
                             <td>${ tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0] != null ? tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0].codigo : '-----------' }</td>
                             <td>${ tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0] != null ? tiposDoc.docs.filter(doc => { return tiposDoc.tipo == doc.tipo })[0].fecha_fin_vigencia : '-----------' }</td>
+                            <td>
+                                <a title="Editar documento" class="btn btn-primary btn-circle btn-outline"  href="/documents/edit/${clienteSeleccionado}/${clienteNatural == 0 ? clienteNatural : tiposDoc.sede}/${tiposDoc.tipo}"><i style="font-size: 15px" class="fa fa-edit"></i></a>
+                            </td>
                         </tr>
                     `)
                })

@@ -69,8 +69,8 @@
                                                     <input type="hidden" value="prospecto" name="estado_registro">
 
                                                     <div class="form-group col-lg-5">
-                                                    <label class="control-label">Nit/Cedula *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Identificación del cliente" class="form-control" required>
+                                                    <label class="control-label">Nit/Cedula </label>
+                                                        <input style="text-transform: uppercase" type="text" name="nit_cedula" id="nit_cedula" placeholder="Identificación del cliente" class="form-control" >
                                                     </div>
                                                     <div class="form-group col-lg-1">
                                                         <label class="control-label">D.V.</label>
@@ -143,8 +143,8 @@
                                                         
                                                     </div>
 
-                                                    <div class="form-group col-lg-3"><label class="control-label">Email *</label>
-                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_inicial" placeholder="Del contacto inicial" class="form-control" required>
+                                                    <div class="form-group col-lg-3"><label class="control-label">Email </label>
+                                                        <input style="text-transform: uppercase" type="text" name="email_contacto_inicial" placeholder="Del contacto inicial" class="form-control">
                                                         
                                                     </div>
 

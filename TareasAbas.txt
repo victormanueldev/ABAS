@@ -6,6 +6,7 @@ Otros Ajustes
             - Quitar textos redundantes placeholder (OK)
             - Notificar a programacion solicitud es creada  (OK)
             - Organizar la creacion de telefonos (OK)
+            - Dejar opcional el NIT y el Email (OK)
 
         - Ver progreso de la meta propuesta por contabilidad (Algun grafico y filtrado por la meta del mes vigente)
 
@@ -18,11 +19,14 @@ Otros Ajustes
             - Valor sin IVA * cantidad = valor total (OK)
             - Creacion de cliente con sede no obligatorio (OK)
             - Validar creacion de clientes (OK)
+            - Validar la información de facturacion (OK)
         - Ver cliente
             - Bug actualizar sede (valor de inputs con .class ) (OK)
             - El cambio de NIT bloqueada y solo editada por ADMIN y DIRECTOR COMERCIAl (OK)
         - Cronograma
             - Mostrar observaciones en el label del tipo (OK)
+            - Revisar informacion del cliente en el evento (OK)
+            - Mostrar la información del cliente en el label de tipo (OK)
 
 
     AREA CALIDAD (2 Dias)
@@ -35,6 +39,7 @@ Otros Ajustes
           creado en la frecuencia de la fecha actual (Diagnosticos, Informes, etc...) (OK)
         - Links del sidebar de documentos (OK)
         - Revisar Consultas y detalles de interfaz (OK)
+        - Editar documentos (OK)
 
     AREA DE PROGRAMACION
         - Ocultar/Mostrar servicios por tecnico en calendario (OK)
@@ -47,6 +52,8 @@ Otros Ajustes
         - Asignar los tipos de servicios en el calendario al seleccionar la solicitud. (OK)
         - Agregar el valor de la factura de cada servicio y mostrarlo en el servicio. (OK)
         - Imprimir los horarios de los tecnicos por separado, boton de imprimir horarios. (OK)
+        - Revisar la actualizacion de horaios en servicio y drag & drop del calendario (OK)
+        - Intentar cambiar el formato de las horas del calendario en vista dia (OK)
 
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
@@ -91,10 +98,11 @@ Otros Ajustes
         - Revisar swalerts P
         - Todos los modulos disponibles (OK)
         - Modulo para cambiar valores generales
+        - Encapsulamiento de errores en la creacion de usuarios (OK)
 
     SESIONES VIP (2 Dias)
         - Realizar vista de recibir documentos para los clientes (OK)
-        - Visualizar informacion 
+        - Visualizar informacion (OK)
 
 
 Crear clientes <- Creado

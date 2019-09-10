@@ -922,6 +922,8 @@ class ServicioController extends Controller
                 if($servicio->confirmado == 0){
                     $servicio->fecha_inicio = Carbon::parse($request->start)->toDateString();
                     $servicio->fecha_fin = Carbon::parse($request->end)->toDateString();
+                    $servicio->hora_inicio = Carbon::parse($request->start)->toTimeString();
+                    $servicio->hora_fin = Carbon::parse($request->end)->toTimeString();
                     $servicio->save();
                 }
                 break;
