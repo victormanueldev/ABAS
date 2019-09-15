@@ -64,7 +64,8 @@
         </div>
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
-                {!! Form::open(['route' => ['users.update', '0'], 'method' => 'PUT', 'id' => 'act-usuario']) !!}
+                {!! Form::open(['route' => ['users.update', '0'], 'method' => 'PUT', 'id' => 'act-usuario', 'enctype' =>
+                'multipart/form-data', 'files' => 'true']) !!}
                 {!! Form::token() !!}
 
                 <div class="ibox-title">
@@ -99,6 +100,11 @@
                             <label class="control-label">Teléfono </label>
                             <input style="text-transform: uppercase" type="text" name="telefono_usuario" id="telefono_usuario"
                                 class="form-control" placeholder="Teléfono móvil o fijo">
+                        </div>
+                        <div class="form-group col-lg-4" style="margin-top: 15px;">
+                            <label class="control-label">Foto </label>
+                            <input style="text-transform: uppercase" type="file" name="foto_usuario" id="foto_usuario"
+                                class="form-control" placeholder="Seleccione un archivo">
                         </div>
                         <div class="form-group col-lg-4" style="margin-top: 15px;">
                             <label class="control-label">E-mail *</label>

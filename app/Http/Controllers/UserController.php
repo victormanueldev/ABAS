@@ -51,7 +51,7 @@ class UserController extends Controller
             $user->cedula = $request->cedula_usuario;
             $user->nombres = $request->nombres_usuario;
             $user->apellidos = $request->apellidos_usuario;
-            $user->iniciales = $request->iniciales_usuario;
+            $user->iniciales = strtoupper( $request->iniciales_usuario );
             $user->telefono = $request->telefono_usuario;
             if($request->hasFile('foto_usuario')){
                 $user->foto = $request->file('foto_usuario')->store('public');
@@ -84,7 +84,7 @@ class UserController extends Controller
                 'gastos' => isset($request->gastos) ? 'true' : 'false'
             ]);
     
-            $user->password = bcrypt($request->cedula_usuario);
+            $user->password = bcrypt($request->contrasena_user);
             $user->cargo_id = $request->cargo_usuario;
             switch ($request->cargo_usuario) {
                 case '1':
@@ -184,6 +184,11 @@ class UserController extends Controller
             'gestion_productos' => isset($request->gestion_productos) ? 'true' : 'false',
             'gastos' => isset($request->gastos) ? 'true' : 'false'
         ]);
+
+        if($request->hasFile('foto_usuario')){
+            $user->foto = $request->file('foto_usuario')->store('public');
+        }
+
         if(isset($request->contrasena_user) && $request->contrasena_user){
             $user->password = bcrypt($request->contrasena_user);
         }

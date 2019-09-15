@@ -86,6 +86,12 @@
                         </div>
 
                         <div class="form-group col-lg-4" style="margin-top: 15px;">
+                            <label class="control-label">Contraseña *</label>
+                            <input type="password" name="contrasena_user" id="contrasena_user"
+                                class="form-control" placeholder="Nueva contraseña" required>
+                        </div>
+
+                        <div class="form-group col-lg-4" style="margin-top: 15px;">
                             <label class="control-label">Cargo *</label>
                             <select style="text-transform: uppercase" required name="cargo_usuario" id="cargo_usuario"
                                 class="form-control">

@@ -486,7 +486,7 @@ body.mini-navbar .navbar-static-side {
 body.mini-navbar .profile-element,
 body.mini-navbar .nav-label,
 body.mini-navbar .navbar-default .nav li a .nav-label{
-    display: none !important;
+    display: inline-block !important;
 }
 
 body.mini-navbar .profile-element,
@@ -549,7 +549,7 @@ body.canvas-menu.mini-navbar .footer {
 body.fixed-sidebar .navbar-static-side,
 body.canvas-menu .navbar-static-side {
     position: fixed;
-    width: 220px;
+    width: 240px;
     z-index: 2001;
     height: 100%;
 }

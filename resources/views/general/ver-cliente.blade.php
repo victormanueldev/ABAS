@@ -20,7 +20,7 @@
 </div>
 <div class="wrapper wrapper-content ">
     <div class="row">
-        @if(Auth::user()->area_id == "4" || Auth::user()->area_id == "6")
+        @if(Auth::user()->area_id == "4" || Auth::user()->area_id == "6" || Auth::user()->area_id == "3")
             <div class="col-lg-9">
         @else
             <div class="col-lg-12">
@@ -519,7 +519,7 @@
             </div>
         </div>
         <div class="col-lg-3" id="documentos">
-            @if (Auth::user()->area_id == '4' || Auth::user()->area_id == '6')
+            @if (Auth::user()->area_id == '4' || Auth::user()->area_id == '6' || Auth::user()->area_id == '3')
             <documentos></documentos>
 
             <div class="ibox">

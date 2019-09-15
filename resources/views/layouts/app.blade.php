@@ -39,13 +39,13 @@
     </script>
 </head>
 
-<body class="md-skin" id="body-tag">
+<body class="md-skin fixed-sidebar body-small" id="body-tag">
     <div id="wrapper" style="background-color: #5cae27;">
-        <nav class="navbar-default  navbar-static-side" role="navigation" style="position: fixed">
+        <nav class="navbar-default  navbar-static-side" role="navigation" >
             <div class="sidebar-collapse">
 
                 <ul class="nav metismenu">
-                    <li class="nav-header">
+                    <li class="nav-header" id="nav-header">
                         <div class="dropdown profile-element"> <span>
                                 <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
                                     style="width: 50px;" />

@@ -483,7 +483,7 @@ class TecnicoController extends Controller
 
         $fechaActual = Carbon::now()->toDateString();
         $data->push(['now' => $fechaActual]);
-        //return $data;
+        // return $data;
         return view('print-layouts.ordenes-servicios', compact('data'));
     }
 

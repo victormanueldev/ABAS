@@ -54,6 +54,8 @@ Otros Ajustes
         - Imprimir los horarios de los tecnicos por separado, boton de imprimir horarios. (OK)
         - Revisar la actualizacion de horaios en servicio y drag & drop del calendario (OK)
         - Intentar cambiar el formato de las horas del calendario en vista dia (OK)
+        - Formato de Orden de servicios con plantilla (OK)
+        - Cambiar permisos para crear Certificados (OK)
 
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
@@ -99,6 +101,7 @@ Otros Ajustes
         - Todos los modulos disponibles (OK)
         - Modulo para cambiar valores generales
         - Encapsulamiento de errores en la creacion de usuarios (OK)
+        - Edicion del formulario de crear/editar usuarios (OK)
 
     SESIONES VIP (2 Dias)
         - Realizar vista de recibir documentos para los clientes (OK)
