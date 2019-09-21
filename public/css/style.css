@@ -7035,6 +7035,7 @@ table.shoping-cart-table tr td:last-child {
 }
 
 .social-comment textarea {
+    resize: none !important;
     font-size: 12px;
 }
 

@@ -105,7 +105,7 @@
                    
                         <div class="social-body row">
                                 <div class="form-group col-lg-12">
-                                    <textarea class="form-control" placeholder="Escriba aquí una novedad" rows="3" name="descripcion"></textarea>
+                                    <textarea class="form-control" style="rezise: none;" placeholder="Escriba aquí una novedad" rows="3" name="descripcion"></textarea>
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label style="display: block">Cliente: </label>

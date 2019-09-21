@@ -56,9 +56,14 @@
                                     </span> <span class="text-muted text-xs block">{{
                                         Auth::user()->cargo->descripcion}} <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Perfil</a></li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">Cerrar Sesión</a></li>
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                         Cerrar Sesión
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -77,7 +82,7 @@
                     <!-- Cronograma de eventos -->
                     <li id="m-cronograma-eventos">
                         <a href="{{route('eventos')}}" style="background-color: #5cae27;color: white;" id="a-cronograma-eventos"><i
-                                class="fa fa-calendar"></i> <span class="nav-label">Cronograma</span></a>
+                                class="fa fa-calendar-check-o"></i> <span class="nav-label">Calendario</span></a>
                     </li>
 
                     <!-- Ver novedades -->
@@ -134,7 +139,7 @@
                         <li id="m-cronograma">
                             <a href="{{route('servicios.create')}}" onclick="window.location.href='/servicios/create'"
                                 style="background-color: #5cae27;color: white;" id="a-cronograma"><i class="fa fa-calendar"></i>
-                                <span class="nav-label">Calendario</span></a>
+                                <span class="nav-label">Agenda</span></a>
                             <ul class="nav nav-second-level collapse" id="ml2-cronograma-servicios">
                                 <li id="ml2-cronograma-tecnicos" style="margin-bottom: 10px;">
                                     @foreach (ABAS\Tecnico::all() as $tecnico)

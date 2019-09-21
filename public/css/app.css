@@ -211,6 +211,7 @@ legend {
 }
 
 textarea {
+  resize: vertical !important;
   overflow: auto;
 }
 
@@ -3405,6 +3406,7 @@ fieldset[disabled] .form-control {
 }
 
 textarea.form-control {
+  resize: vertical !important;
   height: auto;
 }
 

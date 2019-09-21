@@ -20,6 +20,7 @@ Otros Ajustes
             - Creacion de cliente con sede no obligatorio (OK)
             - Validar creacion de clientes (OK)
             - Validar la información de facturacion (OK)
+            - Cambiar placeholder de Cajas alcantarillas y sumideros (OK)
         - Ver cliente
             - Bug actualizar sede (valor de inputs con .class ) (OK)
             - El cambio de NIT bloqueada y solo editada por ADMIN y DIRECTOR COMERCIAl (OK)
@@ -40,6 +41,8 @@ Otros Ajustes
         - Links del sidebar de documentos (OK)
         - Revisar Consultas y detalles de interfaz (OK)
         - Editar documentos (OK)
+        - Revisar las notificaciones en publicaciones de novedades. (OK)
+        - Evitar el rezise de todos los text area, textarea { rezise: vertical; } (OK)
 
     AREA DE PROGRAMACION
         - Ocultar/Mostrar servicios por tecnico en calendario (OK)
@@ -56,6 +59,7 @@ Otros Ajustes
         - Intentar cambiar el formato de las horas del calendario en vista dia (OK)
         - Formato de Orden de servicios con plantilla (OK)
         - Cambiar permisos para crear Certificados (OK)
+        - Cambiar nombre a Calendario -> AGENDA y Cronograma -> CALENDARIO ()OK
 
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO

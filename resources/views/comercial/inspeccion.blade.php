@@ -507,13 +507,13 @@
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Cajas de alcantarilla y eléctricas</label>
                                         <input type="number" min=0 name="cant_cajas" id="cant_cajas"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label class="control-label">Sumideros</label>
                                         <input type="number" min=0 name="cant_sumideros" id="cant_sumideros"
-                                            placeholder="Valor total" class="form-control">
+                                            placeholder="Cantidad total" class="form-control">
                                     </div>
 
                                     <div class="form-group col-lg-3">
