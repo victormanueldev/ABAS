@@ -96,6 +96,16 @@ class NotificacionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function destroyMany(Request $request)
+    {
+        if(request()->ajax()){;
+            foreach ($request->notificaciones as $notificacion) {
+                DatabaseNotification::find($notificacion['id'])->delete();
+            }
+            return Auth::user()->unreadNotifications;
+        }
+    }
+
     public function destroy($id)
     {
         //

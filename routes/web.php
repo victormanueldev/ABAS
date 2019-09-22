@@ -55,7 +55,11 @@ Route::resource('sedes', 'SedesController', [
 Route::get('sedes/cliente/{id}', 'SedesController@index');
 
 //Notificaciones
-Route::resource('notificaciones', 'NotificacionesController');
+Route::resource('notificaciones', 'NotificacionesController', [
+    'except' => 'destroyMany'
+]);
+
+Route::post('notifications/delete', 'NotificacionesController@destroyMany');
 
 //Solicitudes
 Route::resource('solicitud', 'SolicitudesController', [

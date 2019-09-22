@@ -31275,7 +31275,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Se ejecuta cuando se carga el documento
   mounted: function mounted() {
-    console.log('Notificaciones Montado');
     this.notificacionesNoLeidas();
   },
   data: function data() {
@@ -31311,14 +31310,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     eliminarNotificacion: function eliminarNotificacion(notificacion) {
       var _this2 = this;
 
+      this.notificaciones.splice(this.notificacion.indexOf({ id: notificacion.id }), 1);
       axios.delete('/notificaciones/' + notificacion.id).then(function (res) {
-        res.data.forEach(function (notificacion) {
-          if (notificacion.type !== 'ABAS\\Notifications\\SolicitudPublicada') {
-            _this2.notificaciones.push(notificacion);
+        res.data.forEach(function (value, index) {
+          if (value.type !== 'ABAS\\Notifications\\SolicitudPublicada' && value.id !== notificacion.id) {
+            _this2.notificaciones[index] = value;
           }
         });
-
-        //   this.notificaciones = res.data
       }).catch(function (err) {
         console.log(err);
       });
@@ -31330,8 +31328,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     eliminarTodasNotificaciones: function eliminarTodasNotificaciones(notificacion) {
       var _this3 = this;
 
-      this.notificaciones.forEach(function (notificacion) {
-        _this3.eliminarNotificacion(notificacion);
+      axios.post('/notifications/delete', { notificaciones: this.notificaciones }).then(function (res) {
+        _this3.notificaciones = [];
+      }).catch(function (err) {
+        console.log(err);
       });
     }
   }
@@ -31355,7 +31355,7 @@ var render = function() {
       [
         _c("i", { staticClass: "fa fa-bell" }),
         _vm._v(" "),
-        _vm.notificaciones.length
+        _vm.notificaciones.length > 0
           ? _c("span", {
               staticClass: "label label-warning",
               domProps: { textContent: _vm._s(_vm.notificaciones.length) }
@@ -31384,7 +31384,7 @@ var render = function() {
                           staticClass: "img-circle",
                           attrs: {
                             alt: "image",
-                            src: "/storage/" + notificacion.data.foto
+                            src: "/storage/" + notificacion.data.foto.substr(6)
                           }
                         })
                       ]

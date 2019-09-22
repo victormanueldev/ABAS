@@ -8,7 +8,7 @@
       <i class="fa fa-bell"></i> <span
         class="label label-warning"
         v-text="notificaciones.length"
-        v-if="notificaciones.length"
+        v-if="notificaciones.length > 0"
       ></span>
     </a>
     <ul
@@ -28,7 +28,7 @@
               <img
                 alt="image"
                 class="img-circle"
-                :src="'/storage/'+notificacion.data.foto"
+                :src="`/storage/${notificacion.data.foto.substr(6,)}`"
               >
             </a>
             <div class="media-body">
@@ -72,7 +72,6 @@
 export default {
   //Se ejecuta cuando se carga el documento
   mounted() {
-    console.log('Notificaciones Montado')
     this.notificacionesNoLeidas()
   },
   data() {
@@ -104,15 +103,14 @@ export default {
     * Elimina una notificacion de la base de datos 
      */
     eliminarNotificacion(notificacion) {
+      this.notificaciones.splice(this.notificacion.indexOf({ id: notificacion.id }),1)
       axios.delete('/notificaciones/' + notificacion.id)
         .then((res) => {
-          res.data.forEach(notificacion => {
-            if (notificacion.type !== 'ABAS\\Notifications\\SolicitudPublicada') {
-              this.notificaciones.push(notificacion)
+          res.data.forEach((value, index) => {
+            if (value.type !== 'ABAS\\Notifications\\SolicitudPublicada' && value.id !== notificacion.id) {
+              this.notificaciones[index] = value;
             }
           })
-
-          //   this.notificaciones = res.data
         })
         .catch((err) => {
           console.log(err)
@@ -122,9 +120,13 @@ export default {
     * Elimina todas las notificaciones de la base de datos del usuario autenticado
      */
     eliminarTodasNotificaciones(notificacion) {
-      this.notificaciones.forEach(notificacion => {
-        this.eliminarNotificacion(notificacion)
-      });
+      axios.post('/notifications/delete', {notificaciones: this.notificaciones})
+      .then(res => {
+        this.notificaciones = []
+      })
+      .catch(err => {
+        console.log(err);
+      })
     }
   }
 }

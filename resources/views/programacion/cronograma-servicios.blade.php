@@ -989,6 +989,7 @@
             // events: {
             //     url: "/servicios"
             // },
+            defaultView: 'agendaWeek',
             eventLimit: true,
             editable: true,
             eventLimit: true,
