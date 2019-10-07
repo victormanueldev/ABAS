@@ -168,6 +168,7 @@ Route::resource('inspeccion', 'InspeccionController', [
     'except' => 'showInspectionClient'
 ]);
 Route::get('show/inspections/{idCliente}/{idSede}', 'InspeccionController@showInspectionClient');
+Route::put('edit/inspection/state', 'InspeccionController@updateState');
 
 //Comisiones
 Route::resource('comisiones', 'ComisionController');

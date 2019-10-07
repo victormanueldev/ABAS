@@ -32,7 +32,7 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'on', 'id' =>
+    {!! Form::open(array('route'=>('solicitud.store'), 'method'=>'POST', 'autocomplete'=>'off', 'id' =>
     'form-solicitud')) !!}
     {!! Form::token() !!}
 
@@ -46,18 +46,24 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="ibox-title col-lg-12">
-                                        <h1>SOLICITUD A PROGRAMACION</h1>
+                                        <h1>SOLICITUD A PROGRAMACIÓN</h1>
                                         <br>
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-4" id="data_1">
+                                    <div class="form-group col-lg-6" id="data_1">
                                         <label>Fecha *</label>
                                         <div class="input-group date">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
                                                 type="text" id="fecha_creacion" class="form-control" placeholder=""
                                                 name="fecha_creacion" required>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <label class="control-label">Inspector Comercial:</label>
+                                        <input style="text-transform: uppercase" type="text" id="nombre_usuario" name="nombre-usuario"
+                                            placeholder="" class="form-control">
                                     </div>
 
 
@@ -215,18 +221,12 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
-                                        <label class="control-label">Inspector Comercial:</label>
-                                        <input style="text-transform: uppercase" type="text" id="nombre_usuario" name="nombre-usuario"
-                                            placeholder="" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
+                                    {{-- <div class="form-group col-lg-4">
                                         <label class="control-label">Frecuencia del Servicio</label>
                                         <input style="text-transform: uppercase" type="text" id="frecuencia_servicio"
                                             name="frecuencia_servicio" placeholder="" class="form-control">
 
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group col-lg-4"><label class="control-label">Contacto Factura *</label>
                                         <input type="text" style="text-transform: uppercase" placeholder="Nombre del contacto a facturar"
@@ -244,13 +244,6 @@
                                     <div class="form-group col-lg-4"><label class="control-label">Celular *</label>
                                         <input type="text" style="text-transform: uppercase" placeholder="Celular del contacto a facturar"
                                             name="contacto-celular-factura" id="contacto_celular_factura" class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-lg-12">
-                                        <label>Instrucciones y Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
-                                            class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
-                                            rows="3" name="instrucciones" id="observaciones_tecnico" ></textarea>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -282,7 +275,7 @@
                                     <div class="form-group col-lg-4">
                                         <label class="control-label">Valor plan de saneamiento</label>
                                         <input type="text" min=0 name="total_plan" id="total_plan" placeholder="Valor total"
-                                            class="form-control">
+                                            class="form-control" required>
                                     </div>
 
                                     <div class="form-group col-lg-4">
@@ -307,92 +300,64 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
-                                        <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
-                                            id="btn-add-servicio"><i class="fa fa-plus"></i> Agregar servicio</button>
+                                        {{-- <button type="button" style="margin-top: -35px;" class="btn btn-primary pull-right"
+                                            id="btn-add-servicio"><i class="fa fa-plus"></i> Agregar servicio</button> --}}
                                         <hr>
                                         <br>
                                     </div>
 
                                     <div class="row" id="detalle-servicios" style="padding: 15px 15px;">
-                                        <div class="form-group col-lg-4">
+                                        <div class="form-group col-lg-6">
                                             <label class="control-label">Servicio a incluir</label>
-                                            <input type="text" min=0 name="servicio_detalle-0" id="servicio_detalle-0"
-                                                placeholder="Servicio" class="form-control">
+                                            <select type="text" min=0 name="servicio_detalle-0" id="servicio_detalle-0"
+                                                placeholder="Servicio" class="form-control" required>
+                                            </select>
                                         </div>
 
-                                        <div class="form-group col-lg-2">
+                                        <div class="form-group col-lg-3">
                                             <label class="control-label">Valor </label>
                                             <input type="text" min=0 name="valor_servicio_detalle-0" id="valor_servicio_detalle-0"
-                                                placeholder="Valor total" class="form-control">
+                                                placeholder="Valor total" class="form-control" required>
                                         </div>
 
-                                        <div class="form-group col-lg-2">
+                                        <div class="form-group col-lg-3">
                                             <label class="control-label">Frecuencia</label>
-                                            <input type="text" min=0 name="frecuencia_servicio_detalle-0" id="frecuencia_servicio_detalle-0"
-                                                placeholder="Frecuencia" class="form-control">
+                                            <select type="text" min=0 name="frecuencia_servicio_detalle-0" id="frecuencia_servicio_detalle-0"
+                                                placeholder="Frecuencia" class="form-control" required>
+                                                <option value="" selected>Seleccione una frecuencia</option>
+                                                <option value="Semanal">SEMANAL</option>
+                                                <option value="Quincenal">QUINCENAL</option>
+                                                <option value="Mensual">MENSUAL</option>
+                                                <option value="Bimestral">BIMESTRAL</option>
+                                                <option value="Trimestral">TRIMESTRAL</option>
+                                                <option value="Cuatrimestral">CUATRIMESTRAL</option>
+                                                <option value="Semestral">SEMESTRAL</option>
+                                                <option value="Anual">ANUAL</option>
+                                                <option value="Ocasional">OCASIONAL</option>
+                                            </select>
                                         </div>
 
-                                        <div class="form-group col-lg-4">
-                                            <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                        <div class="form-group col-lg-12">
+                                            <label>Instrucciones y Observaciones</label>
+                                            
+                                                <textarea style="text-transform: uppercase" style="text-transform: uppercase"
                                                 class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                                rows="1" name="observacion_servicio_detalle-0" id="observacion_servicio_detalle-0"></textarea>
+                                                rows="3" name="observacion_servicio_detalle-0" id="observacion_servicio_detalle-0"></textarea>
                                         </div>
+
+                                        {{-- <div class="form-group col-lg-12">
+                                            <label>Instrucciones y Observaciones</label>
+                                            <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                                class="form-control" placeholder="Escriba aquí las observaciones para el técnico."
+                                                rows="3" name="instrucciones" id="observaciones_tecnico" ></textarea>
+                                        </div> --}}
+
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label class="control-label">Total a facturar</label>
                                         <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle"
                                             placeholder="Valor total" class="form-control" readonly>
-                                    </div>
-
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Forma de Pago de Servicios </h3>
-                                        <hr>
-                                        <br>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Facturación</label>
-                                        <select style="text-transform: uppercase" id="tipo_facturacion" class="form-control">
-                                            <option value="" selected>Seleccione una opción</option>
-                                            <option value="sc">SC</option>
-                                            <option value="green">GREEN</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Forma de pago</label>
-                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control">
-                                            <option value="" selected>Seleccione una opción</option>
-                                            <option value="contado">CONTADO</option>
-                                            <option value="8_dias">8 Dias</option>
-                                            <option value="10_dias">10 Dias</option>
-                                            <option value="15_dias">15 Dias</option>
-                                            <option value="20_dias">20 Dias</option>
-                                            <option value="30_dias">30 Dias</option>
-                                            <option value="60_dias">60 Dias</option>
-                                            <option value="90_dias">90 Dias</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">¿Tiene contrato?</label>
-                                        <select style="text-transform: uppercase" id="contrato" class="form-control">
-                                            <option value="" selected>Seleccione una opción</option>
-                                            <option value="si">SI</option>
-                                            <option value="no">NO</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-lg-3">
-                                        <label class="control-label">Forma de facturación</label>
-                                        <select style="text-transform: uppercase" id="factura_maestra" class="form-control" required>
-                                            <option value="" selected>Seleccione una opción</option>
-                                            <option value="si">Factura Maestra</option>
-                                            <option value="no">Factura Individual</option>
-                                        </select>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -445,12 +410,60 @@
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Inventario Inicial del Cliente</h3>
+                                        <h3>Forma de Pago </h3>
                                         <hr>
                                         <br>
                                     </div>
 
                                     <div class="form-group col-lg-3">
+                                        <label class="control-label">Facturación</label>
+                                        <select required style="text-transform: uppercase" id="tipo_facturacion" class="form-control">
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="sc">SC</option>
+                                            <option value="green">GREEN</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Forma de pago</label>
+                                        <select style="text-transform: uppercase" id="forma_pago" class="form-control">
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="contado">CONTADO</option>
+                                            <option value="8_dias">8 Dias</option>
+                                            <option value="10_dias">10 Dias</option>
+                                            <option value="15_dias">15 Dias</option>
+                                            <option value="20_dias">20 Dias</option>
+                                            <option value="30_dias">30 Dias</option>
+                                            <option value="60_dias">60 Dias</option>
+                                            <option value="90_dias">90 Dias</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">¿Tiene contrato?</label>
+                                        <select style="text-transform: uppercase" id="contrato" class="form-control">
+                                            <option value="" selected>Seleccione una opción</option>
+                                            <option value="si">SI</option>
+                                            <option value="no">NO</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label class="control-label">Forma de facturación</label>
+                                        <select style="text-transform: uppercase" id="factura_maestra" class="form-control" required>
+                                            <option value="si">Factura Maestra</option>
+                                            <option value="no" selected>Factura Individual</option>
+                                        </select>
+                                    </div>
+
+                                    {{-- <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Inventario Inicial del Cliente</h3>
+                                        <hr>
+                                        <br>
+                                    </div> --}}
+
+                                    {{-- <div class="form-group col-lg-3">
                                         <label class="control-label">Lámpara con lámina</label>
                                         <input type="number" min=0 name="cantidad_lampara_lamina" id="cantidad_lampara_lamina"
                                             placeholder="Valor total" class="form-control">
@@ -497,7 +510,7 @@
                                         <label class="control-label">Sumideros</label>
                                         <input type="number" min=0 name="cant_sumideros" id="cant_sumideros"
                                             placeholder="Valor total" class="form-control">
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="ibox-title col-lg-12">
@@ -679,7 +692,7 @@
 <script src="{{asset('js/plugins/autonumeric/autonumeric.js')}}"></script>
 <script>
     //Declaracion de variables globales
-    var servicios;
+    var servicios = [];
     var valoresServicios = [];
     var valoresResidencias = [];
     var valoresSinIvaDispositivos = [];
@@ -825,7 +838,7 @@
 
     function getInspectionForm(dataInspection) {
         //Info general de la inspeccion
-        $("#frecuencia_servicio").val(dataInspection.frecuencia);
+        // $("#frecuencia_servicio").val(dataInspection.frecuencia);
         $("#observaciones_tecnico").val(dataInspection.observaciones);
 
         //Plan de Saneamiento
@@ -873,12 +886,12 @@
         $('#observaciones_plan').val(dataInspection.observaciones_visitas);
 
         //Detalle del servicio
-        dataInspection.detalle_servicios.forEach((value, index) => {
-            if (index === 0) {
-                $("#servicio_detalle-0").val(value.tipo_servicio);
-                $("#valor_servicio_detalle-0").val(value.valor_servicio);
-                $("#frecuencia_servicio_detalle-0").val(value.frecuencia_servicio);
-                $("#observacion_servicio_detalle-0").val(value.observacion_servicio);
+        // dataInspection.detalle_servicios.forEach((value, index) => {
+        //     if (index === 0) {
+        //         $("#servicio_detalle-0").val(value.tipo_servicio);
+        //         $("#valor_servicio_detalle-0").val(value.valor_servicio);
+        //         $("#frecuencia_servicio_detalle-0").val(value.frecuencia_servicio);
+        //         $("#observacion_servicio_detalle-0").val(value.observacion_servicio);
                 valoresServicios[0] = new AutoNumeric(document.getElementById('valor_servicio_detalle-0'), {
                     digitalGroupSpacing: '3',
                     digitGroupSeparator: '.',
@@ -886,49 +899,52 @@
                     decimalPlaces: 0,
                     outputFormat: "number"
                 })
-            } else {
-                $("#detalle-servicios").append(`
-                    <div class="form-group col-lg-4">
-                        <label class="control-label">Servicio a incluir</label>
-                        <input type="text" min=0 name="servicio_detalle-${index}" id="servicio_detalle-${index}"
-                            placeholder="Valor total" class="form-control" value="${value.tipo_servicio}">
-                    </div>
+        //     } else {
+        //         $("#detalle-servicios").append(`
+        //             <div class="form-group col-lg-4">
+        //                 <label class="control-label">Servicio a incluir</label>
+        //                 <input type="text" min=0 name="servicio_detalle-${index}" id="servicio_detalle-${index}"
+        //                     placeholder="Valor total" class="form-control" value="${value.tipo_servicio}">
+        //             </div>
 
-                    <div class="form-group col-lg-2">
-                        <label class="control-label">Valor </label>
-                        <input type="text" min=0 name="valor_servicio_detalle-${index}" id="valor_servicio_detalle-${index}"
-                            placeholder="Valor total" class="form-control" value="${value.valor_servicio}">
-                    </div>
+        //             <div class="form-group col-lg-2">
+        //                 <label class="control-label">Valor </label>
+        //                 <input type="text" min=0 name="valor_servicio_detalle-${index}" id="valor_servicio_detalle-${index}"
+        //                     placeholder="Valor total" class="form-control" value="${value.valor_servicio}">
+        //             </div>
 
-                    <div class="form-group col-lg-2">
-                        <label class="control-label">Frecuencia</label>
-                        <input type="text" min=0 name="frecuencia_servicio_detalle-${index}" id="frecuencia_servicio_detalle-${index}"
-                            placeholder="Valor total" class="form-control" value="${value.frecuencia_servicio}">
-                    </div>
+        //             <div class="form-group col-lg-2">
+        //                 <label class="control-label">Frecuencia</label>
+        //                 <input type="text" min=0 name="frecuencia_servicio_detalle-${index}" id="frecuencia_servicio_detalle-${index}"
+        //                     placeholder="Valor total" class="form-control" value="${value.frecuencia_servicio}">
+        //             </div>
 
-                    <div class="form-group col-lg-4">
-                        <label>Observaciones</label>
-                        <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                            rows="1" name="observacion_servicio_detalle-${index}" id="observacion_servicio_detalle-${index}" >${value.observacion_servicio}</textarea>
-                    </div>
-                `)
+        //             <div class="form-group col-lg-4">
+        //                 <label>Observaciones</label>
+        //                 <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
+        //                     rows="1" name="observacion_servicio_detalle-${index}" id="observacion_servicio_detalle-${index}" >${value.observacion_servicio}</textarea>
+        //             </div>
+        //         `)
 
-                valoresServicios[index] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${index}`), {
-                    digitalGroupSpacing: '3',
-                    digitGroupSeparator: '.',
-                    decimalCharacter: ',',
-                    decimalPlaces: 0,
-                    outputFormat: "number"
-                })
+        //         valoresServicios[index] = new AutoNumeric(document.getElementById(`valor_servicio_detalle-${index}`), {
+        //             digitalGroupSpacing: '3',
+        //             digitGroupSeparator: '.',
+        //             decimalCharacter: ',',
+        //             decimalPlaces: 0,
+        //             outputFormat: "number"
+        //         })
 
-                //Añade el listener al evento especificado de cada input creado
-                $(`#valor_servicio_detalle-${index}`).on('keyup', e => {
-                    autosumaTotalServicio()
-                })
-            }
-            contServicio++;
-        })
-        $("#total_servicio_detalle").val(dataInspection.total_detalle_servicios);
+        //         //Añade el listener al evento especificado de cada input creado
+                // $(`#valor_servicio_detalle-${index}`).on('keyup', e => {
+                //     autosumaTotalServicio()
+                // })
+                // $(`#valor_servicio_detalle-0`).on('keyup', e => {
+                //     autosumaTotalServicio()
+                // })
+        //     }
+        //     contServicio++;
+        // })
+        // $("#total_servicio_detalle").val(dataInspection.total_detalle_servicios);
 
         //Forma de Pago
         $("#tipo_facturacion").val(dataInspection.tipo_facturacion).change()
@@ -999,14 +1015,14 @@
         })
 
         //Inventario Inicial del Cliente
-        $("#cantidad_lampara_lamina").val(dataInspection.cant_lampara_lamina);
-        $("#cant_lampara_insectocutora").val(dataInspection.cant_lampara_insectocutora);
-        $("#cant_trampas_impacto").val(dataInspection.cant_trampas);
-        $("#cant_jaulas").val(dataInspection.cant_jaulas);
-        $("#cant_estaciones_roedor").val(dataInspection.cant_estaciones_roedor);
-        $("#observaciones_estaciones").val(dataInspection.observaciones_estaciones);
-        $("#cant_cajas").val(dataInspection.cant_cajas_alca_elec);
-        $("#cant_sumideros").val(dataInspection.sumideros);
+        // $("#cantidad_lampara_lamina").val(dataInspection.cant_lampara_lamina);
+        // $("#cant_lampara_insectocutora").val(dataInspection.cant_lampara_insectocutora);
+        // $("#cant_trampas_impacto").val(dataInspection.cant_trampas);
+        // $("#cant_jaulas").val(dataInspection.cant_jaulas);
+        // $("#cant_estaciones_roedor").val(dataInspection.cant_estaciones_roedor);
+        // $("#observaciones_estaciones").val(dataInspection.observaciones_estaciones);
+        // $("#cant_cajas").val(dataInspection.cant_cajas_alca_elec);
+        // $("#cant_sumideros").val(dataInspection.sumideros);
 
         //Compra de dispositivos
         dataInspection.compra_dispositivos.forEach((value, index) => {
@@ -1256,18 +1272,19 @@
         })
 
         //Añade el listener al evento especificado de cada input creado
-        $(`#valor_servicio_detalle-${contServicio}`).on('keyup', e => {
-            autosumaTotalServicio()
-        })
+        // $(`#valor_servicio_detalle-${contServicio}`).on('keyup', e => {
+        //     autosumaTotalServicio()
+        // })
 
-        anadirServiciosSelect(contServicio)
-        contServicio++;
+        // anadirServiciosSelect(contServicio)
+        // contServicio++;
     })
 
     $("#valor_servicio_detalle-0").on('keyup', e => {
         autosumaTotalServicio()
-
     })
+
+    anadirServiciosSelect(0)
 
     /**
     * Suma automaticamente los valores de los inputs con el id existente
@@ -1275,17 +1292,18 @@
     */
     function autosumaTotalServicio() {
         var sum = 0;
-        for (let index = 0; index < contServicio; index++) {
-            console.log(valoresServicios[index].rawValue)
-            sum += parseInt(valoresServicios[index].rawValue);
-        }
+        // for (let index = 0; index < contServicio; index++) {
+        //     console.log(valoresServicios[index].rawValue)
+        //     sum += parseInt(valoresServicios[index].rawValue);
+        // }
+        sum += parseInt(valoresServicios[0].rawValue);
 
         $("#total_servicio_detalle").val(sum)
     }
 
     function anadirServiciosSelect(idSelect) {
         servicios.forEach((value, index) => {
-            $(`#servicio_detalle-${idSelect}`).append(`
+            $(`#servicio_detalle-0`).append(`
                 <option value="${value.nombre}">${value.nombre}</option>
             `)
         })
@@ -1592,15 +1610,22 @@
         }
 
         //Detalle del servicio correctivo y/o preventivo
-        for (let index = 0; index < contServicio; index++) {
-            dataToSend.detalle_servicios[index] = {
-                tipo_servicio: $(`#servicio_detalle-${index}`).val(),
-                valor_servicio: valoresServicios[index].rawValue,
-                frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
-                observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
-            }
+        // for (let index = 0; index < contServicio; index++) {
+        //     dataToSend.detalle_servicios[index] = {
+        //         tipo_servicio: $(`#servicio_detalle-${index}`).val(),
+        //         valor_servicio: valoresServicios[index].rawValue,
+        //         frecuencia_servicio: $(`#frecuencia_servicio_detalle-${index}`).val(),
+        //         observacion_servicio: $(`#observacion_servicio_detalle-${index}`).val()
+        //     }
 
-        }
+        // }
+
+        dataToSend.detalle_servicios[0] = {
+                tipo_servicio: $(`#servicio_detalle-${0}`).val(),
+                valor_servicio: valoresServicios[0].rawValue,
+                frecuencia_servicio: $(`#frecuencia_servicio_detalle-${0}`).val(),
+                observacion_servicio: $(`#observacion_servicio_detalle-${0}`).val()
+            }
 
         //Numero de residencias
         for (let index = 0; index < contResidencias; index++) {
@@ -1646,7 +1671,7 @@
         dataToSend.codigo = codigoAleatorio();
         dataToSend.nombre_usuario = $("#nombre_usuario").val();
         dataToSend.fecha = $("#fecha_creacion").val();
-        dataToSend.frecuencia = $("#frecuencia_servicio").val();
+        dataToSend.frecuencia = 'OCASIONAL';
         dataToSend.observaciones = $("#observaciones_tecnico").val();
         dataToSend.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
         dataToSend.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
@@ -1656,14 +1681,22 @@
         dataToSend.forma_pago = $("#forma_pago").val();
         dataToSend.contrato = $("#contrato").val() == 'si' ? true : false;
         dataToSend.factura_maestra = $("#factura_maestra").val() == 'si' ? true : false;
-        dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
-        dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
-        dataToSend.cant_trampas = $("#cant_trampas_impacto").val();
-        dataToSend.cant_jaulas = $("#cant_jaulas").val();
-        dataToSend.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
-        dataToSend.observaciones_estaciones = $("#observaciones_estaciones").val();
-        dataToSend.cant_cajas_alca_elec = $("#cant_cajas").val();
-        dataToSend.sumideros = $("#cant_sumideros").val();
+        dataToSend.cant_lampara_lamina = '';
+        dataToSend.cant_lampara_insectocutora = '';
+        dataToSend.cant_trampas = '';
+        dataToSend.cant_jaulas = '';
+        dataToSend.cant_estaciones_roedor = '';
+        dataToSend.observaciones_estaciones = '';
+        dataToSend.cant_cajas_alca_elec = '';
+        dataToSend.sumideros = '';
+        // dataToSend.cant_lampara_lamina = $("#cantidad_lampara_lamina").val();
+        // dataToSend.cant_lampara_insectocutora = $("#cant_lampara_insectocutora").val();
+        // dataToSend.cant_trampas = $("#cant_trampas_impacto").val();
+        // dataToSend.cant_jaulas = $("#cant_jaulas").val();
+        // dataToSend.cant_estaciones_roedor = $("#cant_estaciones_roedor").val();
+        // dataToSend.observaciones_estaciones = $("#observaciones_estaciones").val();
+        // dataToSend.cant_cajas_alca_elec = $("#cant_cajas").val();
+        // dataToSend.sumideros = $("#cant_sumideros").val();
         dataToSend.cliente_id = $("#id_cliente").val();
         dataToSend.sede_id = $("#select_sedes").val();
         dataToSend.medio_contacto = $("#medio_contacto").val();

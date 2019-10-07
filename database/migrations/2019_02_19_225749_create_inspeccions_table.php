@@ -53,6 +53,7 @@ class CreateInspeccionsTable extends Migration
             //Info de publicidad
             $table->string('medio_contacto', 20)->nullable();
             $table->string('otro', 20)->nullable();
+            $table->string('estado_agenda', 20)->default('nuevo');
             //Info del Cliente
             $table->integer('cliente_id');
             $table->integer('sede_id');  

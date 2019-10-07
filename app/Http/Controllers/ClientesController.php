@@ -62,7 +62,7 @@ class ClientesController extends Controller
                 $idCliente = DB::table('clientes')->insertGetId([
                     'estado_registro' => 'cliente_nuevo',
                     'nit_cedula' => $request->nit_cliente,
-                    'nombre_cliente' => $request->nombre_cliente,
+                    'nombre_cliente' => strtoupper($request->nombre_cliente),
                     'sector_economico' => $request->sector_economico_cliente,
                     'municipio' => strtoupper($request->ciudad_cliente),
                     'direccion' => strtoupper($request->direccion_cliente),
@@ -71,6 +71,10 @@ class ClientesController extends Controller
                     'cargo_contacto_inicial' => strtoupper($request->cargo_cliente),
                     'celular_contacto_inicial' => strtoupper($request->celular_cliente),
                     'email_contacto_inicial' => strtoupper($request->email_cliente),
+                    'nombre_contacto_facturacion' => strtoupper($request->contacto_name_factura),
+                    'celular_contacto_facturacion' => strtoupper($request->contacto_email_factura),
+                    'telefono_contacto_facturacion' => strtoupper($request->telefono_contacto_facturacion),
+                    'email_contacto_facturacion' => strtoupper($request->contacto_celular_factura),
                     'user_id' => Auth::user()->id,
                     'created_at' => $now,
                     'updated_at' => $now
@@ -128,6 +132,7 @@ class ClientesController extends Controller
                 'nombre_contacto_facturacion' => strtoupper($request->get('contacto_facturacion')),
                 'cargo_contacto_facturacion' => strtoupper($request->get('cargo_contacto_facturacion')),
                 'celular_contacto_facturacion' => strtoupper($request->get('celular_contacto_facturacion')),
+                'telefono_contacto_facturacion' => strtoupper($request->get('telefono_contacto_facturacion')),
                 'email_contacto_facturacion' => strtoupper($request->get('email_contacto_facturacion')),
                 'empresa_actual' => strtoupper($request->get('empresa_actual')),
                 'razon_cambio' => strtoupper($request->get('razon_cambio')),
@@ -289,6 +294,7 @@ class ClientesController extends Controller
         $cliente->cargo_contacto_facturacion = strtoupper($request->get('cargo_contacto_facturacion'));
         $cliente->celular_contacto_facturacion = strtoupper($request->get('celular_contacto_facturacion'));
         $cliente->email_contacto_facturacion = strtoupper($request->get('email_contacto_facturacion'));
+        $cliente->telefono_contacto_facturacion = strtoupper($request->get('telefono_contacto_facturacion'));
         $cliente->empresa_actual = strtoupper($request->get('empresa_actual'));
         $cliente->razon_cambio = strtoupper($request->get('razon_cambio'));
         $cliente->medio_contacto = strtoupper($request->get('medio_contacto'));

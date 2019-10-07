@@ -2082,9 +2082,8 @@
       </tr>
       <tr class=xl134332684 height=26 style='mso-height-source:userset;height:19.9pt'>
         <td height=26 class=xl134332684 style='height:19.9pt'></td>
-        <td colspan=50 class=xl136932684>CONCEPTO SANITARIO UES VALLE<span style='mso-spacerun:yes'> </span>ACTA<span
-            style='mso-spacerun:yes'>
-          </span>P  00173  11 - 2016</td>
+        {{-- <td colspan=50 class=xl136932684>CONCEPTO SANITARIO UES VALLE ACTA P  00173  11 - 2016</td> --}}
+      <td colspan=50 class=xl136932684> {{ \ABAS\ValorGeneral::where('descripcion', 'concepto_sanitario')->get()[0]->valor }}</td>
         <td class=xl134332684></td>
         <td class=xl134332684></td>
       </tr>

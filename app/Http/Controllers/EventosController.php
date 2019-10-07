@@ -42,13 +42,13 @@ class EventosController extends Controller
             //Agrega todos los elementos a la coleccion
             $data->push([
                 'id' => $evento->id, 
-                'title' => isset($cliente) ? $cliente[0]->nombre_cliente : $evento->tipo,
+                'title' => $cliente->count() > 0 ? $cliente[0]->nombre_cliente : $evento->tipo,
                 'tipo' => $evento->tipo, 
                 'start' => $evento->fecha_inicio,
                 'end' =>$evento->fecha_fin, 
                 'backgroundColor' => $evento->color, 
                 'borderColor' => $evento->color,
-                'cliente' => isset($cliente) ? $cliente[0]->nombre_cliente : "No definido",
+                'cliente' => $cliente->count() > 0 ? $cliente[0]->nombre_cliente : "No definido",
                 'sede' => $sede->count() > 0 ? $sede[0]->nombre : "No definido",
                 'telefono' => $evento->telefono_evento != "" ? $evento->telefono_evento : 'No definido',
                 'direccion' => $evento->direccion_evento != "" ? $evento->direccion_evento : 'No definido',

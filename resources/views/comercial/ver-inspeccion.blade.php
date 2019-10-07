@@ -581,6 +581,8 @@
 
         $.get(`/inspeccion/${id_inspeccion}/edit`)
             .then(res => {
+                console.log(res);
+                
                 getInspectionForm(res);
             })
             .catch(err => {
@@ -1540,7 +1542,7 @@
             
         }
         
-        dataToSendInspection.codigo = codigoAleatorio();
+        // dataToSendInspection.codigo = codigoAleatorio();
         dataToSendInspection.fecha  = $("#fecha_creacion").val();
         dataToSendInspection.frecuencia = $("#frecuencia_servicio").val();
         dataToSendInspection.observaciones = $("#observaciones_tecnico").val();
@@ -1563,16 +1565,16 @@
         console.log(dataToSendInspection)
         //Alert para cambiar el codigo generado por uno personalizado (opcional)
         swal({
-            title: "Código de Inspección",
-            text: "Código generado: "+dataToSendInspection.codigo+", escribe otro código aquí: ",
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de actualizar esta inspección?",
             icon: "warning",
-            content: {
-                element: "input",
-                attributes: {
-                placeholder: "Ingresa el código personalizado para el formulario de inspeccion",
-                type: "text"
-                },
-            },
+            // content: {
+            //     element: "input",
+            //     attributes: {
+            //     placeholder: "Ingresa el código personalizado para el formulario de inspeccion",
+            //     type: "text"
+            //     },
+            // },
             buttons: {
                 cancel: true,
                 confirm: {
@@ -1585,7 +1587,7 @@
         })
         .then(isConfirm => {
             if(isConfirm){ //Valida si el input de codigo está diligenciado
-                dataToSendInspection.codigo =  isConfirm;
+                // dataToSendInspection.codigo =  isConfirm;
                 guardarInspeccion(dataToSendInspection);
                 
             }else if(isConfirm == ''){

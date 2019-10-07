@@ -165,21 +165,21 @@
                             </ul>
                         </li>
                     @endif
-                    @if($permiso['horarios_tecnicos'] === 'true')
+                    {{-- @if($permiso['horarios_tecnicos'] === 'true')
                         <!-- Horario de tecnicos -->
                         <li id="m-calendario-tecnicos">
                             <a href="{{route('tecnicos.index')}}" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
                                 id="a-calendario-tecnicos"><i class="fa fa-print"></i> <span class="nav-label">Impresión documentos</span></a>
                         </li>
-                    @endif
-                    @if($permiso['listado_servicios'] === 'true')
+                    @endif --}}
+                    {{-- @if($permiso['listado_servicios'] === 'true')
                         <!-- Listado de servicios -->
                         <li id="m-listado-servicios">
                             <a href="/list/services" style="background-color: #5cae27;color: white;" title="Horario de técnicos"
                                 id="a-listado-servicios"><i class="fa fa-list"></i> <span class="nav-label">Listado de
                                     servicios</span></a>
                         </li>
-                    @endif
+                    @endif --}}
                     @if($permiso['clientes_cerrados'] === 'true')
                         <!-- Listado de clientes cerrados -->
                         <li id="m-listado-clientes">
@@ -251,7 +251,7 @@
                             <ul class="nav nav-second-level collapse" id="ml2-recepcion">
                                 <li id="ml2-recepcion-ordenes"><a href="/ordenes/create" style="color: white;">Ordenes de
                                         servicio</a></li>
-                                <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li>
+                                {{-- <li id="ml2-recepcion-rutas"><a href="/recepcion/rutas" style="color: white;">Rutas</a></li> --}}
                             </ul>
                         </li>
                     @endif
@@ -262,7 +262,7 @@
                                     class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
                         </li>
                     @endif
-                    @if($permiso['inventario_docs'] === 'true')
+                    {{-- @if($permiso['inventario_docs'] === 'true')
                         <!-- Inventario de documemtns -->
                         <li id="m-inventario-documentos">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-inventario-documentos"><i class="fa fa-clone"></i>
@@ -272,7 +272,7 @@
                                 <li id="ml2-ver-inventario"><a href="/documents" style="color: white;">Ver inventario</a></li>
                             </ul>
                         </li>
-                    @endif
+                    @endif --}}
                     @if($permiso['crear_tecnicos'] === 'true')
                         <!-- Crear tecnicos -->
                         <li id="m-crear-tecnicos">

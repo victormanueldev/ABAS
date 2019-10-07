@@ -695,6 +695,12 @@
 
                                 </div>
 
+                                <div class="form-group col-lg-3"><label class="control-label">Telefono </label>
+                                    <input style="text-transform: uppercase" type="text" name="telefono_contacto_facturacion"
+                                        placeholder="teléfono del contacto de facturación" class="form-control" value="{{$cliente[0]->telefono_contacto_facturacion}}">
+
+                                </div>
+
                                 <div class="form-group col-lg-3"><label class="control-label">Celular </label>
                                     <input style="text-transform: uppercase" type="text" name="celular_contacto_facturacion"
                                         placeholder="celular del contacto de facturación" class="form-control" value="{{$cliente[0]->celular_contacto_facturacion}}">
@@ -1403,10 +1409,10 @@
         $("#columna-tratamientos").append(`
             <div class="form-group col-sm-12 col-md-4">
                 <select type="text" id="tratamiento-${contTratamientos - 1}" class="form-control">
-                    <option value="Desinsectacion">Desinsectación</option>
-                    <option value="Desratizacion">Desratización</option>
-                    <option value="Desinfeccion">Desinfección</option>
-                    <option value="Gasificacion">Gasificación</option>
+                    <option value="Desinsectacion">DESINSECTACIÓN</option>
+                    <option value="Desratizacion">DESRATIZACIÓN</option>
+                    <option value="Desinfeccion">DESINFECCIÓN</option>
+                    <option value="Gasificacion">GASIFICACIÓN</option>
                 </select>
             </div>`);
     });

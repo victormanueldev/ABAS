@@ -858,20 +858,26 @@ class ServicioController extends Controller
 
     public function getServicesByTecnician($idTecnico)
     {
+        $individual = false;
+        $tecnico = '';
         if($idTecnico == 'neutro'){
             $servicios = Servicio::with('solicitud','tecnicos')
                                     ->where('tipo', 'Neutro')
                                     ->get();
+            $individual = true;
         } elseif($idTecnico == 'mensajeria') {
             $servicios = Servicio::with('solicitud','tecnicos')
                                     ->where('tipo', 'Mensajeria')
                                     ->get();
+            $individual = true;
         } else {
             $servicios = Servicio::with('solicitud','tecnicos')
                                     ->whereHas('tecnicos', function($query) use($idTecnico){
                                         $query->where('id', $idTecnico);
                                     })
                                     ->get();
+            $tecnico = Tecnico::select('color')->where('id', $idTecnico)->get();
+            $individual = false;
         }
 
         $data = collect();
@@ -894,23 +900,42 @@ class ServicioController extends Controller
             }else{
                 $editableEvent = true;
             }
+            if($idTecnico == 'neutro' || $idTecnico == 'mensajeria'){
+                $data->push([
+                    'id' => $servicio->id, 
+                    'title' => $titleService, 
+                    'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                    'end' => $servicio->fecha_fin." ".$servicio->hora_fin, 
+                    'backgroundColor' => $servicio->color , 
+                    'borderColor' => $servicio->color ,
+                    'lock' => $servicio->confirmado,
+                    'dirClient' => $dirClient,
+                    "contactClient" => $nameContact,
+                    "telClient" => $telClient,
+                    "editable" => $editableEvent,
+                    'duration' => $servicio->duracion
+                    ]);
+            } else {
+                $data->push([
+                    'id' => $servicio->id, 
+                    'title' => $titleService, 
+                    'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                    'end' => $servicio->fecha_fin." ".$servicio->hora_fin, 
+                    'backgroundColor' => $tecnico[0]->color, 
+                    'borderColor' => $tecnico[0]->color,
+                    // 'backgroundColor' => $servicio->tecnicos[0]->color, 
+                    // 'borderColor' => $servicio->tecnicos[0]->color,
+                    'lock' => $servicio->confirmado,
+                    'dirClient' => $dirClient,
+                    "contactClient" => $nameContact,
+                    "telClient" => $telClient,
+                    "editable" => $editableEvent,
+                    'duration' => $servicio->duracion
+                    ]);
+            }
 
-            $data->push([
-                'id' => $servicio->id, 
-                'title' => $titleService, 
-                'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
-                'end' => $servicio->fecha_fin." ".$servicio->hora_fin, 
-                'backgroundColor' => $servicio->color, 
-                'borderColor' => $servicio->color,
-                'lock' => $servicio->confirmado,
-                'dirClient' => $dirClient,
-                "contactClient" => $nameContact,
-                "telClient" => $telClient,
-                "editable" => $editableEvent,
-                'duration' => $servicio->duracion
-                ]);
         }
-        //$data->toJson();//Convierte la colecciona a formato JSON
+        // $data->toJson();//Convierte la colecciona a formato JSON
         return $data;
     }
 

@@ -134,7 +134,7 @@ class InspeccionController extends Controller
         //
         if($request->ajax()){
             $inspeccion = Solicitud::findOrFail($id);
-            $inspeccion->codigo = $request->codigo;
+            // $inspeccion->codigo = $request->codigo;
             $inspeccion->fecha = $request->fecha;
             $inspeccion->frecuencia = $request->frecuencia;
             $inspeccion->observaciones = $request->observaciones;
@@ -178,10 +178,34 @@ class InspeccionController extends Controller
 
     public function showInspectionClient($idCliente, $idSede)
     {
-        $inspecciones = Inspeccion::select('id','codigo','fecha','frecuencia','observaciones_visitas','valor_plan_saneamiento','frecuencia_visitas','total_detalle_servicios','tipo_facturacion', 'detalle_servicios')
-                                    ->where('cliente_id', $idCliente)
-                                    ->where('sede_id', $idSede)
-                                    ->get();
+        $inspecciones = Inspeccion::select('id',
+            'codigo',
+            'fecha',
+            'frecuencia',
+            'observaciones_visitas',
+            'valor_plan_saneamiento',
+            'frecuencia_visitas',
+            'total_detalle_servicios',
+            'tipo_facturacion', 
+            'detalle_servicios',
+            'estado_agenda',
+            'visitas'
+        )
+        ->where('cliente_id', $idCliente)
+        ->where('sede_id', $idSede)
+        ->get();
         return $inspecciones;
+    }
+
+    public function updateState(Request $request)
+    {
+        if($request->ajax()){
+            $inspeccion = Inspeccion::findOrFail($request->id);
+            $inspeccion->estado_agenda = $request->estado_agenda;
+            $inspeccion->save();
+            return response()->json(['msg' => 'Update success'], 200);
+        } else {
+            return respomse()->json(['error' => 'Error al actualizar solicitud'], 500);
+        }
     }
 }

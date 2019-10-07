@@ -492,8 +492,8 @@
                  inicio_servicio = start.format("YYYY-MM-DD");
                 $("#select_sedes").empty();
                 $('#input_autocomplete').val('');
-                $("#hora_inicio").val('');
-                $("#hora_fin").val('');
+                $("#hora_inicio").val(start.format('hh:mm'));
+                $("#hora_fin").val(moment(start).add(1, 'h').format('hh:mm'));
                 $("#text-instrucciones").val("");
                 $("#select_tipo_servicio").val('0').change();
                 $("#telefono_evento").val('');
@@ -592,6 +592,7 @@
                                     <li><strong>Sede: </strong>${event.sede}</li>
                                     <li><strong>Teléfono: </strong>${event.telefono}</li>
                                     <li><strong>Dirección: </strong>${event.direccion}</li>
+                                    <li><strong>Observaciones: </strong>${event.asunto}</li>
                                 </ul>
                             </div>
                         </div>

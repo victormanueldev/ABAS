@@ -60,6 +60,8 @@ Otros Ajustes
         - Formato de Orden de servicios con plantilla (OK)
         - Cambiar permisos para crear Certificados (OK)
         - Cambiar nombre a Calendario -> AGENDA y Cronograma -> CALENDARIO ()OK
+        - Bug en buscar todos los servicios, limpiar la tabla
+        - Bug en agendar servicios, crear los servicios del color que corresponde a cada tecnico
 
 
     AREA DE SERVICIO AL CLIENTE Y JEFE TECNICO
@@ -110,6 +112,29 @@ Otros Ajustes
     SESIONES VIP (2 Dias)
         - Realizar vista de recibir documentos para los clientes (OK)
         - Visualizar informacion (OK)
+
+    Cambios 28-09-2019
+    - BUG de Calendario, mostrar eventos (OK)
+    - Cliente no obligatorio, y al seleccionar el cliente con Telefono y direccion (OK)
+    - Seleccionar la hora de inicio y fin al seleccionar en el calendario (Ok)
+    - Revisar la creacion de servicios por tecnico y asignar el color respectivo, no solo el tecnico[0] (OK)
+    - Al editar un evento neutro, se actualiza el servicio actual y no los posteriores (OK)
+    - Mostrar Ordenes de servicio por tecnico y no por cliente (OK)
+    - Listado de servicios (OK)
+    - Crear la estructura de la información para mostrar en el agendamiento (OK)
+    - Revisar que la solicitud y relacionar los datos en la seleccion del cliente (OK)
+    - Editar la inspeccion, actualizar la seleccionada (Ok)
+    - Listado de productos en ordenes de servicio -> Pendiente
+    - Formato para subir inventario a BD en excel
+    - Formato para clientes y sedes
+    - Rutas (OK)
+    - Inventario de documentos ( OK )
+    - Impresion en Agenda de servicios (OK)
+    - Impresión de documentos (Deprecated) (OK)
+    - Concepto sanitario (Certificados) Valores Generales (OK)
+    - Modulo de valores generales
+    - Revisar la creacin de clientes, NIT solo numeros (OK)
+    - Revisar los datos del contacto de facturacion en inspeccion y solicitud (OK)
 
 
 Crear clientes <- Creado

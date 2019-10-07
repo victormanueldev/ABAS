@@ -2282,8 +2282,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </head>
 
 <body>
-
 @foreach ($data["ods"] as $ods)
+  @foreach($ods->tecnicos as $tecnico)
 <div id="VMA-ODS_10222" align=center x:publishsource="Excel">
 
 <table border=0 cellpadding=0 cellspacing=0 width=786 style='border-collapse:
@@ -5132,6 +5132,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 </div>
 </div>
+@endforeach
 @endforeach
 
 

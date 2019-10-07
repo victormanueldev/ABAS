@@ -24,7 +24,7 @@
                 <a>Documentación</a>
             </li>
             <li class="active">
-                <strong>Solicitud de Programación</strong>
+                <strong>Formato de inspeccion</strong>
             </li>
         </ol>
     </div>
@@ -68,7 +68,7 @@
                                         <br>
                                     </div>
 
-                                    <div class="form-group col-lg-4">
+                                    {{-- <div class="form-group col-lg-4">
                                         <label class="control-label">Frecuencia del Servicio</label>
 
                                         <select style="text-transform: uppercase" class="form-control"
@@ -86,7 +86,7 @@
 
                                         </select>
 
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="ibox-title col-lg-12">
@@ -300,19 +300,17 @@
 
                                     </div>
 
+                                    <div class="form-group col-lg-6"><label class="control-label">Teléfono *</label>
+                                        <input type="text" style="text-transform: uppercase" id="telefono_contacto_facturacion"
+                                            name="telefono_contacto_facturacion" placeholder="Teléfono del contacto del servicio"
+                                            class="form-control">
+                                    </div>
+
                                     <div class="form-group col-lg-6"><label class="control-label">Celular </label>
                                         <input type="text" style="text-transform: uppercase"
                                             placeholder="Celular del contacto a facturar"
                                             name="contacto-celular-factura" id="contacto_celular_factura"
                                             class="form-control" >
-                                    </div>
-
-                                    <div class="form-group col-lg-12">
-                                        <label>Instrucciones y Observaciones</label>
-                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
-                                            class="form-control"
-                                            placeholder="Escriba aquí las observaciones para el técnico." rows="3"
-                                            name="instrucciones" id="observaciones_tecnico"></textarea>
                                     </div>
 
                                     <div class="ibox-title col-lg-12">
@@ -371,7 +369,7 @@
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
-                                        <h3>Forma de Pago de Servicios </h3>
+                                        <h3>Forma de Pago</h3>
                                         <hr>
                                         <br>
                                     </div>
@@ -409,60 +407,6 @@
                                             <option value="no">NO</option>
                                         </select>
                                     </div>
-
-                                    <div class="ibox-title col-lg-12">
-                                        <br>
-                                        <h3>Número de Residencias</h3>
-                                        <button type="button" style="margin-top: -35px;"
-                                            class="btn btn-primary pull-right" id="btn-add-residencia"><i
-                                                class="fa fa-plus"></i> Agregar residencia</button>
-                                        <hr>
-                                        <br>
-                                    </div>
-
-                                    <div class="row" id="residencias" style="padding: 15px 15px">
-                                        <div class="form-group col-lg-3">
-                                            <label class="control-label">Tipo de residencia</label>
-                                            <select style="text-transform: uppercase" id="tipo_residencia-0"
-                                                class="form-control">
-                                                <option value="" selected>Seleccione una opción</option>
-                                                <option value="casa">CASA</option>
-                                                <option value="apto">APTO</option>
-                                                <option value="bodega">BODEGA</option>
-                                                <option value="local">LOCAL</option>
-                                                <option value="oficina">OFICINA</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-3">
-                                            <label class="control-label">Valor</label>
-                                            <input type="text" min=0 name="valor_residencia-0" id="valor_residencia-0"
-                                                placeholder="Valor total por residencia" class="form-control">
-                                        </div>
-
-                                        <div class="form-group col-lg-3 ">
-                                            <label>Duración del servicio</label>
-                                            <div class="input-group">
-                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
-                                                    max="11" class="form-control" id="num_horas_residencia-0"
-                                                    placeholder="Horas">
-                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
-                                                    max="60" class="form-control" id="num_minutos_residencia-0"
-                                                    placeholder="Minutos">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group col-lg-3 ">
-                                            <label>Observaciones</label>
-                                            <textarea style="text-transform: uppercase"
-                                                style="text-transform: uppercase" class="form-control"
-                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
-                                                name="observaciones_residencia-0"
-                                                id="observaciones_residencia-0"></textarea>
-                                        </div>
-                                    </div>
-
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
@@ -803,9 +747,9 @@
                                     <div class="ibox-title col-lg-12">
                                         <br>
                                         <h3>Detalle y valor del servicio preventivo y/o correctivo</h3>
-                                        <button type="button" style="margin-top: -35px;"
+                                        {{-- <button type="button" style="margin-top: -35px;"
                                             class="btn btn-primary pull-right" id="btn-add-servicio"><i
-                                                class="fa fa-plus"></i> Agregar servicio</button>
+                                                class="fa fa-plus"></i> Agregar servicio</button> --}}
                                         <hr>
                                         <br>
                                     </div>
@@ -828,7 +772,7 @@
 
                                         <div class="form-group col-lg-2">
                                             <label class="control-label">Frecuencia</label>
-                                            <select style="text-transform: uppercase" id="frecuencia_servicio_detalle-0"
+                                            <select style="text-transform: uppercase" id="frecuencia_servicio"
                                                 class="form-control" required>
                                                 <option value="" selected>Seleccione una frecuencia</option>
                                                 <option value="Semanal">SEMANAL</option>
@@ -858,6 +802,68 @@
                                         <input type="number" min=0 name="total_servicio_detalle"
                                             id="total_servicio_detalle" placeholder="Valor total a facturar"
                                             class="form-control" readonly>
+                                    </div>
+
+                                    <div class="ibox-title col-lg-12">
+                                        <br>
+                                        <h3>Número de Residencias</h3>
+                                        <button type="button" style="margin-top: -35px;"
+                                            class="btn btn-primary pull-right" id="btn-add-residencia"><i
+                                                class="fa fa-plus"></i> Agregar residencia</button>
+                                        <hr>
+                                        <br>
+                                    </div>
+
+                                    <div class="row" id="residencias" style="padding: 15px 15px">
+                                        <div class="form-group col-lg-3">
+                                            <label class="control-label">Tipo de residencia</label>
+                                            <select style="text-transform: uppercase" id="tipo_residencia-0"
+                                                class="form-control">
+                                                <option value="" selected>Seleccione una opción</option>
+                                                <option value="casa">CASA</option>
+                                                <option value="apto">APTO</option>
+                                                <option value="bodega">BODEGA</option>
+                                                <option value="local">LOCAL</option>
+                                                <option value="oficina">OFICINA</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
+                                            <label class="control-label">Valor</label>
+                                            <input type="text" min=0 name="valor_residencia-0" id="valor_residencia-0"
+                                                placeholder="Valor total por residencia" class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-lg-3 ">
+                                            <label>Duración del servicio</label>
+                                            <div class="input-group">
+                                                <input style="width: 40%;margin-right: 10px;" type="number" min="0"
+                                                    max="11" class="form-control" id="num_horas_residencia-0"
+                                                    placeholder="Horas">
+                                                <input style="width: 42%;margin-left: 10px;" type="number" min="0"
+                                                    max="60" class="form-control" id="num_minutos_residencia-0"
+                                                    placeholder="Minutos">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-lg-3 ">
+                                            <label>Observaciones</label>
+                                            <textarea style="text-transform: uppercase"
+                                                style="text-transform: uppercase" class="form-control"
+                                                placeholder="Escriba aquí las observaciones que desee." rows="1"
+                                                name="observaciones_residencia-0"
+                                                id="observaciones_residencia-0"></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group col-lg-12">
+                                        <label>Instrucciones y Observaciones</label>
+                                        <textarea style="text-transform: uppercase" style="text-transform: uppercase"
+                                            class="form-control"
+                                            placeholder="Escriba aquí las observaciones para el técnico." rows="3"
+                                            name="instrucciones" id="observaciones_tecnico"></textarea>
                                     </div>
 
 
@@ -1052,6 +1058,7 @@
             $("#contacto_name_factura").val(res[0]["nombre_contacto_facturacion"])
             $("#contacto_email_factura").val(res[0]["email_contacto_facturacion"])
             $("#contacto_celular_factura").val(res[0]["celular_contacto_facturacion"])
+            $("#telefono_contacto_facturacion").val(res[0]["telefono_contacto_facturacion"])
         }).then((res) => { //Peticion exitosa => status: 200
             console.log('Petición Exitosa');
         }).catch((err) => { //Peticion fallida => status: > 400
@@ -1701,6 +1708,10 @@
             telefono_sede: $("#input-sede-telefono").val(),
             celular_sede: $("#input-sede-celular").val(),
             email_sede: $("#input-sede-email").val(),
+            contacto_name_factura: $("#contacto_name_factura").val(),
+            contacto_email_factura: $("#contacto_email_factura").val(),
+            telefono_contacto_facturacion: $("#telefono_contacto_facturacion").val(),
+            contacto_celular_factura: $("#contacto_celular_factura").val(),
         }
         return $.ajax({
             url: '/clientes',
