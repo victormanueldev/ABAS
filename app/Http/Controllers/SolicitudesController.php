@@ -120,7 +120,7 @@ class SolicitudesController extends Controller
         if ($request->id_sede != 0) {
             $solicitud = DB::table('solicitudes')
                                     ->select(
-                                        'solicitudes.id',
+                                        'solicitudes.id as id_solicitud',
                                         'solicitudes.frecuencia',
                                         'solicitudes.observaciones',
                                         'sedes.*'

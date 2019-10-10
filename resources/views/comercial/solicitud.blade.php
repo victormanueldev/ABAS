@@ -1174,27 +1174,27 @@
             //Gestion de Calidad
             dataInspection.gestion_calidad.forEach((value, index) => {
                 if (index === 0) {
-                    $("#tipo_doc-0").val(value.tipo_documento);
-                    $("#frecuencia_doc-0").val(value.frecuencia_documento);
-                    $("#observacion_doc-0").val(value.observacion_documento);
+                    $("#tipo_doc-0").val(value.tipo_documento.toUpperCase());
+                    $("#frecuencia_doc-0").val(value.frecuencia_documento.toUpperCase());
+                    $("#observacion_doc-0").val(value.observacion_documento || '');
                 } else {
                     $('#gestion-calidad').append(`
                         <div class="form-group col-lg-4">
                             <label class="control-label">Tipo de documento</label>
                             <input type="text" id="tipo_doc-${index}" name="tipo_doc-${index}" placeholder="Nombre del Documento"
-                            class="form-control" value="${value.tipo_documento}">
+                            class="form-control" value="${value.tipo_documento.toUpperCase()}">
                         </div>
 
                         <div class="form-group col-lg-4">
                             <label class="control-label">Frecuencia.</label>
                             <input type="text" id="frecuencia_doc-${index}" name="frecuencia_doc-${index}" placeholder="Frecuencia del Documento"
-                            class="form-control" value="${value.frecuencia_documento}">
+                            class="form-control" value="${value.frecuencia_documento.toUpperCase()}">
                         </div>
 
                         <div class="form-group col-lg-4">
                             <label>Observaciones</label>
                             <textarea style="text-transform: uppercase" class="form-control" placeholder="Escriba aquí las observaciones que desee."
-                                rows="1" name="observacion_doc-${index}" id="observacion_doc-${index}" >${value.observacion_documento}</textarea>
+                                rows="1" name="observacion_doc-${index}" id="observacion_doc-${index}" >${value.observacion_documento || ''}</textarea>
                         </div>
                     `)
                 }

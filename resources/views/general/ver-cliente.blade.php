@@ -1598,7 +1598,7 @@
                                 })
                         })
                         .catch(err => {
-                            swal("¡Error!", 'Solicitud a programación no encontrada.', 'error')
+                            swal("¡Error!", 'Ha ocurrido un error al crear el certificado.', 'error')
                                 .then(value => { //Boton OK actualizado
                                     if (value) {
                                         $("#btn-close-certificate").click();

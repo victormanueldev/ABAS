@@ -259,7 +259,7 @@
                                                 <div class="input-group">
                                                     <input style="width: 18%;margin-right: 10px;" type="number"
                                                         name="indice-frecuencia" id="indice-frecuencia"
-                                                        class="form-control">
+                                                        class="form-control" min="1">
                                                     <select style="width: 30%;margin-left: 10px;"
                                                         name="opcion-frecuencia" id="opcion-frecuencia"
                                                         class="form-control">
@@ -1744,7 +1744,7 @@
                                     .html(); //Retorna el contenido del HTML que se encuentra dentro del ID seleccionado
                             }
                         });
-                        id_solicitud = res[0]['id'];
+                        id_solicitud = res[0]['id_solicitud'];
                         //Servicio para obtener el historia de tecnicos del cliente seleccionado
                         $.get(`/tecnicos/${id_solicitud}`)
                             .then((data) => {

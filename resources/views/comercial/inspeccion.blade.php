@@ -149,7 +149,7 @@
 
                                     <div class="form-group col-lg-6"><label class="control-label">Dirección *</label>
                                         <input type="text" style="text-transform: uppercase" id="input-direccion"
-                                            name="input-direccion" placeholder="Residencia del cliente"
+                                            name="input-direccion" placeholder="Dirección del cliente"
                                             class="form-control" required>
 
                                     </div>
