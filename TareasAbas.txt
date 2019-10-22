@@ -141,6 +141,11 @@ Otros Ajustes
     - Revisar los datos del contacto de facturacion en inspeccion y solicitud (OK)
 
 
+    CAMBIOS 2019-10-19
+    - Quitar select en tipo de evento en cronograma personal, dejar input abierto
+    - Quitar el select de tipo de evento en la creacion del cliente
+
+
 Crear clientes <- Creado
 Ver clientes <- Creado
 Cronograma eventos <-Creado

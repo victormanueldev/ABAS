@@ -117,7 +117,7 @@
                                         <div class="row">
                                             <div class="form-group col-lg-12">
                                                 <label>Tipo de Evento: </label>
-                                                <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio" required>
+                                                {{-- <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio" required>
                                                     <option value="0">SELECCIONA UN TIPO.</option>
                                                     @if(Auth::user()->area_id == 1)
                                                         <option value="Llamada">LLAMADA</option>
@@ -129,7 +129,8 @@
                                                         <option value="Capacitacion">CAPACITACION</option>
                                                         <option value="Diagnostico">DIAGNOSTICO</option>
                                                     @endif
-                                                </select>
+                                                </select> --}}
+                                                <input type="text" class="form-control"  style="margin-top: 10px;text-transform: uppercase;" id="select_tipo_servicio" required >
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label>Hora de inicio*</label>
@@ -236,7 +237,7 @@
                                             <div class="row">
                                                 <div class="form-group col-lg-12">
                                                     <label>Tipo de Evento: </label>
-                                                    <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio_edit" required>
+                                                    {{-- <select class="form-control" style="margin-top: 10px;" id="select_tipo_servicio_edit" required>
                                                         <option value="0">SELECCIONA UN TIPO.</option>
                                                         @if(Auth::user()->area_id == 1)
                                                             <option value="Llamada">LLAMADA</option>
@@ -248,7 +249,8 @@
                                                             <option value="Capacitacion">CAPACITACION</option>
                                                             <option value="Diagnostico">DIAGNOSTICO</option>
                                                         @endif
-                                                    </select>
+                                                    </select> --}}
+                                                    <input type="text" class="form-control" style="margin-top: 10px;text-transform: uppercase;" id="select_tipo_servicio_edit" required>
                                                 </div>
                                                 <div class="form-group col-lg-4">
                                                     <label>Hora de inicio*</label>
@@ -495,7 +497,7 @@
                 $("#hora_inicio").val(start.format('hh:mm'));
                 $("#hora_fin").val(moment(start).add(1, 'h').format('hh:mm'));
                 $("#text-instrucciones").val("");
-                $("#select_tipo_servicio").val('0').change();
+                $("#select_tipo_servicio").val('');
                 $("#telefono_evento").val('');
                 $("#direccion_evento").val('');
             },
@@ -626,7 +628,7 @@
                 $('#actual-sede').val(event.sede);
                 $("#telefono_evento_edit").val(event.direccion)
                 $("#direccion_evento_edit").val(event.telefono)
-                $("#select_tipo_servicio_edit").val(event.tipo).change()
+                $("#select_tipo_servicio_edit").val(event.tipo);
                 $("#hora_inicio_edit").val(event.start.format("hh:mm"))
                 $("#hora_fin_edit").val(event.end.format('hh:mm'))
                 $("#text-instrucciones-edit").val(event.asunto)
@@ -637,7 +639,7 @@
 
         function saveEvent(method){
             if(method === 1){
-                if($("#select_tipo_servicio").val() == '0'){
+                if($("#select_tipo_servicio").val() == ''){
                     swal('Información', 'Selecciona el tipo de evento.', 'info')
                     return
                 }
@@ -650,7 +652,7 @@
                 //     return
                 // }
             }else{
-                if($("#select_tipo_servicio_edit").val() == '0'){
+                if($("#select_tipo_servicio_edit").val() == ''){
                     swal('Información', 'Selecciona el tipo de evento.', 'info')
                     return
                 }

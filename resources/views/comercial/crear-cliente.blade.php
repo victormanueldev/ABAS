@@ -294,10 +294,11 @@
                                                     
                                                     <div class="form-group col-lg-12">
                                                         <label>Tipo</label>
-                                                        <select class="form-control" name="tipo_evento">
+                                                        {{-- <select class="form-control" name="tipo_evento">
                                                                 <option value="Llamada">LLAMADA</option>
                                                                 <option value="Visita">VISITA</option>
-                                                        </select>
+                                                        </select> --}}
+                                                        <input type="text" class="form-control" name="tipo_evento" style="text-transform: uppercase">
                                                     </div>
                                     
                                                     <div class="form-group col-lg-6" id="data_1">

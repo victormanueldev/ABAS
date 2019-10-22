@@ -86,35 +86,35 @@ class EventosController extends Controller
                 $evento->fecha_inicio = $request->start." ".$request->hora_inicio;
                 $evento->fecha_fin = $fecha_fin->toDateTimeString();
                 $evento->dia_completo = $request->allDay;
-                $evento->tipo = $request->tipo;
+                $evento->tipo = strtolower($request->tipo);
                 $evento->cliente_id = $request->idCliente;
                 $evento->sede_id = $request->idSede;
                 $evento->telefono_evento = strtoupper($request->telefono_evento);
                 $evento->direccion_evento = strtoupper($request->direccion_evento);
 
-                switch ($request->tipo) {
-                    case 'Llamada':
+                switch (strtolower($request->tipo)) {
+                    case 'llamada':
                         $evento->color = "rgb(219, 165, 37)";
                         break;
 
-                    case 'Visita':
+                    case 'visita':
                         $evento->color = 'rgb(69, 130, 29)';
                         break;
 
-                    case 'Actualizacion':
+                    case 'actualizacion':
                         $evento->color = 'rgb(35,198,200)';
                         break;
                     
-                    case 'Capacitacion':
+                    case 'capacitacion':
                         $evento->color = 'rgb(255,130,0)';
                         break;
 
-                    case 'Diagnostico':
+                    case 'diagnostico':
                         $evento->color = 'rgb(2,112,192)';
                         break;
 
                     default:
-                        $evento->color = 'rgb(143, 143, 143)';
+                        $evento->color = 'rgb(69, 130, 29)';
                         break;
                 }
                 $evento->user_id = Auth::user()->id;
