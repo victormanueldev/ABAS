@@ -47,7 +47,7 @@
                 <ul class="nav metismenu">
                     <li class="nav-header" id="nav-header">
                         <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
+                                <img alt="image" class="img-responsive" src="{{ Storage::url(Auth::user()->foto) }}"
                                     style="width: 50px;" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -255,14 +255,14 @@
                             </ul>
                         </li>
                     @endif
-                    @if($permiso['reporte_docs'] === 'true')
+                    {{-- @if($permiso['reporte_docs'] === 'true')
                         <!-- Reporte de documentos -->
                         <li id="m-reporte-documentos">
                             <a href="/documentos/cliente" style="background-color: #5cae27;color: white;" id="a-reporte-documentos"><i
                                     class="fa fa-file"></i> <span class="nav-label">Reporte de documentos</span></a>
                         </li>
-                    @endif
-                    {{-- @if($permiso['inventario_docs'] === 'true')
+                    @endif --}}
+                    @if($permiso['inventario_docs'] === 'true')
                         <!-- Inventario de documemtns -->
                         <li id="m-inventario-documentos">
                             <a href="#" style="background-color: #5cae27;color: white;" id="a-inventario-documentos"><i class="fa fa-clone"></i>
@@ -272,7 +272,7 @@
                                 <li id="ml2-ver-inventario"><a href="/documents" style="color: white;">Ver inventario</a></li>
                             </ul>
                         </li>
-                    @endif --}}
+                    @endif
                     @if($permiso['crear_tecnicos'] === 'true')
                         <!-- Crear tecnicos -->
                         <li id="m-crear-tecnicos">
@@ -345,7 +345,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right" id="notificacion">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">Sanicontrol S.A. &copy; 2019</span>
+                            <span class="m-r-sm text-muted welcome-message">Sanicontrol S.A.S. &copy; 2019</span>
                         </li>
 
                         <notificaciones></notificaciones>

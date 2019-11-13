@@ -142,7 +142,7 @@
                                         <select class="form-control" name="input-sector" id="input-sector">
                                             <option value="RESIDENCIAL">RESIDENCIAL</option>
                                             <option value="COMERCIAL">COMERCIAL</option>
-                                            <option value="SERVICIO">SERVICIO</option>
+                                            <option value="SERVICIOS">SERVICIOS</option>
                                             <option value="INDUSTRIAL">INDUSTRIAL</option>
                                         </select>
                                     </div>
@@ -733,7 +733,7 @@
                                                 <option value="alto">ALTO</option>
                                                 <option value="medio">MEDIO</option>
                                                 <option value="bajo">BAJO</option>
-                                                <option value="no">NO</option>
+                                                <option value="no" selected>NO</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1653,7 +1653,7 @@
                     <option value="alto">ALTO</option>
                     <option value="medio">MEDIO</option>
                     <option value="bajo">BAJO</option>
-                    <option value="no">NO</option>
+                    <option value="no" selected>NO</option>
                 </select>
             </div>
         `)

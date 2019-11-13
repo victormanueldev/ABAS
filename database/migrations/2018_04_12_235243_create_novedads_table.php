@@ -15,7 +15,7 @@ class CreateNovedadsTable extends Migration
     {
         Schema::create('novedads', function (Blueprint $table) {
             $table->integer('id')->unique();
-            $table->string('descripcion');
+            $table->text('descripcion');  
             $table->string('estado', 15)->default('publicada');
             $table->integer('user2_id')->nullable();
             $table->string('prioridad')->default('Normal');
@@ -24,7 +24,7 @@ class CreateNovedadsTable extends Migration
             $table->integer('area_id');
             $table->integer('cliente_id')->nullable();
             $table->integer('sede_id')->nullable();
-            $table->string('comentario', 60)->nullable();
+            $table->text('comentario', 60)->nullable();
             $table->timestamps();
         });
     }

@@ -319,6 +319,7 @@
         var $input;
         var crsfToken = document.getElementsByName("_token")[0].value;
         var id_cliente;
+        var sedes;
 
          //Peticion al servidor para obtener los clientes de la DB
          $.get('/clientes')
@@ -413,14 +414,15 @@
 
         function getSedes(current,idSelect){
             //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
-            $.get(`/sedes/cliente/${current.id}`, function (res) {
+            $.get(`/sedes/clientes_v2/${current.id}`, function (res) {
+                sedes = res;
                 $(`#${idSelect}`).empty();//Limipia el select
                 $(`#${idSelect}`).append(`<option value='' disabled selected> Selecciona una sede </option>`);
-                if (res == '') {//Valida que el cliente tenga sedes
+                if (res[0].sedes.length == 0) {//Valida que el cliente tenga sedes
                     $(`#${idSelect}`).append(`<option value="0"> Sede Única </option>`);
                 } else {
                     //Recorre la respuesta del servidor
-                    res.forEach(element => {
+                    res[0].sedes.forEach(element => {
                         //Añade Options al select de sedes dependiendo de la respues del servidor
                         $(`#${idSelect}`).append(`<option value=${element.id}> ${element.nombre} </option>`);
                     });
@@ -431,6 +433,20 @@
                 console.log(err);
             });
         }
+
+        $("#select_sedes").change(e => {
+            if(e.target.value == '0'){
+                $("#telefono_evento").val(sedes[0].celular_contacto_inicial || '');
+                $("#direccion_evento").val(sedes[0].direccion || '');
+            } else {
+                sedes[0].sedes.forEach(sede => {
+                    if(sede.id == e.target.value){
+                        $("#telefono_evento").val(sede.telefono_contacto || '');
+                        $("#direccion_evento").val(sede.direccion || '');
+                    }
+                })
+            }
+        })
 
         //Change del input de autocompletado
         $input.change(() => {
@@ -492,6 +508,7 @@
                 document.getElementById("btn-modal").click();
                  //Guarda la fecha y hora del dia seleccionado
                  inicio_servicio = start.format("YYYY-MM-DD");
+                 id_cliente = '';
                 $("#select_sedes").empty();
                 $('#input_autocomplete').val('');
                 $("#hora_inicio").val(start.format('hh:mm'));

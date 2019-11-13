@@ -142,8 +142,17 @@ Otros Ajustes
 
 
     CAMBIOS 2019-10-19
-    - Quitar select en tipo de evento en cronograma personal, dejar input abierto
-    - Quitar el select de tipo de evento en la creacion del cliente
+    - Quitar select en tipo de evento en cronograma personal, dejar input abierto (OK)
+    - Quitar el select de tipo de evento en la creacion del cliente (OK)
+
+
+    CAMBIOS 2019-11-09
+    - Novedad Publica predeterminado (OK)
+    - Revisar VALOR SERVICIO modal crear servicio (OK)
+    - Revisar notificaciones de solicitudes creadas (OK)
+    - Areas de ispeccion, predeterminar Nivel act. en No (OK)
+    - Revisar autocompletes en móvil (DESCARTADO)
+    - Modulo de buscar servicios y redireccion a ordenes de servicio (OK)
 
 
 Crear clientes <- Creado

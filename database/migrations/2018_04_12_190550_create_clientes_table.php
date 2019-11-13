@@ -18,8 +18,8 @@ class CreateClientesTable extends Migration
             //Datos del Cliente
             $table->string('tipo_cliente', 20)->nullable();
             $table->string('nit_cedula', 20)->nullable();
-            $table->string('nombre_cliente', 100)->nullable();
-            $table->string('razon_social', 40)->nullable();
+            $table->string('nombre_cliente', 255)->nullable();
+            $table->string('razon_social', 255)->nullable();
             $table->string('sector_economico', 100)->nullable();
             $table->string('municipio', 45)->nullable();
             $table->string('direccion', 100)->nullable();

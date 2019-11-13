@@ -856,6 +856,58 @@ class ServicioController extends Controller
                                     ->firstOrFail();
     }
 
+    public function serviceByClient($idCliente, $idSede)
+    {
+        $servicios = Servicio::with('solicitud')
+                                    ->whereHas('solicitud', function($query) use($idCliente, $idSede){
+                                        $query->where('cliente_id', $idCliente);
+                                        $query->where('sede_id', $idSede);
+                                    })
+                                    ->get();
+
+        $data = collect();
+        foreach ($servicios as $servicio) {
+            //Valida que el cliente sea persona natural o juridica (Si tiene sedes)
+            if($servicio->solicitud->sede != ''){
+                $titleService = $servicio->solicitud->cliente["nombre_cliente"];
+                $dirClient = $servicio->solicitud->sede["direccion"];
+                $telClient = $servicio->solicitud->sede["telefono_contacto"];
+                $nameContact = $servicio->solicitud->sede["nombre_contacto"];
+                $sedeService = $servicio->solicitud->sede["nombre"];
+            }else{
+                $titleService = $servicio->solicitud->cliente["nombre_cliente"];
+                $dirClient = $servicio->solicitud->cliente["direccion"];
+                $telClient = $servicio->solicitud->cliente["celular"];
+                $nameContact = $servicio->solicitud->cliente["nombre_contacto"];
+                $sedeService = '';
+            }
+
+            if($servicio->confirmado == 1){
+                $editableEvent = false;
+            }else{
+                $editableEvent = true;
+            }
+
+            $data->push([
+                'id' => $servicio->id, 
+                'title' => $titleService, 
+                'sede' => $sedeService,
+                'start' => $servicio->fecha_inicio." ".$servicio->hora_inicio,
+                'end' => $servicio->fecha_fin." ".$servicio->hora_fin, 
+                'backgroundColor' => $servicio->color, 
+                'borderColor' => $servicio->color,
+                'lock' => $servicio->confirmado,
+                'dirClient' => $dirClient,
+                "contactClient" => $nameContact,
+                "telClient" => $telClient,
+                "editable" => $editableEvent,
+                'duration' => $servicio->duracion
+                ]);
+
+        }
+       return $data;
+    }
+
     public function getServicesByTecnician($idTecnico)
     {
         $individual = false;

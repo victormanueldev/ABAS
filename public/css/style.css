@@ -2165,7 +2165,7 @@ div.dt-button-info {
 
 .widget {
     border-radius: 5px;
-    padding: 15px 20px;
+    padding: 0px 10px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -2176,8 +2176,8 @@ div.dt-button-info {
 
 .widget h2,
 .widget h3 {
-    margin-top: 5px;
-    margin-bottom: 0;
+    margin-top: 0px;
+    margin-bottom: 3px;
 }
 
 .widget-text-box {
@@ -10602,11 +10602,11 @@ body{
 
 .swal-footer {
     text-align: center !important;
-    .navbar-static-side {   
-        position: fixed !important;
-        top: 60px !important;
-    }
+}
 
+.navbar-static-side {   
+    position: fixed !important;
+    top: 60px !important;
 }
 
 

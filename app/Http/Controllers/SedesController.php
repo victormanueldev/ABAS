@@ -3,6 +3,7 @@
 namespace ABAS\Http\Controllers;
 
 use ABAS\Sede;
+use ABAS\Cliente;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -148,5 +149,11 @@ class SedesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function byClient($id)
+    {
+        $sedes = Cliente::select('id', 'direccion', 'celular_contacto_inicial')->with('sedes')->where('id',  $id)->get();
+        return $sedes;
     }
 }

@@ -150,15 +150,15 @@
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="crear_docs" name="crear_docs" class="i-checks" />
-                                    <span >Crear Inspecciones/Solicitudes </span>
+                                    <span >Documentación </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="asignar_metas" name="asignar_metas" class="i-checks" />
-                                    <span >Asignación de metas </span>
+                                    <span >Asignar metas </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="ver_progresos" name="ver_progresos" class="i-checks" />
-                                    <span >Ver progresos comerciales </span>
+                                    <span >Metas comerciales </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="ver_comisiones" name="ver_comisiones" class="i-checks" />
@@ -166,11 +166,11 @@
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="resumen_comisiones" name="resumen_comisiones" class="i-checks" />
-                                    <span >Ver Resumen de Comisiones </span>
+                                    <span >Resumen de Comisiones </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="clientes_cerrados" name="clientes_cerrados" class="i-checks" />
-                                    <span >Listado de  clientes cerrados </span>
+                                    <span >Listado de  clientes </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="asignar_facturas" name="asignar_facturas" class="i-checks" />
@@ -182,23 +182,23 @@
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="agendar_servicios" name="agendar_servicios" class="i-checks" />
-                                    <span >Agendamiento de servicios </span>
+                                    <span >Agenda </span>
                                 </div>
-                                <div class="form-group col-lg-3">
+                                {{-- <div class="form-group col-lg-3">
                                     <input type="checkbox" id="horarios_tecnicos" name="horarios_tecnicos" class="i-checks" />
                                     <span >Horarios de técnicos </span>
-                                </div>
-                                <div class="form-group col-lg-3">
+                                </div> --}}
+                                {{-- <div class="form-group col-lg-3">
                                     <input type="checkbox" id="listado_servicios" name="listado_servicios" class="i-checks" />
                                     <span >Listado de servicios </span>
-                                </div>
+                                </div> --}}
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="recepcion_docs" name="recepcion_docs" class="i-checks" />
-                                    <span >Recepción de órdenes </span>
+                                    <span >Recepción de documentos </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="inventario_docs" name="inventario_docs" class="i-checks" />
-                                    <span >Inventario de documentos </span>
+                                    <span >Documentos de clientes </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="reporte_docs" name="reporte_docs" class="i-checks" />
@@ -222,11 +222,11 @@
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="gestion_productos" name="gestion_productos" class="i-checks" />
-                                    <span >Gestión de productos </span>
+                                    <span >Poductos </span>
                                 </div>
                                 <div class="form-group col-lg-3">
                                     <input type="checkbox" id="gastos" name="gastos" class="i-checks" />
-                                    <span >Gastos de técnicos/productos </span>
+                                    <span >Gastos </span>
                                 </div>
                             </div>
                         </div>

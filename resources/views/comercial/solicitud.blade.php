@@ -354,11 +354,11 @@
 
                                     </div>
 
-                                    <div class="form-group col-lg-6">
+                                    {{-- <div class="form-group col-lg-6">
                                         <label class="control-label">Total a facturar</label>
                                         <input type="number" min=0 name="total_servicio_detalle" id="total_servicio_detalle"
                                             placeholder="Valor total" class="form-control" readonly>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
@@ -747,60 +747,60 @@
             inspeccionCliente = res[0].solicitudes[0];
         }).then((res) => {//Peticion exitosa => status: 200
             console.log('Petición Exitosa');
+            //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
+            $.get(`/sedes/cliente/${event.target.value}`, function (res) {
+                $("#select_sedes").empty();//Limipia el select
+                $("#input-sede-direccion").val('');
+                $("#input-sede-ciudad").val('');
+                $("#input-sede-barrio").val('');
+                $("#input-sede-zona").val('');
+                $("#input-sede-contacto").val('');
+                $("#input-sede-telefono").val('');
+                $("#input-sede-celular").val('');
+                $("#input-sede-email").val('');
+                if (res == '') {//Valida que el cliente tenga sedes
+                    $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
+                    $("#select_sedes").prop('required', false);
+
+                    $("#select_sedes").prop('disabled', true);
+                    $("#input-sede-nit").prop('disabled', true);
+                    $("#input-sede-direccion").prop('disabled', true);
+                    $("#input-sede-ciudad").prop('disabled', true);
+                    $("#input-sede-barrio").prop('disabled', true);
+                    $("#input-sede-zona").prop('disabled', true);
+                    $("#input-sede-contacto").prop('disabled', true);
+                    $("#input-sede-telefono").prop('disabled', true);
+                    $("#input-sede-celular").prop('disabled', true);
+                    $("#input-sede-email").prop('disabled', true);
+                    //Diligencia todo el formulario de inspeccion
+                    getInspectionForm(inspeccionCliente)
+                } else {
+                    $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
+                    $("#select_sedes").prop('required', true);
+
+                    $("#select_sedes").prop('disabled', false);
+                    $("#input-sede-nit").prop('disabled', false);
+                    $("#input-sede-direccion").prop('disabled', false);
+                    $("#input-sede-ciudad").prop('disabled', false);
+                    $("#input-sede-barrio").prop('disabled', false);
+                    $("#input-sede-zona").prop('disabled', false);
+                    $("#input-sede-contacto").prop('disabled', false);
+                    $("#input-sede-telefono").prop('disabled', false);
+                    $("#input-sede-celular").prop('disabled', false);
+                    $("#input-sede-email").prop('disabled', false);
+
+                    //Recorre la respuesta del servidor
+                    res.forEach(element => {
+                        //Añade Options al select de sedes dependiendo de la respues del servidor
+                        $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                    });
+                }
+            }).then((res) => {
+                console.log('Petición Exitosa');
+            }).catch((err) => {
+                console.log(err);
+            });
         }).catch((err) => {//Peticion fallida => status: > 400
-            console.log(err);
-        });
-        //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
-        $.get(`/sedes/cliente/${event.target.value}`, function (res) {
-            $("#select_sedes").empty();//Limipia el select
-            $("#input-sede-direccion").val('');
-            $("#input-sede-ciudad").val('');
-            $("#input-sede-barrio").val('');
-            $("#input-sede-zona").val('');
-            $("#input-sede-contacto").val('');
-            $("#input-sede-telefono").val('');
-            $("#input-sede-celular").val('');
-            $("#input-sede-email").val('');
-            if (res == '') {//Valida que el cliente tenga sedes
-                $("#select_sedes").append(`<option value='' disabled selected> Sede Única </option>`);
-                $("#select_sedes").prop('required', false);
-
-                $("#select_sedes").prop('disabled', true);
-                $("#input-sede-nit").prop('disabled', true);
-                $("#input-sede-direccion").prop('disabled', true);
-                $("#input-sede-ciudad").prop('disabled', true);
-                $("#input-sede-barrio").prop('disabled', true);
-                $("#input-sede-zona").prop('disabled', true);
-                $("#input-sede-contacto").prop('disabled', true);
-                $("#input-sede-telefono").prop('disabled', true);
-                $("#input-sede-celular").prop('disabled', true);
-                $("#input-sede-email").prop('disabled', true);
-                //Diligencia todo el formulario de inspeccion
-                getInspectionForm(inspeccionCliente)
-            } else {
-                $("#select_sedes").append(`<option value='' disabled selected> Selecciona una sede </option>`);
-                $("#select_sedes").prop('required', true);
-
-                $("#select_sedes").prop('disabled', false);
-                $("#input-sede-nit").prop('disabled', false);
-                $("#input-sede-direccion").prop('disabled', false);
-                $("#input-sede-ciudad").prop('disabled', false);
-                $("#input-sede-barrio").prop('disabled', false);
-                $("#input-sede-zona").prop('disabled', false);
-                $("#input-sede-contacto").prop('disabled', false);
-                $("#input-sede-telefono").prop('disabled', false);
-                $("#input-sede-celular").prop('disabled', false);
-                $("#input-sede-email").prop('disabled', false);
-
-                //Recorre la respuesta del servidor
-                res.forEach(element => {
-                    //Añade Options al select de sedes dependiendo de la respues del servidor
-                    $("#select_sedes").append(`<option value=${element.id}> ${element.nombre} </option>`);
-                });
-            }
-        }).then((res) => {
-            console.log('Petición Exitosa');
-        }).catch((err) => {
             console.log(err);
         });
     });
@@ -1280,11 +1280,11 @@
         // contServicio++;
     })
 
-    $("#valor_servicio_detalle-0").on('keyup', e => {
-        autosumaTotalServicio()
-    })
+    // $("#valor_servicio_detalle-0").on('keyup', e => {
+    //     autosumaTotalServicio()
+    // })
 
-    anadirServiciosSelect(0)
+    // anadirServiciosSelect(0)
 
     /**
     * Suma automaticamente los valores de los inputs con el id existente
@@ -1676,7 +1676,7 @@
         dataToSend.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
         dataToSend.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
         dataToSend.observaciones_visitas = $("#observaciones_plan").val();
-        dataToSend.total_detalle_servicios = $("#total_servicio_detalle").val();
+        dataToSend.total_detalle_servicios = valoresServicios[0].rawValue;
         dataToSend.tipo_facturacion = $("#tipo_facturacion").val();
         dataToSend.forma_pago = $("#forma_pago").val();
         dataToSend.contrato = $("#contrato").val() == 'si' ? true : false;

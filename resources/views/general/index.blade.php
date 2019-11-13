@@ -23,7 +23,7 @@
         <div class="col-md-6">
 
             <div class="profile-image">
-                <img src="{{ Storage::url($user[0]->foto)}}" class="img-circle circle-border m-b-md" alt="profile">
+                <img src="{{ Storage::url($user[0]->foto)}}" class="m-b-md" alt="profile">
             </div>
             <div class="profile-info">
                 <div class="">
@@ -52,7 +52,7 @@
                 {{-- <img src="{{asset('img/zender_logo.png')}}" class="img-fluid"> --}}
                 <h2 style="text-align: center; color: #5cae27">ABAS &trade;</h2>
                 <p class="small" style="text-align: center">
-                    Administrador de base de datos de <br> Sanicontrol S.A.S. &copy; 2018 </p>
+                    Administrador de base de datos de <br> Sanicontrol S.A.S. &copy; 2019 </p>
        </div>
 
 
@@ -88,7 +88,7 @@
                                                     <option value="{{$area->id}}" >{{$area->descripcion}}</option>
                                                 @endif
                                             @endforeach
-                                                <option value="0" >Pública</option>
+                                                <option value="0" selected>Pública</option>
                                     </select>
                                 </small>
                                 <small class="text-muted">

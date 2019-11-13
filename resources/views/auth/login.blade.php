@@ -55,7 +55,7 @@
                             </button>
                         </div>
 						
-                        <h5 style="text-align: center;font-size: 18px;font-weight: normal;margin-bottom: 30px;color: white;">ABAS SOFT <br><small style="color: white;"> Administrador de base de datos de Sanicontrol S.A.</small></h5>
+                        <h5 style="text-align: center;font-size: 18px;font-weight: normal;margin-bottom: 30px;color: white;">ABAS SOFT <br><small style="color: white;"> Administrador de base de datos de Sanicontrol S.A.S.</small></h5>
                         
 						<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <input id="email" type="email" class="form-control" placeholder="Email" required="" value="{{ old('email') }}" name="email">

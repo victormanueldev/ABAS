@@ -39,13 +39,18 @@
                 <div class="ibox-content">
                     <div class="row">
                         <form class="form-inline">
-                            <div class="form-group col-sm-7 col-lg-9">
+                            <div class="form-group col-sm-8 col-lg-8">
                                 <label>Impresión de documentos</label><br>
                                 <span>Presiona el botón para ver todas las opciones de impresión de servicios</span>
                             </div>
-                            <div class="form-group col-sm-3 col-lg-3">
-                                <buttontype="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-print-options"
-                                id="btn-modal-p-o">Ver opciones de impresion</button>
+                            <div class="form-group col-sm-2 col-lg-2">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#modal-print-options" id="btn-modal-p-o">Ver opciones de
+                                    impresion</button>
+                            </div>
+                            <div class="form-group col-sm-2 col-lg-2">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#search-service" id="btn-modal-p-o">Buscar servicios</button>
                             </div>
                         </form>
                     </div>
@@ -111,7 +116,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-4 b-r">
+                                    <div class="col-sm-12 b-r col-md-12 col-lg-4">
                                         <h3 class="m-t-none m-b">Información del cliente</h3>
                                         <p>Indique los datos del cliente al que se le agendará el servicio.</p>
                                         <div class="row">
@@ -158,9 +163,9 @@
                                                 <input class="form-control" rows="2" id="tel_sede" readonly>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                    <label>Celular</label>
-                                                    <input class="form-control" rows="2" id="cel_sede" readonly>
-                                                </div>
+                                                <label>Celular</label>
+                                                <input class="form-control" rows="2" id="cel_sede" readonly>
+                                            </div>
                                             <div class="form-group col-lg-6">
                                                 <label>Dirección</label>
                                                 <input class="form-control" rows="2" id="dir_sede" readonly>
@@ -180,7 +185,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 b-r">
+                                    <div class="col-sm-12 b-r col-md-12 col-lg-4">
                                         <h3 class="m-t-none m-b">Información de la solicitud</h3>
                                         <p>Agenda el servicio con base a esta información.</p>
                                         <div class="row">
@@ -194,31 +199,32 @@
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label class="control-label">Valor del plan</label>
-                                                <input type="text" id="valor_plan_solicitud" class="form-control" readonly>
+                                                <input type="text" id="valor_plan_solicitud" class="form-control"
+                                                    readonly>
                                             </div>
                                             <div class="form-group col-lg-3">
                                                 <label class="control-label"># de visitas</label>
                                                 <input type="text" id="numero_visitas" class="form-control" readonly>
                                             </div>
                                             <div class="form-group col-lg-5">
-                                                    <label class="control-label">Frec. de visitas</label>
-                                                    <input type="text" id="frecuencia_visitas_solicitud"
-                                                        class="form-control" readonly>
-                                                </div>
+                                                <label class="control-label">Frec. de visitas</label>
+                                                <input type="text" id="frecuencia_visitas_solicitud"
+                                                    class="form-control" readonly>
+                                            </div>
                                             <div class="form-group col-lg-12">
-                                                    <label class="control-label">Tipo de servicio</label>
-                                                    <input type="text" id="tipo_servicio"
-                                                        class="form-control" readonly>
-                                                </div>
-                                                <div class="form-group col-lg-4">
-                                                        <label class="control-label">Frec. de servicio</label>
-                                                        <input style="text-transform: uppercase" type="text"
-                                                            id="frecuencia_solicitud" class="form-control" readonly>
-                                                    </div>
+                                                <label class="control-label">Tipo de servicio</label>
+                                                <input type="text" id="tipo_servicio" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">Frec. de servicio</label>
+                                                <input style="text-transform: uppercase" type="text"
+                                                    id="frecuencia_solicitud" class="form-control" readonly>
+                                            </div>
 
                                             <div class="form-group col-lg-4">
                                                 <label class="control-label">Valor servicio</label>
-                                                <input type="text" id="valor_servicios_solicitud" class="form-control" readonly>
+                                                <input type="text" id="valor_servicios_solicitud" class="form-control"
+                                                    readonly>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label class="control-label">T. facturación</label>
@@ -227,14 +233,15 @@
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label class="control-label">Observaciones del servicio</label>
-                                                <textarea style="text-transform: uppercase" class="form-control" placeholder="Observaciones de visitas."
-                                                    rows="5" id="observaciones_visitas_solicitud" readonly></textarea>
+                                                <textarea style="text-transform: uppercase" class="form-control"
+                                                    placeholder="Observaciones de visitas." rows="5"
+                                                    id="observaciones_visitas_solicitud" readonly></textarea>
                                             </div>
                                             <div class="form-group col-lg-12" id="more-solicitud"></div>
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-12 col-md-12 col-lg-4">
                                         <h3 class="m-t-none m-b">Información del servicio</h3>
                                         <p>Diligencie todos los campos del referentes al servicio</p>
                                         <div class="row">
@@ -822,13 +829,16 @@
                                                 <span class="m-l-xs">Fecha Seleccionada</span>
                                             </div> --}}
                                             <div class="form-group col-lg-5" id="data_1">
-                                                    <div class="input-group date">
-                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        <input type="text" class="form-control" placeholder="" name="fecha_inicio_impresion" id="fecha_inicio_impresion">
-                                                    </div>
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i
+                                                            class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" placeholder=""
+                                                        name="fecha_inicio_impresion" id="fecha_inicio_impresion">
                                                 </div>
+                                            </div>
                                             <div class="col-md-2">
-                                                <button type="button" class="btn btn-outline btn-primary" id="filter-dates">Buscar servicios</button>
+                                                <button type="button" class="btn btn-outline btn-primary"
+                                                    id="filter-dates">Buscar servicios</button>
                                             </div>
                                         </div>
                                     </div>
@@ -838,10 +848,12 @@
                                     <div class="col-sm-6 b-r">
                                         <h3>Lisado de servicios por realizar</h3>
                                         <div class="sk-spinner sk-spinner-pulse" id="loader-impresion"></div>
-                                        <ul class="todo-list m-t ui-sortable" id="lista-servicios-impresion" style="cursor: pointer">
+                                        <ul class="todo-list m-t ui-sortable" id="lista-servicios-impresion"
+                                            style="cursor: pointer">
                                             {{-- Servicios --}}
                                         </ul>
-                                        <div style="margin: 20px 20px 0 0; width: 68%;position: relative;display: inline-block;">
+                                        <div
+                                            style="margin: 20px 20px 0 0; width: 68%;position: relative;display: inline-block;">
                                             <label>
                                                 <input type="checkbox" id="select-all" value="1">
                                                 <i></i> <b>Seleccionar todos</b> </label>
@@ -858,7 +870,8 @@
 
                                                     <td class="row" colspan="2">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-primary m-r-sm" id="print-ods">OS</button>
+                                                            <button type="button" class="btn btn-primary m-r-sm"
+                                                                id="print-ods">OS</button>
                                                         </div>
                                                         <div class="col-sm-6 col-md-18" style="padding: 0">
                                                             <p style="margin-bottom: 0">Órdenes de Servicio <br><i
@@ -872,7 +885,8 @@
 
                                                     <td class="row">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-success m-r-sm" id="print-rt">RT</button>
+                                                            <button type="button" class="btn btn-success m-r-sm"
+                                                                id="print-rt">RT</button>
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
                                                             <p style="margin-bottom: 0">Ruta de técnicos <br><i
@@ -882,11 +896,13 @@
                                                     </td>
                                                     <td class="row">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
-                                                            <button type="button" class="btn btn-warning m-r-sm" id="print-ctf">CT</button>
+                                                            <button type="button" class="btn btn-warning m-r-sm"
+                                                                id="print-ctf">CT</button>
                                                         </div>
                                                         <div class="col-sm-6 col-md-8" style="padding: 0">
 
-                                                            <p style="margin-bottom: 0">Certificados <br><i style="font-size: 10px;position: absolute;">(Tomado
+                                                            <p style="margin-bottom: 0">Certificados <br><i
+                                                                    style="font-size: 10px;position: absolute;">(Tomado
                                                                     de la BD)</i></p>
                                                         </div>
                                                     </td>
@@ -916,7 +932,7 @@
                                                                     de la BD)</i></p>
                                                         </div>
                                                     </td> --}}
-{{-- 
+                                                    {{-- 
                                                     <td class="row">
                                                         <div class="col-sm-6 col-md-4" style="padding: 0">
                                                             <button type="button" class="btn btn-primary m-r-sm" id="print-rre">RE</button>
@@ -950,10 +966,65 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button style="margin-bottom: 0;" type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                                <button style="margin-bottom: 0;" type="button" class="btn btn-white"
+                                    data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Aceptar</button>
                             </div>
                             {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--===================================================
+                /* Modal Buscar Servicios
+                ====================================================-->
+                <div class="modal inmodal fade" id="search-service" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <h2 class="modal-title" style="font-size: 23px;">Buscar servicios</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group ">
+                                        <label class="col-sm-4 control-label">Buscar cliente por: </label>
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline">
+                                                <input class="radio-options" type="radio" value="1" id="por_nombre"
+                                                    name="optionsRadios"> Nombre </label>
+                                            <label class="radio-inline">
+                                                <input class="radio-options" type="radio" value="2" id="por_rs"
+                                                    name="optionsRadios"> Razon Social </label>
+                                            <label class="radio-inline">
+                                                <input class="radio-options" type="radio" value="3" id="por_nit"
+                                                    name="optionsRadios"> NIT/CC </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" style="margin-top: 10px;">
+                                        <input type="text" placeholder="Cliente..." class="typeahead_2 form-control"
+                                            id="input_autocomplete_2" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-lg-12" style="margin-top: 15px;">
+                                        <label class="control-label">Sede *</label>
+                                        <select class="form-control " id="select_sedes_2">
+                                            <option value="" selected disabled>Selecciona una sede</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" id="list-services">
+                                    
+                                    <!-- Resultados de busqueda -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button id="btn-search-service" class="btn btn-primary">Buscar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -970,8 +1041,8 @@
 
 <!-- Full Calendar -->
 <script src="{{asset('js/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
-<script src="{{asset('js/plugins/fullcalendar/locale/es.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/moment.min.js')}}"></script>
+<script src="{{asset('js/plugins/fullcalendar/locale/es.js')}}"></script>
 <script src="{{asset('js/plugins/fullcalendar/moment-timezone.js')}}"></script>
 <script src="{{asset('js/date.js')}}"></script>
 
@@ -1063,11 +1134,11 @@
 
             toastr["error"](`Solicitud ${codigoSolicitud} para ${cliente} ${sede}`,
                 "¡Nueva solicitud creada!", {
-                    own_id: idToast,
-                    onHidden: function () {
-                        eliminarNotificacion(this.own_id)
-                    }
-                })
+                own_id: idToast,
+                onHidden: function () {
+                    eliminarNotificacion(this.own_id)
+                }
+            })
         }
 
         //Inicializacion de selects
@@ -1130,6 +1201,9 @@
         $input = $('.typeahead_1').typeahead({
             source: nit_clientes
         });
+        $input2 = $('.typeahead_2').typeahead({
+            source: nit_clientes
+        });
 
         //Evento click de los radiobuttons
         $(".radio-options").click(event => {
@@ -1141,18 +1215,27 @@
                     $('.typeahead_1').typeahead('destroy').typeahead({
                         source: data
                     });
+                    $('.typeahead_2').typeahead('destroy').typeahead({
+                        source: data
+                    });
                     break;
-                    //Buscar por razon social de clientes
+                //Buscar por razon social de clientes
                 case '2':
                     data = razon_social_clientes;
                     $('.typeahead_1').typeahead('destroy').typeahead({
                         source: data
                     });
+                    $('.typeahead_2').typeahead('destroy').typeahead({
+                        source: data
+                    });
                     break;
-                    //Buscar por NIT o CC de clientes
+                //Buscar por NIT o CC de clientes
                 case '3':
                     data = nit_clientes;
                     $('.typeahead_1').typeahead('destroy').typeahead({
+                        source: data
+                    });
+                    $('.typeahead_2').typeahead('destroy').typeahead({
                         source: data
                     });
                     break;
@@ -1185,6 +1268,7 @@
         var frecuencia_solicitud;
         var id_solicitud;
         var id_cliente;
+        var id_sede;
 
         //Inicializa el calendario
         $('#calendar').fullCalendar({
@@ -1244,8 +1328,8 @@
                 $("#contacto_sede").val('');
                 $("#tel_sede").val('');
                 $("#ema_sede").val(''),
-                $("#cel_sede").val(''),
-                $("#select_frecuencia").val('0').change();
+                    $("#cel_sede").val(''),
+                    $("#select_frecuencia").val('0').change();
                 $("#opcion-frecuencia").val('0').change();
                 $("#hora_inicio").val('');
                 $("#num_horas").val('');
@@ -1591,7 +1675,7 @@
                 ); //Añade el source servicios de cada tecnico
                 $(`#tecnico-${tecnico.id}`).click(e => {
                     if ($(`#tecnico-${tecnico.id}`).is(
-                            ':checked')) { //Valida si el checkbox esta activo
+                        ':checked')) { //Valida si el checkbox esta activo
                         $('#calendar').fullCalendar('addEventSource',
                             `/servicios/show/${tecnico.id}`)
                     } else {
@@ -1612,7 +1696,7 @@
                     `/servicios/show/neutro`); //Añade el source servicios de cada tecnico
                 $("#neutros").click(e => {
                     if ($(`#neutros`).is(
-                            ':checked')) { //Valida si el checkbox esta activo
+                        ':checked')) { //Valida si el checkbox esta activo
                         $('#calendar').fullCalendar('addEventSource',
                             `/servicios/show/neutro`)
                     } else {
@@ -1626,7 +1710,7 @@
                     `/servicios/show/mensajeria`); //Añade el source servicios de cada tecnico
                 $("#mensajeria").click(e => {
                     if ($(`#mensajeria`).is(
-                            ':checked')) { //Valida si el checkbox esta activo
+                        ':checked')) { //Valida si el checkbox esta activo
                         $('#calendar').fullCalendar('addEventSource',
                             `/servicios/show/mensajeria`)
                     } else {
@@ -1644,10 +1728,7 @@
             })
 
 
-        //Change del input de autocompletado
-        $input.change(function () {
-            var current = $input.typeahead("getActive");
-            id_cliente = current.id;
+        function obtenerClienteSede(idCliente, numberFilter) {
             //Valida si el cliente esta en Mora
             info_clientes.forEach(cliente => {
                 if (id_cliente == cliente.id) {
@@ -1664,27 +1745,48 @@
             })
 
             //Peticion GET al servidor a la ruta /sedes/clientes/{id} (Sedes de cliente)
-            $.get(`/sedes/cliente/${current.id}`, function (res) {
-                $("#select_sedes").empty(); //Limipia el select
-                $("#select_sedes").append(
-                    `<option value='' disabled selected> Selecciona una sede </option>`);
-                if (res == '') { //Valida que el cliente tenga sedes
-                    $("#select_sedes").append(`<option value="0"> Sede Única </option>`);
+            $.get(`/sedes/cliente/${id_cliente}`, function (res) {
+                if(numberFilter === 1){
+                    establecerSede('select_sedes', res)
                 } else {
-                    //Recorre la respuesta del servidor
-                    res.forEach(element => {
-                        //Añade Options al select de sedes dependiendo de la respues del servidor
-                        $("#select_sedes").append(
-                            `<option value=${element.id}> ${element.nombre} </option>`
-                        );
-                    });
+                    establecerSede('select_sedes_2', res)
                 }
             }).then((res) => {
                 console.log('Petición Exitosa');
             }).catch((err) => {
                 console.log(err);
             });
+        }
+
+        function establecerSede(idSelect, res){
+            $(`#${idSelect}`).empty(); //Limipia el select
+            $(`#${idSelect}`).append(
+                `<option value='' disabled selected> Selecciona una sede </option>`);
+            if (res == '') { //Valida que el cliente tenga sedes
+                $(`#${idSelect}`).append(`<option value="0"> Sede Única </option>`);
+            } else {
+                //Recorre la respuesta del servidor
+                res.forEach(element => {
+                    //Añade Options al select de sedes dependiendo de la respues del servidor
+                    $(`#${idSelect}`).append(
+                        `<option value=${element.id}> ${element.nombre} </option>`
+                    );
+                });
+            }
+        }
+
+        //Change del input de autocompletado
+        $input.change(function () {
+            var current = $input.typeahead("getActive");
+            id_cliente = current.id;
+            obtenerClienteSede(id_cliente,1)
         });
+
+        $input2.change(function () {
+            let current = $input2.typeahead("getActive");
+            id_cliente = current.id;
+            obtenerClienteSede(id_cliente,2)
+        })
 
         //Peticion al servidor para obtener la solicitud de una sede
         function obtenerSolicitudSede(id_sede, crsfToken) {
@@ -1790,10 +1892,10 @@
                                                 },
                                                 success: (res) => {
                                                     url: `/temporales/novedad/${e.target.value}`,
-                                                    $(
-                                                        `#item-novedad-${e.target.value}`
-                                                    )
-                                                    .remove();
+                                                        $(
+                                                            `#item-novedad-${e.target.value}`
+                                                        )
+                                                            .remove();
                                                 },
                                                 error: (err) => {
                                                     console.log(err)
@@ -1816,7 +1918,7 @@
 
                                 res.forEach((value, index) => {
                                     $("#select_solicitudes").append(
-                                        `<option value="${value.id}">${value.codigo} - ${value.fecha} ${ value.estado_agenda !== 'nuevo' ? '- Agendado' : ''}</option>`
+                                        `<option value="${value.id}">${value.codigo} - ${value.fecha} ${value.estado_agenda !== 'nuevo' ? '- Agendado' : ''}</option>`
                                     )
                                 })
                             })
@@ -1889,8 +1991,12 @@
             $("#observaciones_visitas_solicitud").val('');
             //Referencia al metodo de obtener la solicitud del cliente
             obtenerSolicitudSede(id_sede, crsfToken);
-
         });
+
+        // Evento change del select de sedes 2
+        $("#select_sedes_2").change(e => {
+            id_sede = e.target.value;
+        })
 
         $("#opcion-frecuencia").change(event => {
             addOptionsAtSelects('frecuencia', 'personalizada');
@@ -1986,19 +2092,19 @@
             }
             //Alert de confirmacion
             swal({
-                    title: "¡Advertencia!",
-                    text: "¿Estás seguro de guardar este servicio?",
-                    icon: "warning",
-                    buttons: {
-                        cancel: true,
-                        confirm: {
-                            text: 'Aceptar',
-                            visible: true,
-                            value: true,
-                            closeModal: false, //Muestra el Loader
-                        }
+                title: "¡Advertencia!",
+                text: "¿Estás seguro de guardar este servicio?",
+                icon: "warning",
+                buttons: {
+                    cancel: true,
+                    confirm: {
+                        text: 'Aceptar',
+                        visible: true,
+                        value: true,
+                        closeModal: false, //Muestra el Loader
                     }
-                })
+                }
+            })
                 .then(isConfirm => {
                     if (isConfirm) {
                         $.ajax({
@@ -2010,9 +2116,9 @@
                                 "X-CSRF-TOKEN": crsfToken //Token de seguridad
                             }
                         })
-                        .then(() => {
-                            //Peticion HTTP para guardar el evento
-                            $.ajax({
+                            .then(() => {
+                                //Peticion HTTP para guardar el evento
+                                $.ajax({
                                     url: '/servicios', //URL del servicio
                                     data: dataToSend,
                                     type: "POST", //Método de envío
@@ -2020,31 +2126,31 @@
                                         "Content-Type": 'application/x-www-form-urlencoded',
                                         "X-CSRF-TOKEN": crsfToken //Token de seguridad
                                     },
-    
+
                                 })
-                                .then(events => {
-                                    swal("¡Creación Correcta!", "Servicios creados correctamente.",
+                                    .then(events => {
+                                        swal("¡Creación Correcta!", "Servicios creados correctamente.",
                                             "success")
-                                        .then(value => { //Boton OK actualizado
-                                            if (value) {
-                                                console.log('Evento creado'); //Escribe en la consola
-                                                $("#btn-close2").click();
-                                                // addSources(tecnicos)
-                                                $('#calendar').fullCalendar(
-                                                    'refetchEvents'
-                                                ); //Refresca todos los eventos dentro del calendario
-                                            }
-                                        })
-                                })
-                                .catch(error => {
-                                    swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios',
-                                        "error")
-                                })
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            
-                        })
+                                            .then(value => { //Boton OK actualizado
+                                                if (value) {
+                                                    console.log('Evento creado'); //Escribe en la consola
+                                                    $("#btn-close2").click();
+                                                    // addSources(tecnicos)
+                                                    $('#calendar').fullCalendar(
+                                                        'refetchEvents'
+                                                    ); //Refresca todos los eventos dentro del calendario
+                                                }
+                                            })
+                                    })
+                                    .catch(error => {
+                                        swal("¡Error!", 'Ha ocurrido un error al intentar crear los servicios',
+                                            "error")
+                                    })
+                            })
+                            .catch(err => {
+                                console.log(err);
+
+                            })
 
                         console.log(dataToSend)
                     }
@@ -2111,14 +2217,14 @@
                     //Variables de fechas
                     var dateStart, dateEnd, diffDates;
                     //Recorre los servicios retornados
-                    if(res.length == 0){
+                    if (res.length == 0) {
                         $("#lista-servicios-impresion").append(`
                             <li class="item-list" >
                                 <span>No hay servicios en esta fecha</span>
                             </li>
                         `)
                     } else {
-                       
+
                         res.forEach((value, index) => {
                             //Formate las fechas con Moment
                             dateStart = moment(value.start); //Hora Inicio del servicio
@@ -2233,7 +2339,7 @@
 
         }
 
-        function obtenerServicios(){
+        function obtenerServicios() {
             $("#lista-servicios-impresion").empty();
             $("#filter-state").empty();
             //Valida la opcion de filtro de servicios
@@ -2261,8 +2367,8 @@
             //         break;
             // }
             getServicesByDates($("#select_tecnicos").val(), $("#fecha_inicio_impresion").val(), $("#fecha_inicio_impresion").val());
-                $("#filter-state").append("(Filtro aplicado)");
-                filterState = true;
+            $("#filter-state").append("(Filtro aplicado)");
+            filterState = true;
         }
 
         //Evento Click en filtro por rango de fechas
@@ -2338,6 +2444,57 @@
                 //Habilita los Radio Buttons
                 $("input[name=selected-service]").removeAttr("disabled");
             }
+        })
+
+        /* Modulo de busqueda de servicios
+        --------------------------------------------------------------------*/
+
+        $("#btn-search-service").click(e => {
+            $("#list-services").empty();
+            $("#list-services").append(`
+                <div class="sk-spinner sk-spinner-pulse" id="loader-search-service"></div>
+            `)
+            $.get(`/servicios/list/${id_cliente}/${id_sede}`)
+            .then(res => {
+                $("#loader-search-service").remove();
+                if(res.length > 0){
+                    res.forEach(servicio => {
+                        let momentDateStart = moment(servicio.start, 'YYYY-MM-DD HH:mm:ss');
+                        let momentDateEnd   = moment(servicio.end, 'YYYY-MM-DD HH:mm:ss');
+                        $("#list-services").append(`
+                            <div class="col-sm-12">
+                                <a href="/ordenes/${servicio.id}" style="text-decoration: none; color: #fff">
+                                    <div class="widget style1" style="background-color: ${servicio.backgroundColor}">
+                                        <div class="row">
+                                            <div class="col-md-2 m-t-xs" style="padding: 0 28px">
+                                                <h4 class="m-b-xxs" style="font-size: 15px; margin-top: 2px">
+                                                    ${momentDateStart.format('MMM').toUpperCase()}
+                                                </h4>
+                                                <h2 class="font-bold m-b-xs">${momentDateStart.format('DD')}</h2>
+                                            </div>
+                                            <div class="col-md-8 m-t-xs no-padding">
+                                                <span>
+                                                    ${servicio.title} - ${ servicio.sede }
+                                                </span>
+                                                <br>
+                                                <p>${momentDateStart.format('h a')} - ${momentDateEnd.format('h a')} - ${servicio.dirClient}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        `)
+                    })
+                } else {
+                    $("#list-services").append(`
+                        <span>No se encontraron servicios.</span>
+                    `)
+                }
+            })
+            .catch(err => {
+                $("#loader-search-service").remove();
+                console.log(err);
+            })
         })
 
 
@@ -2913,34 +3070,34 @@
     //Metodo para cancelar un servicio
     $("#btn-cancelar-servicio").click(e => {
         swal({
-                title: "¡Advertencia!",
-                text: "¿Estás seguro de cancelar este servicio?",
-                icon: "warning",
-                buttons: {
-                    cancel: true,
-                    confirm: {
-                        text: 'Aceptar',
-                        visible: true,
-                        value: true,
-                        closeModal: false, //Muestra el Loader
-                    }
+            title: "¡Advertencia!",
+            text: "¿Estás seguro de cancelar este servicio?",
+            icon: "warning",
+            buttons: {
+                cancel: true,
+                confirm: {
+                    text: 'Aceptar',
+                    visible: true,
+                    value: true,
+                    closeModal: false, //Muestra el Loader
                 }
-            })
+            }
+        })
             .then(isConfirm => {
                 if (isConfirm) {
                     $.ajax({
-                            url: `/servicios/${infoServiceSelected.id}`,
-                            data: {
-                                option: '4',
-                            },
-                            type: 'DELETE',
-                            headers: {
-                                "X-CSRF-TOKEN": crsfToken
-                            }
-                        })
+                        url: `/servicios/${infoServiceSelected.id}`,
+                        data: {
+                            option: '4',
+                        },
+                        type: 'DELETE',
+                        headers: {
+                            "X-CSRF-TOKEN": crsfToken
+                        }
+                    })
                         .then(res => {
                             swal('¡Servivio Cancelado', 'El servicio seleccionado fue cancelado',
-                                    'success')
+                                'success')
                                 .then(value => {
                                     if (value) {
                                         $('#calendar').fullCalendar('refetchEvents');

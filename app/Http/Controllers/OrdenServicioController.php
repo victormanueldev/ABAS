@@ -144,9 +144,10 @@ class OrdenServicioController extends Controller
      * @param  \ABAS\OrdenServicio  $ordenServicio
      * @return \Illuminate\Http\Response
      */
-    public function show(OrdenServicio $ordenServicio)
+    public function show(OrdenServicio $ordenServicio, $id)
     {
         //
+        return view('servicio-clientes.registro-ordenes-2');
     }
 
     /**

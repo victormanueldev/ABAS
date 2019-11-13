@@ -50,9 +50,11 @@ Route::post('login-cliente', 'ClientesController@clientLogin');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [
-    'except' => 'index'
+    'except' => 'index',
+    'except' => 'byClient'
 ]);
 Route::get('sedes/cliente/{id}', 'SedesController@index');
+Route::get('sedes/clientes_v2/{id}', 'SedesController@byClient');
 
 //Notificaciones
 Route::resource('notificaciones', 'NotificacionesController', [
@@ -71,13 +73,15 @@ Route::post('solicitud/show', 'SolicitudesController@show');
 Route::resource('servicios', 'ServicioController', [
     'except' => 'updateFrecuency',
     'except' => 'updateState',
-    'except' => 'getServicesByTecnician'
+    'except' => 'getServicesByTecnician',
+    'except' => 'serviceByClient'
 ]);
 Route::put('servicios/edit/frecuency', 'ServicioController@updateFrecuency');
 Route::put('servicios/edit/state', 'ServicioController@updateState');
 Route::get('list/services','ServicioController@listServices');
 Route::get('servicios/show/{idTecnico}', 'ServicioController@getServicesByTecnician');
 Route::put('servicios/edit/dates','ServicioController@updateDatesHoursService');
+Route::get('servicios/list/{idCliente}/{idSede}', 'ServicioController@serviceByClient');
 
 //Tecnicos
 Route::resource('tecnicos', 'TecnicoController');
