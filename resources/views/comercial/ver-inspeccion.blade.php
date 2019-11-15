@@ -969,9 +969,9 @@
         dataInspection.areas.forEach((value,index) => {
             var hours = 0;
             var minutes = 0;
+            hours = Math.floor((parseInt(value.tiempo_estimado)) / 60);
+            minutes = (parseInt(value.tiempo_estimado) % 60);
             if (index === 0) {
-                hours = Math.floor((value.tiempo_estimado) / 60);
-                minutes = (value.tiempo_estimado % 60);
                 $("#area-0").val(value.area);
                 $("#num_horas_area-0").val(hours);
                 $("#num_minutos_area-0").val(minutes);
@@ -993,9 +993,9 @@
                         <label>Tiempo estimado</label>
                         <div class="input-group">
                             <input style="width: 40%;margin-right: 10px;" type="number" min="0" max="11"
-                                class="form-control" id="num_horas_area-${index}" placeholder="Horas">
+                                class="form-control" id="num_horas_area-${index}" placeholder="Horas" value="${hours}">
                             <input style="width: 42%;margin-left: 10px;" type="number" min="0" max="60"
-                                class="form-control" id="num_minutos_area-${index}" placeholder="Minutos">
+                                class="form-control" id="num_minutos_area-${index}" placeholder="Minutos" value="${minutes}">
                         </div>
                     </div>
 
@@ -1017,7 +1017,7 @@
                     <div class="form-group col-lg-2">
                         <label class="control-label">Nivel act.</label>
                         <input type="text" style="text-transform: uppercase" id="nivel_area-${index}" name="nivel_area-${index}" placeholder="Actividad"
-                            class="form-control" value="${value.area}">
+                            class="form-control" value="${value.nivel_actividad_area}">
                     </div>
                 `)
                 $(`#plagas_area-${index}`).select2({

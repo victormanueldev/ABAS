@@ -24,7 +24,7 @@ class CreateSedesTable extends Migration
             //Informacion del Contacto
             $table->string('nombre_contacto', 100)->nullable();
             $table->string('telefono_contacto', 100)->nullable();
-            $table->string('celular_contacto', 20)->nullable();
+            $table->string('celular_contacto', 100)->nullable();
             $table->string('email_contacto', 100)->nullable();
             //Informacion del Cliente
             $table->integer('cliente_id');

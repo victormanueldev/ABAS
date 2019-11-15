@@ -797,12 +797,12 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group col-lg-6">
+                                    {{-- <div class="form-group col-lg-6">
                                         <label class="control-label">Total a facturar</label>
                                         <input type="number" min=0 name="total_servicio_detalle"
                                             id="total_servicio_detalle" placeholder="Valor total a facturar"
                                             class="form-control" readonly>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="ibox-title col-lg-12">
                                         <br>
@@ -1814,7 +1814,7 @@
             dataToSendInspection.residencias[index] = {
                 tipo_residencia: $(`#tipo_residencia-${index}`).val(),
                 valor_residencia: valoresResidencias[index].rawValue,
-                tiempo_estimado: (parseInt($(`#num_horas_residencia-${index}`).val()) || 0 * 60) + parseInt($(
+                tiempo_estimado: ((parseInt($(`#num_horas_residencia-${index}`).val()) || 0 )* 60) + parseInt($(
                     `#num_minutos_residencia-${index}`).val() || 0) ,
                 observaciones_residencia: $(`#observaciones_residencia-${index}`).val()
             }
@@ -1857,7 +1857,7 @@
         for (let index = 0; index < contAreas; index++) {
             dataToSendInspection.areas[index] = {
                 area: $(`#area-${index}`).val(),
-                tiempo_estimado: (parseInt($(`#num_horas_area-${index}`).val()) || 0  * 60) + parseInt($(
+                tiempo_estimado: ((parseInt($(`#num_horas_area-${index}`).val()) || 0 )* 60) + parseInt($(
                     `#num_minutos_area-${index}`).val() || 0) ,
                 plagas_area: $(`#plagas_area-${index}`).val(),
                 nivel_actividad_area: $(`#nivel_area-${index}`).val()
@@ -1873,7 +1873,7 @@
         dataToSendInspection.valor_plan_saneamiento = totalPlanSaneamiento.rawValue;
         dataToSendInspection.frecuencia_visitas = $("#frecuencia_visitas_plan").val();
         dataToSendInspection.observaciones_visitas = $("#observaciones_plan").val();
-        dataToSendInspection.total_detalle_servicios = $("#total_servicio_detalle").val();
+        dataToSendInspection.total_detalle_servicios = valoresServicios[0].rawValue;
         dataToSendInspection.tipo_facturacion = $("#tipo_facturacion").val();
         dataToSendInspection.forma_pago = $("#forma_pago").val();
         dataToSendInspection.contrato = $("#contrato").val() == 'si' ? true : false;
