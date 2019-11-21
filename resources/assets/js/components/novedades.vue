@@ -83,7 +83,9 @@ Object.defineProperty(Vue.prototype, "$lodash", { value: lodash });
 export default {
   //Se ejecuta cuando se carga el documento
   mounted() {
-    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 5000);
   },
   data() {
     /**

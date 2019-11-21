@@ -72,7 +72,9 @@
 export default {
   //Se ejecuta cuando se carga el documento
   mounted() {
-    this.notificacionesNoLeidas()
+    setInterval(() => {
+      this.notificacionesNoLeidas()
+    }, 4500)
   },
   data() {
     return {
@@ -89,7 +91,9 @@ export default {
         .then((res) => {
           res.data.forEach(notificacion => {
             if (notificacion.type !== 'ABAS\\Notifications\\SolicitudPublicada') {
-              this.notificaciones.push(notificacion)
+              if(this.notificaciones.filter(n => n.id === notificacion.id).length === 0){
+                this.notificaciones.push(notificacion)
+              }
             }
           })
 
@@ -108,7 +112,7 @@ export default {
         .then((res) => {
           res.data.forEach((value, index) => {
             if (value.type !== 'ABAS\\Notifications\\SolicitudPublicada' && value.id !== notificacion.id) {
-              this.notificaciones[index] = value;
+              this.notificaciones[index] = value
             }
           })
         })
@@ -125,7 +129,7 @@ export default {
         this.notificaciones = []
       })
       .catch(err => {
-        console.log(err);
+        console.log(err)
       })
     }
   }

@@ -13703,7 +13703,11 @@ Object.defineProperty(Vue.prototype, "$lodash", { value: __WEBPACK_IMPORTED_MODU
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Se ejecuta cuando se carga el documento
   mounted: function mounted() {
-    this.fetchData();
+    var _this = this;
+
+    setInterval(function () {
+      _this.fetchData();
+    }, 5000);
   },
   data: function data() {
     /**
@@ -13726,10 +13730,10 @@ Object.defineProperty(Vue.prototype, "$lodash", { value: __WEBPACK_IMPORTED_MODU
      * convierte la respuesta del servidor en una novedad
      */
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("novedades").then(function (res) {
-        _this.novedades = res.data;
+        _this2.novedades = res.data;
       }).catch(function (err) {
         console.log(err);
       });
@@ -13740,14 +13744,14 @@ Object.defineProperty(Vue.prototype, "$lodash", { value: __WEBPACK_IMPORTED_MODU
      * envia una variable al servicio para actualizar la novedad
      **/
     resolver: function resolver(novedad) {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = "novedades/" + novedad.id;
       axios.put(url, {
         estado: "resuelta",
         comentario: this.comentario_text[novedad.id]
       }).then(function (res) {
-        _this2.fetchData();
+        _this3.fetchData();
       }).catch(function (err) {
         console.log(err);
       });
@@ -31275,7 +31279,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   //Se ejecuta cuando se carga el documento
   mounted: function mounted() {
-    this.notificacionesNoLeidas();
+    var _this = this;
+
+    setInterval(function () {
+      _this.notificacionesNoLeidas();
+    }, 4500);
   },
   data: function data() {
     return {
@@ -31289,12 +31297,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     * Obtiene todas las notificaciones No leidas del usuario autenticado 
      */
     notificacionesNoLeidas: function notificacionesNoLeidas() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/notificaciones').then(function (res) {
         res.data.forEach(function (notificacion) {
           if (notificacion.type !== 'ABAS\\Notifications\\SolicitudPublicada') {
-            _this.notificaciones.push(notificacion);
+            if (_this2.notificaciones.filter(function (n) {
+              return n.id === notificacion.id;
+            }).length === 0) {
+              _this2.notificaciones.push(notificacion);
+            }
           }
         });
 
@@ -31308,13 +31320,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     * Elimina una notificacion de la base de datos 
      */
     eliminarNotificacion: function eliminarNotificacion(notificacion) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.notificaciones.splice(this.notificacion.indexOf({ id: notificacion.id }), 1);
       axios.delete('/notificaciones/' + notificacion.id).then(function (res) {
         res.data.forEach(function (value, index) {
           if (value.type !== 'ABAS\\Notifications\\SolicitudPublicada' && value.id !== notificacion.id) {
-            _this2.notificaciones[index] = value;
+            _this3.notificaciones[index] = value;
           }
         });
       }).catch(function (err) {
@@ -31326,10 +31338,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     * Elimina todas las notificaciones de la base de datos del usuario autenticado
      */
     eliminarTodasNotificaciones: function eliminarTodasNotificaciones(notificacion) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.post('/notifications/delete', { notificaciones: this.notificaciones }).then(function (res) {
-        _this3.notificaciones = [];
+        _this4.notificaciones = [];
       }).catch(function (err) {
         console.log(err);
       });

@@ -154,6 +154,10 @@ Otros Ajustes
     - Revisar autocompletes en móvil (DESCARTADO)
     - Modulo de buscar servicios y redireccion a ordenes de servicio (OK)
 
+    CAMBIOS 2019-11-21
+    - Actualizacion de novedades en tiempo real (OK)
+    - Cambio de contraseña del cliente VIP
+
 
 Crear clientes <- Creado
 Ver clientes <- Creado
