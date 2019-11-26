@@ -188,6 +188,8 @@
                 /** Estructura y opciones para la información mostrada 
                 -------------------------------------------------- **/
                 var contadorDocumentos = []
+                console.log(docsTipoSede);
+                
 
                 docsTipoSede.forEach((tiposDoc, index) => {
                     // Inicializa el contador para cada "Seccion"
@@ -249,14 +251,12 @@
                                                         class="form-control" required>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <!--<div class="row">
                                                 <div class="col-lg-12">
                                                     <br>
-                                                    <strong>Observaciones: </strong>Diligencia el formulario de Sede si
-                                                    la empresa tiene mas
-                                                    sedes además de la principal.
+                                                    <strong>Observaciones: </strong>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="ibox-footer">
                                             <button type="button" class="btn btn-w-m btn-default">Cancelar</button>

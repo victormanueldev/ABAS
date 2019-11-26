@@ -417,4 +417,12 @@ class ClientesController extends Controller
         }
     }
 
+    public function clientUpdatePassword(Request $request)
+    {
+        $cliente = Cliente::findOrFail($request->userID);
+        $cliente->password = bcrypt($request->newPassword);
+        $cliente->save();
+        return response()->json('Contrasema actualizada', 200);
+    }
+
 }

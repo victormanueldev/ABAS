@@ -18,6 +18,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/show/comisiones',
         '/crear-cuenta',
         '/login-cliente',
-        '/documents*'
+        '/documents*',
+        '/update-password/cliente'
     ];
 }

@@ -47,6 +47,7 @@ Route::get('documentos/cliente', 'ClientesController@docsReport');
 Route::get('ver-cliente/{id}', 'ClientesController@clientByNit');
 Route::put('crear-cuenta', 'ClientesController@updateLoginData' );
 Route::post('login-cliente', 'ClientesController@clientLogin');
+Route::put('update-password/cliente', 'ClientesController@clientUpdatePassword');
 
 //Sedes
 Route::resource('sedes', 'SedesController', [
