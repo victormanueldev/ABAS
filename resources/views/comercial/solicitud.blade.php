@@ -723,7 +723,7 @@
     });
 
     //Inicializador del Select AUTOCOMPLETAR
-    $('.chosen-select').chosen({ width: "100%" });
+    $('.chosen-select').selectize({ width: "100%" });
 
     //Evento change del select de clientes
     $("#id_cliente").change(event => {

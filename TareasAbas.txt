@@ -156,8 +156,13 @@ Otros Ajustes
 
     CAMBIOS 2019-11-21
     - Actualizacion de novedades en tiempo real (OK)
-    - Cambio de contraseña del cliente VIP
+    - Cambio de contraseña del cliente VIP (OK)
 
+    CAMBIOOS 2019-12-11
+    - Mostrar solo la sede principal en clientes VIP (OK)
+    - Cambiar todos los autocompletes del Sistema (OK)
+    - Revisar editar inspeccion del cliente (OK)
+    - Revisar edicion de cliente (OK)
 
 Crear clientes <- Creado
 Ver clientes <- Creado

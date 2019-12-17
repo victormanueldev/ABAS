@@ -105,18 +105,20 @@
                    
                         <div class="social-body row">
                                 <div class="form-group col-lg-12">
-                                    <textarea class="form-control" style="rezise: none;" placeholder="Escriba aquí una novedad" rows="3" name="descripcion"></textarea>
+                                    <textarea class="form-control" style="rezise: none;" placeholder="Escriba aquí una novedad" rows="3" name="descripcion" required></textarea>
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label style="display: block">Cliente: </label>
                                         <!-- Select con Autocompletar-->
-                                        <select data-placeholder="Seleccione NIT" class="chosen-select" tabindex="2" id="id_cliente"
+                                        <select data-placeholder="SELECCIONA UN CLIENTE" class="chosen-select" tabindex="2" id="id_cliente"
                                             name="id_cliente">
                                             <option value="" selected disabled>SELECCIONA CLIENTE</option>
                                             @foreach($clientes as $cliente)
                                         <option value="{{$cliente->id}}">{{$cliente->nombre_cliente." - ".$cliente->razon_social}}</option>
                                             @endforeach
                                         </select>
+
+                                        {{-- <input  class="form-control" type="text" id="clientes"> --}}
                                 </div>
                                 <div class="form-group col-lg-6" id="select-filter-sede">
                                         <label class="control-label">Sede *</label>
@@ -229,7 +231,10 @@
     $(document).ready(function(){
 
         //Inicializador del Select AUTOCOMPLETAR
-        $('.chosen-select').chosen({ width: "100%" });
+        $('.chosen-select').selectize({
+            openOnFocus: false,
+            loadingClass: 'loading'
+        });
 
             //Evento change del select de clientes
             $("#id_cliente").change(event => {

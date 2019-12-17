@@ -226,6 +226,7 @@
                                                         id="nombre_documento_${index}-0"
                                                         name="nombre_documento_${index}-0"
                                                         placeholder="Ej: Acta de concepto favorable"
+                                                        value="${toCapitalCase(tiposDoc.tipo || 'Ninguna')}"
                                                         class="form-control" required>
                                                 </div>
                                                 <div class="col-md-4">

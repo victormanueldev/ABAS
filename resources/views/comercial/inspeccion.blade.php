@@ -1035,7 +1035,7 @@
     });
 
     //Inicializador del Select AUTOCOMPLETAR
-    $('.chosen-select').chosen({
+    $('.chosen-select').selectize({
         width: "100%"
     });
 
@@ -1208,42 +1208,43 @@
 
     //Definicion de frencuencias para documentos
     function frecuenciaDefinida(tipoDocumento, idSelectFrecuencia) {
+        
         switch (tipoDocumento) {
             case 'diagnostico_inicial':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('semestral').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('semestral').change()
                 break
             case 'cronograma_servicios':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('anual').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('anual').change()
                 break
             case 'mapas_dispositivos':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('ocasional').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('ocasional').change()
                 break
             case 'programa_prevencion_control_plagas':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('anual').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('anual').change()
                 break
             case 'informes_tendencias':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('mensual').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('mensual').change()
                 break
             case 'informes_frecuentes':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('mensual').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('mensual').change()
                 break
             case 'fichas_tecnicas':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('ocasional').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('ocasional').change()
                 break
             case 'documentos_legales':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('mensual').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('mensual').change()
                 break
             case 'docs_prevencion_control_plagas':
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('anual').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('anual').change()
                 break
             default:
-                $(`#frecuencia_doc-${idSelectFrecuencia}`).val('ocasional').change()
+                $(`#frecuencia_doc${idSelectFrecuencia}`).val('ocasional').change()
                 break;
         }
 
     }
     $("#tipo_doc-0").change(e => {
-        frecuenciaDefinida(e.target.value, 0)
+        frecuenciaDefinida(e.target.value, '-0')
     })
 
     //Plan de sanemaiento
@@ -1606,8 +1607,7 @@
         `)
 
         $(`#tipo_doc-${contDocs}`).change(e => {
-            console.log(contDocs)
-            frecuenciaDefinida(e.target.value, contDocs - 1)
+            frecuenciaDefinida(e.target.value, e.target.id.substr(8,))
         })
 
         contDocs++;
@@ -1657,7 +1657,7 @@
                 </select>
             </div>
         `)
-        $('.chosen-select').chosen({
+        $('.chosen-select').selectize({
             width: "100%"
         });
 

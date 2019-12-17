@@ -26,6 +26,8 @@
     <link href="{{asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
     <!-- Gritter -->
     <link href="{{asset('js/plugins/gritter/jquery.gritter.css')}}" rel="stylesheet">
+    <!-- Select Autocomplete --> 
+    <link href="{{asset('css/plugins/selectizejs/selectize.css')}}" rel="stylesheet">
 
     <!-- Custom page css -->
     @yield('custom-css')
@@ -401,6 +403,9 @@
 
     <!-- Input Mask-->
     <script src="{{asset('js/plugins/jasny/jasny-bootstrap.min.js')}}"></script>
+
+    <!-- Select Autocomplete -->
+    <script src="{{asset('js/plugins/selectizejs/standalone/selectize.js')}}"></script>
 
 
     @yield('ini-scripts');

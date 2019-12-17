@@ -133,7 +133,7 @@ export default {
      */
     mostrarToast(notificacion) {
 
-      // Muestra toast
+      // Muestra toastr
       toastr.options = {
         closeButton: true,
         debug: false,

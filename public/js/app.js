@@ -42193,7 +42193,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mostrarToast: function mostrarToast(notificacion) {
       var _this5 = this;
 
-      // Muestra toast
+      // Muestra toastr
       toastr.options = {
         closeButton: true,
         debug: false,
